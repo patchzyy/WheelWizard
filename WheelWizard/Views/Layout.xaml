@@ -13,7 +13,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
         xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
         mc:Ignorable="d"
-        Title="MKW Mod Manager" Height="876" Width="656"
+        Title="Wheel Wizard" Height="876" Width="656"
         WindowStyle='None'
         ResizeMode='CanMinimize'
         AllowsTransparency="True"
