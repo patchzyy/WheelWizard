@@ -1,8 +1,8 @@
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/patchzyy/CT-MKWII-WPF?color=green&style=for-the-badge)
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/patchzyy/CT-MKWII-WPF/total?color=green&style=for-the-badge)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/patchzyy/WheelWizard?color=green&style=for-the-badge)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/patchzyy/WheelWizard/total?color=green&style=for-the-badge)
 [![Discord](https://img.shields.io/discord/1253384439937896560?color=7289da&style=for-the-badge)](https://discord.gg/vZ7T2wJnsq)
 
-# Open Source Mario Kart Wii Mod Manager
+# Wheel wizard
 
 
 **Currently only supports RR**
