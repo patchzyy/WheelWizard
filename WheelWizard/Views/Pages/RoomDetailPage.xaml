@@ -1,0 +1,54 @@
+﻿<Page x:Class="CT_MKWII_WPF.Views.Pages.RoomDetailPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+      xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Pages"
+      mc:Ignorable="d"
+      d:DesignHeight="831" d:DesignWidth="444"
+      Title="RoomDetailPage" Background="Transparent">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <UniformGrid Grid.Row="0"> 
+        <TextBlock Text="Room Details" FontSize="24" Style="{StaticResource TitleText}"
+                   FontWeight="Bold" Margin="0,0,0,20"/>
+        <components:Button Variant="Default"
+                           IsEnabled="True"
+                           IconPack="FontAwesome"
+                           Width="120"
+                           IconKind="{x:Static icon:PackIconFontAwesomeKind.ArrowLeftSolid}"
+                           Text="Back"
+                           Click="GoBackClick"
+                           Margin="3"/>
+        </UniformGrid>
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0,0,0,20">
+            <TextBlock 
+                Text="{Binding Room.Id, StringFormat=Room ID: {0}}"  Style="{StaticResource TinyText}"
+
+                Margin="0,0,0,5"/>
+            <TextBlock Text="{Binding Room.Created, StringFormat=Created: {0}}" Style="{StaticResource TinyText}"
+                       Margin="0,0,0,5"/>
+            <TextBlock Text="{Binding Room.Type, StringFormat=Access: {0}}" Style="{StaticResource TinyText}"
+                       Margin="0,0,0,5"/>
+            <TextBlock Text="{Binding Room.Host, StringFormat=Players: {0}}" Style="{StaticResource TinyText}"
+                       Margin="0,0,0,5"/>
+        </StackPanel>
+
+        <ListView Grid.Row="2" ItemsSource="{Binding Room.Players}" x:Name="playersListView">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Mii" DisplayMemberBinding="{Binding Value.Mii[0].Data}" Width="100"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Value.Name}"/>
+                    <GridViewColumn Header="FC" DisplayMemberBinding="{Binding Value.Fc}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Page>

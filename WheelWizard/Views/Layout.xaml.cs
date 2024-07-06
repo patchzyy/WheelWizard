@@ -16,6 +16,7 @@ public partial class Layout : Window
     private void SettingsPage_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new SettingsPage());
     private void ModsPage_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new ModsPage());
     private void KitchenSink_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new KitchenSink());
+    private void RoomsButton_Navigate(object sender, RoutedEventArgs e) => NavigateToPage(new RoomsPage());
     
     public void NavigateToPage(Page page)
     {
@@ -80,4 +81,6 @@ public partial class Layout : Window
             UseShellExecute = true
         });
     }
+
+
 }

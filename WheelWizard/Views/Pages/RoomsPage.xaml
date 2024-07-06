@@ -1,0 +1,43 @@
+﻿<Page x:Class="CT_MKWII_WPF.Views.Pages.RoomsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+      xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      mc:Ignorable="d"
+      d:DesignHeight="831" d:DesignWidth="444"
+      Title="RoomsPage" Background="Transparent">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <components:IconLabel Grid.Row="0"
+                              IconPack="FontAwesome"
+                              IconKind="{x:Static icon:PackIconFontAwesomeKind.UsersRectangleSolid}"
+                              Text="Rooms"
+                              FontSize="20"
+                              VerticalAlignment="Center"
+                              IconSize="24"
+                              Margin="20,0,0,20"
+                              Color="{StaticResource TitleTextColor}"/>
+        <components:EmptyPageInfo Grid.Row="2" x:Name="EmptyRoomsMessage"
+                                  HorizontalAlignment="Center"
+                                  VerticalContentAlignment="Center"
+                                  Title="No Rooms found"
+                                  Body="You might not have internet connection, or no-one might be playing."
+        ></components:EmptyPageInfo>
+        <ListView Grid.Row="1" ItemsSource="{Binding  Rooms}" x:Name="RoomsListView">
+            <ListView.View>
+                <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Shows information about the RR games">
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=RoomNumber}" Header="ID" Width="50"></GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=PlayerCount}" Header="Count" Width="100"></GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Type}" Header="Access" Width="100"></GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Playtime}" Header="Time Online" Width="140"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Page>
