@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -8,59 +9,68 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Windows.Media;
 using CT_MKWII_WPF.Utils;
+using System.ComponentModel;
 
 namespace CT_MKWII_WPF.Views.Pages
 {
-    public partial class RoomDetailPage : Page
+    public partial class RoomDetailPage : Page, INotifyPropertyChanged
     {
-        public RRLiveInfo.RoomInfo Room { get; set; }
+        private RRLiveInfo.RoomInfo _room;
+        public RRLiveInfo.RoomInfo Room
+        {
+            get => _room;
+            set
+            {
+                _room = value;
+                OnPropertyChanged(nameof(Room));
+            }
+        }
+
+        public ObservableCollection<KeyValuePair<string, RRLiveInfo.RoomInfo.Player>> PlayersList { get; set; }
+
         private static readonly HttpClient _httpClient = new HttpClient();
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public RoomDetailPage(RRLiveInfo.RoomInfo room)
         {
             InitializeComponent();
             Room = room;
+            PlayersList = new ObservableCollection<KeyValuePair<string, RRLiveInfo.RoomInfo.Player>>(Room.Players);
             DataContext = this;
 
-            playersListView.MouseDoubleClick += PlayersListView_MouseDoubleClick;
+            LoadMiiImagesAsync();
         }
 
-        private void GoBackClick(object sender, RoutedEventArgs e)
+        private async void setMiiImage(KeyValuePair<String, RRLiveInfo.RoomInfo.Player> playerPair)
         {
-            var layout = (Layout)Application.Current.MainWindow;
-            layout.NavigateToPage(new RoomsPage());
-        }
-
-        private async void PlayersListView_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            if (playersListView.SelectedItem is KeyValuePair<string, RRLiveInfo.RoomInfo.Player> selectedPlayer)
+            var player = playerPair.Value;
+            if (player.Mii != null && player.Mii.Count > 0)
             {
                 try
                 {
-                    if (selectedPlayer.Value.Mii != null && selectedPlayer.Value.Mii.Count > 0)
+                    var miiImage = await GetMiiImageAsync(player.Mii[0].Data);
+                    player.MiiImage = miiImage;
+                    // Update the UI on the main thread
+                    Application.Current.Dispatcher.Invoke(() =>
                     {
-                        var miiImage = await GetMiiImageAsync(selectedPlayer.Value.Mii[0].Data);
-                        ShowMiiPopup(selectedPlayer.Value.Name, miiImage);
-                    }
-                    else
-                    {
-                        MessageBox.Show("No Mii data available for this player.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                }
-                catch (HttpRequestException ex)
-                {
-                    MessageBox.Show($"Network error: {ex.Message}\n\nPlease check your internet connection and try again.", "Network Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                catch (JsonException ex)
-                {
-                    MessageBox.Show($"Error parsing Mii data: {ex.Message}\n\nThe server response was not in the expected format.", "Data Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        OnPropertyChanged(nameof(PlayersList));
+                    });
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"An unexpected error occurred: {ex.Message}\n\nPlease try again later or contact support if the issue persists.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    // Handle exceptions as needed
+                    player.MiiImage = null; // Or a placeholder image
                 }
+            }
+        }
+
+        private async void LoadMiiImagesAsync()
+        {
+            foreach (var playerPair in PlayersList)
+            {
+                setMiiImage(playerPair);
             }
         }
 
@@ -73,7 +83,6 @@ namespace CT_MKWII_WPF.Views.Pages
             var response = await _httpClient.PostAsync("https://qrcode.rc24.xyz/cgi-bin/studio.cgi", formData);
 
             var jsonResponse = await response.Content.ReadAsStringAsync();
-            Console.WriteLine(jsonResponse);
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error fetching Mii image: {response.StatusCode}");
@@ -95,22 +104,15 @@ namespace CT_MKWII_WPF.Views.Pages
             return $"{baseUrl}?{queryParameters}";
         }
 
-        private void ShowMiiPopup(string playerName, BitmapImage miiImage)
+        private void GoBackClick(object sender, RoutedEventArgs e)
         {
-            var window = new Window
-            {
-                Title = $"{playerName}'s Mii",
-                Content = new Image
-                {
-                    Source = miiImage,
-                    Stretch = Stretch.Uniform,
-                    Margin = new Thickness(10)
-                },
-                SizeToContent = SizeToContent.WidthAndHeight,
-                ResizeMode = ResizeMode.NoResize,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen
-            };
-            window.ShowDialog();
+            var layout = (Layout)Application.Current.MainWindow;
+            layout.NavigateToPage(new RoomsPage());
+        }
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 
@@ -149,4 +151,5 @@ namespace CT_MKWII_WPF.Views.Pages
         [JsonPropertyName("copying")]
         public string Copying { get; set; }
     }
+    
 }

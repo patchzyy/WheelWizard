@@ -29,10 +29,14 @@
                                   Title="No Rooms found"
                                   Body="You might not have internet connection, or no-one might be playing."
         ></components:EmptyPageInfo>
-        <ListView Grid.Row="1" ItemsSource="{Binding  Rooms}" x:Name="RoomsListView">
+        <ListView Grid.Row="1" ItemsSource="{Binding  Rooms}" x:Name="RoomsListView"
+                  Foreground="{StaticResource ForegroundColorV2}"
+                  Background="{StaticResource BackgroundColorV2}"
+                  
+                  >
             <ListView.View>
                 <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Shows information about the RR games">
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=RoomNumber}" Header="ID" Width="50"></GridViewColumn>
+                    <GridViewColumn  DisplayMemberBinding="{Binding Path=RoomNumber}" Header="ID" Width="50"></GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=PlayerCount}" Header="Count" Width="100"></GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Type}" Header="Access" Width="100"></GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Playtime}" Header="Time Online" Width="140"></GridViewColumn>

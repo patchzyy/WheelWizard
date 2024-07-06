@@ -29,22 +29,33 @@
                            Margin="3"/>
         </UniformGrid>
         <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0,0,0,20">
+            <UniformGrid Grid.Row="0" Columns="2" Rows="2"> 
             <TextBlock 
-                Text="{Binding Room.Id, StringFormat=Room ID: {0}}"  Style="{StaticResource TinyText}"
-
+                Text="{Binding Room.Id, StringFormat=Room ID: {0}}"  
+                Style="{StaticResource SidebarSectionText}"
                 Margin="0,0,0,5"/>
-            <TextBlock Text="{Binding Room.Created, StringFormat=Created: {0}}" Style="{StaticResource TinyText}"
+            <TextBlock Text="{Binding Room.Created, StringFormat=Created: {0}}" Style="{StaticResource SidebarSectionText}"
                        Margin="0,0,0,5"/>
-            <TextBlock Text="{Binding Room.Type, StringFormat=Access: {0}}" Style="{StaticResource TinyText}"
+            <TextBlock Text="{Binding Room.Type, StringFormat=Access: {0}}" Style="{StaticResource SidebarSectionText}"
                        Margin="0,0,0,5"/>
-            <TextBlock Text="{Binding Room.Host, StringFormat=Players: {0}}" Style="{StaticResource TinyText}"
+            <TextBlock Text="{Binding Room.Host, StringFormat=Players: {0}}" Style="{StaticResource SidebarSectionText}"
                        Margin="0,0,0,5"/>
+            </UniformGrid>
         </StackPanel>
 
-        <ListView Grid.Row="2" ItemsSource="{Binding Room.Players}" x:Name="playersListView">
+        <ListView Grid.Row="2" ItemsSource="{Binding PlayersList}" x:Name="playersListView" 
+                  Foreground="{StaticResource TitleTextColor}"
+                  Background="{StaticResource BackgroundColor}"
+                  >
             <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Mii" DisplayMemberBinding="{Binding Value.Mii[0].Data}" Width="100"/>
+                <GridView AllowsColumnReorder="False">
+                    <GridViewColumn Header="Mii">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Value.MiiImage}" Width="50" Height="50" Stretch="Uniform"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Value.Name}"/>
                     <GridViewColumn Header="FC" DisplayMemberBinding="{Binding Value.Fc}"/>
                 </GridView>
