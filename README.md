@@ -4,9 +4,6 @@
 
 # Wheel wizard
 
-
-**Currently only supports RR**
-
 Please report any bugs :)
 
 ![image](https://github.com/patchzyy/CT-MKWII-WPF/assets/64382339/f97125bf-b339-44ef-8719-05a592edc2f4)
