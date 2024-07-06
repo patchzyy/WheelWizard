@@ -1,66 +1,20 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <SolidColorBrush x:Key="HeaderAttributes" Color="{StaticResource Gray400}" />
-    <SolidColorBrush x:Key="ItemAttributes-Default" Color="{StaticResource Gray200}" />
-    <SolidColorBrush x:Key="ItemAttributes-Hover+" Color="{StaticResource Gray100}" /> <!-- This is also the color for when an item is selected/focussed -->
+    <SolidColorBrush x:Key="DragItemAttributes-Default" Color="{StaticResource Gray200}" />
+    <SolidColorBrush x:Key="DragItemAttributes-Hover+" Color="{StaticResource Gray100}" /> <!-- This is also the color for when an item is selected/focussed -->
 
-    <SolidColorBrush x:Key="ItemBackground-Default" Color="{StaticResource Gray800}" />
-    <SolidColorBrush x:Key="ItemBackground-Hover" Color="{StaticResource Gray700}" />
-    <SolidColorBrush x:Key="ItemBackground-Focus" Color="{StaticResource Gray600}" /> <!-- when selected for example -->
+    <SolidColorBrush x:Key="DragItemBackground-Default" Color="{StaticResource Gray800}" />
+    <SolidColorBrush x:Key="DragItemBackground-Hover" Color="{StaticResource Gray700}" />
+    <SolidColorBrush x:Key="DragItemBackground-Focus" Color="{StaticResource Gray600}" /> <!-- when selected for example -->
 
-    <SolidColorBrush x:Key="ItemIcon-Default" Color="{StaticResource Gray600}" />
-    <SolidColorBrush x:Key="ItemIcon-Hover+" Color="{StaticResource Gray500}" />  <!-- This is also the color for when an item is selected/focussed -->
-
-
-  <Style x:Key="DragAndDroppableList" TargetType="{x:Type ListView}">
-    <Setter Property="Background" Value="Transparent"/>
-    <Setter Property="BorderBrush" Value="Transparent"/>
-    <Setter Property="BorderThickness" Value="0"/>
-    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
-    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-
-    <Setter Property="ItemContainerStyle">
-        <Setter.Value>
-            <Style TargetType="{x:Type ListViewItem}">
-                <Setter Property="Background" Value="{StaticResource ItemBackground-Default}"/>
-                <Setter Property="Foreground" Value="{StaticResource ItemAttributes-Default}"/>
-                <Setter Property="Margin" Value="0,2"/>
-                <Setter Property="FontSize" Value="14"/>
-                
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type ListViewItem}">
-                            <Border Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="{StaticResource GlobalCornerRadius}">
-                                <GridViewRowPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                                      Content="{TemplateBinding Content}"
-                                                      Columns="{TemplateBinding GridView.ColumnCollection}"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="{StaticResource ItemBackground-Hover}"/>
-                        <Setter Property="Foreground" Value="{StaticResource ItemAttributes-Hover+}"/>
-                    </Trigger>
-                    <Trigger Property="IsSelected" Value="True">
-                        <Setter Property="Background" Value="{StaticResource ItemBackground-Focus}"/>
-                        <Setter Property="Foreground" Value="{StaticResource ItemAttributes-Hover+}"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-        </Setter.Value>
-    </Setter>
+    <SolidColorBrush x:Key="DragItemIcon-Default" Color="{StaticResource Gray600}" />
+    <SolidColorBrush x:Key="DragItemIcon-GroupHover+" Color="{StaticResource Gray400}" />  <!-- This is also the color for when an item is selected/focussed -->
+    <SolidColorBrush x:Key="DragItemIcon-IndividualHover+" Color="{StaticResource Gray300}" />
     
-
-</Style>
-    
+    <SolidColorBrush x:Key="DragItem-Target" Color="{StaticResource Cyan400}" />
+    <!-- Style of the header -->
     <Style TargetType="{x:Type GridViewColumnHeader}">
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="Background" Value="Transparent" />
@@ -68,6 +22,7 @@
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="5,0,0,0"/>
+        <!--<Setter Property="Margin" Value="50,0,0,0"/>-->
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -82,6 +37,52 @@
                                    Foreground="{TemplateBinding Foreground}"/>
                     </Border>
                 </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- TODO: DELETE THE FOLLOWING STYLE BELOW -->
+    <Style x:Key="DragAndDroppableList" TargetType="{x:Type ListView}">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+
+    <Setter Property="ItemContainerStyle">
+        <Setter.Value>
+            <Style TargetType="{x:Type ListViewItem}">
+                <Setter Property="Background" Value="{StaticResource DragItemBackground-Default}"/>
+                <Setter Property="Foreground" Value="{StaticResource DragItemAttributes-Default}"/>
+                <Setter Property="Margin" Value="0,2"/>
+                <Setter Property="FontSize" Value="14"/>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                            <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="{StaticResource GlobalCornerRadius}">
+                                <GridViewRowPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                                      Content="{TemplateBinding Content}"
+                                                      Columns="{TemplateBinding GridView.ColumnCollection}"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="{StaticResource DragItemBackground-Hover}"/>
+                        <Setter Property="Foreground" Value="{StaticResource DragItemAttributes-Hover+}"/>
+                    </Trigger>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="{StaticResource DragItemBackground-Focus}"/>
+                        <Setter Property="Foreground" Value="{StaticResource DragItemAttributes-Hover+}"/>
+                    </Trigger>
+                </Style.Triggers>
+              </Style>
             </Setter.Value>
         </Setter>
     </Style>

@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
+
 using System.Windows.Media;
 
 /*
@@ -16,7 +16,7 @@ using System.Windows.Media;
 
 namespace CT_MKWII_WPF.Views.Components
 {
-    public partial class IconLabelButton : UserControl
+    public partial class IconLabelButton : System.Windows.Controls.Button
     {
         public IconLabelButton()
         {
@@ -81,20 +81,6 @@ namespace CT_MKWII_WPF.Views.Components
         {
             get => (string)GetValue(IconPackProperty);
             set => SetValue(IconPackProperty, value);
-        }
-        
-        public static readonly RoutedEvent ClickEvent = EventManager.RegisterRoutedEvent(
-            nameof(Click), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(IconLabelButton));
-
-        public event RoutedEventHandler Click
-        {
-            add { AddHandler(ClickEvent, value); }
-            remove { RemoveHandler(ClickEvent, value); }
-        }
-
-        private void OnClick(object sender, RoutedEventArgs e)
-        {
-            RaiseEvent(new RoutedEventArgs(ClickEvent));
         }
     }
 }
