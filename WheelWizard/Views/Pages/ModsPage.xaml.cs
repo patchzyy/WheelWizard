@@ -156,6 +156,7 @@ namespace CT_MKWII_WPF.Views.Pages
         {
             string modName = Microsoft.VisualBasic.Interaction
                 .InputBox("Enter mod name:", "Mod Name", "New Mod");
+            if (!IsValidName(modName)) return;
             var modDirectory = GetModDirectoryPath(modName);
             CreateDirectory(modDirectory);
             for (int i = 0; i < filePaths.Length; i++)
@@ -267,6 +268,24 @@ namespace CT_MKWII_WPF.Views.Pages
             foreach (var mod in Mods)
                 mod.IsEnabled = selectAll;
         }
+
+        private bool IsValidName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                MessageBox.Show($"Mod name can't be empty", "Error",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (Mods.Any(mod => mod.Title.Equals(name, StringComparison.OrdinalIgnoreCase)))
+            {
+                MessageBox.Show($"A mod with the name '{name}' already exists.", "Error",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            return true;
+        } 
         
         private void RenameMod_Click(object sender, RoutedEventArgs e)
         {
@@ -275,18 +294,7 @@ namespace CT_MKWII_WPF.Views.Pages
             
             string newTitle = Microsoft.VisualBasic.Interaction
                 .InputBox("Enter new title:", "Rename Mod", selectedMod.Title);
-            if (string.IsNullOrWhiteSpace(newTitle))
-            {
-                MessageBox.Show($"Mod name can't be empty", "Error",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            if (Mods.Any(mod => mod.Title.Equals(newTitle, StringComparison.OrdinalIgnoreCase)))
-            {
-                MessageBox.Show($"A mod with the name '{newTitle}' already exists.", "Error",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+            if (!IsValidName(newTitle)) return;
             
             try
             {
