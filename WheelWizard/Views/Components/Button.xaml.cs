@@ -71,7 +71,7 @@ namespace CT_MKWII_WPF.Views.Components
         
         public static readonly DependencyProperty IconSizeProperty =
             DependencyProperty.Register(nameof(IconSize), typeof(double), typeof(Button), 
-                new PropertyMetadata(24.0));
+                new PropertyMetadata(20.0));
         
         public double IconSize
         {
@@ -91,7 +91,7 @@ namespace CT_MKWII_WPF.Views.Components
         
         public static readonly new DependencyProperty FontSizeProperty =
             DependencyProperty.Register(nameof(FontSize), typeof(double), typeof(Button), 
-                new PropertyMetadata(20.0));
+                new PropertyMetadata(16.0));
    
         public new double FontSize
         {

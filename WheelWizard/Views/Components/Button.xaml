@@ -11,7 +11,7 @@
         <Button.Template>
             <ControlTemplate TargetType="Button">
                 <Border Background="{Binding Background, ElementName=BButton}" 
-                        CornerRadius="5" Padding="14,7">
+                        CornerRadius="{StaticResource GlobalCornerRadius}" Padding="16,10">
                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
             </ControlTemplate>

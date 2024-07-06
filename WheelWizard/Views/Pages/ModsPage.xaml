@@ -54,7 +54,7 @@
                              </DataTemplate>
                          </GridViewColumn.CellTemplate> 
                      </GridViewColumn>
-                     <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" />
+                     <GridViewColumn Header="Title" Width="Auto" DisplayMemberBinding="{Binding Title}" />
                  </GridView>
              </ListView.View>
          </components:DraggableListView>
