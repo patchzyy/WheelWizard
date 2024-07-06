@@ -106,7 +106,7 @@
             Grid.Row="6"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
-            Text="Pre-release v1.0.3"
+            Text="Pre-release v1.0.4"
             ></TextBlock>
         
     </Grid>
