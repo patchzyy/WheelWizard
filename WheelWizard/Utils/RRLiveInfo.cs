@@ -43,7 +43,7 @@ public class RRLiveInfo
     public static int GetCurrentOnlinePlayers(RRInformation info)
     {
         int PlayerCount = 0;
-        foreach (RoomInfo room in info.Rooms) PlayerCount =+ room.Players.Count;
+        foreach (RoomInfo room in info.Rooms) PlayerCount += room.Players.Count;
         return PlayerCount;
     }
 
