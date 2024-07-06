@@ -5,22 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
       xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-      
-      xmlns:local="clr-namespace:CT_MKWII_WPF"
-      mc:Ignorable="d"
-      d:DesignHeight="831" d:DesignWidth="444"
+      mc:Ignorable="d" d:DesignHeight="831" d:DesignWidth="444"
       Title="Mods" Background="Transparent">
-    <Page.Resources>
-        <ContextMenu x:Key="ModContextMenu">
-            <MenuItem Header="Rename" Click="RenameMod_Click"/>
-            <MenuItem Header="Delete" Click="DeleteMod_Click"/>
-            <MenuItem Header="Open Folder" Click="OpenFolder_Click"/>
-        </ContextMenu>
-    </Page.Resources>
-    
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition />
@@ -41,31 +29,7 @@
                                   Body="You can import mods by clicking the button below."
             ></components:EmptyPageInfo>
         
-        <ListView Grid.Row="1" x:Name="ModsListView" 
-                  Style="{StaticResource DragAndDroppableList}"
-                  ItemsSource="{Binding Mods}" AllowDrop="True" 
-                  
-                  PreviewMouseLeftButtonDown="ModsListView_PreviewMouseLeftButtonDown" 
-                  PreviewMouseMove="ModsListView_PreviewMouseMove"
-                  Drop="ModsListView_Drop"
-                  MouseRightButtonUp="ModsListView_MouseRightButtonUp">
-            <ListView.View>
-                <GridView AllowsColumnReorder="False">
-                    <GridViewColumn Header="Enabled" Width="75">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsChecked="{Binding IsEnabled, Mode=TwoWay}" 
-                                          HorizontalAlignment="Center" VerticalAlignment="Center"
-                                          Margin="0,5"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" Width="200" />
-                </GridView>
-            </ListView.View>
-        </ListView>
-        
-         <components:DraggableListView Grid.Row="2" x:Name="ModsListView2"
+         <components:DraggableListView Grid.Row="1" x:Name="ModsListView"
                                        OnItemsReorder="ModsListView2_OnOnItemsReorder"
                                        EnableLineIndication="False"
                                        ItemsSource="{Binding Mods}">
@@ -95,7 +59,7 @@
              </ListView.View>
          </components:DraggableListView>
         
-        <UniformGrid Grid.Row="3" Columns="2" Rows="2"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+        <UniformGrid Grid.Row="2" Columns="2" Rows="2"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
             <components:Button Variant="Default"
                                IsEnabled="True"
                                IconPack="Material"

@@ -6,8 +6,6 @@ using System.Linq;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
 using Microsoft.Win32;
 using System.IO.Compression;
 using System.Threading.Tasks;
@@ -19,20 +17,18 @@ namespace CT_MKWII_WPF.Views.Pages
 {
     public partial class ModsPage : Page
     {
-        //dont do this, we do it later
-        private readonly string configFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII", "Mods", "modconfig.json");
+        private readonly string configFilePath = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "CT-MKWII", "Mods", "modconfig.json");
         public ObservableCollection<Mod> Mods { get; set; }
-        private Mod _contextMenuTargetMod;
         
-        //public ObservableCollection<ModItem> Mods { get; set; }
         private Point startPoint;
         public ModsPage()
         {
             InitializeComponent();
             LoadMods();
             
-            ModsListView.DataContext = this; // TODO : TAGGED FOR REMOVAL
-            ModsListView2.DataContext = this;
+            ModsListView.DataContext = this; 
         }
         
         private void LoadMods()
@@ -60,8 +56,7 @@ namespace CT_MKWII_WPF.Views.Pages
         private void UpdateEmptyListMessageVisibility()
         {
             EmptyListMessage.Visibility = Mods.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
-            ModsListView.Visibility = Mods.Count > 0 ? Visibility.Visible : Visibility.Collapsed; // TODO : TAGGED FOR REMOVAL
-            ModsListView2.Visibility = Mods.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+            ModsListView.Visibility = Mods.Count > 0 ? Visibility.Visible : Visibility.Collapsed; 
         }
         
         private void Mod_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -69,80 +64,6 @@ namespace CT_MKWII_WPF.Views.Pages
             if (e.PropertyName == nameof(Mod.IsEnabled))
                 SaveMods();
             UpdateEmptyListMessageVisibility();
-        }
-        
-        // TODO : TAGGED FOR REMOVAL
-        private void ModsListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            startPoint = e.GetPosition(null);
-        }
-        
-        // TODO : TAGGED FOR REMOVAL
-        private void ModsListView_PreviewMouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.LeftButton != MouseButtonState.Pressed) return;
-
-            Point mousePos = e.GetPosition(null);
-            Vector diff = startPoint - mousePos;
-
-            if (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance || Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance)
-            {
-                ListView listView = sender as ListView;
-                ListViewItem listViewItem = FindAncestor<ListViewItem>((DependencyObject)e.OriginalSource);
-
-                if (listViewItem != null)
-                {
-                    Mod mod = (Mod)listView.ItemContainerGenerator.ItemFromContainer(listViewItem);
-
-                    DataObject dragData = new DataObject("myFormat", mod);
-                    DragDrop.DoDragDrop(listViewItem, dragData, DragDropEffects.Move);
-                }
-            }
-        }
-        
-        // TODO : TAGGED FOR REMOVAL
-        private static T FindAncestor<T>(DependencyObject current) where T : DependencyObject
-        {
-            while (current != null && !(current is T))
-            {
-                current = VisualTreeHelper.GetParent(current);
-            }
-            return current as T;
-        }
-        
-        // TODO : TAGGED FOR REMOVAL
-        private void ModsListView_Drop(object sender, DragEventArgs e)
-        {
-            try
-            {
-                if (e.Data.GetDataPresent("myFormat"))
-                {
-                    Mod mod = e.Data.GetData("myFormat") as Mod;
-                    ListView listView = sender as ListView;
-                    Point dropPosition = e.GetPosition(listView);
-                    int targetIndex = GetDropTargetIndex(listView, dropPosition);
-
-                    if (targetIndex < 0)
-                    {
-
-                        targetIndex = listView.Items.Count - 1;
-                    }
-
-                    MoveModInCollection(mod, targetIndex);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Failed to drop mod: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-        
-        // TODO : TAGGED FOR REMOVAL
-        private void MoveModInCollection(Mod mod, int targetIndex)
-        {
-            Mods.Remove(mod);
-            Mods.Insert(targetIndex, mod);
-            SaveMods();
         }
         
         private void SaveMods()
@@ -163,50 +84,6 @@ namespace CT_MKWII_WPF.Views.Pages
             }
         }
         
-        // TODO : TAGGED FOR REMOVAL
-        private int GetDropTargetIndex(ListView listView, Point dropPosition)
-        {
-            for (int i = 0; i < listView.Items.Count; i++)
-            {
-                ListViewItem listViewItem = (ListViewItem)listView.ItemContainerGenerator.ContainerFromIndex(i);
-                if (listViewItem != null)
-                {
-                    Rect itemBounds = VisualTreeHelper.GetDescendantBounds(listViewItem);
-                    Point itemPosition = listViewItem.TransformToAncestor(listView).Transform(new Point(0, 0));
-
-                    if (dropPosition.Y < itemPosition.Y + itemBounds.Height)
-                    {
-                        return i;
-                    }
-                }
-            }
-
-            return -1;
-        }
-        
-        // TODO : TAGGED FOR REMOVAL
-        private void ModsListView_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is ListView listView)
-            {
-                ListViewItem listViewItem = FindAncestor<ListViewItem>((DependencyObject)e.OriginalSource);
-                if (listViewItem != null)
-                {
-                    _contextMenuTargetMod = (Mod)listView.ItemContainerGenerator.ItemFromContainer(listViewItem);
-
-                    if (_contextMenuTargetMod != null)
-                    {
-                        ContextMenu contextMenu = Resources["ModContextMenu"] as ContextMenu;
-                        if (contextMenu != null)
-                        {
-                            contextMenu.PlacementTarget = listViewItem;
-                            contextMenu.IsOpen = true;
-                        }
-                    }
-                }
-            }
-        }
-
         private void ImportMod_Click(object sender, RoutedEventArgs e)
         {
             var openFileDialog = new OpenFileDialog
@@ -220,7 +97,8 @@ namespace CT_MKWII_WPF.Views.Pages
             {
                 var selectedFiles = openFileDialog.FileNames;
 
-                if (selectedFiles.Length == 1) ProcessModFiles(selectedFiles, singleMod: true);
+                if (selectedFiles.Length == 1) 
+                    ProcessModFiles(selectedFiles, singleMod: true);
                 else
                 {
                     var result = MessageBox.Show("Do you want to combine all files into 1 mod?", 
@@ -392,7 +270,7 @@ namespace CT_MKWII_WPF.Views.Pages
         
         private void RenameMod_Click(object sender, RoutedEventArgs e)
         {
-            var selectedMod = ModsListView2.GetCurrentContextItem<Mod>();
+            var selectedMod = ModsListView.GetCurrentContextItem<Mod>();
             if (selectedMod == null) return;
             
             string newTitle = Microsoft.VisualBasic.Interaction
@@ -425,11 +303,10 @@ namespace CT_MKWII_WPF.Views.Pages
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-    
 
         private void DeleteMod_Click(object sender, RoutedEventArgs e)
         {
-            var selectedMod = ModsListView2.GetCurrentContextItem<Mod>();
+            var selectedMod = ModsListView.GetCurrentContextItem<Mod>();
             if (selectedMod == null) return;
             var areTheySure = MessageBox.Show($"Are you sure you want to delete {selectedMod.Title}?",
                 "Delete Mod", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes;
@@ -454,7 +331,7 @@ namespace CT_MKWII_WPF.Views.Pages
         
         private void OpenFolder_Click(object sender, RoutedEventArgs e)
         {
-            var selectedMod = ModsListView2.GetCurrentContextItem<Mod>();
+            var selectedMod = ModsListView.GetCurrentContextItem<Mod>();
             if (selectedMod == null) return;
             
             string modDirectory = GetModDirectoryPath(selectedMod!.Title);
