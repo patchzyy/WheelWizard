@@ -1,0 +1,88 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="TopButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource TitleTextColor}"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+            
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="White"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
+           TargetType="{x:Type RadioButton}"
+           x:Key="SidebarMenuButton">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Grid VerticalAlignment="Stretch"
+                          HorizontalAlignment="Stretch"
+                          Background="{TemplateBinding Background}">
+                        <TextBlock Text="{TemplateBinding Content}"
+                                   VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="{StaticResource BackgroundColorV2}"/>
+            </Trigger>
+        </Style.Triggers>
+        
+    </Style>
+    
+    <!-- Default -->
+    <SolidColorBrush x:Key="ButtonBackgroundDefault-Default" Color="{StaticResource Gray800}" />
+    <SolidColorBrush x:Key="ButtonForegroundDefault-Default" Color="{StaticResource Gray300}" />
+    <SolidColorBrush x:Key="ButtonBackgroundDefault-Hover" Color="{StaticResource Gray600}" />
+    <SolidColorBrush x:Key="ButtonForegroundDefault-Hover" Color="{StaticResource Gray300}" />
+    <SolidColorBrush x:Key="ButtonBackgroundDefault-Pressing" Color="{StaticResource Gray500}" />
+    <SolidColorBrush x:Key="ButtonForegroundDefault-Pressing" Color="{StaticResource Gray300}" />
+    
+    <!-- Primary -->
+    <SolidColorBrush x:Key="ButtonBackgroundPrimary-Default" Color="{StaticResource Cyan700}" />
+    <SolidColorBrush x:Key="ButtonForegroundPrimary-Default" Color="{StaticResource Gray50}" />
+    <SolidColorBrush x:Key="ButtonBackgroundPrimary-Hover" Color="{StaticResource Cyan600}" />
+    <SolidColorBrush x:Key="ButtonForegroundPrimary-Hover" Color="{StaticResource Gray50}" />
+    <SolidColorBrush x:Key="ButtonBackgroundPrimary-Pressing" Color="{StaticResource Cyan400}" />
+    <SolidColorBrush x:Key="ButtonForegroundPrimary-Pressing" Color="{StaticResource Gray50}" />
+    
+    <!-- Secondary -->
+    <SolidColorBrush x:Key="ButtonBackgroundSecondary-Default" Color="{StaticResource Yellow700}" />
+    <SolidColorBrush x:Key="ButtonForegroundSecondary-Default" Color="{StaticResource Gray100}" />
+    <SolidColorBrush x:Key="ButtonBackgroundSecondary-Hover" Color="{StaticResource Yellow600}" />
+    <SolidColorBrush x:Key="ButtonForegroundSecondary-Hover" Color="{StaticResource Gray50}" />
+    <SolidColorBrush x:Key="ButtonBackgroundSecondary-Pressing" Color="{StaticResource Yellow500}" />
+    <SolidColorBrush x:Key="ButtonForegroundSecondary-Pressing" Color="{StaticResource Gray50}" />
+    
+    <!-- Danger -->
+    <SolidColorBrush x:Key="ButtonBackgroundDanger-Default" Color="{StaticResource Red700}" />
+    <SolidColorBrush x:Key="ButtonForegroundDanger-Default" Color="{StaticResource Gray100}" />
+    <SolidColorBrush x:Key="ButtonBackgroundDanger-Hover" Color="{StaticResource Red600}" />
+    <SolidColorBrush x:Key="ButtonForegroundDanger-Hover" Color="{StaticResource Gray50}" />
+    <SolidColorBrush x:Key="ButtonBackgroundDanger-Pressing" Color="{StaticResource Red400}" />
+    <SolidColorBrush x:Key="ButtonForegroundDanger-Pressing" Color="{StaticResource Gray50}" />
+    
+    <SolidColorBrush x:Key="ButtonBackground-Disabled" Color="{StaticResource Gray900}" />
+    <SolidColorBrush x:Key="ButtonForeground-Disabled" Color="{StaticResource Gray950}" />
+</ResourceDictionary>

@@ -1,0 +1,44 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <!-- Global Dark Theme -->
+        <SolidColorBrush x:Key="BackgroundColor">#1E1E1E</SolidColorBrush>
+        <SolidColorBrush x:Key="ForegroundColor">#4b4b4b</SolidColorBrush>
+        <SolidColorBrush x:Key="AccentColor">#3b3b3b</SolidColorBrush>
+        <SolidColorBrush x:Key="WhiteTextColor">#FFFFFF</SolidColorBrush>
+        
+        <!-- Global Style for Buttons -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource AccentColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource WhiteTextColor}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource AccentColor}"/>
+            
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#005FA3"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Global Style for TextBoxes -->
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#2D2D2D"/>
+            <Setter Property="Foreground" Value="{StaticResource WhiteTextColor}"/>
+            <Setter Property="BorderBrush" Value="#4D4D4D"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="#2D2D2D"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+            <Setter Property="BorderBrush" Value="#4D4D4D"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+</ResourceDictionary>

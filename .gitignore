@@ -1,0 +1,53 @@
+# Ignore all bin and obj folders
+bin/
+obj/
+
+# Ignore all .user files
+*.user
+*.userosscache
+*.suo
+
+# Ignore all .vs folders
+.vs/
+
+# Ignore NuGet Packages
+*.nupkg
+packages/
+
+# ReSharper/Rider specific ignoring
+_ReSharper*/
+*.DotSettings
+.idea/
+
+# Ignore temporary files, logs, and files created by Windows
+*.[Cc]ache
+*.[Tt]mp
+*.[Ll]og
+*.pidb
+*.dll
+*.exe
+*.pdb
+
+# Ignore files built by Visual Studio
+*.opendb
+*.VC.db
+
+# Miscellaneous files
+*.dbmdl
+*.jfm
+node_modules/
+jspm_packages/
+
+# Thumbnails created by Windows
+Thumbs.db
+
+# Files created by MacOS
+.DS_Store
+
+/CT-MKWII-WPF/obj
+/CT-MKWII-WPF/bin
+/.vs
+CT-MKWII-WPF/Utils/RRNetwork.cs
+
+
+.idea/

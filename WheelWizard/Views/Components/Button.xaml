@@ -1,0 +1,119 @@
+﻿<UserControl x:Class="CT_MKWII_WPF.Views.Components.Button"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+             mc:Ignorable="d" d:DesignHeight="100" d:DesignWidth="200"
+             x:Name="Root">
+
+    <Button Click="Button_Click" x:Name="BButton" IsEnabled="{Binding IsEnabled, ElementName=Root}" >
+        <Button.Template>
+            <ControlTemplate TargetType="Button">
+                <Border Background="{Binding Background, ElementName=BButton}" 
+                        CornerRadius="5" Padding="14,7">
+                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+            </ControlTemplate>
+        </Button.Template>
+        <Button.Style>
+            <!-- Sorry in advance before you start reading this. It was a pain to write -->
+            <Style TargetType="Button">
+                
+                <!-- Default (this has no variant check to ensure if you make a typo, it will just fall back to this) -->
+                <Setter Property="Foreground" Value="{StaticResource ButtonForegroundDefault-Default}"/>
+                <Setter Property="Background" Value="{StaticResource ButtonBackgroundDefault-Default}"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Setter Property="Foreground" Value="{StaticResource ButtonForegroundDefault-Hover}"/>
+                        <Setter Property="Background" Value="{StaticResource ButtonBackgroundDefault-Hover}"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Foreground" Value="{StaticResource ButtonForegroundDefault-Pressing }"/>
+                        <Setter Property="Background" Value="{StaticResource ButtonBackgroundDefault-Pressing }"/>
+                    </Trigger>
+                    
+                    <!-- Primary -->
+                    <DataTrigger Binding="{Binding Variant, ElementName=Root}" Value="Primary">
+                        <Setter Property="Foreground" Value="{StaticResource ButtonForegroundPrimary-Default}"/>
+                        <Setter Property="Background" Value="{StaticResource ButtonBackgroundPrimary-Default}"/>
+                    </DataTrigger>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Variant, ElementName=Root}" Value="Primary"/>
+                            <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter Property="Foreground" Value="{StaticResource ButtonForegroundPrimary-Hover}"/>
+                        <Setter Property="Background" Value="{StaticResource ButtonBackgroundPrimary-Hover}"/>
+                    </MultiDataTrigger>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Variant, ElementName=Root}" Value="Primary"/>
+                            <Condition Binding="{Binding IsPressed, RelativeSource={RelativeSource Self}}" Value="True"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter Property="Foreground" Value="{StaticResource ButtonForegroundPrimary-Pressing}"/>
+                        <Setter Property="Background" Value="{StaticResource ButtonBackgroundPrimary-Pressing}"/>
+                    </MultiDataTrigger>
+                    
+                    <!-- Secondary -->
+                    <DataTrigger Binding="{Binding Variant, ElementName=Root}" Value="Secondary">
+                        <Setter Property="Foreground" Value="{StaticResource ButtonForegroundSecondary-Default}"/>
+                        <Setter Property="Background" Value="{StaticResource ButtonBackgroundSecondary-Default}"/>
+                    </DataTrigger>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Variant, ElementName=Root}" Value="Secondary"/>
+                            <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter Property="Foreground" Value="{StaticResource ButtonForegroundSecondary-Hover}"/>
+                        <Setter Property="Background" Value="{StaticResource ButtonBackgroundSecondary-Hover}"/>
+                    </MultiDataTrigger>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Variant, ElementName=Root}" Value="Secondary"/>
+                            <Condition Binding="{Binding IsPressed, RelativeSource={RelativeSource Self}}" Value="True"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter Property="Foreground" Value="{StaticResource ButtonForegroundSecondary-Pressing}"/>
+                        <Setter Property="Background" Value="{StaticResource ButtonBackgroundSecondary-Pressing}"/>
+                    </MultiDataTrigger>
+                    
+                    <!-- Danger -->
+                    <DataTrigger Binding="{Binding Variant, ElementName=Root}" Value="Danger">
+                        <Setter Property="Foreground" Value="{StaticResource ButtonForegroundDanger-Default}"/>
+                        <Setter Property="Background" Value="{StaticResource ButtonBackgroundDanger-Default}"/>
+                    </DataTrigger>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Variant, ElementName=Root}" Value="Danger"/>
+                            <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter Property="Foreground" Value="{StaticResource ButtonForegroundDanger-Hover}"/>
+                        <Setter Property="Background" Value="{StaticResource ButtonBackgroundDanger-Hover}"/>
+                    </MultiDataTrigger>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Variant, ElementName=Root}" Value="Danger"/>
+                            <Condition Binding="{Binding IsPressed, RelativeSource={RelativeSource Self}}" Value="True"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter Property="Foreground" Value="{StaticResource ButtonForegroundDanger-Pressing}"/>
+                        <Setter Property="Background" Value="{StaticResource ButtonBackgroundDanger-Pressing}"/>
+                    </MultiDataTrigger>
+                    
+                    <!-- Disabled (at the end, and thus overwrites everything) -->
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Foreground" Value="{StaticResource ButtonForeground-Disabled}"/>
+                        <Setter Property="Background" Value="{StaticResource ButtonBackground-Disabled}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Button.Style>
+
+        <components:IconLabel IconPack="{Binding IconPack, ElementName=Root}"
+                              IconKind="{Binding IconKind, ElementName=Root}"
+                              IconSize="{Binding IconSize, ElementName=Root}"
+                              Text="{Binding Text, ElementName=Root}"
+                              FontSize="{Binding FontSize, ElementName=Root}"
+                              Color="{Binding Foreground, ElementName=BButton}"/>
+    </Button>
+</UserControl>

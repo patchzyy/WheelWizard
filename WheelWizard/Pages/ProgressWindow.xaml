@@ -1,0 +1,11 @@
+﻿<Window x:Class="CT_MKWII_WPF.Pages.ProgressWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Update Progress" Height="120" Width="400"
+        WindowStyle="ToolWindow" Topmost="True">
+    
+    <StackPanel Margin="10">
+        <Label x:Name="StatusLabel" Content="Updating... Please do NOT use the application" />
+        <ProgressBar x:Name="ProgressBar" Height="20" Maximum="100"/>
+    </StackPanel>
+</Window>

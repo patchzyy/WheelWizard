@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="CT_MKWII_WPF.Views.Components.IconLabelButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Components"
+             mc:Ignorable="d"
+             d:DesignHeight="150" d:DesignWidth="300"
+             x:Name="Root">
+    <!-- style for this button icon label thing -->
+    <UserControl.Resources>
+        <Style x:Key="HoverStyle" TargetType="Button">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Foreground" Value="{Binding Color, ElementName=Root}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Foreground" Value="{Binding HoverColor, ElementName=Root}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    
+    <Button Click="OnClick" Style="{StaticResource HoverStyle}" x:Name="MainButton">
+        <local:IconLabel IconPack="{Binding IconPack, ElementName=Root}"
+                         IconKind="{Binding IconKind, ElementName=Root}"
+                         IconSize="{Binding IconSize, ElementName=Root}"
+                         Text="{Binding Text, ElementName=Root}"
+                         FontSize="{Binding FontSize, ElementName=Root}"
+                         Color="{Binding Foreground, ElementName=MainButton}"/>
+    </Button>
+</UserControl>

@@ -1,0 +1,146 @@
+﻿<!--
+For any icons we use the IconPack which basicly includes any icon from any  free iconpack out there:
+https://github.com/MahApps/MahApps.Metro.IconPacks
+
+https://game-icons.net/1x1/delapouite/flat-tire.html
+https://game-icons.net/1x1/delapouite/car-wheel.html
+-->
+<Window x:Class="CT_MKWII_WPF.Views.Layout"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+        mc:Ignorable="d"
+        Title="MKW Mod Manager" Height="876" Width="656"
+        WindowStyle='None'
+        ResizeMode='CanMinimize'
+        AllowsTransparency="True"
+        Background="Transparent">
+    
+    <Border Background="{StaticResource ForegroundColorV2}" 
+            CornerRadius="{StaticResource WindowCornerRadius}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="192"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/> <!-- TopBar -->
+                <RowDefinition Height="45"/> <!-- Reserved spacing for title -->   <!-- Also the page container -->
+                <RowDefinition/>             <!--Side bar -->                      <!-- Also the page container -->
+                <RowDefinition Height="60"/> <!--Bottom info corner -->            <!-- Also the page container -->
+            </Grid.RowDefinitions>
+
+            <!-- This border is only used as topBar in order so you can move the window around -->
+            <Border Grid.ColumnSpan="2"
+                    CornerRadius="{StaticResource WindowCornerRadius}"
+                    Background="{StaticResource ForegroundColorV2}"
+                    MouseDown="TopBar_MouseDown"></Border>
+            
+            <DockPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Button Width="30" Height="25" Style="{StaticResource TopButton}" Click="MinimizeButton_Click">
+                    <icon:FontAwesome Kind="MinusSolid" Width="12" Height="12"/>
+                </Button>
+                <Button Width="30" Height="25" Style="{StaticResource TopButton}" Click="CloseButton_Click">
+                    <icon:FontAwesome Kind="XmarkSolid" Width="12" Height="12"/>
+                </Button>
+            </DockPanel>
+            
+             <!-- Page container -->
+            <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="3"
+                    CornerRadius="{StaticResource WindowCornerRadiusLeftRightTwix}"
+                    Background="{StaticResource BackgroundColorV2}"></Border>
+            
+            <Frame Grid.Column="1"  Grid.Row="1"  Grid.RowSpan="3"
+                            x:Name="ContentArea" Margin="{StaticResource EdgeGap}"
+                            JournalOwnership="OwnsJournal" NavigationUIVisibility="Hidden" />
+            
+            <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top">
+                <components:IconLabel IconKind="{x:Static icon:PackIconGameIconsKind.CarWheel}" 
+                                      IconPack="GameIcons"
+                                      Text="Wheel Wizard" 
+                                      Color="{StaticResource TitleTextColor}"
+                                      FontSize="20"
+                                      Margin="{StaticResource LeftTopEdgeGap}"
+                                      IconSize="31"/>
+            </Border>
+            
+            <Border Grid.Row="2" 
+                    VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                    ToolTipService.InitialShowDelay="5"
+                    ToolTipService.ShowDuration="10000"
+                    ToolTipService.BetweenShowDelay="0" Margin="10">
+                <components:DynamicIcon IconPack="FontAwesome"
+                                        IconKind="{x:Static icon:PackIconFontAwesomeKind.TriangleExclamationSolid}" 
+                                        ForegroundColor="{StaticResource WarningTitleTextColor}"
+                                        IconSize="30"/>
+                <Border.ToolTip>
+                    <components:ToolTipMessage Alignment="TopLeft">
+                        <StackPanel>
+                            <TextBlock Text="Amazing that you are trying out our new mod manager!"/>
+                            <TextBlock Text="We wanted to mention that we are in a complete UI overhaul"/>
+                            <TextBlock Text="So dont be confused if a button got moved to some other page when we push a new update"/>
+                            <TextBlock Text="If you have any feedback, please let us know :)"/>
+                        </StackPanel>
+                    </components:ToolTipMessage>
+                </Border.ToolTip>
+            </Border>
+            <!--Bottom info corner -->
+            <Border Grid.Column="0" Grid.Row="3"
+                    CornerRadius="{StaticResource WindowCornerRadiusBottomLeft}"
+                    Background="{StaticResource ForegroundContactColor}"
+                    >
+                <StackPanel VerticalAlignment="Center">
+                    <components:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.DiscordBrands}" 
+                                                IconPack="FontAwesome"
+                                                Text="Talk to us!" 
+                                                Color="{StaticResource TitleTextColor}"
+                                                FontSize="13"
+                                                HoverColor="{StaticResource SuccessTitleTextColor}"
+                                                Margin="{StaticResource LeftEdgeGap}"
+                                                Click="Discord_Click"
+                                                IconSize="20"/>
+                    <Rectangle Height="5" Fill="Transparent"/>
+                    <components:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.GithubBrands}" 
+                                                IconPack="FontAwesome"
+                                                Text="Source code" 
+                                                Color="{StaticResource TitleTextColor}"
+                                                FontSize="13"
+                                                HoverColor="{StaticResource SuccessTitleTextColor}"
+                                                Margin="{StaticResource LeftEdgeGap}"
+                                                Click="Github_Click"
+                                                IconSize="20"/>
+                </StackPanel>
+            </Border>
+            
+            <!--Side bar -->
+            <Border Grid.Column="0" Grid.Row="2" VerticalAlignment="Top">
+                <StackPanel x:Name="SidePanelButtons">
+                    <TextBlock x:Name="PlayerCountText" Margin="10,0,0,0" Style="{StaticResource SidebarSectionText}"/>
+                    <TextBlock Text="General" Style="{StaticResource SidebarSectionText}"/>
+                    <components:SidebarRadioButton  IconKind="{x:Static icon:PackIconFontAwesomeKind.HouseChimneySolid}"
+                                                    IconPack="FontAwesome" Text="Home" IsChecked="True"
+                                                    Click="DashboardPage_Navigate"/>
+                    <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.WrenchSolid}" 
+                                                   IconPack="FontAwesome" Text="Settings" x:Name="SettingsButton"
+                                                   Click="SettingsPage_Navigate"/>
+                    <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.CubesStackedSolid}" 
+                                                   IconPack="FontAwesome" Text="Mods"
+                                                   Click="ModsPage_Navigate"/>
+                    
+                    <!-- add an other section by doing this:
+                    <TextBlock Text="Other" Style="{StaticResource SidebarSectionText}"/>
+                     -->
+                    
+                    <!-- <TextBlock Text="Components" Style="{StaticResource SidebarSectionText}"/> -->
+                    <!-- <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.SinkSolid}"  -->
+                    <!--                                IconPack="FontAwesome" Text="Kitchen Sink" -->
+                    <!--                                Click="KitchenSink_Navigate"/> -->
+                    
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,41 @@
+﻿<Page x:Class="CT_MKWII_WPF.Views.Pages.Dashboard"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+      xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      mc:Ignorable="d"
+      d:DesignHeight="831" d:DesignWidth="444"
+      Title="Dashboard" Background="Transparent">
+    <Grid>
+        <components:IconLabel  HorizontalAlignment="Left"
+                              IconPack="FontAwesome"
+                              IconKind="{x:Static icon:PackIconFontAwesomeKind.HouseSolid}"
+                              Text="Home"
+                              FontSize="20"
+                              VerticalAlignment="Top"
+                              IconSize="24"
+                              Margin="20,0,0,0"
+                              Color="{StaticResource TitleTextColor}"
+        ></components:IconLabel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"  >
+            <TextBlock HorizontalAlignment="Center"
+                Style="{StaticResource TitleText}"
+                Text="Retro Rewind"
+                FontSize="30"
+                ></TextBlock>
+            <components:Button Variant="Primary" 
+                               x:Name="ActionButton"
+                               IsEnabled="False"
+                               IconPack="FontAwesome"
+                               IconKind="{x:Static icon:PackIconFontAwesomeKind.PlaySolid}"
+                               Text="Loading..."
+                               FontSize="16"
+                               Click="PlayButtonClick"
+                               Width="210" 
+                               Height="50" 
+                               Margin="0,20,0,00"/>
+        </StackPanel>
+    </Grid>
+</Page>
