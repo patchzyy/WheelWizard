@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
@@ -47,6 +46,10 @@ namespace CT_MKWII_WPF.Views.Pages
         private async void setMiiImage(KeyValuePair<String, RRLiveInfo.RoomInfo.Player> playerPair)
         {
             var player = playerPair.Value;
+            if (player.Mii == null || player.Mii.Count == 0 || string.IsNullOrEmpty(player.Mii[0]?.Data))
+            {
+                return;
+            }
             if (player.Mii.Count > 0)
             {
                 try
