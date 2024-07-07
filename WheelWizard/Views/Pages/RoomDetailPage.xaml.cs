@@ -52,7 +52,6 @@ namespace CT_MKWII_WPF.Views.Pages
                 {
                     var miiImage = await GetMiiImageAsync(player.Mii[0].Data);
                     player.MiiImage = miiImage;
-                    // Update the UI on the main thread
                     Application.Current.Dispatcher.Invoke(() =>
                     {
                         OnPropertyChanged(nameof(PlayersList));
@@ -60,8 +59,7 @@ namespace CT_MKWII_WPF.Views.Pages
                 }
                 catch (Exception ex)
                 {
-                    // Handle exceptions as needed
-                    player.MiiImage = null; // Or a placeholder image
+                    player.MiiImage = null;
                 }
             }
         }

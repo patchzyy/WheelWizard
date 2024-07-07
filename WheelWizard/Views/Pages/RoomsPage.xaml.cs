@@ -87,6 +87,11 @@ namespace CT_MKWII_WPF.Views.Pages
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        private void View_RoomButton(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class RoomViewModel

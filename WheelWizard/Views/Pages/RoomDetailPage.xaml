@@ -38,7 +38,7 @@
                        Margin="0,0,0,5"/>
             <TextBlock Text="{Binding Room.Type, StringFormat=Access: {0}}" Style="{StaticResource SidebarSectionText}"
                        Margin="0,0,0,5"/>
-            <TextBlock Text="{Binding Room.Host, StringFormat=Players: {0}}" Style="{StaticResource SidebarSectionText}"
+            <TextBlock Text="{Binding PlayersList.Count, StringFormat=Players: {0}}" Style="{StaticResource SidebarSectionText}"
                        Margin="0,0,0,5"/>
             </UniformGrid>
         </StackPanel>
@@ -58,6 +58,7 @@
                     </GridViewColumn>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Value.Name}"/>
                     <GridViewColumn Header="FC" DisplayMemberBinding="{Binding Value.Fc}"/>
+                    <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Value.Ev}"/>
                 </GridView>
             </ListView.View>
         </ListView>
