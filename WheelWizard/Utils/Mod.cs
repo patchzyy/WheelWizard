@@ -33,6 +33,7 @@ public class Mod : INotifyPropertyChanged
         }
     }
     
+    public override string ToString() => "Mod: " + Title + " - " + IsEnabled;
 
     public event PropertyChangedEventHandler PropertyChanged;
 

@@ -12,9 +12,11 @@
     <SolidColorBrush x:Key="CheckboxDisabled-Background" Color="{StaticResource Gray900}" />
     <SolidColorBrush x:Key="CheckboxDisabled-BorderColor" Color="{StaticResource Gray700}" />
     
+    <!-- note that switches use the Checkbox colors unless other required, those are below here -->
     <SolidColorBrush x:Key="SwitchDisabled-Background" Color="{StaticResource Gray800}" />
     <SolidColorBrush x:Key="Switch-Background" Color="{StaticResource Gray700}" />
     <SolidColorBrush x:Key="Switch-Hover" Color="{StaticResource Gray500}" />
+    <SolidColorBrush x:Key="SwitchDark-BackgroundHover" Color="{StaticResource Gray900}" />
     
     <!-- ============ -->
     <!--   CHECKBOX   -->
@@ -153,6 +155,69 @@
          </Setter>
      </Style>
     
+    
+     <!-- ============ -->
+    <!--  SWITCH DARK -->
+    <!-- ============ -->
+    <Style TargetType="CheckBox"  x:Key="SwitchDark">
+         <!-- setting the contents attributes, but will be overwritten inside the checkbox itself -->
+         <Setter Property="FontSize" Value="14"/>
+         <Setter Property="FontWeight" Value="Bold"/>
+         <Setter Property="Foreground" Value="{StaticResource FormFieldLabelColor}" />
+
+         <Setter Property="Background" Value="{StaticResource Checkbox-Background}"/>
+
+         <Setter Property="Template">
+             <Setter.Value>
+                 <ControlTemplate TargetType="CheckBox">
+                     <StackPanel Orientation="Horizontal">
+                         <Border Width="42" Height="24"
+                                 Background="{TemplateBinding Background}"
+                                 BorderThickness="0"
+                                 CornerRadius="13">
+                             <Ellipse Width="18" Height="18" x:Name="SwitchNob"
+                                      Margin="3,0" HorizontalAlignment="Left"
+                                      Fill="{StaticResource Checkbox-InnerWhite}" VerticalAlignment="Center"/>
+                         </Border>
+                         <ContentPresenter 
+                             VerticalAlignment="Center"
+                             Margin="5,0,0,0"
+                             RecognizesAccessKey="True"/>
+                     </StackPanel>
+                     <ControlTemplate.Triggers>
+                         <Trigger Property="IsMouseOver" Value="True">
+                             <Setter Property="Background" Value="{StaticResource SwitchDark-BackgroundHover}"/>
+                             <Setter Property="Cursor" Value="Hand"/>
+                         </Trigger>
+
+                         <Trigger Property="IsChecked" Value="True">
+                             <Setter TargetName="SwitchNob" Property="HorizontalAlignment" Value="Right"/>
+                             <Setter Property="Background" Value="{StaticResource Checkbox-CheckedColor}"/>
+                         </Trigger>
+
+                         <!-- Disabled -->
+                         <MultiTrigger>
+                             <MultiTrigger.Conditions>
+                                 <Condition Property="IsEnabled" Value="False"/>
+                                 <Condition Property="IsChecked" Value="False"/>
+                             </MultiTrigger.Conditions>
+                             <Setter Property="Background" Value="{StaticResource CheckboxDisabled-Background}"/>
+                             <Setter TargetName="SwitchNob" Property="Fill" Value="{StaticResource CheckboxDisabled-InnerWhite}"/>
+                         </MultiTrigger>
+
+                         <MultiTrigger>
+                             <MultiTrigger.Conditions>
+                                 <Condition Property="IsEnabled" Value="False"/>
+                                 <Condition Property="IsChecked" Value="True"/>
+                             </MultiTrigger.Conditions>
+                             <Setter Property="Background" Value="{StaticResource CheckboxDisabled-CheckedColor}"/>
+                             <Setter TargetName="SwitchNob" Property="Fill" Value="{StaticResource CheckboxDisabled-InnerWhite}"/>
+                         </MultiTrigger>
+                     </ControlTemplate.Triggers>
+                 </ControlTemplate>
+             </Setter.Value>
+         </Setter>
+     </Style>
     
     <!-- ============ -->
     <!-- RADIO BUTTON -->
