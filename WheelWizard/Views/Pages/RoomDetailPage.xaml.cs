@@ -11,6 +11,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using CT_MKWII_WPF.Utils;
 using System.ComponentModel;
+using static CT_MKWII_WPF.Views.ViewUtils;
 
 namespace CT_MKWII_WPF.Views.Pages
 {
@@ -46,16 +47,13 @@ namespace CT_MKWII_WPF.Views.Pages
         private async void setMiiImage(KeyValuePair<String, RRLiveInfo.RoomInfo.Player> playerPair)
         {
             var player = playerPair.Value;
-            if (player.Mii != null && player.Mii.Count > 0)
+            if (player.Mii.Count > 0)
             {
                 try
                 {
                     var miiImage = await GetMiiImageAsync(player.Mii[0].Data);
                     player.MiiImage = miiImage;
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        OnPropertyChanged(nameof(PlayersList));
-                    });
+                    Application.Current.Dispatcher.Invoke(() => OnPropertyChanged(nameof(PlayersList)) );
                 }
                 catch (Exception ex)
                 {
@@ -66,10 +64,8 @@ namespace CT_MKWII_WPF.Views.Pages
 
         private async void LoadMiiImagesAsync()
         {
-            foreach (var playerPair in PlayersList)
-            {
+            foreach (var playerPair in PlayersList) 
                 setMiiImage(playerPair);
-            }
         }
 
         private async Task<BitmapImage> GetMiiImageAsync(string base64MiiData)
@@ -95,18 +91,27 @@ namespace CT_MKWII_WPF.Views.Pages
 
         private string GetMiiImageUrlFromResponse(MiiResponse response)
         {
-            // Construct the URL using the Mii data from the response
-            var baseUrl = "https://studio.mii.nintendo.com/miis/image.png";
-            var queryParameters = $"data={response.MiiData}&type=face&expression=normal&width=270&bgColor=FFFFFF00&clothesColor=default&cameraXRotate=0&cameraYRotate=0&cameraZRotate=0&characterXRotate=0&characterYRotate=0&characterZRotate=0&lightDirectionMode=none&instanceCount=1&instanceRotationMode=model";
-            
-            return $"{baseUrl}?{queryParameters}";
+            const string baseUrl = "https://studio.mii.nintendo.com/miis/image.png";
+    
+            var queryParams = new List<string>
+            {
+                $"data={response.MiiData}",
+                "type=face", "expression=normal",
+                "width=270",
+                "bgColor=FFFFFF00",
+                "clothesColor=default",
+                "cameraXRotate=0", "cameraYRotate=0", "cameraZRotate=0",
+                "characterXRotate=0", "characterYRotate=0", "characterZRotate=0",
+                "lightDirectionMode=none",
+                "instanceCount=1",
+                "instanceRotationMode=model"
+            };
+
+            string queryString = string.Join("&", queryParams);
+            return $"{baseUrl}?{queryString}";
         }
 
-        private void GoBackClick(object sender, RoutedEventArgs e)
-        {
-            var layout = (Layout)Application.Current.MainWindow;
-            layout.NavigateToPage(new RoomsPage());
-        }
+        private void GoBackClick(object sender, RoutedEventArgs e) => GetLayout().NavigateToPage(new RoomsPage());
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -116,38 +121,16 @@ namespace CT_MKWII_WPF.Views.Pages
 
     public class MiiResponse
     {
-        [JsonPropertyName("mii")]
-        public string MiiData { get; set; }
-
-        [JsonPropertyName("miistudio")]
-        public string MiiStudio { get; set; }
-
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
-
-        [JsonPropertyName("creator_name")]
-        public string CreatorName { get; set; }
-
-        [JsonPropertyName("birthday")]
-        public string Birthday { get; set; }
-
-        [JsonPropertyName("favorite_color")]
-        public string FavoriteColor { get; set; }
-
-        [JsonPropertyName("height")]
-        public int Height { get; set; }
-
-        [JsonPropertyName("build")]
-        public int Build { get; set; }
-
-        [JsonPropertyName("gender")]
-        public string Gender { get; set; }
-
-        [JsonPropertyName("mingle")]
-        public string Mingle { get; set; }
-
-        [JsonPropertyName("copying")]
-        public string Copying { get; set; }
+        [JsonPropertyName("mii")] public string MiiData { get; set; }
+        [JsonPropertyName("miistudio")] public string MiiStudio { get; set; }
+        [JsonPropertyName("name")] public string Name { get; set; }
+        [JsonPropertyName("creator_name")] public string CreatorName { get; set; }
+        [JsonPropertyName("birthday")] public string Birthday { get; set; }
+        [JsonPropertyName("favorite_color")] public string FavoriteColor { get; set; }
+        [JsonPropertyName("height")] public int Height { get; set; }
+        [JsonPropertyName("build")] public int Build { get; set; }
+        [JsonPropertyName("gender")] public string Gender { get; set; }
+        [JsonPropertyName("mingle")] public string Mingle { get; set; }
+        [JsonPropertyName("copying")] public string Copying { get; set; }
     }
-    
 }

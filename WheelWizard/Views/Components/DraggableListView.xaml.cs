@@ -9,21 +9,14 @@ using static CT_MKWII_WPF.Views.ViewUtils;
 
 namespace CT_MKWII_WPF.Views.Components;
 
-public partial class DraggableListView : ListView
+public partial class DraggableListView : BaseListView
 {
-    private ListViewItem? _contextListViewItem; // the item that was right-clicked
     private ListViewItem? _draggingListViewItem; // the item that is being dragged
     private ListViewItem? _dragHoverListViewItem; // the item that is being hovered over while dragging an other item
     private bool? _previousBotSide;
     private Point? _startDraggingPoint;
-    
-    public ListViewItem? ContextMenuListViewItem
-    {
-        get { return _contextListViewItem; }
-        private set { _contextListViewItem = value; }
-    }
-    
-    public DraggableListView()
+
+    public DraggableListView() : base()
     {
         InitializeComponent();
         Loaded += OnLoaded;
@@ -41,33 +34,8 @@ public partial class DraggableListView : ListView
         set => SetValue(EnableLineIndicationProperty, value);
     }
     
-    public static readonly DependencyProperty ItemContextMenuProperty = DependencyProperty.Register(
-        nameof(ItemContextMenu), typeof(ContextMenu), typeof(DraggableListView),
-        new PropertyMetadata(null));
-
-    public ContextMenu? ItemContextMenu
-    {
-        get => (ContextMenu)GetValue(ItemContextMenuProperty);
-        set => SetValue(ItemContextMenuProperty, value);
-    }
-   
-        // Define the custom event handlers
-     public delegate void ItemClickEventHandler(object sender, MouseButtonEventArgs e, ListViewItem clickedItem);
      public delegate void ItemsReorderEventHandler(ListViewItem movedItem, int newIndex);
-
-     // Declare the events
-     public event ItemClickEventHandler? OnItemClick;
      public event ItemsReorderEventHandler? OnItemsReorder;
-     
-
-     private void ListViewItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-     {
-         var clickedItem = FindAncestor<ListViewItem>(e.OriginalSource);
-         Console.WriteLine(clickedItem);
-         if (clickedItem != null) 
-             OnItemClick?.Invoke(this, e, clickedItem);
-     }
-        
         
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
@@ -82,19 +50,6 @@ public partial class DraggableListView : ListView
         };
         
         gridView.Columns.Insert(0, gripColumn);
-    }
-
-    public T? GetCurrentContextItem<T>() where T : class
-    {
-        if (_contextListViewItem == null) return null;
-        return ItemContainerGenerator.ItemFromContainer(_contextListViewItem) as T;
-    }
-    
-    private void ContextMenu_Click(object sender, RoutedEventArgs e)
-    {
-        _contextListViewItem = FindAncestor<ListViewItem>(e.OriginalSource)!;
-        if (sender is FrameworkElement && ItemContextMenu != null)
-            ItemContextMenu.IsOpen = true;
     }
 
     private void GripIcon_Hold(object sender, MouseButtonEventArgs e)
@@ -133,7 +88,8 @@ public partial class DraggableListView : ListView
         var targetData = GetDropTargetIndex(e.GetPosition(this));
         var viewItem = ItemContainerGenerator.ContainerFromIndex(targetData.Item1) as ListViewItem;
        
-        // || (targetIndex == Items.Count - 1 && _previousBotSide != targetData.Item2)
+        // TODO: make it so it does not change the style if the smae targetData has been given,
+        //       this will make it so it does not flicker
         if (EnableLineIndication && viewItem != null && (viewItem != _dragHoverListViewItem ))
         {
             if (_dragHoverListViewItem != null)

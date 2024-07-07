@@ -29,63 +29,20 @@
                                   HorizontalAlignment="Center"
                                   VerticalContentAlignment="Center"
                                   Title="No Rooms found"
-                                  Body="You might not have internet connection, or no-one might be playing."
-        ></components:EmptyPageInfo>
-            <ListView Grid.Row="1"  ItemsSource="{Binding Rooms}" x:Name="RoomsListView"
-                      Foreground="{StaticResource TitleTextColor}"
-                      Background="{StaticResource BackgroundColor}"
-                      BorderBrush="{StaticResource TitleTextColor}">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        <Setter Property="Padding" Value="5" />
-                        <Style.Triggers>
-                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                                <Setter Property="Background" Value="{StaticResource BackgroundColor}" />
-                            </Trigger>
-                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                                <Setter Property="Background" Value="{StaticResource BackgroundColor}" />
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="{StaticResource AccentColor}" />
-                                <Setter Property="Foreground" Value="White" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ListView.ItemContainerStyle>
+                                  Body="You might not have internet connection, or no-one might be playing."/>
+        
+            <components:StaticListView Grid.Row="1" ItemsSource="{Binding Rooms}" x:Name="RoomsListView"
+                                       OnDoubleItemClick="Room_MouseDoubleClick">
                 <ListView.View>
-                    <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Shows information about the RR games">
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=RoomNumber}" Header="ID" Width="50">
-                            <GridViewColumn.HeaderContainerStyle>
-                                <Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
-                                    <Setter Property="IsHitTestVisible" Value="False" />
-                                </Style>
-                            </GridViewColumn.HeaderContainerStyle>
-                        </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=PlayerCount}" Header="Players" Width="100">
-                            <GridViewColumn.HeaderContainerStyle>
-                                <Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
-                                    <Setter Property="IsHitTestVisible" Value="False" />
-                                </Style>
-                            </GridViewColumn.HeaderContainerStyle>
-                        </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Type}" Header="Access" Width="100">
-                            <GridViewColumn.HeaderContainerStyle>
-                                <Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
-                                    <Setter Property="IsHitTestVisible" Value="False" />
-                                </Style>
-                            </GridViewColumn.HeaderContainerStyle>
-                        </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Playtime}" Header="Time Online" Width="140">
-                            <GridViewColumn.HeaderContainerStyle>
-                                <Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
-                                    <Setter Property="IsHitTestVisible" Value="False" />
-                                </Style>
-                            </GridViewColumn.HeaderContainerStyle>
-                        </GridViewColumn>
+                    <GridView AllowsColumnReorder="False">
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=RoomNumber}" Header="ID" Width="Auto"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=PlayerCount}" Header="Players" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Type}" Header="Access" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Playtime}" Header="Time Online" Width="140"/>
                     </GridView>
                 </ListView.View>
-            </ListView>
+            </components:StaticListView>
+        
         <components:Button Grid.Row="3" Variant="Default"
                            Height="50"
                            Width="180"

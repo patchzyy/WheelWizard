@@ -27,9 +27,6 @@ namespace CT_MKWII_WPF.Views.Pages
             DataContext = this;
             Rooms = new ObservableCollection<RoomViewModel>();
             LoadRoomsData();
-            
-            // Add event handler for double-click
-            RoomsListView.MouseDoubleClick += RoomsListView_MouseDoubleClick;
         }
 
         private async void LoadRoomsData()
@@ -41,7 +38,8 @@ namespace CT_MKWII_WPF.Views.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading rooms data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Error loading rooms data: {ex.Message}", "Error", 
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -72,14 +70,11 @@ namespace CT_MKWII_WPF.Views.Pages
             }
         }
 
-        private void RoomsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void Room_MouseDoubleClick(object sender, MouseButtonEventArgs e, ListViewItem clickedItem)
         {
-            var selectedRoom = RoomsListView.SelectedItem as RoomViewModel;
-            if (selectedRoom != null)
-            {
-                var roomDetailPage = new RoomDetailPage(selectedRoom.RoomInfo);
-                NavigationService?.Navigate(roomDetailPage);
-            }
+            var selectedRoom = (RoomViewModel)clickedItem.DataContext;
+            var roomDetailPage = new RoomDetailPage(selectedRoom.RoomInfo);
+            NavigationService?.Navigate(roomDetailPage);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
