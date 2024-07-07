@@ -50,19 +50,19 @@
                     <GridViewColumn Header="Mii">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Border Width="50" Height="50" Background="{StaticResource MiiIconBackground}" CornerRadius="25" >
+                                <Border Width="40" Height="40" Background="{StaticResource MiiIconBackground}" CornerRadius="20" >
                                     <Image Source="{Binding Value.MiiImage}" Stretch="Uniform" >
                                         <Image.Clip>
-                                            <EllipseGeometry Center="25,25" RadiusX="25" RadiusY="25"/>
+                                            <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20"/>
                                         </Image.Clip>
                                     </Image>
                                 </Border>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Value.Name}"/>
-                    <GridViewColumn Header="FC" DisplayMemberBinding="{Binding Value.Fc}"/>
-                    <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Value.Ev}"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Value.Name}" Width="120"/>
+                    <GridViewColumn Header="Friend code" DisplayMemberBinding="{Binding Value.Fc}" Width="130"/>
+                    <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Value.Ev}" Width="80"/>
                 </GridView>
             </ListView.View>
         </components:StaticListView>

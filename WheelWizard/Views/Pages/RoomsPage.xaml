@@ -37,41 +37,31 @@
                     <GridView AllowsColumnReorder="False">
                         <GridViewColumn Width="Auto">
                             <GridViewColumn.CellTemplate>
+                                
                                 <DataTemplate>
-                                    <ContentControl>
-                                        <ContentControl.Style>
-                                            <Style TargetType="ContentControl">
-                                                <Setter Property="Content">
-                                                    <Setter.Value>
-                                                        <icon:PackIconFontAwesome Kind="RoadCircleExclamationSolid" Height="30" Width="30"/>
-                                                    </Setter.Value>
-                                                </Setter>
+                                    <icon:PackIconFontAwesome Height="30" Width="30" >
+                                        <icon:PackIconFontAwesome.Style>
+                                            <Style TargetType="icon:PackIconFontAwesome">
+                                                <Setter Property="Kind" Value="RoadCircleExclamationSolid"/>
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding Path=Type}" Value="private">
-                                                        <Setter Property="Content">
-                                                            <Setter.Value>
-                                                                <icon:PackIconFontAwesome Kind="RoadLockSolid" Height="30" Width="30"/>
-                                                            </Setter.Value>
-                                                        </Setter>
+                                                        <Setter Property="Kind" Value="RoadLockSolid"/>
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Path=Type}" Value="anybody">
-                                                        <Setter Property="Content">
-                                                            <Setter.Value>
-                                                                <icon:PackIconFontAwesome Kind="RoadSolid" Height="30" Width="30"/>
-                                                            </Setter.Value>
-                                                        </Setter>
+                                                        <Setter Property="Kind" Value="RoadSolid"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
-                                        </ContentControl.Style>
-                                    </ContentControl>
+                                        </icon:PackIconFontAwesome.Style>
+                                    </icon:PackIconFontAwesome>
                                 </DataTemplate>
+                                
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=RoomNumber}" Header="ID" Width="Auto"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=PlayerCount}" Header="Players" Width="100"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Type}" Header="Access" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=PlayerCount}" Header="Players" Width="70"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Type}" Header="Access" Width="90"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=Playtime}" Header="Time Online" Width="140"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=RoomNumber}" Header="ID" Width="70"/>
                     </GridView>
                 </ListView.View>
             </components:StaticListView>

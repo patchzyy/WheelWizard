@@ -20,10 +20,10 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ListViewItem}">
-                        <Border Background="{TemplateBinding Background}"
+                        <Border Background="{TemplateBinding Background}" Height="Auto" 
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                Margin="0,2" Height="Auto" 
+                                Margin="0,2"
                                 MouseLeftButtonDown="ListViewItem_PreviewMouseLeftButtonDown"
                                 MouseRightButtonUp="ContextMenu_Click" MinHeight="30">
                             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
