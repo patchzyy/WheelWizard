@@ -1,8 +1,16 @@
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/patchzyy/WheelWizard?color=green&style=for-the-badge)
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/patchzyy/WheelWizard/total?color=green&style=for-the-badge)
-[![Discord](https://img.shields.io/discord/1253384439937896560?color=7289da&style=for-the-badge)](https://discord.gg/vZ7T2wJnsq)
+<p align="center">
+  <img src="https://img.shields.io/github/v/release/patchzyy/WheelWizard?color=green&style=for-the-badge" alt="GitHub release (latest by date)" />
+  <img src="https://img.shields.io/github/downloads/patchzyy/WheelWizard/total?color=green&style=for-the-badge" alt="GitHub Downloads (all assets, all releases)" />
+  <a href="https://discord.gg/vZ7T2wJnsq">
+    <img src="https://img.shields.io/discord/1253384439937896560?color=7289da&style=for-the-badge" alt="Discord" />
+  </a>
+</p>
 
 # Wheel Wizard
+
+<p align="center">
+  <img src="https://github.com/patchzyy/WheelWizard/blob/main/images/WheelWizzard_with_icon.png" alt="Wheel Wizard Logo" width="500"/>
+</p>
 
 ## Mario Kart Mod Manager & Retro Rewind Auto Updater
 
