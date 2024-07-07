@@ -46,7 +46,7 @@ public partial class DraggableListView : BaseListView
         var gripColumn = new GridViewColumn {
             Width = 40,
             CellTemplate = new DataTemplate(),
-            Header = new GridViewColumnHeader { Visibility = Visibility.Collapsed }
+            Header = new GridViewColumnHeader( )
         };
         
         gridView.Columns.Insert(0, gripColumn);

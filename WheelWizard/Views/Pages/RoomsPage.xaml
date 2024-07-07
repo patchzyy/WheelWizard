@@ -35,6 +35,39 @@
                                        OnItemClick="Room_MouseDoubleClick">
                 <ListView.View>
                     <GridView AllowsColumnReorder="False">
+                        <GridViewColumn Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ContentControl>
+                                        <ContentControl.Style>
+                                            <Style TargetType="ContentControl">
+                                                <Setter Property="Content">
+                                                    <Setter.Value>
+                                                        <icon:PackIconFontAwesome Kind="RoadCircleExclamationSolid" Height="30" Width="30"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=Type}" Value="private">
+                                                        <Setter Property="Content">
+                                                            <Setter.Value>
+                                                                <icon:PackIconFontAwesome Kind="RoadLockSolid" Height="30" Width="30"/>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=Type}" Value="anybody">
+                                                        <Setter Property="Content">
+                                                            <Setter.Value>
+                                                                <icon:PackIconFontAwesome Kind="RoadSolid" Height="30" Width="30"/>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ContentControl.Style>
+                                    </ContentControl>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=RoomNumber}" Header="ID" Width="Auto"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=PlayerCount}" Header="Players" Width="100"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=Type}" Header="Access" Width="100"/>
