@@ -5,7 +5,6 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
       xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-      xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Pages"
       mc:Ignorable="d"
       d:DesignHeight="831" d:DesignWidth="444"
       Title="RoomDetailPage" Background="Transparent">
@@ -28,21 +27,31 @@
                            Click="GoBackClick"
                            Margin="3"/>
         </UniformGrid>
-        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0,0,0,20">
-            <UniformGrid Grid.Row="0" Columns="2" Rows="2"> 
-            <TextBlock 
-                Text="{Binding Room.Id, StringFormat=Room ID: {0}}"  
-                Style="{StaticResource SidebarSectionText}"
-                Margin="0,0,0,5"/>
-            <TextBlock Text="{Binding Room.Created, StringFormat=Created: {0}}" Style="{StaticResource SidebarSectionText}"
-                       Margin="0,0,0,5"/>
-            <TextBlock Text="{Binding Room.Type, StringFormat=Access: {0}}" Style="{StaticResource SidebarSectionText}"
-                       Margin="0,0,0,5"/>
-            <TextBlock Text="{Binding PlayersList.Count, StringFormat=Players: {0}}" Style="{StaticResource SidebarSectionText}"
-                       Margin="0,0,0,5"/>
-            </UniformGrid>
-        </StackPanel>
-
+     
+        <Grid Grid.Row="1" Margin="0,0,0,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+    
+            <TextBlock Grid.Row="0" Grid.Column="0"   Margin="0,0,0,5" 
+                         Text="{Binding Room.Id, StringFormat=Room ID: {0}}"  
+                         Style="{StaticResource SidebarSectionText}"/>
+            <TextBlock Grid.Row="0" Grid.Column="1"    Margin="0,0,0,5"
+                       Text="{Binding Room.Created, StringFormat=Created: {0}}" 
+                       Style="{StaticResource SidebarSectionText}"/>
+            <TextBlock Grid.Row="1" Grid.Column="0"     Margin="0,0,0,5"
+                       Text="{Binding Room.Type, StringFormat=Access: {0}}" 
+                       Style="{StaticResource SidebarSectionText}"/>
+            <TextBlock Grid.Row="1" Grid.Column="1"  Margin="0,0,0,5"
+                       Text="{Binding PlayersList.Count, StringFormat=Players: {0}}"
+                       Style="{StaticResource SidebarSectionText}"/>
+        </Grid>
+      
         <components:StaticListView Grid.Row="2" x:Name="playersListView" IsClickable="False"
                                    ItemsSource="{Binding PlayersList}" >
             <ListView.View>
