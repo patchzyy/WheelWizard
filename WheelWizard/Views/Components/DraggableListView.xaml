@@ -97,6 +97,7 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="{StaticResource DragItemBackground-Hover}"/>
                                 <Setter Property="Foreground" Value="{StaticResource DragItemAttributes-Hover+}"/>
+                                <Setter Property="Cursor" Value="Hand"/>
                                 <Setter Property="Color" TargetName="GripIcon" Value="{StaticResource DragItemIcon-GroupHover+}"/>
                                 <Setter Property="Color" TargetName="DotsIcon" Value="{StaticResource DragItemIcon-GroupHover+}"/>
                             </Trigger>

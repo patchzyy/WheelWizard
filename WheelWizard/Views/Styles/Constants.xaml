@@ -94,6 +94,7 @@
     <SolidColorBrush x:Key="ErrorTitleTextColor" Color="{StaticResource Red400}" />
     <SolidColorBrush x:Key="WarningTitleTextColor" Color="{StaticResource Yellow400}" />
     
+    <SolidColorBrush x:Key="MiiIconBackground" Color="{StaticResource Gray800}" />
     <!-- Font size constants are:
     Title: 20
     body: 16

@@ -9,34 +9,29 @@
           d:DesignHeight="500" d:DesignWidth="300">
     
     <ListView.Resources>
-        <Style x:Key="ItemStyleCommon" TargetType="{x:Type ListViewItem}">
-            <Setter Property="Background" Value="{StaticResource DragItemBackground-Default}"/>
-            <Setter Property="Foreground" Value="{StaticResource DragItemAttributes-Default}"/>
-            <Setter Property="Margin" Value="0,2"/>
+      
+        <Style x:Key="DefaultItemStyle" TargetType="{x:Type ListViewItem}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="{StaticResource StaticItemForeground-Default}"/>
+            <Setter Property="Margin" Value="0"/>
             <Setter Property="FontSize" Value="14"/>
-        </Style>
-        <Style x:Key="BorderCommon"  TargetType="{x:Type Border}">
-            <Setter Property="CornerRadius" Value="{StaticResource GlobalCornerRadius}"/>
-        </Style>
-        
-        
-        <Style x:Key="DefaultItemStyle" TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource ItemStyleCommon}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ListViewItem}">
-                        <Border Background="{TemplateBinding Background}"
-                                Height="Auto" Style="{StaticResource BorderCommon}"
+                        <Border Background="{TemplateBinding Background}" Height="Auto" 
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 MouseLeftButtonDown="ListViewItem_PreviewMouseLeftButtonDown"
-                                MouseRightButtonUp="ContextMenu_Click" MinHeight="37">
+                                MouseRightButtonUp="ContextMenu_Click" MinHeight="30">
                             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                 <components:IconLabelButton Text="" IconPack="FontAwesome" IconSize="23"  x:Name="DotsIcon" 
                                                             IconKind="{x:Static icon:PackIconFontAwesomeKind.EllipsisVerticalSolid}"
                                                             VerticalAlignment="Stretch" HorizontalAlignment="Right" 
-                                                            HoverColor="{StaticResource DragItemIcon-IndividualHover+ }"
+                                                            HoverColor="{StaticResource StaticItemForeground-Hover+ }"
                                                             Click="ContextMenu_Click"
-                                                            Color="{StaticResource DragItemIcon-Default}" />
+                                                            Color="{StaticResource StaticItemForeground-Default}" />
                                 
                                 <GridViewRowPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                                       Margin="0,0,20,0"
@@ -50,19 +45,23 @@
                             <DataTrigger Binding="{Binding ModName}"  Value="Sample Mod 3">
                                 <Setter Property="Visibility" TargetName="DotsIcon" Value="Collapsed"/>
                             </DataTrigger> --> 
-                            <DataTrigger Binding="{Binding ItemContextMenu, ElementName=Root}"  Value="{x:Null}">
+                            <DataTrigger Binding="{Binding ContextMenu, ElementName=Root}"  Value="{x:Null}">
                                 <Setter Property="Visibility" TargetName="DotsIcon" Value="Collapsed"/>
                             </DataTrigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="{StaticResource DragItemBackground-Hover}"/>
-                                <Setter Property="Foreground" Value="{StaticResource DragItemAttributes-Hover+}"/>
-                                <Setter Property="Color" TargetName="DotsIcon" Value="{StaticResource DragItemIcon-GroupHover+}"/>
+                                <Setter Property="Foreground" Value="{StaticResource StaticItemForeground-Hover+}"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="Color" TargetName="DotsIcon" Value="{StaticResource StaticItemForeground-Hover+}"/>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="{StaticResource DragItemBackground-Focus}"/>
-                                <Setter Property="Foreground" Value="{StaticResource DragItemAttributes-Hover+}"/>
-                                <Setter Property="Color" TargetName="DotsIcon" Value="{StaticResource DragItemIcon-GroupHover+}"/>
+                                <Setter Property="Foreground" Value="{StaticResource StaticItemForeground-Hover+}"/>
+                                <Setter Property="Color" TargetName="DotsIcon" Value="{StaticResource StaticItemForeground-Hover+}"/>
                             </Trigger>
+                            
+                            <DataTrigger Binding="{Binding IsClickable, ElementName=Root}"  Value="False">
+                                <Setter Property="Foreground" Value="{StaticResource StaticItemForeground-Default}"/>
+                                <Setter Property="Cursor" Value="Arrow"/>
+                            </DataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>

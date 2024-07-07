@@ -43,16 +43,20 @@
             </UniformGrid>
         </StackPanel>
 
-        <ListView Grid.Row="2" ItemsSource="{Binding PlayersList}" x:Name="playersListView" 
-                  Foreground="{StaticResource TitleTextColor}"
-                  Background="{StaticResource BackgroundColor}"
-                  >
+        <components:StaticListView Grid.Row="2" x:Name="playersListView" IsClickable="False"
+                                   ItemsSource="{Binding PlayersList}" >
             <ListView.View>
                 <GridView AllowsColumnReorder="False">
                     <GridViewColumn Header="Mii">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding Value.MiiImage}" Width="50" Height="50" Stretch="Uniform"/>
+                                <Border Width="50" Height="50" Background="{StaticResource MiiIconBackground}" CornerRadius="25" >
+                                    <Image Source="{Binding Value.MiiImage}" Stretch="Uniform" >
+                                        <Image.Clip>
+                                            <EllipseGeometry Center="25,25" RadiusX="25" RadiusY="25"/>
+                                        </Image.Clip>
+                                    </Image>
+                                </Border>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -61,6 +65,6 @@
                     <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Value.Ev}"/>
                 </GridView>
             </ListView.View>
-        </ListView>
+        </components:StaticListView>
     </Grid>
 </Page>

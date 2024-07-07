@@ -32,7 +32,7 @@
                                   Body="You might not have internet connection, or no-one might be playing."/>
         
             <components:StaticListView Grid.Row="1" ItemsSource="{Binding Rooms}" x:Name="RoomsListView"
-                                       OnDoubleItemClick="Room_MouseDoubleClick">
+                                       OnItemClick="Room_MouseDoubleClick">
                 <ListView.View>
                     <GridView AllowsColumnReorder="False">
                         <GridViewColumn DisplayMemberBinding="{Binding Path=RoomNumber}" Header="ID" Width="Auto"/>
@@ -43,6 +43,7 @@
                 </ListView.View>
             </components:StaticListView>
         
+        <!--
         <components:Button Grid.Row="3" Variant="Default"
                            Height="50"
                            Width="180"
@@ -53,6 +54,6 @@
                            IconKind="{x:Static icon:PackIconMaterialKind.Home}"
                            Text="View Room"
                            Click="View_RoomButton"
-                           Margin="3,30,0,0"/>
+                           Margin="3,30,0,0"/> -->
     </Grid>
 </Page>
