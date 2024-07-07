@@ -13,11 +13,7 @@ namespace CT_MKWII_WPF.Utils;
 
 public class RRLiveInfo
 {
-    private static readonly HttpClient client = new HttpClient();
-
-    public static async Task<RRInformation> getCurrentGameData()
-    {
-      string data = @"[
+    private static string _mocking_data = @"[
   {
     ""id"": ""PIFYVV"",
     ""game"": ""mariokartwii"",
@@ -228,34 +224,37 @@ public class RRLiveInfo
     }
   }
 ]";
-      List<RoomInfo> rooms = JsonSerializer.Deserialize<List<RoomInfo>>(data, new JsonSerializerOptions
+      
+    private static readonly HttpClient client = new HttpClient();
+
+    public static async Task<RRInformation> getCurrentGameData()
+    {
+      string data = "";
+      bool useMockingData = false;
+      string apiUrl = "http://zplwii.xyz/api/groups";
+      try
       {
-        PropertyNameCaseInsensitive = true
-      });
+        if (useMockingData) data = _mocking_data;
+        else
+        {
+          HttpResponseMessage response = await client.GetAsync(apiUrl);
+          response.EnsureSuccessStatusCode();
+          data = await response.Content.ReadAsStringAsync();
+        }
+      }
+      catch (HttpRequestException e)
+      {
+        return new RRInformation { Rooms = new List<RoomInfo>() };
+      }
+      catch (JsonException e)
+      {
+        MessageBox.Show(($"I messed up, here is why: {e.Message}"));
+        return new RRInformation { Rooms = new List<RoomInfo>() };
+      }
+      List<RoomInfo> rooms = JsonSerializer.Deserialize<List<RoomInfo>>(data,
+        new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+        );
       return new RRInformation { Rooms = rooms };
-      // string apiUrl = "http://zplwii.xyz/api/groups";
-      // try
-      // {
-      //     HttpResponseMessage response = await client.GetAsync(apiUrl);
-      //     response.EnsureSuccessStatusCode();
-      //     string responseBody = await response.Content.ReadAsStringAsync();
-      //
-      //     List<RoomInfo> rooms = JsonSerializer.Deserialize<List<RoomInfo>>(responseBody, new JsonSerializerOptions
-      //     {
-      //         PropertyNameCaseInsensitive = true
-      //     });
-      //     return new RRInformation { Rooms = rooms };
-      // }
-      // catch (HttpRequestException e)
-      // {
-      //     return new RRInformation { Rooms = new List<RoomInfo>() };
-      // }
-      // catch (JsonException e)
-      // {
-      //     MessageBox.Show(($"I messed up, here is why: {e.Message}"));
-      //     
-      //     return new RRInformation { Rooms = new List<RoomInfo>() };
-      // }
     }
 
     public static int GetCurrentOnlinePlayers(RRInformation info)
