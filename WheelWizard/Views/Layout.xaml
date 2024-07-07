@@ -129,7 +129,11 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.CubesStackedSolid}" 
                                                    IconPack="FontAwesome" Text="Mods"
                                                    Click="ModsPage_Navigate"/>
-                    
+                    <TextBlock Text="Retro Rewind" Style="{StaticResource SidebarSectionText}"/>
+                    <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.UsersRectangleSolid}" 
+                                                   IconPack="FontAwesome" Text="Rooms" x:Name="RoomsButton"
+                                                   Click="RoomsButton_Navigate"/>
+
                     <!-- add an other section by doing this:
                     <TextBlock Text="Other" Style="{StaticResource SidebarSectionText}"/>
                      -->

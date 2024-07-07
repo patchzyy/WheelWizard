@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <SolidColorBrush x:Key="HeaderAttributes" Color="{StaticResource Gray400}" />
+    <SolidColorBrush x:Key="HeaderLine" Color="{StaticResource Gray800}" />
     <SolidColorBrush x:Key="DragItemAttributes-Default" Color="{StaticResource Gray200}" />
     <SolidColorBrush x:Key="DragItemAttributes-Hover+" Color="{StaticResource Gray100}" /> <!-- This is also the color for when an item is selected/focussed -->
 
@@ -12,8 +13,11 @@
     <SolidColorBrush x:Key="DragItemIcon-Default" Color="{StaticResource Gray600}" />
     <SolidColorBrush x:Key="DragItemIcon-GroupHover+" Color="{StaticResource Gray400}" />  <!-- This is also the color for when an item is selected/focussed -->
     <SolidColorBrush x:Key="DragItemIcon-IndividualHover+" Color="{StaticResource Gray300}" />
-    
     <SolidColorBrush x:Key="DragItem-Target" Color="{StaticResource Cyan400}" />
+    
+    <SolidColorBrush x:Key="StaticItemForeground-Default" Color="{StaticResource Gray300}" />
+    <SolidColorBrush x:Key="StaticItemForeground-Hover+" Color="{StaticResource Gray50}" />
+    
     <!-- Style of the header -->
     <Style TargetType="{x:Type GridViewColumnHeader}">
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -22,20 +26,23 @@
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="5,0,0,0"/>
-        <!--<Setter Property="Margin" Value="50,0,0,0"/>-->
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                        <TextBlock Text="{TemplateBinding Content}"
-                                   Padding="{TemplateBinding Padding}"
-                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                   Foreground="{TemplateBinding Foreground}"/>
-                    </Border>
+                    <StackPanel>
+                 
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <TextBlock Text="{TemplateBinding Content}"
+                                       Padding="{TemplateBinding Padding}"
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                       Foreground="{TemplateBinding Foreground}"/>
+                        </Border>
+                        <Rectangle Height="1" Margin="0,3" Fill="{StaticResource HeaderLine}"/>
+                    </StackPanel>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

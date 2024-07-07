@@ -283,7 +283,6 @@ namespace CT_MKWII_WPF.Views.Pages
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-
             return true;
         } 
         

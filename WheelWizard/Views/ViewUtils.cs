@@ -24,4 +24,6 @@ public static class ViewUtils
         }
         return null;
     }
+
+    public static Layout GetLayout() => (Layout)Application.Current.MainWindow!;
 }

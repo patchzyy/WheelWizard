@@ -1,0 +1,70 @@
+﻿<Page x:Class="CT_MKWII_WPF.Views.Pages.RoomDetailPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+      xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Pages"
+      mc:Ignorable="d"
+      d:DesignHeight="831" d:DesignWidth="444"
+      Title="RoomDetailPage" Background="Transparent">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <UniformGrid Grid.Row="0"> 
+        <TextBlock Text="Room Details" FontSize="24" Style="{StaticResource TitleText}"
+                   FontWeight="Bold" Margin="0,0,0,20"/>
+        <components:Button Variant="Default"
+                           IsEnabled="True"
+                           IconPack="FontAwesome"
+                           Width="120"
+                           IconKind="{x:Static icon:PackIconFontAwesomeKind.ArrowLeftSolid}"
+                           Text="Back"
+                           Click="GoBackClick"
+                           Margin="3"/>
+        </UniformGrid>
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0,0,0,20">
+            <UniformGrid Grid.Row="0" Columns="2" Rows="2"> 
+            <TextBlock 
+                Text="{Binding Room.Id, StringFormat=Room ID: {0}}"  
+                Style="{StaticResource SidebarSectionText}"
+                Margin="0,0,0,5"/>
+            <TextBlock Text="{Binding Room.Created, StringFormat=Created: {0}}" Style="{StaticResource SidebarSectionText}"
+                       Margin="0,0,0,5"/>
+            <TextBlock Text="{Binding Room.Type, StringFormat=Access: {0}}" Style="{StaticResource SidebarSectionText}"
+                       Margin="0,0,0,5"/>
+            <TextBlock Text="{Binding PlayersList.Count, StringFormat=Players: {0}}" Style="{StaticResource SidebarSectionText}"
+                       Margin="0,0,0,5"/>
+            </UniformGrid>
+        </StackPanel>
+
+        <components:StaticListView Grid.Row="2" x:Name="playersListView" IsClickable="False"
+                                   ItemsSource="{Binding PlayersList}" >
+            <ListView.View>
+                <GridView AllowsColumnReorder="False">
+                    <GridViewColumn Header="Mii">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Width="40" Height="40" Background="{StaticResource MiiIconBackground}" CornerRadius="20" >
+                                    <Image Source="{Binding Value.MiiImage}" Stretch="Uniform" >
+                                        <Image.Clip>
+                                            <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20"/>
+                                        </Image.Clip>
+                                    </Image>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Value.Name}" Width="120"/>
+                    <GridViewColumn Header="Friend code" DisplayMemberBinding="{Binding Value.Fc}" Width="130"/>
+                    <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Value.Ev}" Width="80"/>
+                </GridView>
+            </ListView.View>
+        </components:StaticListView>
+    </Grid>
+</Page>

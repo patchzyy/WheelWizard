@@ -1,0 +1,82 @@
+﻿<Page x:Class="CT_MKWII_WPF.Views.Pages.RoomsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+      xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      mc:Ignorable="d"
+      d:DesignHeight="831" d:DesignWidth="444"
+      Title="RoomsPage" Background="Transparent">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <components:IconLabel Grid.Row="0"
+                              IconPack="FontAwesome"
+                              IconKind="{x:Static icon:PackIconFontAwesomeKind.UsersRectangleSolid}"
+                              Text="Rooms"
+                              FontSize="20"
+                              VerticalAlignment="Center"
+                              IconSize="24"
+                              Margin="20,0,0,20"
+                              Color="{StaticResource TitleTextColor}"/>
+        <components:EmptyPageInfo Grid.Row="2" x:Name="EmptyRoomsMessage"
+                                  HorizontalAlignment="Center"
+                                  VerticalContentAlignment="Center"
+                                  Title="No Rooms found"
+                                  Body="You might not have internet connection, or no-one might be playing."/>
+        
+            <components:StaticListView Grid.Row="1" ItemsSource="{Binding Rooms}" x:Name="RoomsListView"
+                                       OnItemClick="Room_MouseDoubleClick">
+                <ListView.View>
+                    <GridView AllowsColumnReorder="False">
+                        <GridViewColumn Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                
+                                <DataTemplate>
+                                    <icon:PackIconFontAwesome Height="30" Width="30" >
+                                        <icon:PackIconFontAwesome.Style>
+                                            <Style TargetType="icon:PackIconFontAwesome">
+                                                <Setter Property="Kind" Value="RoadCircleExclamationSolid"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=Type}" Value="private">
+                                                        <Setter Property="Kind" Value="RoadLockSolid"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=Type}" Value="anybody">
+                                                        <Setter Property="Kind" Value="RoadSolid"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </icon:PackIconFontAwesome.Style>
+                                    </icon:PackIconFontAwesome>
+                                </DataTemplate>
+                                
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=PlayerCount}" Header="Players" Width="70"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Type}" Header="Access" Width="90"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Playtime}" Header="Time Online" Width="140"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=RoomNumber}" Header="ID" Width="70"/>
+                    </GridView>
+                </ListView.View>
+            </components:StaticListView>
+        
+        <!--
+        <components:Button Grid.Row="3" Variant="Default"
+                           Height="50"
+                           Width="180"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Bottom"
+                           IsEnabled="True"
+                           IconPack="Material"
+                           IconKind="{x:Static icon:PackIconMaterialKind.Home}"
+                           Text="View Room"
+                           Click="View_RoomButton"
+                           Margin="3,30,0,0"/> -->
+    </Grid>
+</Page>
