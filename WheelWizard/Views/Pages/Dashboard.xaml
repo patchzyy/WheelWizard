@@ -9,22 +9,21 @@
       d:DesignHeight="831" d:DesignWidth="444"
       Title="Dashboard" Background="Transparent">
     <Grid>
-        <components:IconLabel  HorizontalAlignment="Left"
-                              IconPack="FontAwesome"
-                              IconKind="{x:Static icon:PackIconFontAwesomeKind.HouseSolid}"
-                              Text="Home"
-                              FontSize="20"
-                              VerticalAlignment="Top"
-                              IconSize="24"
-                              Margin="20,0,0,0"
-                              Color="{StaticResource TitleTextColor}"
-        ></components:IconLabel>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"  >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource TopRowSize}"/> <!-- This is the total height as the (Title + infoSection) - (padding) -->
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
+        <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
+        <TextBlock Grid.Row="0" Text="Home" HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{StaticResource PageTitleText}"/>
+        
+        
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock HorizontalAlignment="Center"
-                Style="{StaticResource TitleText}"
-                Text="Retro Rewind"
-                FontSize="30"
-                ></TextBlock>
+                       Style="{StaticResource TitleText}"
+                       Text="Retro Rewind"
+                       FontSize="30"/>
+            
             <components:Button Variant="Primary" 
                                x:Name="ActionButton"
                                IsEnabled="False"
@@ -33,8 +32,7 @@
                                Text="Loading..."
                                FontSize="16"
                                Click="PlayButtonClick"
-                               Width="210" 
-                               Height="50" 
+                               Width="210" Height="50" 
                                Margin="0,20,0,00"/>
         </StackPanel>
     </Grid>

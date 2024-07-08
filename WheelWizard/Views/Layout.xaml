@@ -19,7 +19,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
         AllowsTransparency="True"
         Background="Transparent">
     
-    <Border Background="{StaticResource ForegroundColorV2}" 
+    <Border Background="{StaticResource LightBackgroundColor}" 
             CornerRadius="{StaticResource WindowCornerRadius}">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -28,7 +28,8 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/> <!-- TopBar -->
-                <RowDefinition Height="45"/> <!-- Reserved spacing for title -->   <!-- Also the page container -->
+                <RowDefinition Height="17"/> <!-- Reserved spacing for title -->   <!-- Also the page container -->
+                <RowDefinition Height="88"/> <!--Info section side bar -->         <!-- Also the page container -->
                 <RowDefinition/>             <!--Side bar -->                      <!-- Also the page container -->
                 <RowDefinition Height="60"/> <!--Bottom info corner -->            <!-- Also the page container -->
             </Grid.RowDefinitions>
@@ -36,7 +37,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
             <!-- This border is only used as topBar in order so you can move the window around -->
             <Border Grid.ColumnSpan="2"
                     CornerRadius="{StaticResource WindowCornerRadius}"
-                    Background="{StaticResource ForegroundColorV2}"
+                    Background="{StaticResource LightBackgroundColor}"
                     MouseDown="TopBar_MouseDown"></Border>
             
             <DockPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top">
@@ -49,15 +50,15 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
             </DockPanel>
             
              <!-- Page container -->
-            <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="3"
+            <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="4"
                     CornerRadius="{StaticResource WindowCornerRadiusLeftRightTwix}"
                     Background="{StaticResource BackgroundColorV2}"></Border>
             
-            <Frame Grid.Column="1"  Grid.Row="1"  Grid.RowSpan="3"
+            <Frame Grid.Column="1"  Grid.Row="1"  Grid.RowSpan="4"
                             x:Name="ContentArea" Margin="{StaticResource EdgeGap}"
                             JournalOwnership="OwnsJournal" NavigationUIVisibility="Hidden" />
             
-            <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top">
+            <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Bottom">
                 <components:IconLabel IconKind="{x:Static icon:PackIconGameIconsKind.CarWheel}" 
                                       IconPack="GameIcons"
                                       Text="Wheel Wizard" 
@@ -67,11 +68,13 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                                       IconSize="31"/>
             </Border>
             
-            <Border Grid.Row="2" 
+            <TextBlock Grid.Row="2" Text="hey" x:Name="PlayerCountText" Margin="10,0,0,0" Style="{StaticResource SidebarSectionText}"/>
+            
+            <Border Grid.Row="3" 
                     VerticalAlignment="Bottom" HorizontalAlignment="Left"
                     ToolTipService.InitialShowDelay="5"
                     ToolTipService.ShowDuration="10000"
-                    ToolTipService.BetweenShowDelay="0" Margin="10">
+                    ToolTipService.BetweenShowDelay="0" Margin="20">
                 <components:DynamicIcon IconPack="FontAwesome"
                                         IconKind="{x:Static icon:PackIconFontAwesomeKind.TriangleExclamationSolid}" 
                                         ForegroundColor="{StaticResource WarningTitleTextColor}"
@@ -88,9 +91,9 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                 </Border.ToolTip>
             </Border>
             <!--Bottom info corner -->
-            <Border Grid.Column="0" Grid.Row="3"
+            <Border Grid.Column="0" Grid.Row="4"
                     CornerRadius="{StaticResource WindowCornerRadiusBottomLeft}"
-                    Background="{StaticResource ForegroundContactColor}"
+                    Background="{StaticResource BackgroundContactColor}"
                     >
                 <StackPanel VerticalAlignment="Center">
                     <components:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.DiscordBrands}" 
@@ -116,10 +119,10 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
             </Border>
             
             <!--Side bar -->
-            <Border Grid.Column="0" Grid.Row="2" VerticalAlignment="Top">
+            
+            <TextBlock Grid.Row="2"  Text="General" Style="{StaticResource SidebarSectionText}" VerticalAlignment="Bottom"/>
+            <Border Grid.Column="0" Grid.Row="3" VerticalAlignment="Top">
                 <StackPanel x:Name="SidePanelButtons">
-                    <TextBlock x:Name="PlayerCountText" Margin="10,0,0,0" Style="{StaticResource SidebarSectionText}"/>
-                    <TextBlock Text="General" Style="{StaticResource SidebarSectionText}"/>
                     <components:SidebarRadioButton  IconKind="{x:Static icon:PackIconFontAwesomeKind.HouseChimneySolid}"
                                                     IconPack="FontAwesome" Text="Home" IsChecked="True"
                                                     Click="DashboardPage_Navigate"/>

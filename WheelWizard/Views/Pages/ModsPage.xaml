@@ -9,75 +9,76 @@
       Title="Mods" Background="Transparent">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="{StaticResource TopRowSize}"/> <!-- This is the total height as the (Title + infoSection) - (padding) -->
             <RowDefinition />
         </Grid.RowDefinitions>
-        <components:IconLabel Grid.Row="0"
-                              IconPack="FontAwesome"
-                              IconKind="{x:Static icon:PackIconFontAwesomeKind.CubesStackedSolid}"
-                              Text="Mods"
-                              FontSize="20"
-                              VerticalAlignment="Center"
-                              IconSize="24"
-                              Margin="20,0,0,20"
-                              Color="{StaticResource TitleTextColor}"/>
-        <components:EmptyPageInfo Grid.Row="2" x:Name="EmptyListMessage"
-                                  HorizontalAlignment="Center"
-                                  VerticalContentAlignment="Center"
-                                  Title="No mods found"
-                                  Body="You can import mods by clicking the button below."
-            ></components:EmptyPageInfo>
-        
-         <components:DraggableListView Grid.Row="1" x:Name="ModsListView"
-                                       OnItemsReorder="ModsListView2_OnOnItemsReorder"
-                                       EnableLineIndication="False"
-                                       ItemsSource="{Binding Mods}">
-             <components:DraggableListView.ItemContextMenu>
-                 <ContextMenu>
-                     <MenuItem Header="Rename" Click="RenameMod_Click"/>
-                     <MenuItem Header="Delete" Click="DeleteMod_Click"/>
-                     <Separator />
-                     <MenuItem Header="Open Folder" Click="OpenFolder_Click"/>
-                 </ContextMenu>
-             </components:DraggableListView.ItemContextMenu>
-         
-             <ListView.View >
-                 <GridView AllowsColumnReorder="False">
-                     <GridViewColumn Header="Enabled" Width="75">
-                         <GridViewColumn.CellTemplate>
-                             <DataTemplate>
-                                 <CheckBox IsChecked="{Binding IsEnabled, Mode=TwoWay}"
-                                           Style="{StaticResource SwitchDark}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"
-                                           Margin="0,5" />
-                             </DataTemplate>
-                         </GridViewColumn.CellTemplate> 
-                     </GridViewColumn>
-                     <GridViewColumn Header="Title" Width="Auto" DisplayMemberBinding="{Binding Title}" />
-                 </GridView>
-             </ListView.View>
-         </components:DraggableListView>
-        
-        <UniformGrid Grid.Row="2" Columns="2" Rows="2"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
-            <components:Button Variant="Default"
-                               IsEnabled="True"
-                               IconPack="Material"
+        <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
+        <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
+        <TextBlock Grid.Row="0" Text="Mods" HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{StaticResource PageTitleText}"/>
+        <StackPanel Grid.Row="0"  HorizontalAlignment="Right" VerticalAlignment="Bottom"  Margin="12" Orientation="Horizontal" x:Name="TopBarButtons" >
+            <components:Button Variant="Default" IconPack="FontAwesome" x:Name="EnableDisableButton"
+                               Text="Enable All" Click="EnableClick" Margin="0,0,10,0">
+                <components:Button.Style>
+                    <Style TargetType="components:Button">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}" Value="Enable All">
+                                <Setter Property="IconKind" Value="{x:Static icon:PackIconFontAwesomeKind.ToggleOnSolid}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}" Value="Disable All">
+                                <Setter Property="IconKind" Value="{x:Static icon:PackIconFontAwesomeKind.ToggleOffSolid}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </components:Button.Style>
+            </components:Button>
+            <components:Button  Variant="Primary" Text="Import" 
+                                IconPack="Material" 
+                                IconKind="{x:Static icon:PackIconMaterialKind.Import}"
+                                Click="ImportMod_Click"/>
+        </StackPanel>
+       
+        <StackPanel Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="PageWithoutMods">
+            <components:EmptyPageInfo HorizontalAlignment="Center" Title="No mods found"
+                                      Body="Mods can alter how the game works. Start importing your first mod by clicking the button below."/>
+            <components:Button Variant="Primary"  Margin="12"
+                               IconPack="Material" Text="Import mod"
                                IconKind="{x:Static icon:PackIconMaterialKind.Import}"
-                               Text="Import mod"
-                               Width="180"
-                               Click="ImportMod_Click"
-                               Margin="20,20,0,0"/>
-            <components:Button Variant="Default"
-                               IsEnabled="True"
-                               IconPack="FontAwesome"
-                               IconKind="{x:Static icon:PackIconFontAwesomeKind.CheckSolid}"
-                               Text="Enable/Disable"
-                               FontSize="18"
-                               Width="180"
-                               Click="EnableClick"
-                               Margin="20,20,20,0"/>
-        </UniformGrid>
+                               Click="ImportMod_Click" HorizontalAlignment="Center"/>
+        </StackPanel>
+    
+            
+        <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="PageWithMods" >
+            <components:DraggableListView OnItemsReorder="ModsListView2_OnOnItemsReorder" x:Name="ModsListView"
+                                          EnableLineIndication="False"
+                                          ItemsSource="{Binding Mods}">
+                <components:DraggableListView.ItemContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Rename" Click="RenameMod_Click"/>
+                        <MenuItem Header="Delete" Click="DeleteMod_Click"/>
+                        <Separator />
+                        <MenuItem Header="Open Folder" Click="OpenFolder_Click"/>
+                    </ContextMenu>
+                </components:DraggableListView.ItemContextMenu>
+               
+                <ListView.View >
+                    <GridView AllowsColumnReorder="False">
+                        <GridViewColumn Header="Enabled" Width="75">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsEnabled, Mode=TwoWay}"
+                                              Style="{StaticResource SwitchDark}"
+                                              HorizontalAlignment="Center" VerticalAlignment="Center"
+                                              Margin="0,5" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate> 
+                        </GridViewColumn>
+                        <GridViewColumn Header="Title" Width="Auto" DisplayMemberBinding="{Binding Title}" />
+                    </GridView>
+                </ListView.View>
+            </components:DraggableListView>
+        </StackPanel>
+        
+        <!-- TODO: Rework this, it doesnt even work -->
         <ProgressBar x:Name="ProgressBar" 
                      HorizontalAlignment="Center"
                      Visibility="Collapsed" 
@@ -85,13 +86,12 @@
                      VerticalAlignment="Bottom" 
                      Margin="10" 
                      Foreground="{StaticResource ForegroundColor}" />
-        <TextBlock 
-            x:Name="StatusTextBlock" 
-            Visibility="Collapsed" 
-            HorizontalAlignment="Center"
-            Height="20" 
-            VerticalAlignment="Bottom" 
-            Margin="10,0,0,30" 
-            Text="Processing..." Foreground="{StaticResource ForegroundColor}"/>
+        <TextBlock x:Name="StatusTextBlock" 
+                   Visibility="Collapsed" 
+                   HorizontalAlignment="Center"
+                   Height="20" 
+                   VerticalAlignment="Bottom" 
+                   Margin="10,0,0,30" 
+                   Text="Processing..." Foreground="{StaticResource ForegroundColor}"/>
     </Grid>
 </Page>

@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="200">
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-        <ContentControl Width="150" Height="150" Foreground="{StaticResource ForegroundColorV2}">
+        <ContentControl Width="150" Height="150" Foreground="{StaticResource LightBackgroundColor}">
             <icon:GameIcons Kind="FlatTire" Width="150" Height="150" />
         </ContentControl>
         <TextBlock Text="{Binding Title, RelativeSource={RelativeSource AncestorType=UserControl}}"

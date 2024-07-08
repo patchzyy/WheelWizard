@@ -55,9 +55,9 @@
     
     <!-- Layout colors -->
     <SolidColorBrush x:Key="BackgroundColorV2" Color="{StaticResource Gray950}" />
-    <SolidColorBrush x:Key="ForegroundColorV2" Color="{StaticResource Gray900}" />
-    <SolidColorBrush x:Key="ForegroundContactColor" Color="{StaticResource Gray800}" />
-    <SolidColorBrush x:Key="ForegroundHover" Color="{StaticResource Gray600}" />
+    <SolidColorBrush x:Key="LightBackgroundColor" Color="{StaticResource Gray900}" />
+    <SolidColorBrush x:Key="BackgroundContactColor" Color="{StaticResource Gray800}" />
+    <SolidColorBrush x:Key="BackgroundLine" Color="{StaticResource Gray700}" />
     
     <!-- Input field -->
     <SolidColorBrush x:Key="InputFieldBorder-Default" Color="{StaticResource Gray800}" />
@@ -116,5 +116,9 @@
     <Thickness x:Key="LeftEdgeGap">10,0,0,0</Thickness>
     <Thickness x:Key="LeftTopEdgeGap">10,10,0,0</Thickness>
     <Thickness x:Key="SidebarSectionGap">10,20,10,0</Thickness>
+    
+    <GridLength x:Key="TopRowSize">95</GridLength>
+    <!-- This is the total height as the (Title + infoSection) - (padding) -->
+    <!-- This is the point where the line should be on each page and therefore -->
     
 </ResourceDictionary>
