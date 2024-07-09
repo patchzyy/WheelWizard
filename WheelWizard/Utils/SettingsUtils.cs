@@ -17,6 +17,16 @@ namespace CT_MKWII_WPF.Utils
             LoadConfigFromFile();
         }
 
+        public static string getWheelWizardAppPath()
+        {
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/CT-MKWII");
+        }
+
+        public static string getWheelWizardConfigPath()
+        {
+            return _configFilePath;
+        }
+
         public static bool SetupCorrectly()
         {
             if (_config == null) return false;

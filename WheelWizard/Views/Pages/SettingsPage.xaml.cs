@@ -190,4 +190,5 @@ public partial class SettingsPage : Page
             DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "InternalResolution", resolution);
         }
     }
+    
 }
