@@ -16,7 +16,7 @@ public partial class Layout : Window
     private void SettingsPage_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new SettingsPage());
     private void ModsPage_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new ModsPage());
     private void KitchenSink_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new KitchenSink());
-    private void RoomsButton_Navigate(object sender, RoutedEventArgs e) => NavigateToPage(new RoomsPage());
+    private void RoomsButton_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new RoomsPage());
     
     public void NavigateToPage(Page page)
     {
@@ -30,39 +30,41 @@ public partial class Layout : Window
       
         Dashboard myPage = new Dashboard();
         NavigateToPage(myPage);
-        populatePlayerText();
+        PopulatePlayerText();
     }
 
-    public async void populatePlayerText()
+    public async void PopulatePlayerText()
     {
         var rrinfo = await RRLiveInfo.getCurrentGameData();
-        PlayerCountText.Text = "Players online: " + RRLiveInfo.GetCurrentOnlinePlayers(rrinfo).ToString();
+        UpdatePlayerAndRoomCount(RRLiveInfo.GetCurrentOnlinePlayers(rrinfo), rrinfo.Rooms.Count);
+        
         var periodicTimer= new PeriodicTimer(TimeSpan.FromSeconds(20));
         while (await periodicTimer.WaitForNextTickAsync())
         {
             rrinfo = await RRLiveInfo.getCurrentGameData();
-            PlayerCountText.Text = "Players online: " + RRLiveInfo.GetCurrentOnlinePlayers(rrinfo).ToString();
+            UpdatePlayerAndRoomCount(RRLiveInfo.GetCurrentOnlinePlayers(rrinfo), rrinfo.Rooms.Count);
         }
-        
+    }
+    
+    public void UpdatePlayerAndRoomCount(int playerCount, int roomCount)
+    {
+        PlayerCountBox.Text = playerCount.ToString();
+        if (playerCount == 1) PlayerCountBox.TipText = "There is currently 1 player online";
+        else if (playerCount == 0) PlayerCountBox.TipText = "There are currently no players online";
+        else PlayerCountBox.TipText = $"There are currently {playerCount} players online";
+        RoomCountBox.Text = roomCount.ToString();
+        if (roomCount == 1) RoomCountBox.TipText="There is currently 1 room active";
+        else if (roomCount == 0) RoomCountBox.TipText="There are currently no rooms active";
+        else RoomCountBox.TipText=$"There are currently {roomCount} rooms active";
     }
     
     private void TopBar_MouseDown(object sender, MouseButtonEventArgs e)
     {
-        if (e.ChangedButton == MouseButton.Left)
-        {
-            DragMove();
-        }
+        if (e.ChangedButton == MouseButton.Left) DragMove();
     }
     
-    private void MinimizeButton_Click(object sender, RoutedEventArgs e)
-    {
-        this.WindowState = WindowState.Minimized;
-    }
-    
-    private void CloseButton_Click(object sender, RoutedEventArgs e)
-    {
-        Close();
-    }
+    private void MinimizeButton_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
+    private void CloseButton_Click(object sender, RoutedEventArgs e) => Close();
     
     private void Discord_Click(object sender, RoutedEventArgs e)
     {
@@ -81,6 +83,4 @@ public partial class Layout : Window
             UseShellExecute = true
         });
     }
-
-
 }

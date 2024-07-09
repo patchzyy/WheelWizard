@@ -22,7 +22,7 @@ public class MiiChannelManager
             await DownloadMiiChannel();
         }
         //launch mii channel
-        DolphinSettingHelper.LaunchDolphinWithArguments($"-b \"{getSavedChannelLocation()}\"");
+        DolphinSettingHelper.LaunchDolphin($"-b \"{getSavedChannelLocation()}\"");
     }
 
     private static bool MiiChannelExists()

@@ -68,7 +68,20 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                                       IconSize="31"/>
             </Border>
             
-            <TextBlock Grid.Row="2" Text="hey" x:Name="PlayerCountText" Margin="10,0,0,0" Style="{StaticResource SidebarSectionText}"/>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
+                <components:StateBox x:Name="PlayerCountBox" IsDark="True" Text="0" 
+                                     IconPack="FontAwesome"  TipAlignment="TopLeft"
+                                     IconKind="{x:Static icon:PackIconFontAwesomeKind.UserGroupSolid}"  
+                                     TipText="There are currently no players online"
+                                     Margin="10,0,0,0"/>
+                <components:StateBox x:Name="RoomCountBox" IsDark="True" Text="0" 
+                                     IconPack="FontAwesome"  TipAlignment="TopLeft"
+                                     IconKind="{x:Static icon:PackIconFontAwesomeKind.UsersRectangleSolid}"  
+                                     TipText="There are currently no rooms active"
+                                     Margin="10,0,0,0"/>
+            </StackPanel>
+           
+            
             
             <Border Grid.Row="3" 
                     VerticalAlignment="Bottom" HorizontalAlignment="Left"
