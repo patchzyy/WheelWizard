@@ -121,4 +121,9 @@ public partial class Dashboard : Page
         var layout = (Layout) Application.Current.MainWindow;
         layout.SidePanelButtons.IsEnabled = true;
     }
+
+    private void LaunchMiiChannel_Click(object sender, RoutedEventArgs e)
+    {
+        MiiChannelManager.LaunchMiiChannel();
+    }
 }
