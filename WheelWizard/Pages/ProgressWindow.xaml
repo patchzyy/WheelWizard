@@ -9,9 +9,11 @@
         Title="Update Progress" Height="200" Width="400"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Topmost="True">
+        Topmost="True"
+        AllowsTransparency="True"
+        Background="Transparent">
 
-    <Border Background="{StaticResource ForegroundColorV2}" >
+    <Border Background="{StaticResource ForegroundColorV2}" Margin="10" >
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
@@ -46,5 +48,9 @@
                 </StackPanel>
             </Border>
         </Grid>
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="15" Direction="315" 
+                              Opacity="0.5" ShadowDepth="8" Color="Black"/>
+        </Border.Effect>
     </Border>
 </Window>
