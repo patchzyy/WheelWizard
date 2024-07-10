@@ -10,28 +10,27 @@
       Title="RoomsPage" Background="Transparent">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="{StaticResource TopRowSize}"/> <!-- This is the total height as the (Title + infoSection) - (padding) -->
             <RowDefinition />
         </Grid.RowDefinitions>
-        <components:IconLabel Grid.Row="0"
-                              IconPack="FontAwesome"
-                              IconKind="{x:Static icon:PackIconFontAwesomeKind.UsersRectangleSolid}"
-                              Text="Rooms"
-                              FontSize="20"
-                              VerticalAlignment="Center"
-                              IconSize="24"
-                              Margin="20,0,0,20"
-                              Color="{StaticResource TitleTextColor}"/>
-        <components:EmptyPageInfo Grid.Row="2" x:Name="EmptyRoomsMessage"
+        <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
+        <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
+        <TextBlock Grid.Row="0" Text="Rooms" HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{StaticResource PageTitleText}"/>
+        
+       
+        <components:EmptyPageInfo Grid.Row="1" x:Name="EmptyRoomsView"
                                   HorizontalAlignment="Center"
                                   VerticalContentAlignment="Center"
                                   Title="No Rooms found"
                                   Body="You might not have internet connection, or no-one might be playing."/>
         
-            <components:StaticListView Grid.Row="1" ItemsSource="{Binding Rooms}" x:Name="RoomsListView"
+        <StackPanel Grid.Row="1">
+            <StackPanel Orientation="Horizontal" Margin="0,10">
+                <components:FormFieldLabel Text="Rooms" Margin="0,0,2,0"/>
+                <components:StateBox Text="0" IconSize="0" x:Name="RoomCountBox"/>
+            </StackPanel>
+            
+            <components:StaticListView ItemsSource="{Binding Rooms}" x:Name="RoomsView"
                                        OnItemClick="Room_MouseDoubleClick">
                 <ListView.View>
                     <GridView AllowsColumnReorder="False">
@@ -42,6 +41,7 @@
                                     <icon:PackIconFontAwesome Height="30" Width="30" >
                                         <icon:PackIconFontAwesome.Style>
                                             <Style TargetType="icon:PackIconFontAwesome">
+                                                <Setter Property="Foreground" Value="{StaticResource TitleTextColor}"/>
                                                 <Setter Property="Kind" Value="RoadCircleExclamationSolid"/>
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding Path=Type}" Value="private">
@@ -49,6 +49,10 @@
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Path=Type}" Value="anybody">
                                                         <Setter Property="Kind" Value="RoadSolid"/>
+                                                    </DataTrigger>
+                                                    
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=IsMouseOver}" Value="True">
+                                                        <Setter Property="Foreground" Value="{StaticResource TitleTextHover}"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -58,25 +62,30 @@
                                 
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=PlayerCount}" Header="Players" Width="70"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Type}" Header="Access" Width="90"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Playtime}" Header="Time Online" Width="140"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=RoomNumber}" Header="ID" Width="70"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=RoomNumber}" Header="ID" Width="110"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Playtime}" Header="Time Online" Width="180"/>
+                        <GridViewColumn  Header="Players" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <components:StateBox Text="{Binding PlayerCount}" 
+                                                         IconPack="FontAwesome" IconKind="{x:Static icon:PackIconFontAwesomeKind.UserGroupSolid}">
+                                        <components:StateBox.Style>
+                                            <Style TargetType="components:StateBox">
+                                                <Setter Property="IsDark" Value="True"></Setter>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=IsMouseOver}" Value="True">
+                                                        <Setter Property="IsDark" Value="False" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </components:StateBox.Style>
+                                    </components:StateBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate> 
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </components:StaticListView>
-        
-        <!--
-        <components:Button Grid.Row="3" Variant="Default"
-                           Height="50"
-                           Width="180"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Bottom"
-                           IsEnabled="True"
-                           IconPack="Material"
-                           IconKind="{x:Static icon:PackIconMaterialKind.Home}"
-                           Text="View Room"
-                           Click="View_RoomButton"
-                           Margin="3,30,0,0"/> -->
+        </StackPanel>
     </Grid>
 </Page>

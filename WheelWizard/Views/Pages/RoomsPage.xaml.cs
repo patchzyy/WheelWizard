@@ -54,21 +54,31 @@ namespace CT_MKWII_WPF.Views.Pages
                     RoomNumber = room.Id,
                     PlayerCount = room.Players.Count.ToString(),
                     Type = room.Type,
-                    Playtime = (DateTime.Now - room.Created).ToString(@"hh\:mm\:ss")
+                    Playtime = HumanizeTimeSpan(DateTime.Now - room.Created)
                 });
             }
-
-            if (Rooms.Count == 0)
-            {
-                EmptyRoomsMessage.Visibility = Visibility.Visible;
-                RoomsListView.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                EmptyRoomsMessage.Visibility = Visibility.Collapsed;
-                RoomsListView.Visibility = Visibility.Visible;
-            }
+         
+            RoomCountBox.Text = Rooms.Count.ToString();
+           
+            EmptyRoomsView.Visibility = Rooms.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+            RoomsView.Visibility = Rooms.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
         }
+        
+        private string HumanizeTimeSpan(TimeSpan timeSpan)
+        {
+            string P(int count) => count != 1 ? "s" : "";
+
+            if (timeSpan.TotalDays >= 1)
+                return $"{timeSpan.Days} day{P(timeSpan.Days)} {timeSpan.Hours} hour{P(timeSpan.Hours)}";
+           
+            if (timeSpan.TotalHours >= 1)
+                return $"{timeSpan.Hours} hour{P(timeSpan.Hours)} {timeSpan.Minutes} minute{P(timeSpan.Minutes)}";
+        
+            if (timeSpan.TotalMinutes >= 1)
+                return $"{timeSpan.Minutes} minute{P(timeSpan.Minutes)} {timeSpan.Seconds} second{P(timeSpan.Seconds)}";
+            
+            return $"{timeSpan.Seconds} second{P(timeSpan.Seconds)}";
+        } 
 
         private void Room_MouseDoubleClick(object sender, MouseButtonEventArgs e, ListViewItem clickedItem)
         {
@@ -82,11 +92,6 @@ namespace CT_MKWII_WPF.Views.Pages
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }  
-
-        // private void View_RoomButton(object sender, RoutedEventArgs e)
-        // {
-        //     throw new NotImplementedException();
-        // }
     }
 
     public class RoomViewModel
