@@ -21,18 +21,6 @@ public static class RetroRewindInstaller
 
         return Directory.Exists(retroRewindFolder) || Directory.Exists(retroRewindRRFolder);
     }
-    
-    public static void InstallRRToSD()
-    {
-        MessageBox.Show("Installing Retro Rewind to SD/USB...");
-        MessageBox.Show("Implement me!");
-    }
-    
-    public static void InstallRRToUSB()
-    {
-        MessageBox.Show("Installing Retro Rewind to USB...");
-        MessageBox.Show("Implement me!");
-    }
 
     public static string CurrentRRVersion()
     {
@@ -91,26 +79,17 @@ public static class RetroRewindInstaller
     var allVersions = await GetAllVersionData();
     var updatesToApply = GetUpdatesToApply(currentVersion, allVersions);
     
-    var progressWindow = new ProgressWindow();
-    progressWindow.Show();
-    
     int totalUpdates = updatesToApply.Count;
     int currentUpdateIndex = 1;
+    var progressWindow = new ProgressWindow();
+    progressWindow.Show();
     foreach (var update in updatesToApply)
     {
-        // MessageBox.Show($"Updating to version {update.Version}: {update.Description}");
-        int progressPercentage = (currentUpdateIndex * 100) / totalUpdates;
-        string status = $"Updating to version {update.Version}: {update.Description}";
-        Application.Current.Dispatcher.Invoke(() => 
-        {
-            progressWindow.UpdateProgress(progressPercentage, status);
-        });
-        
-        bool success = await DownloadAndApplyUpdate(update);
+        bool success = await DownloadAndApplyUpdate(update, totalUpdates, currentUpdateIndex, progressWindow);
         if (!success)
         {
-            progressWindow.Close();
             MessageBox.Show("Failed to apply an update. Aborting.");
+            progressWindow.Close();
             return false;
         }
         currentUpdateIndex++;
@@ -181,36 +160,18 @@ private static int CompareVersions(string v1, string v2)
     return 0;
 }
 
-private static async Task<bool> DownloadAndApplyUpdate((string Version, string Url, string Path, string Description) update)
+private static async Task<bool> DownloadAndApplyUpdate((string Version, string Url, string Path, string Description) update, int totalUpdates, int currentUpdateIndex, ProgressWindow window)
 {
-    using var httpClient = new HttpClient();
+    var loadPath = SettingsUtils.GetLoadPathLocation();
     var tempZipPath = Path.GetTempFileName();
-
     try
     {
-        var response = await httpClient.GetAsync(update.Url, HttpCompletionOption.ResponseHeadersRead);
-
-        if (!response.IsSuccessStatusCode)
-        {
-            MessageBox.Show($"Failed to download update: {update.Version}");
-            return false;
-        }
-
-        using (var fs = new FileStream(tempZipPath, FileMode.Create))
-        {
-            await response.Content.CopyToAsync(fs);
-        }
-
-        // string extractionPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Dolphin Emulator", "Load", "Riivolution");
-        var loadPath = SettingsUtils.GetLoadPathLocation();
+        string extratext = $"Update {currentUpdateIndex}/{totalUpdates}: {update.Description}";
+        await DownloadUtils.DownloadFileWithWindow(update.Url, tempZipPath, window, extratext);
+        window.UpdateProgress(100, "Extracting update...");
         var extractionPath = Path.Combine(loadPath, "Riivolution");
-
-        // Ensure the extraction path exists.
         Directory.CreateDirectory(extractionPath);
-
-        // Extract the zip file.
         ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
-        
     }
     catch (Exception ex)
     {
@@ -242,67 +203,19 @@ public static async Task InstallRetroRewind()
     
     var loadPath = SettingsUtils.GetLoadPathLocation();
     var tempZipPath = Path.Combine(loadPath, "Temp", "RetroRewind.zip");
-    Directory.CreateDirectory(Path.GetDirectoryName(tempZipPath)); // Ensure the Temp directory exists
+    ProgressWindow progressWindow = new ProgressWindow();
+    progressWindow.Show();
+    await DownloadUtils.DownloadFileWithWindow(RetroRewindURL, tempZipPath, progressWindow, "Downloading Retro Rewind...");
+    progressWindow.Close();
+    // Extract the zip to the Riivolution folder
+    var extractionPath = Path.Combine(loadPath, "Riivolution");
+    ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
     
-    try
-    {
-        using var httpClient = new HttpClient();
-        
-        var progressWindow = new ProgressWindow();
-        progressWindow.Show();
-        
-        // Start the download
-        var response = await httpClient.GetAsync(RetroRewindURL, HttpCompletionOption.ResponseHeadersRead);
+    // Clean up the downloaded zip file
+    File.Delete(tempZipPath);
+    
+    }
 
-        if (!response.IsSuccessStatusCode)
-        {
-            MessageBox.Show("Failed to download Retro Rewind.");
-            return;
-        }
-        
-        long? totalDownloadSize = response.Content.Headers.ContentLength;
-        var totalBytesDownloaded = 0L;
-        
-        using (var downloadStream = await response.Content.ReadAsStreamAsync())
-        {
-            using (var fileStream = new FileStream(tempZipPath, FileMode.Create, FileAccess.Write))
-            {
-                var buffer = new byte[81920]; // 80KB buffer
-                int bytesRead;
-                while ((bytesRead = await downloadStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
-                {
-                    fileStream.Write(buffer, 0, bytesRead);
-                    totalBytesDownloaded += bytesRead;
-                    
-                    int progressPercentage = totalDownloadSize.HasValue
-                        ? (int)((totalBytesDownloaded * 100) / totalDownloadSize.Value)
-                        : 0;
-                    
-                    Application.Current.Dispatcher.Invoke(() => 
-                    {
-                        progressWindow.UpdateProgress(progressPercentage, "Downloading Retro Rewind... This may take a while.");
-                    });
-                }
-            }
-        }
-        
-        // Extract the zip to the Riivolution folder
-        var extractionPath = Path.Combine(loadPath, "Riivolution");
-        ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
-        
-        // Clean up the downloaded zip file
-        File.Delete(tempZipPath);
-        
-        Application.Current.Dispatcher.Invoke(() => 
-        {
-            progressWindow.Close();
-        });
-    }
-    catch (Exception ex)
-    {
-        MessageBox.Show($"An error occurred during the installation: {ex.Message}");
-    }
-}
 
 
 

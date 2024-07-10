@@ -43,14 +43,6 @@ public partial class Dashboard : Page
                 await RetroRewindInstaller.InstallRetroRewind();
                 EnableSidebarButtons();
                 break;
-            case RRStatusManager.ActionButtonStatus.noRRActive:
-                //this is here for future use,
-                //right now there is no de-activation, but if we want multiple mods this might be handy
-                MessageBox.Show("Activate Retro Rewind");
-                break;
-            case RRStatusManager.ActionButtonStatus.RRnotReady:
-                // RetroRewindInstaller.ActivateRetroRewind();
-                break;
             case RRStatusManager.ActionButtonStatus.OutOfDate:
                 SetButtonState("Updating...", "Secondary", false, PackIconKind.Update);
                 DisableSidebarButtons();
@@ -121,9 +113,5 @@ public partial class Dashboard : Page
         var layout = (Layout) Application.Current.MainWindow;
         layout.SidePanelButtons.IsEnabled = true;
     }
-
-    private void LaunchMiiChannel_Click(object sender, RoutedEventArgs e)
-    {
-        MiiChannelManager.LaunchMiiChannel();
-    }
+    
 }

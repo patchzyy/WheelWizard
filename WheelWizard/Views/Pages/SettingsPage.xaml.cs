@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using CT_MKWII_WPF.Utils;
@@ -49,6 +50,8 @@ public partial class SettingsPage : Page
                 RadioButton radioButton = (RadioButton) ResolutionStackPanel.Children[finalResolution];
                 radioButton.IsChecked = true;
             }
+            var forcemote = WiiMoteSettings.IsForceSettingsEnabled();
+            DisableForce.IsChecked = forcemote;
         }
     }
     
@@ -127,6 +130,7 @@ public partial class SettingsPage : Page
         string dolphinPath = DolphinInputField.Text;
         string gamePath = MarioInputField.Text;
         string userFolder = UserPathInputField.Text;
+        bool forceDisableWiimote = DisableForce.IsChecked == true;
         if (!File.Exists(dolphinPath) || !File.Exists(gamePath) || !Directory.Exists(userFolder))
         {
             MessageBox.Show("Please ensure all paths are correct and try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -134,7 +138,7 @@ public partial class SettingsPage : Page
         }
 
         // Save settings to a configuration file or system registry
-        SettingsUtils.SaveSettings(dolphinPath, gamePath, userFolder);
+        SettingsUtils.SaveSettings(dolphinPath, gamePath, userFolder, true, forceDisableWiimote);
         if(!SettingsUtils.SetupCorrectly())
         {
             MessageBox.Show("Please ensure all paths are correct and try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -190,5 +194,20 @@ public partial class SettingsPage : Page
             DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "InternalResolution", resolution);
         }
     }
-    
+
+    private void LaunchMiiChannel_Click(object sender, RoutedEventArgs e)
+    {
+        ResolutionStackPanel.IsEnabled = false;
+        CheckBoxStackPanel.IsEnabled = false;
+        WiiMoteSettings.EnableVirtualWiiMote();
+        MiiChannelManager.LaunchMiiChannel();
+        //wait 5 seconds before re-enabling the buttons
+        Task.Delay(5000).ContinueWith(_ =>
+        {
+            Dispatcher.Invoke(() =>
+            {
+                UpdateResolutionButtonsState();
+            });
+        });
+    }
 }

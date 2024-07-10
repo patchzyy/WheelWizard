@@ -226,9 +226,20 @@ public class RRLiveInfo
 ]";
       
     private static readonly HttpClient client = new HttpClient();
+    
+    
+    // Caching
+    private static RRInformation? cachedData;
+    private static readonly TimeSpan cacheDuration = TimeSpan.FromSeconds(60); 
+    private static DateTime lastFetchTime;
 
     public static async Task<RRInformation> getCurrentGameData()
     {
+      if (cachedData != null && (DateTime.Now - lastFetchTime) < cacheDuration)
+      {
+        return cachedData;
+      }
+      
       string data = "";
       bool useMockingData = false;
       string apiUrl = "http://zplwii.xyz/api/groups";
@@ -254,7 +265,10 @@ public class RRLiveInfo
       List<RoomInfo> rooms = JsonSerializer.Deserialize<List<RoomInfo>>(data,
         new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
         );
-      return new RRInformation { Rooms = rooms };
+      
+      cachedData = new RRInformation { Rooms = rooms };
+      lastFetchTime = DateTime.Now;
+      return cachedData;
     }
 
     public static int GetCurrentOnlinePlayers(RRInformation info)

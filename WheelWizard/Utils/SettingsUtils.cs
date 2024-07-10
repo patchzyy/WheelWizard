@@ -47,33 +47,14 @@ namespace CT_MKWII_WPF.Utils
             return doesConfigExist() && SetupCorrectly();
         }
         
-        
-        public static void SaveSettings(string dolphinPath, string gamePath, string userFolderPath)
-        {
-            // Update the _config object with the new values
-            _config.DolphinLocation = dolphinPath;
-            _config.GameLocation = gamePath;
-            _config.UserFolderPath = userFolderPath;
-            // Serialize the _config object to JSON and save it to the config file
-            var configJson = JsonConvert.SerializeObject(_config, Formatting.Indented);
-            Directory.CreateDirectory(Path.GetDirectoryName(_configFilePath));
-            try
-            {
-                File.WriteAllText(_configFilePath, configJson);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("An error occurred while saving settings. Please try again later. \n \nError: " + e.Message);
-                throw;
-            }
-        }
-        public static void SaveSettings(string dolphinPath, string gamePath, string userFolderPath, bool hasRunNANDTutorial)
+        public static void SaveSettings(string dolphinPath, string gamePath, string userFolderPath, bool hasRunNANDTutorial, bool forceDisableWiimote)
         {
             // Update the _config object with the new values
             _config.DolphinLocation = dolphinPath;
             _config.GameLocation = gamePath;
             _config.UserFolderPath = userFolderPath;
             _config.HasRunNANDTutorial = hasRunNANDTutorial;
+            _config.ForceWiimote = forceDisableWiimote;
             // Serialize the _config object to JSON and save it to the config file
             var configJson = JsonConvert.SerializeObject(_config, Formatting.Indented);
             File.WriteAllText(_configFilePath, configJson);
@@ -87,7 +68,7 @@ namespace CT_MKWII_WPF.Utils
             }
             else
             {
-                _config = new Config();
+                _config = new Config { ForceWiimote = true };
             }
         }
 
@@ -96,17 +77,14 @@ namespace CT_MKWII_WPF.Utils
             return File.Exists(_configFilePath) ? File.ReadAllText(_configFilePath) : string.Empty;
         }
         
-        public static void setHasSeenNandPopUp(bool hasRunNANDTutorial)
-        {
-            _config.HasRunNANDTutorial = hasRunNANDTutorial;
-            SaveSettings(_config.DolphinLocation, _config.GameLocation, _config.UserFolderPath, hasRunNANDTutorial);
-        }
 
         public static string GetGameLocation() => _config.GameLocation;
 
         public static string GetDolphinLocation() => _config.DolphinLocation;
 
         public static string GetUserPathLocation() => _config.UserFolderPath;
+        
+        public static bool GetForceWiimote() => _config.ForceWiimote;
 
         public static string GetLoadPathLocation()
         {
@@ -122,6 +100,20 @@ namespace CT_MKWII_WPF.Utils
                 return false;
             }
             return true;
+        }
+
+        public static string FindWiiMoteNew()
+        {
+            var folderPath = GetUserPathLocation();
+            var configFolder = Path.Combine(folderPath, "Config");
+            var wiimoteFile = Path.Combine(configFolder, "WiimoteNew.ini");
+            
+            if (File.Exists(wiimoteFile))
+            {
+                return wiimoteFile;
+            }
+            MessageBox.Show($"Could not find WiimoteNew file, tried looking in {wiimoteFile}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return string.Empty;
         }
 
         public static string FindGFXFile()
@@ -146,6 +138,7 @@ namespace CT_MKWII_WPF.Utils
             public string GameLocation { get; set; }
             public string UserFolderPath { get; set; }
             public bool HasRunNANDTutorial { get; set; }
+            public bool ForceWiimote { get; set; }
         }
 
         public static ModData[] GetMods()
