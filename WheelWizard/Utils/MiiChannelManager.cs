@@ -20,6 +20,8 @@ public class MiiChannelManager
         if (!MiiChannelExists())
         {
             await DownloadMiiChannel();
+            //todo: maybe remove?
+            await Task.Delay(200);
         }
         //launch mii channel
         DolphinSettingHelper.LaunchDolphin($"-b \"{getSavedChannelLocation()}\"");

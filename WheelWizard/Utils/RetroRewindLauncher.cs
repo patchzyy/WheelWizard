@@ -8,11 +8,24 @@ public static class RetroRewindLauncher
 {
     public static void PlayRetroRewind()
     {
+        //close dolphin if its open,
+        var dolphinLocation = SettingsUtils.GetDolphinLocation();
+        if (Process.GetProcessesByName(Path.GetFileNameWithoutExtension(dolphinLocation)).Length != 0)
+        {
+            foreach (var process in Process.GetProcessesByName(Path.GetFileNameWithoutExtension(dolphinLocation)))
+            {
+                process.Kill();
+            }
+        }
         //if its not activated, activate it
         if (!DirectoryHandler.isRRActive())
         {
             DirectoryHandler.BackupRiivolution();
             DirectoryHandler.RetrieveRR();
+        }
+        if (WiiMoteSettings.IsForceSettingsEnabled())
+        {
+            WiiMoteSettings.DisableVirtualWiiMote();
         }
         //first clear the my-stuff folder
         //now we check for all the mods we want in the modconfig
@@ -35,9 +48,7 @@ public static class RetroRewindLauncher
         }
         //reverse the list, because mods that have the lowest priority go first
         //the reason we do this is, lets say file A from the lowest priority mod is in the highest priority mod, we want to overwrite it
-
-        
-        string dolphinLocation = SettingsUtils.GetDolphinLocation();
+        dolphinLocation = SettingsUtils.GetDolphinLocation();
         string gamePath = SettingsUtils.GetGameLocation();
         GenerateLaunchJSON();
         string launchJson = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII", "RR.json");

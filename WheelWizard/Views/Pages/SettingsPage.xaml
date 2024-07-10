@@ -39,6 +39,19 @@
             <StackPanel Margin="0,25" x:Name="CheckBoxStackPanel">
                 <CheckBox IsChecked="False" Style="{StaticResource Switch}" Click="VSyncPress" x:Name="VSyncButton" >VSync</CheckBox>
                 <CheckBox IsChecked="False" Style="{StaticResource Switch}" Click="RecommendedClick" x:Name="RecommendedButton"  >Recommended Settings</CheckBox>
+                <CheckBox IsChecked="False" 
+                          Style="{StaticResource Switch}" 
+                          x:Name="DisableForce"  
+                          ToolTip="test">Force Disable Wiimote</CheckBox>
+                <components:Button Variant="Default"
+                                   IsEnabled="True"
+                                   IconPack="FontAwesome"
+                                   IconKind="{x:Static icon:PackIconFontAwesomeKind.UsersLineSolid}"
+                                   Text="Launch Mii Channel"
+                                   Click="LaunchMiiChannel_Click"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Bottom"
+                                   Margin="2,10,5,0"/>
             </StackPanel>
         </UniformGrid> 
         
@@ -106,7 +119,7 @@
             Grid.Row="6"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
-            Text="Pre-release v1.0.6"
+            Text="Pre-release v1.0.7"
             ></TextBlock>
         
     </Grid>
