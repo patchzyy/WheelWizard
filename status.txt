@@ -1,2 +1,8 @@
+
+Here are the icons we support currently
+
+The current status is the status that is inside of line 1
+
 warning|We are testing live dynamic icons!
 alert|Test alert!
+info|information!
