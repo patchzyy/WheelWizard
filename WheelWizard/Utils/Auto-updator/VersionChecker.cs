@@ -12,7 +12,7 @@ namespace CT_MKWII_WPF.Utils.Auto_updator;
 public static class VersionChecker
 {
     private const string VersionFileURL = "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/version.txt";
-    private const string CurrentVersion = "1.0.7";
+    private const string CurrentVersion = "1.0.8";
     
     public static string GetVersionNumber()
     {
@@ -64,6 +64,8 @@ public static class VersionChecker
         // Download the new file
         await DownloadUtils.DownloadFileWithWindow(downloadUrl, newFilePath, progressWindow);
 
+        //wait 0.2 seconds
+        await Task.Delay(200);
         // Create and run the batch file
         CreateAndRunBatchFile(currentLocation, newFilePath);
 
