@@ -1,4 +1,4 @@
-info|Information can be shown here for the program
+
 Here are the icons we support currently
 
 The current status is the status that is inside of line 1
