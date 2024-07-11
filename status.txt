@@ -1,2 +1,2 @@
-alert|Test alert!
 warning|We are testing live dynamic icons!
+alert|Test alert!
