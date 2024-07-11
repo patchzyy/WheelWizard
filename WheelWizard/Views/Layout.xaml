@@ -66,24 +66,31 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                                       Margin="{StaticResource LeftTopEdgeGap}"
                                       IconSize="31"/>
             </Border>
-            
+            <Border Grid.Row="2" 
+                    VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                    ToolTipService.InitialShowDelay="5"
+                    ToolTipService.ShowDuration="10000"
+                    ToolTipService.BetweenShowDelay="0" Margin="10">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource TinyText}" Text="Made by: Patchzy" HorizontalAlignment="Right"></TextBlock>
+                    <TextBlock Style="{StaticResource TinyText}" Text="And WantToBeeMe" HorizontalAlignment="Right"></TextBlock>
+                </StackPanel>
+            </Border>
             <Border Grid.Row="2" 
                     VerticalAlignment="Bottom" HorizontalAlignment="Left"
                     ToolTipService.InitialShowDelay="5"
                     ToolTipService.ShowDuration="10000"
                     ToolTipService.BetweenShowDelay="0" Margin="10">
-                <components:DynamicIcon IconPack="FontAwesome"
-                                        IconKind="{x:Static icon:PackIconFontAwesomeKind.TriangleExclamationSolid}" 
-                                        ForegroundColor="{StaticResource WarningTitleTextColor}"
-                                        IconSize="30"/>
+                
+                <StackPanel>
+                    <components:DynamicIcon IconPack="FontAwesome" x:Name="Statusicon"
+                                            IconKind="{x:Static icon:PackIconFontAwesomeKind.TriangleExclamationSolid}" 
+                                            ForegroundColor="{StaticResource WarningTitleTextColor}"
+                                            IconSize="30"/>
+                </StackPanel>
                 <Border.ToolTip>
                     <components:ToolTipMessage Alignment="TopLeft">
-                        <StackPanel>
-                            <TextBlock Text="Amazing that you are trying out our new mod manager!"/>
-                            <TextBlock Text="We wanted to mention that we are in a complete UI overhaul"/>
-                            <TextBlock Text="So dont be confused if a button got moved to some other page when we push a new update"/>
-                            <TextBlock Text="If you have any feedback, please let us know :)"/>
-                        </StackPanel>
+                        <TextBlock Text="{Binding StatusMessage}"/>
                     </components:ToolTipMessage>
                 </Border.ToolTip>
             </Border>

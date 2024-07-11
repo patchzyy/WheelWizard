@@ -57,7 +57,16 @@ namespace CT_MKWII_WPF.Utils
             _config.ForceWiimote = forceDisableWiimote;
             // Serialize the _config object to JSON and save it to the config file
             var configJson = JsonConvert.SerializeObject(_config, Formatting.Indented);
-            File.WriteAllText(_configFilePath, configJson);
+            Directory.CreateDirectory(Path.GetDirectoryName(_configFilePath));
+            try
+            {
+                File.WriteAllText(_configFilePath, configJson);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("An error occurred while saving settings. \n \nError: " + e.Message);
+                throw;
+            }
         }
 
         private static void LoadConfigFromFile()
