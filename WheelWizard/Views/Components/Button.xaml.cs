@@ -1,6 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
-
 /*
 EXAMPLES:
 
@@ -25,29 +23,50 @@ EXAMPLES:
 
 namespace CT_MKWII_WPF.Views.Components
 {
-    public partial class Button : UserControl
+    public partial class Button : System.Windows.Controls.Button
     {
-        // Primary, Secondary, Default, Danger
-        public static readonly DependencyProperty VariantProperty =
-            DependencyProperty.Register(nameof(Variant), typeof(string), typeof(Button), 
-                new PropertyMetadata("Default"));
-        
-        public string Variant
+        public Button()
         {
-            get { return (string)GetValue(VariantProperty); }
+            InitializeComponent();
+            Style = (Style)Application.Current.FindResource("DefaultButtonStyle")!;
+            FontSize = 14.0;
+        }
+        
+        public enum ButtonsVariantType
+        {
+            Primary,
+            Secondary,
+            Default,
+            Danger
+        }
+
+        public static readonly DependencyProperty VariantProperty =
+            DependencyProperty.Register(nameof(Variant), typeof(ButtonsVariantType), typeof(Button), 
+                new PropertyMetadata(ButtonsVariantType.Default, OnVariantChanged));
+        
+        public ButtonsVariantType Variant
+        {
+            get { return (ButtonsVariantType)GetValue(VariantProperty); }
             set { SetValue(VariantProperty, value); }
         }
         
-        public static readonly new DependencyProperty IsEnabledProperty =
-            DependencyProperty.Register(nameof(IsEnabled), typeof(bool), typeof(Button), 
-                new PropertyMetadata(true));
-     
-        public new bool IsEnabled
+        private static void OnVariantChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            get { return (bool)GetValue(IsEnabledProperty); }
-            set { SetValue(IsEnabledProperty, value); }
+            if (d is Button button)
+            {
+                var type = (ButtonsVariantType)e.NewValue;
+                string styleName = type switch
+                {
+                    ButtonsVariantType.Primary => "PrimaryButtonStyle",
+                    ButtonsVariantType.Secondary => "SecondaryButtonStyle",
+                    ButtonsVariantType.Danger => "DangerButtonStyle",
+                    _ => "DefaultButtonStyle"
+                };
+                
+                button.Style = (Style)Application.Current.FindResource(styleName)!;
+            }
         }
-        
+
         public static readonly DependencyProperty IconPackProperty =
             DependencyProperty.Register(nameof(IconPack), typeof(string), typeof(Button),
                 new PropertyMetadata(null));
@@ -58,7 +77,6 @@ namespace CT_MKWII_WPF.Views.Components
             set { SetValue(IconPackProperty, value); }
         }
 
-        
         public static readonly DependencyProperty IconKindProperty =
             DependencyProperty.Register(nameof(IconKind), typeof(object), typeof(Button),
                 new PropertyMetadata(null));
@@ -87,38 +105,6 @@ namespace CT_MKWII_WPF.Views.Components
         {
             get { return (string)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
-        }
-        
-        public static readonly new DependencyProperty FontSizeProperty =
-            DependencyProperty.Register(nameof(FontSize), typeof(double), typeof(Button), 
-                new PropertyMetadata(16.0));
-   
-        public new double FontSize
-        {
-            get { return (double)GetValue(FontSizeProperty); }
-            set { SetValue(FontSizeProperty, value); }
-        }
-        
-        public Button()
-        {
-            InitializeComponent();
-        }
-        
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            // Raise a custom click event or execute a command here
-            RoutedEventArgs newEventArgs = new RoutedEventArgs(ClickEvent, this);
-            RaiseEvent(newEventArgs);
-        }
-
-        // Custom click event
-        public static readonly RoutedEvent ClickEvent = EventManager.RegisterRoutedEvent(
-            nameof(Click), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Button));
-
-        public event RoutedEventHandler Click
-        {
-            add { AddHandler(ClickEvent, value); }
-            remove { RemoveHandler(ClickEvent, value); }
         }
     }
 }

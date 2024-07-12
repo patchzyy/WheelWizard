@@ -16,10 +16,10 @@
         <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
         <TextBlock Grid.Row="0" Text="Mods" HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{StaticResource PageTitleText}"/>
         <StackPanel Grid.Row="0"  HorizontalAlignment="Right" VerticalAlignment="Bottom"  Margin="12" Orientation="Horizontal" x:Name="TopBarButtons" >
-            <components:Button Variant="Default" IconPack="FontAwesome" x:Name="EnableDisableButton"
+            <components:Button IconPack="FontAwesome" x:Name="EnableDisableButton"
                                Text="Enable All" Click="EnableClick" Margin="0,0,10,0">
                 <components:Button.Style>
-                    <Style TargetType="components:Button">
+                    <Style TargetType="components:Button" BasedOn="{StaticResource DefaultButtonStyle}">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}" Value="Enable All">
                                 <Setter Property="IconKind" Value="{x:Static icon:PackIconFontAwesomeKind.ToggleOnSolid}"/>
