@@ -16,6 +16,36 @@
 
 Wheel Wizard, our mod manager, is created for the sole purpose of convenience. Technically, these mods and Retro Rewind are all doable without this app, but this app makes it possible with just a few clicks. It still has a lot of features in the planning stage and is fully in development, so keep an eye out for updates.
 
+---
+## How to Prevent Windows Defender from Detecting a False Positive .exe
+
+If Windows Defender is detecting Wheel Wizard as a threat, you can add it to the exclusion list. Follow these super easy steps:
+
+### Step 1: Open Windows Security
+
+1. **Press** the **Windows Key**.
+2. **Type** "Virus & threat protection" and **click** on it when it appears.
+
+### Step 2: Manage Settings
+
+1. Under "Virus & threat protection settings", **click** on "Manage settings".
+
+### Step 3: Add an Exclusion
+
+1. Scroll down to the "Exclusions" section and **click** on "Add or remove exclusions".
+2. **Click** on "Add an exclusion" and select "File".
+
+### Step 4: Select Your .exe File
+
+1. **Browse** to the location of your .exe file.
+2. **Select** the .exe file and **click** "Open".
+
+Your .exe file is now excluded from Windows Defender scans and should no longer be detected as a false positive.
+
+### Important Note:
+We are in contact with Microsoft to resolve this issue. If you encounter any problems, please let us know.
+---
+
 ## Free and Open Source
 
 Wheel Wizard was made by [patchzy](https://github.com/patchzyy) and [wanttobeeme](https://github.com/wanttobeeme). This application is completely free to use. You can go to the [latest releases](https://github.com/patchzyy/WheelWizard/releases) and download the executable there. Once installed, the app will automatically notify you when updates are available.

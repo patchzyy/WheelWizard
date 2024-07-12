@@ -11,6 +11,12 @@ public class DownloadUtils
 {
     public static async Task DownloadFileWithWindow(string url, string filePath, ProgressWindow progressWindow, string extratext = "")
     {
+        string directory = Path.GetDirectoryName(filePath);
+        if (!Directory.Exists(directory))
+        {
+            Directory.CreateDirectory(directory);
+        }
+        
         using (HttpClient client = new HttpClient())
         {
             using (var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead))

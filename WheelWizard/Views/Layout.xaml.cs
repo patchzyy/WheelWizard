@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,7 +11,7 @@ using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace CT_MKWII_WPF.Views;
 
-public partial class Layout : Window
+public partial class Layout : Window, INotifyPropertyChanged
 {
     // ADD HERE THE PAGED YOU WANT TO NAVIGATE TO
     private void DashboardPage_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new Dashboard());
@@ -18,19 +20,60 @@ public partial class Layout : Window
     private void KitchenSink_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new KitchenSink());
     private void RoomsButton_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new RoomsPage());
     
+    private LiveAlertsManager _alertsManager;
+    
     public void NavigateToPage(Page page)
     {
         ContentArea.Navigate(page);
         ContentArea.NavigationService.RemoveBackEntry();
     }
     
+    private string _statusMessage;
+    public string StatusMessage
+    {
+        get => _statusMessage;
+        set
+        {
+            if (_statusMessage != value)
+            {
+                _statusMessage = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+    
     public Layout()
     {
         InitializeComponent();
-      
+        DataContext = this;
         Dashboard myPage = new Dashboard();
         NavigateToPage(myPage);
+
         PopulatePlayerText();
+        
+        // Create and start the LiveAlertsManager
+        _alertsManager = new LiveAlertsManager(
+            "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/status.txt",
+            StatusIcon,
+            UpdateStatusMessage
+        );
+        _alertsManager.Start();
+        
+        var statusIconBorder = StatusIcon.Parent as Border;
+        if (statusIconBorder != null)
+            statusIconBorder.ToolTip = null;
+    }
+    
+    private void UpdateStatusMessage(string message)
+    {
+        Dispatcher.Invoke(() => StatusMessage = message);
     }
 
     public async void PopulatePlayerText()
@@ -82,5 +125,11 @@ public partial class Layout : Window
             FileName = "https://github.com/patchzyy/WheelWizard",
             UseShellExecute = true
         });
+    }
+
+    protected override void OnClosed(EventArgs e)
+    {
+        base.OnClosed(e);
+        _alertsManager?.Stop();
     }
 }

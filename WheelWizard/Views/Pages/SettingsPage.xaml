@@ -41,8 +41,7 @@
                 <CheckBox IsChecked="False" Style="{StaticResource Switch}" Click="RecommendedClick" x:Name="RecommendedButton"  >Recommended Settings</CheckBox>
                 <CheckBox IsChecked="False" 
                           Style="{StaticResource Switch}" 
-                          x:Name="DisableForce"  
-                          ToolTip="test">Force Disable Wiimote</CheckBox>
+                          x:Name="DisableForce"  >Force Disable Wiimote</CheckBox>
                 <components:Button Variant="Default"
                                    IsEnabled="True"
                                    IconPack="FontAwesome"
@@ -119,7 +118,7 @@
             Grid.Row="6"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
-            Text="Pre-release v1.0.7"
+            Text="Pre-release v1.0.9"
             ></TextBlock>
         
     </Grid>
