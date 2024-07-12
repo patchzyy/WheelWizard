@@ -10,9 +10,10 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition />
         </Grid.RowDefinitions>
+        
         <components:IconLabel Grid.Row="0"
                               IconPack="FontAwesome"
                               IconKind="{x:Static icon:PackIconFontAwesomeKind.CubesStackedSolid}"
@@ -22,44 +23,47 @@
                               IconSize="24"
                               Margin="20,0,0,20"
                               Color="{StaticResource TitleTextColor}"/>
-        <components:EmptyPageInfo Grid.Row="2" x:Name="EmptyListMessage"
+        
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <components:DraggableListView x:Name="ModsListView"
+                                           OnItemsReorder="ModsListView2_OnOnItemsReorder"
+                                           EnableLineIndication="False"
+                                           ItemsSource="{Binding Mods}">
+                <components:DraggableListView.ItemContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Rename" Click="RenameMod_Click"/>
+                        <MenuItem Header="Delete" Click="DeleteMod_Click"/>
+                        <Separator />
+                        <MenuItem Header="Open Folder" Click="OpenFolder_Click"/>
+                    </ContextMenu>
+                </components:DraggableListView.ItemContextMenu>
+            
+                <ListView.View>
+                    <GridView AllowsColumnReorder="False">
+                        <GridViewColumn Header="Enabled" Width="75">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsEnabled, Mode=TwoWay}"
+                                              Style="{StaticResource SwitchDark}"
+                                              HorizontalAlignment="Center" VerticalAlignment="Center"
+                                              Margin="0,5" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate> 
+                        </GridViewColumn>
+                        <GridViewColumn Header="Title" Width="Auto" DisplayMemberBinding="{Binding Title}" />
+                    </GridView>
+                </ListView.View>
+            </components:DraggableListView>
+        </ScrollViewer>
+
+        <components:EmptyPageInfo Grid.Row="1" x:Name="EmptyListMessage"
                                   HorizontalAlignment="Center"
                                   VerticalContentAlignment="Center"
                                   Title="No mods found"
                                   Body="You can import mods by clicking the button below."
-            ></components:EmptyPageInfo>
+                                  Visibility="{Binding EmptyListMessageVisibility}"/>
         
-         <components:DraggableListView Grid.Row="1" x:Name="ModsListView"
-                                       OnItemsReorder="ModsListView2_OnOnItemsReorder"
-                                       EnableLineIndication="False"
-                                       ItemsSource="{Binding Mods}">
-             <components:DraggableListView.ItemContextMenu>
-                 <ContextMenu>
-                     <MenuItem Header="Rename" Click="RenameMod_Click"/>
-                     <MenuItem Header="Delete" Click="DeleteMod_Click"/>
-                     <Separator />
-                     <MenuItem Header="Open Folder" Click="OpenFolder_Click"/>
-                 </ContextMenu>
-             </components:DraggableListView.ItemContextMenu>
-         
-             <ListView.View >
-                 <GridView AllowsColumnReorder="False">
-                     <GridViewColumn Header="Enabled" Width="75">
-                         <GridViewColumn.CellTemplate>
-                             <DataTemplate>
-                                 <CheckBox IsChecked="{Binding IsEnabled, Mode=TwoWay}"
-                                           Style="{StaticResource SwitchDark}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"
-                                           Margin="0,5" />
-                             </DataTemplate>
-                         </GridViewColumn.CellTemplate> 
-                     </GridViewColumn>
-                     <GridViewColumn Header="Title" Width="Auto" DisplayMemberBinding="{Binding Title}" />
-                 </GridView>
-             </ListView.View>
-         </components:DraggableListView>
-        
-        <UniformGrid Grid.Row="2" Columns="2" Rows="2"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+        <UniformGrid Grid.Row="2" Columns="2" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
             <components:Button Variant="Default"
                                IsEnabled="True"
                                IconPack="Material"
@@ -78,6 +82,7 @@
                                Click="EnableClick"
                                Margin="20,20,20,0"/>
         </UniformGrid>
+        
         <ProgressBar x:Name="ProgressBar" 
                      HorizontalAlignment="Center"
                      Visibility="Collapsed" 

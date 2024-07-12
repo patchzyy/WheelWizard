@@ -22,6 +22,7 @@ namespace CT_MKWII_WPF.Views.Pages
             "CT-MKWII", "Mods", "modconfig.json");
         public ObservableCollection<Mod> Mods { get; set; }
         
+        
         private Point startPoint;
         public ModsPage()
         {
