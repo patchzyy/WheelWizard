@@ -127,16 +127,13 @@ namespace CT_MKWII_WPF.Utils
 
         public static string FindGFXFile()
         {
-
             var folderPath = GetUserPathLocation();
             var configFolder = Path.Combine(folderPath, "Config");
             var gfxFile = Path.Combine(configFolder, "GFX.ini");
-
             if (File.Exists(gfxFile))
             {
                 return gfxFile;
             }
-
             MessageBox.Show($"Could not find GFX file, tried looking in {gfxFile}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return string.Empty;
         }

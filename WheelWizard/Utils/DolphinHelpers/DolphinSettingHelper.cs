@@ -43,9 +43,8 @@ public class DolphinSettingHelper
         return "";
     }
     
-    public static string GetDolphinFolderPath()
+    public static string AutomaticallyFindDolphinPath()
     {
-        // Try to automatically find the Dolphin Emulator folder path
         string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Dolphin Emulator");
         if (Directory.Exists(appDataPath))
             return appDataPath;
@@ -53,8 +52,6 @@ public class DolphinSettingHelper
         string documentsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Dolphin Emulator");
         if (Directory.Exists(documentsPath))
             return documentsPath;
-
-        // Folder not found automatically
         return string.Empty;
     }
     

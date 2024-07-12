@@ -37,7 +37,7 @@ public partial class SettingsPage : Page
         if (enableControls)
         {
             VSyncButton.IsChecked = DolphinSettingsUtils.GetCurrentVSyncStatus();
-            RecommendedButton.IsChecked = DolphinSettingsUtils.IsReccommendedSettingsEnabled();
+            RecommendedButton.IsChecked = DolphinSettingsUtils.IsRecommendedSettingsEnabled();
             int finalResolution = 0;
             var resolution =
                 DolphinSettingHelper.ReadINISetting(SettingsUtils.FindGFXFile(), "Settings", "InternalResolution");
@@ -60,7 +60,7 @@ public partial class SettingsPage : Page
     private void FillUserPath()
     {
         if (DolphinInputField.Text != "") return;
-        string folderPath = DolphinSettingHelper.GetDolphinFolderPath();
+        string folderPath = DolphinSettingHelper.AutomaticallyFindDolphinPath();
         if (!string.IsNullOrEmpty(folderPath))
         {
             UserPathInputField.Text = folderPath;
@@ -98,7 +98,7 @@ public partial class SettingsPage : Page
 
     private void DolphinUserPathClick(object sender, RoutedEventArgs e)
     {
-        string folderPath = DolphinSettingHelper.GetDolphinFolderPath();
+        string folderPath = DolphinSettingHelper.AutomaticallyFindDolphinPath();
 
         if (!string.IsNullOrEmpty(folderPath))
         {
@@ -182,9 +182,9 @@ public partial class SettingsPage : Page
         }
     }
     
-    private void EnableReccommendedSettings() => DolphinSettingsUtils.EnableReccomendedSettings();
+    private void EnableReccommendedSettings() => DolphinSettingsUtils.EnableRecommendedSettings();
     
-    private void DisableReccommendedSettings() => DolphinSettingsUtils.DisableReccommendedSettings(); 
+    private void DisableReccommendedSettings() => DolphinSettingsUtils.DisableRecommendedSettings(); 
 
     private void UpdateResolution(object sender, RoutedEventArgs e)
     {
