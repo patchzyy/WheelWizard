@@ -81,7 +81,7 @@
                         </Border>
                         
                         <ControlTemplate.Triggers>
-                            <DataTrigger Binding="{Binding ContextMenu, ElementName=Root}"  Value="{x:Null}">
+                            <DataTrigger Binding="{Binding ItemContextMenu, ElementName=Root}"  Value="{x:Null}">
                                 <Setter Property="Visibility" TargetName="DotsIcon" Value="Collapsed"/>
                             </DataTrigger>
                             <Trigger Property="IsMouseOver" Value="True">

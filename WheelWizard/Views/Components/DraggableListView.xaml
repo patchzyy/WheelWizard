@@ -116,7 +116,7 @@
                             <DataTrigger Binding="{Binding ModName}"  Value="Sample Mod 3">
                                 <Setter Property="Visibility" TargetName="DotsIcon" Value="Collapsed"/>
                             </DataTrigger> --> 
-                            <DataTrigger Binding="{Binding IsEnabled, ElementName=Root}"  Value="{x:Null}">
+                            <DataTrigger Binding="{Binding ItemContextMenu, ElementName=Root}"  Value="{x:Null}">
                                 <Setter Property="Visibility" TargetName="DotsIcon" Value="Collapsed"/>
                             </DataTrigger>
                             <Trigger Property="IsMouseOver" Value="True">

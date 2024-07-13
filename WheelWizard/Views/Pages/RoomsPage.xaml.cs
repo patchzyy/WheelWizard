@@ -34,7 +34,6 @@ namespace CT_MKWII_WPF.Views.Pages
         private static int PlayerComparable(object? x, object? y)
         {
             if (x is not RoomViewModel xItem || y is not RoomViewModel yItem) return 0;
-            Console.WriteLine(xItem.PlayerCount);
             if (!(int.TryParse(xItem.PlayerCount, out var xPlayerCount) &&
                   int.TryParse(yItem.PlayerCount, out var yPlayerCount))) return 0;
             return xPlayerCount.CompareTo(yPlayerCount);
@@ -57,6 +56,10 @@ namespace CT_MKWII_WPF.Views.Pages
         private void UpdateRoomsList(RRLiveInfo.RRInformation rrInfo)
         {
             Rooms.Clear();
+            // TODO: Playtime looks cool, but the sorting is broken since its a string, not a real date anymore
+            //      that means if you want to shortest time on top, 1 hour would still be higher then 30 minutes
+            //      we can make a custom sorter function for this, but that is just moving the problem, so instead this model should probably contain a real DateTime object
+            //      (or like a number of seconds since creation if date is not possible)
             foreach (var room in rrInfo.Rooms)
             {
                 Rooms.Add(new RoomViewModel

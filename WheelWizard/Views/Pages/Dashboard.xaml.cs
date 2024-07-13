@@ -117,5 +117,9 @@ public partial class Dashboard : Page
     private void EnableSidebarButtons() => GetLayout().SidePanelButtons.IsEnabled = true;
     
     private void DolphinButton_OnClick(object sender, RoutedEventArgs e) => DolphinSettingHelper.LaunchDolphin();
-    private void MiiButton_OnClick(object sender, RoutedEventArgs e) => MiiChannelManager.LaunchMiiChannel();
+    private void MiiButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        WiiMoteSettings.EnableVirtualWiiMote();
+        MiiChannelManager.LaunchMiiChannel();
+    }
 }

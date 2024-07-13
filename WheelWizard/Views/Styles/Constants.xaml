@@ -84,6 +84,7 @@
     <!-- Generic text stuff -->
     <SolidColorBrush x:Key="BodyTextColor" Color="{StaticResource Gray600}" />
     <SolidColorBrush x:Key="TitleTextColor" Color="{StaticResource Gray500}" />
+    <SolidColorBrush x:Key="TitleIconColor" Color="{StaticResource Gray600}" />
     <SolidColorBrush x:Key="TitleTextHover" Color="{StaticResource Gray300}" />
     <SolidColorBrush x:Key="FormFieldLabelColor" Color="{StaticResource Gray300}" />
     

@@ -11,17 +11,29 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="{StaticResource TopRowSize}"/> <!-- This is the total height as the (Title + infoSection) - (padding) -->
-            <RowDefinition />
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
         <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
-        <TextBlock Grid.Row="0" Text="Rooms" HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{StaticResource PageTitleText}"/>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <TextBlock Text="Rooms" Style="{StaticResource PageTitleText}"/>
+            <Border ToolTipService.InitialShowDelay="50" VerticalAlignment="Center"
+                    ToolTipService.ShowDuration="5000" HorizontalAlignment="Center"
+                    ToolTipService.BetweenShowDelay="0">
+                <icon:PackIconMaterial Kind="Information" Width="18" Height="18" Margin="5,2,5,0"
+                                       Foreground="{StaticResource TitleIconColor}" />
+                <Border.ToolTip>
+                    <components:ToolTipMessage Alignment="TopCenter" Content="
+Please note that this page does not offer any functionality to join a room directly. &#10;
+To join a specific room, you'll need to either join through a friend, or hope to join it by joining the online servers."/>
+                </Border.ToolTip>
+            </Border>
+        </StackPanel>
         
-       
         <components:EmptyPageInfo Grid.Row="1" x:Name="EmptyRoomsView"
                                   HorizontalAlignment="Center"
                                   VerticalContentAlignment="Center"
-                                  Title="No Rooms found"
+                                  Title="No rooms found"
                                   Body="You might not have internet connection, or no-one might be playing."/>
         
         <StackPanel Grid.Row="1">
@@ -62,9 +74,10 @@
                                 
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=RoomNumber}" Header="ID" Width="110" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=RoomNumber}" Header="ID" Width="110" 
+                                        components:StaticListView.IsSortable="True"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=Playtime}" Header="Time Online" Width="180"
-                                        components:StaticListView.IsSortable="True" />
+                                        components:StaticListView.IsSortable="True"/>
                         <GridViewColumn Header="Players" Width="80" components:StaticListView.IsSortable="True" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>

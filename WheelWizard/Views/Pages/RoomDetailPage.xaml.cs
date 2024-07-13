@@ -40,9 +40,10 @@ namespace CT_MKWII_WPF.Views.Pages
             PlayersList = new ObservableCollection<KeyValuePair<string, RRLiveInfo.RoomInfo.Player>>(Room.Players);
             DataContext = this;
 
+            PlayerCountBox.Text = Room.Players.Count.ToString();
             LoadMiiImagesAsync();
          
-            playersListView.SortingFunctions.Add("Value.Ev", EvComparable);
+            PlayersListView.SortingFunctions.Add("Value.Ev", EvComparable);
         }
         
         private static int EvComparable(object? x, object? y)
@@ -130,6 +131,14 @@ namespace CT_MKWII_WPF.Views.Pages
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void CopyFriendCode_OnClick(object sender, RoutedEventArgs e)
+        {
+            // TODO: This list should not be a dictionary, it also makes this method a bit of a mess, since now i have to get it by getting an object and cast it to a KeyValuePair later
+            var selectedMod = PlayersListView.GetCurrentContextItem<object>();
+            if (selectedMod is KeyValuePair<string, RRLiveInfo.RoomInfo.Player> playerPair)
+                Clipboard.SetText(playerPair.Value.Fc);
         }
     }
 

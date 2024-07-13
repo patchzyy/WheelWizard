@@ -98,6 +98,10 @@ namespace CT_MKWII_WPF.Utils
                         _statusIcon.IconKind = PackIconFontAwesomeKind.CircleExclamationSolid;
                        brush = Application.Current.FindResource("WarningColor") as SolidColorBrush;
                         break;
+                    case "alert":
+                        _statusIcon.IconKind = PackIconFontAwesomeKind.CircleExclamationSolid;
+                        brush = Application.Current.FindResource("WarningColor") as SolidColorBrush;
+                        break;
                     case "error":
                         _statusIcon.IconKind = PackIconFontAwesomeKind.CircleXmarkSolid;
                         brush = Application.Current.FindResource("ErrorColor") as SolidColorBrush;
@@ -113,7 +117,7 @@ namespace CT_MKWII_WPF.Utils
                 }
                 // We never actually want Brushes.Gray,
                 // but just in case the resource is missing for some unknown reason, we still want to display the icon
-                _statusIcon.ForegroundColor = brush != null ? brush: Brushes.Gray;
+                _statusIcon.ForegroundColor = brush ?? Brushes.Gray;
 
                 _updateStatusMessage(message);
             });

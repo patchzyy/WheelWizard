@@ -9,73 +9,100 @@
       d:DesignHeight="831" d:DesignWidth="444"
       Title="RoomDetailPage" Background="Transparent">
 
-    <Grid Margin="20">
+    <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource TopRowSize}"/> <!-- This is the total height as the (Title + infoSection) - (padding) -->
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <UniformGrid Grid.Row="0"> 
-        <TextBlock Text="Room Details" FontSize="24" Style="{StaticResource TitleText}"
-                   FontWeight="Bold" Margin="0,0,0,20"/>
-        <components:Button Variant="Default"
-                           IsEnabled="True"
-                           IconPack="FontAwesome"
-                           Width="120"
-                           IconKind="{x:Static icon:PackIconFontAwesomeKind.ArrowLeftSolid}"
-                           Text="Back"
-                           Click="GoBackClick"
-                           Margin="3"/>
-        </UniformGrid>
-     
-        <Grid Grid.Row="1" Margin="0,0,0,20">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
+        <Border Grid.Row="2" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
+        <TextBlock Grid.Row="0" Text="Room Details" HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{StaticResource PageTitleText}"/>
+        
+        <components:IconLabelButton Grid.Row="0" IconKind="{x:Static icon:PackIconFontAwesomeKind.ArrowLeftSolid}"
+                                    IconPack="FontAwesome" Text="Rooms"
+                                    Color="{StaticResource TitleTextColor}"
+                                    HoverColor="{StaticResource SuccessTitleTextColor}"
+                                    VerticalAlignment="Top" HorizontalAlignment="Left"
+                                    Click="GoBackClick"/>
+        
+        <Grid Grid.Row="1" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-    
-            <TextBlock Grid.Row="0" Grid.Column="0"   Margin="0,0,0,5" 
-                         Text="{Binding Room.Id, StringFormat=Room ID: {0}}"  
-                         Style="{StaticResource SidebarSectionText}"/>
-            <TextBlock Grid.Row="0" Grid.Column="1"    Margin="0,0,0,5"
-                       Text="{Binding Room.Created, StringFormat=Created: {0}}" 
-                       Style="{StaticResource SidebarSectionText}"/>
-            <TextBlock Grid.Row="1" Grid.Column="0"     Margin="0,0,0,5"
-                       Text="{Binding Room.Type, StringFormat=Access: {0}}" 
-                       Style="{StaticResource SidebarSectionText}"/>
-            <TextBlock Grid.Row="1" Grid.Column="1"  Margin="0,0,0,5"
-                       Text="{Binding PlayersList.Count, StringFormat=Players: {0}}"
-                       Style="{StaticResource SidebarSectionText}"/>
+            
+            <StackPanel  Grid.Column="0">
+                <components:FormFieldLabel Text="Room ID" Margin="0,0,2,0"/>
+                <TextBlock Text="{Binding Room.Id}"  
+                           Style="{StaticResource BodyText}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <components:FormFieldLabel Text="Created At" Margin="0,0,2,0"/>
+                <TextBlock Text="{Binding Room.Created}"  
+                           Style="{StaticResource BodyText}"/>
+            </StackPanel>
+            
+                    
+            <icon:PackIconFontAwesome  Grid.Column="2" Height="30" Width="30" Margin="3,12"
+                                       HorizontalAlignment="Right" VerticalAlignment="Top">
+                <icon:PackIconFontAwesome.Style>
+                    <Style TargetType="icon:PackIconFontAwesome">
+                        <Setter Property="Foreground" Value="{StaticResource TitleTextColor}"/>
+                        <!-- this icon has no kind (meaning it is invisible) unless it is private, then it becomes a lock -->
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=Room.Type}" Value="private">
+                                <Setter Property="Kind" Value="LockSolid"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </icon:PackIconFontAwesome.Style>
+            </icon:PackIconFontAwesome>
         </Grid>
       
-        <components:StaticListView Grid.Row="2" x:Name="playersListView" IsClickable="False"
-                                   ItemsSource="{Binding PlayersList}" >
-            <ListView.View>
-                <GridView AllowsColumnReorder="False">
-                    <GridViewColumn Header="Mii">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Border Width="40" Height="40" Background="{StaticResource MiiIconBackground}" CornerRadius="20" >
-                                    <Image Source="{Binding Value.MiiImage}" Stretch="Uniform" >
-                                        <Image.Clip>
-                                            <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20"/>
-                                        </Image.Clip>
-                                    </Image>
-                                </Border>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Value.Name}" Width="120" 
-                                    components:StaticListView.IsSortable="True" />
-                    <GridViewColumn Header="Friend code" DisplayMemberBinding="{Binding Value.Fc}" Width="130"/>
-                    <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Value.Ev}" Width="80" 
-                                    components:StaticListView.IsSortable="True"/>
-                </GridView>
-            </ListView.View>
-        </components:StaticListView>
+        <!-- there is no need for an empty list element since it should not be possible to have an empty room -->
+        <!-- and even if for some reason it is empty, the list will just be empty, that's all -->
+        <StackPanel Grid.Row="2">
+            <StackPanel Orientation="Horizontal" Margin="0,10">
+                <components:FormFieldLabel Text="Players" Margin="0,0,2,0"/>
+                <components:StateBox Text="0" IconSize="0" x:Name="PlayerCountBox"/>
+            </StackPanel>
+            
+            <components:StaticListView x:Name="PlayersListView" IsClickable="False"
+                                       ItemsSource="{Binding PlayersList}" >
+                <components:StaticListView.ItemContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Copy friend code" Click="CopyFriendCode_OnClick"/>
+                       <!-- <MenuItem Header="View Mii" Click="..."/> -->
+                    </ContextMenu>
+                </components:StaticListView.ItemContextMenu>
+                
+                <ListView.View>
+                    <GridView AllowsColumnReorder="False">
+                        <GridViewColumn Header="">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border Width="40" Height="40" Background="{StaticResource MiiIconBackground}" CornerRadius="20" >
+                                        <Image Source="{Binding Value.MiiImage}" Stretch="Uniform" >
+                                            <Image.Clip>
+                                                <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20"/>
+                                            </Image.Clip>
+                                        </Image>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Value.Name}" Width="105" 
+                                        components:StaticListView.IsSortable="True" />
+                        <GridViewColumn Header="Friend code" DisplayMemberBinding="{Binding Value.Fc}" Width="135"
+                                        components:StaticListView.IsSortable="True" />
+                        <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Value.Ev}" Width="80" 
+                                        components:StaticListView.IsSortable="True"/>
+                    </GridView>
+                </ListView.View>
+            </components:StaticListView>
+        </StackPanel>
     </Grid>
 </Page>
