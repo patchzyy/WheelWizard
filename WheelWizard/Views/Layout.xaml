@@ -101,10 +101,10 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                     ToolTipService.BetweenShowDelay="0" Margin="10">
                 
                 <StackPanel>
+                    <!-- Icon is not defined since that is done in the AlertManager -->
                     <components:DynamicIcon IconPack="FontAwesome" x:Name="StatusIcon"
-                                            IconKind="{x:Static icon:PackIconFontAwesomeKind.TriangleExclamationSolid}" 
                                             ForegroundColor="{StaticResource WarningTitleTextColor}"
-                                            IconSize="30"/>
+                                            IconSize="26"/>
                 </StackPanel>
                 
                 <Border.ToolTip>

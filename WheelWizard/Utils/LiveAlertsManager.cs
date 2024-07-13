@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
 using System.Windows.Media;
 using CT_MKWII_WPF.Views.Components;
@@ -60,16 +62,14 @@ namespace CT_MKWII_WPF.Utils
                 var parts = content.Split("\n");
                 var firstline = parts[0];
                 if (string.IsNullOrWhiteSpace(firstline))
-                {
-                    //do nothing
-                    return;
-                }
+                    return;   //do nothing
                 var alertMessage = firstline.Split("|");
                 if (alertMessage.Length == 2)
                 {
                     string messageType = alertMessage[0];
                     string message = alertMessage[1];
-
+                    message = Regex.Replace(message, @"\\u000A", "\n");
+                    
                     await UpdateUI(messageType, message);
                 }
                 else
@@ -79,7 +79,7 @@ namespace CT_MKWII_WPF.Utils
             }
             catch (Exception ex)
             {
-                await UpdateUI("alert", $"Failed to update status: {ex.Message}");
+                await UpdateUI("error", $"Failed to update status: {ex.Message}");
             }
         }
 
@@ -87,25 +87,33 @@ namespace CT_MKWII_WPF.Utils
         {
             await _statusIcon.Dispatcher.InvokeAsync(() =>
             {
+                SolidColorBrush? brush;
                 switch (messageType.ToLower())
                 {
                     case "info":
                         _statusIcon.IconKind = PackIconFontAwesomeKind.CircleInfoSolid;
-                        _statusIcon.ForegroundColor = Brushes.Gray;
+                        brush = Application.Current.FindResource("InfoColor") as SolidColorBrush;
                         break;
                     case "warning":
-                        _statusIcon.IconKind = PackIconFontAwesomeKind.TriangleExclamationSolid;
-                        _statusIcon.ForegroundColor = Brushes.Orange;
-                        break;
-                    case "alert":
                         _statusIcon.IconKind = PackIconFontAwesomeKind.CircleExclamationSolid;
-                        _statusIcon.ForegroundColor = Brushes.Red;
+                       brush = Application.Current.FindResource("WarningColor") as SolidColorBrush;
+                        break;
+                    case "error":
+                        _statusIcon.IconKind = PackIconFontAwesomeKind.CircleXmarkSolid;
+                        brush = Application.Current.FindResource("ErrorColor") as SolidColorBrush;
+                        break;
+                    case "success":
+                        _statusIcon.IconKind = PackIconFontAwesomeKind.CircleCheckSolid;
+                        brush = Application.Current.FindResource("SuccessColor") as SolidColorBrush;
                         break;
                     default:
                         _statusIcon.IconKind = PackIconFontAwesomeKind.CircleQuestionSolid;
-                        _statusIcon.ForegroundColor = Brushes.Gray;
+                        brush = Application.Current.FindResource("InfoColor") as SolidColorBrush;
                         break;
                 }
+                // We never actually want Brushes.Gray,
+                // but just in case the resource is missing for some unknown reason, we still want to display the icon
+                _statusIcon.ForegroundColor = brush != null ? brush: Brushes.Gray;
 
                 _updateStatusMessage(message);
             });

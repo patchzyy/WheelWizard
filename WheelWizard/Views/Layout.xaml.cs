@@ -70,18 +70,14 @@ public partial class Layout : Window, INotifyPropertyChanged
         if (statusIconBorder != null)
             statusIconBorder.ToolTip = null;
     }
-    
-    private void UpdateStatusMessage(string message)
-    {
-        Dispatcher.Invoke(() => StatusMessage = message);
-    }
+    private void UpdateStatusMessage(string message) => Dispatcher.Invoke(() => StatusMessage = message);
 
     public async void PopulatePlayerText()
     {
         var rrinfo = await RRLiveInfo.getCurrentGameData();
         UpdatePlayerAndRoomCount(RRLiveInfo.GetCurrentOnlinePlayers(rrinfo), rrinfo.Rooms.Count);
         
-        var periodicTimer= new PeriodicTimer(TimeSpan.FromSeconds(20));
+        var periodicTimer = new PeriodicTimer(TimeSpan.FromSeconds(20));
         while (await periodicTimer.WaitForNextTickAsync())
         {
             rrinfo = await RRLiveInfo.getCurrentGameData();

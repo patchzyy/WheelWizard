@@ -5,8 +5,8 @@ EXAMPLES:
 # all parameters
  <components:Button Variant="Primary"
                     IsEnabled="True"
-                    IconPack="Material"
-                    IconKind="{x:Static icon:PackIconMaterialKind.Home}"
+                    IconPack="FontAwesome"
+                    IconKind="{x:Static icon:PackIconFontAwesomeKind.PlaySolid}"
                     IconSize="20"
                     Text="Home"
                     FontSize="16"
@@ -18,7 +18,6 @@ EXAMPLES:
                     Click="Button_OnClick"/>
                     
 # Note1:  you either need to find the icon, or set IconSize to 0 to hide it
-# Note2:  variant can be: Primary, Secondary, Default, Danger   (if none, it will go to Default)
  */
 
 namespace CT_MKWII_WPF.Views.Components
