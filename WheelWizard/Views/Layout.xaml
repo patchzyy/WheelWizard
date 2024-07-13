@@ -153,7 +153,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                                                    IconPack="FontAwesome" Text="Settings" x:Name="SettingsButton"
                                                    Click="SettingsPage_Navigate"/>
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.CubesStackedSolid}" 
-                                                   IconPack="FontAwesome" Text="Mods"
+                                                   IconPack="FontAwesome" Text="My Stuff"
                                                    Click="ModsPage_Navigate"/>
                     <TextBlock Text="Retro Rewind" Style="{StaticResource SidebarSectionText}"/>
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.UsersRectangleSolid}" 

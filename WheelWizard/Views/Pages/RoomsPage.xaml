@@ -62,9 +62,10 @@
                                 
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=RoomNumber}" Header="ID" Width="110"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Playtime}" Header="Time Online" Width="180"/>
-                        <GridViewColumn  Header="Players" Width="Auto">
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=RoomNumber}" Header="ID" Width="110" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Playtime}" Header="Time Online" Width="180"
+                                        components:StaticListView.IsSortable="True" />
+                        <GridViewColumn Header="Players" Width="80" components:StaticListView.IsSortable="True" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <components:StateBox Text="{Binding PlayerCount}" 

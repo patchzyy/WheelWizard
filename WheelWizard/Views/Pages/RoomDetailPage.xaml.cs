@@ -41,8 +41,19 @@ namespace CT_MKWII_WPF.Views.Pages
             DataContext = this;
 
             LoadMiiImagesAsync();
+         
+            playersListView.SortingFunctions.Add("Value.Ev", EvComparable);
         }
-
+        
+        private static int EvComparable(object? x, object? y)
+        {
+            if (x is not KeyValuePair<string, RRLiveInfo.RoomInfo.Player> xItem || 
+                y is not KeyValuePair<string, RRLiveInfo.RoomInfo.Player> yItem) return 0;
+            if (!(int.TryParse(xItem.Value.Ev, out var xEv) &&
+                  int.TryParse(yItem.Value.Ev, out var yEv))) return 0;
+            return xEv.CompareTo(yEv);
+        }
+        
         private async void setMiiImage(KeyValuePair<String, RRLiveInfo.RoomInfo.Player> playerPair)
         {
             var player = playerPair.Value;

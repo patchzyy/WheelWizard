@@ -21,18 +21,27 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
                         <StackPanel>
-                 
                             <Border Background="{TemplateBinding Background}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                    MouseEnter="GridViewColumnHeader_MouseEnter"
+                                    MouseLeave="GridViewColumnHeader_MouseLeave"
                                     BorderThickness="{TemplateBinding BorderThickness}">
-                                <TextBlock Text="{TemplateBinding Content}"
-                                           Padding="{TemplateBinding Padding}"
-                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                           Foreground="{TemplateBinding Foreground}"/>
+                                <DockPanel>
+                                    <TextBlock Text="{TemplateBinding Content}"
+                                               Padding="{TemplateBinding Padding}"
+                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                               Foreground="{TemplateBinding Foreground}"/>
+                                    <icon:PackIconFontAwesome x:Name="SortArrow" Visibility="Collapsed" VerticalAlignment="Center"
+                                                              Width="12" Height="12" Margin="5,0,0,0"/>
+                                </DockPanel>
                             </Border>
                             <Rectangle Height="1" Margin="0,3" Fill="{StaticResource HeaderLine}"/>
                         </StackPanel>
+                      <!-- you should actually be able to read if it is sortable with something like this
+                                "{Binding Path=(components:StaticListView.IsSortable),
+                                 RelativeSource={RelativeSource AncestorType={x:Type GridViewColumnHeader}}}"
+                            But that does not work for some reason, so now i just did it in the controller -->
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>

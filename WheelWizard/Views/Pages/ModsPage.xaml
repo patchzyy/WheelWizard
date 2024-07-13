@@ -6,7 +6,7 @@
       xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
       xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d" d:DesignHeight="831" d:DesignWidth="444"
-      Title="Mods" Background="Transparent">
+      Title="My Stuff" Background="Transparent">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="{StaticResource TopRowSize}"/> <!-- This is the total height as the (Title + infoSection) - (padding) -->
@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
         <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
-        <TextBlock Grid.Row="0" Text="Mods" HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{StaticResource PageTitleText}"/>
+        <TextBlock Grid.Row="0" Text="My Stuff" HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{StaticResource PageTitleText}"/>
         <StackPanel Grid.Row="0"  HorizontalAlignment="Right" VerticalAlignment="Bottom"  Margin="12" Orientation="Horizontal" x:Name="TopBarButtons" >
             <components:Button IconPack="FontAwesome" x:Name="EnableDisableButton"
                                Text="Enable All" Click="EnableClick" Margin="0,0,10,0">

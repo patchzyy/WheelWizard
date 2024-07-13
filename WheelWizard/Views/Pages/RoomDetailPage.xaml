@@ -69,9 +69,11 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Value.Name}" Width="120"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Value.Name}" Width="120" 
+                                    components:StaticListView.IsSortable="True" />
                     <GridViewColumn Header="Friend code" DisplayMemberBinding="{Binding Value.Fc}" Width="130"/>
-                    <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Value.Ev}" Width="80"/>
+                    <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Value.Ev}" Width="80" 
+                                    components:StaticListView.IsSortable="True"/>
                 </GridView>
             </ListView.View>
         </components:StaticListView>

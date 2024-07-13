@@ -114,6 +114,5 @@
         <Border.ToolTip>
             <components:ToolTipMessage x:Name="StateBoxToolTip"/>
         </Border.ToolTip>
-        
     </Border>
 </UserControl>

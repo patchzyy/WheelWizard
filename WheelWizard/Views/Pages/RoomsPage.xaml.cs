@@ -27,8 +27,19 @@ namespace CT_MKWII_WPF.Views.Pages
             DataContext = this;
             Rooms = new ObservableCollection<RoomViewModel>();
             LoadRoomsData();
+          
+            RoomsView.SortingFunctions.Add("Players", PlayerComparable);
         }
 
+        private static int PlayerComparable(object? x, object? y)
+        {
+            if (x is not RoomViewModel xItem || y is not RoomViewModel yItem) return 0;
+            Console.WriteLine(xItem.PlayerCount);
+            if (!(int.TryParse(xItem.PlayerCount, out var xPlayerCount) &&
+                  int.TryParse(yItem.PlayerCount, out var yPlayerCount))) return 0;
+            return xPlayerCount.CompareTo(yPlayerCount);
+        }
+        
         private async void LoadRoomsData()
         {
             try
