@@ -8,7 +8,7 @@
       mc:Ignorable="d"
       d:DesignHeight="831" d:DesignWidth="444"
       Title="Dashboard" Background="Transparent">
-    <Grid>
+    <Grid x:Name="CompleteGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="{StaticResource TopRowSize}"/> <!-- This is the total height as the (Title + infoSection) - (padding) -->
             <RowDefinition />

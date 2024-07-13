@@ -71,9 +71,7 @@ namespace CT_MKWII_WPF.Views.Pages
                     Playtime = HumanizeTimeSpan(DateTime.Now - room.Created)
                 });
             }
-         
-            RoomCountBox.Text = Rooms.Count.ToString();
-           
+
             EmptyRoomsView.Visibility = Rooms.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
             RoomsView.Visibility = Rooms.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
         }

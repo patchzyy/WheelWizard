@@ -354,7 +354,7 @@ namespace CT_MKWII_WPF.Views.Pages
                 MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        private void ModsListView2_OnOnItemsReorder(ListViewItem movedItem, int newIndex)
+        private void ModsListView_OnOnItemsReorder(ListViewItem movedItem, int newIndex)
         {
             var mySelectedMod = (Mod)movedItem.DataContext;
             // This is also done inside the component, but that does not translate outside of the component

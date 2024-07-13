@@ -39,8 +39,6 @@ namespace CT_MKWII_WPF.Views.Pages
             Room = room;
             PlayersList = new ObservableCollection<KeyValuePair<string, RRLiveInfo.RoomInfo.Player>>(Room.Players);
             DataContext = this;
-
-            PlayerCountBox.Text = Room.Players.Count.ToString();
             LoadMiiImagesAsync();
          
             PlayersListView.SortingFunctions.Add("Value.Ev", EvComparable);

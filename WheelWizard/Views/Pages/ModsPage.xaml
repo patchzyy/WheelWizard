@@ -10,7 +10,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="{StaticResource TopRowSize}"/> <!-- This is the total height as the (Title + infoSection) - (padding) -->
-            <RowDefinition />
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
         <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
@@ -47,9 +47,11 @@
         </StackPanel>
     
             
-        <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="PageWithMods" >
-            <components:DraggableListView OnItemsReorder="ModsListView2_OnOnItemsReorder" x:Name="ModsListView"
-                                          EnableLineIndication="False"
+        <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" x:Name="PageWithMods" VerticalAlignment="Stretch">
+            <!-- if you want to add something to this page, make sure you encapsulate the ListView in a standalone container,
+             make that container stretch, and swap the ElementName for maxHeight to that container-->
+            <components:DraggableListView OnItemsReorder="ModsListView_OnOnItemsReorder" x:Name="ModsListView"
+                                          EnableLineIndication="False" MaxHeight="{Binding ElementName=PageWithMods, Path=ActualHeight}"
                                           ItemsSource="{Binding Mods}">
                 <components:DraggableListView.ItemContextMenu>
                     <ContextMenu>
@@ -72,7 +74,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate> 
                         </GridViewColumn>
-                        <GridViewColumn Header="Title" Width="Auto" DisplayMemberBinding="{Binding Title}" />
+                        <GridViewColumn Header="Title" Width="100000" DisplayMemberBinding="{Binding Title}" />
                     </GridView>
                 </ListView.View>
             </components:DraggableListView>

@@ -14,6 +14,7 @@
                 <ResourceDictionary Source="Views/Styles/CheckboxStyles.xaml"/>
                 <ResourceDictionary Source="Views/Styles/Converters.xaml"/>
                 <ResourceDictionary Source="Views/Styles/ListViewStyles.xaml"/>
+                <ResourceDictionary Source="Views/Styles/ScrollBarStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
         

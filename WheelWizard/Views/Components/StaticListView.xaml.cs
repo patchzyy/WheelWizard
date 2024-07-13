@@ -26,13 +26,23 @@ public partial class StaticListView : BaseListView
     }
     
     public static readonly DependencyProperty IsClickableProperty = DependencyProperty.Register(
-        nameof(IsClickable), typeof(bool), typeof(BaseListView),
+        nameof(IsClickable), typeof(bool), typeof(StaticListView),
         new PropertyMetadata(true));
 
     public bool IsClickable
     {
         get => (bool)GetValue(IsClickableProperty);
         set => SetValue(IsClickableProperty, value);
+    }
+    
+    public static readonly DependencyProperty ListTitleProperty = DependencyProperty.Register(
+        nameof(ListTitle), typeof(string), typeof(StaticListView),
+        new PropertyMetadata(string.Empty));
+
+    public string ListTitle
+    {
+        get => (string)GetValue(ListTitleProperty);
+        set => SetValue(ListTitleProperty, value);
     }
     
     public Dictionary<string, Func<object?, object?, int>> SortingFunctions { get; set; } = new();

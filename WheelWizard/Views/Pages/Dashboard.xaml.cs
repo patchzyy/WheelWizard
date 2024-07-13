@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using CT_MKWII_WPF.Utils;
 using CT_MKWII_WPF.Utils.DolphinHelpers;
 using MahApps.Metro.IconPacks;
+using System.Threading.Tasks;
 using static CT_MKWII_WPF.Views.ViewUtils;
 using Button = CT_MKWII_WPF.Views.Components.Button;
 
@@ -55,6 +56,7 @@ public partial class Dashboard : Page
                 break;
         }
         UpdateActionButton();
+        DisableAllButtonsTemporarily();
     }
     
     private async void UpdateActionButton()
@@ -115,11 +117,26 @@ public partial class Dashboard : Page
     
     private void DisableSidebarButtons() => GetLayout().SidePanelButtons.IsEnabled = false;
     private void EnableSidebarButtons() => GetLayout().SidePanelButtons.IsEnabled = true;
-    
-    private void DolphinButton_OnClick(object sender, RoutedEventArgs e) => DolphinSettingHelper.LaunchDolphin();
+
+    private void DolphinButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        DolphinSettingHelper.LaunchDolphin();
+        DisableAllButtonsTemporarily();
+    } 
     private void MiiButton_OnClick(object sender, RoutedEventArgs e)
     {
         WiiMoteSettings.EnableVirtualWiiMote();
-        MiiChannelManager.LaunchMiiChannel();
+        MiiChannelManager.LaunchMiiChannel(); 
+        DisableAllButtonsTemporarily();
+    }
+    
+    private void DisableAllButtonsTemporarily()
+    {
+        CompleteGrid.IsEnabled = false;
+        //wait 5 seconds before re-enabling the buttons
+        Task.Delay(5000).ContinueWith(_ =>
+        {
+            Dispatcher.Invoke(() => CompleteGrid.IsEnabled = true );
+        });
     }
 }

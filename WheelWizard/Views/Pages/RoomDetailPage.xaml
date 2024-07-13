@@ -64,14 +64,9 @@
       
         <!-- there is no need for an empty list element since it should not be possible to have an empty room -->
         <!-- and even if for some reason it is empty, the list will just be empty, that's all -->
-        <StackPanel Grid.Row="2">
-            <StackPanel Orientation="Horizontal" Margin="0,10">
-                <components:FormFieldLabel Text="Players" Margin="0,0,2,0"/>
-                <components:StateBox Text="0" IconSize="0" x:Name="PlayerCountBox"/>
-            </StackPanel>
-            
-            <components:StaticListView x:Name="PlayersListView" IsClickable="False"
-                                       ItemsSource="{Binding PlayersList}" >
+        <StackPanel Grid.Row="2" x:Name="ModsListContainer" VerticalAlignment="Stretch">
+            <components:StaticListView x:Name="PlayersListView" IsClickable="False"  MaxHeight="{Binding ElementName=ModsListContainer, Path=ActualHeight}"
+                                       ItemsSource="{Binding PlayersList}" ListTitle="Players" >
                 <components:StaticListView.ItemContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Copy friend code" Click="CopyFriendCode_OnClick"/>

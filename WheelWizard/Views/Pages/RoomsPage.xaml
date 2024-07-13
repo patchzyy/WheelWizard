@@ -18,7 +18,7 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
             <TextBlock Text="Rooms" Style="{StaticResource PageTitleText}"/>
             <Border ToolTipService.InitialShowDelay="50" VerticalAlignment="Center"
-                    ToolTipService.ShowDuration="5000" HorizontalAlignment="Center"
+                    ToolTipService.ShowDuration="50000" HorizontalAlignment="Center"
                     ToolTipService.BetweenShowDelay="0">
                 <icon:PackIconMaterial Kind="Information" Width="18" Height="18" Margin="5,2,5,0"
                                        Foreground="{StaticResource TitleIconColor}" />
@@ -36,14 +36,9 @@ To join a specific room, you'll need to either join through a friend, or hope to
                                   Title="No rooms found"
                                   Body="You might not have internet connection, or no-one might be playing."/>
         
-        <StackPanel Grid.Row="1">
-            <StackPanel Orientation="Horizontal" Margin="0,10">
-                <components:FormFieldLabel Text="Rooms" Margin="0,0,2,0"/>
-                <components:StateBox Text="0" IconSize="0" x:Name="RoomCountBox"/>
-            </StackPanel>
-            
-            <components:StaticListView ItemsSource="{Binding Rooms}" x:Name="RoomsView"
-                                       OnItemClick="Room_MouseDoubleClick">
+        <StackPanel Grid.Row="1" x:Name="ListContainer">
+            <components:StaticListView ItemsSource="{Binding Rooms}" x:Name="RoomsView" ListTitle="Rooms"
+                                       OnItemClick="Room_MouseDoubleClick"  MaxHeight="{Binding ElementName=ListContainer, Path=ActualHeight}">
                 <ListView.View>
                     <GridView AllowsColumnReorder="False">
                         <GridViewColumn Width="Auto">
