@@ -1,4 +1,4 @@
-info|We are in still working on the ui-rework, so some buttons may move between pages :)
+alert|Servers are down for now
 Here are the icons we support currently
 
 The current status is the status that is inside of line 1
