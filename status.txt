@@ -1,6 +1,4 @@
-alert|Servers will be down for a few minutes!
 info|We are in still working on the ui-rework, so some buttons may move between pages :)
-
 
 Here are the icons we support currently
 
