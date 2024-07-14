@@ -57,7 +57,7 @@
                     <ContextMenu>
                         <MenuItem Header="Rename" Click="RenameMod_Click"/>
                         <MenuItem Header="Delete" Click="DeleteMod_Click"/>
-                        <Separator />
+                        <Separator Style="{StaticResource ContextMenuLine}"/>
                         <MenuItem Header="Open Folder" Click="OpenFolder_Click"/>
                     </ContextMenu>
                 </components:DraggableListView.ItemContextMenu>
