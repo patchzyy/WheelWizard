@@ -22,8 +22,6 @@ public class RRStatusManager
         if (!serverEnabled) return ActionButtonStatus.NoServer;
         var configCorrectAndExists = SettingsUtils.configCorrectAndExists();
         if (!configCorrectAndExists) return ActionButtonStatus.ConfigNotFinished;
-        var isUserFolderValid = DolphinInstaller.IsUserFolderValid();
-        if (!isUserFolderValid) return ActionButtonStatus.NoDolphin;
         var retroRewindInstalled = RetroRewindInstaller.IsRetroRewindInstalled();
         if (!retroRewindInstalled) return ActionButtonStatus.noRR;
         bool retroRewindUpToDate;

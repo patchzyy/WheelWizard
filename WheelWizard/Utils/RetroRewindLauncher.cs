@@ -17,12 +17,6 @@ public static class RetroRewindLauncher
                 process.Kill();
             }
         }
-        //if its not activated, activate it
-        if (!DirectoryHandler.isRRActive())
-        {
-            DirectoryHandler.BackupRiivolution();
-            DirectoryHandler.RetrieveRR();
-        }
         if (WiiMoteSettings.IsForceSettingsEnabled())
         {
             WiiMoteSettings.DisableVirtualWiiMote();

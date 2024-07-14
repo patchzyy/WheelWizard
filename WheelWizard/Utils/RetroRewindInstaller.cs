@@ -15,11 +15,9 @@ public static class RetroRewindInstaller
     public static bool IsRetroRewindInstalled()
     {
         var loadPath = SettingsUtils.GetLoadPathLocation();
-        var retroRewindFolder = Path.Combine(loadPath, "Riivolution", "RetroRewind6");
-        
-        var retroRewindRRFolder = Path.Combine(loadPath, "Riivolution-RR", "RetroRewind6");
+        var versionFilePath = Path.Combine(loadPath, "Riivolution", "RetroRewind6", "version.txt");
+        return File.Exists(versionFilePath);
 
-        return Directory.Exists(retroRewindFolder) || Directory.Exists(retroRewindRRFolder);
     }
 
     public static string CurrentRRVersion()
@@ -27,8 +25,6 @@ public static class RetroRewindInstaller
         var loadPath = SettingsUtils.GetLoadPathLocation();
         var versionFilePath = Path.Combine(loadPath, "Riivolution", "RetroRewind6", "version.txt");
         if (File.Exists(versionFilePath)) return File.ReadAllText(versionFilePath);
-        //try the RR folder
-        versionFilePath = Path.Combine(loadPath, "Riivolution-RR", "RetroRewind6", "version.txt");
         return !File.Exists(versionFilePath) ? "Not Installed" : File.ReadAllText(versionFilePath);
     }
 
@@ -72,8 +68,12 @@ public static class RetroRewindInstaller
     
     if (currentVersion == "Not Installed")
     {
-        MessageBox.Show("Retro Rewind is not installed. Starting installation.");
-        await InstallRetroRewind();
+        // ask user "Your version of RR could not be determent\n therefore we can not update, do you want to download RR?"
+        var result = MessageBox.Show("Your version of Retro Rewind could not be determined. Therefore, we cannot update. Would you like to download Retro Rewind?", "Download Retro Rewind", MessageBoxButton.YesNo);
+        if (result == MessageBoxResult.Yes)
+        {
+            await InstallRetroRewind();
+        }
         return true;
     }
     var allVersions = await GetAllVersionData();
