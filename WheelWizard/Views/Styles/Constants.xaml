@@ -125,6 +125,7 @@
     <SolidColorBrush x:Key="ErrorColor" Color="{StaticResource Red500}" />
     <SolidColorBrush x:Key="WarningColor" Color="{StaticResource Yellow500}" />
     <SolidColorBrush x:Key="InfoColor" Color="{StaticResource Gray400}" />
+    <SolidColorBrush x:Key="PartyColor" Color="{StaticResource Yellow200}" />
     
     <SolidColorBrush x:Key="MiiIconBackground" Color="{StaticResource Gray800}" />
     <!-- Font size constants are:

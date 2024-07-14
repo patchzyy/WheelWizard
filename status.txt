@@ -1,4 +1,4 @@
-info|We are in still working on the ui-rework,&#x0a so some buttons may move between pages :)
+info|We are in still working on the ui-rework,\u000Aso some buttons may move between pages :)
 
 
 
@@ -10,6 +10,7 @@ info|did you know that hippos cant swim
 warning|We are testing live dynamic icons!
 error|AAAAA, servers are down!! ITS ALL OVER, AAA!!!
 success|You look great today!
+party|Good news, we reached a new peek!, __ players!
 
 To go to a new line you can  use: \u000A
 

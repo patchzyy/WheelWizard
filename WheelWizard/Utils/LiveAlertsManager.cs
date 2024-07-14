@@ -90,19 +90,24 @@ namespace CT_MKWII_WPF.Utils
                 SolidColorBrush? brush;
                 switch (messageType.ToLower())
                 {
+                    case "party":
+                        _statusIcon.IconPack = "Material";
+                        _statusIcon.IconKind = PackIconMaterialKind.PartyPopper;
+                        brush = Application.Current.FindResource("PartyColor") as SolidColorBrush;
+                        break;
                     case "info":
+                        _statusIcon.IconPack = "FontAwesome";
                         _statusIcon.IconKind = PackIconFontAwesomeKind.CircleInfoSolid;
                         brush = Application.Current.FindResource("InfoColor") as SolidColorBrush;
                         break;
                     case "warning":
-                        _statusIcon.IconKind = PackIconFontAwesomeKind.CircleExclamationSolid;
-                       brush = Application.Current.FindResource("WarningColor") as SolidColorBrush;
-                        break;
                     case "alert":
+                        _statusIcon.IconPack = "FontAwesome";
                         _statusIcon.IconKind = PackIconFontAwesomeKind.CircleExclamationSolid;
                         brush = Application.Current.FindResource("WarningColor") as SolidColorBrush;
                         break;
                     case "error":
+                        _statusIcon.IconPack = "FontAwesome";
                         _statusIcon.IconKind = PackIconFontAwesomeKind.CircleXmarkSolid;
                         brush = Application.Current.FindResource("ErrorColor") as SolidColorBrush;
                         break;
@@ -111,6 +116,7 @@ namespace CT_MKWII_WPF.Utils
                         brush = Application.Current.FindResource("SuccessColor") as SolidColorBrush;
                         break;
                     default:
+                        _statusIcon.IconPack = "FontAwesome";
                         _statusIcon.IconKind = PackIconFontAwesomeKind.CircleQuestionSolid;
                         brush = Application.Current.FindResource("InfoColor") as SolidColorBrush;
                         break;
