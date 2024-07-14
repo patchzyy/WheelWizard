@@ -10,116 +10,143 @@
       Title="Settings" Background="Transparent">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="{StaticResource TopRowSize}"/> <!-- This is the total height as the (Title + infoSection) - (padding) -->
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <components:IconLabel Grid.Row="0"
-                              IconPack="FontAwesome"
-                              IconKind="{x:Static icon:PackIconFontAwesomeKind.WrenchSolid}"
-                              Text="Settings"
-                              FontSize="20"
-                              VerticalAlignment="Center"
-                              IconSize="24"
-                              Margin="20,0,0,0"
-                              Color="{StaticResource TitleTextColor}"
-        ></components:IconLabel>
-        <UniformGrid Grid.Row="1" Columns="2" Rows="1" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-            <StackPanel Margin="0,25" x:Name="ResolutionStackPanel">
-                <RadioButton GroupName="ResolutionGroup1" IsChecked="True" Click="UpdateResolution" Tag="1" >1x (Native 640x528)</RadioButton>
-                <RadioButton GroupName="ResolutionGroup1" IsChecked="False" Click="UpdateResolution" Tag="2" >2x (1280x1056)</RadioButton>
-                <RadioButton GroupName="ResolutionGroup1" IsChecked="False" Click="UpdateResolution" Tag="3" >3x (1920x1584)</RadioButton>
-                <RadioButton GroupName="ResolutionGroup1" IsChecked="False" Click="UpdateResolution" Tag="4" >4x (2560x2112)</RadioButton>
+        <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
+        <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
+        <!-- if we want to add multiple pages to the settings, this title has to align to the Top instead -->
+        <TextBlock Grid.Row="0" Text="Settings" HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{StaticResource PageTitleText}"/>
+        
+        <!-- The Body! -->
+        <StackPanel Grid.Row="1">
+            <!-- File location settings -->
+            <StackPanel>
+                <components:FormFieldLabel Text="Location settings"/>
+                <Border Style="{StaticResource SettingsBlockStyle}">
+                    <StackPanel>
+                        <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <components:FormFieldLabel Text="Dolphin Emulator executable" 
+                                                       TipText="Path must end with .exe"/>
+                            
+                            <components:InputField Grid.Row="1" Grid.Column="0"
+                                                   Placeholder="Enter desired path here..."
+                                                   HorizontalAlignment="Stretch"
+                                                   x:Name="DolphinInputField"/>
+                            <components:Button Grid.Row="1" Grid.Column="1"
+                                               Text="" FontSize="16" 
+                                               IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}" 
+                                               IconPack="FontAwesome"
+                                               Click="DolphinBrowseClick" Margin="10,0,0,0"/>
+                        </Grid>
+                        
+                        <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <components:FormFieldLabel Text="Mario Kart Wii Game File" 
+                                                       TipText="Path can end with: .wbfs/.iso/.rvz"/>
+                            
+                            <components:InputField Grid.Row="1" Grid.Column="0"
+                                                   Placeholder="Enter desired path here..."
+                                                   HorizontalAlignment="Stretch"
+                                                   x:Name="MarioInputField" />
+
+                            <components:Button Grid.Row="1" Grid.Column="1"
+                                               Text="" FontSize="16" 
+                                               IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}" 
+                                               IconPack="FontAwesome"
+                                               Click="MarioKartBrowseClick" 
+                                               Margin="10,0,0,0" />
+                        </Grid>
+                  
+                        <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <components:FormFieldLabel Text="Dolphin User Folder"/>
+                            
+                            <components:InputField Grid.Row="1" Grid.Column="0"
+                                                   HorizontalAlignment="Stretch"
+                                                   Placeholder="Enter desired path here..."
+                                                   x:Name="UserPathInputField"/>
+                            <components:Button  Grid.Row="1" Grid.Column="1"
+                                                Text="" FontSize="16" 
+                                                IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}" 
+                                                IconPack="FontAwesome"
+                                                Click="DolphinUserPathClick" Margin="10,0,0,0"/>
+                        </Grid>
+      
+                        
+                        <UniformGrid Columns="3" Rows="1" Margin="0,4,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock></TextBlock>
+                            <TextBlock></TextBlock>
+                            <components:Button Variant="Default"
+                                               IsEnabled="True"
+                                               IconPack="Material"
+                                               IconKind="{x:Static icon:PackIconMaterialKind.Floppy}"
+                                               Text="Save"
+                                               Click="SaveButtonClick"
+                                               Margin="3"/>
+                        </UniformGrid>
+        
+                    </StackPanel>
+                </Border>
             </StackPanel>
             
-            <StackPanel Margin="0,25" x:Name="CheckBoxStackPanel">
-                <CheckBox IsChecked="False" Style="{StaticResource Switch}" Click="VSyncPress" x:Name="VSyncButton" >VSync</CheckBox>
-                <CheckBox IsChecked="False" Style="{StaticResource Switch}" Click="RecommendedClick" x:Name="RecommendedButton"  >Recommended Settings</CheckBox>
-                <CheckBox IsChecked="False" 
-                          Style="{StaticResource Switch}" 
-                          x:Name="DisableForce"  >Force Disable Wiimote</CheckBox>
-                <components:Button Variant="Default"
-                                   IsEnabled="True"
-                                   IconPack="FontAwesome"
-                                   IconKind="{x:Static icon:PackIconFontAwesomeKind.UsersLineSolid}"
-                                   Text="Launch Mii Channel"
-                                   Click="LaunchMiiChannel_Click"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Bottom"
-                                   Margin="2,10,5,0"/>
-            </StackPanel>
-        </UniformGrid> 
-        
-        <StackPanel Grid.Row="2" Margin="0,25">
-            <components:FormFieldLabel Text="Dolphin Emulator executable" 
-                                       TipText="Path must end with .exe"/>
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Top"  >
-                <components:InputField
-                    Width="300"
-                    Placeholder="Enter desired path here..."
-                    HorizontalAlignment="Left"
-                    x:Name="DolphinInputField"/>
-      
-                <components:Button Text="" FontSize="16" 
-                                   IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}" 
-                                   IconPack="FontAwesome"
-                                   Click="DolphinBrowseClick" Margin="10,0,0,0"/>
+            <!-- Video settings -->
+            <StackPanel>
+                <components:FormFieldLabel Text="Video settings"/>
+                <Border Style="{StaticResource SettingsBlockStyle}">
+                    <UniformGrid Grid.Row="1" Columns="2" Rows="1" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <StackPanel  x:Name="ResolutionStackPanel">
+                            <RadioButton Margin="0,2" GroupName="ResolutionGroup1" 
+                            IsChecked="True" Click="UpdateResolution" Tag="1" >1x (Native 640x528)</RadioButton>
+                            <RadioButton Margin="0,2" GroupName="ResolutionGroup1" 
+                            IsChecked="False" Click="UpdateResolution" Tag="2" >2x (1280x1056)</RadioButton>
+                            <RadioButton Margin="0,2" GroupName="ResolutionGroup1" 
+                            IsChecked="False" Click="UpdateResolution" Tag="3" >3x (1920x1584)</RadioButton>
+                            <RadioButton Margin="0,2" GroupName="ResolutionGroup1" 
+                            IsChecked="False" Click="UpdateResolution" Tag="4" >4x (2560x2112)</RadioButton>
+                        </StackPanel>
+            
+                        <StackPanel x:Name="CheckBoxStackPanel">
+                            <CheckBox Margin="0,2" IsChecked="False" 
+                                      Style="{StaticResource Switch}" Click="VSyncPress" x:Name="VSyncButton" >VSync</CheckBox>
+                            <CheckBox Margin="0,2" IsChecked="False" 
+                                      Style="{StaticResource Switch}" Click="RecommendedClick" x:Name="RecommendedButton"  >Recommended Settings</CheckBox>
+                            <CheckBox Margin="0,2" IsChecked="False" 
+                                      Style="{StaticResource Switch}" 
+                                      x:Name="DisableForce"  >Force Disable Wiimote</CheckBox>
+                        </StackPanel>
+                    </UniformGrid> 
+                </Border>
             </StackPanel>
         </StackPanel>
         
-        
-        <StackPanel Grid.Row="3" Margin="0,25">
-            <components:FormFieldLabel Text="Mario Kart Wii Game File" 
-                                       TipText="Path can end with: .wbfs/.iso/.rvz"/>
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" >
-            <components:InputField
-                Width="300"
-                Placeholder="Enter desired path here..."
-                HorizontalAlignment="Left"
-                x:Name="MarioInputField"/>
-      
-            <components:Button Text="" FontSize="16" 
-                               IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}" 
-                               IconPack="FontAwesome"
-                               Click="MarioKartBrowseClick" Margin="10,0,0,0"/>
-            </StackPanel>
-        </StackPanel>
-        <StackPanel Grid.Row="4" Margin="0,25">
-            <components:FormFieldLabel Text="Dolphin User Folder"/>
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" >
-                <components:InputField
-                    Width="300"
-                    Placeholder="Enter desired path here..."
-                    HorizontalAlignment="Left"
-                    x:Name="UserPathInputField"/>
-            <components:Button Text="" FontSize="16" 
-                               IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}" 
-                               IconPack="FontAwesome"
-                               Click="DolphinUserPathClick" Margin="10,0,0,0"/>
-            </StackPanel>
-        </StackPanel>
-        <UniformGrid Grid.Row="5" Columns="3" Rows="1" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-            <TextBlock></TextBlock>
-            <components:Button Variant="Default"
-                               IsEnabled="True"
-                               IconPack="Material"
-                               IconKind="{x:Static icon:PackIconMaterialKind.Floppy}"
-                               Text="Save"
-                               Click="SaveButtonClick"
-                               Margin="3"/>
-            <TextBlock></TextBlock>
-        </UniformGrid>
-        <TextBlock
-            Style="{StaticResource TinyText}"
-            Grid.Row="6"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom"
-            Text="Pre-release v1.0.9"
-            ></TextBlock>
-        
+        <TextBlock  Grid.Row="1"  x:Name="VersionText"
+                    Style="{StaticResource TinyText}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Text="Example version 1.0.0" />  
+        <!-- Version text is now retrieved from the updater -->
     </Grid>
 </Page>

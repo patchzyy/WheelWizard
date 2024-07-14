@@ -15,7 +15,7 @@
     
     <!-- Black is only used for things not directly inside the application 
     We use it for things like context menus and tool tips-->
-    <Color x:Key="Black">#121317</Color>
+    <Color x:Key="Black">#090A0C</Color>
     
     <Color x:Key="Red50">#FFF1F4 </Color>
     <Color x:Key="Red100">#FFE0E6</Color>

@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="Views/Styles/ContextMenuStyles.xaml"/>
                 <ResourceDictionary Source="Views/Styles/ScrollBarStyle.xaml"/>
                 <ResourceDictionary Source="Views/Styles/InputFieldStyles.xaml"/>
+                <ResourceDictionary Source="Views/Styles/SettingsBlockStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
         

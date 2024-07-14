@@ -1,0 +1,13 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Style x:Key="SettingsBlockStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource LightBackgroundColor}"/>
+        <Setter Property="CornerRadius" Value="{StaticResource GlobalCornerRadius}"/>
+        <Setter Property="Margin" Value="0,0,0,10"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="BorderBrush" Value="{StaticResource LightBackgroundColor}"/>
+        <Setter Property="BorderThickness" Value="3"/>
+    </Style>
+        
+</ResourceDictionary>

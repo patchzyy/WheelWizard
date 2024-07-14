@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using CT_MKWII_WPF.Utils;
+using CT_MKWII_WPF.Utils.Auto_updator;
 using CT_MKWII_WPF.Utils.DolphinHelpers;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
@@ -18,6 +19,7 @@ public partial class SettingsPage : Page
         LoadSettings();
         FillUserPath();
         UpdateResolutionButtonsState();
+        VersionText.Text = "v" + VersionChecker.CurrentVersion;
     }
     
     private void LoadSettings()
@@ -30,29 +32,27 @@ public partial class SettingsPage : Page
 
     private void UpdateResolutionButtonsState()
     {
-        bool enableControls = SettingsUtils.configCorrectAndExists();
+        var enableControls = SettingsUtils.configCorrectAndExists();
         if (ResolutionStackPanel == null || CheckBoxStackPanel == null) return;
         ResolutionStackPanel.IsEnabled = enableControls;
         CheckBoxStackPanel.IsEnabled = enableControls;
-        if (enableControls)
+        if (!enableControls) return;
+        VSyncButton.IsChecked = DolphinSettingsUtils.GetCurrentVSyncStatus();
+        RecommendedButton.IsChecked = DolphinSettingsUtils.IsRecommendedSettingsEnabled();
+        var finalResolution = 0;
+        var resolution =
+            DolphinSettingHelper.ReadINISetting(SettingsUtils.FindGFXFile(), "Settings", "InternalResolution");
+        if (int.TryParse(resolution, out var parsedResolution))
         {
-            VSyncButton.IsChecked = DolphinSettingsUtils.GetCurrentVSyncStatus();
-            RecommendedButton.IsChecked = DolphinSettingsUtils.IsRecommendedSettingsEnabled();
-            int finalResolution = 0;
-            var resolution =
-                DolphinSettingHelper.ReadINISetting(SettingsUtils.FindGFXFile(), "Settings", "InternalResolution");
-            if (int.TryParse(resolution, out int parsedResolution))
-            {
-                finalResolution = parsedResolution - 1;
-            }
-            if (finalResolution >= 0 && finalResolution < ResolutionStackPanel.Children.Count)
-            {
-                RadioButton radioButton = (RadioButton) ResolutionStackPanel.Children[finalResolution];
-                radioButton.IsChecked = true;
-            }
-            var forcemote = WiiMoteSettings.IsForceSettingsEnabled();
-            DisableForce.IsChecked = forcemote;
+            finalResolution = parsedResolution - 1;
         }
+        if (finalResolution >= 0 && finalResolution < ResolutionStackPanel.Children.Count)
+        {
+            var radioButton = (RadioButton) ResolutionStackPanel.Children[finalResolution];
+            radioButton.IsChecked = true;
+        }
+        var forcemote = WiiMoteSettings.IsForceSettingsEnabled();
+        DisableForce.IsChecked = forcemote;
     }
     
     
@@ -60,50 +60,45 @@ public partial class SettingsPage : Page
     private void FillUserPath()
     {
         if (DolphinInputField.Text != "") return;
-        string folderPath = DolphinSettingHelper.AutomaticallyFindDolphinPath();
+        var folderPath = DolphinSettingHelper.AutomaticallyFindDolphinPath();
         if (!string.IsNullOrEmpty(folderPath))
-        {
             UserPathInputField.Text = folderPath;
-        }
     }
 
 
     private void DolphinBrowseClick(object sender, RoutedEventArgs e)
     {
-        OpenFileDialog openFileDialog = new OpenFileDialog
+        var openFileDialog = new OpenFileDialog
         {
             Filter = "Executable files (*.exe)|*.exe|All files (*.*)|*.*",
             Title = "Select Dolphin Emulator"
         };
 
         if (openFileDialog.ShowDialog() == true)
-        {
             DolphinInputField.Text = openFileDialog.FileName;
-        }
     }
 
     private void MarioKartBrowseClick(object sender, RoutedEventArgs e)
     {
-        OpenFileDialog openFileDialog = new OpenFileDialog
+        var openFileDialog = new OpenFileDialog
         {
             Filter = "Game files (*.iso;*.wbfs;*.rvz)|*.iso;*.wbfs;*.rvz|All files (*.*)|*.*",
             Title = "Select Mario Kart Wii Game File"
         };
 
         if (openFileDialog.ShowDialog() == true)
-        {
             MarioInputField.Text = openFileDialog.FileName;
-        }
     }
 
     private void DolphinUserPathClick(object sender, RoutedEventArgs e)
     {
-        string folderPath = DolphinSettingHelper.AutomaticallyFindDolphinPath();
+        var folderPath = DolphinSettingHelper.AutomaticallyFindDolphinPath();
 
         if (!string.IsNullOrEmpty(folderPath))
         {
             // Ask user if they want to use the automatically found folder
-            var result = MessageBox.Show("**If you dont know what all of this means, just click yes :)**\n\nDolphin Emulator folder found. Would you like to use this folder?\n\n" + folderPath, "Dolphin Emulator Folder Found", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var result = MessageBox.Show("**If you dont know what all of this means, just click yes :)**\n\nDolphin Emulator folder found. Would you like to use this folder?\n\n" + folderPath, 
+                "Dolphin Emulator Folder Found", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 UserPathInputField.Text = folderPath;
@@ -112,7 +107,8 @@ public partial class SettingsPage : Page
         }
         else
         {
-            MessageBox.Show("Dolphin Emulator folder not automatically found. Please try and find the folder manually, click 'help' for more information.", "Dolphin Emulator Folder Not Found", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Dolphin Emulator folder not automatically found. Please try and find the folder manually, click 'help' for more information.", 
+                "Dolphin Emulator Folder Not Found", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         // If we end up here, this means either the path wasn't found, or the user wants to manually select the path
@@ -120,17 +116,15 @@ public partial class SettingsPage : Page
         CommonOpenFileDialog dialog = new();
         dialog.IsFolderPicker = true;
         if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
-        {
             UserPathInputField.Text = dialog.FileName;
-        }
     }
 
     private void SaveButtonClick(object sender, RoutedEventArgs e)
     {
-        string dolphinPath = DolphinInputField.Text;
-        string gamePath = MarioInputField.Text;
-        string userFolder = UserPathInputField.Text;
-        bool forceDisableWiimote = DisableForce.IsChecked == true;
+        var dolphinPath = DolphinInputField.Text;
+        var gamePath = MarioInputField.Text;
+        var userFolder = UserPathInputField.Text;
+        var forceDisableWiimote = DisableForce.IsChecked == true;
         if (!File.Exists(dolphinPath) || !File.Exists(gamePath) || !Directory.Exists(userFolder))
         {
             MessageBox.Show("Please ensure all paths are correct and try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -142,8 +136,8 @@ public partial class SettingsPage : Page
         if(!SettingsUtils.SetupCorrectly())
         {
             MessageBox.Show("Please ensure all paths are correct and try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            var SettingsWindow = (Layout)Application.Current.MainWindow;
-            SettingsWindow.NavigateToPage(new SettingsPage());
+            var settingsWindow = (Layout)Application.Current.MainWindow;
+            settingsWindow.NavigateToPage(new SettingsPage());
             return;
         }
         UpdateResolutionButtonsState();
@@ -160,26 +154,16 @@ public partial class SettingsPage : Page
     private void VSyncPress(object sender, RoutedEventArgs e)
     {
         //todo: move this logic into the backend
-        if (VSyncButton.IsChecked == true)
-        {
-            DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Hardware", "VSync", "True");
-        }
-        else
-        {
-            DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Hardware", "VSync", "False");
-        }
+        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Hardware", "VSync",
+            VSyncButton.IsChecked == true ? "True" : "False");
     }
 
     private void RecommendedClick(object sender, RoutedEventArgs e)
     {
         if (RecommendedButton.IsChecked == true)
-        {
             EnableReccommendedSettings();
-        }
         else
-        {
             DisableReccommendedSettings();
-        }
     }
     
     private void EnableReccommendedSettings() => DolphinSettingsUtils.EnableRecommendedSettings();
@@ -188,11 +172,9 @@ public partial class SettingsPage : Page
 
     private void UpdateResolution(object sender, RoutedEventArgs e)
     {
-        if (sender is RadioButton radioButton)
-        {
-            var resolution = radioButton.Tag.ToString();
-            DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "InternalResolution", resolution);
-        }
+        if (sender is not RadioButton radioButton) return;
+        var resolution = radioButton.Tag.ToString();
+        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "InternalResolution", resolution);
     }
 
     private void LaunchMiiChannel_Click(object sender, RoutedEventArgs e)
@@ -202,12 +184,6 @@ public partial class SettingsPage : Page
         WiiMoteSettings.EnableVirtualWiiMote();
         MiiChannelManager.LaunchMiiChannel();
         //wait 5 seconds before re-enabling the buttons
-        Task.Delay(5000).ContinueWith(_ =>
-        {
-            Dispatcher.Invoke(() =>
-            {
-                UpdateResolutionButtonsState();
-            });
-        });
+        Task.Delay(5000).ContinueWith(_ => Dispatcher.Invoke(UpdateResolutionButtonsState));
     }
 }
