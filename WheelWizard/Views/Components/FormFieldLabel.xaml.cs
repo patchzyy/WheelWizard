@@ -6,10 +6,7 @@ namespace CT_MKWII_WPF.Views.Components;
 
 public partial class FormFieldLabel : UserControl
 {
-    public FormFieldLabel()
-    {
-        InitializeComponent();
-    }
+    public FormFieldLabel() => InitializeComponent();
     
     public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
         nameof(Text), typeof(string), typeof(FormFieldLabel), 

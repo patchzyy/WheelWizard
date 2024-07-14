@@ -6,49 +6,46 @@ namespace CT_MKWII_WPF.Views.Components
 {
     public partial class DynamicIcon : UserControl
     {
+        public DynamicIcon() =>  InitializeComponent();
+        
         public static readonly DependencyProperty IconPackProperty =
-            DependencyProperty.Register("IconPack", typeof(string), typeof(DynamicIcon), 
+            DependencyProperty.Register(nameof(IconPack), typeof(string), typeof(DynamicIcon), 
                 new PropertyMetadata("Material"));
 
         public static readonly DependencyProperty IconKindProperty =
-            DependencyProperty.Register("IconKind", typeof(object), typeof(DynamicIcon), 
+            DependencyProperty.Register(nameof(IconKind), typeof(object), typeof(DynamicIcon), 
                 new PropertyMetadata(null));
 
         public static readonly DependencyProperty IconSizeProperty =
-            DependencyProperty.Register("IconSize", typeof(double), typeof(DynamicIcon),
+            DependencyProperty.Register(nameof(IconSize), typeof(double), typeof(DynamicIcon),
                 new PropertyMetadata(16.0));
 
         public static readonly DependencyProperty ForegroundColorProperty =
-            DependencyProperty.Register("ForegroundColor", typeof(Brush), typeof(DynamicIcon),
+            DependencyProperty.Register(nameof(ForegroundColor), typeof(Brush), typeof(DynamicIcon),
                 new PropertyMetadata(Brushes.Black));
 
         public string IconPack
         {
-            get { return (string)GetValue(IconPackProperty); }
-            set { SetValue(IconPackProperty, value); }
+            get => (string)GetValue(IconPackProperty);
+            set => SetValue(IconPackProperty, value);
         }
 
         public object IconKind
         {
-            get { return GetValue(IconKindProperty); }
-            set { SetValue(IconKindProperty, value); }
+            get => GetValue(IconKindProperty);
+            set => SetValue(IconKindProperty, value);
         }
 
         public double IconSize
         {
-            get { return (double)GetValue(IconSizeProperty); }
-            set { SetValue(IconSizeProperty, value); }
+            get => (double)GetValue(IconSizeProperty);
+            set => SetValue(IconSizeProperty, value);
         }
 
         public Brush ForegroundColor
         {
-            get { return (Brush)GetValue(ForegroundColorProperty); }
-            set { SetValue(ForegroundColorProperty, value); }
-        }
-
-        public DynamicIcon()
-        {
-            InitializeComponent();
+            get => (Brush)GetValue(ForegroundColorProperty);
+            set => SetValue(ForegroundColorProperty, value);
         }
     }
 }

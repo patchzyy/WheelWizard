@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -22,7 +23,7 @@ public partial class StaticListView : BaseListView
     {
         InitializeComponent();
         FontSize = 14.0;
-        AddHandler(GridViewColumnHeader.ClickEvent, new RoutedEventHandler(GridViewColumnHeader_Click));
+        AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(GridViewColumnHeader_Click));
     }
     
     public static readonly DependencyProperty IsClickableProperty = DependencyProperty.Register(
@@ -84,7 +85,7 @@ public partial class StaticListView : BaseListView
         _lastDirection = direction;
     }
 
-    private void SetSortArrow(GridViewColumnHeader header, ListSortDirection? direction)
+    private static void SetSortArrow(GridViewColumnHeader header, ListSortDirection? direction)
     {
         if (header.Template.FindName("SortArrow", header) is not PackIconFontAwesome sortArrow) return;
         
@@ -158,5 +159,4 @@ public partial class StaticListView : BaseListView
             return result;
         }
     }
-
 }

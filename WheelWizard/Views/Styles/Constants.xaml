@@ -63,28 +63,6 @@
     <SolidColorBrush x:Key="BackgroundContactColor" Color="{StaticResource Gray800}" />
     <SolidColorBrush x:Key="BackgroundLine" Color="{StaticResource Gray700}" />
     
-    <!-- Input field -->
-    <SolidColorBrush x:Key="InputFieldBorder-Default" Color="{StaticResource Gray800}" />
-    <SolidColorBrush x:Key="InputFieldBackground-Default" Color="{StaticResource Gray800}" />
-    <SolidColorBrush x:Key="InputFieldForeground-Default" Color="{StaticResource Gray200}" />
-    <SolidColorBrush x:Key="InputFieldPlaceholder-Default" Color="{StaticResource Gray500}" />
-    
-    <SolidColorBrush x:Key="InputFieldBorder-Hover" Color="{StaticResource Gray700}" />
-    <SolidColorBrush x:Key="InputFieldBackground-Hover" Color="{StaticResource Gray700}" />
-    <SolidColorBrush x:Key="InputFieldForeground-Hover" Color="{StaticResource Gray200}" />
-    <SolidColorBrush x:Key="InputFieldPlaceholder-Hover" Color="{StaticResource Gray500}" />
-
-    <SolidColorBrush x:Key="InputFieldBorder-Selected" Color="{StaticResource Gray500}" />
-    <SolidColorBrush x:Key="InputFieldBackground-Selected" Color="{StaticResource Gray700}" />
-    <SolidColorBrush x:Key="InputFieldForeground-Selected" Color="{StaticResource Gray50}" />
-    <SolidColorBrush x:Key="InputFieldPlaceholder-Selected" Color="{StaticResource Gray500}" />
-    
-    <SolidColorBrush x:Key="InputFieldBorder-Disabled" Color="{StaticResource Gray900}" />
-    <SolidColorBrush x:Key="InputFieldBackground-Disabled" Color="{StaticResource Gray900}" />
-    <SolidColorBrush x:Key="InputFieldForeground-Disabled" Color="{StaticResource Gray950}" />
-    <SolidColorBrush x:Key="InputFieldPlaceholder-Disabled" Color="{StaticResource Gray950}" />
-    
-    
     <!-- Generic text stuff -->
     <SolidColorBrush x:Key="BodyTextColor" Color="{StaticResource Gray600}" />
     <SolidColorBrush x:Key="TitleTextColor" Color="{StaticResource Gray500}" />
@@ -92,16 +70,23 @@
     <SolidColorBrush x:Key="TitleTextHover" Color="{StaticResource Gray300}" />
     <SolidColorBrush x:Key="FormFieldLabelColor" Color="{StaticResource Gray300}" />
     
-    <!-- Tool tip -->
-    <SolidColorBrush x:Key="ToolTipBackground" Color="{StaticResource Black}" />
-    <SolidColorBrush x:Key="ToolTipForeground" Color="{StaticResource Gray300}" />
+    <!-- List Views (static & drag and drop) -->
+    <SolidColorBrush x:Key="HeaderAttributes" Color="{StaticResource Gray400}" />
+    <SolidColorBrush x:Key="HeaderLine" Color="{StaticResource Gray800}" />
+    <SolidColorBrush x:Key="DragItemAttributes-Default" Color="{StaticResource Gray200}" />
+    <SolidColorBrush x:Key="DragItemAttributes-Hover+" Color="{StaticResource Gray100}" /> <!-- This is also the color for when an item is selected/focussed -->
+
+    <SolidColorBrush x:Key="DragItemBackground-Default" Color="{StaticResource Gray800}" />
+    <SolidColorBrush x:Key="DragItemBackground-Hover" Color="{StaticResource Gray700}" />
+    <SolidColorBrush x:Key="DragItemBackground-Focus" Color="{StaticResource Gray600}" /> <!-- when selected for example -->
+
+    <SolidColorBrush x:Key="DragItemIcon-Default" Color="{StaticResource Gray600}" />
+    <SolidColorBrush x:Key="DragItemIcon-GroupHover+" Color="{StaticResource Gray400}" />  <!-- This is also the color for when an item is selected/focussed -->
+    <SolidColorBrush x:Key="DragItemIcon-IndividualHover+" Color="{StaticResource Gray300}" />
+    <SolidColorBrush x:Key="DragItem-Target" Color="{StaticResource Cyan400}" />
     
-    <!-- Context Menu -->
-    <SolidColorBrush x:Key="ContextMenuBackground" Color="{StaticResource Black}" />
-    <SolidColorBrush x:Key="ContextMenuLineColor" Color="{StaticResource Gray700}" />
-    <SolidColorBrush x:Key="ContextMenuHover" Color="{StaticResource Gray950}" />
-    <SolidColorBrush x:Key="ContextMenuForeground" Color="{StaticResource Gray300}" />
-    <SolidColorBrush x:Key="ContextMenuForegroundHover" Color="{StaticResource Gray100}" />
+    <SolidColorBrush x:Key="StaticItemForeground-Default" Color="{StaticResource Gray300}" />
+    <SolidColorBrush x:Key="StaticItemForeground-Hover+" Color="{StaticResource Gray50}" />
     
     <!-- State box -->
     <SolidColorBrush x:Key="StateBoxBackground" Color="{StaticResource Gray900}" />

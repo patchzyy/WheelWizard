@@ -1,4 +1,3 @@
-using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -33,22 +32,16 @@ namespace CT_MKWII_WPF.Views.Components
         
         public ToolTipAlignment Alignment
         {
-            get { return (ToolTipAlignment)GetValue(AlignmentProperty); }
-            set { SetValue(AlignmentProperty, value); }
+            get => (ToolTipAlignment)GetValue(AlignmentProperty);
+            set => SetValue(AlignmentProperty, value);
         }
               
         // Accessor for UpArrow
-        private Path UpArrow
-        {
-            get { return (Template.FindName("UpArrow", this) as Path)!; }
-        }
+        private Path UpArrow => (Template.FindName("UpArrow", this) as Path)!;
 
         // Accessor for DownArrow
-        private Path DownArrow
-        {
-            get { return (Template.FindName("DownArrow", this) as Path)!; }
-        }
-        
+        private Path DownArrow => (Template.FindName("DownArrow", this) as Path)!;
+
         private void OnToolTipOpened(object sender, RoutedEventArgs e) => UpdatePlacement();
         private void UpdatePlacement()
         {
@@ -66,15 +59,14 @@ namespace CT_MKWII_WPF.Views.Components
             
             Placement = PlacementMode.Custom;
            
-            if (Alignment == ToolTipAlignment.TopCenter || Alignment == ToolTipAlignment.TopLeft ||
-                Alignment == ToolTipAlignment.TopRight) 
+            if (Alignment is ToolTipAlignment.TopCenter or ToolTipAlignment.TopLeft or ToolTipAlignment.TopRight) 
                 DownArrow.Visibility = Visibility.Visible;
             else // All Bottom sides
                 UpArrow.Visibility = Visibility.Visible;   
             
-            if (Alignment == ToolTipAlignment.TopLeft || Alignment == ToolTipAlignment.BottomLeft)
+            if (Alignment is ToolTipAlignment.TopLeft or ToolTipAlignment.BottomLeft)
                 UpArrow.HorizontalAlignment = DownArrow.HorizontalAlignment = HorizontalAlignment.Left;
-            else if (Alignment == ToolTipAlignment.TopRight || Alignment == ToolTipAlignment.BottomRight)
+            else if (Alignment is ToolTipAlignment.TopRight or ToolTipAlignment.BottomRight)
                 UpArrow.HorizontalAlignment = DownArrow.HorizontalAlignment = HorizontalAlignment.Right;
             else
                 UpArrow.HorizontalAlignment = DownArrow.HorizontalAlignment = HorizontalAlignment.Center;
@@ -82,7 +74,7 @@ namespace CT_MKWII_WPF.Views.Components
 
         private CustomPopupPlacement[] PlaceToolTip(Size popupSize, Size targetSize, Point offset)
         {
-            PopupPrimaryAxis axis = PopupPrimaryAxis.Horizontal;
+            var axis = PopupPrimaryAxis.Horizontal;
             if (Alignment == ToolTipAlignment.Mouse)
                 axis = PopupPrimaryAxis.Vertical;
 
@@ -95,15 +87,15 @@ namespace CT_MKWII_WPF.Views.Components
             // This is just a threshold at this point its a bit ugly to have the left and right
             // be on literally the left and right of the object
             
-            if (Alignment == ToolTipAlignment.BottomCenter || Alignment == ToolTipAlignment.TopCenter)
+            if (Alignment is ToolTipAlignment.BottomCenter or ToolTipAlignment.TopCenter)
                 offsetX = (targetSize.Width - popupSize.Width) /2;
-            else if (Alignment == ToolTipAlignment.BottomLeft || Alignment == ToolTipAlignment.TopLeft)
+            else if (Alignment is ToolTipAlignment.BottomLeft or ToolTipAlignment.TopLeft)
                 offsetX = arrowNeedsCenter ? targetSize.Width/2 - 25 : -10;
-            else if (Alignment == ToolTipAlignment.BottomRight || Alignment == ToolTipAlignment.TopRight)
+            else if (Alignment is ToolTipAlignment.BottomRight or ToolTipAlignment.TopRight)
                 offsetX = -popupSize.Width + (arrowNeedsCenter ? targetSize.Width/2 + 25 : targetSize.Width + 10);
             
-            if (Alignment == ToolTipAlignment.BottomCenter || Alignment == ToolTipAlignment.BottomLeft ||
-                Alignment == ToolTipAlignment.BottomRight)
+            if (Alignment is ToolTipAlignment.BottomCenter or ToolTipAlignment.BottomLeft or 
+                ToolTipAlignment.BottomRight)
                 offsetY = targetSize.Height;
             else
                 offsetY = -popupSize.Height;
@@ -113,6 +105,5 @@ namespace CT_MKWII_WPF.Views.Components
                 new CustomPopupPlacement(new Point(offsetX, offsetY), axis)
             };
         }
-  
     }
 }

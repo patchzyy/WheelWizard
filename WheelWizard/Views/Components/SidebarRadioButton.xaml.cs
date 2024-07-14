@@ -14,10 +14,7 @@ EXAMPLES:
 
 public partial class SidebarRadioButton : UserControl
 {
-    public SidebarRadioButton()
-    {
-        InitializeComponent();
-    }
+    public SidebarRadioButton() => InitializeComponent();
 
     public static readonly DependencyProperty IconKindProperty =
         DependencyProperty.Register(nameof(IconKind), typeof(object), typeof(SidebarRadioButton), new PropertyMetadata(null));
@@ -60,8 +57,8 @@ public partial class SidebarRadioButton : UserControl
 
     public event RoutedEventHandler Click
     {
-        add { AddHandler(ClickEvent, value); }
-        remove { RemoveHandler(ClickEvent, value); }
+        add => AddHandler(ClickEvent, value);
+        remove => RemoveHandler(ClickEvent, value);
     }
 
     private void OnClick(object sender, RoutedEventArgs e)

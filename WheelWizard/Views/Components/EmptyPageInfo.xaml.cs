@@ -14,10 +14,7 @@ namespace CT_MKWII_WPF.Views.Components
 {
     public partial class EmptyPageInfo : UserControl
     {
-        public EmptyPageInfo()
-        {
-            InitializeComponent();
-        }
+        public EmptyPageInfo() => InitializeComponent();
 
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
             nameof(Title), typeof(string), typeof(EmptyPageInfo), 
@@ -26,8 +23,8 @@ namespace CT_MKWII_WPF.Views.Components
 
         public string Title
         {
-            get { return (string)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
+            get => (string)GetValue(TitleProperty);
+            set => SetValue(TitleProperty, value);
         }
 
         public static readonly DependencyProperty BodyProperty = DependencyProperty.Register(
@@ -37,8 +34,8 @@ namespace CT_MKWII_WPF.Views.Components
 
         public string Body
         {
-            get { return (string)GetValue(BodyProperty); }
-            set { SetValue(BodyProperty, value); }
+            get => (string)GetValue(BodyProperty);
+            set => SetValue(BodyProperty, value);
         }
     }
 }

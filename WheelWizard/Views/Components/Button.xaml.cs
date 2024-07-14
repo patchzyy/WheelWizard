@@ -45,25 +45,23 @@ namespace CT_MKWII_WPF.Views.Components
         
         public ButtonsVariantType Variant
         {
-            get { return (ButtonsVariantType)GetValue(VariantProperty); }
-            set { SetValue(VariantProperty, value); }
+            get => (ButtonsVariantType)GetValue(VariantProperty);
+            set => SetValue(VariantProperty, value);
         }
         
         private static void OnVariantChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is Button button)
+            if (d is not Button button) return;
+            var type = (ButtonsVariantType)e.NewValue;
+            var styleName = type switch
             {
-                var type = (ButtonsVariantType)e.NewValue;
-                string styleName = type switch
-                {
-                    ButtonsVariantType.Primary => "PrimaryButtonStyle",
-                    ButtonsVariantType.Secondary => "SecondaryButtonStyle",
-                    ButtonsVariantType.Danger => "DangerButtonStyle",
-                    _ => "DefaultButtonStyle"
-                };
+                ButtonsVariantType.Primary => "PrimaryButtonStyle",
+                ButtonsVariantType.Secondary => "SecondaryButtonStyle",
+                ButtonsVariantType.Danger => "DangerButtonStyle",
+                _ => "DefaultButtonStyle"
+            };
                 
-                button.Style = (Style)Application.Current.FindResource(styleName)!;
-            }
+            button.Style = (Style)Application.Current.FindResource(styleName)!;
         }
 
         public static readonly DependencyProperty IconPackProperty =
@@ -72,8 +70,8 @@ namespace CT_MKWII_WPF.Views.Components
 
         public string IconPack
         {
-            get { return (string)GetValue(IconPackProperty); }
-            set { SetValue(IconPackProperty, value); }
+            get => (string)GetValue(IconPackProperty);
+            set => SetValue(IconPackProperty, value);
         }
 
         public static readonly DependencyProperty IconKindProperty =
@@ -82,8 +80,8 @@ namespace CT_MKWII_WPF.Views.Components
             
         public object IconKind
         {
-            get { return GetValue(IconKindProperty); }
-            set { SetValue(IconKindProperty, value); }
+            get => GetValue(IconKindProperty);
+            set => SetValue(IconKindProperty, value);
         }
         
         public static readonly DependencyProperty IconSizeProperty =
@@ -92,8 +90,8 @@ namespace CT_MKWII_WPF.Views.Components
         
         public double IconSize
         {
-            get { return (double)GetValue(IconSizeProperty); }
-            set { SetValue(IconSizeProperty, value); }
+            get => (double)GetValue(IconSizeProperty);
+            set => SetValue(IconSizeProperty, value);
         }
         
         public static readonly DependencyProperty TextProperty =
@@ -102,8 +100,8 @@ namespace CT_MKWII_WPF.Views.Components
 
         public string Text
         {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            get => (string)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
         }
     }
 }
