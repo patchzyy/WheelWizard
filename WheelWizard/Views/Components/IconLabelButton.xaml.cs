@@ -20,6 +20,7 @@ namespace CT_MKWII_WPF.Views.Components
     {
         public IconLabelButton()
         {
+            FontSize = 16;
             InitializeComponent();
         }
 
@@ -45,7 +46,7 @@ namespace CT_MKWII_WPF.Views.Components
         
         public static readonly DependencyProperty IconSizeProperty = DependencyProperty.Register(
             nameof(IconSize), typeof(double), typeof(IconLabelButton),
-            new PropertyMetadata(16.0));
+            new PropertyMetadata(20.0));
 
         public double IconSize
         {

@@ -1,14 +1,12 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
-
 /*
 EXAMPLES:
 
 # all parameters
  <components:Button Variant="Primary"
                     IsEnabled="True"
-                    IconPack="Material"
-                    IconKind="{x:Static icon:PackIconMaterialKind.Home}"
+                    IconPack="FontAwesome"
+                    IconKind="{x:Static icon:PackIconFontAwesomeKind.PlaySolid}"
                     IconSize="20"
                     Text="Home"
                     FontSize="16"
@@ -20,53 +18,70 @@ EXAMPLES:
                     Click="Button_OnClick"/>
                     
 # Note1:  you either need to find the icon, or set IconSize to 0 to hide it
-# Note2:  variant can be: Primary, Secondary, Default, Danger   (if none, it will go to Default)
  */
 
 namespace CT_MKWII_WPF.Views.Components
 {
-    public partial class Button : UserControl
+    public partial class Button : System.Windows.Controls.Button
     {
-        // Primary, Secondary, Default, Danger
+        public Button()
+        {
+            InitializeComponent();
+            Style = (Style)Application.Current.FindResource("DefaultButtonStyle")!;
+            FontSize = 14.0;
+        }
+        
+        public enum ButtonsVariantType
+        {
+            Primary,
+            Secondary,
+            Default,
+            Danger
+        }
+
         public static readonly DependencyProperty VariantProperty =
-            DependencyProperty.Register(nameof(Variant), typeof(string), typeof(Button), 
-                new PropertyMetadata("Default"));
+            DependencyProperty.Register(nameof(Variant), typeof(ButtonsVariantType), typeof(Button), 
+                new PropertyMetadata(ButtonsVariantType.Default, OnVariantChanged));
         
-        public string Variant
+        public ButtonsVariantType Variant
         {
-            get { return (string)GetValue(VariantProperty); }
-            set { SetValue(VariantProperty, value); }
+            get => (ButtonsVariantType)GetValue(VariantProperty);
+            set => SetValue(VariantProperty, value);
         }
         
-        public static readonly new DependencyProperty IsEnabledProperty =
-            DependencyProperty.Register(nameof(IsEnabled), typeof(bool), typeof(Button), 
-                new PropertyMetadata(true));
-     
-        public new bool IsEnabled
+        private static void OnVariantChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            get { return (bool)GetValue(IsEnabledProperty); }
-            set { SetValue(IsEnabledProperty, value); }
+            if (d is not Button button) return;
+            var type = (ButtonsVariantType)e.NewValue;
+            var styleName = type switch
+            {
+                ButtonsVariantType.Primary => "PrimaryButtonStyle",
+                ButtonsVariantType.Secondary => "SecondaryButtonStyle",
+                ButtonsVariantType.Danger => "DangerButtonStyle",
+                _ => "DefaultButtonStyle"
+            };
+                
+            button.Style = (Style)Application.Current.FindResource(styleName)!;
         }
-        
+
         public static readonly DependencyProperty IconPackProperty =
             DependencyProperty.Register(nameof(IconPack), typeof(string), typeof(Button),
                 new PropertyMetadata(null));
 
         public string IconPack
         {
-            get { return (string)GetValue(IconPackProperty); }
-            set { SetValue(IconPackProperty, value); }
+            get => (string)GetValue(IconPackProperty);
+            set => SetValue(IconPackProperty, value);
         }
 
-        
         public static readonly DependencyProperty IconKindProperty =
             DependencyProperty.Register(nameof(IconKind), typeof(object), typeof(Button),
                 new PropertyMetadata(null));
             
         public object IconKind
         {
-            get { return GetValue(IconKindProperty); }
-            set { SetValue(IconKindProperty, value); }
+            get => GetValue(IconKindProperty);
+            set => SetValue(IconKindProperty, value);
         }
         
         public static readonly DependencyProperty IconSizeProperty =
@@ -75,8 +90,8 @@ namespace CT_MKWII_WPF.Views.Components
         
         public double IconSize
         {
-            get { return (double)GetValue(IconSizeProperty); }
-            set { SetValue(IconSizeProperty, value); }
+            get => (double)GetValue(IconSizeProperty);
+            set => SetValue(IconSizeProperty, value);
         }
         
         public static readonly DependencyProperty TextProperty =
@@ -85,40 +100,8 @@ namespace CT_MKWII_WPF.Views.Components
 
         public string Text
         {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
-        }
-        
-        public static readonly new DependencyProperty FontSizeProperty =
-            DependencyProperty.Register(nameof(FontSize), typeof(double), typeof(Button), 
-                new PropertyMetadata(16.0));
-   
-        public new double FontSize
-        {
-            get { return (double)GetValue(FontSizeProperty); }
-            set { SetValue(FontSizeProperty, value); }
-        }
-        
-        public Button()
-        {
-            InitializeComponent();
-        }
-        
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            // Raise a custom click event or execute a command here
-            RoutedEventArgs newEventArgs = new RoutedEventArgs(ClickEvent, this);
-            RaiseEvent(newEventArgs);
-        }
-
-        // Custom click event
-        public static readonly RoutedEvent ClickEvent = EventManager.RegisterRoutedEvent(
-            nameof(Click), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Button));
-
-        public event RoutedEventHandler Click
-        {
-            add { AddHandler(ClickEvent, value); }
-            remove { RemoveHandler(ClickEvent, value); }
+            get => (string)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
         }
     }
 }

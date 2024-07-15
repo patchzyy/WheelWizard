@@ -118,7 +118,7 @@ public class DolphinSettingHelper
         File.WriteAllLines(fileLocation, lines);
     }
     
-    public static void LaunchDolphinWithArguments(string arguments)
+    public static void LaunchDolphin(string arguments = "")
     {
         var DolphinLocation = SettingsUtils.GetDolphinLocation();
         if (DolphinLocation == "")

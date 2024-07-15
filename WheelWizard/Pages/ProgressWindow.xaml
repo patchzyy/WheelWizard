@@ -13,7 +13,7 @@
         AllowsTransparency="True"
         Background="Transparent">
 
-    <Border Background="{StaticResource ForegroundColorV2}" Margin="10" >
+    <Border Background="{StaticResource LightBackgroundColor}" Margin="10" >
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
@@ -22,7 +22,7 @@
 
             <!-- TopBar -->
             <Border Grid.Row="0"
-                    Background="{StaticResource ForegroundColorV2}"
+                    Background="{StaticResource LightBackgroundColor}"
                     MouseDown="Border_MouseLeftButtonDown">
                 <!-- <DockPanel HorizontalAlignment="Right" VerticalAlignment="Top"> -->
                 <!--     <Button Width="30" Height="25" Style="{StaticResource TopButton}" Click="CloseButton_Click"> -->

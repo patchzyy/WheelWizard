@@ -15,8 +15,8 @@ namespace CT_MKWII_WPF.Views.Components
 
         public ListViewItem? ContextMenuListViewItem
         {
-            get { return _contextListViewItem; }
-            protected set { _contextListViewItem = value; }
+            get => _contextListViewItem;
+            protected set => _contextListViewItem = value;
         }
 
         public static readonly DependencyProperty ItemContextMenuProperty = DependencyProperty.Register(

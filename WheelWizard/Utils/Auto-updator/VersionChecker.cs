@@ -12,12 +12,9 @@ namespace CT_MKWII_WPF.Utils.Auto_updator;
 public static class VersionChecker
 {
     private const string VersionFileURL = "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/version.txt";
-    private const string CurrentVersion = "1.0.10";
-    
-    public static string GetVersionNumber()
-    {
-        return CurrentVersion;
-    }
+
+    public const string CurrentVersion = "1.0.10";
+
 
     public static void CheckForUpdates()
     {

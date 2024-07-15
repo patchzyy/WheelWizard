@@ -6,26 +6,41 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using CT_MKWII_WPF.Utils;
+using CT_MKWII_WPF.Views.Components;
 using CT_MKWII_WPF.Views.Pages;
-using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace CT_MKWII_WPF.Views;
 
 public partial class Layout : Window, INotifyPropertyChanged
 {
-    // ADD HERE THE PAGED YOU WANT TO NAVIGATE TO
-    private void DashboardPage_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new Dashboard());
-    private void SettingsPage_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new SettingsPage());
-    private void ModsPage_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new ModsPage());
-    private void KitchenSink_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new KitchenSink());
-    private void RoomsButton_Navigate(object sender, RoutedEventArgs e) => NavigateToPage(new RoomsPage());
+    public event PropertyChangedEventHandler PropertyChanged;
     
-    private LiveAlertsManager _alertsManager;
+    public Layout()
+    {
+        InitializeComponent();
+        DataContext = this;
+        NavigateToPage(new Dashboard());
     
+        PopulatePlayerText();
+        
+        // Create and start the LiveAlertsManager
+        LiveAlertsManager.Start(StatusIcon, UpdateStatusMessage);
+        
+        var statusIconBorder = StatusIcon.Parent as Border;
+        if (statusIconBorder != null)
+            statusIconBorder.ToolTip = null;
+    }
+
     public void NavigateToPage(Page page)
     {
         ContentArea.Navigate(page);
         ContentArea.NavigationService.RemoveBackEntry();
+
+        foreach (var child in SidePanelButtons.Children)
+        {
+            if (child is SidebarRadioButton button)
+                button.IsChecked = button.PageType == page.GetType();
+        }
     }
     
     private string _statusMessage;
@@ -34,80 +49,57 @@ public partial class Layout : Window, INotifyPropertyChanged
         get => _statusMessage;
         set
         {
-            if (_statusMessage != value)
-            {
-                _statusMessage = value;
-                OnPropertyChanged();
-            }
+            if (_statusMessage == value) return;
+            _statusMessage = value;
+            OnPropertyChanged();
         }
     }
     
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
     
-    public Layout()
-    {
-        InitializeComponent();
-        DataContext = this;
-        Dashboard myPage = new Dashboard();
-        NavigateToPage(myPage);
-        populatePlayerText();
-        
-        // Create and start the LiveAlertsManager
-        _alertsManager = new LiveAlertsManager(
-            "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/status.txt",
-            Statusicon,
-            UpdateStatusMessage
-        );
-        _alertsManager.Start();
+    private void UpdateStatusMessage(string message) => Dispatcher.Invoke(() => StatusMessage = message);
 
-        // Remove any existing tooltip from XAML
-        var statusIconBorder = Statusicon.Parent as Border;
-        if (statusIconBorder != null)
+    public async void PopulatePlayerText()
+    {
+        var rrInfo = await RRLiveInfo.getCurrentGameData();
+        UpdatePlayerAndRoomCount(RRLiveInfo.GetCurrentOnlinePlayers(rrInfo), rrInfo.Rooms.Count);
+        
+        var periodicTimer = new PeriodicTimer(TimeSpan.FromSeconds(20));
+        while (await periodicTimer.WaitForNextTickAsync())
         {
-            statusIconBorder.ToolTip = null;
+            rrInfo = await RRLiveInfo.getCurrentGameData();
+            UpdatePlayerAndRoomCount(RRLiveInfo.GetCurrentOnlinePlayers(rrInfo), rrInfo.Rooms.Count);
         }
     }
     
-    private void UpdateStatusMessage(string message)
+    public void UpdatePlayerAndRoomCount(int playerCount, int roomCount)
     {
-        Dispatcher.Invoke(() => StatusMessage = message);
-    }
-
-    public async void populatePlayerText()
-    {
-        var rrinfo = await RRLiveInfo.getCurrentGameData();
-        PlayerCountText.Text = "Players online: " + RRLiveInfo.GetCurrentOnlinePlayers(rrinfo).ToString();
-        var periodicTimer= new PeriodicTimer(TimeSpan.FromSeconds(20));
-        while (await periodicTimer.WaitForNextTickAsync())
+        PlayerCountBox.Text = playerCount.ToString();
+        PlayerCountBox.TipText = playerCount switch
         {
-            rrinfo = await RRLiveInfo.getCurrentGameData();
-            PlayerCountText.Text = "Players online: " + RRLiveInfo.GetCurrentOnlinePlayers(rrinfo).ToString();
-        }
-        
+            1 => "There is currently 1 player online",
+            0 => "There are currently no players online",
+            _ => $"There are currently {playerCount} players online"
+        };
+        RoomCountBox.Text = roomCount.ToString();
+        RoomCountBox.TipText = roomCount switch
+        {
+            1 => "There is currently 1 room active",
+            0 => "There are currently no rooms active",
+            _ => $"There are currently {roomCount} rooms active"
+        };
     }
     
     private void TopBar_MouseDown(object sender, MouseButtonEventArgs e)
     {
-        if (e.ChangedButton == MouseButton.Left)
-        {
-            DragMove();
-        }
+        if (e.ChangedButton == MouseButton.Left) DragMove();
     }
     
-    private void MinimizeButton_Click(object sender, RoutedEventArgs e)
-    {
-        this.WindowState = WindowState.Minimized;
-    }
-    
-    private void CloseButton_Click(object sender, RoutedEventArgs e)
-    {
-        Close();
-    }
+    private void MinimizeButton_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
+    private void CloseButton_Click(object sender, RoutedEventArgs e) => Close();
     
     private void Discord_Click(object sender, RoutedEventArgs e)
     {
@@ -126,12 +118,10 @@ public partial class Layout : Window, INotifyPropertyChanged
             UseShellExecute = true
         });
     }
-    
+
     protected override void OnClosed(EventArgs e)
     {
         base.OnClosed(e);
-        _alertsManager?.Stop();
+        LiveAlertsManager.Stop();
     }
-
-
 }

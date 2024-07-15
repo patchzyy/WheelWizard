@@ -21,8 +21,8 @@ namespace CT_MKWII_WPF.Views.Pages
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             "CT-MKWII", "Mods", "modconfig.json");
         public ObservableCollection<Mod> Mods { get; set; }
-        
-        
+
+        private bool _toggleAll = true;
         private Point startPoint;
         public ModsPage()
         {
@@ -56,8 +56,9 @@ namespace CT_MKWII_WPF.Views.Pages
         
         private void UpdateEmptyListMessageVisibility()
         {
-            EmptyListMessage.Visibility = Mods.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
-            ModsListView.Visibility = Mods.Count > 0 ? Visibility.Visible : Visibility.Collapsed; 
+            PageWithoutMods.Visibility = Mods.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+            TopBarButtons.Visibility = Mods.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+            PageWithMods.Visibility = Mods.Count > 0 ? Visibility.Visible : Visibility.Collapsed; 
         }
         
         private void Mod_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -265,9 +266,13 @@ namespace CT_MKWII_WPF.Views.Pages
 
         private void EnableClick(object sender, RoutedEventArgs e)
         {
-            bool selectAll = Mods.Any(mod => !mod.IsEnabled);
+            //bool selectAll = Mods.Any(mod => !mod.IsEnabled);
             foreach (var mod in Mods)
-                mod.IsEnabled = selectAll;
+                mod.IsEnabled = _toggleAll;
+            _toggleAll = !_toggleAll;
+            if (!_toggleAll)
+                EnableDisableButton.Text = "Disable All";
+            else EnableDisableButton.Text = "Enable All";
         }
 
         private bool IsValidName(string name)
@@ -349,7 +354,7 @@ namespace CT_MKWII_WPF.Views.Pages
                 MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        private void ModsListView2_OnOnItemsReorder(ListViewItem movedItem, int newIndex)
+        private void ModsListView_OnOnItemsReorder(ListViewItem movedItem, int newIndex)
         {
             var mySelectedMod = (Mod)movedItem.DataContext;
             // This is also done inside the component, but that does not translate outside of the component

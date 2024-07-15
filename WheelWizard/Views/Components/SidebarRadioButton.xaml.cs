@@ -1,6 +1,9 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using CT_MKWII_WPF.Views.Pages;
+using static CT_MKWII_WPF.Views.ViewUtils;
 
 namespace CT_MKWII_WPF.Views.Components;
 
@@ -14,10 +17,7 @@ EXAMPLES:
 
 public partial class SidebarRadioButton : UserControl
 {
-    public SidebarRadioButton()
-    {
-        InitializeComponent();
-    }
+    public SidebarRadioButton() => InitializeComponent();
 
     public static readonly DependencyProperty IconKindProperty =
         DependencyProperty.Register(nameof(IconKind), typeof(object), typeof(SidebarRadioButton), new PropertyMetadata(null));
@@ -55,17 +55,30 @@ public partial class SidebarRadioButton : UserControl
         set => SetValue(IsCheckedProperty, value);
     }
     
+    public static readonly DependencyProperty PageTypeProperty =
+        DependencyProperty.Register(nameof(PageType), typeof(Type), typeof(SidebarRadioButton),
+            new PropertyMetadata(typeof(Dashboard)));
+
+    public Type PageType
+    {
+        get => (Type)GetValue(PageTypeProperty);
+        set => SetValue(PageTypeProperty, value);
+    }
+    
     public static readonly RoutedEvent ClickEvent = EventManager.RegisterRoutedEvent(
         nameof(Click), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SidebarRadioButton));
 
     public event RoutedEventHandler Click
     {
-        add { AddHandler(ClickEvent, value); }
-        remove { RemoveHandler(ClickEvent, value); }
+        add => AddHandler(ClickEvent, value);
+        remove => RemoveHandler(ClickEvent, value);
     }
-
+    
     private void OnClick(object sender, RoutedEventArgs e)
     {
+        if (Activator.CreateInstance(PageType) is not Page page) return;
+        NavigateToPage(page);
+
         RaiseEvent(new RoutedEventArgs(ClickEvent));
     }
 }

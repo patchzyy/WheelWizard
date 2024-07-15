@@ -39,7 +39,7 @@ public partial class DraggableListView : BaseListView
         
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
-        if (!(View is GridView gridView)) return; 
+        if (View is not GridView gridView) return; 
 
         // here we create an empty column that will later be filled with the icon for each row
         // We create an empty column that will be filled in order to not mess up any other columns arrangement
@@ -90,22 +90,20 @@ public partial class DraggableListView : BaseListView
        
         // TODO: make it so it does not change the style if the smae targetData has been given,
         //       this will make it so it does not flicker
-        if (EnableLineIndication && viewItem != null && (viewItem != _dragHoverListViewItem ))
+        if (!EnableLineIndication || viewItem == null || (viewItem == _dragHoverListViewItem)) return;
+        if (_dragHoverListViewItem != null)
+            _dragHoverListViewItem.Style = (Style)FindResource("DefaultItemStyle");
+        if (viewItem != _draggingListViewItem)
         {
-            if (_dragHoverListViewItem != null)
-                _dragHoverListViewItem.Style = (Style)FindResource("DefaultItemStyle");
-            if (viewItem != _draggingListViewItem)
-            {
-                _dragHoverListViewItem = viewItem;
-                string side = targetData.Item2 ? "Down" : "Up";
-                _previousBotSide = targetData.Item2;
-                _dragHoverListViewItem.Style = (Style)FindResource($"DefaultItemStyle-Target{side}");
-            }
-            else
-            {
-                _dragHoverListViewItem = null;
-                _previousBotSide = null;
-            }
+            _dragHoverListViewItem = viewItem;
+            var side = targetData.Item2 ? "Down" : "Up";
+            _previousBotSide = targetData.Item2;
+            _dragHoverListViewItem.Style = (Style)FindResource($"DefaultItemStyle-Target{side}");
+        }
+        else
+        {
+            _dragHoverListViewItem = null;
+            _previousBotSide = null;
         }
     }
     
@@ -120,7 +118,7 @@ public partial class DraggableListView : BaseListView
         if(!(e.Data.GetData("listViewItem") is ListViewItem listViewItem)) return;
         if(_draggingListViewItem == null) return; // this should never happen, so to be safe we just return
         var targetData = GetDropTargetIndex(e.GetPosition(this));
-        int targetIndex = targetData.Item1;
+        var targetIndex = targetData.Item1;
         if (targetData.Item2) targetIndex++;
 
         // Getting a bunch of types to call the Remove and Insert methods
@@ -148,11 +146,9 @@ public partial class DraggableListView : BaseListView
     
     private IEnumerable<ListViewItem> GetAllListViewItems()
     {
-        for (int i = 0; i < Items.Count; i++)
+        for (var i = 0; i < Items.Count; i++)
         {
-            var container = ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
-        
-            if (container != null) yield return container;
+            if (ItemContainerGenerator.ContainerFromIndex(i) is ListViewItem container) yield return container;
             // else
             // {
             //     // If the container is null, it might not be realized yet
@@ -168,7 +164,7 @@ public partial class DraggableListView : BaseListView
     // Item2 = wether or not it should be displayed as bottom. (if so, Item1 also has to be decreased by 1)
     private Tuple<int,bool> GetDropTargetIndex(Point dropPosition)
     {
-        int index = 0;
+        var index = 0;
         foreach (var listViewItem in GetAllListViewItems())
         {
             Rect itemBounds = VisualTreeHelper.GetDescendantBounds(listViewItem);

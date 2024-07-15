@@ -304,7 +304,7 @@ public class RRLiveInfo
         public string ConnFail { get; set; }
         public string Suspend { get; set; }
         public string Fc { get; set; }
-        public string Ev { get; set; }
+        public string Ev { get; set; } = "--";
         public string Eb { get; set; }
         public List<Mii> Mii { get; set; }
 

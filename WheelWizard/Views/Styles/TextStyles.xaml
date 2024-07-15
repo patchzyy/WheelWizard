@@ -2,9 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
         
     <Style TargetType="TextBlock" x:Key="TitleText">
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="23"/>
         <Setter Property="Foreground" Value="{StaticResource TitleTextColor}"/>
         <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+    
+    <Style TargetType="TextBlock" x:Key="PageTitleText" BasedOn="{StaticResource TitleText}">
+        <Setter Property="Margin" Value="3,12"/>
     </Style>
     
     <Style TargetType="TextBlock" x:Key="BodyText">
@@ -24,6 +28,5 @@
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="Foreground" Value="{StaticResource BodyTextColor}"/>
     </Style>
-    
     
 </ResourceDictionary>

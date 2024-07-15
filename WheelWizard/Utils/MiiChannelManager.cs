@@ -24,7 +24,7 @@ public class MiiChannelManager
             await Task.Delay(200);
         }
         //launch mii channel
-        DolphinSettingHelper.LaunchDolphinWithArguments($"-b \"{getSavedChannelLocation()}\"");
+        DolphinSettingHelper.LaunchDolphin($"-b \"{getSavedChannelLocation()}\"");
     }
 
     private static bool MiiChannelExists()

@@ -1,9 +1,16 @@
 info|We are in still working on the ui-rework, so some buttons may move between pages :)
 
-Here are the icons we support currently
 
 The current status is the status that is inside of line 1
+(warning=yellow) (info=gray/white)  (alert=red)  (success=green)
+examples: 
 
+info|did you know that hippos cant swim
 warning|We are testing live dynamic icons!
-alert|Test alert!
-info|information!
+error|AAAAA, servers are down!! ITS ALL OVER, AAA!!!
+success|You look great today!
+party|Good news, we reached a new peek!, __ players!
+
+To go to a new line you can  use: \u000A
+
+so this is the firstline \u000Aand this is the second line

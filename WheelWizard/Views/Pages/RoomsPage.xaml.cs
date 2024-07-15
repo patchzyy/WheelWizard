@@ -27,8 +27,18 @@ namespace CT_MKWII_WPF.Views.Pages
             DataContext = this;
             Rooms = new ObservableCollection<RoomViewModel>();
             LoadRoomsData();
+          
+            RoomsView.SortingFunctions.Add("Players", PlayerComparable);
         }
 
+        private static int PlayerComparable(object? x, object? y)
+        {
+            if (x is not RoomViewModel xItem || y is not RoomViewModel yItem) return 0;
+            if (!(int.TryParse(xItem.PlayerCount, out var xPlayerCount) &&
+                  int.TryParse(yItem.PlayerCount, out var yPlayerCount))) return 0;
+            return xPlayerCount.CompareTo(yPlayerCount);
+        }
+        
         private async void LoadRoomsData()
         {
             try
@@ -46,6 +56,10 @@ namespace CT_MKWII_WPF.Views.Pages
         private void UpdateRoomsList(RRLiveInfo.RRInformation rrInfo)
         {
             Rooms.Clear();
+            // TODO: Playtime looks cool, but the sorting is broken since its a string, not a real date anymore
+            //      that means if you want to shortest time on top, 1 hour would still be higher then 30 minutes
+            //      we can make a custom sorter function for this, but that is just moving the problem, so instead this model should probably contain a real DateTime object
+            //      (or like a number of seconds since creation if date is not possible)
             foreach (var room in rrInfo.Rooms)
             {
                 Rooms.Add(new RoomViewModel
@@ -54,21 +68,29 @@ namespace CT_MKWII_WPF.Views.Pages
                     RoomNumber = room.Id,
                     PlayerCount = room.Players.Count.ToString(),
                     Type = room.Type,
-                    Playtime = (DateTime.Now - room.Created).ToString(@"hh\:mm\:ss")
+                    Playtime = HumanizeTimeSpan(DateTime.Now - room.Created)
                 });
             }
 
-            if (Rooms.Count == 0)
-            {
-                EmptyRoomsMessage.Visibility = Visibility.Visible;
-                RoomsListView.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                EmptyRoomsMessage.Visibility = Visibility.Collapsed;
-                RoomsListView.Visibility = Visibility.Visible;
-            }
+            EmptyRoomsView.Visibility = Rooms.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+            RoomsView.Visibility = Rooms.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
         }
+        
+        private string HumanizeTimeSpan(TimeSpan timeSpan)
+        {
+            string P(int count) => count != 1 ? "s" : "";
+
+            if (timeSpan.TotalDays >= 1)
+                return $"{timeSpan.Days} day{P(timeSpan.Days)} {timeSpan.Hours} hour{P(timeSpan.Hours)}";
+           
+            if (timeSpan.TotalHours >= 1)
+                return $"{timeSpan.Hours} hour{P(timeSpan.Hours)} {timeSpan.Minutes} minute{P(timeSpan.Minutes)}";
+        
+            if (timeSpan.TotalMinutes >= 1)
+                return $"{timeSpan.Minutes} minute{P(timeSpan.Minutes)} {timeSpan.Seconds} second{P(timeSpan.Seconds)}";
+            
+            return $"{timeSpan.Seconds} second{P(timeSpan.Seconds)}";
+        } 
 
         private void Room_MouseDoubleClick(object sender, MouseButtonEventArgs e, ListViewItem clickedItem)
         {
@@ -82,11 +104,6 @@ namespace CT_MKWII_WPF.Views.Pages
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }  
-
-        // private void View_RoomButton(object sender, RoutedEventArgs e)
-        // {
-        //     throw new NotImplementedException();
-        // }
     }
 
     public class RoomViewModel

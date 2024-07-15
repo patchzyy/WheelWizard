@@ -39,10 +39,20 @@ namespace CT_MKWII_WPF.Views.Pages
             Room = room;
             PlayersList = new ObservableCollection<KeyValuePair<string, RRLiveInfo.RoomInfo.Player>>(Room.Players);
             DataContext = this;
-
             LoadMiiImagesAsync();
+         
+            PlayersListView.SortingFunctions.Add("Value.Ev", EvComparable);
         }
-
+        
+        private static int EvComparable(object? x, object? y)
+        {
+            if (x is not KeyValuePair<string, RRLiveInfo.RoomInfo.Player> xItem || 
+                y is not KeyValuePair<string, RRLiveInfo.RoomInfo.Player> yItem) return 0;
+            if (!(int.TryParse(xItem.Value.Ev, out var xEv) &&
+                  int.TryParse(yItem.Value.Ev, out var yEv))) return 0;
+            return xEv.CompareTo(yEv);
+        }
+        
         private async void setMiiImage(KeyValuePair<String, RRLiveInfo.RoomInfo.Player> playerPair)
         {
             var player = playerPair.Value;
@@ -114,11 +124,19 @@ namespace CT_MKWII_WPF.Views.Pages
             return $"{baseUrl}?{queryString}";
         }
 
-        private void GoBackClick(object sender, RoutedEventArgs e) => GetLayout().NavigateToPage(new RoomsPage());
+        private void GoBackClick(object sender, RoutedEventArgs e) => NavigateToPage(new RoomsPage());
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void CopyFriendCode_OnClick(object sender, RoutedEventArgs e)
+        {
+            // TODO: This list should not be a dictionary, it also makes this method a bit of a mess, since now i have to get it by getting an object and cast it to a KeyValuePair later
+            var selectedMod = PlayersListView.GetCurrentContextItem<object>();
+            if (selectedMod is KeyValuePair<string, RRLiveInfo.RoomInfo.Player> playerPair)
+                Clipboard.SetText(playerPair.Value.Fc);
         }
     }
 

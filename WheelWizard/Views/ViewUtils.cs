@@ -1,3 +1,5 @@
+using System.Windows.Controls;
+
 namespace CT_MKWII_WPF.Views;
 using System.Windows.Media;
 using System.Windows;
@@ -26,4 +28,5 @@ public static class ViewUtils
     }
 
     public static Layout GetLayout() => (Layout)Application.Current.MainWindow!;
+    public static void NavigateToPage(Page page) => GetLayout().NavigateToPage(page);
 }
