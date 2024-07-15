@@ -135,8 +135,13 @@ namespace CT_MKWII_WPF.Views.Pages
         {
             // TODO: This list should not be a dictionary, it also makes this method a bit of a mess, since now i have to get it by getting an object and cast it to a KeyValuePair later
             var selectedMod = PlayersListView.GetCurrentContextItem<object>();
+
             if (selectedMod is KeyValuePair<string, RRLiveInfo.RoomInfo.Player> playerPair)
-                Clipboard.SetText(playerPair.Value.Fc);
+            {
+                IDataObject dataObject = new DataObject();
+                dataObject.SetData(DataFormats.Text, playerPair.Value.Fc);
+                Clipboard.SetDataObject(dataObject);
+            }
         }
     }
 

@@ -6,7 +6,7 @@ using CT_MKWII_WPF.Utils;
 
 public static class RetroRewindLauncher
 {
-    public static void PlayRetroRewind()
+    public static void PlayRetroRewind(bool playTT)
     {
         //close dolphin if its open,
         var dolphinLocation = SettingsUtils.GetDolphinLocation();
@@ -44,7 +44,7 @@ public static class RetroRewindLauncher
         //the reason we do this is, lets say file A from the lowest priority mod is in the highest priority mod, we want to overwrite it
         dolphinLocation = SettingsUtils.GetDolphinLocation();
         string gamePath = SettingsUtils.GetGameLocation();
-        GenerateLaunchJSON();
+        GenerateLaunchJSON(playTT);
         string launchJson = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII", "RR.json");
 
         if (!File.Exists(dolphinLocation) || !File.Exists(gamePath))
@@ -70,36 +70,42 @@ public static class RetroRewindLauncher
         }
     }
 
-    private static void GenerateLaunchJSON()
+    private static void GenerateLaunchJSON(bool launchTT)
     {
-        string originalJSON = """
-{
-"base-file": "LINK TO ISO OR WBFS",
-"display-name": "RR",
-"riivolution": {
-  "patches": [
-    {
-      "options": [
-        {
-          "choice": 1,
-          "option-name": "Pack",
-          "section-name": "Retro Rewind"
-        },
-        {
-          "choice": 2,
-          "option-name": "My Stuff",
-          "section-name": "Retro Rewind"
-        }
-      ],
-      "root": "LINK TO RIIVOLUTION FOLDER",
-      "xml": "LINK TO RETRO REWIND XML FILE"
-    }
-  ]
-},
-"type": "dolphin-game-mod-descriptor",
-"version": 1
-}
-""";
+        int value = launchTT ? 1 : 0;
+        string originalJSON = $$"""
+                            {
+                            "base-file": "LINK TO ISO OR WBFS",
+                            "display-name": "RR",
+                            "riivolution": {
+                              "patches": [
+                                {
+                                  "options": [
+                                    {
+                                      "choice": 1,
+                                      "option-name": "Pack",
+                                      "section-name": "Retro Rewind"
+                                    },
+                                    {
+                                      "choice": 2,
+                                      "option-name": "My Stuff",
+                                      "section-name": "Retro Rewind"
+                                    },
+                                    {
+                                      "choice": {{value}},
+                                      "option-name": "Online TT",
+                                      "section-name": "Retro Rewind"
+                                    }
+                                  ],
+                                  "root": "LINK TO RIIVOLUTION FOLDER",
+                                  "xml": "LINK TO RETRO REWIND XML FILE"
+                                }
+                              ]
+                            },
+                            "type": "dolphin-game-mod-descriptor",
+                            "version": 1
+                            }
+                            """;
 
         // Replace the base-file with the game path
         string correctedGamePath = SettingsUtils.GetGameLocation().Replace(@"\", @"\/");

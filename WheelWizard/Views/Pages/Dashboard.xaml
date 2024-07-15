@@ -17,6 +17,22 @@
         <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
         <TextBlock Grid.Row="0" Text="Home" HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{StaticResource PageTitleText}"/>
         
+        <StackPanel Grid.Row="0" Margin="0,0,0,10" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <TextBlock
+                Style="{StaticResource BodyText}"
+                Text="Regular online"
+                Margin="0,0,10,0"></TextBlock>
+            <CheckBox
+                x:Name="OnlineTTCheckbox"
+                Style="{StaticResource Switch}"
+                HorizontalAlignment="Right"
+            ></CheckBox>
+            <TextBlock
+                Style="{StaticResource BodyText}"
+                Text="Online TT"
+                Margin="0,0,10,0"
+            ></TextBlock>
+        </StackPanel>
         
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock HorizontalAlignment="Center"
