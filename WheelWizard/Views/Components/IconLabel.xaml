@@ -9,7 +9,7 @@
              d:DesignHeight="150" d:DesignWidth="300"
              x:Name="Root">
     
-    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" FlowDirection="LeftToRight">
         
         <local:DynamicIcon IconPack="{Binding IconPack, ElementName=Root}"
                            IconKind="{Binding IconKind, ElementName=Root}"

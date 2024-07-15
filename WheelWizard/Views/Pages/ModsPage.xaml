@@ -68,7 +68,7 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <CheckBox IsChecked="{Binding IsEnabled, Mode=TwoWay}"
-                                              Style="{StaticResource SwitchDark}"
+                                              Style="{StaticResource DarkSwitch}"
                                               HorizontalAlignment="Center" VerticalAlignment="Center"
                                               Margin="0,5" />
                                 </DataTemplate>

@@ -16,7 +16,7 @@
     <SolidColorBrush x:Key="SwitchDisabled-Background" Color="{StaticResource Gray800}" />
     <SolidColorBrush x:Key="Switch-Background" Color="{StaticResource Gray700}" />
     <SolidColorBrush x:Key="Switch-Hover" Color="{StaticResource Gray500}" />
-    <SolidColorBrush x:Key="SwitchDark-BackgroundHover" Color="{StaticResource Gray900}" />
+    <SolidColorBrush x:Key="SwitchDark-BackgroundHover" Color="{StaticResource Gray950}" />
     
     <!-- ============ -->
     <!--   CHECKBOX   -->
@@ -159,7 +159,7 @@
      <!-- ============ -->
     <!--  SWITCH DARK -->
     <!-- ============ -->
-    <Style TargetType="CheckBox"  x:Key="SwitchDark">
+    <Style TargetType="CheckBox"  x:Key="DarkSwitch">
          <!-- setting the contents attributes, but will be overwritten inside the checkbox itself -->
          <Setter Property="FontSize" Value="14"/>
          <Setter Property="FontWeight" Value="Bold"/>

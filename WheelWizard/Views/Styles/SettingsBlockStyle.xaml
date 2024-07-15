@@ -8,6 +8,7 @@
         <Setter Property="Padding" Value="10"/>
         <Setter Property="BorderBrush" Value="{StaticResource LightBackgroundColor}"/>
         <Setter Property="BorderThickness" Value="3"/>
+        
     </Style>
         
 </ResourceDictionary>

@@ -1,6 +1,5 @@
-﻿using System;
+﻿
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using CT_MKWII_WPF.Utils;
@@ -25,11 +24,18 @@ public partial class SettingsPage : Page
     private void LoadSettings()
     {
         if (!SettingsUtils.configCorrectAndExists()) return;
-        DolphinInputField.Text = SettingsUtils.GetDolphinLocation();
-        MarioInputField.Text = SettingsUtils.GetGameLocation();
-        UserPathInputField.Text = SettingsUtils.GetUserPathLocation();
+        DolphinExeInput.Text = SettingsUtils.GetDolphinLocation();
+        MarioKartInput.Text = SettingsUtils.GetGameLocation();
+        DolphinUserPathInput.Text = SettingsUtils.GetUserPathLocation();
     }
 
+    private void UpdateResolution(object sender, RoutedEventArgs e)
+    {
+        if (sender is not RadioButton radioButton) return;
+        var resolution = radioButton.Tag.ToString();
+        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "InternalResolution", resolution);
+    }
+    
     private void UpdateResolutionButtonsState()
     {
         var enableControls = SettingsUtils.configCorrectAndExists();
@@ -54,19 +60,17 @@ public partial class SettingsPage : Page
         var forcemote = WiiMoteSettings.IsForceSettingsEnabled();
         DisableForce.IsChecked = forcemote;
     }
-    
-    
 
     private void FillUserPath()
     {
-        if (DolphinInputField.Text != "") return;
+        if (DolphinExeInput.Text != "") return;
         var folderPath = DolphinSettingHelper.AutomaticallyFindDolphinPath();
         if (!string.IsNullOrEmpty(folderPath))
-            UserPathInputField.Text = folderPath;
+            DolphinUserPathInput.Text = folderPath;
     }
 
 
-    private void DolphinBrowseClick(object sender, RoutedEventArgs e)
+    private void DolphinExeBrowse_OnClick(object sender, RoutedEventArgs e)
     {
         var openFileDialog = new OpenFileDialog
         {
@@ -75,10 +79,10 @@ public partial class SettingsPage : Page
         };
 
         if (openFileDialog.ShowDialog() == true)
-            DolphinInputField.Text = openFileDialog.FileName;
+            DolphinExeInput.Text = openFileDialog.FileName;
     }
 
-    private void MarioKartBrowseClick(object sender, RoutedEventArgs e)
+    private void MarioKartBrowse_OnClick(object sender, RoutedEventArgs e)
     {
         var openFileDialog = new OpenFileDialog
         {
@@ -87,10 +91,10 @@ public partial class SettingsPage : Page
         };
 
         if (openFileDialog.ShowDialog() == true)
-            MarioInputField.Text = openFileDialog.FileName;
+            MarioKartInput.Text = openFileDialog.FileName;
     }
 
-    private void DolphinUserPathClick(object sender, RoutedEventArgs e)
+    private void DolphinUserPathBrowse_OnClick(object sender, RoutedEventArgs e)
     {
         var folderPath = DolphinSettingHelper.AutomaticallyFindDolphinPath();
 
@@ -101,7 +105,7 @@ public partial class SettingsPage : Page
                 "Dolphin Emulator Folder Found", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                UserPathInputField.Text = folderPath;
+                DolphinUserPathInput.Text = folderPath;
                 return;
             }
         }
@@ -116,14 +120,29 @@ public partial class SettingsPage : Page
         CommonOpenFileDialog dialog = new();
         dialog.IsFolderPicker = true;
         if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
-            UserPathInputField.Text = dialog.FileName;
+            DolphinUserPathInput.Text = dialog.FileName;
+    }
+    
+    private void VSync_OnClick(object sender, RoutedEventArgs e)
+    {
+        //todo: move this logic into the backend
+        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Hardware", "VSync",
+            VSyncButton.IsChecked == true ? "True" : "False");
     }
 
-    private void SaveButtonClick(object sender, RoutedEventArgs e)
+    private void Recommended_OnClick(object sender, RoutedEventArgs e)
     {
-        var dolphinPath = DolphinInputField.Text;
-        var gamePath = MarioInputField.Text;
-        var userFolder = UserPathInputField.Text;
+        if (RecommendedButton.IsChecked == true)
+            DolphinSettingsUtils.EnableRecommendedSettings();
+        else
+            DolphinSettingsUtils.DisableRecommendedSettings(); 
+    }
+    
+    private void SaveButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        var dolphinPath = DolphinExeInput.Text;
+        var gamePath = MarioKartInput.Text;
+        var userFolder = DolphinUserPathInput.Text;
         var forceDisableWiimote = DisableForce.IsChecked == true;
         if (!File.Exists(dolphinPath) || !File.Exists(gamePath) || !Directory.Exists(userFolder))
         {
@@ -144,46 +163,15 @@ public partial class SettingsPage : Page
         
         MessageBox.Show("Settings saved successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
     }
-
-    private void HomeButtonClick(object sender, RoutedEventArgs e)
-    {
-        var mainWindow = (Layout)Application.Current.MainWindow;
-        mainWindow.NavigateToPage(new Dashboard());
-    }
-
-    private void VSyncPress(object sender, RoutedEventArgs e)
-    {
-        //todo: move this logic into the backend
-        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Hardware", "VSync",
-            VSyncButton.IsChecked == true ? "True" : "False");
-    }
-
-    private void RecommendedClick(object sender, RoutedEventArgs e)
-    {
-        if (RecommendedButton.IsChecked == true)
-            EnableReccommendedSettings();
-        else
-            DisableReccommendedSettings();
-    }
     
-    private void EnableReccommendedSettings() => DolphinSettingsUtils.EnableRecommendedSettings();
-    
-    private void DisableReccommendedSettings() => DolphinSettingsUtils.DisableRecommendedSettings(); 
-
-    private void UpdateResolution(object sender, RoutedEventArgs e)
+    private void EditButton_OnClick(object sender, RoutedEventArgs e)
     {
-        if (sender is not RadioButton radioButton) return;
-        var resolution = radioButton.Tag.ToString();
-        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "InternalResolution", resolution);
+       
     }
 
-    private void LaunchMiiChannel_Click(object sender, RoutedEventArgs e)
+    private void CancelButton_OnClick(object sender, RoutedEventArgs e)
     {
-        ResolutionStackPanel.IsEnabled = false;
-        CheckBoxStackPanel.IsEnabled = false;
-        WiiMoteSettings.EnableVirtualWiiMote();
-        MiiChannelManager.LaunchMiiChannel();
-        //wait 5 seconds before re-enabling the buttons
-        Task.Delay(5000).ContinueWith(_ => Dispatcher.Invoke(UpdateResolutionButtonsState));
+        
     }
 }
+
