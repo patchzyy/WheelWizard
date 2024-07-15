@@ -29,7 +29,8 @@
         <Grid Grid.Row="1" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             
@@ -45,8 +46,14 @@
                            Style="{StaticResource BodyText}"/>
             </StackPanel>
             
+            <StackPanel Grid.Column="2">
+                <components:FormFieldLabel Text="Type" Margin="0,0,2,0"/>
+                <TextBlock x:Name="RoomKind"
+                           Style="{StaticResource BodyText}"/>
+            </StackPanel>
+            
                     
-            <icon:PackIconFontAwesome  Grid.Column="2" Height="30" Width="30" Margin="3,12"
+            <icon:PackIconFontAwesome  Grid.Column="3" Height="30" Width="30" Margin="3,12"
                                        HorizontalAlignment="Right" VerticalAlignment="Top">
                 <icon:PackIconFontAwesome.Style>
                     <Style TargetType="icon:PackIconFontAwesome">

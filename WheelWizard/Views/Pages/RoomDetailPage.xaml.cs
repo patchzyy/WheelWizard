@@ -40,7 +40,7 @@ namespace CT_MKWII_WPF.Views.Pages
             PlayersList = new ObservableCollection<KeyValuePair<string, RRLiveInfo.RoomInfo.Player>>(Room.Players);
             DataContext = this;
             LoadMiiImagesAsync();
-         
+            RoomKind.Text = room.Rk == "vs_10" ? "VS" : "TT";
             PlayersListView.SortingFunctions.Add("Value.Ev", EvComparable);
         }
         

@@ -68,6 +68,7 @@ namespace CT_MKWII_WPF.Views.Pages
                     RoomNumber = room.Id,
                     PlayerCount = room.Players.Count.ToString(),
                     Type = room.Type,
+                    RoomKind = room.Rk == "vs_10" ? "VS" : "TT",
                     Playtime = HumanizeTimeSpan(DateTime.Now - room.Created)
                 });
             }
@@ -75,6 +76,8 @@ namespace CT_MKWII_WPF.Views.Pages
             EmptyRoomsView.Visibility = Rooms.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
             RoomsView.Visibility = Rooms.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
         }
+        
+
         
         private string HumanizeTimeSpan(TimeSpan timeSpan)
         {
@@ -113,5 +116,7 @@ namespace CT_MKWII_WPF.Views.Pages
         public string PlayerCount { get; set; }
         public string Type { get; set; }
         public string Playtime { get; set; }
+        
+        public string RoomKind { get; set; }
     }
 }
