@@ -164,7 +164,7 @@
                             <CheckBox Margin="0,2" IsChecked="False" 
                                       Style="{StaticResource DarkSwitch}" Click="Recommended_OnClick" x:Name="RecommendedButton"  >
                                 <components:FormFieldLabel Text="Recommended Settings" 
-                                                           TipText="This setting will change curtain dolphin settings to reduce stuttering and lag spikes"/>
+                                                           TipText="This setting will change certain dolphin settings to reduce stuttering and lag spikes"/>
                             </CheckBox>
                         </StackPanel>
                     </Grid>
@@ -179,7 +179,8 @@
                 <Border Style="{StaticResource SettingsBlockStyle}" x:Name="WiiBorder">
                     <CheckBox Margin="0,2" IsChecked="False" 
                               Style="{StaticResource DarkSwitch}" 
-                              x:Name="DisableForce"  >
+                              x:Name="DisableForce"
+                              Click="clickForceWiimote">
                         <components:FormFieldLabel Text=" Force Disable Wiimote" 
                                                    TipText="This setting disabled Wiimote ingame, but enables is for the Wii chanel"/>
 

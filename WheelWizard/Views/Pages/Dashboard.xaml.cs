@@ -44,7 +44,7 @@ public partial class Dashboard : Page
                 EnableSidebarButtons();
                 break;
             case RRStatusManager.ActionButtonStatus.UpToDate:
-                RetroRewindLauncher.PlayRetroRewind();
+                RetroRewindLauncher.PlayRetroRewind((bool)OnlineTTCheckbox.IsChecked!);
                 break;
         }
         UpdateActionButton();
