@@ -76,6 +76,15 @@ public static class RetroRewindInstaller
         }
         return true;
     }
+    
+    //if currentversion is below 3.2.6 we need to do a full reinstall
+    if (CompareVersions(currentVersion, "3.2.6") < 0)
+    {
+        var result = MessageBox.Show("Your version of Retro Rewind is too old to update. Would you like to reinstall Retro Rewind?", "Reinstall Retro Rewind", MessageBoxButton.YesNo);
+        if (result == MessageBoxResult.No) return false;
+        await InstallRetroRewind();
+        return true;
+    }
     var allVersions = await GetAllVersionData();
     var updatesToApply = GetUpdatesToApply(currentVersion, allVersions);
     
@@ -197,8 +206,28 @@ public static async Task InstallRetroRewind()
     // Check if Retro Rewind is already installed
     if (IsRetroRewindInstalled())
     {
-        MessageBox.Show("Retro Rewind is already installed.");
-        return;
+        var result = MessageBox.Show("There are already files in your RetroRewind Folder. Would you like to install?", "Reinstall Retro Rewind", MessageBoxButton.YesNo);
+        if (result == MessageBoxResult.No)
+        {
+            return;
+        }
+        var loadPath_ = SettingsUtils.GetLoadPathLocation();
+        var rrWFC = Path.Combine(loadPath_, "Riivolution", "RetroRewind6", "save","RetroWFC");
+        if (Directory.Exists(rrWFC))
+        {
+            var files = Directory.GetFiles(rrWFC, "rksys.dat", SearchOption.AllDirectories);
+            if (files.Length > 0)
+            {
+                var regionFolder = Path.GetDirectoryName(files[0]);
+                var regionFoldername = Path.GetFileName(regionFolder);
+                var DATFILEDATA = await File.ReadAllBytesAsync(files[0]);
+                var riiWFCregion = Path.Combine(loadPath_, "Riivolution", "riivolution", "save", "RetroWFC", regionFoldername);
+                Directory.CreateDirectory(riiWFCregion);
+                await File.WriteAllBytesAsync(Path.Combine(riiWFCregion, "rksys.dat"), DATFILEDATA);
+            }
+        }
+        var retroRewindPath = Path.Combine(loadPath_, "Riivolution", "RetroRewind6");
+        Directory.Delete(retroRewindPath, true);
     }
     
     var loadPath = SettingsUtils.GetLoadPathLocation();
@@ -210,10 +239,8 @@ public static async Task InstallRetroRewind()
     // Extract the zip to the Riivolution folder
     var extractionPath = Path.Combine(loadPath, "Riivolution");
     ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
-    
     // Clean up the downloaded zip file
     File.Delete(tempZipPath);
-    
     }
 
 

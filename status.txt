@@ -1,7 +1,6 @@
 info|We are in still working on the ui-rework,\u000Aso some buttons may move between pages :)
 
 
-
 The current status is the status that is inside of line 1
 (warning=yellow) (info=gray/white)  (alert=red)  (success=green)
 examples: 

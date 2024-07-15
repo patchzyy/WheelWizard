@@ -99,16 +99,16 @@
                         <StackPanel Margin="0,10,0,0" Orientation="Horizontal" FlowDirection="RightToLeft">
                             <components:Button Variant="Primary" 
                                                IconSize="0" Text="Save"
-                                               Visibility="Collapsed"  x:Name="LocationSaveButton"
+                                                x:Name="LocationSaveButton"
                                                Click="SaveButton_OnClick" 
                                                Margin="3"/>
                             <components:Button Variant="Secondary" IconSize="0"
-                                                Visibility="Collapsed" x:Name="LocationCancelButton"
-                                                Click="CancelButton_OnClick"
+                                                 x:Name="LocationCancelButton"
+                                               Visibility="Collapsed" Click="CancelButton_OnClick"
                                                Text="Cancel" Margin="3"/>
                             <components:Button Variant="Primary" x:Name="LocationEditButton"
                                                IconPack="FontAwesome" Text="Edit"
-                                               Click="EditButton_OnClick"
+                                               Click="EditButton_OnClick" Visibility="Collapsed"
                                                IconKind="{x:Static icon:PackIconFontAwesomeKind.PenSolid}"
                                                Margin="3"/>
                         </StackPanel>
