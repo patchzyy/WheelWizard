@@ -1,12 +1,15 @@
 ﻿
+using System.Drawing;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using CT_MKWII_WPF.Utils;
 using CT_MKWII_WPF.Utils.Auto_updator;
 using CT_MKWII_WPF.Utils.DolphinHelpers;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using Button = CT_MKWII_WPF.Views.Components.Button;
 
 namespace CT_MKWII_WPF.Views.Pages;
 
@@ -14,10 +17,12 @@ public partial class SettingsPage : Page
 {
     public SettingsPage()
     {
+      
         InitializeComponent();
         LoadSettings();
         FillUserPath();
         UpdateResolutionButtonsState();
+        ToggleLocationSettings(false);
         VersionText.Text = "v" + VersionChecker.CurrentVersion;
     }
     
@@ -160,18 +165,38 @@ public partial class SettingsPage : Page
             return;
         }
         UpdateResolutionButtonsState();
-        
+        ToggleLocationSettings(false);
         MessageBox.Show("Settings saved successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
     }
     
     private void EditButton_OnClick(object sender, RoutedEventArgs e)
     {
-       
+        ToggleLocationSettings(true);
     }
 
     private void CancelButton_OnClick(object sender, RoutedEventArgs e)
     {
+        ToggleLocationSettings(false);
+    }
+
+    private void ToggleLocationSettings(bool enable)
+    {
+        if (!SettingsUtils.configCorrectAndExists() && !enable)
+        {
+            LocationBorder.BorderBrush = (SolidColorBrush)FindResource("SettingsBlockWarningHighlight");
+            LocationEditButton.Variant = Button.ButtonsVariantType.Secondary;
+            LocationWarningIcon.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            LocationBorder.BorderBrush = (SolidColorBrush)FindResource("SettingsBlockBackground");
+            LocationEditButton.Variant = Button.ButtonsVariantType.Primary;
+            LocationWarningIcon.Visibility = Visibility.Collapsed;
+        }
         
+        LocationInputFields.IsEnabled = enable;
+        LocationEditButton.Visibility = enable ? Visibility.Collapsed : Visibility.Visible;
+        LocationSaveButton.Visibility = enable ? Visibility.Visible : Visibility.Collapsed;
+        LocationCancelButton.Visibility = enable ? Visibility.Visible : Visibility.Collapsed;
     }
 }
-

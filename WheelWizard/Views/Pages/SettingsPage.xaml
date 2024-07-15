@@ -22,7 +22,21 @@
         <StackPanel Grid.Row="1">
             <!-- File location settings -->
             <StackPanel Margin="0,15,0,0">
-                <components:FormFieldLabel Text="Location settings"/>
+                <StackPanel Orientation="Horizontal">
+                    <components:FormFieldLabel Text="Location settings"/>
+                    <Border ToolTipService.InitialShowDelay="5" x:Name="LocationWarningIcon"
+                            ToolTipService.ShowDuration="10000"
+                            ToolTipService.BetweenShowDelay="0">
+                        <icon:PackIconFontAwesome Kind="TriangleExclamationSolid" 
+                                                  Foreground="{StaticResource WarningColor}"
+                        />
+                        <Border.ToolTip>
+                            <components:ToolTipMessage Alignment="TopCenter" Content="You must set these 3 values &#10;before you can start playing retro rewind"/>
+                        </Border.ToolTip>
+                    </Border>
+              
+                </StackPanel>
+                
                 <Border Style="{StaticResource SettingsBlockStyle}" x:Name="LocationBorder">
                     <StackPanel>
                         <StackPanel x:Name="LocationInputFields">
@@ -101,14 +115,15 @@
                                                IconSize="0" Text="Save"
                                                 x:Name="LocationSaveButton"
                                                Click="SaveButton_OnClick" 
+                                               Visibility="Collapsed" Height="40"
                                                Margin="3"/>
                             <components:Button Variant="Secondary" IconSize="0"
-                                                 x:Name="LocationCancelButton"
+                                                 x:Name="LocationCancelButton" Height="40"
                                                Visibility="Collapsed" Click="CancelButton_OnClick"
                                                Text="Cancel" Margin="3"/>
                             <components:Button Variant="Primary" x:Name="LocationEditButton"
                                                IconPack="FontAwesome" Text="Edit"
-                                               Click="EditButton_OnClick" Visibility="Collapsed"
+                                               Click="EditButton_OnClick" Height="40"
                                                IconKind="{x:Static icon:PackIconFontAwesomeKind.PenSolid}"
                                                Margin="3"/>
                         </StackPanel>

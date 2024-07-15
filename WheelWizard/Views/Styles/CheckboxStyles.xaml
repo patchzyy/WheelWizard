@@ -13,7 +13,7 @@
     <SolidColorBrush x:Key="CheckboxDisabled-BorderColor" Color="{StaticResource Gray700}" />
     
     <!-- note that switches use the Checkbox colors unless other required, those are below here -->
-    <SolidColorBrush x:Key="SwitchDisabled-Background" Color="{StaticResource Gray800}" />
+    <SolidColorBrush x:Key="SwitchDisabled-Background" Color="{StaticResource Gray700}" />
     <SolidColorBrush x:Key="Switch-Background" Color="{StaticResource Gray700}" />
     <SolidColorBrush x:Key="Switch-Hover" Color="{StaticResource Gray500}" />
     <SolidColorBrush x:Key="SwitchDark-BackgroundHover" Color="{StaticResource Gray950}" />
@@ -196,23 +196,10 @@
                          </Trigger>
 
                          <!-- Disabled -->
-                         <MultiTrigger>
-                             <MultiTrigger.Conditions>
-                                 <Condition Property="IsEnabled" Value="False"/>
-                                 <Condition Property="IsChecked" Value="False"/>
-                             </MultiTrigger.Conditions>
-                             <Setter Property="Background" Value="{StaticResource CheckboxDisabled-Background}"/>
+                         <Trigger  Property="IsEnabled" Value="False">
+                             <Setter Property="Background" Value="{StaticResource SwitchDisabled-Background}"/>
                              <Setter TargetName="SwitchNob" Property="Fill" Value="{StaticResource CheckboxDisabled-InnerWhite}"/>
-                         </MultiTrigger>
-
-                         <MultiTrigger>
-                             <MultiTrigger.Conditions>
-                                 <Condition Property="IsEnabled" Value="False"/>
-                                 <Condition Property="IsChecked" Value="True"/>
-                             </MultiTrigger.Conditions>
-                             <Setter Property="Background" Value="{StaticResource CheckboxDisabled-CheckedColor}"/>
-                             <Setter TargetName="SwitchNob" Property="Fill" Value="{StaticResource CheckboxDisabled-InnerWhite}"/>
-                         </MultiTrigger>
+                         </Trigger>
                      </ControlTemplate.Triggers>
                  </ControlTemplate>
              </Setter.Value>
