@@ -26,7 +26,7 @@
                             <!-- The border is wrapped inside an outerBorder without the border
                             This is to ensure that even if there is a funky pixel gap in between the inner part and outer stroke of the border, 
                             that it will just be filled in with the same background color as the inside -->
-                            <Border Background="{TemplateBinding Background}"
+                            <Border Background="{TemplateBinding Background}" Height="{TemplateBinding Height}"
                                     CornerRadius="{StaticResource GlobalCornerRadius}">
                                 <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                         Background="{TemplateBinding Background}"
