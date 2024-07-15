@@ -10,64 +10,44 @@ using MahApps.Metro.IconPacks;
 
 namespace CT_MKWII_WPF.Utils
 {
-    public class LiveAlertsManager
+    public static class LiveAlertsManager
     {
-        private readonly string _statusUrl;
-        private readonly DynamicIcon _statusIcon;
-        private readonly DispatcherTimer _timer;
-        private readonly HttpClient _httpClient;
-        private readonly Action<string> _updateStatusMessage;
+        private static readonly string _statusUrl = "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/status.txt";
+        private static DynamicIcon _statusIcon;
+        private static Action<string> _updateStatusMessage;
+        private static readonly DispatcherTimer _timer = new() { Interval = TimeSpan.FromSeconds(60) };
+        private static readonly HttpClient _httpClient = new();
 
-        public LiveAlertsManager(string statusUrl, DynamicIcon statusIcon, Action<string> updateStatusMessage)
+        public static void Start(DynamicIcon statusIcon,  Action<string> updateStatusMessage)
         {
-            _statusUrl = statusUrl;
             _statusIcon = statusIcon;
             _updateStatusMessage = updateStatusMessage;
-            _httpClient = new HttpClient();
+            _timer.Tick += async (s, e) => await UpdateStatus(); 
             
-            _timer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromSeconds(60) // update the status every 60 seconds
-            };
-            _timer.Tick += async (s, e) => await UpdateStatus(); //subscribe to the timer tick event
-            //so i didnt even know this was a thing but now every timer tick, it will call the UpdateStatus method
-
-            // Initialize with a default state
-            InitializeDefaultState();
-        }
-
-        private void InitializeDefaultState()
-        {
             _statusIcon.IconKind = null;
             _statusIcon.ForegroundColor = null;
             _updateStatusMessage("");
-        }
-
-        public void Start()
-        {
+            
             _timer.Start();
             Task.Run(async () => await UpdateStatus());
         }
 
-        public void Stop()
-        {
-            _timer.Stop();
-        }
+        public static void Stop() => _timer.Stop();
 
-        private async Task UpdateStatus()
+        private static async Task UpdateStatus()
         {
             try
             {
-                string content = await _httpClient.GetStringAsync(_statusUrl);
+                var content = await _httpClient.GetStringAsync(_statusUrl);
                 var parts = content.Split("\n");
-                var firstline = parts[0];
-                if (string.IsNullOrWhiteSpace(firstline))
+                var firstLine = parts[0];
+                if (string.IsNullOrWhiteSpace(firstLine))
                     return;   //do nothing
-                var alertMessage = firstline.Split("|");
+                var alertMessage = firstLine.Split("|");
                 if (alertMessage.Length == 2)
                 {
-                    string messageType = alertMessage[0];
-                    string message = alertMessage[1];
+                    var messageType = alertMessage[0];
+                    var message = alertMessage[1];
                     message = Regex.Replace(message, @"\\u000A", "\n");
                     
                     await UpdateUI(messageType, message);
@@ -83,7 +63,7 @@ namespace CT_MKWII_WPF.Utils
             }
         }
 
-        private async Task UpdateUI(string messageType, string message)
+        private static async Task UpdateUI(string messageType, string message)
         {
             await _statusIcon.Dispatcher.InvokeAsync(() =>
             {

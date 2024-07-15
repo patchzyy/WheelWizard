@@ -16,28 +16,20 @@ public partial class Dashboard : Page
         InitializeComponent();
         UpdateActionButton();
     }
-
-    private void GotoSettingsPage()
-    {
-        var layout = GetLayout();
-        layout.SettingsButton.IsChecked = true;
-        layout.NavigateToPage(new SettingsPage());
-    }
-
-
+    
     private async void PlayButton_Click(object sender, RoutedEventArgs e)
     {
         RRStatusManager.ActionButtonStatus status = await RRStatusManager.GetCurrentStatus();
         switch (status)
         {
-            case RRStatusManager.ActionButtonStatus.NoServer: 
-                GotoSettingsPage();
+            case RRStatusManager.ActionButtonStatus.NoServer:
+                NavigateToPage(new SettingsPage());
                 break;
             case RRStatusManager.ActionButtonStatus.NoDolphin:
-                GotoSettingsPage();
+                NavigateToPage(new SettingsPage());
                 break;
             case RRStatusManager.ActionButtonStatus.ConfigNotFinished:
-                GotoSettingsPage();
+                NavigateToPage(new SettingsPage());
                 break;
             case RRStatusManager.ActionButtonStatus.noRR:
                 SetButtonState("Installing...", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download, false, true);

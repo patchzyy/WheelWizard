@@ -124,7 +124,7 @@ namespace CT_MKWII_WPF.Views.Pages
             return $"{baseUrl}?{queryString}";
         }
 
-        private void GoBackClick(object sender, RoutedEventArgs e) => GetLayout().NavigateToPage(new RoomsPage());
+        private void GoBackClick(object sender, RoutedEventArgs e) => NavigateToPage(new RoomsPage());
 
         protected virtual void OnPropertyChanged(string propertyName)
         {

@@ -10,6 +10,7 @@ using CT_MKWII_WPF.Utils.DolphinHelpers;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Button = CT_MKWII_WPF.Views.Components.Button;
+using static CT_MKWII_WPF.Views.ViewUtils;
 
 namespace CT_MKWII_WPF.Views.Pages;
 
@@ -160,8 +161,7 @@ public partial class SettingsPage : Page
         if(!SettingsUtils.SetupCorrectly())
         {
             MessageBox.Show("Please ensure all paths are correct and try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            var settingsWindow = (Layout)Application.Current.MainWindow;
-            settingsWindow.NavigateToPage(new SettingsPage());
+            NavigateToPage(new SettingsPage());
             return;
         }
         UpdateResolutionButtonsState();
