@@ -1,4 +1,3 @@
-warning|Servers are being updated to improve download speeds
 info|We are in still working on the ui-rework, so some buttons may move between pages :)
 
 Here are the icons we support currently
