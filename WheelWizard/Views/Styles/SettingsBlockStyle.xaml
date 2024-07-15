@@ -7,7 +7,7 @@
     <Style x:Key="SettingsBlockStyle" TargetType="Border">
         <Setter Property="Background" Value="{StaticResource SettingsBlockBackground}"/>
         <Setter Property="CornerRadius" Value="{StaticResource GlobalCornerRadius}"/>
-        <Setter Property="Margin" Value="0,0,0,10"/>
+        <Setter Property="Margin" Value="0,0,0,7"/>
         <Setter Property="Padding" Value="10"/>
         <Setter Property="BorderBrush" Value="{StaticResource SettingsBlockBackground}"/>
         <Setter Property="BorderThickness" Value="3"/>

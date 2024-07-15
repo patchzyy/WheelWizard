@@ -135,9 +135,9 @@
             <!-- Video settings -->
             <StackPanel>
                 <components:FormFieldLabel Text="Video settings"/>
-                <Border Style="{StaticResource SettingsBlockStyle}">
+                <Border Style="{StaticResource SettingsBlockStyle}" x:Name="VideoBorder">
                     <UniformGrid Grid.Row="1" Columns="2" Rows="1" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                        <StackPanel  x:Name="ResolutionStackPanel">
+                        <StackPanel x:Name="ResolutionStackPanel">
                             <RadioButton Margin="0,2" GroupName="ResolutionGroup1" 
                             IsChecked="True" Click="UpdateResolution" Tag="1" >1x (Native 640x528)</RadioButton>
                             <RadioButton Margin="0,2" GroupName="ResolutionGroup1" 
@@ -148,16 +148,25 @@
                             IsChecked="False" Click="UpdateResolution" Tag="4" >4x (2560x2112)</RadioButton>
                         </StackPanel>
             
-                        <StackPanel x:Name="CheckBoxStackPanel">
+                        <StackPanel>
                             <CheckBox Margin="0,2" IsChecked="False" 
                                       Style="{StaticResource DarkSwitch}" Click="VSync_OnClick" x:Name="VSyncButton" >VSync</CheckBox>
                             <CheckBox Margin="0,2" IsChecked="False" 
                                       Style="{StaticResource DarkSwitch}" Click="Recommended_OnClick" x:Name="RecommendedButton"  >Recommended Settings</CheckBox>
-                            <CheckBox Margin="0,2" IsChecked="False" 
-                                      Style="{StaticResource DarkSwitch}" 
-                                      x:Name="DisableForce"  >Force Disable Wiimote</CheckBox>
                         </StackPanel>
                     </UniformGrid> 
+                </Border>
+            </StackPanel>
+            
+            
+                 
+            <!-- Wii settings -->
+            <StackPanel>
+                <components:FormFieldLabel Text="Wii Settings"/>
+                <Border Style="{StaticResource SettingsBlockStyle}" x:Name="WiiBorder">
+                    <CheckBox Margin="0,2" IsChecked="False" 
+                              Style="{StaticResource DarkSwitch}" 
+                              x:Name="DisableForce"  >Force Disable Wiimote</CheckBox>
                 </Border>
             </StackPanel>
         </StackPanel>

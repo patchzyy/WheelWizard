@@ -44,9 +44,9 @@ public partial class SettingsPage : Page
     private void UpdateResolutionButtonsState()
     {
         var enableControls = SettingsUtils.configCorrectAndExists();
-        if (ResolutionStackPanel == null || CheckBoxStackPanel == null) return;
-        ResolutionStackPanel.IsEnabled = enableControls;
-        CheckBoxStackPanel.IsEnabled = enableControls;
+        VideoBorder.IsEnabled = enableControls;
+        WiiBorder.IsEnabled = enableControls;
+        
         if (!enableControls) return;
         VSyncButton.IsChecked = DolphinSettingsUtils.GetCurrentVSyncStatus();
         RecommendedButton.IsChecked = DolphinSettingsUtils.IsRecommendedSettingsEnabled();
@@ -177,6 +177,7 @@ public partial class SettingsPage : Page
     private void CancelButton_OnClick(object sender, RoutedEventArgs e)
     {
         ToggleLocationSettings(false);
+        LoadSettings();
     }
 
     private void ToggleLocationSettings(bool enable)
