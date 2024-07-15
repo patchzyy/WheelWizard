@@ -200,4 +200,9 @@ public partial class SettingsPage : Page
         LocationSaveButton.Visibility = enable ? Visibility.Visible : Visibility.Collapsed;
         LocationCancelButton.Visibility = enable ? Visibility.Visible : Visibility.Collapsed;
     }
+
+    private void clickForceWiimote(object sender, RoutedEventArgs e)
+    {
+        SettingsUtils.SaveWiimoteSettings(DisableForce.IsChecked == true);
+    }
 }

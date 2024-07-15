@@ -160,5 +160,10 @@ namespace CT_MKWII_WPF.Utils
             var json = File.ReadAllText(modConfigPath);
             return JsonConvert.DeserializeObject<ModData[]>(json);
         }
+
+        public static void SaveWiimoteSettings(bool ForceWiimote)
+        {
+            SaveSettings(_config.DolphinLocation, _config.GameLocation, _config.UserFolderPath, _config.HasRunNANDTutorial, ForceWiimote);
+        }
     }
 }
