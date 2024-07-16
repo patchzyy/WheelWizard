@@ -28,18 +28,16 @@ public partial class Layout : Window, INotifyPropertyChanged
         var statusIconBorder = StatusIcon.Parent as Border;
         if (statusIconBorder != null)
             statusIconBorder.ToolTip = null;
-        loadplayerdata();
+        // loadplayerdata();
 
     }
 
-    public static void loadplayerdata()
-    {
-        var data = new GameDataLoader();
-        data.LoadGameData();
-        var gameData = data.GameData;
-
-        
-    }
+    // public static void loadplayerdata()
+    // {
+    //     var data = new GameDataLoader();
+    //     data.LoadGameData();
+    //     var gameData = data.GameData;
+    // }
 
     public void NavigateToPage(Page page)
     {
