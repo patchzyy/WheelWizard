@@ -13,7 +13,7 @@ public static class VersionChecker
 {
     private const string VersionFileURL = "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/version.txt";
 
-    public const string CurrentVersion = "1.1.1";
+    public const string CurrentVersion = "1.1.2";
 
 
     public static void CheckForUpdates()
