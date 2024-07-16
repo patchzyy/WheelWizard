@@ -1,20 +1,10 @@
 ﻿using System.Threading.Tasks;
+using CT_MKWII_WPF.Enums;
 
 namespace CT_MKWII_WPF.Utils;
 
 public class RRStatusManager
 {
-    public enum ActionButtonStatus
-    {
-        NoServer,
-        NoDolphin,
-        ConfigNotFinished,
-        noRR,
-        noRRActive,
-        RRnotReady,
-        OutOfDate,
-        UpToDate
-    }
 
     public static async Task<ActionButtonStatus> GetCurrentStatus()
     {

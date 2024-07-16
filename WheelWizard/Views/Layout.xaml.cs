@@ -5,6 +5,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using CT_MKWII_WPF.Classes;
 using CT_MKWII_WPF.Utils;
 using CT_MKWII_WPF.Views.Components;
 using CT_MKWII_WPF.Views.Pages;
@@ -20,15 +21,24 @@ public partial class Layout : Window, INotifyPropertyChanged
         InitializeComponent();
         DataContext = this;
         NavigateToPage(new Dashboard());
-    
         PopulatePlayerText();
-        
         // Create and start the LiveAlertsManager
         LiveAlertsManager.Start(StatusIcon, UpdateStatusMessage);
         
         var statusIconBorder = StatusIcon.Parent as Border;
         if (statusIconBorder != null)
             statusIconBorder.ToolTip = null;
+        loadplayerdata();
+
+    }
+
+    public static void loadplayerdata()
+    {
+        var data = new GameDataLoader();
+        data.LoadGameData();
+        var gameData = data.GameData;
+
+        
     }
 
     public void NavigateToPage(Page page)

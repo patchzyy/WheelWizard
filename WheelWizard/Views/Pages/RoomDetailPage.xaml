@@ -41,8 +41,8 @@
             </StackPanel>
 
             <StackPanel Grid.Column="1">
-                <components:FormFieldLabel Text="Created At" Margin="0,0,2,0"/>
-                <TextBlock Text="{Binding Room.Created}"  
+                <components:FormFieldLabel Text="Time Online" Margin="0,0,2,0"/>
+                <TextBlock x:Name="TimeOnline"  
                            Style="{StaticResource BodyText}"/>
             </StackPanel>
             

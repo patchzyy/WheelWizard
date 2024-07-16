@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using CT_MKWII_WPF.Classes;
 using CT_MKWII_WPF.Utils;
 
 namespace CT_MKWII_WPF.Views.Pages
@@ -68,13 +69,24 @@ namespace CT_MKWII_WPF.Views.Pages
                     RoomNumber = room.Id,
                     PlayerCount = room.Players.Count.ToString(),
                     Type = room.Type,
-                    RoomKind = room.Rk == "vs_10" ? "VS" : "TT",
-                    Playtime = HumanizeTimeSpan(DateTime.Now - room.Created)
+                    RoomKind = HumanizeGameMode(room.Rk),
+                    Playtime = HumanizeTimeSpan(DateTime.UtcNow - room.Created)
                 });
             }
 
             EmptyRoomsView.Visibility = Rooms.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
             RoomsView.Visibility = Rooms.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
+        }
+        
+        private string HumanizeGameMode(string mode)
+        {
+            return mode switch
+            {
+                "vs_10" => "VS",
+                "vs_11" => "TT",
+                "vs_751" => "VS",
+                _ => "??"
+            };
         }
         
 
@@ -111,7 +123,7 @@ namespace CT_MKWII_WPF.Views.Pages
 
     public class RoomViewModel
     {
-        public RRLiveInfo.RoomInfo RoomInfo { get; set; }
+        public RoomInfo RoomInfo { get; set; }
         public string RoomNumber { get; set; }
         public string PlayerCount { get; set; }
         public string Type { get; set; }

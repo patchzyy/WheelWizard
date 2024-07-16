@@ -18,7 +18,6 @@ public class DownloadUtils
         {
             Directory.CreateDirectory(directory);
         }
-
         try
         {
             using (HttpClient client = new HttpClient())
