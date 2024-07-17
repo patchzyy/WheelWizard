@@ -9,7 +9,7 @@ public static class RetroRewindLauncher
     public static void PlayRetroRewind(bool playTT)
     {
         //close dolphin if its open,
-        var dolphinLocation = SettingsUtils.GetDolphinLocation();
+        var dolphinLocation = SettingsManager.GetDolphinLocation();
         if (Process.GetProcessesByName(Path.GetFileNameWithoutExtension(dolphinLocation)).Length != 0)
         {
             foreach (var process in Process.GetProcessesByName(Path.GetFileNameWithoutExtension(dolphinLocation)))
@@ -23,11 +23,11 @@ public static class RetroRewindLauncher
         }
         //first clear the my-stuff folder
         //now we check for all the mods we want in the modconfig
-        var mods = SettingsUtils.GetMods();
+        var mods = SettingsManager.GetMods();
         if (mods.Length != 0)
         {
             Array.Reverse(mods);
-            var mystuffFolder = Path.Combine(SettingsUtils.GetLoadPathLocation(), "Riivolution", "RetroRewind6", "MyStuff");
+            var mystuffFolder = Path.Combine(SettingsManager.GetLoadPathLocation(), "Riivolution", "RetroRewind6", "MyStuff");
             if (Directory.Exists(mystuffFolder))
             {
                 Directory.Delete(mystuffFolder, true);
@@ -42,8 +42,8 @@ public static class RetroRewindLauncher
         }
         //reverse the list, because mods that have the lowest priority go first
         //the reason we do this is, lets say file A from the lowest priority mod is in the highest priority mod, we want to overwrite it
-        dolphinLocation = SettingsUtils.GetDolphinLocation();
-        string gamePath = SettingsUtils.GetGameLocation();
+        dolphinLocation = SettingsManager.GetDolphinLocation();
+        string gamePath = SettingsManager.GetGameLocation();
         GenerateLaunchJSON(playTT);
         string launchJson = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII", "RR.json");
 
@@ -108,11 +108,11 @@ public static class RetroRewindLauncher
                             """;
 
         // Replace the base-file with the game path
-        string correctedGamePath = SettingsUtils.GetGameLocation().Replace(@"\", @"\/");
+        string correctedGamePath = SettingsManager.GetGameLocation().Replace(@"\", @"\/");
         originalJSON = originalJSON.Replace("LINK TO ISO OR WBFS", correctedGamePath);
 
         // Replace the link to appdata riivolution folder with the correct path
-        string correctedRRPath = Path.Combine(SettingsUtils.GetLoadPathLocation(),"Riivolution");
+        string correctedRRPath = Path.Combine(SettingsManager.GetLoadPathLocation(),"Riivolution");
         correctedRRPath = correctedRRPath.Replace(@"\", @"\/");
         originalJSON = originalJSON.Replace("LINK TO RIIVOLUTION FOLDER", correctedRRPath + @"\/");
 

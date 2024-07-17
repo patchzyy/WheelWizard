@@ -99,7 +99,7 @@ public partial class Dashboard : Page
                 break;
         }
 
-        if (!SettingsUtils.configCorrectAndExists())
+        if (!SettingsManager.configCorrectAndExists())
         {
             DolphinButton.IsEnabled = false;
             MiiButton.IsEnabled = false;

@@ -6,13 +6,13 @@ using CT_MKWII_WPF.Pages;
 
 namespace CT_MKWII_WPF.Utils
 {
-    public static class SettingsUtils
+    public static class SettingsManager
     {
         //in appdata CT-MKWII
         private static readonly string _configFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/CT-MKWII", "config.json");
         private static Config _config;
 
-        static SettingsUtils()
+        static SettingsManager()
         {
             LoadConfigFromFile();
         }

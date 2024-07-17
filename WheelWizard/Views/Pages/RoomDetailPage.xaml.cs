@@ -91,7 +91,7 @@ namespace CT_MKWII_WPF.Views.Pages
             {
                 try
                 {
-                    var miiImage = await miiLoader.GetMiiImageAsync(player.Mii[0].Data);
+                    var miiImage = await MiiGenerator.GetMiiImageAsync(player.Mii[0].Data);
                     player.MiiImage = miiImage;
                     Application.Current.Dispatcher.Invoke(() => OnPropertyChanged(nameof(PlayersList)) );
                 }

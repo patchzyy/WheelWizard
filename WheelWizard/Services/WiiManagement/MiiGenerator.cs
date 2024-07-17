@@ -8,7 +8,7 @@ using System.Windows.Media.Imaging;
 
 namespace CT_MKWII_WPF.Utils;
 
-public class miiLoader
+public class MiiGenerator
 {
     private static readonly HttpClient _httpClient = new HttpClient();
     
