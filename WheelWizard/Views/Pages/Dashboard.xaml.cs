@@ -91,7 +91,7 @@ public partial class Dashboard : Page
                 //right now there is no de-activation, but if we want multiple mods this might be handy
                 SetButtonState("Activated", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Power);
                 break;
-            case ActionButtonStatus.RRnotReady:
+            case ActionButtonStatus.RRNotReady:
                 SetButtonState("Activate", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Power);
                 break;
             case ActionButtonStatus.OutOfDate:

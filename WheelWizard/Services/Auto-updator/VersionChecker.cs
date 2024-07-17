@@ -11,9 +11,10 @@ namespace CT_MKWII_WPF.Utilities.Auto_updator;
 
 public static class VersionChecker
 {
-    private const string VersionFileURL = "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/version.txt";
-
-    public const string CurrentVersion = "1.1.2";
+    private const string VersionFileUrl = "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/version.txt";
+    private const string DownloadUrl = "https://github.com/patchzyy/WheelWizard/releases/latest/download/WheelWizard.exe";
+    
+    public const string CurrentVersion = "1.1.3";
 
 
     public static void CheckForUpdates()
@@ -22,15 +23,10 @@ public static class VersionChecker
         {
             try
             {
-                var version = client.DownloadString(VersionFileURL).Trim();
-                if (version != CurrentVersion)
-                {
-                    var result = MessageBox.Show("A new version of WheelWizard is available. Would you like to update?", "Update Available", MessageBoxButtons.YesNo);
-                    if (result == DialogResult.Yes)
-                    {
-                        Update();
-                    }
-                }
+                var version = client.DownloadString(VersionFileUrl).Trim();
+                if (version == CurrentVersion) return;
+                var result = MessageBox.Show("A new version of WheelWizard is available. Would you like to update?", "Update Available", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes) Update();
             }
             catch (Exception e)
             {
@@ -44,29 +40,25 @@ public static class VersionChecker
         // Use the process module's filename, which should be the actual .exe path
         using (var process = Process.GetCurrentProcess())
         {
-            return process.MainModule.FileName;
+            return process.MainModule!.FileName;
         }
     }
 
     public static async Task Update()
     {
-        string currentLocation = GetActualExecutablePath();
+        var currentLocation = GetActualExecutablePath();
         var currentFolder = Path.GetDirectoryName(currentLocation);
-        var downloadUrl = "https://github.com/patchzyy/WheelWizard/releases/latest/download/WheelWizard.exe";
         var newFilePath = Path.Combine(currentFolder, "CT-MKWII-WPF_new.exe");
 
         var progressWindow = new ProgressWindow();
         progressWindow.Show();
+        
+        await DownloadUtils.DownloadFileWithWindow(DownloadUrl, newFilePath, progressWindow);
 
-        // Download the new file
-        await DownloadUtils.DownloadFileWithWindow(downloadUrl, newFilePath, progressWindow);
-
-        //wait 0.2 seconds
+        // we need to wait a bit before running the batch file to ensure the file is saved on disk
         await Task.Delay(200);
-        // Create and run the batch file
         CreateAndRunBatchFile(currentLocation, newFilePath);
 
-        // Close the current program
         Environment.Exit(0);
     }
 
@@ -89,5 +81,4 @@ del ""%~f0""
 
         Process.Start(new ProcessStartInfo(batchFilePath) { CreateNoWindow = true });
     }
-    
 }

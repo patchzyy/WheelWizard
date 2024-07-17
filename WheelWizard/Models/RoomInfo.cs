@@ -36,11 +36,9 @@ public class RoomInfo
             get => _miiImage;
             set
             {
-                if (_miiImage != value)
-                {
-                    _miiImage = value;
-                    OnPropertyChanged(nameof(MiiImage));
-                }
+                if (_miiImage == value) return;
+                _miiImage = value;
+                OnPropertyChanged(nameof(MiiImage));
             }
         }
 

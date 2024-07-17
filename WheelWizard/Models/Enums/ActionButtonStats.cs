@@ -7,7 +7,7 @@ public enum ActionButtonStatus
     ConfigNotFinished,
     NoRR,
     NoRRActive,
-    RRnotReady,
+    RRNotReady,
     OutOfDate,
     UpToDate
 }

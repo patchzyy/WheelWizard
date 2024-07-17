@@ -9,32 +9,26 @@ public class Mod : INotifyPropertyChanged
 
     public bool IsEnabled
     {
-        get { return _isEnabled; }
+        get => _isEnabled;
         set
         {
-            if (_isEnabled != value)
-            {
-                _isEnabled = value;
-                OnPropertyChanged(nameof(IsEnabled));
-            }
+            if (_isEnabled == value) return;
+            _isEnabled = value;
+            OnPropertyChanged(nameof(IsEnabled));
         }
     }
 
     public string Title
     {
-        get { return _title; }
+        get => _title;
         set
         {
-            if (_title != value)
-            {
-                _title = value;
-                OnPropertyChanged(nameof(Title));
-            }
+            if (_title == value) return;
+            _title = value;
+            OnPropertyChanged(nameof(Title));
         }
     }
     
-    public override string ToString() => "Mod: " + Title + " - " + IsEnabled;
-
     public event PropertyChangedEventHandler PropertyChanged;
 
     protected void OnPropertyChanged(string propertyName)
