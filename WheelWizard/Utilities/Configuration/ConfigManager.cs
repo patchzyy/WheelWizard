@@ -61,10 +61,4 @@ public static class ConfigManager
             _config = new Config { ForceWiimote = true };
         }
     }
-
-    public static string GetConfigText()
-    {
-        return File.Exists(WheelWizardAppdataPath) ? File.ReadAllText(WheelWizardAppdataPath) : string.Empty;
-    }
-    
 }

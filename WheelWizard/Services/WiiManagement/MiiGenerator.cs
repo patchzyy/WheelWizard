@@ -8,7 +8,7 @@ using System.Windows.Media.Imaging;
 
 namespace CT_MKWII_WPF.Services.WiiManagement;
 
-public class MiiGenerator
+public static class MiiGenerator
 {
     private static readonly HttpClient HttpClient = new HttpClient();
     
@@ -18,19 +18,15 @@ public class MiiGenerator
         using var formData = new MultipartFormDataContent();
         formData.Add(new ByteArrayContent(Convert.FromBase64String(base64MiiData)), "data", "mii.dat");
         formData.Add(new StringContent("wii"), "platform");
-
         var response = await HttpClient.PostAsync("https://qrcode.rc24.xyz/cgi-bin/studio.cgi", formData);
-
         var jsonResponse = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
         {
             throw new HttpRequestException($"Error fetching Mii image: {response.StatusCode}");
         }
-
         var miiResponse = JsonSerializer.Deserialize<MiiResponse>(jsonResponse);
-
+        if (miiResponse == null) return new BitmapImage();
         var miiImageUrl = GetMiiImageUrlFromResponse(miiResponse);
-
         return new BitmapImage(new Uri(miiImageUrl));
     }
     
@@ -51,23 +47,22 @@ public class MiiGenerator
             "instanceCount=1",
             "instanceRotationMode=model"
         };
-
         string queryString = string.Join("&", queryParams);
         return $"{baseUrl}?{queryString}";
     }
     
     public class MiiResponse
     {
-        [JsonPropertyName("mii")] public string MiiData { get; set; }
-        [JsonPropertyName("miistudio")] public string MiiStudio { get; set; }
-        [JsonPropertyName("name")] public string Name { get; set; }
-        [JsonPropertyName("creator_name")] public string CreatorName { get; set; }
-        [JsonPropertyName("birthday")] public string Birthday { get; set; }
-        [JsonPropertyName("favorite_color")] public string FavoriteColor { get; set; }
-        [JsonPropertyName("height")] public int Height { get; set; }
-        [JsonPropertyName("build")] public int Build { get; set; }
-        [JsonPropertyName("gender")] public string Gender { get; set; }
-        [JsonPropertyName("mingle")] public string Mingle { get; set; }
-        [JsonPropertyName("copying")] public string Copying { get; set; }
+        [JsonPropertyName("mii")] public string? MiiData { get; set; }
+        [JsonPropertyName("miistudio")] public string? MiiStudio { get; set; }
+        [JsonPropertyName("name")] public string? Name { get; set; }
+        [JsonPropertyName("creator_name")] public string? CreatorName { get; set; }
+        [JsonPropertyName("birthday")] public string? Birthday { get; set; }
+        [JsonPropertyName("favorite_color")] public string? FavoriteColor { get; set; }
+        [JsonPropertyName("height")] public int? Height { get; set; }
+        [JsonPropertyName("build")] public int? Build { get; set; }
+        [JsonPropertyName("gender")] public string? Gender { get; set; }
+        [JsonPropertyName("mingle")] public string? Mingle { get; set; }
+        [JsonPropertyName("copying")] public string? Copying { get; set; }
     }
 }
