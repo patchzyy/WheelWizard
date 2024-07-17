@@ -12,7 +12,7 @@ public class WiiMoteSettings
 
     public static string GetSavedWiiMoteLocation()
     {
-        return SettingsManager.FindWiiMoteNew();
+        return PathManager.FindWiiMoteNew();
     }
 
     public static void EnableVirtualWiiMote()
@@ -27,7 +27,7 @@ public class WiiMoteSettings
     
     public static bool IsForceSettingsEnabled()
     {
-        return SettingsManager.GetForceWiimote();
+        return PathManager.GetForceWiimote();
     }
     
     private static void ModifyWiiMoteSource(int sourceValue)

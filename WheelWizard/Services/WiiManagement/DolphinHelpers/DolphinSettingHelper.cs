@@ -120,7 +120,7 @@ public class DolphinSettingHelper
     
     public static void LaunchDolphin(string arguments = "")
     {
-        var DolphinLocation = SettingsManager.GetDolphinLocation();
+        var DolphinLocation = PathManager.GetDolphinLocation();
         if (DolphinLocation == "")
         {
             MessageBox.Show("Could not find Dolphin Emulator, please set the path in settings", "Error", MessageBoxButton.OK, MessageBoxImage.Error);

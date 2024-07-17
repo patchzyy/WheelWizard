@@ -10,13 +10,13 @@ public class RRStatusManager
     {
         var serverEnabled = await RetroRewindInstaller.IsServerEnabled();
         if (!serverEnabled) return ActionButtonStatus.NoServer;
-        var configCorrectAndExists = SettingsManager.configCorrectAndExists();
+        var configCorrectAndExists = ConfigValidator.configCorrectAndExists();
         if (!configCorrectAndExists) return ActionButtonStatus.ConfigNotFinished;
         var retroRewindInstalled = RetroRewindInstaller.IsRetroRewindInstalled();
         if (!retroRewindInstalled) return ActionButtonStatus.noRR;
         bool retroRewindUpToDate;
         string latestRRVersion;
-        if (!SettingsManager.IsConfigFileFinishedSettingUp()) return ActionButtonStatus.ConfigNotFinished;
+        if (!ConfigValidator.IsConfigFileFinishedSettingUp()) return ActionButtonStatus.ConfigNotFinished;
         retroRewindUpToDate = await RetroRewindInstaller.IsRRUpToDate(RetroRewindInstaller.CurrentRRVersion());
         if (!retroRewindUpToDate) return ActionButtonStatus.OutOfDate;
         latestRRVersion = await RetroRewindInstaller.GetLatestVersionString();

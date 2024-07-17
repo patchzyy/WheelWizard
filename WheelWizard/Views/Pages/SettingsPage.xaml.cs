@@ -29,22 +29,22 @@ public partial class SettingsPage : Page
     
     private void LoadSettings()
     {
-        if (!SettingsManager.configCorrectAndExists()) return;
-        DolphinExeInput.Text = SettingsManager.GetDolphinLocation();
-        MarioKartInput.Text = SettingsManager.GetGameLocation();
-        DolphinUserPathInput.Text = SettingsManager.GetUserPathLocation();
+        if (!ConfigValidator.configCorrectAndExists()) return;
+        DolphinExeInput.Text = PathManager.GetDolphinLocation();
+        MarioKartInput.Text = PathManager.GetGameLocation();
+        DolphinUserPathInput.Text = PathManager.GetUserPathLocation();
     }
 
     private void UpdateResolution(object sender, RoutedEventArgs e)
     {
         if (sender is not RadioButton radioButton) return;
         var resolution = radioButton.Tag.ToString();
-        DolphinSettingHelper.ChangeINISettings(SettingsManager.FindGFXFile(), "Settings", "InternalResolution", resolution);
+        DolphinSettingHelper.ChangeINISettings(PathManager.FindGFXFile(), "Settings", "InternalResolution", resolution);
     }
     
     private void UpdateResolutionButtonsState()
     {
-        var enableControls = SettingsManager.configCorrectAndExists();
+        var enableControls = ConfigValidator.configCorrectAndExists();
         VideoBorder.IsEnabled = enableControls;
         WiiBorder.IsEnabled = enableControls;
         
@@ -53,7 +53,7 @@ public partial class SettingsPage : Page
         RecommendedButton.IsChecked = DolphinSettingsUtils.IsRecommendedSettingsEnabled();
         var finalResolution = 0;
         var resolution =
-            DolphinSettingHelper.ReadINISetting(SettingsManager.FindGFXFile(), "Settings", "InternalResolution");
+            DolphinSettingHelper.ReadINISetting(PathManager.FindGFXFile(), "Settings", "InternalResolution");
         if (int.TryParse(resolution, out var parsedResolution))
         {
             finalResolution = parsedResolution - 1;
@@ -132,7 +132,7 @@ public partial class SettingsPage : Page
     private void VSync_OnClick(object sender, RoutedEventArgs e)
     {
         //todo: move this logic into the backend
-        DolphinSettingHelper.ChangeINISettings(SettingsManager.FindGFXFile(), "Hardware", "VSync",
+        DolphinSettingHelper.ChangeINISettings(PathManager.FindGFXFile(), "Hardware", "VSync",
             VSyncButton.IsChecked == true ? "True" : "False");
     }
 
@@ -157,8 +157,8 @@ public partial class SettingsPage : Page
         }
 
         // Save settings to a configuration file or system registry
-        SettingsManager.SaveSettings(dolphinPath, gamePath, userFolder, true, forceDisableWiimote);
-        if(!SettingsManager.SetupCorrectly())
+        ConfigManager.SaveSettings(dolphinPath, gamePath, userFolder, true, forceDisableWiimote);
+        if(!ConfigValidator.SetupCorrectly())
         {
             MessageBox.Show("Please ensure all paths are correct and try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             NavigateToPage(new SettingsPage());
@@ -182,7 +182,7 @@ public partial class SettingsPage : Page
 
     private void ToggleLocationSettings(bool enable)
     {
-        if (!SettingsManager.configCorrectAndExists() && !enable)
+        if (!ConfigValidator.configCorrectAndExists() && !enable)
         {
             LocationBorder.BorderBrush = (SolidColorBrush)FindResource("SettingsBlockWarningHighlight");
             LocationEditButton.Variant = Button.ButtonsVariantType.Secondary;
@@ -203,6 +203,6 @@ public partial class SettingsPage : Page
 
     private void clickForceWiimote(object sender, RoutedEventArgs e)
     {
-        SettingsManager.SaveWiimoteSettings(DisableForce.IsChecked == true);
+        ConfigValidator.SaveWiimoteSettings(DisableForce.IsChecked == true);
     }
 }

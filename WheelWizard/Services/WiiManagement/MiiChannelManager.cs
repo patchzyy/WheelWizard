@@ -11,7 +11,7 @@ public class MiiChannelManager
 {
     public static string getSavedChannelLocation()
     {
-        return SettingsManager.getWheelWizardAppPath() + "/MiiChannel.wad";
+        return ConfigManager.GetWheelWizardAppdataPath() + "/MiiChannel.wad";
     }
 
     public async static Task LaunchMiiChannel()

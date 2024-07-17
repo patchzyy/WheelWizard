@@ -9,7 +9,7 @@ public class DolphinSettingsUtils
     
     private static void ChangeSettings(params (string Key, string Value)[] settings)
     {
-        var gfxFile = SettingsManager.FindGFXFile();
+        var gfxFile = PathManager.FindGFXFile();
         if (string.IsNullOrEmpty(gfxFile)) return;
 
         foreach (var (key, value) in settings)
@@ -23,7 +23,7 @@ public class DolphinSettingsUtils
     
     public static bool IsRecommendedSettingsEnabled()
     {
-        var gfxFile = SettingsManager.FindGFXFile();
+        var gfxFile = PathManager.FindGFXFile();
         if (string.IsNullOrEmpty(gfxFile)) return false;
 
         var settings = new[] { "ShaderCompilationMode", "WaitForShadersBeforeStarting", "MSAA", "SSAA" };
@@ -36,7 +36,7 @@ public class DolphinSettingsUtils
     
     public static bool GetCurrentVSyncStatus()
     {
-        var GFXFile = SettingsManager.FindGFXFile();
+        var GFXFile = PathManager.FindGFXFile();
         if (GFXFile == "")
         {
             MessageBox.Show("Something went wrong, please contact us via discord. \nGFX file not found");
@@ -47,7 +47,7 @@ public class DolphinSettingsUtils
     
     public static int GetCurrentResolution()
     {
-        var GFXFile = SettingsManager.FindGFXFile();
+        var GFXFile = PathManager.FindGFXFile();
         if (GFXFile == "")
         {
             return -1;

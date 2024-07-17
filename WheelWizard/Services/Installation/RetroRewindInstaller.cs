@@ -14,7 +14,7 @@ public static class RetroRewindInstaller
 {
     public static bool IsRetroRewindInstalled()
     {
-        var loadPath = SettingsManager.GetLoadPathLocation();
+        var loadPath = ConfigValidator.GetLoadPathLocation();
         var versionFilePath = Path.Combine(loadPath, "Riivolution", "RetroRewind6", "version.txt");
         return File.Exists(versionFilePath);
 
@@ -22,7 +22,7 @@ public static class RetroRewindInstaller
 
     public static string CurrentRRVersion()
     {
-        var loadPath = SettingsManager.GetLoadPathLocation();
+        var loadPath = ConfigValidator.GetLoadPathLocation();
         var versionFilePath = Path.Combine(loadPath, "Riivolution", "RetroRewind6", "version.txt");
         if (File.Exists(versionFilePath)) return File.ReadAllText(versionFilePath);
         return !File.Exists(versionFilePath) ? "Not Installed" : File.ReadAllText(versionFilePath);
@@ -111,7 +111,7 @@ public static class RetroRewindInstaller
 
 private static void UpdateVersionFile(string newVersion)
 {
-    var loadPath = SettingsManager.GetLoadPathLocation();
+    var loadPath = ConfigValidator.GetLoadPathLocation();
     var VersionFilePath = Path.Combine(loadPath, "Riivolution", "RetroRewind6", "version.txt");
     File.WriteAllText(VersionFilePath, newVersion);
 }
@@ -171,7 +171,7 @@ private static int CompareVersions(string v1, string v2)
 
 private static async Task<bool> DownloadAndApplyUpdate((string Version, string Url, string Path, string Description) update, int totalUpdates, int currentUpdateIndex, ProgressWindow window)
 {
-    var loadPath = SettingsManager.GetLoadPathLocation();
+    var loadPath = ConfigValidator.GetLoadPathLocation();
     var tempZipPath = Path.GetTempFileName();
     try
     {
@@ -211,7 +211,7 @@ public static async Task InstallRetroRewind()
         {
             return;
         }
-        var loadPath_ = SettingsManager.GetLoadPathLocation();
+        var loadPath_ = ConfigValidator.GetLoadPathLocation();
         var rrWFC = Path.Combine(loadPath_, "Riivolution", "RetroRewind6", "save","RetroWFC");
         if (Directory.Exists(rrWFC))
         {
@@ -230,7 +230,7 @@ public static async Task InstallRetroRewind()
         Directory.Delete(retroRewindPath, true);
     }
     
-    var loadPath = SettingsManager.GetLoadPathLocation();
+    var loadPath = ConfigValidator.GetLoadPathLocation();
     var tempZipPath = Path.Combine(loadPath, "Temp", "RetroRewind.zip");
     ProgressWindow progressWindow = new ProgressWindow();
     progressWindow.Show();
