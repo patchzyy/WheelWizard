@@ -14,12 +14,12 @@
         <TextBlock Text="{Binding Title, RelativeSource={RelativeSource AncestorType=UserControl}}"
                    Style="{StaticResource TitleText}"
                    Margin="0,10,0,0"
-                   HorizontalAlignment="Center"/>
+                   HorizontalAlignment="Center" />
         <TextBlock Text="{Binding Body, RelativeSource={RelativeSource AncestorType=UserControl}}"
                    Style="{StaticResource BodyText}"
                    Margin="0,10,0,0"
                    Width="190"
                    TextAlignment="Center"
-                   HorizontalAlignment="Center"/>
+                   HorizontalAlignment="Center" />
     </StackPanel>
 </UserControl>

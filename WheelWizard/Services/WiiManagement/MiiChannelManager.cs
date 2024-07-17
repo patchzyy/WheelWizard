@@ -11,10 +11,9 @@ namespace CT_MKWII_WPF.Services.WiiManagement;
 
 public class MiiChannelManager
 {
-    
     private static string GetSavedChannelLocation() => ConfigManager.GetWheelWizardAppdataPath() + "/MiiChannel.wad";
     private static bool MiiChannelExists() => File.Exists(GetSavedChannelLocation());
-    
+
     public static async Task LaunchMiiChannel()
     {
         if (!MiiChannelExists())
@@ -23,6 +22,7 @@ public class MiiChannelManager
             //we wait to make sure the file is written to disk
             await Task.Delay(200);
         }
+
         DolphinSettingHelper.LaunchDolphin($"-b \"{GetSavedChannelLocation()}\"");
     }
 
@@ -30,7 +30,9 @@ public class MiiChannelManager
     {
         var progressWindow = new ProgressWindow();
         progressWindow.Show();
-        await DownloadUtils.DownloadFileWithWindow("https://repo.mariocube.com/WADs/Other/Mii%20Channel%20Symbols%20-%20HACS.wad", GetSavedChannelLocation(), progressWindow);
+        await DownloadUtils.DownloadFileWithWindow(
+            "https://repo.mariocube.com/WADs/Other/Mii%20Channel%20Symbols%20-%20HACS.wad", GetSavedChannelLocation(),
+            progressWindow);
         progressWindow.Close();
     }
 }

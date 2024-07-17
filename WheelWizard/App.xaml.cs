@@ -9,7 +9,5 @@ namespace CT_MKWII_WPF
         {
             VersionChecker.CheckForUpdates();
         }
-
     }
-
 }

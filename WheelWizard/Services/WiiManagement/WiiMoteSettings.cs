@@ -13,7 +13,7 @@ public class WiiMoteSettings
     public static void EnableVirtualWiiMote() => ModifyWiiMoteSource(1);
     public static void DisableVirtualWiiMote() => ModifyWiiMoteSource(0);
     public static bool IsForceSettingsEnabled() => PathManager.GetForceWiimote();
-    
+
     private static void ModifyWiiMoteSource(int sourceValue)
     {
         var configPath = GetSavedWiiMoteLocation();

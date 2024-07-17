@@ -9,60 +9,70 @@
       Title="My Stuff" Background="Transparent">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="{StaticResource TopRowSize}"/> <!-- This is the total height as the (Title + infoSection) - (padding) -->
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="{StaticResource TopRowSize}" />
+            <!-- This is the total height as the (Title + infoSection) - (padding) -->
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
-        <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
-        <TextBlock Grid.Row="0" Text="My Stuff" HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{StaticResource PageTitleText}"/>
-        <StackPanel Grid.Row="0"  HorizontalAlignment="Right" VerticalAlignment="Bottom"  Margin="12" Orientation="Horizontal" x:Name="TopBarButtons" >
+        <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
+        <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
+        <TextBlock Grid.Row="0" Text="My Stuff" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                   Style="{StaticResource PageTitleText}" />
+        <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="12"
+                    Orientation="Horizontal" x:Name="TopBarButtons">
             <components:Button IconPack="FontAwesome" x:Name="EnableDisableButton"
                                Text="Enable All" Click="EnableClick" Margin="0,0,10,0">
                 <components:Button.Style>
                     <Style TargetType="components:Button" BasedOn="{StaticResource DefaultButtonStyle}">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}" Value="Enable All">
-                                <Setter Property="IconKind" Value="{x:Static icon:PackIconFontAwesomeKind.ToggleOnSolid}"/>
+                            <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}"
+                                         Value="Enable All">
+                                <Setter Property="IconKind"
+                                        Value="{x:Static icon:PackIconFontAwesomeKind.ToggleOnSolid}" />
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}" Value="Disable All">
-                                <Setter Property="IconKind" Value="{x:Static icon:PackIconFontAwesomeKind.ToggleOffSolid}"/>
+                            <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}"
+                                         Value="Disable All">
+                                <Setter Property="IconKind"
+                                        Value="{x:Static icon:PackIconFontAwesomeKind.ToggleOffSolid}" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </components:Button.Style>
             </components:Button>
-            <components:Button  Variant="Primary" Text="Import" 
-                                IconPack="Material" 
-                                IconKind="{x:Static icon:PackIconMaterialKind.Import}"
-                                Click="ImportMod_Click"/>
+            <components:Button Variant="Primary" Text="Import"
+                               IconPack="Material"
+                               IconKind="{x:Static icon:PackIconMaterialKind.Import}"
+                               Click="ImportMod_Click" />
         </StackPanel>
-       
-        <StackPanel Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="PageWithoutMods">
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="PageWithoutMods">
             <components:EmptyPageInfo HorizontalAlignment="Center" Title="No mods found"
-                                      Body="Mods can alter how the game works. Start importing your first mod by clicking the button below."/>
-            <components:Button Variant="Primary"  Margin="12"
+                                      Body="Mods can alter how the game works. Start importing your first mod by clicking the button below." />
+            <components:Button Variant="Primary" Margin="12"
                                IconPack="Material" Text="Import mod"
                                IconKind="{x:Static icon:PackIconMaterialKind.Import}"
-                               Click="ImportMod_Click" HorizontalAlignment="Center"/>
+                               Click="ImportMod_Click" HorizontalAlignment="Center" />
         </StackPanel>
-    
-            
+
+
         <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" x:Name="PageWithMods" VerticalAlignment="Stretch">
             <!-- if you want to add something to this page, make sure you encapsulate the ListView in a standalone container,
              make that container stretch, and swap the ElementName for maxHeight to that container-->
             <components:DraggableListView OnItemsReorder="ModsListView_OnOnItemsReorder" x:Name="ModsListView"
-                                          EnableLineIndication="False" MaxHeight="{Binding ElementName=PageWithMods, Path=ActualHeight}"
+                                          EnableLineIndication="False"
+                                          MaxHeight="{Binding ElementName=PageWithMods, Path=ActualHeight}"
                                           ItemsSource="{Binding Mods}">
                 <components:DraggableListView.ItemContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Rename" Click="RenameMod_Click"/>
-                        <MenuItem Header="Delete" Click="DeleteMod_Click"/>
-                        <Separator Style="{StaticResource ContextMenuLine}"/>
-                        <MenuItem Header="Open Folder" Click="OpenFolder_Click"/>
+                        <MenuItem Header="Rename" Click="RenameMod_Click" />
+                        <MenuItem Header="Delete" Click="DeleteMod_Click" />
+                        <Separator Style="{StaticResource ContextMenuLine}" />
+                        <MenuItem Header="Open Folder" Click="OpenFolder_Click" />
                     </ContextMenu>
                 </components:DraggableListView.ItemContextMenu>
-               
-                <ListView.View >
+
+                <ListView.View>
                     <GridView AllowsColumnReorder="False">
                         <GridViewColumn Header="Enabled" Width="75">
                             <GridViewColumn.CellTemplate>
@@ -72,28 +82,28 @@
                                               HorizontalAlignment="Center" VerticalAlignment="Center"
                                               Margin="0,5" />
                                 </DataTemplate>
-                            </GridViewColumn.CellTemplate> 
+                            </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Title" Width="100000" DisplayMemberBinding="{Binding Title}" />
                     </GridView>
                 </ListView.View>
             </components:DraggableListView>
         </StackPanel>
-        
+
         <!-- TODO: Rework this, it doesnt even work -->
-        <ProgressBar x:Name="ProgressBar" 
+        <ProgressBar x:Name="ProgressBar"
                      HorizontalAlignment="Center"
-                     Visibility="Collapsed" 
-                     Height="20" 
-                     VerticalAlignment="Bottom" 
-                     Margin="10" 
+                     Visibility="Collapsed"
+                     Height="20"
+                     VerticalAlignment="Bottom"
+                     Margin="10"
                      Foreground="{StaticResource ForegroundColor}" />
-        <TextBlock x:Name="StatusTextBlock" 
-                   Visibility="Collapsed" 
+        <TextBlock x:Name="StatusTextBlock"
+                   Visibility="Collapsed"
                    HorizontalAlignment="Center"
-                   Height="20" 
-                   VerticalAlignment="Bottom" 
-                   Margin="10,0,0,30" 
-                   Text="Processing..." Foreground="{StaticResource ForegroundColor}"/>
+                   Height="20"
+                   VerticalAlignment="Bottom"
+                   Margin="10,0,0,30"
+                   Text="Processing..." Foreground="{StaticResource ForegroundColor}" />
     </Grid>
 </Page>

@@ -10,33 +10,37 @@
       Title="Settings" Background="Transparent">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="{StaticResource TopRowSize}"/> <!-- This is the total height as the (Title + infoSection) - (padding) -->
+            <RowDefinition Height="{StaticResource TopRowSize}" />
+            <!-- This is the total height as the (Title + infoSection) - (padding) -->
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
-        <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
+        <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
+        <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
         <!-- if we want to add multiple pages to the settings, this title has to align to the Top instead -->
-        <TextBlock Grid.Row="0" Text="Settings" HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{StaticResource PageTitleText}"/>
-        
+        <TextBlock Grid.Row="0" Text="Settings" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                   Style="{StaticResource PageTitleText}" />
+
         <!-- The Body! -->
         <StackPanel Grid.Row="1">
             <!-- File location settings -->
             <StackPanel Margin="0,15,0,0">
                 <StackPanel Orientation="Horizontal">
-                    <components:FormFieldLabel Text="Location settings"/>
+                    <components:FormFieldLabel Text="Location settings" />
                     <Border ToolTipService.InitialShowDelay="5" x:Name="LocationWarningIcon"
                             ToolTipService.ShowDuration="10000"
                             ToolTipService.BetweenShowDelay="0">
-                        <icon:PackIconFontAwesome Kind="TriangleExclamationSolid" 
-                                                  Foreground="{StaticResource WarningColor}"
-                        />
+                        <icon:PackIconFontAwesome Kind="TriangleExclamationSolid"
+                                                  Foreground="{StaticResource WarningColor}" />
                         <Border.ToolTip>
-                            <components:ToolTipMessage Alignment="TopCenter" Content="You must set these 3 values &#10;before you can start playing retro rewind"/>
+                            <components:ToolTipMessage Alignment="TopCenter"
+                                                       Content="You must set these 3 values &#10;before you can start playing retro rewind" />
                         </Border.ToolTip>
                     </Border>
-              
+
                 </StackPanel>
-                
+
                 <Border Style="{StaticResource SettingsBlockStyle}" x:Name="LocationBorder">
                     <StackPanel>
                         <StackPanel x:Name="LocationInputFields">
@@ -49,21 +53,21 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
-                                <components:FormFieldLabel Text="Dolphin Emulator executable" 
-                                                           TipText="Path must end with .exe"/>
-                                
+                                <components:FormFieldLabel Text="Dolphin Emulator executable"
+                                                           TipText="Path must end with .exe" />
+
                                 <components:InputField Grid.Row="1" Grid.Column="0"
                                                        Height="40"
                                                        Placeholder="Enter desired path here..."
                                                        HorizontalAlignment="Stretch" Variant="Dark"
-                                                       x:Name="DolphinExeInput"/>
+                                                       x:Name="DolphinExeInput" />
                                 <components:Button Grid.Row="1" Grid.Column="1"
                                                    Text="" FontSize="16" Height="40"
-                                                   IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}" 
+                                                   IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}"
                                                    IconPack="FontAwesome"
-                                                   Click="DolphinExeBrowse_OnClick" Margin="10,0,0,0"/>
+                                                   Click="DolphinExeBrowse_OnClick" Margin="10,0,0,0" />
                             </Grid>
-                            
+
                             <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
@@ -73,20 +77,20 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
-                                <components:FormFieldLabel Text="Mario Kart Wii Game File" 
-                                                           TipText="Path can end with: .wbfs/.iso/.rvz"/>
-                                <components:InputField Grid.Row="1" Grid.Column="0"  Height="40"
+                                <components:FormFieldLabel Text="Mario Kart Wii Game File"
+                                                           TipText="Path can end with: .wbfs/.iso/.rvz" />
+                                <components:InputField Grid.Row="1" Grid.Column="0" Height="40"
                                                        Placeholder="Enter desired path here..."
                                                        HorizontalAlignment="Stretch" Variant="Dark"
                                                        x:Name="MarioKartInput" />
                                 <components:Button Grid.Row="1" Grid.Column="1"
-                                                   Text="" FontSize="16"   Height="40"
-                                                   IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}" 
+                                                   Text="" FontSize="16" Height="40"
+                                                   IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}"
                                                    IconPack="FontAwesome"
-                                                   Click="MarioKartBrowse_OnClick" 
+                                                   Click="MarioKartBrowse_OnClick"
                                                    Margin="10,0,0,0" />
                             </Grid>
-                    
+
                             <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
@@ -96,104 +100,111 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
-                                <components:FormFieldLabel Text="Dolphin User Folder"/>
-                                <components:InputField Grid.Row="1" Grid.Column="0" 
-                                                       HorizontalAlignment="Stretch" 
+                                <components:FormFieldLabel Text="Dolphin User Folder" />
+                                <components:InputField Grid.Row="1" Grid.Column="0"
+                                                       HorizontalAlignment="Stretch"
                                                        Variant="Dark" Height="40"
                                                        Placeholder="Enter desired path here..."
-                                                       x:Name="DolphinUserPathInput"/>
-                                <components:Button  Grid.Row="1" Grid.Column="1"
-                                                    Text="" FontSize="16" Height="40"
-                                                    IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}" 
-                                                    IconPack="FontAwesome"
-                                                    Click="DolphinUserPathBrowse_OnClick" Margin="10,0,0,0"/>
+                                                       x:Name="DolphinUserPathInput" />
+                                <components:Button Grid.Row="1" Grid.Column="1"
+                                                   Text="" FontSize="16" Height="40"
+                                                   IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}"
+                                                   IconPack="FontAwesome"
+                                                   Click="DolphinUserPathBrowse_OnClick" Margin="10,0,0,0" />
                             </Grid>
-        
-                            
-                   
-                            </StackPanel>
+
+
+                        </StackPanel>
                         <StackPanel Margin="0,10,0,0" Orientation="Horizontal" FlowDirection="RightToLeft">
-                            <components:Button Variant="Primary" 
+                            <components:Button Variant="Primary"
                                                IconSize="0" Text="Save"
-                                                x:Name="LocationSaveButton"
-                                               Click="SaveButton_OnClick" 
+                                               x:Name="LocationSaveButton"
+                                               Click="SaveButton_OnClick"
                                                Visibility="Collapsed" Height="40"
-                                               Margin="3"/>
+                                               Margin="3" />
                             <components:Button Variant="Secondary" IconSize="0"
-                                                 x:Name="LocationCancelButton" Height="40"
+                                               x:Name="LocationCancelButton" Height="40"
                                                Visibility="Collapsed" Click="CancelButton_OnClick"
-                                               Text="Cancel" Margin="3"/>
+                                               Text="Cancel" Margin="3" />
                             <components:Button Variant="Primary" x:Name="LocationEditButton"
                                                IconPack="FontAwesome" Text="Edit"
                                                Click="EditButton_OnClick" Height="40"
                                                IconKind="{x:Static icon:PackIconFontAwesomeKind.PenSolid}"
-                                               Margin="3"/>
+                                               Margin="3" />
                         </StackPanel>
                     </StackPanel>
-                    
+
                 </Border>
             </StackPanel>
-            
+
             <!-- Video settings -->
             <StackPanel>
-                <components:FormFieldLabel Text="Video settings"/>
+                <components:FormFieldLabel Text="Video settings" />
                 <Border Style="{StaticResource SettingsBlockStyle}" x:Name="VideoBorder">
                     <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="3*" />
                         </Grid.ColumnDefinitions>
-                        
+
                         <StackPanel Grid.Column="0" x:Name="ResolutionStackPanel">
-                            <RadioButton Margin="0,2" GroupName="ResolutionGroup1" 
-                                         IsChecked="True" Click="UpdateResolution" Tag="1" >
-                                
+                            <RadioButton Margin="0,2" GroupName="ResolutionGroup1"
+                                         IsChecked="True" Click="UpdateResolution" Tag="1">
+
                                 <components:FormFieldLabel Text="1x (640x528)" TipText="1x is the native resolution" />
                             </RadioButton>
-                            <RadioButton Margin="0,2" GroupName="ResolutionGroup1" 
-                                         IsChecked="False" Click="UpdateResolution" Tag="2" >2x (1280x1056)</RadioButton>
-                            <RadioButton Margin="0,2" GroupName="ResolutionGroup1" 
-                                         IsChecked="False" Click="UpdateResolution" Tag="3" >3x (1920x1584)</RadioButton>
-                            <RadioButton Margin="0,2" GroupName="ResolutionGroup1" 
-                                         IsChecked="False" Click="UpdateResolution" Tag="4" >4x (2560x2112)</RadioButton>
+                            <RadioButton Margin="0,2" GroupName="ResolutionGroup1"
+                                         IsChecked="False" Click="UpdateResolution" Tag="2">
+                                2x (1280x1056)
+                            </RadioButton>
+                            <RadioButton Margin="0,2" GroupName="ResolutionGroup1"
+                                         IsChecked="False" Click="UpdateResolution" Tag="3">
+                                3x (1920x1584)
+                            </RadioButton>
+                            <RadioButton Margin="0,2" GroupName="ResolutionGroup1"
+                                         IsChecked="False" Click="UpdateResolution" Tag="4">
+                                4x (2560x2112)
+                            </RadioButton>
                         </StackPanel>
-            
+
                         <StackPanel Grid.Column="1">
-                            <CheckBox Margin="0,2" IsChecked="False" 
-                                      Style="{StaticResource DarkSwitch}" Click="VSync_OnClick" x:Name="VSyncButton" >VSync</CheckBox>
-                            <CheckBox Margin="0,2" IsChecked="False" 
-                                      Style="{StaticResource DarkSwitch}" Click="Recommended_OnClick" x:Name="RecommendedButton"  >
-                                <components:FormFieldLabel Text="Recommended Settings" 
-                                                           TipText="This setting will change certain dolphin settings to reduce stuttering and lag spikes"/>
+                            <CheckBox Margin="0,2" IsChecked="False"
+                                      Style="{StaticResource DarkSwitch}" Click="VSync_OnClick" x:Name="VSyncButton">
+                                VSync
+                            </CheckBox>
+                            <CheckBox Margin="0,2" IsChecked="False"
+                                      Style="{StaticResource DarkSwitch}" Click="Recommended_OnClick"
+                                      x:Name="RecommendedButton">
+                                <components:FormFieldLabel Text="Recommended Settings"
+                                                           TipText="This setting will change certain dolphin settings to reduce stuttering and lag spikes" />
                             </CheckBox>
                         </StackPanel>
                     </Grid>
                 </Border>
             </StackPanel>
-            
-            
-                 
+
+
             <!-- Wii settings -->
             <StackPanel>
-                <components:FormFieldLabel Text="Wii Settings"/>
+                <components:FormFieldLabel Text="Wii Settings" />
                 <Border Style="{StaticResource SettingsBlockStyle}" x:Name="WiiBorder">
-                    <CheckBox Margin="0,2" IsChecked="False" 
-                              Style="{StaticResource DarkSwitch}" 
+                    <CheckBox Margin="0,2" IsChecked="False"
+                              Style="{StaticResource DarkSwitch}"
                               x:Name="DisableForce"
                               Click="ClickForceWiimote">
-                        <components:FormFieldLabel Text=" Force Disable Wiimote" 
-                                                   TipText="This setting disabled Wiimote ingame, but enables is for the Wii chanel"/>
+                        <components:FormFieldLabel Text=" Force Disable Wiimote"
+                                                   TipText="This setting disabled Wiimote ingame, but enables is for the Wii chanel" />
 
                     </CheckBox>
                 </Border>
             </StackPanel>
         </StackPanel>
-        
-        <TextBlock  Grid.Row="1"  x:Name="VersionText"
-                    Style="{StaticResource TinyText}"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom"
-                    Text="Example version 1.0.0" />  
+
+        <TextBlock Grid.Row="1" x:Name="VersionText"
+                   Style="{StaticResource TinyText}"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom"
+                   Text="Example version 1.0.0" />
         <!-- Version text is now retrieved from the updater -->
     </Grid>
 </Page>

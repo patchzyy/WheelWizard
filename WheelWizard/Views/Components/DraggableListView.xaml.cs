@@ -23,7 +23,7 @@ public partial class DraggableListView : BaseListView
         DragOver += DraggableListView_DragOver;
         AddHandler(DragDrop.QueryContinueDragEvent, new QueryContinueDragEventHandler(OnQueryContinueDrag));
     }
-    
+
     public static readonly DependencyProperty EnableLineIndicationProperty = DependencyProperty.Register(
         nameof(EnableLineIndication), typeof(bool), typeof(DraggableListView),
         new PropertyMetadata(true));
@@ -33,34 +33,36 @@ public partial class DraggableListView : BaseListView
         get => (bool)GetValue(EnableLineIndicationProperty);
         set => SetValue(EnableLineIndicationProperty, value);
     }
-    
-     public delegate void ItemsReorderEventHandler(ListViewItem movedItem, int newIndex);
-     public event ItemsReorderEventHandler? OnItemsReorder;
-        
+
+    public delegate void ItemsReorderEventHandler(ListViewItem movedItem, int newIndex);
+
+    public event ItemsReorderEventHandler? OnItemsReorder;
+
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
-        if (View is not GridView gridView) return; 
+        if (View is not GridView gridView) return;
 
         // here we create an empty column that will later be filled with the icon for each row
         // We create an empty column that will be filled in order to not mess up any other columns arrangement
-        var gripColumn = new GridViewColumn {
+        var gripColumn = new GridViewColumn
+        {
             Width = 40,
             CellTemplate = new DataTemplate(),
-            Header = new GridViewColumnHeader( )
+            Header = new GridViewColumnHeader()
         };
-        
+
         gridView.Columns.Insert(0, gripColumn);
     }
 
     private void GripIcon_Hold(object sender, MouseButtonEventArgs e)
     {
         _draggingListViewItem = FindAncestor<ListViewItem>(e.OriginalSource)!;
-    
+
         var height = _draggingListViewItem.ActualHeight;
         _draggingListViewItem.Style = (Style)FindResource("DraggedItemStyle");
-        _draggingListViewItem.Height = height; 
+        _draggingListViewItem.Height = height;
         _startDraggingPoint = e.GetPosition(this);
-        
+
         var dragData = new DataObject("listViewItem", _draggingListViewItem);
         DragDrop.DoDragDrop(_draggingListViewItem, dragData, DragDropEffects.Move);
     }
@@ -76,18 +78,19 @@ public partial class DraggableListView : BaseListView
         _previousBotSide = null;
         _startDraggingPoint = null;
     }
-    
+
     private void GripIcon_MouseMove(object sender, MouseEventArgs e)
     {
         if (e.LeftButton != MouseButtonState.Pressed) CancelDropAction();
     }
-    
+
     private void DraggableListView_DragOver(object sender, DragEventArgs e) => UpdateDragHoverItem(e);
+
     private void UpdateDragHoverItem(DragEventArgs e)
     {
         var targetData = GetDropTargetIndex(e.GetPosition(this));
         var viewItem = ItemContainerGenerator.ContainerFromIndex(targetData.Item1) as ListViewItem;
-       
+
         // TODO: make it so it does not change the style if the smae targetData has been given,
         //       this will make it so it does not flicker
         if (!EnableLineIndication || viewItem == null || (viewItem == _dragHoverListViewItem)) return;
@@ -106,17 +109,17 @@ public partial class DraggableListView : BaseListView
             _previousBotSide = null;
         }
     }
-    
+
     private void OnQueryContinueDrag(object sender, QueryContinueDragEventArgs e)
     {
         if (e.EscapePressed || e.Action == DragAction.Cancel || e.Action == DragAction.Drop)
             CancelDropAction();
     }
-    
+
     private void GripIcon_OnDrop(object sender, DragEventArgs e)
     {
-        if(!(e.Data.GetData("listViewItem") is ListViewItem listViewItem)) return;
-        if(_draggingListViewItem == null) return; // this should never happen, so to be safe we just return
+        if (!(e.Data.GetData("listViewItem") is ListViewItem listViewItem)) return;
+        if (_draggingListViewItem == null) return; // this should never happen, so to be safe we just return
         var targetData = GetDropTargetIndex(e.GetPosition(this));
         var targetIndex = targetData.Item1;
         if (targetData.Item2) targetIndex++;
@@ -129,21 +132,21 @@ public partial class DraggableListView : BaseListView
         var genericCollectionType = typeof(ObservableCollection<>).MakeGenericType(itemType);
         var removeMethod = genericCollectionType.GetMethod("Remove", new[] { itemType });
         var insertMethod = genericCollectionType.GetMethod("Insert", new[] { typeof(int), itemType });
-        
+
         OnItemsReorder?.Invoke(_draggingListViewItem, targetIndex);
         if (removeMethod != null && insertMethod != null)
         {
             _draggingListViewItem = null;
             removeMethod.Invoke(ItemsSource, new[] { itemObject });
-            insertMethod.Invoke(ItemsSource, new object[] { targetIndex , itemObject });
-        } 
+            insertMethod.Invoke(ItemsSource, new object[] { targetIndex, itemObject });
+        }
         else Console.WriteLine("It seems this collection type does not support in-place reordering");
 
         _startDraggingPoint = null;
         if (_dragHoverListViewItem != null)
             _dragHoverListViewItem.Style = (Style)FindResource("DefaultItemStyle");
     }
-    
+
     private IEnumerable<ListViewItem> GetAllListViewItems()
     {
         for (var i = 0; i < Items.Count; i++)
@@ -158,11 +161,11 @@ public partial class DraggableListView : BaseListView
             // }
         }
     }
-    
+
     // This method returns 2 indexes.
     // Item1 = the target index where it should place
     // Item2 = wether or not it should be displayed as bottom. (if so, Item1 also has to be decreased by 1)
-    private Tuple<int,bool> GetDropTargetIndex(Point dropPosition)
+    private Tuple<int, bool> GetDropTargetIndex(Point dropPosition)
     {
         var index = 0;
         foreach (var listViewItem in GetAllListViewItems())
@@ -172,13 +175,13 @@ public partial class DraggableListView : BaseListView
             double itemBottom = itemPosition.Y + itemBounds.Height;
 
             var showBottom = false;
-            if(_startDraggingPoint != null)
+            if (_startDraggingPoint != null)
                 showBottom = dropPosition.Y > _startDraggingPoint?.Y;
-            
+
             if (dropPosition.Y < itemBottom) return new Tuple<int, bool>(index, showBottom);
             index++;
         }
-        
-        return new Tuple<int,bool>(Items.Count - 1, true);
+
+        return new Tuple<int, bool>(Items.Count - 1, true);
     }
 }

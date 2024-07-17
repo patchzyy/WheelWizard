@@ -6,12 +6,12 @@
          xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
          mc:Ignorable="d" x:Name="Root"
          d:DesignHeight="90" d:DesignWidth="300">
-    
+
     <!-- The actual style is set in the controller -->
     <TextBox.Resources>
-         <Style TargetType="TextBox" x:Key="DarkVariant" BasedOn="{StaticResource DarkInputFieldStyle}">
-             <Setter Property="Tag" Value="ForceUpdate"/>
-             <Setter Property="Template">
+        <Style TargetType="TextBox" x:Key="DarkVariant" BasedOn="{StaticResource DarkInputFieldStyle}">
+            <Setter Property="Tag" Value="ForceUpdate" />
+            <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
                         <StackPanel>
@@ -19,10 +19,10 @@
                             <!-- This will be collapsed if the label is empty, but that is done in the controller
                              since for some reason it just straight up ignores the dataTrigger -->
                             <components:FormFieldLabel x:Name="LabelElement"
-                                                       Text="{Binding Label, ElementName=Root}" 
-                                                       TipText="{Binding LabelTip, ElementName=Root}" 
+                                                       Text="{Binding Label, ElementName=Root}"
+                                                       TipText="{Binding LabelTip, ElementName=Root}"
                                                        VerticalAlignment="Bottom" />
-                            
+
                             <!-- The border is wrapped inside an outerBorder without the border
                             This is to ensure that even if there is a funky pixel gap in between the inner part and outer stroke of the border, 
                             that it will just be filled in with the same background color as the inside -->
@@ -39,37 +39,40 @@
                                                    Foreground="{StaticResource DarkInputFieldPlaceholder-Default}"
                                                    Visibility="Collapsed"
                                                    VerticalAlignment="Center"
-                                                   Margin="{TemplateBinding Padding}"/>
+                                                   Margin="{TemplateBinding Padding}" />
                                         <ScrollViewer x:Name="PART_ContentHost"
                                                       Focusable="False"
                                                       VerticalAlignment="Center"
                                                       HorizontalScrollBarVisibility="Hidden"
-                                                      VerticalScrollBarVisibility="Hidden"/>
+                                                      VerticalScrollBarVisibility="Hidden" />
                                     </Grid>
                                 </Border>
                             </Border>
-                        
+
                         </StackPanel>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Foreground" TargetName="PlaceholderBlock" Value="{StaticResource DarkInputFieldPlaceholder-Disabled}"/>
+                                <Setter Property="Foreground" TargetName="PlaceholderBlock"
+                                        Value="{StaticResource DarkInputFieldPlaceholder-Disabled}" />
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Foreground" TargetName="PlaceholderBlock" Value="{StaticResource DarkInputFieldPlaceholder-Hover}"/>
+                                <Setter Property="Foreground" TargetName="PlaceholderBlock"
+                                        Value="{StaticResource DarkInputFieldPlaceholder-Hover}" />
                             </Trigger>
                             <Trigger Property="IsFocused" Value="True">
-                                <Setter Property="Foreground" TargetName="PlaceholderBlock" Value="{StaticResource DarkInputFieldPlaceholder-Selected}"/>
+                                <Setter Property="Foreground" TargetName="PlaceholderBlock"
+                                        Value="{StaticResource DarkInputFieldPlaceholder-Selected}" />
                             </Trigger>
                             <Trigger Property="Text" Value="">
-                                <Setter Property="Visibility" TargetName="PlaceholderBlock" Value="Visible"/>
+                                <Setter Property="Visibility" TargetName="PlaceholderBlock" Value="Visible" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        
-         <Style TargetType="TextBox" x:Key="DefaultVariant" BasedOn="{StaticResource DefaultInputFieldStyle}">
+
+        <Style TargetType="TextBox" x:Key="DefaultVariant" BasedOn="{StaticResource DefaultInputFieldStyle}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
@@ -78,10 +81,10 @@
                             <!-- This will be collapsed if the label is empty, but that is done in the controller
                              since for some reason it just straight up ignores the dataTrigger -->
                             <components:FormFieldLabel x:Name="LabelElement"
-                                                       Text="{Binding Label, ElementName=Root}" 
-                                                       TipText="{Binding LabelTip, ElementName=Root}" 
+                                                       Text="{Binding Label, ElementName=Root}"
+                                                       TipText="{Binding LabelTip, ElementName=Root}"
                                                        VerticalAlignment="Bottom" />
-                            
+
                             <!-- The border is wrapped inside an outerBorder without the border
                             This is to ensure that even if there is a funky pixel gap in between the inner part and outer stroke of the border, 
                             that it will just be filled in with the same background color as the inside -->
@@ -98,29 +101,32 @@
                                                    Foreground="{StaticResource InputFieldPlaceholder-Default}"
                                                    Visibility="Collapsed"
                                                    VerticalAlignment="Center"
-                                                   Margin="{TemplateBinding Padding}"/>
+                                                   Margin="{TemplateBinding Padding}" />
                                         <ScrollViewer x:Name="PART_ContentHost"
                                                       Focusable="False"
                                                       VerticalAlignment="Center"
                                                       HorizontalScrollBarVisibility="Hidden"
-                                                      VerticalScrollBarVisibility="Hidden"/>
+                                                      VerticalScrollBarVisibility="Hidden" />
                                     </Grid>
                                 </Border>
                             </Border>
-                        
+
                         </StackPanel>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Foreground" TargetName="PlaceholderBlock" Value="{StaticResource InputFieldPlaceholder-Disabled}"/>
+                                <Setter Property="Foreground" TargetName="PlaceholderBlock"
+                                        Value="{StaticResource InputFieldPlaceholder-Disabled}" />
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Foreground" TargetName="PlaceholderBlock" Value="{StaticResource InputFieldPlaceholder-Hover}"/>
+                                <Setter Property="Foreground" TargetName="PlaceholderBlock"
+                                        Value="{StaticResource InputFieldPlaceholder-Hover}" />
                             </Trigger>
                             <Trigger Property="IsFocused" Value="True">
-                                <Setter Property="Foreground" TargetName="PlaceholderBlock" Value="{StaticResource InputFieldPlaceholder-Selected}"/>
+                                <Setter Property="Foreground" TargetName="PlaceholderBlock"
+                                        Value="{StaticResource InputFieldPlaceholder-Selected}" />
                             </Trigger>
                             <Trigger Property="Text" Value="">
-                                <Setter Property="Visibility" TargetName="PlaceholderBlock" Value="Visible"/>
+                                <Setter Property="Visibility" TargetName="PlaceholderBlock" Value="Visible" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -128,5 +134,5 @@
             </Setter>
         </Style>
     </TextBox.Resources>
-    
+
 </TextBox>

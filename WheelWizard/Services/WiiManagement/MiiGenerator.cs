@@ -11,7 +11,7 @@ namespace CT_MKWII_WPF.Services.WiiManagement;
 public static class MiiGenerator
 {
     private static readonly HttpClient HttpClient = new HttpClient();
-    
+
     public static async Task<BitmapImage> GetMiiImageAsync(string base64MiiData)
     {
         using var formData = new MultipartFormDataContent();
@@ -23,16 +23,17 @@ public static class MiiGenerator
         {
             throw new HttpRequestException($"Error fetching Mii image: {response.StatusCode}");
         }
+
         var miiResponse = JsonSerializer.Deserialize<MiiResponse>(jsonResponse);
         if (miiResponse == null) return new BitmapImage();
         var miiImageUrl = GetMiiImageUrlFromResponse(miiResponse);
         return new BitmapImage(new Uri(miiImageUrl));
     }
-    
+
     private static string GetMiiImageUrlFromResponse(MiiResponse response)
     {
         const string baseUrl = "https://studio.mii.nintendo.com/miis/image.png";
-    
+
         var queryParams = new List<string>
         {
             $"data={response.MiiData}",
@@ -49,7 +50,7 @@ public static class MiiGenerator
         var queryString = string.Join("&", queryParams);
         return $"{baseUrl}?{queryString}";
     }
-    
+
     public class MiiResponse
     {
         [JsonPropertyName("mii")] public string? MiiData { get; set; }

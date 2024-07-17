@@ -10,13 +10,18 @@
       Title="Dashboard" Background="Transparent">
     <Grid x:Name="CompleteGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="{StaticResource TopRowSize}"/> <!-- This is the total height as the (Title + infoSection) - (padding) -->
+            <RowDefinition Height="{StaticResource TopRowSize}" />
+            <!-- This is the total height as the (Title + infoSection) - (padding) -->
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
-        <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
-        <TextBlock Grid.Row="0" Text="Home" HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{StaticResource PageTitleText}"/>
-        <StackPanel Grid.Row="0" Margin="0,10,0,10" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top">
+        <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
+        <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
+        <TextBlock Grid.Row="0" Text="Home" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                   Style="{StaticResource PageTitleText}" />
+        <StackPanel Grid.Row="0" Margin="0,10,0,10" Orientation="Vertical" HorizontalAlignment="Right"
+                    VerticalAlignment="Top">
             <!-- <Image x:Name="MainMii" Stretch="Uniform" > -->
             <!--     <Image.Clip> -->
             <!--         <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20"/> -->
@@ -33,30 +38,32 @@
             <!--            Text="1234-5678-1234" -->
             <!--            Margin="0,0,10,0"></TextBlock> -->
         </StackPanel>
-        <StackPanel Grid.Row="0" Margin="0,10,0,10" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="0" Margin="0,10,0,10" Orientation="Horizontal" HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom">
             <TextBlock
                 Style="{StaticResource BodyText}"
                 Text="Regular online"
-                Margin="0,0,10,0"></TextBlock>
+                Margin="0,0,10,0">
+            </TextBlock>
             <CheckBox
                 x:Name="OnlineTTCheckbox"
                 Style="{StaticResource Switch}"
-                HorizontalAlignment="Right"
-            ></CheckBox>
+                HorizontalAlignment="Right">
+            </CheckBox>
             <TextBlock
                 Style="{StaticResource BodyText}"
                 Text="Online TT"
-                Margin="0,0,10,0"
-            ></TextBlock>
+                Margin="0,0,10,0">
+            </TextBlock>
         </StackPanel>
-        
+
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock HorizontalAlignment="Center"
                        Style="{StaticResource TitleText}"
                        Text="Retro Rewind"
-                       FontSize="30"/>
-            
-            <components:Button Variant="Primary" 
+                       FontSize="30" />
+
+            <components:Button Variant="Primary"
                                x:Name="PlayButton"
                                IsEnabled="False"
                                IconPack="FontAwesome"
@@ -64,45 +71,45 @@
                                Text="Loading..."
                                FontSize="16"
                                Click="PlayButton_Click"
-                               Width="210" Height="50" 
-                               Margin="0,20,0,0"/>
-           <Grid Margin="0,10,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-               <Grid.ColumnDefinitions>
-                   <ColumnDefinition/>
-                   <ColumnDefinition Width="10"/>
-                   <ColumnDefinition/>
-               </Grid.ColumnDefinitions>
-               
-               <components:Button Grid.Column="0"
-                                  x:Name="MiiButton"
-                                  IsEnabled="False" 
-                                  IconPack="GameIcons" Text=""
-                                  IconKind="{x:Static icon:PackIconGameIconsKind.Mustache}"
-                                  Click="MiiButton_OnClick"
-                    
-                                  ToolTipService.InitialShowDelay="50"
-                                  ToolTipService.ShowDuration="5000"
-                                  ToolTipService.BetweenShowDelay="0">
-                   <components:Button.ToolTip>
-                       <components:ToolTipMessage Content="Launch the Mii creator" Alignment="BottomCenter"/>
-                   </components:Button.ToolTip>
-               </components:Button>
-                                  
-               <components:Button Grid.Column="2"
-                                  x:Name="DolphinButton"
-                                  IsEnabled="False" 
-                                  IconPack="GameIcons" Text=""
-                                  IconKind="{x:Static icon:PackIconGameIconsKind.Dolphin}"
-                                  Click="DolphinButton_OnClick"
-                                  
-                                  ToolTipService.InitialShowDelay="50"
-                                  ToolTipService.ShowDuration="5000"
-                                  ToolTipService.BetweenShowDelay="0">
-                   <components:Button.ToolTip>
-                       <components:ToolTipMessage Content="Launch dolphin" Alignment="BottomCenter"/>
-                   </components:Button.ToolTip>
-               </components:Button>
-           </Grid>
+                               Width="210" Height="50"
+                               Margin="0,20,0,0" />
+            <Grid Margin="0,10,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <components:Button Grid.Column="0"
+                                   x:Name="MiiButton"
+                                   IsEnabled="False"
+                                   IconPack="GameIcons" Text=""
+                                   IconKind="{x:Static icon:PackIconGameIconsKind.Mustache}"
+                                   Click="MiiButton_OnClick"
+
+                                   ToolTipService.InitialShowDelay="50"
+                                   ToolTipService.ShowDuration="5000"
+                                   ToolTipService.BetweenShowDelay="0">
+                    <components:Button.ToolTip>
+                        <components:ToolTipMessage Content="Launch the Mii creator" Alignment="BottomCenter" />
+                    </components:Button.ToolTip>
+                </components:Button>
+
+                <components:Button Grid.Column="2"
+                                   x:Name="DolphinButton"
+                                   IsEnabled="False"
+                                   IconPack="GameIcons" Text=""
+                                   IconKind="{x:Static icon:PackIconGameIconsKind.Dolphin}"
+                                   Click="DolphinButton_OnClick"
+
+                                   ToolTipService.InitialShowDelay="50"
+                                   ToolTipService.ShowDuration="5000"
+                                   ToolTipService.BetweenShowDelay="0">
+                    <components:Button.ToolTip>
+                        <components:ToolTipMessage Content="Launch dolphin" Alignment="BottomCenter" />
+                    </components:Button.ToolTip>
+                </components:Button>
+            </Grid>
         </StackPanel>
     </Grid>
 </Page>

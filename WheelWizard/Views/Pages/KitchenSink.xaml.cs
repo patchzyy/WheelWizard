@@ -13,7 +13,8 @@ public partial class KitchenSink : Page
     {
         InitializeComponent();
     }
-    private void Button_OnClick(object _, RoutedEventArgs e) => 
+
+    private void Button_OnClick(object _, RoutedEventArgs e) =>
         MessageBox.Show("Button Clicked");
 
     private void InputButton_OnClick(object _, RoutedEventArgs e) =>

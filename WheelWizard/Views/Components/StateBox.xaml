@@ -4,10 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
-             mc:Ignorable="d" x:Name="Root" 
+             mc:Ignorable="d" x:Name="Root"
              d:DesignHeight="50" d:DesignWidth="70"
              HorizontalAlignment="Left" VerticalAlignment="Top">
-             
+
     <Border CornerRadius="3" Padding="4,3"
             ToolTipService.InitialShowDelay="20"
             ToolTipService.ShowDuration="5000"
@@ -27,9 +27,9 @@
         </Border.Style>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <components:DynamicIcon Grid.Column="0"
@@ -41,7 +41,7 @@
                         <Setter Property="ForegroundColor" Value="{StaticResource StateBoxIcon-Default}" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IconSize, ElementName=Root}" Value="0">
-                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Setter Property="Visibility" Value="Collapsed" />
                             </DataTrigger>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
@@ -51,14 +51,18 @@
                             </MultiDataTrigger>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Border}}" Value="True" />
+                                    <Condition
+                                        Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Border}}"
+                                        Value="True" />
                                     <Condition Binding="{Binding IsDark, ElementName=Root}" Value="False" />
                                 </MultiDataTrigger.Conditions>
                                 <Setter Property="ForegroundColor" Value="{StaticResource StateBoxIcon-Hover}" />
                             </MultiDataTrigger>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Border}}" Value="True" />
+                                    <Condition
+                                        Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Border}}"
+                                        Value="True" />
                                     <Condition Binding="{Binding IsDark, ElementName=Root}" Value="True" />
                                 </MultiDataTrigger.Conditions>
                                 <Setter Property="ForegroundColor" Value="{StaticResource DarkStateBoxIcon-Hover}" />
@@ -71,10 +75,10 @@
             <Rectangle Grid.Column="1" Width="4">
                 <Rectangle.Style>
                     <Style TargetType="Rectangle">
-                        <Setter Property="Visibility" Value="Visible"/>
+                        <Setter Property="Visibility" Value="Visible" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IconSize, ElementName=Root}" Value="0">
-                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Setter Property="Visibility" Value="Collapsed" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
@@ -92,27 +96,31 @@
                             <DataTrigger Binding="{Binding IsDark, ElementName=Root}" Value="True">
                                 <Setter Property="Foreground" Value="{StaticResource DarkStateBoxForeground-Default}" />
                             </DataTrigger>
-                            
-                            <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Border}}" Value="True">
+
+                            <DataTrigger
+                                Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Border}}"
+                                Value="True">
                                 <Setter Property="Foreground" Value="{StaticResource StateBoxForeground-Hover}" />
                             </DataTrigger>
-                            
+
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Border}}" Value="True" />
+                                    <Condition
+                                        Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Border}}"
+                                        Value="True" />
                                     <Condition Binding="{Binding IsDark, ElementName=Root}" Value="True" />
                                 </MultiDataTrigger.Conditions>
                                 <Setter Property="Foreground" Value="{StaticResource DarkStateBoxForeground-Hover}" />
                             </MultiDataTrigger>
-                            
+
                         </Style.Triggers>
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
         </Grid>
-        
+
         <Border.ToolTip>
-            <components:ToolTipMessage x:Name="StateBoxToolTip"/>
+            <components:ToolTipMessage x:Name="StateBoxToolTip" />
         </Border.ToolTip>
     </Border>
 </UserControl>

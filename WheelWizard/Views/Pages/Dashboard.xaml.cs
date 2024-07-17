@@ -34,7 +34,7 @@ public partial class Dashboard : Page
     //         Dispatcher.Invoke(() => MainMii.Source = task.Result);
     //     });
     // }
-    
+
     private async void PlayButton_Click(object sender, RoutedEventArgs e)
     {
         ActionButtonStatus status = await RRStatusManager.GetCurrentStatus();
@@ -50,13 +50,15 @@ public partial class Dashboard : Page
                 NavigateToPage(new SettingsPage());
                 break;
             case ActionButtonStatus.NoRR:
-                SetButtonState("Installing...", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download, false, true);
+                SetButtonState("Installing...", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download,
+                    false, true);
                 DisableSidebarButtons();
                 await RetroRewindInstaller.InstallRetroRewind();
                 EnableSidebarButtons();
                 break;
             case ActionButtonStatus.OutOfDate:
-                SetButtonState("Updating...", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Update, false, true);
+                SetButtonState("Updating...", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Update, false,
+                    true);
                 DisableSidebarButtons();
                 await RetroRewindInstaller.UpdateRR();
                 EnableSidebarButtons();
@@ -65,10 +67,11 @@ public partial class Dashboard : Page
                 RetroRewindLauncher.PlayRetroRewind((bool)OnlineTTCheckbox.IsChecked!);
                 break;
         }
+
         UpdateActionButton();
         DisableAllButtonsTemporarily();
     }
-    
+
     private async void UpdateActionButton()
     {
         ActionButtonStatus status = await RRStatusManager.GetCurrentStatus();
@@ -81,7 +84,8 @@ public partial class Dashboard : Page
                 SetButtonState("Settings", Button.ButtonsVariantType.Secondary, PackIconFontAwesomeKind.FilePenSolid);
                 break;
             case ActionButtonStatus.ConfigNotFinished:
-                SetButtonState("Config Not Finished", Button.ButtonsVariantType.Secondary, PackIconFontAwesomeKind.FilePenSolid);
+                SetButtonState("Config Not Finished", Button.ButtonsVariantType.Secondary,
+                    PackIconFontAwesomeKind.FilePenSolid);
                 break;
             case ActionButtonStatus.NoRR:
                 SetButtonState("Install", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download);
@@ -109,8 +113,9 @@ public partial class Dashboard : Page
             OnlineTTCheckbox.IsEnabled = false;
         }
     }
-    
-    private void SetButtonState(string text, Button.ButtonsVariantType variant, PackIconMaterialKind iconKind, bool enabled = true, bool subButtonsEnabled = true)
+
+    private void SetButtonState(string text, Button.ButtonsVariantType variant, PackIconMaterialKind iconKind,
+        bool enabled = true, bool subButtonsEnabled = true)
     {
         PlayButton.Text = text;
         PlayButton.Variant = variant;
@@ -120,8 +125,9 @@ public partial class Dashboard : Page
         MiiButton.IsEnabled = subButtonsEnabled;
         DolphinButton.IsEnabled = subButtonsEnabled;
     }
-    
-    private void SetButtonState(string text, Button.ButtonsVariantType variant, PackIconFontAwesomeKind iconKind, bool enabled = true, bool subButtonsEnabled = true)
+
+    private void SetButtonState(string text, Button.ButtonsVariantType variant, PackIconFontAwesomeKind iconKind,
+        bool enabled = true, bool subButtonsEnabled = true)
     {
         PlayButton.Text = text;
         PlayButton.Variant = variant;
@@ -131,7 +137,7 @@ public partial class Dashboard : Page
         MiiButton.IsEnabled = subButtonsEnabled;
         DolphinButton.IsEnabled = subButtonsEnabled;
     }
-    
+
     private void DisableSidebarButtons() => GetLayout().SidePanelButtons.IsEnabled = false;
     private void EnableSidebarButtons() => GetLayout().SidePanelButtons.IsEnabled = true;
 
@@ -139,21 +145,19 @@ public partial class Dashboard : Page
     {
         DolphinSettingHelper.LaunchDolphin();
         DisableAllButtonsTemporarily();
-    } 
+    }
+
     private void MiiButton_OnClick(object sender, RoutedEventArgs e)
     {
         WiiMoteSettings.EnableVirtualWiiMote();
-        MiiChannelManager.LaunchMiiChannel(); 
+        MiiChannelManager.LaunchMiiChannel();
         DisableAllButtonsTemporarily();
     }
-    
+
     private void DisableAllButtonsTemporarily()
     {
         CompleteGrid.IsEnabled = false;
         //wait 5 seconds before re-enabling the buttons
-        Task.Delay(5000).ContinueWith(_ =>
-        {
-            Dispatcher.Invoke(() => CompleteGrid.IsEnabled = true );
-        });
+        Task.Delay(5000).ContinueWith(_ => { Dispatcher.Invoke(() => CompleteGrid.IsEnabled = true); });
     }
 }

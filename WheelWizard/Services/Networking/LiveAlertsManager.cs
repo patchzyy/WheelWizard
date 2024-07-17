@@ -12,22 +12,24 @@ namespace CT_MKWII_WPF.Services.Networking
 {
     public static class LiveAlertsManager
     {
-        private static readonly string StatusUrl = "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/status.txt";
+        private static readonly string StatusUrl =
+            "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/status.txt";
+
         private static DynamicIcon _statusIcon;
         private static Action<string> _updateStatusMessage;
         private static readonly DispatcherTimer Timer = new() { Interval = TimeSpan.FromSeconds(60) };
         private static readonly HttpClient HttpClient = new();
 
-        public static void Start(DynamicIcon statusIcon,  Action<string> updateStatusMessage)
+        public static void Start(DynamicIcon statusIcon, Action<string> updateStatusMessage)
         {
             _statusIcon = statusIcon;
             _updateStatusMessage = updateStatusMessage;
-            Timer.Tick += async (s, e) => await UpdateStatus(); 
-            
+            Timer.Tick += async (s, e) => await UpdateStatus();
+
             _statusIcon.IconKind = null;
             _statusIcon.ForegroundColor = null;
             _updateStatusMessage("");
-            
+
             Timer.Start();
             Task.Run(async () => await UpdateStatus());
         }
@@ -42,14 +44,14 @@ namespace CT_MKWII_WPF.Services.Networking
                 var parts = content.Split("\n");
                 var firstLine = parts[0];
                 if (string.IsNullOrWhiteSpace(firstLine))
-                    return;   //do nothing
+                    return; //do nothing
                 var alertMessage = firstLine.Split("|");
                 if (alertMessage.Length == 2)
                 {
                     var messageType = alertMessage[0];
                     var message = alertMessage[1];
                     message = Regex.Replace(message, @"\\u000A", "\n");
-                    
+
                     await UpdateUi(messageType, message);
                 }
                 else
@@ -101,6 +103,7 @@ namespace CT_MKWII_WPF.Services.Networking
                         brush = Application.Current.FindResource("InfoColor") as SolidColorBrush;
                         break;
                 }
+
                 // We never actually want Brushes.Gray,
                 // but just in case the resource is missing for some unknown reason, we still want to display the icon
                 _statusIcon.ForegroundColor = brush ?? Brushes.Gray;

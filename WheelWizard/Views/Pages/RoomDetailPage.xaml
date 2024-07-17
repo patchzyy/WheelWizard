@@ -1,8 +1,8 @@
 ﻿<Page x:Class="CT_MKWII_WPF.Views.Pages.RoomDetailPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
       xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d"
@@ -11,97 +11,103 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="{StaticResource TopRowSize}"/> <!-- This is the total height as the (Title + infoSection) - (padding) -->
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="{StaticResource TopRowSize}" />
+            <!-- This is the total height as the (Title + infoSection) - (padding) -->
+            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
-        <Border Grid.Row="2" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
-        <TextBlock Grid.Row="0" Text="Room Details" HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{StaticResource PageTitleText}"/>
-        
+        <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
+        <Border Grid.Row="2" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
+        <TextBlock Grid.Row="0" Text="Room Details" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                   Style="{StaticResource PageTitleText}" />
+
         <components:IconLabelButton Grid.Row="0" IconKind="{x:Static icon:PackIconFontAwesomeKind.ArrowLeftSolid}"
                                     IconPack="FontAwesome" Text="Rooms"
                                     Color="{StaticResource TitleTextColor}"
                                     HoverColor="{StaticResource SuccessTitleTextColor}"
                                     VerticalAlignment="Top" HorizontalAlignment="Left"
-                                    Click="GoBackClick"/>
-        
-        <Grid Grid.Row="1" >
+                                    Click="GoBackClick" />
+
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            
-            <StackPanel  Grid.Column="0">
-                <components:FormFieldLabel Text="Room ID" Margin="0,0,2,0"/>
-                <TextBlock Text="{Binding Room.Id}"  
-                           Style="{StaticResource BodyText}"/>
+
+            <StackPanel Grid.Column="0">
+                <components:FormFieldLabel Text="Room ID" Margin="0,0,2,0" />
+                <TextBlock Text="{Binding Room.Id}"
+                           Style="{StaticResource BodyText}" />
             </StackPanel>
 
             <StackPanel Grid.Column="1">
-                <components:FormFieldLabel Text="Time Online" Margin="0,0,2,0"/>
-                <TextBlock x:Name="TimeOnline"  
-                           Style="{StaticResource BodyText}"/>
+                <components:FormFieldLabel Text="Time Online" Margin="0,0,2,0" />
+                <TextBlock x:Name="TimeOnline"
+                           Style="{StaticResource BodyText}" />
             </StackPanel>
-            
+
             <StackPanel Grid.Column="2">
-                <components:FormFieldLabel Text="Type" Margin="0,0,2,0"/>
+                <components:FormFieldLabel Text="Type" Margin="0,0,2,0" />
                 <TextBlock x:Name="RoomKind"
-                           Style="{StaticResource BodyText}"/>
+                           Style="{StaticResource BodyText}" />
             </StackPanel>
-            
-                    
-            <icon:PackIconFontAwesome  Grid.Column="3" Height="30" Width="30" Margin="3,12"
-                                       HorizontalAlignment="Right" VerticalAlignment="Top">
+
+
+            <icon:PackIconFontAwesome Grid.Column="3" Height="30" Width="30" Margin="3,12"
+                                      HorizontalAlignment="Right" VerticalAlignment="Top">
                 <icon:PackIconFontAwesome.Style>
                     <Style TargetType="icon:PackIconFontAwesome">
-                        <Setter Property="Foreground" Value="{StaticResource TitleTextColor}"/>
+                        <Setter Property="Foreground" Value="{StaticResource TitleTextColor}" />
                         <!-- this icon has no kind (meaning it is invisible) unless it is private, then it becomes a lock -->
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Path=Room.Type}" Value="private">
-                                <Setter Property="Kind" Value="LockSolid"/>
+                                <Setter Property="Kind" Value="LockSolid" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </icon:PackIconFontAwesome.Style>
             </icon:PackIconFontAwesome>
         </Grid>
-      
+
         <!-- there is no need for an empty list element since it should not be possible to have an empty room -->
         <!-- and even if for some reason it is empty, the list will just be empty, that's all -->
         <StackPanel Grid.Row="2" x:Name="ModsListContainer" VerticalAlignment="Stretch">
-            <components:StaticListView x:Name="PlayersListView" IsClickable="False"  MaxHeight="{Binding ElementName=ModsListContainer, Path=ActualHeight}"
-                                       ItemsSource="{Binding PlayersList}" ListTitle="Players" >
+            <components:StaticListView x:Name="PlayersListView" IsClickable="False"
+                                       MaxHeight="{Binding ElementName=ModsListContainer, Path=ActualHeight}"
+                                       ItemsSource="{Binding PlayersList}" ListTitle="Players">
                 <components:StaticListView.ItemContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Copy friend code" Click="CopyFriendCode_OnClick"/>
-                       <!-- <MenuItem Header="View Mii" Click="..."/> -->
+                        <MenuItem Header="Copy friend code" Click="CopyFriendCode_OnClick" />
+                        <!-- <MenuItem Header="View Mii" Click="..."/> -->
                     </ContextMenu>
                 </components:StaticListView.ItemContextMenu>
-                
+
                 <ListView.View>
                     <GridView AllowsColumnReorder="False">
                         <GridViewColumn Header="">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Border Width="40" Height="40" Background="{StaticResource MiiIconBackground}" CornerRadius="20" >
-                                        <Image Source="{Binding Value.MiiImage}" Stretch="Uniform" >
+                                    <Border Width="40" Height="40" Background="{StaticResource MiiIconBackground}"
+                                            CornerRadius="20">
+                                        <Image Source="{Binding Value.MiiImage}" Stretch="Uniform">
                                             <Image.Clip>
-                                                <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20"/>
+                                                <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20" />
                                             </Image.Clip>
                                         </Image>
                                     </Border>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Value.Name}" Width="105" 
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Value.Name}" Width="105"
                                         components:StaticListView.IsSortable="True" />
                         <GridViewColumn Header="Friend code" DisplayMemberBinding="{Binding Value.Fc}" Width="135"
                                         components:StaticListView.IsSortable="True" />
-                        <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Value.Ev}" Width="80" 
-                                        components:StaticListView.IsSortable="True"/>
+                        <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Value.Ev}" Width="80"
+                                        components:StaticListView.IsSortable="True" />
                     </GridView>
                 </ListView.View>
             </components:StaticListView>

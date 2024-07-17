@@ -17,22 +17,22 @@ public class DolphinSettingsUtils
 
     public static void EnableRecommendedSettings()
     {
-        ChangeSettings(("ShaderCompilationMode", "2"), 
-            ("WaitForShadersBeforeStarting", "True"), 
-            ("MSAA", "0x00000002"), 
+        ChangeSettings(("ShaderCompilationMode", "2"),
+            ("WaitForShadersBeforeStarting", "True"),
+            ("MSAA", "0x00000002"),
             ("SSAA", "False")
-            );
+        );
     }
-    
+
     public static void DisableRecommendedSettings()
     {
-        ChangeSettings(("ShaderCompilationMode", "0"), 
+        ChangeSettings(("ShaderCompilationMode", "0"),
             ("WaitForShadersBeforeStarting", "False"),
-            ("MSAA", "0x00000001"), 
+            ("MSAA", "0x00000001"),
             ("SSAA", "False")
-            );
+        );
     }
-    
+
     public static bool IsRecommendedSettingsEnabled()
     {
         var gfxFile = PathManager.FindGfxFile();
@@ -41,11 +41,11 @@ public class DolphinSettingsUtils
         var settings = new[] { "ShaderCompilationMode", "WaitForShadersBeforeStarting", "MSAA", "SSAA" };
         var expectedValues = new[] { "2", "True", "0x00000002", "False" };
 
-        return settings.Select((setting, index) => 
+        return settings.Select((setting, index) =>
                 DolphinSettingHelper.ReadIniSetting(gfxFile, "Settings", setting) == expectedValues[index])
             .All(result => result);
     }
-    
+
     public static bool GetCurrentVSyncStatus()
     {
         var gfxFile = PathManager.FindGfxFile();
@@ -53,7 +53,7 @@ public class DolphinSettingsUtils
         MessageBox.Show("Something went wrong, please contact us via discord. \nGFX file not found");
         return false;
     }
-    
+
     public static int GetCurrentResolution()
     {
         var gfxFile = PathManager.FindGfxFile();
@@ -61,6 +61,7 @@ public class DolphinSettingsUtils
         {
             return -1;
         }
+
         var resolution = DolphinSettingHelper.ReadIniSetting(gfxFile, "Settings", "InternalResolution");
         if (!int.TryParse(resolution, out _)) return -1;
         return int.Parse(resolution);

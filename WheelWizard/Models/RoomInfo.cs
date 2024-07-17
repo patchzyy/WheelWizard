@@ -10,7 +10,7 @@ public class RoomInfo
     public string Id { get; set; }
     public string Game { get; set; }
     public DateTime Created { get; set; }
-      
+
     public string Type { get; set; }
     public bool Suspend { get; set; }
     public string Host { get; set; }
@@ -31,6 +31,7 @@ public class RoomInfo
         public List<Mii> Mii { get; set; }
 
         private BitmapImage _miiImage;
+
         public BitmapImage MiiImage
         {
             get => _miiImage;

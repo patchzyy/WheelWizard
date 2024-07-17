@@ -28,7 +28,7 @@ public class Mod : INotifyPropertyChanged
             OnPropertyChanged(nameof(Title));
         }
     }
-    
+
     public event PropertyChangedEventHandler PropertyChanged;
 
     protected void OnPropertyChanged(string propertyName)

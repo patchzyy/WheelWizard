@@ -7,16 +7,16 @@
              mc:Ignorable="d"
              x:Name="Root"
              d:DesignHeight="90" d:DesignWidth="300">
-    
+
     <UserControl.Resources>
         <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
                TargetType="{x:Type RadioButton}"
                x:Key="SidebarMenuButton">
-            
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="{StaticResource TitleTextColor}"/>
-            <Setter Property="Height" Value="50"/>
-   
+
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{StaticResource TitleTextColor}" />
+            <Setter Property="Height" Value="50" />
+
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
@@ -30,17 +30,17 @@
                                              Color="{TemplateBinding Foreground}"
                                              HorizontalAlignment="Left"
                                              VerticalAlignment="Center"
-                                             Margin="{StaticResource LeftEdgeGap}"/>
+                                             Margin="{StaticResource LeftEdgeGap}" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="Background" Value="{StaticResource BackgroundContactColor}"/>
-                                <Setter Property="Foreground" Value= "{StaticResource TitleTextHover}"/>
+                                <Setter Property="Cursor" Value="Hand" />
+                                <Setter Property="Background" Value="{StaticResource BackgroundContactColor}" />
+                                <Setter Property="Foreground" Value="{StaticResource TitleTextHover}" />
                             </Trigger>
                             <Trigger Property="IsChecked" Value="True">
-                                <Setter Property="Background" Value="{StaticResource BackgroundColorV2}"/>
-                                <Setter Property="Foreground" Value="{StaticResource TitleTextColor}"/>
+                                <Setter Property="Background" Value="{StaticResource BackgroundColorV2}" />
+                                <Setter Property="Foreground" Value="{StaticResource TitleTextColor}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -48,8 +48,8 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    
+
     <RadioButton Style="{StaticResource SidebarMenuButton}"
                  GroupName="SidebarGroup" Click="OnClick"
-                 IsChecked="{Binding IsChecked, ElementName=Root, Mode=TwoWay}"/>
+                 IsChecked="{Binding IsChecked, ElementName=Root, Mode=TwoWay}" />
 </UserControl>

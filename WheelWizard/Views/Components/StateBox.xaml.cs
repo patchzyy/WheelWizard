@@ -12,9 +12,9 @@ namespace CT_MKWII_WPF.Views.Components
             FontSize = 14;
             StateBoxToolTip.Visibility = string.IsNullOrEmpty(TipText) ? Visibility.Hidden : Visibility.Visible;
         }
-        
+
         public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register(nameof(Text), typeof(string), typeof(StateBox), 
+            DependencyProperty.Register(nameof(Text), typeof(string), typeof(StateBox),
                 new PropertyMetadata(string.Empty));
 
         public string Text
@@ -22,9 +22,9 @@ namespace CT_MKWII_WPF.Views.Components
             get => (string)GetValue(TextProperty);
             set => SetValue(TextProperty, value);
         }
-        
+
         public static readonly DependencyProperty IsDarkProperty =
-            DependencyProperty.Register(nameof(IsDark), typeof(bool), typeof(StateBox), 
+            DependencyProperty.Register(nameof(IsDark), typeof(bool), typeof(StateBox),
                 new PropertyMetadata(false));
 
         public bool IsDark
@@ -32,10 +32,10 @@ namespace CT_MKWII_WPF.Views.Components
             get => (bool)GetValue(IsDarkProperty);
             set => SetValue(IsDarkProperty, value);
         }
-        
+
         public static readonly DependencyProperty IconPackProperty =
             DependencyProperty.Register(nameof(IconPack), typeof(string), typeof(StateBox),
-            new PropertyMetadata("Material"));
+                new PropertyMetadata("Material"));
 
         public string IconPack
         {
@@ -44,9 +44,9 @@ namespace CT_MKWII_WPF.Views.Components
         }
 
         public static readonly DependencyProperty IconKindProperty =
-            DependencyProperty.Register(nameof(IconKind), typeof(object), typeof(StateBox), 
+            DependencyProperty.Register(nameof(IconKind), typeof(object), typeof(StateBox),
                 new PropertyMetadata(null));
-        
+
         public object IconKind
         {
             get => GetValue(IconKindProperty);
@@ -56,7 +56,7 @@ namespace CT_MKWII_WPF.Views.Components
         public static readonly DependencyProperty IconSizeProperty =
             DependencyProperty.Register(nameof(IconSize), typeof(double), typeof(StateBox),
                 new PropertyMetadata(20.0));
-        
+
         public double IconSize
         {
             get => (double)GetValue(IconSizeProperty);
@@ -65,7 +65,7 @@ namespace CT_MKWII_WPF.Views.Components
 
         public static readonly DependencyProperty TipAlignmentProperty =
             DependencyProperty.Register(nameof(TipAlignment), typeof(ToolTipMessage.ToolTipAlignment),
-                typeof(StateBox), 
+                typeof(StateBox),
                 new PropertyMetadata(ToolTipMessage.ToolTipAlignment.TopCenter, OnTipAlignmentChanged));
 
         public ToolTipMessage.ToolTipAlignment TipAlignment
@@ -73,7 +73,7 @@ namespace CT_MKWII_WPF.Views.Components
             get => (ToolTipMessage.ToolTipAlignment)GetValue(TipAlignmentProperty);
             set => SetValue(TipAlignmentProperty, value);
         }
-        
+
         private static void OnTipAlignmentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             // quick and dirty fix to set the tooltip, because for some reason
@@ -81,17 +81,17 @@ namespace CT_MKWII_WPF.Views.Components
             if (d is StateBox formFieldLabel)
                 formFieldLabel.StateBoxToolTip.Alignment = (ToolTipMessage.ToolTipAlignment)e.NewValue;
         }
-        
+
         public static readonly DependencyProperty TipTextProperty =
-            DependencyProperty.Register(nameof(TipText), typeof(string), typeof(StateBox), 
+            DependencyProperty.Register(nameof(TipText), typeof(string), typeof(StateBox),
                 new PropertyMetadata(string.Empty, OnTipTextChanged));
-        
+
         public string TipText
         {
             get => (string)GetValue(TipTextProperty);
             set => SetValue(TipTextProperty, value);
         }
-        
+
         private static void OnTipTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             // quick and dirty fix to set the tooltip, because for some reason

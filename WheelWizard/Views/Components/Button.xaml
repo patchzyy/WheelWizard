@@ -6,12 +6,12 @@
         xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
         mc:Ignorable="d" d:DesignHeight="100" d:DesignWidth="200"
         x:Name="Root">
-    
+
     <Button.Template>
         <ControlTemplate TargetType="Button">
-            <Border Background="{TemplateBinding Background}" 
+            <Border Background="{TemplateBinding Background}"
                     CornerRadius="{StaticResource GlobalCornerRadius}" Padding="16,10">
-                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
             </Border>
         </ControlTemplate>
     </Button.Template>
@@ -21,5 +21,5 @@
                           IconSize="{Binding IconSize, ElementName=Root}"
                           Text="{Binding Text, ElementName=Root}"
                           FontSize="{Binding FontSize, ElementName=Root}"
-                          Color="{Binding Foreground, ElementName=Root}"/>
+                          Color="{Binding Foreground, ElementName=Root}" />
 </Button>

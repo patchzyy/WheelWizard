@@ -10,7 +10,7 @@ namespace CT_MKWII_WPF.Utilities.Downloads;
 
 public static class DownloadUtils
 {
-    public static async Task DownloadFileWithWindow(string url, string filePath, ProgressWindow progressWindow, 
+    public static async Task DownloadFileWithWindow(string url, string filePath, ProgressWindow progressWindow,
         string bottomWindowText = "")
     {
         if (filePath == null) throw new ArgumentNullException(nameof(filePath));
@@ -19,6 +19,7 @@ public static class DownloadUtils
         {
             Directory.CreateDirectory(directory);
         }
+
         try
         {
             using var client = new HttpClient();

@@ -7,10 +7,11 @@ namespace CT_MKWII_WPF.Views.Components
 {
     public class BaseListView : ListView
     {
-        public BaseListView() {
+        public BaseListView()
+        {
             MouseDoubleClick += ListView_DoubleClick;
         }
-        
+
         protected ListViewItem? ContextListViewItem; // the item that was right-clicked
 
         public ListViewItem? ContextMenuListViewItem
@@ -30,9 +31,12 @@ namespace CT_MKWII_WPF.Views.Components
         }
 
         // Define the custom event handlers
-        
+
         public delegate void ItemClickEventHandler(object sender, MouseButtonEventArgs e, ListViewItem clickedItem);
-        public delegate void ItemDoubleClickEventHandler(object sender, MouseButtonEventArgs e, ListViewItem clickedItem);
+
+        public delegate void ItemDoubleClickEventHandler(object sender, MouseButtonEventArgs e,
+            ListViewItem clickedItem);
+
         public event ItemClickEventHandler? OnItemClick;
         public event ItemDoubleClickEventHandler? OnDoubleItemClick;
 
@@ -42,7 +46,7 @@ namespace CT_MKWII_WPF.Views.Components
             if (clickedItem != null)
                 OnItemClick?.Invoke(this, e, clickedItem);
         }
-        
+
         private void ListView_DoubleClick(object sender, MouseButtonEventArgs e)
         {
             var clickedItem = FindAncestor<ListViewItem>(e.OriginalSource);

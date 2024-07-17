@@ -8,34 +8,34 @@
              mc:Ignorable="d" x:Name="Root"
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-        
-        <TextBlock Text="{Binding Text, ElementName=Root}" 
-                   VerticalAlignment="Center" FontSize="14" FontWeight="Bold" 
+
+        <TextBlock Text="{Binding Text, ElementName=Root}"
+                   VerticalAlignment="Center" FontSize="14" FontWeight="Bold"
                    Foreground="{StaticResource FormFieldLabelColor}"
-                   Margin="0,2,5,2"> 
+                   Margin="0,2,5,2">
         </TextBlock>
-        
+
         <Border ToolTipService.InitialShowDelay="50"
                 ToolTipService.ShowDuration="5000"
                 ToolTipService.BetweenShowDelay="0">
             <Border.Style>
                 <Style TargetType="Border">
-                    <Setter Property="Visibility" Value="Visible"/>
+                    <Setter Property="Visibility" Value="Visible" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding TipText, ElementName=Root}" Value="">
-                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Setter Property="Visibility" Value="Collapsed" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </Border.Style>
-            <icon:PackIconMaterial Kind="Information" Width="14" Height="14" 
-                                   Foreground="{StaticResource FormFieldLabelColor}" 
-                                   VerticalAlignment="Center"/>
+            <icon:PackIconMaterial Kind="Information" Width="14" Height="14"
+                                   Foreground="{StaticResource FormFieldLabelColor}"
+                                   VerticalAlignment="Center" />
             <Border.ToolTip>
-                <components:ToolTipMessage Alignment="TopCenter" x:Name="FormFieldLabelTip"/>
+                <components:ToolTipMessage Alignment="TopCenter" x:Name="FormFieldLabelTip" />
             </Border.ToolTip>
         </Border>
-      
-        
+
+
     </StackPanel>
 </UserControl>

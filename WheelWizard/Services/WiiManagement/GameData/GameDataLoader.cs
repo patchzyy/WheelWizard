@@ -12,9 +12,9 @@ public class GameDataLoader
 {
     private Models.GameData.GameData _gameData;
     private byte[] _saveData;
-    
+
     public Models.GameData.GameData GameData => _gameData;
-    
+
     private const int RksysSize = 0x2BC000;
     private const string RksysMagic = "RKSD0006";
     private const int MaxPlayerNum = 4;
@@ -24,14 +24,14 @@ public class GameDataLoader
     private const int FriendDataOffset = 0x56D0;
     private const int FriendDataSize = 0x1C0;
     private const int MiiSize = 0x4A;
-    
-    
+
+
     public GameDataLoader()
     {
         _gameData = new Models.GameData.GameData();
     }
-    
-    
+
+
     public void LoadGameData()
     {
         _saveData = LoadSaveDataFile();
@@ -39,7 +39,7 @@ public class GameDataLoader
             throw new InvalidDataException("Invalid save file data");
         ParseUsers();
     }
-    
+
     private void ParseUsers()
     {
         for (var i = 0; i < MaxPlayerNum; i++)
@@ -50,13 +50,13 @@ public class GameDataLoader
             _gameData.Users.Add(user);
         }
     }
-    
+
     private User ParseUser(int offset)
     {
         var user = new User
         {
             Name = GetUtf16String(offset + 0x14, 10),
-            FriendCode = FriendCodeGenerator.GetFriendCode(_saveData,offset + 0x5C),
+            FriendCode = FriendCodeGenerator.GetFriendCode(_saveData, offset + 0x5C),
             MiiData = Convert.ToBase64String(_saveData.AsSpan(offset + 0x4C, MiiSize)),
             Vr = BitConverter.ToUInt16(_saveData, offset + 0xB0),
             Br = BitConverter.ToUInt16(_saveData, offset + 0xB2),
@@ -66,7 +66,7 @@ public class GameDataLoader
         ParseFriends(user, offset);
         return user;
     }
-    
+
     private void ParseFriends(User user, int userOffset)
     {
         var friendOffset = userOffset + FriendDataOffset;
@@ -85,17 +85,18 @@ public class GameDataLoader
             user.Friends.Add(friend);
         }
     }
-    
+
     private bool CheckMiiData(int offset)
     {
         for (var i = 0; i < MiiSize; i++)
         {
-            if (_saveData[offset + i] != 0) 
+            if (_saveData[offset + i] != 0)
                 return true;
         }
+
         return false;
     }
-    
+
     private string GetUtf16String(int offset, int maxLength)
     {
         var bytes = new List<byte>();
@@ -107,9 +108,10 @@ public class GameDataLoader
             bytes.Add(b1);
             bytes.Add(b2);
         }
+
         return Encoding.BigEndianUnicode.GetString(bytes.ToArray());
     }
-    
+
     private string GetFriendCode(int offset)
     {
         // This is a simplified version. The actual friend code generation is more complex.
@@ -117,7 +119,7 @@ public class GameDataLoader
         return pid.ToString("D12").Insert(4, "-").Insert(9, "-");
     }
 
-    
+
     private bool ValidateMagicNumber()
     {
         return Encoding.ASCII.GetString(_saveData, 0, RksysMagic.Length) == RksysMagic;
@@ -125,7 +127,8 @@ public class GameDataLoader
 
     public static byte[]? LoadSaveDataFile()
     {
-        var saveFileLocation = Path.Combine(ConfigValidator.GetLoadPathLocation(), "Riivolution", "RetroRewind6", "save");
+        var saveFileLocation =
+            Path.Combine(ConfigValidator.GetLoadPathLocation(), "Riivolution", "RetroRewind6", "save");
         var saveFile = Directory.GetFiles(saveFileLocation, "rksys.dat", SearchOption.AllDirectories);
         return saveFile.Length == 0 ? null : File.ReadAllBytes(saveFile[0]);
     }

@@ -8,32 +8,33 @@
              mc:Ignorable="d"
              d:DesignHeight="150" d:DesignWidth="300"
              x:Name="Root">
-    
-    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" FlowDirection="LeftToRight">
-        
+
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left"
+                FlowDirection="LeftToRight">
+
         <local:DynamicIcon IconPack="{Binding IconPack, ElementName=Root}"
                            IconKind="{Binding IconKind, ElementName=Root}"
                            IconSize="{Binding IconSize, ElementName=Root}"
-                           ForegroundColor="{Binding Color, ElementName=Root}"/>
-        
+                           ForegroundColor="{Binding Color, ElementName=Root}" />
+
         <TextBlock Text="{Binding Text, ElementName=Root}"
                    FontSize="{Binding FontSize, ElementName=Root}"
                    Foreground="{Binding Color, ElementName=Root}"
                    VerticalAlignment="Center">
             <TextBlock.Style>
                 <Style TargetType="TextBlock">
-                    <Setter Property="Margin" Value="10,0,0,0"/>
+                    <Setter Property="Margin" Value="10,0,0,0" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IconSize, ElementName=Root}" Value="0">
-                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="Margin" Value="0" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Text, ElementName=Root}" Value="">
-                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="Margin" Value="0" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </TextBlock.Style>
         </TextBlock>
-        
+
     </StackPanel>
 </UserControl>

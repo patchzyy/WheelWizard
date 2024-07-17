@@ -14,18 +14,18 @@
                     Background="Transparent">
         <ContentControl.Style>
             <Style TargetType="ContentControl">
-                
+
                 <!-- Default IconMaterial -->
                 <Setter Property="ContentTemplate">
                     <Setter.Value>
                         <DataTemplate>
-                            <icon:PackIconMaterial Kind="{Binding}" 
+                            <icon:PackIconMaterial Kind="{Binding}"
                                                    Width="{Binding IconSize, ElementName=Root}"
                                                    Height="{Binding IconSize, ElementName=Root}" />
                         </DataTemplate>
                     </Setter.Value>
                 </Setter>
-                
+
                 <Style.Triggers>
                     <!-- using GameIcons when setting IconPack="GameIcons" -->
                     <DataTrigger Binding="{Binding IconPack, ElementName=Root}" Value="GameIcons">
@@ -34,7 +34,7 @@
                                 <DataTemplate>
                                     <icon:PackIconGameIcons Kind="{Binding}"
                                                             Width="{Binding IconSize, ElementName=Root}"
-                                                            Height="{Binding IconSize, ElementName=Root}"/>
+                                                            Height="{Binding IconSize, ElementName=Root}" />
                                 </DataTemplate>
                             </Setter.Value>
                         </Setter>
@@ -46,13 +46,13 @@
                                 <DataTemplate>
                                     <icon:PackIconFontAwesome Kind="{Binding}"
                                                               Width="{Binding IconSize, ElementName=Root}"
-                                                              Height="{Binding IconSize, ElementName=Root}"/>
+                                                              Height="{Binding IconSize, ElementName=Root}" />
                                 </DataTemplate>
                             </Setter.Value>
                         </Setter>
                     </DataTrigger>
-                    <!-- here there would be any other pack --> 
-                    
+                    <!-- here there would be any other pack -->
+
                 </Style.Triggers>
             </Style>
         </ContentControl.Style>

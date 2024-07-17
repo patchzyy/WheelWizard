@@ -10,19 +10,20 @@ public class PathManager
     public static string GetDolphinLocation() => ConfigManager.GetConfig().DolphinLocation;
     public static string GetUserPathLocation() => ConfigManager.GetConfig().UserFolderPath;
     public static bool GetForceWiimote() => ConfigManager.GetConfig().ForceWiimote;
-    
+
     public static string FindWiiMoteNew()
     {
         var folderPath = GetUserPathLocation();
         var configFolder = Path.Combine(folderPath, "Config");
         var wiimoteFile = Path.Combine(configFolder, "WiimoteNew.ini");
-            
+
         if (File.Exists(wiimoteFile))
             return wiimoteFile;
-        MessageBox.Show($"Could not find WiimoteNew file, tried looking in {wiimoteFile}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        MessageBox.Show($"Could not find WiimoteNew file, tried looking in {wiimoteFile}", "Error", MessageBoxButton.OK,
+            MessageBoxImage.Error);
         return string.Empty;
     }
-    
+
     public static string FindGfxFile()
     {
         var folderPath = GetUserPathLocation();
@@ -30,7 +31,8 @@ public class PathManager
         var gfxFile = Path.Combine(configFolder, "GFX.ini");
         if (File.Exists(gfxFile))
             return gfxFile;
-        MessageBox.Show($"Could not find GFX file, tried looking in {gfxFile}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        MessageBox.Show($"Could not find GFX file, tried looking in {gfxFile}", "Error", MessageBoxButton.OK,
+            MessageBoxImage.Error);
         return string.Empty;
     }
 }

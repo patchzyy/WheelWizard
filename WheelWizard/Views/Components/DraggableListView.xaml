@@ -9,16 +9,16 @@
                          d:DesignHeight="500" d:DesignWidth="300"
                          PreviewMouseMove="GripIcon_MouseMove"
                          Drop="GripIcon_OnDrop">
-    
+
     <components:BaseListView.Resources>
         <Style TargetType="{x:Type GridViewColumnHeader}">
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
             <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="{StaticResource HeaderAttributes}"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="5,0,0,0"/>
-            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="{StaticResource HeaderAttributes}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="5,0,0,0" />
+            <Setter Property="FontSize" Value="16" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
@@ -29,23 +29,23 @@
                                        Padding="{TemplateBinding Padding}"
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                       Foreground="{TemplateBinding Foreground}"/>
+                                       Foreground="{TemplateBinding Foreground}" />
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style x:Key="ItemStyleCommon" TargetType="{x:Type ListViewItem}">
-            <Setter Property="Background" Value="{StaticResource DragItemBackground-Default}"/>
-            <Setter Property="Foreground" Value="{StaticResource DragItemAttributes-Default}"/>
-            <Setter Property="Margin" Value="0,2"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Background" Value="{StaticResource DragItemBackground-Default}" />
+            <Setter Property="Foreground" Value="{StaticResource DragItemAttributes-Default}" />
+            <Setter Property="Margin" Value="0,2" />
+            <Setter Property="FontSize" Value="14" />
         </Style>
-        <Style x:Key="BorderCommon"  TargetType="{x:Type Border}">
-            <Setter Property="CornerRadius" Value="{StaticResource GlobalCornerRadius}"/>
+        <Style x:Key="BorderCommon" TargetType="{x:Type Border}">
+            <Setter Property="CornerRadius" Value="{StaticResource GlobalCornerRadius}" />
         </Style>
-        
+
         <Style x:Key="DraggedItemStyle" TargetType="{x:Type ListViewItem}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -56,7 +56,7 @@
                                 <DrawingBrush Viewport="0,0,20,20" ViewportUnits="Absolute" TileMode="Tile">
                                     <DrawingBrush.Drawing>
                                         <DrawingGroup>
-                                            <GeometryDrawing Brush="{StaticResource DragItemBackground-Focus}" >
+                                            <GeometryDrawing Brush="{StaticResource DragItemBackground-Focus}">
                                                 <GeometryDrawing.Geometry>
                                                     <GeometryGroup>
                                                         <RectangleGeometry Rect="0,0,50,50" />
@@ -73,7 +73,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <!--   ============  
          DEFAULT ITEM STYLE
          ============   -->
@@ -87,61 +87,68 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 MouseLeftButtonDown="ListViewItem_PreviewMouseLeftButtonDown"
                                 MouseRightButtonUp="ContextMenu_Click" MinHeight="37">
-                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-                                <components:IconLabelButton Text="" IconPack="FontAwesome" IconSize="23"  x:Name="GripIcon" 
+                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <components:IconLabelButton Text="" IconPack="FontAwesome" IconSize="23"
+                                                            x:Name="GripIcon"
                                                             IconKind="{x:Static icon:PackIconFontAwesomeKind.GripSolid}"
-                                                            VerticalAlignment="Stretch" HorizontalAlignment="Left" 
+                                                            VerticalAlignment="Stretch" HorizontalAlignment="Left"
                                                             HorizontalContentAlignment="Center" Width="40"
                                                             PreviewMouseLeftButtonDown="GripIcon_Hold"
                                                             HoverColor="{StaticResource DragItemIcon-IndividualHover+ }"
                                                             Color="{StaticResource DragItemIcon-Default}" />
-                                
-                                <components:IconLabelButton Text="" IconPack="FontAwesome" IconSize="23"  x:Name="DotsIcon" 
+
+                                <components:IconLabelButton Text="" IconPack="FontAwesome" IconSize="23"
+                                                            x:Name="DotsIcon"
                                                             IconKind="{x:Static icon:PackIconFontAwesomeKind.EllipsisVerticalSolid}"
-                                                            VerticalAlignment="Stretch" HorizontalAlignment="Right" 
+                                                            VerticalAlignment="Stretch" HorizontalAlignment="Right"
                                                             HoverColor="{StaticResource DragItemIcon-IndividualHover+ }"
                                                             Click="ContextMenu_Click"
                                                             Color="{StaticResource DragItemIcon-Default}" />
-                                
-                                
+
+
                                 <GridViewRowPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                                       Margin="0,0,20,0"
                                                       Content="{TemplateBinding Content}"
-                                                      Columns="{TemplateBinding GridView.ColumnCollection}"/>
+                                                      Columns="{TemplateBinding GridView.ColumnCollection}" />
                             </Grid>
                         </Border>
-                        
+
                         <ControlTemplate.Triggers>
                             <!-- you can also do styling based on the ItemObject itself
                             <DataTrigger Binding="{Binding ModName}"  Value="Sample Mod 3">
                                 <Setter Property="Visibility" TargetName="DotsIcon" Value="Collapsed"/>
-                            </DataTrigger> --> 
-                            <DataTrigger Binding="{Binding ItemContextMenu, ElementName=Root}"  Value="{x:Null}">
-                                <Setter Property="Visibility" TargetName="DotsIcon" Value="Collapsed"/>
+                            </DataTrigger> -->
+                            <DataTrigger Binding="{Binding ItemContextMenu, ElementName=Root}" Value="{x:Null}">
+                                <Setter Property="Visibility" TargetName="DotsIcon" Value="Collapsed" />
                             </DataTrigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="{StaticResource DragItemBackground-Hover}"/>
-                                <Setter Property="Foreground" Value="{StaticResource DragItemAttributes-Hover+}"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="Color" TargetName="GripIcon" Value="{StaticResource DragItemIcon-GroupHover+}"/>
-                                <Setter Property="Color" TargetName="DotsIcon" Value="{StaticResource DragItemIcon-GroupHover+}"/>
+                                <Setter Property="Background" Value="{StaticResource DragItemBackground-Hover}" />
+                                <Setter Property="Foreground" Value="{StaticResource DragItemAttributes-Hover+}" />
+                                <Setter Property="Cursor" Value="Hand" />
+                                <Setter Property="Color" TargetName="GripIcon"
+                                        Value="{StaticResource DragItemIcon-GroupHover+}" />
+                                <Setter Property="Color" TargetName="DotsIcon"
+                                        Value="{StaticResource DragItemIcon-GroupHover+}" />
                             </Trigger>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="{StaticResource DragItemBackground-Focus}"/>
-                                <Setter Property="Foreground" Value="{StaticResource DragItemAttributes-Hover+}"/>
-                                <Setter Property="Color" TargetName="GripIcon" Value="{StaticResource DragItemIcon-GroupHover+}"/>
-                                <Setter Property="Color" TargetName="DotsIcon" Value="{StaticResource DragItemIcon-GroupHover+}"/>
+                                <Setter Property="Background" Value="{StaticResource DragItemBackground-Focus}" />
+                                <Setter Property="Foreground" Value="{StaticResource DragItemAttributes-Hover+}" />
+                                <Setter Property="Color" TargetName="GripIcon"
+                                        Value="{StaticResource DragItemIcon-GroupHover+}" />
+                                <Setter Property="Color" TargetName="DotsIcon"
+                                        Value="{StaticResource DragItemIcon-GroupHover+}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <!--   ============
         DEFAULT TARGET UP
         ============   -->
-        <Style x:Key="DefaultItemStyle-TargetUp" TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource ItemStyleCommon}">
+        <Style x:Key="DefaultItemStyle-TargetUp" TargetType="{x:Type ListViewItem}"
+               BasedOn="{StaticResource ItemStyleCommon}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ListViewItem}">
@@ -151,64 +158,71 @@
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     MinHeight="37">
-                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-                                    <components:IconLabelButton Text="" IconPack="FontAwesome" IconSize="23"  x:Name="GripIcon" 
+                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <components:IconLabelButton Text="" IconPack="FontAwesome" IconSize="23"
+                                                                x:Name="GripIcon"
                                                                 IconKind="{x:Static icon:PackIconFontAwesomeKind.GripSolid}"
-                                                                VerticalAlignment="Stretch" HorizontalAlignment="Left" 
+                                                                VerticalAlignment="Stretch" HorizontalAlignment="Left"
                                                                 HorizontalContentAlignment="Center" Width="40"
                                                                 PreviewMouseLeftButtonDown="GripIcon_Hold"
                                                                 HoverColor="{StaticResource DragItemIcon-IndividualHover+ }"
                                                                 Color="{StaticResource DragItemIcon-Default}" />
-                                    
-                                    <components:IconLabelButton Text="" IconPack="FontAwesome" IconSize="23"  x:Name="DotsIcon" 
+
+                                    <components:IconLabelButton Text="" IconPack="FontAwesome" IconSize="23"
+                                                                x:Name="DotsIcon"
                                                                 IconKind="{x:Static icon:PackIconFontAwesomeKind.EllipsisVerticalSolid}"
-                                                                VerticalAlignment="Stretch" HorizontalAlignment="Right" 
+                                                                VerticalAlignment="Stretch" HorizontalAlignment="Right"
                                                                 HoverColor="{StaticResource DragItemIcon-IndividualHover+ }"
                                                                 Color="{StaticResource DragItemIcon-Default}" />
-                                    
-                                    
+
+
                                     <GridViewRowPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                                           Margin="0,0,20,0"
                                                           Content="{TemplateBinding Content}"
-                                                          Columns="{TemplateBinding GridView.ColumnCollection}"/>
+                                                          Columns="{TemplateBinding GridView.ColumnCollection}" />
                                 </Grid>
                             </Border>
-                            
-                            <Border VerticalAlignment="Top" 
+
+                            <Border VerticalAlignment="Top"
                                     Height="3" CornerRadius="2" Margin="50,0"
                                     Background="{StaticResource DragItem-Target}">
                                 <Border.RenderTransform>
-                                    <TranslateTransform Y="-4"/>
+                                    <TranslateTransform Y="-4" />
                                 </Border.RenderTransform>
                             </Border>
                         </Grid>
-                        
+
                         <ControlTemplate.Triggers>
-                            <DataTrigger Binding="{Binding IsEnabled, ElementName=Root}"  Value="{x:Null}">
-                                <Setter Property="Visibility" TargetName="DotsIcon" Value="Collapsed"/>
+                            <DataTrigger Binding="{Binding IsEnabled, ElementName=Root}" Value="{x:Null}">
+                                <Setter Property="Visibility" TargetName="DotsIcon" Value="Collapsed" />
                             </DataTrigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="{StaticResource DragItemBackground-Hover}"/>
-                                <Setter Property="Foreground" Value="{StaticResource DragItemAttributes-Hover+}"/>
-                                <Setter Property="Color" TargetName="GripIcon" Value="{StaticResource DragItemIcon-GroupHover+}"/>
-                                <Setter Property="Color" TargetName="DotsIcon" Value="{StaticResource DragItemIcon-GroupHover+}"/>
+                                <Setter Property="Background" Value="{StaticResource DragItemBackground-Hover}" />
+                                <Setter Property="Foreground" Value="{StaticResource DragItemAttributes-Hover+}" />
+                                <Setter Property="Color" TargetName="GripIcon"
+                                        Value="{StaticResource DragItemIcon-GroupHover+}" />
+                                <Setter Property="Color" TargetName="DotsIcon"
+                                        Value="{StaticResource DragItemIcon-GroupHover+}" />
                             </Trigger>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="{StaticResource DragItemBackground-Focus}"/>
-                                <Setter Property="Foreground" Value="{StaticResource DragItemAttributes-Hover+}"/>
-                                <Setter Property="Color" TargetName="GripIcon" Value="{StaticResource DragItemIcon-GroupHover+}"/>
-                                <Setter Property="Color" TargetName="DotsIcon" Value="{StaticResource DragItemIcon-GroupHover+}"/>
+                                <Setter Property="Background" Value="{StaticResource DragItemBackground-Focus}" />
+                                <Setter Property="Foreground" Value="{StaticResource DragItemAttributes-Hover+}" />
+                                <Setter Property="Color" TargetName="GripIcon"
+                                        Value="{StaticResource DragItemIcon-GroupHover+}" />
+                                <Setter Property="Color" TargetName="DotsIcon"
+                                        Value="{StaticResource DragItemIcon-GroupHover+}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <!--   ============
         DEFAULT TARGET Down
         ============   -->
-        <Style x:Key="DefaultItemStyle-TargetDown" TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource ItemStyleCommon}">
+        <Style x:Key="DefaultItemStyle-TargetDown" TargetType="{x:Type ListViewItem}"
+               BasedOn="{StaticResource ItemStyleCommon}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ListViewItem}">
@@ -218,53 +232,59 @@
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     MinHeight="37">
-                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-                                    <components:IconLabelButton Text="" IconPack="FontAwesome" IconSize="23"  x:Name="GripIcon" 
+                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <components:IconLabelButton Text="" IconPack="FontAwesome" IconSize="23"
+                                                                x:Name="GripIcon"
                                                                 IconKind="{x:Static icon:PackIconFontAwesomeKind.GripSolid}"
-                                                                VerticalAlignment="Stretch" HorizontalAlignment="Left" 
+                                                                VerticalAlignment="Stretch" HorizontalAlignment="Left"
                                                                 HorizontalContentAlignment="Center" Width="40"
                                                                 PreviewMouseLeftButtonDown="GripIcon_Hold"
                                                                 HoverColor="{StaticResource DragItemIcon-IndividualHover+ }"
                                                                 Color="{StaticResource DragItemIcon-Default}" />
-                                    
-                                    <components:IconLabelButton Text="" IconPack="FontAwesome" IconSize="23"  x:Name="DotsIcon" 
+
+                                    <components:IconLabelButton Text="" IconPack="FontAwesome" IconSize="23"
+                                                                x:Name="DotsIcon"
                                                                 IconKind="{x:Static icon:PackIconFontAwesomeKind.EllipsisVerticalSolid}"
-                                                                VerticalAlignment="Stretch" HorizontalAlignment="Right" 
+                                                                VerticalAlignment="Stretch" HorizontalAlignment="Right"
                                                                 HoverColor="{StaticResource DragItemIcon-IndividualHover+ }"
                                                                 Color="{StaticResource DragItemIcon-Default}" />
-                                    
-                                    
+
+
                                     <GridViewRowPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                                           Margin="0,0,20,0"
                                                           Content="{TemplateBinding Content}"
-                                                          Columns="{TemplateBinding GridView.ColumnCollection}"/>
+                                                          Columns="{TemplateBinding GridView.ColumnCollection}" />
                                 </Grid>
                             </Border>
-                            
+
                             <Border VerticalAlignment="Bottom"
-                                Height="3" CornerRadius="2" Margin="50,0"
+                                    Height="3" CornerRadius="2" Margin="50,0"
                                     Background="{StaticResource DragItem-Target}">
                                 <Border.RenderTransform>
-                                    <TranslateTransform Y="4"/>
+                                    <TranslateTransform Y="4" />
                                 </Border.RenderTransform>
                             </Border>
                         </Grid>
-                        
+
                         <ControlTemplate.Triggers>
-                            <DataTrigger Binding="{Binding IsEnabled, ElementName=Root}"  Value="{x:Null}">
-                                <Setter Property="Visibility" TargetName="DotsIcon" Value="Collapsed"/>
+                            <DataTrigger Binding="{Binding IsEnabled, ElementName=Root}" Value="{x:Null}">
+                                <Setter Property="Visibility" TargetName="DotsIcon" Value="Collapsed" />
                             </DataTrigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="{StaticResource DragItemBackground-Hover}"/>
-                                <Setter Property="Foreground" Value="{StaticResource DragItemAttributes-Hover+}"/>
-                                <Setter Property="Color" TargetName="GripIcon" Value="{StaticResource DragItemIcon-GroupHover+}"/>
-                                <Setter Property="Color" TargetName="DotsIcon" Value="{StaticResource DragItemIcon-GroupHover+}"/>
+                                <Setter Property="Background" Value="{StaticResource DragItemBackground-Hover}" />
+                                <Setter Property="Foreground" Value="{StaticResource DragItemAttributes-Hover+}" />
+                                <Setter Property="Color" TargetName="GripIcon"
+                                        Value="{StaticResource DragItemIcon-GroupHover+}" />
+                                <Setter Property="Color" TargetName="DotsIcon"
+                                        Value="{StaticResource DragItemIcon-GroupHover+}" />
                             </Trigger>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="{StaticResource DragItemBackground-Focus}"/>
-                                <Setter Property="Foreground" Value="{StaticResource DragItemAttributes-Hover+}"/>
-                                <Setter Property="Color" TargetName="GripIcon" Value="{StaticResource DragItemIcon-GroupHover+}"/>
-                                <Setter Property="Color" TargetName="DotsIcon" Value="{StaticResource DragItemIcon-GroupHover+}"/>
+                                <Setter Property="Background" Value="{StaticResource DragItemBackground-Focus}" />
+                                <Setter Property="Foreground" Value="{StaticResource DragItemAttributes-Hover+}" />
+                                <Setter Property="Color" TargetName="GripIcon"
+                                        Value="{StaticResource DragItemIcon-GroupHover+}" />
+                                <Setter Property="Color" TargetName="DotsIcon"
+                                        Value="{StaticResource DragItemIcon-GroupHover+}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -272,24 +292,26 @@
             </Setter>
         </Style>
     </components:BaseListView.Resources>
-    
+
     <ListView.Style>
         <Style TargetType="{x:Type ListView}">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="ItemContainerStyle" Value="{StaticResource  DefaultItemStyle}"/>
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="ItemContainerStyle" Value="{StaticResource  DefaultItemStyle}" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type components:BaseListView}">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            <GridViewHeaderRowPresenter Grid.Row="0" Columns="{Binding View.Columns, RelativeSource={RelativeSource AncestorType=ListView}}" />
-                            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                                <ItemsPresenter/>
+                            <GridViewHeaderRowPresenter Grid.Row="0"
+                                                        Columns="{Binding View.Columns, RelativeSource={RelativeSource AncestorType=ListView}}" />
+                            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"
+                                          HorizontalScrollBarVisibility="Disabled">
+                                <ItemsPresenter />
                             </ScrollViewer>
                         </Grid>
                     </ControlTemplate>

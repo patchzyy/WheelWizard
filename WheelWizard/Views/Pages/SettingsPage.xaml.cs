@@ -1,5 +1,4 @@
-﻿
-using System.Drawing;
+﻿using System.Drawing;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,7 +18,6 @@ public partial class SettingsPage : Page
 {
     public SettingsPage()
     {
-      
         InitializeComponent();
         LoadSettings();
         FillUserPath();
@@ -27,7 +25,7 @@ public partial class SettingsPage : Page
         ToggleLocationSettings(false);
         VersionText.Text = "v" + VersionChecker.CurrentVersion;
     }
-    
+
     private void LoadSettings()
     {
         if (!ConfigValidator.ConfigCorrectAndExists()) return;
@@ -42,13 +40,13 @@ public partial class SettingsPage : Page
         var resolution = radioButton.Tag.ToString();
         DolphinSettingHelper.ChangeIniSettings(PathManager.FindGfxFile(), "Settings", "InternalResolution", resolution);
     }
-    
+
     private void UpdateResolutionButtonsState()
     {
         var enableControls = ConfigValidator.ConfigCorrectAndExists();
         VideoBorder.IsEnabled = enableControls;
         WiiBorder.IsEnabled = enableControls;
-        
+
         if (!enableControls) return;
         VSyncButton.IsChecked = DolphinSettingsUtils.GetCurrentVSyncStatus();
         RecommendedButton.IsChecked = DolphinSettingsUtils.IsRecommendedSettingsEnabled();
@@ -59,11 +57,13 @@ public partial class SettingsPage : Page
         {
             finalResolution = parsedResolution - 1;
         }
+
         if (finalResolution >= 0 && finalResolution < ResolutionStackPanel.Children.Count)
         {
-            var radioButton = (RadioButton) ResolutionStackPanel.Children[finalResolution];
+            var radioButton = (RadioButton)ResolutionStackPanel.Children[finalResolution];
             radioButton.IsChecked = true;
         }
+
         var forcemote = WiiMoteSettings.IsForceSettingsEnabled();
         DisableForce.IsChecked = forcemote;
     }
@@ -108,7 +108,9 @@ public partial class SettingsPage : Page
         if (!string.IsNullOrEmpty(folderPath))
         {
             // Ask user if they want to use the automatically found folder
-            var result = MessageBox.Show("**If you dont know what all of this means, just click yes :)**\n\nDolphin Emulator folder found. Would you like to use this folder?\n\n" + folderPath, 
+            var result = MessageBox.Show(
+                "**If you dont know what all of this means, just click yes :)**\n\nDolphin Emulator folder found. Would you like to use this folder?\n\n" +
+                folderPath,
                 "Dolphin Emulator Folder Found", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
@@ -118,7 +120,8 @@ public partial class SettingsPage : Page
         }
         else
         {
-            MessageBox.Show("Dolphin Emulator folder not automatically found. Please try and find the folder manually, click 'help' for more information.", 
+            MessageBox.Show(
+                "Dolphin Emulator folder not automatically found. Please try and find the folder manually, click 'help' for more information.",
                 "Dolphin Emulator Folder Not Found", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
@@ -129,7 +132,7 @@ public partial class SettingsPage : Page
         if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             DolphinUserPathInput.Text = dialog.FileName;
     }
-    
+
     private void VSync_OnClick(object sender, RoutedEventArgs e)
     {
         //todo: move this logic into the backend
@@ -142,9 +145,9 @@ public partial class SettingsPage : Page
         if (RecommendedButton.IsChecked == true)
             DolphinSettingsUtils.EnableRecommendedSettings();
         else
-            DolphinSettingsUtils.DisableRecommendedSettings(); 
+            DolphinSettingsUtils.DisableRecommendedSettings();
     }
-    
+
     private void SaveButton_OnClick(object sender, RoutedEventArgs e)
     {
         var dolphinPath = DolphinExeInput.Text;
@@ -153,23 +156,26 @@ public partial class SettingsPage : Page
         var forceDisableWiimote = DisableForce.IsChecked == true;
         if (!File.Exists(dolphinPath) || !File.Exists(gamePath) || !Directory.Exists(userFolder))
         {
-            MessageBox.Show("Please ensure all paths are correct and try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show("Please ensure all paths are correct and try again.", "Error", MessageBoxButton.OK,
+                MessageBoxImage.Error);
             return;
         }
 
         // Save settings to a configuration file or system registry
         ConfigManager.SaveSettings(dolphinPath, gamePath, userFolder, true, forceDisableWiimote);
-        if(!ConfigValidator.SetupCorrectly())
+        if (!ConfigValidator.SetupCorrectly())
         {
-            MessageBox.Show("Please ensure all paths are correct and try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show("Please ensure all paths are correct and try again.", "Error", MessageBoxButton.OK,
+                MessageBoxImage.Error);
             NavigateToPage(new SettingsPage());
             return;
         }
+
         UpdateResolutionButtonsState();
         ToggleLocationSettings(false);
         MessageBox.Show("Settings saved successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
     }
-    
+
     private void EditButton_OnClick(object sender, RoutedEventArgs e)
     {
         ToggleLocationSettings(true);
@@ -195,7 +201,7 @@ public partial class SettingsPage : Page
             LocationEditButton.Variant = Button.ButtonsVariantType.Primary;
             LocationWarningIcon.Visibility = Visibility.Collapsed;
         }
-        
+
         LocationInputFields.IsEnabled = enable;
         LocationEditButton.Visibility = enable ? Visibility.Collapsed : Visibility.Visible;
         LocationSaveButton.Visibility = enable ? Visibility.Visible : Visibility.Collapsed;

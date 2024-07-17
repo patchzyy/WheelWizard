@@ -7,9 +7,9 @@ namespace CT_MKWII_WPF.Views.Components;
 public partial class FormFieldLabel : UserControl
 {
     public FormFieldLabel() => InitializeComponent();
-    
+
     public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
-        nameof(Text), typeof(string), typeof(FormFieldLabel), 
+        nameof(Text), typeof(string), typeof(FormFieldLabel),
         new PropertyMetadata(string.Empty));
 
     public string Text
@@ -17,9 +17,9 @@ public partial class FormFieldLabel : UserControl
         get => (string)GetValue(TextProperty);
         set => SetValue(TextProperty, value);
     }
-    
+
     public static readonly DependencyProperty TipTextProperty = DependencyProperty.Register(
-        nameof(TipText), typeof(string), typeof(FormFieldLabel), 
+        nameof(TipText), typeof(string), typeof(FormFieldLabel),
         new PropertyMetadata(string.Empty, OnTipTextChanged));
 
 

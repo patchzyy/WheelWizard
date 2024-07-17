@@ -12,8 +12,11 @@ public class DolphinSettingHelper
     {
         if (!File.Exists(fileLocation))
         {
-            MessageBox.Show("Something went wrong, INI file could not be read, Message Patchzy with the following error: " + fileLocation, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(
+                "Something went wrong, INI file could not be read, Message Patchzy with the following error: " +
+                fileLocation, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
+
         //read through every line to find the section
         var lines = File.ReadAllLines(fileLocation);
         var sectionFound = false;
@@ -23,11 +26,13 @@ public class DolphinSettingHelper
             sectionFound = true;
             break;
         }
+
         if (!sectionFound)
         {
             // MessageBox.Show("Could not find section in INI file, Message Patchzy with the following error: " + Section, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return "";
         }
+
         //now we know the section exists, we need to find the setting
         for (var i = 0; i < lines.Length; i++)
         {
@@ -36,25 +41,30 @@ public class DolphinSettingHelper
             var setting = lines[i].Split("=");
             return setting[1].Trim();
         }
+
         // MessageBox.Show("Could not find setting in INI file, Message Patchzy with the following error: " + SettingToRead, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         return "";
     }
-    
+
     public static string AutomaticallyFindDolphinPath()
     {
-        var appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Dolphin Emulator");
+        var appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "Dolphin Emulator");
         if (Directory.Exists(appDataPath))
             return appDataPath;
 
-        var documentsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Dolphin Emulator");
+        var documentsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+            "Dolphin Emulator");
         return Directory.Exists(documentsPath) ? documentsPath : string.Empty;
     }
-    
+
     public static string ReadIniSetting(string fileLocation, string settingToRead)
     {
         if (!File.Exists(fileLocation))
         {
-            MessageBox.Show("Something went wrong, INI file could not be read, Message Patchzy with the following error: " + fileLocation, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(
+                "Something went wrong, INI file could not be read, Message Patchzy with the following error: " +
+                fileLocation, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         var lines = File.ReadAllLines(fileLocation);
@@ -66,14 +76,17 @@ public class DolphinSettingHelper
                 return setting[1].Trim();
             }
         }
+
         return "";
     }
-    
+
     public static void ChangeIniSettings(string fileLocation, string section, string settingToChange, string value)
     {
         if (!File.Exists(fileLocation))
         {
-            MessageBox.Show($"Something went wrong, INI file could not be found, Message Patchzy with the following error: {fileLocation}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(
+                $"Something went wrong, INI file could not be found, Message Patchzy with the following error: {fileLocation}",
+                "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
 
@@ -89,7 +102,8 @@ public class DolphinSettingHelper
                 sectionFound = true;
                 sectionIndex = i;
             }
-            else if (sectionFound && (lines[i].StartsWith($"{settingToChange}=") || lines[i].StartsWith($"{settingToChange} =")))
+            else if (sectionFound && (lines[i].StartsWith($"{settingToChange}=") ||
+                                      lines[i].StartsWith($"{settingToChange} =")))
             {
                 lines[i] = $"{settingToChange} = {value}";
                 settingFound = true;
@@ -113,15 +127,17 @@ public class DolphinSettingHelper
 
         File.WriteAllLines(fileLocation, lines);
     }
-    
+
     public static void LaunchDolphin(string arguments = "")
     {
         var dolphinLocation = PathManager.GetDolphinLocation();
         if (dolphinLocation == "")
         {
-            MessageBox.Show("Could not find Dolphin Emulator, please set the path in settings", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show("Could not find Dolphin Emulator, please set the path in settings", "Error",
+                MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
+
         System.Diagnostics.Process.Start(dolphinLocation, arguments);
     }
 }

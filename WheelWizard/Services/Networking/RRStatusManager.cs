@@ -7,7 +7,6 @@ namespace CT_MKWII_WPF.Services.Networking;
 
 public class RRStatusManager
 {
-
     public static async Task<ActionButtonStatus> GetCurrentStatus()
     {
         var serverEnabled = await RetroRewindInstaller.IsServerEnabled();

@@ -19,16 +19,16 @@
                       x:Name="UpArrow"
                       HorizontalAlignment="Right" Visibility="Visible">
                 </Path>
-                
+
                 <!-- Content Border with background -->
                 <Border HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
                         CornerRadius="{StaticResource GlobalCornerRadius}"
                         Background="{StaticResource ToolTipBackground}"
                         BorderThickness="0" MinWidth="50">
-                    <ContentPresenter Margin="10,5" 
+                    <ContentPresenter Margin="10,5"
                                       HorizontalAlignment="Center"
-                                      VerticalAlignment="Center"/>
+                                      VerticalAlignment="Center" />
                 </Border>
 
                 <!-- Down Arrow -->
@@ -37,7 +37,7 @@
                       x:Name="DownArrow"
                       HorizontalAlignment="Left" Visibility="Visible">
                 </Path>
-                
+
             </StackPanel>
         </ControlTemplate>
     </ToolTip.Template>

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+
 /*
 EXAMPLES:
 
@@ -16,7 +17,7 @@ EXAMPLES:
  <components:Button IconSize="0"
                     Text="Home"
                     Click="Button_OnClick"/>
-                    
+
 # Note1:  you either need to find the icon, or set IconSize to 0 to hide it
  */
 
@@ -30,7 +31,7 @@ namespace CT_MKWII_WPF.Views.Components
             Style = (Style)Application.Current.FindResource("DefaultButtonStyle")!;
             FontSize = 14.0;
         }
-        
+
         public enum ButtonsVariantType
         {
             Primary,
@@ -40,15 +41,15 @@ namespace CT_MKWII_WPF.Views.Components
         }
 
         public static readonly DependencyProperty VariantProperty =
-            DependencyProperty.Register(nameof(Variant), typeof(ButtonsVariantType), typeof(Button), 
+            DependencyProperty.Register(nameof(Variant), typeof(ButtonsVariantType), typeof(Button),
                 new PropertyMetadata(ButtonsVariantType.Default, OnVariantChanged));
-        
+
         public ButtonsVariantType Variant
         {
             get => (ButtonsVariantType)GetValue(VariantProperty);
             set => SetValue(VariantProperty, value);
         }
-        
+
         private static void OnVariantChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is not Button button) return;
@@ -60,7 +61,7 @@ namespace CT_MKWII_WPF.Views.Components
                 ButtonsVariantType.Danger => "DangerButtonStyle",
                 _ => "DefaultButtonStyle"
             };
-                
+
             button.Style = (Style)Application.Current.FindResource(styleName)!;
         }
 
@@ -77,25 +78,25 @@ namespace CT_MKWII_WPF.Views.Components
         public static readonly DependencyProperty IconKindProperty =
             DependencyProperty.Register(nameof(IconKind), typeof(object), typeof(Button),
                 new PropertyMetadata(null));
-            
+
         public object IconKind
         {
             get => GetValue(IconKindProperty);
             set => SetValue(IconKindProperty, value);
         }
-        
+
         public static readonly DependencyProperty IconSizeProperty =
-            DependencyProperty.Register(nameof(IconSize), typeof(double), typeof(Button), 
+            DependencyProperty.Register(nameof(IconSize), typeof(double), typeof(Button),
                 new PropertyMetadata(20.0));
-        
+
         public double IconSize
         {
             get => (double)GetValue(IconSizeProperty);
             set => SetValue(IconSizeProperty, value);
         }
-        
+
         public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register(nameof(Text), typeof(string), typeof(Button), 
+            DependencyProperty.Register(nameof(Text), typeof(string), typeof(Button),
                 new PropertyMetadata(string.Empty));
 
         public string Text

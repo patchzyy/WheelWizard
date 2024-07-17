@@ -4,21 +4,21 @@
              xmlns:local="clr-namespace:CT_MKWII_WPF"
              StartupUri="Views/Layout.xaml">
     <Application.Resources>
-        
+
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Views/Styles/Constants.xaml"/>
-                <ResourceDictionary Source="Views/Styles/OldStyle.xaml"/>
-                <ResourceDictionary Source="Views/Styles/ButtonStyles.xaml"/>
-                <ResourceDictionary Source="Views/Styles/TextStyles.xaml"/>
-                <ResourceDictionary Source="Views/Styles/CheckboxStyles.xaml"/>
-                <ResourceDictionary Source="Views/Styles/Converters.xaml"/>
-                <ResourceDictionary Source="Views/Styles/ContextMenuStyles.xaml"/>
-                <ResourceDictionary Source="Views/Styles/ScrollBarStyle.xaml"/>
-                <ResourceDictionary Source="Views/Styles/InputFieldStyles.xaml"/>
-                <ResourceDictionary Source="Views/Styles/SettingsBlockStyle.xaml"/>
+                <ResourceDictionary Source="Views/Styles/Constants.xaml" />
+                <ResourceDictionary Source="Views/Styles/OldStyle.xaml" />
+                <ResourceDictionary Source="Views/Styles/ButtonStyles.xaml" />
+                <ResourceDictionary Source="Views/Styles/TextStyles.xaml" />
+                <ResourceDictionary Source="Views/Styles/CheckboxStyles.xaml" />
+                <ResourceDictionary Source="Views/Styles/Converters.xaml" />
+                <ResourceDictionary Source="Views/Styles/ContextMenuStyles.xaml" />
+                <ResourceDictionary Source="Views/Styles/ScrollBarStyle.xaml" />
+                <ResourceDictionary Source="Views/Styles/InputFieldStyles.xaml" />
+                <ResourceDictionary Source="Views/Styles/SettingsBlockStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-        
+
     </Application.Resources>
 </Application>

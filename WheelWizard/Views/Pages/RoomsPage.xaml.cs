@@ -12,6 +12,7 @@ namespace CT_MKWII_WPF.Views.Pages
     public partial class RoomsPage : Page, INotifyPropertyChanged
     {
         private ObservableCollection<RoomViewModel> _rooms;
+
         public ObservableCollection<RoomViewModel> Rooms
         {
             get => _rooms;
@@ -28,7 +29,7 @@ namespace CT_MKWII_WPF.Views.Pages
             DataContext = this;
             Rooms = new ObservableCollection<RoomViewModel>();
             LoadRoomsData();
-          
+
             RoomsView.SortingFunctions.Add("Players", PlayerComparable);
         }
 
@@ -39,7 +40,7 @@ namespace CT_MKWII_WPF.Views.Pages
                   int.TryParse(yItem.PlayerCount, out var yPlayerCount))) return 0;
             return xPlayerCount.CompareTo(yPlayerCount);
         }
-        
+
         private async void LoadRoomsData()
         {
             try
@@ -49,7 +50,7 @@ namespace CT_MKWII_WPF.Views.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading rooms data: {ex.Message}", "Error", 
+                MessageBox.Show($"Error loading rooms data: {ex.Message}", "Error",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -77,7 +78,7 @@ namespace CT_MKWII_WPF.Views.Pages
             EmptyRoomsView.Visibility = Rooms.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
             RoomsView.Visibility = Rooms.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
         }
-        
+
         private string HumanizeGameMode(string mode)
         {
             return mode switch
@@ -88,24 +89,23 @@ namespace CT_MKWII_WPF.Views.Pages
                 _ => "??"
             };
         }
-        
 
-        
+
         private string HumanizeTimeSpan(TimeSpan timeSpan)
         {
             string P(int count) => count != 1 ? "s" : "";
 
             if (timeSpan.TotalDays >= 1)
                 return $"{timeSpan.Days} day{P(timeSpan.Days)} {timeSpan.Hours} hour{P(timeSpan.Hours)}";
-           
+
             if (timeSpan.TotalHours >= 1)
                 return $"{timeSpan.Hours} hour{P(timeSpan.Hours)} {timeSpan.Minutes} minute{P(timeSpan.Minutes)}";
-        
+
             if (timeSpan.TotalMinutes >= 1)
                 return $"{timeSpan.Minutes} minute{P(timeSpan.Minutes)} {timeSpan.Seconds} second{P(timeSpan.Seconds)}";
-            
+
             return $"{timeSpan.Seconds} second{P(timeSpan.Seconds)}";
-        } 
+        }
 
         private void Room_MouseDoubleClick(object sender, MouseButtonEventArgs e, ListViewItem clickedItem)
         {
@@ -115,10 +115,11 @@ namespace CT_MKWII_WPF.Views.Pages
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }  
+        }
     }
 
     public class RoomViewModel
@@ -128,7 +129,7 @@ namespace CT_MKWII_WPF.Views.Pages
         public string PlayerCount { get; set; }
         public string Type { get; set; }
         public string Playtime { get; set; }
-        
+
         public string RoomKind { get; set; }
     }
 }

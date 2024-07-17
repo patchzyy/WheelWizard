@@ -221,51 +221,52 @@ public class RRLiveInfo
     }
   }
 ]";
-      
+
     private static readonly HttpClient Client = new HttpClient();
-    
-    
+
+
     // Caching
     private static RRInformation? _cachedData;
-    private static readonly TimeSpan CacheDuration = TimeSpan.FromSeconds(60); 
+    private static readonly TimeSpan CacheDuration = TimeSpan.FromSeconds(60);
     private static DateTime _lastFetchTime;
 
     public static async Task<RRInformation> GetCurrentGameData()
     {
-      if (_cachedData != null && (DateTime.Now - _lastFetchTime) < CacheDuration)
-      {
-        return _cachedData;
-      }
-      
-      string data = "";
-      bool useMockingData = false;
-      string apiUrl = "http://zplwii.xyz/api/groups";
-      try
-      {
-        if (useMockingData) data = _mockingData;
-        else
+        if (_cachedData != null && (DateTime.Now - _lastFetchTime) < CacheDuration)
         {
-          HttpResponseMessage response = await Client.GetAsync(apiUrl);
-          response.EnsureSuccessStatusCode();
-          data = await response.Content.ReadAsStringAsync();
+            return _cachedData;
         }
-      }
-      catch (HttpRequestException e)
-      {
-        return new RRInformation { Rooms = new List<RoomInfo>() };
-      }
-      catch (JsonException e)
-      {
-        MessageBox.Show(($"I messed up, here is why: {e.Message}"));
-        return new RRInformation { Rooms = new List<RoomInfo>() };
-      }
-      List<RoomInfo> rooms = JsonSerializer.Deserialize<List<RoomInfo>>(data,
-        new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+
+        string data = "";
+        bool useMockingData = false;
+        string apiUrl = "http://zplwii.xyz/api/groups";
+        try
+        {
+            if (useMockingData) data = _mockingData;
+            else
+            {
+                HttpResponseMessage response = await Client.GetAsync(apiUrl);
+                response.EnsureSuccessStatusCode();
+                data = await response.Content.ReadAsStringAsync();
+            }
+        }
+        catch (HttpRequestException e)
+        {
+            return new RRInformation { Rooms = new List<RoomInfo>() };
+        }
+        catch (JsonException e)
+        {
+            MessageBox.Show(($"I messed up, here is why: {e.Message}"));
+            return new RRInformation { Rooms = new List<RoomInfo>() };
+        }
+
+        List<RoomInfo> rooms = JsonSerializer.Deserialize<List<RoomInfo>>(data,
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
         );
-      
-      _cachedData = new RRInformation { Rooms = rooms };
-      _lastFetchTime = DateTime.Now;
-      return _cachedData;
+
+        _cachedData = new RRInformation { Rooms = rooms };
+        _lastFetchTime = DateTime.Now;
+        return _cachedData;
     }
 
     public static int GetCurrentOnlinePlayers(RRInformation info)
@@ -277,7 +278,6 @@ public class RRLiveInfo
 
     public class RRInformation
     {
-      public List<RoomInfo> Rooms;
+        public List<RoomInfo> Rooms;
     }
-    
 }

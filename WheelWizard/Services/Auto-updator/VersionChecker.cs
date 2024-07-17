@@ -12,9 +12,11 @@ namespace CT_MKWII_WPF.Utilities.Auto_updator;
 public static class VersionChecker
 {
     private const string VersionFileUrl = "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/version.txt";
-    private const string DownloadUrl = "https://github.com/patchzyy/WheelWizard/releases/latest/download/WheelWizard.exe";
-    
-    public const string CurrentVersion = "1.1.3";
+
+    private const string DownloadUrl =
+        "https://github.com/patchzyy/WheelWizard/releases/latest/download/WheelWizard.exe";
+
+    public const string CurrentVersion = "1.1.2";
 
 
     public static void CheckForUpdates()
@@ -25,16 +27,18 @@ public static class VersionChecker
             {
                 var version = client.DownloadString(VersionFileUrl).Trim();
                 if (version == CurrentVersion) return;
-                var result = MessageBox.Show("A new version of WheelWizard is available. Would you like to update?", "Update Available", MessageBoxButtons.YesNo);
+                var result = MessageBox.Show("A new version of WheelWizard is available. Would you like to update?",
+                    "Update Available", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes) Update();
             }
             catch (Exception e)
             {
-                MessageBox.Show("An error occurred while checking for updates. Please try again later. \n \nError: " + e.Message);
+                MessageBox.Show("An error occurred while checking for updates. Please try again later. \n \nError: " +
+                                e.Message);
             }
         }
     }
-    
+
     private static string GetActualExecutablePath()
     {
         // Use the process module's filename, which should be the actual .exe path
@@ -52,7 +56,7 @@ public static class VersionChecker
 
         var progressWindow = new ProgressWindow();
         progressWindow.Show();
-        
+
         await DownloadUtils.DownloadFileWithWindow(DownloadUrl, newFilePath, progressWindow);
 
         // we need to wait a bit before running the batch file to ensure the file is saved on disk

@@ -13,7 +13,7 @@ namespace CT_MKWII_WPF.Converters
             {
                 CornerRadius cornerRadius = (CornerRadius)values[0];
                 Thickness borderThickness = (Thickness)values[1];
-    
+
                 return new CornerRadius(
                     Math.Max(0, cornerRadius.TopLeft - borderThickness.Left),
                     Math.Max(0, cornerRadius.TopRight - borderThickness.Top),
@@ -21,9 +21,10 @@ namespace CT_MKWII_WPF.Converters
                     Math.Max(0, cornerRadius.BottomLeft - borderThickness.Bottom)
                 );
             }
+
             return new CornerRadius(0);
         }
-    
+
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();

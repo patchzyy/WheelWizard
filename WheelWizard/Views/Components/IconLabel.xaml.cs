@@ -4,17 +4,17 @@ using System.Windows.Media;
 
 /*
 EXAMPLES:
- <local:IconLabelButton IconKind="{x:Static icon:PackIconGameIconsKind.CarWheel}" 
+ <local:IconLabelButton IconKind="{x:Static icon:PackIconGameIconsKind.CarWheel}"
                  IconPack="GameIcons"
-                 Text="Dig" 
-                 Color="Green" 
+                 Text="Dig"
+                 Color="Green"
                  FontSize="18"
                  IconSize="22"/>
 
-<local:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.SolidCoffee}" 
+<local:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.SolidCoffee}"
                  IconPack="FontAwesome"
-                 Text="Coffee" 
-                 Color="Brown" 
+                 Text="Coffee"
+                 Color="Brown"
                  FontSize="16"
                  IconSize="20"/>
  */
@@ -29,7 +29,7 @@ namespace CT_MKWII_WPF.Views.Components
         }
 
         public static readonly DependencyProperty ColorProperty = DependencyProperty.Register(
-            nameof(Color), typeof(Brush), typeof(IconLabel), 
+            nameof(Color), typeof(Brush), typeof(IconLabel),
             new PropertyMetadata(Brushes.Black));
 
         public Brush Color
@@ -37,7 +37,7 @@ namespace CT_MKWII_WPF.Views.Components
             get => (Brush)GetValue(ColorProperty);
             set => SetValue(ColorProperty, value);
         }
-        
+
         public static readonly DependencyProperty IconSizeProperty = DependencyProperty.Register(
             nameof(IconSize), typeof(double), typeof(IconLabel),
             new PropertyMetadata(16.0));
@@ -49,7 +49,7 @@ namespace CT_MKWII_WPF.Views.Components
         }
 
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
-            nameof(Text), typeof(string), typeof(IconLabel), 
+            nameof(Text), typeof(string), typeof(IconLabel),
             new PropertyMetadata(string.Empty));
 
         public string Text
@@ -59,7 +59,7 @@ namespace CT_MKWII_WPF.Views.Components
         }
 
         public static readonly DependencyProperty IconKindProperty = DependencyProperty.Register(
-            nameof(IconKind), typeof(object), typeof(IconLabel), 
+            nameof(IconKind), typeof(object), typeof(IconLabel),
             new PropertyMetadata(null));
 
         public object IconKind
@@ -69,7 +69,7 @@ namespace CT_MKWII_WPF.Views.Components
         }
 
         public static readonly DependencyProperty IconPackProperty = DependencyProperty.Register(
-            nameof(IconPack), typeof(string), typeof(IconLabel), 
+            nameof(IconPack), typeof(string), typeof(IconLabel),
             new PropertyMetadata(null));
 
         public string IconPack

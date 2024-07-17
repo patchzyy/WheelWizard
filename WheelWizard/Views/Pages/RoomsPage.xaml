@@ -10,79 +10,90 @@
       Title="RoomsPage" Background="Transparent">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="{StaticResource TopRowSize}"/> <!-- This is the total height as the (Title + infoSection) - (padding) -->
-            <RowDefinition/>
+            <RowDefinition Height="{StaticResource TopRowSize}" />
+            <!-- This is the total height as the (Title + infoSection) - (padding) -->
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
-        <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
+        <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
+        <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-            <TextBlock Text="Rooms" Style="{StaticResource PageTitleText}"/>
+            <TextBlock Text="Rooms" Style="{StaticResource PageTitleText}" />
             <Border ToolTipService.InitialShowDelay="50" VerticalAlignment="Center"
                     ToolTipService.ShowDuration="50000" HorizontalAlignment="Center"
                     ToolTipService.BetweenShowDelay="0">
                 <icon:PackIconMaterial Kind="Information" Width="18" Height="18" Margin="5,2,5,0"
                                        Foreground="{StaticResource TitleIconColor}" />
                 <Border.ToolTip>
-                    <components:ToolTipMessage Alignment="TopCenter" Content="
+                    <components:ToolTipMessage Alignment="TopCenter"
+                                               Content="
 Please note that this page does not offer any functionality to join a room directly. &#10;
-To join a specific room, you'll need to either join through a friend, or hope to join it by joining the online servers."/>
+To join a specific room, you'll need to either join through a friend, or hope to join it by joining the online servers." />
                 </Border.ToolTip>
             </Border>
         </StackPanel>
-        
+
         <components:EmptyPageInfo Grid.Row="1" x:Name="EmptyRoomsView"
                                   HorizontalAlignment="Center"
                                   VerticalContentAlignment="Center"
                                   Title="No rooms found"
-                                  Body="You might not have internet connection, or no-one might be playing."/>
-        
+                                  Body="You might not have internet connection, or no-one might be playing." />
+
         <StackPanel Grid.Row="1" x:Name="ListContainer">
             <components:StaticListView ItemsSource="{Binding Rooms}" x:Name="RoomsView" ListTitle="Rooms"
-                                       OnItemClick="Room_MouseDoubleClick"  MaxHeight="{Binding ElementName=ListContainer, Path=ActualHeight}">
+                                       OnItemClick="Room_MouseDoubleClick"
+                                       MaxHeight="{Binding ElementName=ListContainer, Path=ActualHeight}">
                 <ListView.View>
                     <GridView AllowsColumnReorder="False">
                         <GridViewColumn Width="Auto">
                             <GridViewColumn.CellTemplate>
-                                
+
                                 <DataTemplate>
-                                    <icon:PackIconFontAwesome Height="30" Width="30" >
+                                    <icon:PackIconFontAwesome Height="30" Width="30">
                                         <icon:PackIconFontAwesome.Style>
                                             <Style TargetType="icon:PackIconFontAwesome">
-                                                <Setter Property="Foreground" Value="{StaticResource TitleTextColor}"/>
-                                                <Setter Property="Kind" Value="RoadCircleExclamationSolid"/>
+                                                <Setter Property="Foreground" Value="{StaticResource TitleTextColor}" />
+                                                <Setter Property="Kind" Value="RoadCircleExclamationSolid" />
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding Path=Type}" Value="private">
-                                                        <Setter Property="Kind" Value="RoadLockSolid"/>
+                                                        <Setter Property="Kind" Value="RoadLockSolid" />
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Path=Type}" Value="anybody">
-                                                        <Setter Property="Kind" Value="RoadSolid"/>
+                                                        <Setter Property="Kind" Value="RoadSolid" />
                                                     </DataTrigger>
-                                                    
-                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=IsMouseOver}" Value="True">
-                                                        <Setter Property="Foreground" Value="{StaticResource TitleTextHover}"/>
+
+                                                    <DataTrigger
+                                                        Binding="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=IsMouseOver}"
+                                                        Value="True">
+                                                        <Setter Property="Foreground"
+                                                                Value="{StaticResource TitleTextHover}" />
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
                                         </icon:PackIconFontAwesome.Style>
                                     </icon:PackIconFontAwesome>
                                 </DataTemplate>
-                                
+
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=RoomNumber}" Header="ID" Width="110" 
-                                        components:StaticListView.IsSortable="True"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=RoomNumber}" Header="ID" Width="110"
+                                        components:StaticListView.IsSortable="True" />
                         <GridViewColumn DisplayMemberBinding="{Binding Path=Playtime}" Header="Time Online" Width="150"
-                                        components:StaticListView.IsSortable="True"/>
-                        <GridViewColumn Header="Players" Width="80" components:StaticListView.IsSortable="True" >
+                                        components:StaticListView.IsSortable="True" />
+                        <GridViewColumn Header="Players" Width="80" components:StaticListView.IsSortable="True">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <components:StateBox Text="{Binding PlayerCount}" 
-                                                         IconPack="FontAwesome" IconKind="{x:Static icon:PackIconFontAwesomeKind.UserGroupSolid}">
+                                    <components:StateBox Text="{Binding PlayerCount}"
+                                                         IconPack="FontAwesome"
+                                                         IconKind="{x:Static icon:PackIconFontAwesomeKind.UserGroupSolid}">
                                         <components:StateBox.Style>
                                             <Style TargetType="components:StateBox">
                                                 <Setter Property="IsDark" Value="True"></Setter>
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=IsMouseOver}" Value="True">
+                                                    <DataTrigger
+                                                        Binding="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=IsMouseOver}"
+                                                        Value="True">
                                                         <Setter Property="IsDark" Value="False" />
                                                     </DataTrigger>
                                                 </Style.Triggers>
@@ -90,10 +101,10 @@ To join a specific room, you'll need to either join through a friend, or hope to
                                         </components:StateBox.Style>
                                     </components:StateBox>
                                 </DataTemplate>
-                            </GridViewColumn.CellTemplate> 
+                            </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=RoomKind}" Header="Type" Width="110" 
-                                        components:StaticListView.IsSortable="True"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=RoomKind}" Header="Type" Width="110"
+                                        components:StaticListView.IsSortable="True" />
                     </GridView>
                 </ListView.View>
             </components:StaticListView>

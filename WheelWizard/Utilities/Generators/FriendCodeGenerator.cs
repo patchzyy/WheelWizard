@@ -37,6 +37,7 @@ public class FriendCodeGenerator
             {
                 sb.Append(hashBytes[i].ToString("x2"));
             }
+
             return sb.ToString();
         }
     }
@@ -49,6 +50,7 @@ public class FriendCodeGenerator
             fc += FcPartParse((int)(fcDec / Math.Pow(10, 4 * (2 - i)) % 10000));
             if (i < 2) fc += "-";
         }
+
         return fc;
     }
 
