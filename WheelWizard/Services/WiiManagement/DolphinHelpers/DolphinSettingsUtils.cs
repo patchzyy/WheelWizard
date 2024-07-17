@@ -6,7 +6,6 @@ namespace CT_MKWII_WPF.Services.WiiManagement.DolphinHelpers;
 
 public class DolphinSettingsUtils
 {
-    
     private static void ChangeSettings(params (string Key, string Value)[] settings)
     {
         var gfxFile = PathManager.FindGfxFile();
@@ -15,11 +14,24 @@ public class DolphinSettingsUtils
         foreach (var (key, value) in settings)
             DolphinSettingHelper.ChangeIniSettings(gfxFile, "Settings", key, value);
     }
-    public static void EnableRecommendedSettings() => 
-        ChangeSettings(("ShaderCompilationMode", "2"), ("WaitForShadersBeforeStarting", "True"), ("MSAA", "0x00000002"), ("SSAA", "False"));
+
+    public static void EnableRecommendedSettings()
+    {
+        ChangeSettings(("ShaderCompilationMode", "2"), 
+            ("WaitForShadersBeforeStarting", "True"), 
+            ("MSAA", "0x00000002"), 
+            ("SSAA", "False")
+            );
+    }
     
-    public static void DisableRecommendedSettings() => 
-        ChangeSettings(("ShaderCompilationMode", "0"), ("WaitForShadersBeforeStarting", "False"), ("MSAA", "0x00000001"), ("SSAA", "False"));
+    public static void DisableRecommendedSettings()
+    {
+        ChangeSettings(("ShaderCompilationMode", "0"), 
+            ("WaitForShadersBeforeStarting", "False"),
+            ("MSAA", "0x00000001"), 
+            ("SSAA", "False")
+            );
+    }
     
     public static bool IsRecommendedSettingsEnabled()
     {
@@ -37,12 +49,9 @@ public class DolphinSettingsUtils
     public static bool GetCurrentVSyncStatus()
     {
         var gfxFile = PathManager.FindGfxFile();
-        if (gfxFile == "")
-        {
-            MessageBox.Show("Something went wrong, please contact us via discord. \nGFX file not found");
-            return false;
-        }
-        return  DolphinSettingHelper.ReadIniSetting(gfxFile,  "VSync") == "True";
+        if (gfxFile != "") return DolphinSettingHelper.ReadIniSetting(gfxFile, "VSync") == "True";
+        MessageBox.Show("Something went wrong, please contact us via discord. \nGFX file not found");
+        return false;
     }
     
     public static int GetCurrentResolution()

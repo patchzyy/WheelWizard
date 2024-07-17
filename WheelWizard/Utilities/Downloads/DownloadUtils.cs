@@ -14,7 +14,7 @@ public static class DownloadUtils
         string bottomWindowText = "")
     {
         if (filePath == null) throw new ArgumentNullException(nameof(filePath));
-        string directory = Path.GetDirectoryName(filePath)!;
+        var directory = Path.GetDirectoryName(filePath)!;
         if (!Directory.Exists(directory))
         {
             Directory.CreateDirectory(directory);

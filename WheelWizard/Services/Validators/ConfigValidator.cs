@@ -9,43 +9,23 @@ namespace CT_MKWII_WPF.Utilities.Configuration
     {
         public static bool SetupCorrectly()
         {
-            Config config = ConfigManager.GetConfig();
+            var config = ConfigManager.GetConfig();
             if (config == null) return false;
-            string gfxFile = Path.Combine(config.UserFolderPath, "Config", "GFX.ini");
+            var gfxFile = Path.Combine(config.UserFolderPath, "Config", "GFX.ini");
             return File.Exists(config.DolphinLocation) && 
                    File.Exists(config.GameLocation) && 
                    File.Exists(gfxFile);
         }
 
-        public static bool DoesConfigExist()
-        {
-            return File.Exists(ConfigManager.GetWheelWizardAppdataPath());
-        }
+        public static bool DoesConfigExist() => File.Exists(ConfigManager.GetWheelWizardAppdataPath());
+        public static bool ConfigCorrectAndExists() => DoesConfigExist() && SetupCorrectly();
+        public static string GetLoadPathLocation() => Path.Combine(ConfigManager.GetConfig().UserFolderPath, "Load");
         
-        public static bool ConfigCorrectAndExists()
-        {
-            return DoesConfigExist() && SetupCorrectly();
-        }
-        
-        
-
-        public static string GetLoadPathLocation()
-        {
-            return Path.Combine(ConfigManager.GetConfig().UserFolderPath, "Load");
-        }
-        
-
         public static bool IsConfigFileFinishedSettingUp()
         {
-            Config config = ConfigManager.GetConfig();
-            if (config == null || !Directory.Exists(config.UserFolderPath) || !File.Exists(config.DolphinLocation) || !File.Exists(config.GameLocation))
-            {
-                return false;
-            }
-            return true;
+            var config = ConfigManager.GetConfig();
+            return config != null && Directory.Exists(config.UserFolderPath) && File.Exists(config.DolphinLocation) && File.Exists(config.GameLocation);
         }
-        
-        
 
         public static ModData[] GetMods()
         {
@@ -63,7 +43,7 @@ namespace CT_MKWII_WPF.Utilities.Configuration
 
         public static void SaveWiimoteSettings(bool forceWiimote)
         {
-            Config config = ConfigManager.GetConfig();
+            var config = ConfigManager.GetConfig();
             ConfigManager.SaveSettings(config.DolphinLocation, config.GameLocation, config.UserFolderPath, config.HasRunNandTutorial, forceWiimote);
         }
     }

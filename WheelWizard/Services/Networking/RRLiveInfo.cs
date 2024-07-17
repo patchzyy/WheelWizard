@@ -280,5 +280,4 @@ public class RRLiveInfo
       public List<RoomInfo> Rooms;
     }
     
-    
 }

@@ -17,13 +17,11 @@ public class DolphinSettingHelper
         //read through every line to find the section
         var lines = File.ReadAllLines(fileLocation);
         var sectionFound = false;
-        for (int i = 0; i < lines.Length; i++)
+        for (var i = 0; i < lines.Length; i++)
         {
-            if (lines[i] == $"[{section}]")
-            {
-                sectionFound = true;
-                break;
-            }
+            if (lines[i] != $"[{section}]") continue;
+            sectionFound = true;
+            break;
         }
         if (!sectionFound)
         {
@@ -31,14 +29,12 @@ public class DolphinSettingHelper
             return "";
         }
         //now we know the section exists, we need to find the setting
-        for (int i = 0; i < lines.Length; i++)
+        for (var i = 0; i < lines.Length; i++)
         {
-            if (lines[i].Contains(settingToRead))
-            {
-                //we found the setting, now we need to return the value
-                var setting = lines[i].Split("=");
-                return setting[1].Trim();
-            }
+            if (!lines[i].Contains(settingToRead)) continue;
+            //we found the setting, now we need to return the value
+            var setting = lines[i].Split("=");
+            return setting[1].Trim();
         }
         // MessageBox.Show("Could not find setting in INI file, Message Patchzy with the following error: " + SettingToRead, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         return "";
@@ -46,14 +42,12 @@ public class DolphinSettingHelper
     
     public static string AutomaticallyFindDolphinPath()
     {
-        string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Dolphin Emulator");
+        var appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Dolphin Emulator");
         if (Directory.Exists(appDataPath))
             return appDataPath;
 
-        string documentsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Dolphin Emulator");
-        if (Directory.Exists(documentsPath))
-            return documentsPath;
-        return string.Empty;
+        var documentsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Dolphin Emulator");
+        return Directory.Exists(documentsPath) ? documentsPath : string.Empty;
     }
     
     public static string ReadIniSetting(string fileLocation, string settingToRead)
@@ -64,7 +58,7 @@ public class DolphinSettingHelper
         }
 
         var lines = File.ReadAllLines(fileLocation);
-        foreach (string line in lines)
+        foreach (var line in lines)
         {
             if (line.StartsWith(settingToRead))
             {
@@ -74,6 +68,7 @@ public class DolphinSettingHelper
         }
         return "";
     }
+    
     public static void ChangeIniSettings(string fileLocation, string section, string settingToChange, string value)
     {
         if (!File.Exists(fileLocation))
@@ -83,11 +78,11 @@ public class DolphinSettingHelper
         }
 
         var lines = File.ReadAllLines(fileLocation).ToList();
-        bool sectionFound = false;
-        bool settingFound = false;
-        int sectionIndex = -1;
+        var sectionFound = false;
+        var settingFound = false;
+        var sectionIndex = -1;
 
-        for (int i = 0; i < lines.Count; i++)
+        for (var i = 0; i < lines.Count; i++)
         {
             if (lines[i].Trim() == $"[{section}]")
             {

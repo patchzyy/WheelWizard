@@ -36,28 +36,24 @@ public class GameDataLoader
     {
         _saveData = LoadSaveDataFile();
         if (_saveData == null || _saveData.Length != RksysSize || !ValidateMagicNumber())
-        {
             throw new InvalidDataException("Invalid save file data");
-        }
         ParseUsers();
     }
     
     private void ParseUsers()
     {
-        for (int i = 0; i < MaxPlayerNum; i++)
+        for (var i = 0; i < MaxPlayerNum; i++)
         {
-            int rkpdOffset = RksysMagic.Length + i * RkpdSize;
-            if (Encoding.ASCII.GetString(_saveData, rkpdOffset, RkpdMagic.Length) == RkpdMagic)
-            {
-                User user = ParseUser(rkpdOffset);
-                _gameData.Users.Add(user);
-            }
+            var rkpdOffset = RksysMagic.Length + i * RkpdSize;
+            if (Encoding.ASCII.GetString(_saveData, rkpdOffset, RkpdMagic.Length) != RkpdMagic) continue;
+            var user = ParseUser(rkpdOffset);
+            _gameData.Users.Add(user);
         }
     }
     
     private User ParseUser(int offset)
     {
-        User user = new User
+        var user = new User
         {
             Name = GetUtf16String(offset + 0x14, 10),
             FriendCode = FriendCodeGenerator.GetFriendCode(_saveData,offset + 0x5C),
@@ -73,38 +69,37 @@ public class GameDataLoader
     
     private void ParseFriends(User user, int userOffset)
     {
-        int friendOffset = userOffset + FriendDataOffset;
-        for (int i = 0; i < MaxFriendNum; i++)
+        var friendOffset = userOffset + FriendDataOffset;
+        for (var i = 0; i < MaxFriendNum; i++)
         {
-            int currentOffset = friendOffset + i * FriendDataSize;
-            if (CheckMiiData(currentOffset + 0x1A))
+            var currentOffset = friendOffset + i * FriendDataSize;
+            if (!CheckMiiData(currentOffset + 0x1A)) continue;
+            var friend = new Friend
             {
-                Friend friend = new Friend
-                {
-                    Name = GetUtf16String(currentOffset + 0x1C, 10),
-                    FriendCode = FriendCodeGenerator.GetFriendCode(_saveData, currentOffset + 4),
-                    Wins = BitConverter.ToUInt16(_saveData, currentOffset + 0x14),
-                    Losses = BitConverter.ToUInt16(_saveData, currentOffset + 0x12),
-                    MiiData = Convert.ToBase64String(_saveData.AsSpan(currentOffset + 0x1A, MiiSize))
-                };
-                user.Friends.Add(friend);
-            }
+                Name = GetUtf16String(currentOffset + 0x1C, 10),
+                FriendCode = FriendCodeGenerator.GetFriendCode(_saveData, currentOffset + 4),
+                Wins = BitConverter.ToUInt16(_saveData, currentOffset + 0x14),
+                Losses = BitConverter.ToUInt16(_saveData, currentOffset + 0x12),
+                MiiData = Convert.ToBase64String(_saveData.AsSpan(currentOffset + 0x1A, MiiSize))
+            };
+            user.Friends.Add(friend);
         }
     }
     
     private bool CheckMiiData(int offset)
     {
-        for (int i = 0; i < MiiSize; i++)
+        for (var i = 0; i < MiiSize; i++)
         {
-            if (_saveData[offset + i] != 0) return true;
+            if (_saveData[offset + i] != 0) 
+                return true;
         }
         return false;
     }
     
     private string GetUtf16String(int offset, int maxLength)
     {
-        List<byte> bytes = new List<byte>();
-        for (int i = 0; i < maxLength * 2; i += 2)
+        var bytes = new List<byte>();
+        for (var i = 0; i < maxLength * 2; i += 2)
         {
             byte b1 = _saveData[offset + i];
             byte b2 = _saveData[offset + i + 1];
@@ -118,7 +113,7 @@ public class GameDataLoader
     private string GetFriendCode(int offset)
     {
         // This is a simplified version. The actual friend code generation is more complex.
-        uint pid = BitConverter.ToUInt32(_saveData, offset);
+        var pid = BitConverter.ToUInt32(_saveData, offset);
         return pid.ToString("D12").Insert(4, "-").Insert(9, "-");
     }
 
@@ -128,14 +123,10 @@ public class GameDataLoader
         return Encoding.ASCII.GetString(_saveData, 0, RksysMagic.Length) == RksysMagic;
     }
 
-    public static byte[] LoadSaveDataFile()
+    public static byte[]? LoadSaveDataFile()
     {
         var saveFileLocation = Path.Combine(ConfigValidator.GetLoadPathLocation(), "Riivolution", "RetroRewind6", "save");
         var saveFile = Directory.GetFiles(saveFileLocation, "rksys.dat", SearchOption.AllDirectories);
-        if (saveFile.Length == 0)
-        {
-            return null;
-        }
-        return File.ReadAllBytes(saveFile[0]);
+        return saveFile.Length == 0 ? null : File.ReadAllBytes(saveFile[0]);
     }
 }

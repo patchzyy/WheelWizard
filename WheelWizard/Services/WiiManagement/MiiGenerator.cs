@@ -12,7 +12,6 @@ public static class MiiGenerator
 {
     private static readonly HttpClient HttpClient = new HttpClient();
     
-    
     public static async Task<BitmapImage> GetMiiImageAsync(string base64MiiData)
     {
         using var formData = new MultipartFormDataContent();
@@ -47,7 +46,7 @@ public static class MiiGenerator
             "instanceCount=1",
             "instanceRotationMode=model"
         };
-        string queryString = string.Join("&", queryParams);
+        var queryString = string.Join("&", queryParams);
         return $"{baseUrl}?{queryString}";
     }
     

@@ -15,15 +15,8 @@ public static class ConfigManager
         LoadConfigFromFile();
     }
     
-    public static Config GetConfig()
-    {
-        return _config;
-    }
-    
-    public static string GetWheelWizardAppdataPath()
-    {
-        return WheelWizardAppdataPath;
-    }
+    public static Config GetConfig() => _config;
+    public static string GetWheelWizardAppdataPath() =>  WheelWizardAppdataPath;
     
     public static void SaveSettings(string dolphinPath, string gamePath, string userFolderPath, bool hasRunNandTutorial, bool forceDisableWiimote)
     {
@@ -53,12 +46,8 @@ public static class ConfigManager
     private static void LoadConfigFromFile()
     {
         if (File.Exists(WheelWizardAppdataPath))
-        {
             _config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(WheelWizardAppdataPath));
-        }
         else
-        {
             _config = new Config { ForceWiimote = true };
-        }
     }
 }

@@ -11,11 +11,10 @@ namespace CT_MKWII_WPF.Services.WiiManagement;
 
 public class MiiChannelManager
 {
-    private static string GetSavedChannelLocation()
-    {
-        return ConfigManager.GetWheelWizardAppdataPath() + "/MiiChannel.wad";
-    }
-
+    
+    private static string GetSavedChannelLocation() => ConfigManager.GetWheelWizardAppdataPath() + "/MiiChannel.wad";
+    private static bool MiiChannelExists() => File.Exists(GetSavedChannelLocation());
+    
     public static async Task LaunchMiiChannel()
     {
         if (!MiiChannelExists())
@@ -25,11 +24,6 @@ public class MiiChannelManager
             await Task.Delay(200);
         }
         DolphinSettingHelper.LaunchDolphin($"-b \"{GetSavedChannelLocation()}\"");
-    }
-
-    private static bool MiiChannelExists()
-    {
-        return File.Exists(GetSavedChannelLocation());
     }
 
     private static async Task DownloadMiiChannel()

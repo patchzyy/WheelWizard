@@ -20,7 +20,6 @@ public static class RetroRewindInstaller
         var loadPath = ConfigValidator.GetLoadPathLocation();
         var versionFilePath = Path.Combine(loadPath, "Riivolution", "RetroRewind6", "version.txt");
         return File.Exists(versionFilePath);
-
     }
 
     public static string CurrentRRVersion()
@@ -35,21 +34,21 @@ public static class RetroRewindInstaller
     {
         //make sure to ignore any spaces
         currentVersion = currentVersion.Trim();
-        string latestVersion = await GetLatestVersionString();
+        var latestVersion = await GetLatestVersionString();
         latestVersion = latestVersion.Trim();
         return currentVersion == latestVersion;
     }
 
     public static async Task<string> GetLatestVersionString()
     {
-        string fullTextURLText = RRNetwork.Ip + "/RetroRewind/RetroRewindVersion.txt";
+        var fullTextURLText = RRNetwork.Ip + "/RetroRewind/RetroRewindVersion.txt";
         try
         {
             using var httpClient = new HttpClient();
-            string allVersions = await httpClient.GetStringAsync(fullTextURLText);
-            string[] lines = allVersions.Split('\n');
+            var allVersions = await httpClient.GetStringAsync(fullTextURLText);
+            var lines = allVersions.Split('\n');
             //now go to the last line split by spaces and grab index 0
-            string latestVersion = lines[lines.Length - 1].Split(' ')[0];
+            var latestVersion = lines[lines.Length - 1].Split(' ')[0];
             return latestVersion;
         }
         catch (Exception ex)
@@ -57,11 +56,11 @@ public static class RetroRewindInstaller
             MessageBox.Show($"Failed to check for updates: {ex.Message}");
             return "Failed to check for updates";
         }
-        
     } 
+    
     public static async Task<bool> UpdateRR()
     {
-        string currentVersion = CurrentRRVersion();
+        var currentVersion = CurrentRRVersion();
     
         if (await IsRRUpToDate(currentVersion))
         {
@@ -91,13 +90,13 @@ public static class RetroRewindInstaller
         var allVersions = await GetAllVersionData();
         var updatesToApply = GetUpdatesToApply(currentVersion, allVersions);
     
-        int totalUpdates = updatesToApply.Count;
-        int currentUpdateIndex = 1;
+        var totalUpdates = updatesToApply.Count;
+        var currentUpdateIndex = 1;
         var progressWindow = new ProgressWindow();
         progressWindow.Show();
         foreach (var update in updatesToApply)
         {
-            bool success = await DownloadAndApplyUpdate(update, totalUpdates, currentUpdateIndex, progressWindow);
+            var success = await DownloadAndApplyUpdate(update, totalUpdates, currentUpdateIndex, progressWindow);
             if (!success)
             {
                 MessageBox.Show("Failed to apply an update. Aborting.");
@@ -118,18 +117,19 @@ public static class RetroRewindInstaller
         var versionFilePath = Path.Combine(loadPath, "Riivolution", "RetroRewind6", "version.txt");
         File.WriteAllText(versionFilePath, newVersion);
     }
+    
     private static async Task<List<(string Version, string Url, string Path, string Description)>> GetAllVersionData()
     {
-        List<(string Version, string Url, string Path, string Description)> versions = new List<(string Version, string Url, string Path, string Description)>();
-        string versionUrl = RRNetwork.Ip + "/RetroRewind/RetroRewindVersion.txt";
+        var versions = new List<(string Version, string Url, string Path, string Description)>();
+        var versionUrl = RRNetwork.Ip + "/RetroRewind/RetroRewindVersion.txt";
 
         using var httpClient = new HttpClient();
-        string allVersionsText = await httpClient.GetStringAsync(versionUrl);
-        string[] lines = allVersionsText.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        var allVersionsText = await httpClient.GetStringAsync(versionUrl);
+        var lines = allVersionsText.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
         foreach (var line in lines)
         {
-            string[] parts = line.Split(new[] { ' ' }, 4);
+            var parts = line.Split(new[] { ' ' }, 4);
             if (parts.Length < 4) continue; // Skip if the line doesn't have enough parts.
             versions.Add((parts[0].Trim(), parts[1].Trim(), parts[2].Trim(), parts[3].Trim()));
         }
@@ -144,13 +144,8 @@ public static class RetroRewindInstaller
         foreach (var version in allVersions)
         {
             if (CompareVersions(version.Version, currentVersion) > 0)
-            {
                 updatesToApply.Add(version);
-            }
-            else
-            {
-                break; 
-            }
+            else break;
         }
         updatesToApply.Reverse();
         return updatesToApply;
@@ -160,14 +155,11 @@ public static class RetroRewindInstaller
     {
         var parts1 = v1.Split('.').Select(int.Parse).ToArray();
         var parts2 = v2.Split('.').Select(int.Parse).ToArray();
-        for (int i = 0; i < Math.Max(parts1.Length, parts2.Length); i++)
+        for (var i = 0; i < Math.Max(parts1.Length, parts2.Length); i++)
         {
-            int p1 = i < parts1.Length ? parts1[i] : 0;
-            int p2 = i < parts2.Length ? parts2[i] : 0;
-            if (p1 != p2)
-            {
-                return p1.CompareTo(p2);
-            }
+            var p1 = i < parts1.Length ? parts1[i] : 0;
+            var p2 = i < parts2.Length ? parts2[i] : 0;
+            if (p1 != p2) return p1.CompareTo(p2);
         }
         return 0;
     }
@@ -178,7 +170,7 @@ public static class RetroRewindInstaller
         var tempZipPath = Path.GetTempFileName();
         try
         {
-            string extratext = $"Update {currentUpdateIndex}/{totalUpdates}: {update.Description}";
+            var extratext = $"Update {currentUpdateIndex}/{totalUpdates}: {update.Description}";
             await DownloadUtils.DownloadFileWithWindow(update.Url, tempZipPath, window, extratext);
             window.UpdateProgress(100, "Extracting update...");
             var extractionPath = Path.Combine(loadPath, "Riivolution");
@@ -193,28 +185,20 @@ public static class RetroRewindInstaller
         finally
         {
             if (File.Exists(tempZipPath))
-            {
                 File.Delete(tempZipPath);
-            }
         }
         return true;
     }
 
-
-
-
     public static async Task InstallRetroRewind()
     {
-        string retroRewindURL = RRNetwork.Ip + "/RetroRewind/zip/RetroRewind.zip";
+        var retroRewindURL = RRNetwork.Ip + "/RetroRewind/zip/RetroRewind.zip";
         var loadPath = ConfigValidator.GetLoadPathLocation();
         // Check if Retro Rewind is already installed
         if (IsRetroRewindInstalled())
         {
             var result = MessageBox.Show("There are already files in your RetroRewind Folder. Would you like to install?", "Reinstall Retro Rewind", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.No)
-            {
-                return;
-            }
+            if (result == MessageBoxResult.No) return;
             loadPath = ConfigValidator.GetLoadPathLocation();
             var rrWfc = Path.Combine(loadPath, "Riivolution", "RetroRewind6", "save","RetroWFC");
             if (Directory.Exists(rrWfc))
@@ -235,7 +219,7 @@ public static class RetroRewindInstaller
         }
         
         var tempZipPath = Path.Combine(loadPath, "Temp", "RetroRewind.zip");
-        ProgressWindow progressWindow = new ProgressWindow();
+        var progressWindow = new ProgressWindow();
         progressWindow.Show();
         await DownloadUtils.DownloadFileWithWindow(retroRewindURL, tempZipPath, progressWindow, "Downloading Retro Rewind...");
         progressWindow.Close();
@@ -245,29 +229,21 @@ public static class RetroRewindInstaller
         // Clean up the downloaded zip file
         File.Delete(tempZipPath);
     }
-
-
-
-
+    
     public static async Task<bool> IsServerEnabled()
     {
-        string serverUrl = RRNetwork.Ip;
+        var serverUrl = RRNetwork.Ip;
         using (var httpClient = new HttpClient())
         {
             try
             {
-                // Setting a reasonable timeout duration
                 httpClient.Timeout = TimeSpan.FromSeconds(5);
-            
-                // Making a GET request to the server URL
                 var response = await httpClient.GetAsync(serverUrl);
-            
-                // If the server responds with a success status code, it is reachable
+                
                 return response.IsSuccessStatusCode;
             }
             catch
             {
-                // If an exception occurs (e.g., timeout), the server is not reachable
                 return false;
             }
         }
