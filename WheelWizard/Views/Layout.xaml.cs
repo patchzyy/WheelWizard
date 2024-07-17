@@ -5,8 +5,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using CT_MKWII_WPF.Classes;
-using CT_MKWII_WPF.Utils;
+using CT_MKWII_WPF.Services.Networking;
 using CT_MKWII_WPF.Views.Components;
 using CT_MKWII_WPF.Views.Pages;
 
@@ -72,13 +71,13 @@ public partial class Layout : Window, INotifyPropertyChanged
 
     public async void PopulatePlayerText()
     {
-        var rrInfo = await RRLiveInfo.getCurrentGameData();
+        var rrInfo = await RRLiveInfo.GetCurrentGameData();
         UpdatePlayerAndRoomCount(RRLiveInfo.GetCurrentOnlinePlayers(rrInfo), rrInfo.Rooms.Count);
         
         var periodicTimer = new PeriodicTimer(TimeSpan.FromSeconds(20));
         while (await periodicTimer.WaitForNextTickAsync())
         {
-            rrInfo = await RRLiveInfo.getCurrentGameData();
+            rrInfo = await RRLiveInfo.GetCurrentGameData();
             UpdatePlayerAndRoomCount(RRLiveInfo.GetCurrentOnlinePlayers(rrInfo), rrInfo.Rooms.Count);
         }
     }

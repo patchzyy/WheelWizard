@@ -11,12 +11,12 @@ namespace CT_MKWII_WPF.Views.Components
             MouseDoubleClick += ListView_DoubleClick;
         }
         
-        protected ListViewItem? _contextListViewItem; // the item that was right-clicked
+        protected ListViewItem? ContextListViewItem; // the item that was right-clicked
 
         public ListViewItem? ContextMenuListViewItem
         {
-            get => _contextListViewItem;
-            protected set => _contextListViewItem = value;
+            get => ContextListViewItem;
+            protected set => ContextListViewItem = value;
         }
 
         public static readonly DependencyProperty ItemContextMenuProperty = DependencyProperty.Register(
@@ -52,13 +52,13 @@ namespace CT_MKWII_WPF.Views.Components
 
         public T? GetCurrentContextItem<T>() where T : class
         {
-            if (_contextListViewItem == null) return null;
-            return ItemContainerGenerator.ItemFromContainer(_contextListViewItem) as T;
+            if (ContextListViewItem == null) return null;
+            return ItemContainerGenerator.ItemFromContainer(ContextListViewItem) as T;
         }
 
         protected virtual void ContextMenu_Click(object sender, RoutedEventArgs e)
         {
-            _contextListViewItem = FindAncestor<ListViewItem>(e.OriginalSource)!;
+            ContextListViewItem = FindAncestor<ListViewItem>(e.OriginalSource)!;
             if (sender is FrameworkElement && ItemContextMenu != null)
                 ItemContextMenu.IsOpen = true;
         }

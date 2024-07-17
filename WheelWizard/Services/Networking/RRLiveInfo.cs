@@ -1,20 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using System.Windows.Documents;
 using System.Windows.Forms;
-using System.Windows.Media.Imaging;
-using CT_MKWII_WPF.Classes;
+using CT_MKWII_WPF.Models;
 
-namespace CT_MKWII_WPF.Utils;
+namespace CT_MKWII_WPF.Services.Networking;
 
 public class RRLiveInfo
 {
-    private static string _mocking_data = @"[
+    private static string _mockingData = @"[
   {
     ""id"": ""PIFYVV"",
     ""game"": ""mariokartwii"",
@@ -226,19 +222,19 @@ public class RRLiveInfo
   }
 ]";
       
-    private static readonly HttpClient client = new HttpClient();
+    private static readonly HttpClient Client = new HttpClient();
     
     
     // Caching
-    private static RRInformation? cachedData;
-    private static readonly TimeSpan cacheDuration = TimeSpan.FromSeconds(60); 
-    private static DateTime lastFetchTime;
+    private static RRInformation? _cachedData;
+    private static readonly TimeSpan CacheDuration = TimeSpan.FromSeconds(60); 
+    private static DateTime _lastFetchTime;
 
-    public static async Task<RRInformation> getCurrentGameData()
+    public static async Task<RRInformation> GetCurrentGameData()
     {
-      if (cachedData != null && (DateTime.Now - lastFetchTime) < cacheDuration)
+      if (_cachedData != null && (DateTime.Now - _lastFetchTime) < CacheDuration)
       {
-        return cachedData;
+        return _cachedData;
       }
       
       string data = "";
@@ -246,10 +242,10 @@ public class RRLiveInfo
       string apiUrl = "http://zplwii.xyz/api/groups";
       try
       {
-        if (useMockingData) data = _mocking_data;
+        if (useMockingData) data = _mockingData;
         else
         {
-          HttpResponseMessage response = await client.GetAsync(apiUrl);
+          HttpResponseMessage response = await Client.GetAsync(apiUrl);
           response.EnsureSuccessStatusCode();
           data = await response.Content.ReadAsStringAsync();
         }
@@ -267,16 +263,16 @@ public class RRLiveInfo
         new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
         );
       
-      cachedData = new RRInformation { Rooms = rooms };
-      lastFetchTime = DateTime.Now;
-      return cachedData;
+      _cachedData = new RRInformation { Rooms = rooms };
+      _lastFetchTime = DateTime.Now;
+      return _cachedData;
     }
 
     public static int GetCurrentOnlinePlayers(RRInformation info)
     {
-        int PlayerCount = 0;
-        foreach (RoomInfo room in info.Rooms) PlayerCount += room.Players.Count;
-        return PlayerCount;
+        int playerCount = 0;
+        foreach (RoomInfo room in info.Rooms) playerCount += room.Players.Count;
+        return playerCount;
     }
 
     public class RRInformation

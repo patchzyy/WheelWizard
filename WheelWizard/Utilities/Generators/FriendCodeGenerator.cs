@@ -1,7 +1,8 @@
-﻿namespace CT_MKWII_WPF.Utils;
-using System;
+﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+
+namespace CT_MKWII_WPF.Utilities.Generators;
 
 public class FriendCodeGenerator
 {

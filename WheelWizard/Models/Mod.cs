@@ -1,6 +1,6 @@
-﻿namespace CT_MKWII_WPF.Utils;
+﻿using System.ComponentModel;
 
-using System.ComponentModel;
+namespace CT_MKWII_WPF.Models;
 
 public class Mod : INotifyPropertyChanged
 {

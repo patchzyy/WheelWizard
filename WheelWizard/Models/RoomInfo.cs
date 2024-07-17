@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Media.Imaging;
 
-namespace CT_MKWII_WPF.Classes;
+namespace CT_MKWII_WPF.Models;
 
 public class RoomInfo
 {

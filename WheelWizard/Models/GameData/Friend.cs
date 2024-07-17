@@ -1,4 +1,4 @@
-﻿namespace CT_MKWII_WPF.Classes;
+﻿namespace CT_MKWII_WPF.Models.GameData;
 
 public class Friend
 {

@@ -6,11 +6,11 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
-namespace CT_MKWII_WPF.Utils;
+namespace CT_MKWII_WPF.Services.WiiManagement;
 
 public class MiiGenerator
 {
-    private static readonly HttpClient _httpClient = new HttpClient();
+    private static readonly HttpClient HttpClient = new HttpClient();
     
     
     public static async Task<BitmapImage> GetMiiImageAsync(string base64MiiData)
@@ -19,7 +19,7 @@ public class MiiGenerator
         formData.Add(new ByteArrayContent(Convert.FromBase64String(base64MiiData)), "data", "mii.dat");
         formData.Add(new StringContent("wii"), "platform");
 
-        var response = await _httpClient.PostAsync("https://qrcode.rc24.xyz/cgi-bin/studio.cgi", formData);
+        var response = await HttpClient.PostAsync("https://qrcode.rc24.xyz/cgi-bin/studio.cgi", formData);
 
         var jsonResponse = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)

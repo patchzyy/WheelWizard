@@ -4,8 +4,8 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using CT_MKWII_WPF.Classes;
-using CT_MKWII_WPF.Utils;
+using CT_MKWII_WPF.Models;
+using CT_MKWII_WPF.Services.Networking;
 
 namespace CT_MKWII_WPF.Views.Pages
 {
@@ -44,7 +44,7 @@ namespace CT_MKWII_WPF.Views.Pages
         {
             try
             {
-                var rrInfo = await RRLiveInfo.getCurrentGameData();
+                var rrInfo = await RRLiveInfo.GetCurrentGameData();
                 UpdateRoomsList(rrInfo);
             }
             catch (Exception ex)

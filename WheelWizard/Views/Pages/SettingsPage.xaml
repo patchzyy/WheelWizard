@@ -180,7 +180,7 @@
                     <CheckBox Margin="0,2" IsChecked="False" 
                               Style="{StaticResource DarkSwitch}" 
                               x:Name="DisableForce"
-                              Click="clickForceWiimote">
+                              Click="ClickForceWiimote">
                         <components:FormFieldLabel Text=" Force Disable Wiimote" 
                                                    TipText="This setting disabled Wiimote ingame, but enables is for the Wii chanel"/>
 

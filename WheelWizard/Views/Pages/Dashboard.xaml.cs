@@ -1,11 +1,14 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using CT_MKWII_WPF.Utils;
-using CT_MKWII_WPF.Utils.DolphinHelpers;
 using MahApps.Metro.IconPacks;
 using System.Threading.Tasks;
-using CT_MKWII_WPF.Classes;
-using CT_MKWII_WPF.Enums;
+using CT_MKWII_WPF.Models.Enums;
+using CT_MKWII_WPF.Services.Installation;
+using CT_MKWII_WPF.Services.Launcher;
+using CT_MKWII_WPF.Services.Networking;
+using CT_MKWII_WPF.Services.WiiManagement;
+using CT_MKWII_WPF.Services.WiiManagement.DolphinHelpers;
+using CT_MKWII_WPF.Utilities.Configuration;
 using static CT_MKWII_WPF.Views.ViewUtils;
 using Button = CT_MKWII_WPF.Views.Components.Button;
 
@@ -46,7 +49,7 @@ public partial class Dashboard : Page
             case ActionButtonStatus.ConfigNotFinished:
                 NavigateToPage(new SettingsPage());
                 break;
-            case ActionButtonStatus.noRR:
+            case ActionButtonStatus.NoRR:
                 SetButtonState("Installing...", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download, false, true);
                 DisableSidebarButtons();
                 await RetroRewindInstaller.InstallRetroRewind();
@@ -80,10 +83,10 @@ public partial class Dashboard : Page
             case ActionButtonStatus.ConfigNotFinished:
                 SetButtonState("Config Not Finished", Button.ButtonsVariantType.Secondary, PackIconFontAwesomeKind.FilePenSolid);
                 break;
-            case ActionButtonStatus.noRR:
+            case ActionButtonStatus.NoRR:
                 SetButtonState("Install", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download);
                 break;
-            case ActionButtonStatus.noRRActive:
+            case ActionButtonStatus.NoRRActive:
                 //this is here for future use,
                 //right now there is no de-activation, but if we want multiple mods this might be handy
                 SetButtonState("Activated", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Power);
@@ -99,7 +102,7 @@ public partial class Dashboard : Page
                 break;
         }
 
-        if (!ConfigValidator.configCorrectAndExists())
+        if (!ConfigValidator.ConfigCorrectAndExists())
         {
             DolphinButton.IsEnabled = false;
             MiiButton.IsEnabled = false;

@@ -2,23 +2,24 @@
 using System.IO;
 using System.Linq;
 using System.Windows;
+using CT_MKWII_WPF.Utilities.Configuration;
 
-namespace CT_MKWII_WPF.Utils.DolphinHelpers;
+namespace CT_MKWII_WPF.Services.WiiManagement.DolphinHelpers;
 
 public class DolphinSettingHelper
 {
-    public static string ReadINISetting(string FileLocation, string Section, string SettingToRead)
+    public static string ReadIniSetting(string fileLocation, string section, string settingToRead)
     {
-        if (!File.Exists(FileLocation))
+        if (!File.Exists(fileLocation))
         {
-            MessageBox.Show("Something went wrong, INI file could not be read, Message Patchzy with the following error: " + FileLocation, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show("Something went wrong, INI file could not be read, Message Patchzy with the following error: " + fileLocation, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         //read through every line to find the section
-        var lines = File.ReadAllLines(FileLocation);
+        var lines = File.ReadAllLines(fileLocation);
         var sectionFound = false;
         for (int i = 0; i < lines.Length; i++)
         {
-            if (lines[i] == $"[{Section}]")
+            if (lines[i] == $"[{section}]")
             {
                 sectionFound = true;
                 break;
@@ -32,7 +33,7 @@ public class DolphinSettingHelper
         //now we know the section exists, we need to find the setting
         for (int i = 0; i < lines.Length; i++)
         {
-            if (lines[i].Contains(SettingToRead))
+            if (lines[i].Contains(settingToRead))
             {
                 //we found the setting, now we need to return the value
                 var setting = lines[i].Split("=");
@@ -55,17 +56,17 @@ public class DolphinSettingHelper
         return string.Empty;
     }
     
-    public static string ReadINISetting(string FileLocation, string SettingToRead)
+    public static string ReadIniSetting(string fileLocation, string settingToRead)
     {
-        if (!File.Exists(FileLocation))
+        if (!File.Exists(fileLocation))
         {
-            MessageBox.Show("Something went wrong, INI file could not be read, Message Patchzy with the following error: " + FileLocation, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show("Something went wrong, INI file could not be read, Message Patchzy with the following error: " + fileLocation, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        var lines = File.ReadAllLines(FileLocation);
+        var lines = File.ReadAllLines(fileLocation);
         foreach (string line in lines)
         {
-            if (line.StartsWith(SettingToRead))
+            if (line.StartsWith(settingToRead))
             {
                 var setting = line.Split("=");
                 return setting[1].Trim();
@@ -73,7 +74,7 @@ public class DolphinSettingHelper
         }
         return "";
     }
-    public static void ChangeINISettings(string fileLocation, string section, string settingToChange, string value)
+    public static void ChangeIniSettings(string fileLocation, string section, string settingToChange, string value)
     {
         if (!File.Exists(fileLocation))
         {
@@ -120,12 +121,12 @@ public class DolphinSettingHelper
     
     public static void LaunchDolphin(string arguments = "")
     {
-        var DolphinLocation = PathManager.GetDolphinLocation();
-        if (DolphinLocation == "")
+        var dolphinLocation = PathManager.GetDolphinLocation();
+        if (dolphinLocation == "")
         {
             MessageBox.Show("Could not find Dolphin Emulator, please set the path in settings", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
-        System.Diagnostics.Process.Start(DolphinLocation, arguments);
+        System.Diagnostics.Process.Start(dolphinLocation, arguments);
     }
 }

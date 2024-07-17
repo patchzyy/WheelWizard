@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Diagnostics;
 using System.Windows.Forms;
-using CT_MKWII_WPF.Pages;
+using CT_MKWII_WPF.Views;
 
-namespace CT_MKWII_WPF.Utils;
+namespace CT_MKWII_WPF.Utilities.Downloads;
 
 public class DownloadUtils
 {
@@ -41,14 +41,14 @@ public class DownloadUtils
                             downloadedBytes += bytesRead;
 
                             var progress = totalBytes == -1 ? 0 : (int)((float)downloadedBytes / totalBytes * 100);
-                            var downloadedMB = downloadedBytes / (1024.0 * 1024.0);
-                            var totalMB = totalBytes / (1024.0 * 1024.0);
-                            var status = $"Downloading... {downloadedMB:F2}/{totalMB:F2} MB";
+                            var downloadedMb = downloadedBytes / (1024.0 * 1024.0);
+                            var totalMb = totalBytes / (1024.0 * 1024.0);
+                            var status = $"Downloading... {downloadedMb:F2}/{totalMb:F2} MB";
 
                             var elapsedSeconds = stopwatch.Elapsed.TotalSeconds;
-                            var speedMBps = downloadedMB / elapsedSeconds;
-                            var remainingMB = totalMB - downloadedMB;
-                            var estimatedTimeRemaining = remainingMB / speedMBps;
+                            var speedMBps = downloadedMb / elapsedSeconds;
+                            var remainingMb = totalMb - downloadedMb;
+                            var estimatedTimeRemaining = remainingMb / speedMBps;
 
                             var bottomText =
                                 $"Speed: {speedMBps:F2} MB/s | Estimated time remaining: {FormatTimeSpan(estimatedTimeRemaining)}";

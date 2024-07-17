@@ -4,13 +4,12 @@ using System.Windows;
 using CT_MKWII_WPF.Models;
 using Newtonsoft.Json;
 
-namespace CT_MKWII_WPF.Utils;
+namespace CT_MKWII_WPF.Utilities.Configuration;
 
-public class ConfigManager
+public static class ConfigManager
 {
     private static readonly string WheelWizardAppdataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII", "config.json");
     private static Config _config;
-
     static ConfigManager()
     {
         LoadConfigFromFile();
@@ -26,15 +25,18 @@ public class ConfigManager
         return WheelWizardAppdataPath;
     }
     
-    public static void SaveSettings(string dolphinPath, string gamePath, string userFolderPath, bool hasRunNANDTutorial, bool forceDisableWiimote)
+    public static void SaveSettings(string dolphinPath, string gamePath, string userFolderPath, bool hasRunNandTutorial, bool forceDisableWiimote)
     {
-        // Update the _config object with the new values
         _config.DolphinLocation = dolphinPath;
         _config.GameLocation = gamePath;
         _config.UserFolderPath = userFolderPath;
-        _config.HasRunNANDTutorial = hasRunNANDTutorial;
+        _config.HasRunNandTutorial = hasRunNandTutorial;
         _config.ForceWiimote = forceDisableWiimote;
-        // Serialize the _config object to JSON and save it to the config file
+        SaveConfigToJson();
+    }
+
+    private static void SaveConfigToJson()
+    {
         var configJson = JsonConvert.SerializeObject(_config, Formatting.Indented);
         Directory.CreateDirectory(Path.GetDirectoryName(WheelWizardAppdataPath));
         try

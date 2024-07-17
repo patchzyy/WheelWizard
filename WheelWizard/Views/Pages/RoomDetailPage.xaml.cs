@@ -9,8 +9,8 @@ using System.Windows.Media.Imaging;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel;
-using CT_MKWII_WPF.Classes;
-using CT_MKWII_WPF.Utils;
+using CT_MKWII_WPF.Models;
+using CT_MKWII_WPF.Services.WiiManagement;
 using static CT_MKWII_WPF.Views.ViewUtils;
 
 namespace CT_MKWII_WPF.Views.Pages
@@ -80,7 +80,7 @@ namespace CT_MKWII_WPF.Views.Pages
             return xEv.CompareTo(yEv);
         }
         
-        private async void setMiiImage(KeyValuePair<String, RoomInfo.Player> playerPair)
+        private async void SetMiiImage(KeyValuePair<String, RoomInfo.Player> playerPair)
         {
             var player = playerPair.Value;
             if (player.Mii == null || player.Mii.Count == 0 || string.IsNullOrEmpty(player.Mii[0]?.Data))
@@ -105,7 +105,7 @@ namespace CT_MKWII_WPF.Views.Pages
         private void LoadMiiImagesAsync()
         {
             foreach (var playerPair in PlayersList) 
-                setMiiImage(playerPair);
+                SetMiiImage(playerPair);
         }
         
 

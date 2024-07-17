@@ -2,11 +2,15 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using CT_MKWII_WPF.Utils;
+using CT_MKWII_WPF.Services.Installation;
+using CT_MKWII_WPF.Services.WiiManagement;
+using CT_MKWII_WPF.Utilities.Configuration;
+
+namespace CT_MKWII_WPF.Services.Launcher;
 
 public static class RetroRewindLauncher
 {
-    public static void PlayRetroRewind(bool playTT)
+    public static void PlayRetroRewind(bool playTt)
     {
         //close dolphin if its open,
         var dolphinLocation = PathManager.GetDolphinLocation();
@@ -44,7 +48,7 @@ public static class RetroRewindLauncher
         //the reason we do this is, lets say file A from the lowest priority mod is in the highest priority mod, we want to overwrite it
         dolphinLocation = PathManager.GetDolphinLocation();
         string gamePath = PathManager.GetGameLocation();
-        GenerateLaunchJSON(playTT);
+        GenerateLaunchJson(playTt);
         string launchJson = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII", "RR.json");
 
         if (!File.Exists(dolphinLocation) || !File.Exists(gamePath))
@@ -70,56 +74,56 @@ public static class RetroRewindLauncher
         }
     }
 
-    private static void GenerateLaunchJSON(bool launchTT)
+    private static void GenerateLaunchJson(bool launchTt)
     {
-        int value = launchTT ? 1 : 0;
-        string originalJSON = $$"""
-                            {
-                            "base-file": "LINK TO ISO OR WBFS",
-                            "display-name": "RR",
-                            "riivolution": {
-                              "patches": [
+        int value = launchTt ? 1 : 0;
+        string originalJson = $$"""
                                 {
-                                  "options": [
+                                "base-file": "LINK TO ISO OR WBFS",
+                                "display-name": "RR",
+                                "riivolution": {
+                                  "patches": [
                                     {
-                                      "choice": 1,
-                                      "option-name": "Pack",
-                                      "section-name": "Retro Rewind"
-                                    },
-                                    {
-                                      "choice": 2,
-                                      "option-name": "My Stuff",
-                                      "section-name": "Retro Rewind"
-                                    },
-                                    {
-                                      "choice": {{value}},
-                                      "option-name": "Online TT",
-                                      "section-name": "Retro Rewind"
+                                      "options": [
+                                        {
+                                          "choice": 1,
+                                          "option-name": "Pack",
+                                          "section-name": "Retro Rewind"
+                                        },
+                                        {
+                                          "choice": 2,
+                                          "option-name": "My Stuff",
+                                          "section-name": "Retro Rewind"
+                                        },
+                                        {
+                                          "choice": {{value}},
+                                          "option-name": "Online TT",
+                                          "section-name": "Retro Rewind"
+                                        }
+                                      ],
+                                      "root": "LINK TO RIIVOLUTION FOLDER",
+                                      "xml": "LINK TO RETRO REWIND XML FILE"
                                     }
-                                  ],
-                                  "root": "LINK TO RIIVOLUTION FOLDER",
-                                  "xml": "LINK TO RETRO REWIND XML FILE"
+                                  ]
+                                },
+                                "type": "dolphin-game-mod-descriptor",
+                                "version": 1
                                 }
-                              ]
-                            },
-                            "type": "dolphin-game-mod-descriptor",
-                            "version": 1
-                            }
-                            """;
+                                """;
 
         // Replace the base-file with the game path
         string correctedGamePath = PathManager.GetGameLocation().Replace(@"\", @"\/");
-        originalJSON = originalJSON.Replace("LINK TO ISO OR WBFS", correctedGamePath);
+        originalJson = originalJson.Replace("LINK TO ISO OR WBFS", correctedGamePath);
 
         // Replace the link to appdata riivolution folder with the correct path
         string correctedRRPath = Path.Combine(ConfigValidator.GetLoadPathLocation(),"Riivolution");
         correctedRRPath = correctedRRPath.Replace(@"\", @"\/");
-        originalJSON = originalJSON.Replace("LINK TO RIIVOLUTION FOLDER", correctedRRPath + @"\/");
+        originalJson = originalJson.Replace("LINK TO RIIVOLUTION FOLDER", correctedRRPath + @"\/");
 
-        string correctedXMLPath = correctedRRPath + @"\/riivolution\/RetroRewind6.xml";
-        originalJSON = originalJSON.Replace("LINK TO RETRO REWIND XML FILE", correctedXMLPath);
+        string correctedXmlPath = correctedRRPath + @"\/riivolution\/RetroRewind6.xml";
+        originalJson = originalJson.Replace("LINK TO RETRO REWIND XML FILE", correctedXmlPath);
 
         // Write the json to the exe folder
-        File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII", "RR.json"), originalJSON);
+        File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII", "RR.json"), originalJson);
     }
 }

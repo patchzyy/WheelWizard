@@ -1,12 +1,12 @@
-﻿namespace CT_MKWII_WPF.Enums;
+﻿namespace CT_MKWII_WPF.Models.Enums;
 
 public enum ActionButtonStatus
 {
     NoServer,
     NoDolphin,
     ConfigNotFinished,
-    noRR,
-    noRRActive,
+    NoRR,
+    NoRRActive,
     RRnotReady,
     OutOfDate,
     UpToDate

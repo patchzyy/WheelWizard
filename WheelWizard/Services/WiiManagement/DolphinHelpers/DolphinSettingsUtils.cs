@@ -1,19 +1,19 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
-using CT_MKWII_WPF.Utils.DolphinHelpers;
+using CT_MKWII_WPF.Utilities.Configuration;
 
-namespace CT_MKWII_WPF.Utils;
+namespace CT_MKWII_WPF.Services.WiiManagement.DolphinHelpers;
 
 public class DolphinSettingsUtils
 {
     
     private static void ChangeSettings(params (string Key, string Value)[] settings)
     {
-        var gfxFile = PathManager.FindGFXFile();
+        var gfxFile = PathManager.FindGfxFile();
         if (string.IsNullOrEmpty(gfxFile)) return;
 
         foreach (var (key, value) in settings)
-            DolphinSettingHelper.ChangeINISettings(gfxFile, "Settings", key, value);
+            DolphinSettingHelper.ChangeIniSettings(gfxFile, "Settings", key, value);
     }
     public static void EnableRecommendedSettings() => 
         ChangeSettings(("ShaderCompilationMode", "2"), ("WaitForShadersBeforeStarting", "True"), ("MSAA", "0x00000002"), ("SSAA", "False"));
@@ -23,36 +23,36 @@ public class DolphinSettingsUtils
     
     public static bool IsRecommendedSettingsEnabled()
     {
-        var gfxFile = PathManager.FindGFXFile();
+        var gfxFile = PathManager.FindGfxFile();
         if (string.IsNullOrEmpty(gfxFile)) return false;
 
         var settings = new[] { "ShaderCompilationMode", "WaitForShadersBeforeStarting", "MSAA", "SSAA" };
         var expectedValues = new[] { "2", "True", "0x00000002", "False" };
 
         return settings.Select((setting, index) => 
-                DolphinSettingHelper.ReadINISetting(gfxFile, "Settings", setting) == expectedValues[index])
+                DolphinSettingHelper.ReadIniSetting(gfxFile, "Settings", setting) == expectedValues[index])
             .All(result => result);
     }
     
     public static bool GetCurrentVSyncStatus()
     {
-        var GFXFile = PathManager.FindGFXFile();
-        if (GFXFile == "")
+        var gfxFile = PathManager.FindGfxFile();
+        if (gfxFile == "")
         {
             MessageBox.Show("Something went wrong, please contact us via discord. \nGFX file not found");
             return false;
         }
-        return  DolphinSettingHelper.ReadINISetting(GFXFile,  "VSync") == "True";
+        return  DolphinSettingHelper.ReadIniSetting(gfxFile,  "VSync") == "True";
     }
     
     public static int GetCurrentResolution()
     {
-        var GFXFile = PathManager.FindGFXFile();
-        if (GFXFile == "")
+        var gfxFile = PathManager.FindGfxFile();
+        if (gfxFile == "")
         {
             return -1;
         }
-        var resolution = DolphinSettingHelper.ReadINISetting(GFXFile, "Settings", "InternalResolution");
+        var resolution = DolphinSettingHelper.ReadIniSetting(gfxFile, "Settings", "InternalResolution");
         if (!int.TryParse(resolution, out _)) return -1;
         return int.Parse(resolution);
     }

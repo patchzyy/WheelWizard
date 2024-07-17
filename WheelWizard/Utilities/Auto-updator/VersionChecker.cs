@@ -2,12 +2,12 @@
 using System.Diagnostics;
 using System.IO;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CT_MKWII_WPF.Pages;
+using CT_MKWII_WPF.Utilities.Downloads;
+using CT_MKWII_WPF.Views;
 
-namespace CT_MKWII_WPF.Utils.Auto_updator;
+namespace CT_MKWII_WPF.Utilities.Auto_updator;
 
 public static class VersionChecker
 {

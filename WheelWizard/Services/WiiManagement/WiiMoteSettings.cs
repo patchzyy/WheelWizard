@@ -1,9 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Text.RegularExpressions;
-using System.Windows.Shapes;
+using CT_MKWII_WPF.Utilities.Configuration;
 
-namespace CT_MKWII_WPF.Utils;
+namespace CT_MKWII_WPF.Services.WiiManagement;
 
 public class WiiMoteSettings
 {

@@ -1,14 +1,16 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using CT_MKWII_WPF.Models;
+using CT_MKWII_WPF.Utilities.Configuration;
 
-namespace CT_MKWII_WPF.Utils;
+namespace CT_MKWII_WPF.Services.Installation;
 
 public class DirectoryHandler
 {
     public static void InstallMod(ModData mod)
     {
-        // Find the mod folder inside of the appdata mods folder
+        // Find the mod folder inside the appdata mods folder
         var modFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII", "Mods", mod.Title);
     
         // Find the destination folder

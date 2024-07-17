@@ -1,4 +1,4 @@
-﻿namespace CT_MKWII_WPF.Utils;
+﻿namespace CT_MKWII_WPF.Services.Networking;
 
 public class RRNetwork
 {

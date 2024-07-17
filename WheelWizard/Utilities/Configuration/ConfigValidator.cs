@@ -1,11 +1,9 @@
 ﻿using System;
 using System.IO;
-using System.Windows;
 using CT_MKWII_WPF.Models;
 using Newtonsoft.Json;
-using CT_MKWII_WPF.Pages;
 
-namespace CT_MKWII_WPF.Utils
+namespace CT_MKWII_WPF.Utilities.Configuration
 {
     public static class ConfigValidator
     {
@@ -19,14 +17,14 @@ namespace CT_MKWII_WPF.Utils
                    File.Exists(gfxFile);
         }
 
-        public static bool doesConfigExist()
+        public static bool DoesConfigExist()
         {
             return File.Exists(ConfigManager.GetWheelWizardAppdataPath());
         }
         
-        public static bool configCorrectAndExists()
+        public static bool ConfigCorrectAndExists()
         {
-            return doesConfigExist() && SetupCorrectly();
+            return DoesConfigExist() && SetupCorrectly();
         }
         
         
@@ -39,8 +37,8 @@ namespace CT_MKWII_WPF.Utils
 
         public static bool IsConfigFileFinishedSettingUp()
         {
-            Config _config = ConfigManager.GetConfig();
-            if (_config == null || !Directory.Exists(_config.UserFolderPath) || !File.Exists(_config.DolphinLocation) || !File.Exists(_config.GameLocation))
+            Config config = ConfigManager.GetConfig();
+            if (config == null || !Directory.Exists(config.UserFolderPath) || !File.Exists(config.DolphinLocation) || !File.Exists(config.GameLocation))
             {
                 return false;
             }
@@ -63,10 +61,10 @@ namespace CT_MKWII_WPF.Utils
             return JsonConvert.DeserializeObject<ModData[]>(json);
         }
 
-        public static void SaveWiimoteSettings(bool ForceWiimote)
+        public static void SaveWiimoteSettings(bool forceWiimote)
         {
-            Config _config = ConfigManager.GetConfig();
-            ConfigManager.SaveSettings(_config.DolphinLocation, _config.GameLocation, _config.UserFolderPath, _config.HasRunNANDTutorial, ForceWiimote);
+            Config config = ConfigManager.GetConfig();
+            ConfigManager.SaveSettings(config.DolphinLocation, config.GameLocation, config.UserFolderPath, config.HasRunNandTutorial, forceWiimote);
         }
     }
 }

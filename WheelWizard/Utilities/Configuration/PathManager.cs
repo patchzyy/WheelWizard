@@ -1,10 +1,8 @@
-﻿
-
-using System;
+﻿using System;
 using System.IO;
 using System.Windows;
 
-namespace CT_MKWII_WPF.Utils;
+namespace CT_MKWII_WPF.Utilities.Configuration;
 
 public class PathManager
 {
@@ -15,13 +13,6 @@ public class PathManager
     public static string GetUserPathLocation() => ConfigManager.GetConfig().UserFolderPath;
         
     public static bool GetForceWiimote() => ConfigManager.GetConfig().ForceWiimote;
-    
-    public static bool HasRunNANDTutorial() => ConfigManager.GetConfig().HasRunNANDTutorial;
-    
-    public static string getWheelWizardAppPath()
-    {
-        return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/CT-MKWII");
-    }
     
     public static string FindWiiMoteNew()
     {
@@ -37,7 +28,7 @@ public class PathManager
         return string.Empty;
     }
     
-    public static string FindGFXFile()
+    public static string FindGfxFile()
     {
         var folderPath = GetUserPathLocation();
         var configFolder = Path.Combine(folderPath, "Config");

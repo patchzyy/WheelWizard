@@ -10,20 +10,20 @@ using Microsoft.Win32;
 using System.IO.Compression;
 using System.Threading.Tasks;
 using System.Windows.Threading;
-using CT_MKWII_WPF.Utils;
+using CT_MKWII_WPF.Models;
 
 
 namespace CT_MKWII_WPF.Views.Pages
 {
     public partial class ModsPage : Page
     {
-        private readonly string configFilePath = Path.Combine(
+        private readonly string _configFilePath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             "CT-MKWII", "Mods", "modconfig.json");
         public ObservableCollection<Mod> Mods { get; set; }
 
         private bool _toggleAll = true;
-        private Point startPoint;
+        private Point _startPoint;
         public ModsPage()
         {
             InitializeComponent();
@@ -36,9 +36,9 @@ namespace CT_MKWII_WPF.Views.Pages
         {
             try
             {
-                if (File.Exists(configFilePath))
+                if (File.Exists(_configFilePath))
                 {
-                    var json = File.ReadAllText(configFilePath);
+                    var json = File.ReadAllText(_configFilePath);
                     Mods = JsonSerializer.Deserialize<ObservableCollection<Mod>>(json) ?? new ObservableCollection<Mod>();
                 }
                 else Mods = new ObservableCollection<Mod>();
@@ -73,11 +73,11 @@ namespace CT_MKWII_WPF.Views.Pages
             try
             {
                 var json = JsonSerializer.Serialize(Mods);
-                var directory = Path.GetDirectoryName(configFilePath);
+                var directory = Path.GetDirectoryName(_configFilePath);
                 
                 if (!Directory.Exists(directory))
                     Directory.CreateDirectory(directory);
-                File.WriteAllText(configFilePath, json);
+                File.WriteAllText(_configFilePath, json);
             }
             catch (Exception ex)
             {
