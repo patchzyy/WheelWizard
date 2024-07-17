@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CT_MKWII_WPF.Pages;
@@ -12,9 +13,7 @@ namespace CT_MKWII_WPF.Utils.Auto_updator;
 public static class VersionChecker
 {
     private const string VersionFileURL = "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/version.txt";
-
-    public const string CurrentVersion = "1.1.2";
-
+    public const string CurrentVersion = "1.1.1";
 
     public static void CheckForUpdates()
     {
@@ -25,8 +24,17 @@ public static class VersionChecker
                 var version = client.DownloadString(VersionFileURL).Trim();
                 if (version != CurrentVersion)
                 {
-                    var result = MessageBox.Show("A new version of WheelWizard is available. Would you like to update?", "Update Available", MessageBoxButtons.YesNo);
-                    if (result == DialogResult.Yes)
+                    if (!IsAdministrator())
+                    {
+                        var result =
+                            MessageBox.Show("A new version of WheelWizard is available. Would you like to update?",
+                                "Update Available", MessageBoxButtons.YesNo);
+                        if (result == DialogResult.Yes)
+                        {
+                            RestartAsAdmin();
+                        }
+                    }
+                    else
                     {
                         Update();
                     }
@@ -38,10 +46,36 @@ public static class VersionChecker
             }
         }
     }
-    
+
+    private static bool IsAdministrator()
+    {
+        using (WindowsIdentity identity = WindowsIdentity.GetCurrent())
+        {
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
+            return principal.IsInRole(WindowsBuiltInRole.Administrator);
+        }
+    }
+
+    private static void RestartAsAdmin()
+    {
+        ProcessStartInfo startInfo = new ProcessStartInfo();
+        startInfo.UseShellExecute = true;
+        startInfo.WorkingDirectory = Environment.CurrentDirectory;
+        startInfo.FileName = GetActualExecutablePath();
+        startInfo.Verb = "runas";
+        try
+        {
+            Process.Start(startInfo);
+            Environment.Exit(0);
+        }
+        catch (System.ComponentModel.Win32Exception)
+        {
+            MessageBox.Show("Administrator rights are required to perform the update. Please run the application as an administrator.");
+        }
+    }
+
     private static string GetActualExecutablePath()
     {
-        // Use the process module's filename, which should be the actual .exe path
         using (var process = Process.GetCurrentProcess())
         {
             return process.MainModule.FileName;
@@ -58,15 +92,11 @@ public static class VersionChecker
         var progressWindow = new ProgressWindow();
         progressWindow.Show();
 
-        // Download the new file
         await DownloadUtils.DownloadFileWithWindow(downloadUrl, newFilePath, progressWindow);
 
-        //wait 0.2 seconds
         await Task.Delay(200);
-        // Create and run the batch file
         CreateAndRunBatchFile(currentLocation, newFilePath);
 
-        // Close the current program
         Environment.Exit(0);
     }
 
@@ -77,17 +107,31 @@ public static class VersionChecker
         var newFileName = Path.GetFileName(newFilePath);
 
         var batchContent = @"
-@echo off
-timeout /t 2 /nobreak
-del """ + originalFileName + @"""
-rename """ + newFileName + @""" """ + originalFileName + @"""
-start """" """ + originalFileName + @"""
-del ""%~f0""
-";
+                                @echo off
+                                timeout /t 2 /nobreak
+                                del """ + originalFileName + @"""
+                                rename """ + newFileName + @""" """ + originalFileName + @"""
+                                start """" """ + originalFileName + @"""
+                                del ""%~f0""
+                                ";
 
         File.WriteAllText(batchFilePath, batchContent);
 
-        Process.Start(new ProcessStartInfo(batchFilePath) { CreateNoWindow = true });
+        ProcessStartInfo psi = new ProcessStartInfo
+        {
+            FileName = batchFilePath,
+            CreateNoWindow = true,
+            UseShellExecute = true,
+            Verb = "runas"
+        };
+
+        try
+        {
+            Process.Start(psi);
+        }
+        catch (System.ComponentModel.Win32Exception)
+        {
+            MessageBox.Show("Failed to run the update script with administrator rights. The update may not complete successfully.");
+        }
     }
-    
 }
