@@ -29,8 +29,8 @@ public static class LaunchJsonGenerator
                             new OptionConfig { Choice = 2, OptionName = "My Stuff", SectionName = "Retro Rewind" },
                             new OptionConfig { Choice = launchTt ? 1 : 0, OptionName = "Online TT", SectionName = "Retro Rewind" }
                         },
-                        Root = Path.Combine(ConfigValidator.GetLoadPathLocation(), "Riivolution"),
-                        Xml = Path.Combine(ConfigValidator.GetLoadPathLocation(), "Riivolution", "riivolution", XmlFileName)
+                        Root = Path.Combine(PathManager.GetLoadPathLocation(), "Riivolution"),
+                        Xml = Path.Combine(PathManager.GetLoadPathLocation(), "Riivolution", "riivolution", XmlFileName)
                     }
                 }
             },

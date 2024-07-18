@@ -63,7 +63,7 @@ public static class RetroRewindLauncher
         var mods = ConfigValidator.GetMods();
         if (mods.Length == 0) return;
         Array.Reverse(mods);
-        var myStuffFolder = Path.Combine(ConfigValidator.GetLoadPathLocation(), "Riivolution", "RetroRewind6",
+        var myStuffFolder = Path.Combine(PathManager.GetLoadPathLocation(), "Riivolution", "RetroRewind6",
             "MyStuff");
         if (Directory.Exists(myStuffFolder))
         {

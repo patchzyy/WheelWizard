@@ -128,7 +128,7 @@ public class GameDataLoader
     public static byte[]? LoadSaveDataFile()
     {
         var saveFileLocation =
-            Path.Combine(ConfigValidator.GetLoadPathLocation(), "Riivolution", "RetroRewind6", "save");
+            Path.Combine(PathManager.GetLoadPathLocation(), "Riivolution", "RetroRewind6", "save");
         var saveFile = Directory.GetFiles(saveFileLocation, "rksys.dat", SearchOption.AllDirectories);
         return saveFile.Length == 0 ? null : File.ReadAllBytes(saveFile[0]);
     }

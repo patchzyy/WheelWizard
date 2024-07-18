@@ -19,7 +19,6 @@ namespace CT_MKWII_WPF.Utilities.Configuration
 
         public static bool DoesConfigExist() => File.Exists(ConfigManager.GetWheelWizardAppdataPath());
         public static bool ConfigCorrectAndExists() => DoesConfigExist() && SetupCorrectly();
-        public static string GetLoadPathLocation() => Path.Combine(ConfigManager.GetConfig().UserFolderPath, "Load");
 
         public static bool IsConfigFileFinishedSettingUp()
         {

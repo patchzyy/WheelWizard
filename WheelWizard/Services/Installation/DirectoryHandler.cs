@@ -16,7 +16,7 @@ public static class DirectoryHandler
 
         // Find the destination folder
         var destinationFolder =
-            Path.Combine(ConfigValidator.GetLoadPathLocation(), "Riivolution", "RetroRewind6", "MyStuff");
+            Path.Combine(PathManager.GetLoadPathLocation(), "Riivolution", "RetroRewind6", "MyStuff");
 
         // Get all files with .szs and .brmstm extensions in the mod folder and its subfolders
         var szsFiles = Directory.GetFiles(modFolder, "*.szs", SearchOption.AllDirectories);

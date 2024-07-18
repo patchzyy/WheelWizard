@@ -15,41 +15,38 @@ namespace CT_MKWII_WPF.Services.Installation;
 
 public static class RetroRewindInstaller
 {
+    private const string VersionFileName = "version.txt";
+    private const string RetroRewindFolderName = "RetroRewind6";
+    private const string RiivolutionFolderName = "Riivolution";
+    private static readonly HttpClient HttpClient = new();
+    
+    private static string GetVersionFilePath() => Path.Combine(PathManager.GetLoadPathLocation(), RiivolutionFolderName, RetroRewindFolderName, VersionFileName);
     public static bool IsRetroRewindInstalled()
     {
-        var loadPath = ConfigValidator.GetLoadPathLocation();
-        var versionFilePath = Path.Combine(loadPath, "Riivolution", "RetroRewind6", "version.txt");
+        string versionFilePath = GetVersionFilePath();
         return File.Exists(versionFilePath);
     }
 
     public static string CurrentRRVersion()
     {
-        var loadPath = ConfigValidator.GetLoadPathLocation();
-        var versionFilePath = Path.Combine(loadPath, "Riivolution", "RetroRewind6", "version.txt");
-        if (File.Exists(versionFilePath)) return File.ReadAllText(versionFilePath);
-        return !File.Exists(versionFilePath) ? "Not Installed" : File.ReadAllText(versionFilePath);
+        var versionFilePath = GetVersionFilePath();
+        return File.Exists(versionFilePath) ? File.ReadAllText(versionFilePath).Trim() : "Not Installed";
     }
 
     public static async Task<bool> IsRRUpToDate(string currentVersion)
     {
-        //make sure to ignore any spaces
-        currentVersion = currentVersion.Trim();
-        var latestVersion = await GetLatestVersionString();
-        latestVersion = latestVersion.Trim();
-        return currentVersion == latestVersion;
+        string latestVersion = await GetLatestVersionString();
+        return currentVersion.Trim() == latestVersion.Trim();
     }
 
     public static async Task<string> GetLatestVersionString()
     {
-        var fullTextURLText = RRNetwork.Ip + "/RetroRewind/RetroRewindVersion.txt";
+        var fullTextURLText = $"{RRNetwork.Ip}/RetroRewind/RetroRewindVersion.txt";
         try
         {
-            using var httpClient = new HttpClient();
-            var allVersions = await httpClient.GetStringAsync(fullTextURLText);
-            var lines = allVersions.Split('\n');
+            var allVersions = await HttpClient.GetStringAsync(fullTextURLText);
             //now go to the last line split by spaces and grab index 0
-            var latestVersion = lines[lines.Length - 1].Split(' ')[0];
-            return latestVersion;
+            return allVersions.Split('\n').Last().Split(' ')[0];
         }
         catch (Exception ex)
         {
@@ -70,60 +67,76 @@ public static class RetroRewindInstaller
 
         if (currentVersion == "Not Installed")
         {
-            // ask user "Your version of RR could not be determent\n therefore we can not update, do you want to download RR?"
-            var result =
-                MessageBox.Show(
-                    "Your version of Retro Rewind could not be determined. Therefore, we cannot update. Would you like to download Retro Rewind?",
-                    "Download Retro Rewind", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
-            {
-                await InstallRetroRewind();
-            }
-
-            return true;
+            return await HandleNotInstalled();
         }
 
         //if currentversion is below 3.2.6 we need to do a full reinstall
         if (CompareVersions(currentVersion, "3.2.6") < 0)
         {
-            var result =
-                MessageBox.Show(
-                    "Your version of Retro Rewind is too old to update. Would you like to reinstall Retro Rewind?",
-                    "Reinstall Retro Rewind", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.No) return false;
-            await InstallRetroRewind();
-            return true;
+            return await HandleOldVersion();
         }
+        return await ApplyUpdates(currentVersion);
+    }
+    
+    private static async Task<bool> HandleNotInstalled()
+    {
+        var result = MessageBox.Show(
+            "Your version of Retro Rewind could not be determined. Would you like to download Retro Rewind?",
+            "Download Retro Rewind", MessageBoxButton.YesNo);
 
+        if (result == MessageBoxResult.No) return false;
+        
+        await InstallRetroRewind();
+        return true;
+    }
+    
+    private static async Task<bool> HandleOldVersion()
+    {
+        var result = MessageBox.Show(
+            "Your version of Retro Rewind is too old to update. Would you like to reinstall Retro Rewind?",
+            "Reinstall Retro Rewind", MessageBoxButton.YesNo);
+            
+        if (result == MessageBoxResult.No) return false;
+            
+        await InstallRetroRewind();
+        return true;
+    }
+
+    private static async Task<bool> ApplyUpdates(string currentVersion)
+    {
         var allVersions = await GetAllVersionData();
         var updatesToApply = GetUpdatesToApply(currentVersion, allVersions);
-
-        var totalUpdates = updatesToApply.Count;
-        var currentUpdateIndex = 1;
+        
         var progressWindow = new ProgressWindow();
         progressWindow.Show();
-        foreach (var update in updatesToApply)
+        try
         {
-            var success = await DownloadAndApplyUpdate(update, totalUpdates, currentUpdateIndex, progressWindow);
-            if (!success)
+            for (int i = 0; i < updatesToApply.Count; i++)
             {
-                MessageBox.Show("Failed to apply an update. Aborting.");
-                progressWindow.Close();
-                return false;
-            }
+                var update = updatesToApply[i];
+                var success = await DownloadAndApplyUpdate(update, updatesToApply.Count, i + 1, progressWindow);
+                if (!success)
+                {
+                    MessageBox.Show("Failed to apply an update. Aborting.");
+                    progressWindow.Close();
+                    return false;
+                }
 
-            currentUpdateIndex++;
-            UpdateVersionFile(update.Version);
+                UpdateVersionFile(update.Version);
+            }
+        }
+        finally
+        {
+            progressWindow.Close();
         }
 
-        progressWindow.Close();
         return true;
     }
 
 
     private static void UpdateVersionFile(string newVersion)
     {
-        var loadPath = ConfigValidator.GetLoadPathLocation();
+        var loadPath = PathManager.GetLoadPathLocation();
         var versionFilePath = Path.Combine(loadPath, "Riivolution", "RetroRewind6", "version.txt");
         File.WriteAllText(versionFilePath, newVersion);
     }
@@ -140,7 +153,7 @@ public static class RetroRewindInstaller
         foreach (var line in lines)
         {
             var parts = line.Split(new[] { ' ' }, 4);
-            if (parts.Length < 4) continue; // Skip if the line doesn't have enough parts.
+            if (parts.Length < 4) continue;
             versions.Add((parts[0].Trim(), parts[1].Trim(), parts[2].Trim(), parts[3].Trim()));
         }
 
@@ -158,7 +171,7 @@ public static class RetroRewindInstaller
                 updatesToApply.Add(version);
             else break;
         }
-
+        
         updatesToApply.Reverse();
         return updatesToApply;
     }
@@ -181,12 +194,13 @@ public static class RetroRewindInstaller
         (string Version, string Url, string Path, string Description) update, int totalUpdates, int currentUpdateIndex,
         ProgressWindow window)
     {
-        var loadPath = ConfigValidator.GetLoadPathLocation();
+        var loadPath = PathManager.GetLoadPathLocation();
         var tempZipPath = Path.GetTempFileName();
         try
         {
             var extratext = $"Update {currentUpdateIndex}/{totalUpdates}: {update.Description}";
             await DownloadUtils.DownloadFileWithWindow(update.Url, tempZipPath, window, extratext);
+            
             window.UpdateProgress(100, "Extracting update...");
             var extractionPath = Path.Combine(loadPath, "Riivolution");
             Directory.CreateDirectory(extractionPath);
@@ -208,47 +222,71 @@ public static class RetroRewindInstaller
 
     public static async Task InstallRetroRewind()
     {
-        var retroRewindURL = RRNetwork.Ip + "/RetroRewind/zip/RetroRewind.zip";
-        var loadPath = ConfigValidator.GetLoadPathLocation();
-        // Check if Retro Rewind is already installed
+        var retroRewindURL = $"{RRNetwork.Ip}/RetroRewind/zip/RetroRewind.zip";
+        var loadPath = PathManager.GetLoadPathLocation();
+
         if (IsRetroRewindInstalled())
         {
-            var result =
-                MessageBox.Show("There are already files in your RetroRewind Folder. Would you like to install?",
-                    "Reinstall Retro Rewind", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.No) return;
-            loadPath = ConfigValidator.GetLoadPathLocation();
-            var rrWfc = Path.Combine(loadPath, "Riivolution", "RetroRewind6", "save", "RetroWFC");
-            if (Directory.Exists(rrWfc))
-            {
-                var files = Directory.GetFiles(rrWfc, "rksys.dat", SearchOption.AllDirectories);
-                if (files.Length > 0)
-                {
-                    var regionFolder = Path.GetDirectoryName(files[0]);
-                    var regionFoldername = Path.GetFileName(regionFolder);
-                    var datfiledata = await File.ReadAllBytesAsync(files[0]);
-                    var riiWfCregion = Path.Combine(loadPath, "Riivolution", "riivolution", "save", "RetroWFC",
-                        regionFoldername);
-                    Directory.CreateDirectory(riiWfCregion);
-                    await File.WriteAllBytesAsync(Path.Combine(riiWfCregion, "rksys.dat"), datfiledata);
-                }
-            }
-
-            var retroRewindPath = Path.Combine(loadPath, "Riivolution", "RetroRewind6");
-            Directory.Delete(retroRewindPath, true);
+            await HandleReinstall(loadPath);
         }
 
         var tempZipPath = Path.Combine(loadPath, "Temp", "RetroRewind.zip");
+        await DownloadAndExtractRetroRewind(retroRewindURL, tempZipPath, loadPath);
+    }
+
+    private static async Task HandleReinstall(string loadPath)
+    {
+        var result = MessageBox.Show("There are already files in your RetroRewind Folder. Would you like to install?",
+            "Reinstall Retro Rewind", MessageBoxButton.YesNo);
+            
+        if (result == MessageBoxResult.No) return;
+
+        await BackupRksysFile(loadPath);
+        DeleteExistingRetroRewind(loadPath);
+    }
+    
+    private static async Task DownloadAndExtractRetroRewind(string retroRewindURL, string tempZipPath, string loadPath)
+    {
         var progressWindow = new ProgressWindow();
         progressWindow.Show();
-        await DownloadUtils.DownloadFileWithWindow(retroRewindURL, tempZipPath, progressWindow,
-            "Downloading Retro Rewind...");
-        progressWindow.Close();
-        // Extract the zip to the Riivolution folder
-        var extractionPath = Path.Combine(loadPath, "Riivolution");
-        ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
-        // Clean up the downloaded zip file
-        File.Delete(tempZipPath);
+            
+        try
+        {
+            await DownloadUtils.DownloadFileWithWindow(retroRewindURL, tempZipPath, progressWindow, "Downloading Retro Rewind...");
+            var extractionPath = Path.Combine(loadPath, RiivolutionFolderName);
+            ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
+        }
+        finally
+        {
+            progressWindow.Close();
+            if (File.Exists(tempZipPath))
+                File.Delete(tempZipPath);
+        }
+    }
+    
+    private static async Task BackupRksysFile(string loadPath)
+    {
+        var rrWfc = Path.Combine(loadPath, RiivolutionFolderName, RetroRewindFolderName, "save", "RetroWFC");
+        if (!Directory.Exists(rrWfc)) return;
+
+        var rksysFiles = Directory.GetFiles(rrWfc, "rksys.dat", SearchOption.AllDirectories);
+        if (rksysFiles.Length == 0) return;
+
+        var sourceFile = rksysFiles[0];
+        var regionFolder = Path.GetDirectoryName(sourceFile);
+        var regionFolderName = Path.GetFileName(regionFolder);
+        var datFileData = await File.ReadAllBytesAsync(sourceFile);
+
+        var destinationFolder = Path.Combine(loadPath, RiivolutionFolderName, "riivolution", "save", "RetroWFC", regionFolderName);
+        Directory.CreateDirectory(destinationFolder);
+        await File.WriteAllBytesAsync(Path.Combine(destinationFolder, "rksys.dat"), datFileData);
+    }
+    
+    private static void DeleteExistingRetroRewind(string loadPath)
+    {
+        var retroRewindPath = Path.Combine(loadPath, RiivolutionFolderName, RetroRewindFolderName);
+        if (Directory.Exists(retroRewindPath))
+            Directory.Delete(retroRewindPath, true);
     }
 
     public static async Task<bool> IsServerEnabled()
