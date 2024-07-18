@@ -60,7 +60,7 @@ public partial class Dashboard : Page
                 SetButtonState("Updating...", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Update, false,
                     true);
                 DisableSidebarButtons();
-                await RetroRewindInstaller.UpdateRR();
+                await RRUpdater.UpdateRR();
                 EnableSidebarButtons();
                 break;
             case ActionButtonStatus.UpToDate:

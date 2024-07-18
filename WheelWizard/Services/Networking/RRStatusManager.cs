@@ -18,9 +18,9 @@ public class RRStatusManager
         bool retroRewindUpToDate;
         string latestRRVersion;
         if (!ConfigValidator.IsConfigFileFinishedSettingUp()) return ActionButtonStatus.ConfigNotFinished;
-        retroRewindUpToDate = await RetroRewindInstaller.IsRRUpToDate(RetroRewindInstaller.CurrentRRVersion());
+        retroRewindUpToDate = await RRUpdater.IsRRUpToDate(RetroRewindInstaller.CurrentRRVersion());
         if (!retroRewindUpToDate) return ActionButtonStatus.OutOfDate;
-        latestRRVersion = await RetroRewindInstaller.GetLatestVersionString();
+        latestRRVersion = await RRUpdater.GetLatestVersionString();
         return ActionButtonStatus.UpToDate;
     }
 }
