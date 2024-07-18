@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using CT_MKWII_WPF.Models;
 using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.WiiManagement;
 using CT_MKWII_WPF.Utilities.Configuration;
@@ -12,50 +13,14 @@ public static class RetroRewindLauncher
 {
     public static void PlayRetroRewind(bool playTt)
     {
-        //close dolphin if its open,
+        KillDolphin();
+        if (WiiMoteSettings.IsForceSettingsEnabled()) WiiMoteSettings.DisableVirtualWiiMote();
+        PrepareModsForLaunch();
+        
         var dolphinLocation = PathManager.GetDolphinLocation();
-        if (Process.GetProcessesByName(Path.GetFileNameWithoutExtension(dolphinLocation)).Length != 0)
-        {
-            foreach (var process in Process.GetProcessesByName(Path.GetFileNameWithoutExtension(dolphinLocation)))
-            {
-                process.Kill();
-            }
-        }
-
-        if (WiiMoteSettings.IsForceSettingsEnabled())
-        {
-            WiiMoteSettings.DisableVirtualWiiMote();
-        }
-
-        //first clear the my-stuff folder
-        //now we check for all the mods we want in the modconfig
-        var mods = ConfigValidator.GetMods();
-        if (mods.Length != 0)
-        {
-            Array.Reverse(mods);
-            var mystuffFolder = Path.Combine(ConfigValidator.GetLoadPathLocation(), "Riivolution", "RetroRewind6",
-                "MyStuff");
-            if (Directory.Exists(mystuffFolder))
-            {
-                Directory.Delete(mystuffFolder, true);
-            }
-
-            foreach (var mod in mods)
-            {
-                if (mod.IsEnabled)
-                {
-                    DirectoryHandler.InstallMod(mod);
-                }
-            }
-        }
-
-        //reverse the list, because mods that have the lowest priority go first
-        //the reason we do this is, lets say file A from the lowest priority mod is in the highest priority mod, we want to overwrite it
-        dolphinLocation = PathManager.GetDolphinLocation();
-        string gamePath = PathManager.GetGameLocation();
-        GenerateLaunchJson(playTt);
-        string launchJson = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "CT-MKWII", "RR.json");
+        var gamePath = PathManager.GetGameLocation();
+        LaunchJsonGenerator.GenerateLaunchJson(playTt);
+        var launchJson = Path.Combine(ConfigManager.GetWheelWizardAppdataPath(), "RR.json");
 
         if (!File.Exists(dolphinLocation) || !File.Exists(gamePath))
         {
@@ -64,7 +29,6 @@ public static class RetroRewindLauncher
                 MessageBoxImage.Error);
             return;
         }
-
         try
         {
             Process.Start(new ProcessStartInfo
@@ -81,59 +45,36 @@ public static class RetroRewindLauncher
                 MessageBoxImage.Error);
         }
     }
-
-    private static void GenerateLaunchJson(bool launchTt)
+    
+    private static void KillDolphin()
     {
-        int value = launchTt ? 1 : 0;
-        string originalJson = $$"""
-                                {
-                                "base-file": "LINK TO ISO OR WBFS",
-                                "display-name": "RR",
-                                "riivolution": {
-                                  "patches": [
-                                    {
-                                      "options": [
-                                        {
-                                          "choice": 1,
-                                          "option-name": "Pack",
-                                          "section-name": "Retro Rewind"
-                                        },
-                                        {
-                                          "choice": 2,
-                                          "option-name": "My Stuff",
-                                          "section-name": "Retro Rewind"
-                                        },
-                                        {
-                                          "choice": {{value}},
-                                          "option-name": "Online TT",
-                                          "section-name": "Retro Rewind"
-                                        }
-                                      ],
-                                      "root": "LINK TO RIIVOLUTION FOLDER",
-                                      "xml": "LINK TO RETRO REWIND XML FILE"
-                                    }
-                                  ]
-                                },
-                                "type": "dolphin-game-mod-descriptor",
-                                "version": 1
-                                }
-                                """;
+        var dolphinLocation = PathManager.GetDolphinLocation();
+        if (Process.GetProcessesByName(Path.GetFileNameWithoutExtension(dolphinLocation)).Length != 0)
+        {
+            foreach (var process in Process.GetProcessesByName(Path.GetFileNameWithoutExtension(dolphinLocation)))
+            {
+                process.Kill();
+            }
+        }
+    }
 
-        // Replace the base-file with the game path
-        string correctedGamePath = PathManager.GetGameLocation().Replace(@"\", @"\/");
-        originalJson = originalJson.Replace("LINK TO ISO OR WBFS", correctedGamePath);
-
-        // Replace the link to appdata riivolution folder with the correct path
-        string correctedRRPath = Path.Combine(ConfigValidator.GetLoadPathLocation(), "Riivolution");
-        correctedRRPath = correctedRRPath.Replace(@"\", @"\/");
-        originalJson = originalJson.Replace("LINK TO RIIVOLUTION FOLDER", correctedRRPath + @"\/");
-
-        string correctedXmlPath = correctedRRPath + @"\/riivolution\/RetroRewind6.xml";
-        originalJson = originalJson.Replace("LINK TO RETRO REWIND XML FILE", correctedXmlPath);
-
-        // Write the json to the exe folder
-        File.WriteAllText(
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII", "RR.json"),
-            originalJson);
+    private static void PrepareModsForLaunch()
+    {
+        var mods = ConfigValidator.GetMods();
+        if (mods.Length == 0) return;
+        Array.Reverse(mods);
+        var myStuffFolder = Path.Combine(ConfigValidator.GetLoadPathLocation(), "Riivolution", "RetroRewind6",
+            "MyStuff");
+        if (Directory.Exists(myStuffFolder))
+        {
+            Directory.Delete(myStuffFolder, true);
+        }
+        foreach (var mod in mods)
+        {
+            if (mod.IsEnabled)
+            {
+                DirectoryHandler.InstallMod(mod);
+            }
+        }
     }
 }
