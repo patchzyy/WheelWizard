@@ -3,7 +3,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using CT_MKWII_WPF.Services.Auto_updater;
+using CT_MKWII_WPF.Services;
 using CT_MKWII_WPF.Services.Validators;
 using CT_MKWII_WPF.Services.WiiManagement;
 using CT_MKWII_WPF.Services.WiiManagement.DolphinHelpers;
@@ -24,7 +24,7 @@ public partial class SettingsPage : Page
         FillUserPath();
         UpdateResolutionButtonsState();
         ToggleLocationSettings(false);
-        VersionText.Text = "v" + VersionChecker.CurrentVersion;
+        VersionText.Text = "v" + AutoUpdater.CurrentVersion;
     }
 
     private void LoadSettings()

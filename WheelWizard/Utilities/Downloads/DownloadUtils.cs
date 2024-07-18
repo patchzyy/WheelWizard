@@ -50,7 +50,8 @@ public static class DownloadUtils
                 var estimatedTimeRemaining = remainingMb / speedMBps;
 
                 var bottomText =
-                    $"Speed: {speedMBps:F2} MB/s | Estimated time remaining: {FormatTimeSpan(estimatedTimeRemaining)}";
+                    $"Speed: {speedMBps:F2} MB/s | Estimated time remaining: " +
+                    Humanizer.HumanizeTimeSpan(TimeSpan.FromSeconds(estimatedTimeRemaining));
 
                 progressWindow.Dispatcher.Invoke(() =>
                 {
@@ -63,16 +64,5 @@ public static class DownloadUtils
         {
             MessageBox.Show($"An error occurred while downloading the file: {x.Message}");
         }
-    }
-
-    private static string FormatTimeSpan(double seconds)
-    {
-        var timeSpan = TimeSpan.FromSeconds(seconds);
-        if (timeSpan.TotalHours >= 1)
-            return $"{timeSpan.TotalHours:F1} hours";
-        else if (timeSpan.TotalMinutes >= 1)
-            return $"{timeSpan.TotalMinutes:F1} minutes";
-        else
-            return $"{timeSpan.TotalSeconds:F0} seconds";
     }
 }

@@ -1,2 +1,0 @@
-Anything in this `utils` folder should be moved out in any of the other folders
-(probably Models, Services, ViewModels or Utilities)

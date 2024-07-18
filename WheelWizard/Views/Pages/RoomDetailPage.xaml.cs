@@ -11,6 +11,7 @@ using System.Text.Json.Serialization;
 using System.ComponentModel;
 using CT_MKWII_WPF.Models;
 using CT_MKWII_WPF.Services.WiiManagement;
+using CT_MKWII_WPF.Utilities;
 using static CT_MKWII_WPF.Views.ViewUtils;
 
 namespace CT_MKWII_WPF.Views.Pages
@@ -30,8 +31,7 @@ namespace CT_MKWII_WPF.Views.Pages
         }
 
         public ObservableCollection<KeyValuePair<string, RoomInfo.Player>> PlayersList { get; set; }
-
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         public RoomDetailPage(RoomInfo room)
@@ -41,38 +41,11 @@ namespace CT_MKWII_WPF.Views.Pages
             PlayersList = new ObservableCollection<KeyValuePair<string, RoomInfo.Player>>(Room.Players);
             DataContext = this;
             LoadMiiImagesAsync();
-            RoomKind.Text = HumanizeGameMode(room.Rk);
+            RoomKind.Text = Humanizer.HumanizeGameMode(room.Rk);
             PlayersListView.SortingFunctions.Add("Value.Ev", EvComparable);
-            TimeOnline.Text = HumanizeTimeSpan(DateTime.UtcNow - room.Created);
+            TimeOnline.Text = Humanizer.HumanizeTimeSpan(DateTime.UtcNow - room.Created);
         }
-
-        private string HumanizeTimeSpan(TimeSpan timeSpan)
-        {
-            string P(int count) => count != 1 ? "s" : "";
-
-            if (timeSpan.TotalDays >= 1)
-                return $"{timeSpan.Days} day{P(timeSpan.Days)} {timeSpan.Hours} hour{P(timeSpan.Hours)}";
-
-            if (timeSpan.TotalHours >= 1)
-                return $"{timeSpan.Hours} hour{P(timeSpan.Hours)} {timeSpan.Minutes} minute{P(timeSpan.Minutes)}";
-
-            if (timeSpan.TotalMinutes >= 1)
-                return $"{timeSpan.Minutes} minute{P(timeSpan.Minutes)} {timeSpan.Seconds} second{P(timeSpan.Seconds)}";
-
-            return $"{timeSpan.Seconds} second{P(timeSpan.Seconds)}";
-        }
-
-        private string HumanizeGameMode(string mode)
-        {
-            return mode switch
-            {
-                "vs_10" => "VS",
-                "vs_11" => "TT",
-                "vs_751" => "VS",
-                _ => "??"
-            };
-        }
-
+        
         private static int EvComparable(object? x, object? y)
         {
             if (x is not KeyValuePair<string, RoomInfo.Player> xItem ||

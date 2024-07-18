@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using CT_MKWII_WPF.Models;
 using CT_MKWII_WPF.Services.Networking;
+using CT_MKWII_WPF.Utilities;
 
 namespace CT_MKWII_WPF.Views.Pages
 {
@@ -70,41 +71,13 @@ namespace CT_MKWII_WPF.Views.Pages
                     RoomNumber = room.Id,
                     PlayerCount = room.Players.Count.ToString(),
                     Type = room.Type,
-                    RoomKind = HumanizeGameMode(room.Rk),
-                    Playtime = HumanizeTimeSpan(DateTime.UtcNow - room.Created)
+                    RoomKind = Humanizer.HumanizeGameMode(room.Rk),
+                    Playtime = Humanizer.HumanizeTimeSpan(DateTime.UtcNow - room.Created)
                 });
             }
 
             EmptyRoomsView.Visibility = Rooms.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
             RoomsView.Visibility = Rooms.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
-        }
-
-        private string HumanizeGameMode(string mode)
-        {
-            return mode switch
-            {
-                "vs_10" => "VS",
-                "vs_11" => "TT",
-                "vs_751" => "VS",
-                _ => "??"
-            };
-        }
-
-
-        private string HumanizeTimeSpan(TimeSpan timeSpan)
-        {
-            string P(int count) => count != 1 ? "s" : "";
-
-            if (timeSpan.TotalDays >= 1)
-                return $"{timeSpan.Days} day{P(timeSpan.Days)} {timeSpan.Hours} hour{P(timeSpan.Hours)}";
-
-            if (timeSpan.TotalHours >= 1)
-                return $"{timeSpan.Hours} hour{P(timeSpan.Hours)} {timeSpan.Minutes} minute{P(timeSpan.Minutes)}";
-
-            if (timeSpan.TotalMinutes >= 1)
-                return $"{timeSpan.Minutes} minute{P(timeSpan.Minutes)} {timeSpan.Seconds} second{P(timeSpan.Seconds)}";
-
-            return $"{timeSpan.Seconds} second{P(timeSpan.Seconds)}";
         }
 
         private void Room_MouseDoubleClick(object sender, MouseButtonEventArgs e, ListViewItem clickedItem)

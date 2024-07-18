@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -8,12 +9,11 @@ using System.Windows.Threading;
 using CT_MKWII_WPF.Views.Components;
 using MahApps.Metro.IconPacks;
 
-namespace CT_MKWII_WPF.Services.Networking
+namespace CT_MKWII_WPF.Services
 {
     public static class LiveAlertsManager
     {
-        private static readonly string StatusUrl =
-            "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/status.txt";
+        private const string StatusUrl = "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/status.txt";
 
         private static DynamicIcon? _statusIcon;
         private static Action<string>? _updateStatusMessage;
@@ -24,48 +24,43 @@ namespace CT_MKWII_WPF.Services.Networking
         {
             _statusIcon = statusIcon;
             _updateStatusMessage = updateStatusMessage;
-            Timer.Tick += async (_, _) => await UpdateStatus();
+            Timer.Tick += async (_, _) => await UpdateStatusAsync();
 
             _statusIcon.IconKind = null!;
             _statusIcon.ForegroundColor = null!;
             _updateStatusMessage("");
 
             Timer.Start();
-            Task.Run(async () => await UpdateStatus());
+            Task.Run(async () => await UpdateStatusAsync());
         }
 
         public static void Stop() => Timer.Stop();
 
-        private static async Task UpdateStatus()
+        private static async Task UpdateStatusAsync()
         {
-            try
-            {
-                var content = await HttpClient.GetStringAsync(StatusUrl);
-                var parts = content.Split("\n");
-                var firstLine = parts[0];
-                if (string.IsNullOrWhiteSpace(firstLine))
-                    return; //do nothing
-                var alertMessage = firstLine.Split("|");
-                if (alertMessage.Length == 2)
-                {
-                    var messageType = alertMessage[0];
-                    var message = alertMessage[1];
-                    message = Regex.Replace(message, @"\\u000A", "\n");
+            var response = await HttpClientHelper.GetAsync<string>(StatusUrl);
+            if (!response.Succeeded || response.Content is null) return; 
+            // We DONT want to show anything if the request failed.
+            // There is no use-case for this and it will only confuse the user.
+            
+            var parts = response.Content.Split("\n");
+            var firstLine = parts.FirstOrDefault();
+            if (string.IsNullOrWhiteSpace(firstLine)) return;
+            
+            var firstLineParts = firstLine.Split("|");
+            if (firstLineParts.Length != 2) return;
+            
+            var messageType = firstLineParts[0];
+            var message = firstLineParts[1];
+            message = Regex.Replace(message, @"\\u000A", "\n");
 
-                    await UpdateUi(messageType, message);
-                }
-                else
-                {
-                    await UpdateUi("warning", "Invalid status format received" + alertMessage);
-                }
-            }
-            catch (Exception ex)
-            {
-                await UpdateUi("error", $"Failed to update status: {ex.Message}");
-            }
+            await UpdateUiAsync(messageType, message);
         }
 
-        private static async Task UpdateUi(string messageType, string message)
+        // TODO: This method should move to its designated ViewModal, and then be broken up in to the
+        //       views code since it is toutching the xaml
+        //       also not usre if it has to be async then anymore ¯\(°_o)/¯
+        private static async Task UpdateUiAsync(string messageType, string message)
         {
             if (_statusIcon == null) return;
             await _statusIcon.Dispatcher.InvokeAsync(() =>

@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using CT_MKWII_WPF.Services.Auto_updater;
+using CT_MKWII_WPF.Services;
 
 namespace CT_MKWII_WPF
 {
@@ -7,7 +7,7 @@ namespace CT_MKWII_WPF
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            VersionChecker.CheckForUpdates();
+            AutoUpdater.CheckForUpdatesAsync();
         }
     }
 }
