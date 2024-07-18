@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace CT_MKWII_WPF.Converters
+namespace CT_MKWII_WPF.Views.Converters
 {
     public class CornerRadiusConverter : IMultiValueConverter
     {

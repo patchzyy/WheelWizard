@@ -2,8 +2,8 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using CT_MKWII_WPF.Models;
 using CT_MKWII_WPF.Services.Installation;
+using CT_MKWII_WPF.Services.Validators;
 using CT_MKWII_WPF.Services.WiiManagement;
 using CT_MKWII_WPF.Utilities.Configuration;
 

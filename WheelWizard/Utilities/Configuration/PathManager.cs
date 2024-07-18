@@ -1,17 +1,16 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Windows;
 
 namespace CT_MKWII_WPF.Utilities.Configuration;
 
-public class PathManager
+public static class PathManager
 {
-    public static string GetGameLocation() => ConfigManager.GetConfig().GameLocation;
-    public static string GetDolphinLocation() => ConfigManager.GetConfig().DolphinLocation;
-    public static string GetUserPathLocation() => ConfigManager.GetConfig().UserFolderPath;
+    public static string GetGameLocation() => ConfigManager.GetConfig().GameLocation!;
+    public static string GetDolphinLocation() => ConfigManager.GetConfig().DolphinLocation!;
+    public static string GetUserPathLocation() => ConfigManager.GetConfig().UserFolderPath!;
     public static bool GetForceWiimote() => ConfigManager.GetConfig().ForceWiimote;
     
-    public static string GetLoadPathLocation() => Path.Combine(ConfigManager.GetConfig().UserFolderPath, "Load");
+    public static string GetLoadPathLocation() => Path.Combine(GetUserPathLocation(), "Load");
 
     public static string FindWiiMoteNew()
     {

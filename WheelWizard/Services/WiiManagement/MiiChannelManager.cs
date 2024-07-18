@@ -9,7 +9,7 @@ using CT_MKWII_WPF.Views;
 
 namespace CT_MKWII_WPF.Services.WiiManagement;
 
-public class MiiChannelManager
+public static class MiiChannelManager
 {
     private static string GetSavedChannelLocation() => ConfigManager.GetWheelWizardAppdataPath() + "/MiiChannel.wad";
     private static bool MiiChannelExists() => File.Exists(GetSavedChannelLocation());

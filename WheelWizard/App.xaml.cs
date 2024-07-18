@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using CT_MKWII_WPF.Utilities.Auto_updator;
+using CT_MKWII_WPF.Services.Auto_updater;
 
 namespace CT_MKWII_WPF
 {

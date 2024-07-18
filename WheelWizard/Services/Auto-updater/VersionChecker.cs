@@ -2,12 +2,13 @@
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CT_MKWII_WPF.Utilities.Downloads;
 using CT_MKWII_WPF.Views;
 
-namespace CT_MKWII_WPF.Utilities.Auto_updator;
+namespace CT_MKWII_WPF.Services.Auto_updater;
 
 public static class VersionChecker
 {
@@ -19,17 +20,18 @@ public static class VersionChecker
     public const string CurrentVersion = "1.1.2";
 
 
-    public static void CheckForUpdates()
+    public static async Task CheckForUpdates()
     {
-        using (var client = new WebClient())
+        using (var client = new HttpClient())
         {
             try
             {
-                var version = client.DownloadString(VersionFileUrl).Trim();
+                var version = await client.GetStringAsync(VersionFileUrl);
+                version = version.Trim();
                 if (version == CurrentVersion) return;
                 var result = MessageBox.Show("A new version of WheelWizard is available. Would you like to update?",
                     "Update Available", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes) Update();
+                if (result == DialogResult.Yes) await Update();
             }
             catch (Exception e)
             {

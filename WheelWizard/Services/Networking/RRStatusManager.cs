@@ -1,11 +1,12 @@
 ﻿using System.Threading.Tasks;
 using CT_MKWII_WPF.Models.Enums;
 using CT_MKWII_WPF.Services.Installation;
+using CT_MKWII_WPF.Services.Validators;
 using CT_MKWII_WPF.Utilities.Configuration;
 
 namespace CT_MKWII_WPF.Services.Networking;
 
-public class RRStatusManager
+public static class RRStatusManager
 {
     public static async Task<ActionButtonStatus> GetCurrentStatus()
     {
@@ -15,12 +16,9 @@ public class RRStatusManager
         if (!configCorrectAndExists) return ActionButtonStatus.ConfigNotFinished;
         var retroRewindInstalled = RetroRewindInstaller.IsRetroRewindInstalled();
         if (!retroRewindInstalled) return ActionButtonStatus.NoRR;
-        bool retroRewindUpToDate;
-        string latestRRVersion;
         if (!ConfigValidator.IsConfigFileFinishedSettingUp()) return ActionButtonStatus.ConfigNotFinished;
-        retroRewindUpToDate = await RRUpdater.IsRRUpToDate(RetroRewindInstaller.CurrentRRVersion());
+        var retroRewindUpToDate = await RRUpdater.IsRRUpToDate(RetroRewindInstaller.CurrentRRVersion());
         if (!retroRewindUpToDate) return ActionButtonStatus.OutOfDate;
-        latestRRVersion = await RRUpdater.GetLatestVersionString();
         return ActionButtonStatus.UpToDate;
     }
 }

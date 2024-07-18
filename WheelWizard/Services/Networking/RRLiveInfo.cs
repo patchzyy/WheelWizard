@@ -237,7 +237,7 @@ public class RRLiveInfo
             return _cachedData;
         }
 
-        string data = "";
+        string data;
         bool useMockingData = false;
         string apiUrl = "http://zplwii.xyz/api/groups";
         try
@@ -250,7 +250,7 @@ public class RRLiveInfo
                 data = await response.Content.ReadAsStringAsync();
             }
         }
-        catch (HttpRequestException e)
+        catch (HttpRequestException)
         {
             return new RRInformation { Rooms = new List<RoomInfo>() };
         }
@@ -260,7 +260,7 @@ public class RRLiveInfo
             return new RRInformation { Rooms = new List<RoomInfo>() };
         }
 
-        List<RoomInfo> rooms = JsonSerializer.Deserialize<List<RoomInfo>>(data,
+        var  rooms = JsonSerializer.Deserialize<List<RoomInfo>>(data,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
         );
 
@@ -272,7 +272,9 @@ public class RRLiveInfo
     public static int GetCurrentOnlinePlayers(RRInformation info)
     {
         int playerCount = 0;
-        foreach (RoomInfo room in info.Rooms) playerCount += room.Players.Count;
+        if (info.Rooms == null) return playerCount;
+        foreach (RoomInfo room in info.Rooms)
+          if (room.Players != null) playerCount += room.Players.Count;
         return playerCount;
     }
 

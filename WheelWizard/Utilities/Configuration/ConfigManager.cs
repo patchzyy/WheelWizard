@@ -11,19 +11,25 @@ public static class ConfigManager
     private static readonly string WheelWizardAppdataPath =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII", "config.json");
 
-    private static Config _config;
+    private static Config? _config;
 
     static ConfigManager()
     {
         LoadConfigFromFile();
     }
 
-    public static Config GetConfig() => _config;
+    public static Config GetConfig()
+    {
+        if (_config == null)
+            throw new Exception("Config is null, this should never happen");
+        return _config;
+    } 
     public static string GetWheelWizardAppdataPath() => WheelWizardAppdataPath;
 
     public static void SaveSettings(string dolphinPath, string gamePath, string userFolderPath, bool hasRunNandTutorial,
         bool forceDisableWiimote)
     {
+        if (_config == null) return;
         _config.DolphinLocation = dolphinPath;
         _config.GameLocation = gamePath;
         _config.UserFolderPath = userFolderPath;
@@ -35,7 +41,7 @@ public static class ConfigManager
     private static void SaveConfigToJson()
     {
         var configJson = JsonConvert.SerializeObject(_config, Formatting.Indented);
-        Directory.CreateDirectory(Path.GetDirectoryName(WheelWizardAppdataPath));
+        Directory.CreateDirectory(Path.GetDirectoryName(WheelWizardAppdataPath)!);
         try
         {
             File.WriteAllText(WheelWizardAppdataPath, configJson);

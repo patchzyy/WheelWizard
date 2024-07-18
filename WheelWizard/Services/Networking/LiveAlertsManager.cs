@@ -15,8 +15,8 @@ namespace CT_MKWII_WPF.Services.Networking
         private static readonly string StatusUrl =
             "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/status.txt";
 
-        private static DynamicIcon _statusIcon;
-        private static Action<string> _updateStatusMessage;
+        private static DynamicIcon? _statusIcon;
+        private static Action<string>? _updateStatusMessage;
         private static readonly DispatcherTimer Timer = new() { Interval = TimeSpan.FromSeconds(60) };
         private static readonly HttpClient HttpClient = new();
 
@@ -24,10 +24,10 @@ namespace CT_MKWII_WPF.Services.Networking
         {
             _statusIcon = statusIcon;
             _updateStatusMessage = updateStatusMessage;
-            Timer.Tick += async (s, e) => await UpdateStatus();
+            Timer.Tick += async (_, _) => await UpdateStatus();
 
-            _statusIcon.IconKind = null;
-            _statusIcon.ForegroundColor = null;
+            _statusIcon.IconKind = null!;
+            _statusIcon.ForegroundColor = null!;
             _updateStatusMessage("");
 
             Timer.Start();
@@ -67,6 +67,7 @@ namespace CT_MKWII_WPF.Services.Networking
 
         private static async Task UpdateUi(string messageType, string message)
         {
+            if (_statusIcon == null) return;
             await _statusIcon.Dispatcher.InvokeAsync(() =>
             {
                 SolidColorBrush? brush;
@@ -107,7 +108,7 @@ namespace CT_MKWII_WPF.Services.Networking
                 // We never actually want Brushes.Gray,
                 // but just in case the resource is missing for some unknown reason, we still want to display the icon
                 _statusIcon.ForegroundColor = brush ?? Brushes.Gray;
-
+                if (_updateStatusMessage == null) return;
                 _updateStatusMessage(message);
             });
         }

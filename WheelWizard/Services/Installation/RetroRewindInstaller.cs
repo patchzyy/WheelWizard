@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,7 +16,6 @@ public static class RetroRewindInstaller
     private const string VersionFileName = "version.txt";
     private const string RetroRewindFolderName = "RetroRewind6";
     private const string RiivolutionFolderName = "Riivolution";
-    private static readonly HttpClient HttpClient = new();
     
     private static string GetVersionFilePath() => Path.Combine(PathManager.GetLoadPathLocation(), RiivolutionFolderName, RetroRewindFolderName, VersionFileName);
     public static bool IsRetroRewindInstalled()
@@ -118,7 +115,7 @@ public static class RetroRewindInstaller
         var regionFolder = Path.GetDirectoryName(sourceFile);
         var regionFolderName = Path.GetFileName(regionFolder);
         var datFileData = await File.ReadAllBytesAsync(sourceFile);
-
+        if (regionFolderName == null) return;
         var destinationFolder = Path.Combine(loadPath, RiivolutionFolderName, "riivolution", "save", "RetroWFC", regionFolderName);
         Directory.CreateDirectory(destinationFolder);
         await File.WriteAllBytesAsync(Path.Combine(destinationFolder, "rksys.dat"), datFileData);

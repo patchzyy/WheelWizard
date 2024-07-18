@@ -13,11 +13,8 @@ using CT_MKWII_WPF.Views;
 
 namespace CT_MKWII_WPF.Services.Installation;
 
-public class RRUpdater
+public static class RRUpdater
 {
-    private const string VersionFileName = "version.txt";
-    private const string RetroRewindFolderName = "RetroRewind6";
-    private const string RiivolutionFolderName = "Riivolution";
     private static readonly HttpClient HttpClient = new();
     public static async Task<bool> IsRRUpToDate(string currentVersion)
     {

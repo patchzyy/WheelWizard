@@ -20,16 +20,15 @@ public class DolphinSettingHelper
         //read through every line to find the section
         var lines = File.ReadAllLines(fileLocation);
         var sectionFound = false;
-        for (var i = 0; i < lines.Length; i++)
+        foreach (var t in lines)
         {
-            if (lines[i] != $"[{section}]") continue;
+            if (t != $"[{section}]") continue;
             sectionFound = true;
             break;
         }
 
         if (!sectionFound)
         {
-            // MessageBox.Show("Could not find section in INI file, Message Patchzy with the following error: " + Section, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return "";
         }
 
@@ -42,7 +41,6 @@ public class DolphinSettingHelper
             return setting[1].Trim();
         }
 
-        // MessageBox.Show("Could not find setting in INI file, Message Patchzy with the following error: " + SettingToRead, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         return "";
     }
 
