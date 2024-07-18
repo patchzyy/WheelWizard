@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using MahApps.Metro.IconPacks;
 using System.Threading.Tasks;
 using CT_MKWII_WPF.Models.Enums;
@@ -9,32 +8,18 @@ using CT_MKWII_WPF.Services.Networking;
 using CT_MKWII_WPF.Services.Validators;
 using CT_MKWII_WPF.Services.WiiManagement;
 using CT_MKWII_WPF.Services.WiiManagement.DolphinHelpers;
-using CT_MKWII_WPF.Utilities.Configuration;
 using static CT_MKWII_WPF.Views.ViewUtils;
 using Button = CT_MKWII_WPF.Views.Components.Button;
 
 namespace CT_MKWII_WPF.Views.Pages;
 
-public partial class Dashboard : Page
+public partial class Dashboard
 {
     public Dashboard()
     {
         InitializeComponent();
         UpdateActionButton();
     }
-
-    // private void LoadPlayerData()
-    // {
-    //     GameDataLoader data = new();
-    //     data.LoadGameData();
-    //     GameData gameData = data.GameData;
-    //     PlayerName.Text = gameData.Users[0].Name;
-    //     FriendCode.Text = gameData.Users[0].FriendCode;
-    //     miiLoader.GetMiiImageAsync(gameData.Users[0].MiiData).ContinueWith(task =>
-    //     {
-    //         Dispatcher.Invoke(() => MainMii.Source = task.Result);
-    //     });
-    // }
 
     private async void PlayButton_Click(object sender, RoutedEventArgs e)
     {
@@ -52,14 +37,13 @@ public partial class Dashboard : Page
                 break;
             case ActionButtonStatus.NoRR:
                 SetButtonState("Installing...", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download,
-                    false, true);
+                    false);
                 DisableSidebarButtons();
                 await RetroRewindInstaller.InstallRetroRewind();
                 EnableSidebarButtons();
                 break;
             case ActionButtonStatus.OutOfDate:
-                SetButtonState("Updating...", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Update, false,
-                    true);
+                SetButtonState("Updating...", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Update, false);
                 DisableSidebarButtons();
                 await RRUpdater.UpdateRR();
                 EnableSidebarButtons();
@@ -151,7 +135,7 @@ public partial class Dashboard : Page
     private void MiiButton_OnClick(object sender, RoutedEventArgs e)
     {
         WiiMoteSettings.EnableVirtualWiiMote();
-        MiiChannelManager.LaunchMiiChannel();
+        _ = MiiChannelManager.LaunchMiiChannel();
         DisableAllButtonsTemporarily();
     }
 
