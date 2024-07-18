@@ -278,6 +278,6 @@ public class RRLiveInfo
 
     public class RRInformation
     {
-        public List<RoomInfo> Rooms;
+        public List<RoomInfo>? Rooms;
     }
 }

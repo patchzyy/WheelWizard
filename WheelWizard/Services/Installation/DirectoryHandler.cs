@@ -6,7 +6,7 @@ using CT_MKWII_WPF.Utilities.Configuration;
 
 namespace CT_MKWII_WPF.Services.Installation;
 
-public class DirectoryHandler
+public static class DirectoryHandler
 {
     public static void InstallMod(ModData mod)
     {
@@ -21,9 +21,11 @@ public class DirectoryHandler
         // Get all files with .szs and .brmstm extensions in the mod folder and its subfolders
         var szsFiles = Directory.GetFiles(modFolder, "*.szs", SearchOption.AllDirectories);
         var brmstmFiles = Directory.GetFiles(modFolder, "*.brstm", SearchOption.AllDirectories);
+        var brsarFiles = Directory.GetFiles(modFolder, "*.brsar", SearchOption.AllDirectories);
 
         // Create a combined list of all the files
         var allFiles = szsFiles.Concat(brmstmFiles).ToArray();
+        allFiles = allFiles.Concat(brsarFiles).ToArray();
 
         foreach (var file in allFiles)
         {
