@@ -171,6 +171,7 @@ private static int CompareVersions(string v1, string v2)
 
 private static async Task<bool> DownloadAndApplyUpdate((string Version, string Url, string Path, string Description) update, int totalUpdates, int currentUpdateIndex, ProgressWindow window)
 {
+    update.Url = update.Url.Replace("104.198.244.247", "34.30.70.41");
     var loadPath = SettingsUtils.GetLoadPathLocation();
     var tempZipPath = Path.GetTempFileName();
     try
