@@ -1,5 +1,4 @@
-info|Did you know: Most car horns are in the key of F
-
+warning|Servers have moved! \u000Aif you have a no Server error, please update your Wheel Wizard!
 
 The current status is the status that is inside of line 1
 (warning=yellow) (info=gray/white)  (alert=red)  (success=green)
