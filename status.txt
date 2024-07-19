@@ -1,4 +1,4 @@
-info|Did You Know The Most Common Car Color Is White And The Least Popular Car Color Is Purple
+info|Did You Know That The Most Common Car Color Is White And The Least Popular Car Color Is Purple
 
 The current status is the status that is inside of line 1
 (warning=yellow) (info=gray/white)  (alert=red)  (success=green)
