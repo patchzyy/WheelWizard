@@ -22,20 +22,16 @@ public static class RRUpdater
         return currentVersion.Trim() == latestVersion.Trim();
     }
     
-    public static async Task<string> GetLatestVersionString()
+    private static async Task<string> GetLatestVersionString()
     {
         var fullTextURLText = $"{RRNetwork.Ip}/RetroRewind/RetroRewindVersion.txt";
-        try
+        var response = await HttpClientHelper.GetAsync<String>(fullTextURLText);
+        if (!response.Succeeded || response.Content == null)
         {
-            var allVersions = await HttpClient.GetStringAsync(fullTextURLText);
-            //now go to the last line split by spaces and grab index 0
-            return allVersions.Split('\n').Last().Split(' ')[0];
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Failed to check for updates: {ex.Message}");
+            MessageBox.Show($"Failed to check for updates");
             return "Failed to check for updates";
         }
+        return response.Content.Split('\n').Last().Split(' ')[0];
     }
     
     public static async Task<bool> UpdateRR()
