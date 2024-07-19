@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.IO;
 using System.Net;
-using System.Net.Http;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,9 +12,9 @@ namespace CT_MKWII_WPF.Utils.Auto_updator;
 public static class VersionChecker
 {
     private const string VersionFileURL = "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/version.txt";
-    public const string CurrentVersion = "1.1.1";
+    public const string CurrentVersion = "1.1.3";
 
-    public static void CheckForUpdates()
+    public static void CheckForUpdates() 
     {
         using (var client = new WebClient())
         {
@@ -24,19 +23,25 @@ public static class VersionChecker
                 var version = client.DownloadString(VersionFileURL).Trim();
                 if (version != CurrentVersion)
                 {
-                    if (!IsAdministrator())
-                    {
-                        var result =
-                            MessageBox.Show("A new version of WheelWizard is available. Would you like to update?",
-                                "Update Available", MessageBoxButtons.YesNo);
-                        if (result == DialogResult.Yes)
-                        {
-                            RestartAsAdmin();
-                        }
-                    }
-                    else
+                    if (IsAdministrator())
                     {
                         Update();
+                        return;
+                    }
+                    var result = MessageBox.Show("A new version of WheelWizard is available. Would you like to update?",
+                        "Update Available", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                            var adminResult = MessageBox.Show("Do you want to try updating with administrator rights? (Recommended)",
+                                "Update Method", MessageBoxButtons.YesNo);
+                            if (adminResult == DialogResult.Yes)
+                            {
+                                RestartAsAdmin();
+                            }
+                            else
+                            {
+                                Update(false);
+                            }
                     }
                 }
             }
@@ -70,7 +75,7 @@ public static class VersionChecker
         }
         catch (System.ComponentModel.Win32Exception)
         {
-            MessageBox.Show("Administrator rights are required to perform the update. Please run the application as an administrator.");
+            MessageBox.Show("Failed to restart with administrator rights.");
         }
     }
 
@@ -82,7 +87,7 @@ public static class VersionChecker
         }
     }
 
-    public static async Task Update()
+    public static async Task Update(bool admin = true)
     {
         string currentLocation = GetActualExecutablePath();
         var currentFolder = Path.GetDirectoryName(currentLocation);
@@ -95,36 +100,47 @@ public static class VersionChecker
         await DownloadUtils.DownloadFileWithWindow(downloadUrl, newFilePath, progressWindow);
 
         await Task.Delay(200);
-        CreateAndRunBatchFile(currentLocation, newFilePath);
+        CreateAndRunBatchFile(currentLocation, newFilePath, admin);
 
         Environment.Exit(0);
     }
 
-    private static void CreateAndRunBatchFile(string currentFilePath, string newFilePath)
+    private static void CreateAndRunBatchFile(string currentFilePath, string newFilePath, bool admin)
     {
         var batchFilePath = Path.Combine(Path.GetDirectoryName(currentFilePath), "update.bat");
         var originalFileName = Path.GetFileName(currentFilePath);
         var newFileName = Path.GetFileName(newFilePath);
 
         var batchContent = @"
-                                @echo off
-                                timeout /t 2 /nobreak
-                                del """ + originalFileName + @"""
-                                rename """ + newFileName + @""" """ + originalFileName + @"""
-                                start """" """ + originalFileName + @"""
-                                del ""%~f0""
-                                ";
+                            @echo off
+                            timeout /t 2 /nobreak
+                            del """ + originalFileName + @"""
+                            rename """ + newFileName + @""" """ + originalFileName + @"""
+                            start """" """ + originalFileName + @"""
+                            del ""%~f0""
+                            ";
 
         File.WriteAllText(batchFilePath, batchContent);
-
-        ProcessStartInfo psi = new ProcessStartInfo
+        var psi = new ProcessStartInfo();
+        if (admin)
         {
-            FileName = batchFilePath,
-            CreateNoWindow = true,
-            UseShellExecute = true,
-            Verb = "runas"
-        };
-
+            psi = new ProcessStartInfo
+            {
+                FileName = batchFilePath,
+                CreateNoWindow = true,
+                UseShellExecute = true,
+                Verb = "runas"
+            };
+        }
+        else
+        {
+            psi = new ProcessStartInfo
+            {
+                FileName = batchFilePath,
+                CreateNoWindow = true,
+                UseShellExecute = true,
+            };
+        }
         try
         {
             Process.Start(psi);
