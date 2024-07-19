@@ -1,4 +1,4 @@
-warning|Servers have moved! \u000Aif you have a no Server error, please update your Wheel Wizard!
+info|Did You Know The Most Common Car Color Is White And The Least Popular Car Color Is Purple
 
 The current status is the status that is inside of line 1
 (warning=yellow) (info=gray/white)  (alert=red)  (success=green)
