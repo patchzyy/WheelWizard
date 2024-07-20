@@ -54,7 +54,10 @@ Feel free to join our community on [Discord](https://discord.gg/vZ7T2wJnsq) for 
 
 
 <p align="center">
-  <img src="https://github.com/patchzyy/WheelWizard/blob/main/images/my_stuff.png" alt="Wheel Wizard Logo" width="600"/>
+  <img src="https://github.com/patchzyy/WheelWizard/blob/main/images/dashboard.png" alt="Wheel Wizard Logo" width="450"/>
+  <img src="https://github.com/patchzyy/WheelWizard/blob/main/images/my_stuff.png" alt="Wheel Wizard Logo" width="450"/>
+  <img src="https://github.com/patchzyy/WheelWizard/blob/main/images/room_details.png" alt="Wheel Wizard Logo" width="450"/>
+  <img src="https://github.com/patchzyy/WheelWizard/blob/main/images/settings.png" alt="Wheel Wizard Logo" width="450"/>
 </p>
 ---
 ## Antivirus Warning
