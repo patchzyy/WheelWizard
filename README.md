@@ -52,8 +52,10 @@ Wheel Wizard was made by [patchzy](https://github.com/patchzyy) and [wanttobeeme
 
 Feel free to join our community on [Discord](https://discord.gg/vZ7T2wJnsq) for support and discussions! If you see any bugs, this is also the place to be :P
 
-![image](https://github.com/patchzyy/CT-MKWII-WPF/assets/64382339/f97125bf-b339-44ef-8719-05a592edc2f4)
 
+<p align="center">
+  <img src="https://github.com/patchzyy/WheelWizard/blob/main/images/my_stuff.png" alt="Wheel Wizard Logo" width="600"/>
+</p>
 ---
 ## Antivirus Warning
 
