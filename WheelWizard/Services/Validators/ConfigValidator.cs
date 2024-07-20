@@ -18,7 +18,7 @@ namespace CT_MKWII_WPF.Services.Validators
                    File.Exists(gfxFile);
         }
 
-        public static bool DoesConfigExist() => File.Exists(ConfigManager.GetWheelWizardAppdataPath());
+        public static bool DoesConfigExist() => File.Exists(ConfigManager.GetWheelWizardConfigPath());
         public static bool ConfigCorrectAndExists() => DoesConfigExist() && SetupCorrectly();
 
         public static bool IsConfigFileFinishedSettingUp()

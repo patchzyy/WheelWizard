@@ -6,7 +6,7 @@ using CT_MKWII_WPF.Utilities.Configuration;
 
 namespace CT_MKWII_WPF.Services.WiiManagement.DolphinHelpers;
 
-public class DolphinSettingHelper
+public static class DolphinSettingHelper
 {
     public static string ReadIniSetting(string fileLocation, string section, string settingToRead)
     {

@@ -8,8 +8,11 @@ namespace CT_MKWII_WPF.Utilities.Configuration;
 
 public static class ConfigManager
 {
-    private static readonly string WheelWizardAppdataPath =
+    private static readonly string WheelWizardConfigFilePath =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII", "config.json");
+    
+    private static readonly string WheelWizardAppdataPath =
+        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII");
 
     private static Config? _config;
 
@@ -25,6 +28,8 @@ public static class ConfigManager
         return _config;
     } 
     public static string GetWheelWizardAppdataPath() => WheelWizardAppdataPath;
+    
+    public static string GetWheelWizardConfigPath() => WheelWizardConfigFilePath;
 
     public static void SaveSettings(string dolphinPath, string gamePath, string userFolderPath, bool hasRunNandTutorial,
         bool forceDisableWiimote)
@@ -41,10 +46,10 @@ public static class ConfigManager
     private static void SaveConfigToJson()
     {
         var configJson = JsonConvert.SerializeObject(_config, Formatting.Indented);
-        Directory.CreateDirectory(Path.GetDirectoryName(WheelWizardAppdataPath)!);
+        Directory.CreateDirectory(Path.GetDirectoryName(WheelWizardConfigFilePath)!);
         try
         {
-            File.WriteAllText(WheelWizardAppdataPath, configJson);
+            File.WriteAllText(WheelWizardConfigFilePath, configJson);
         }
         catch (Exception e)
         {
@@ -55,8 +60,8 @@ public static class ConfigManager
 
     private static void LoadConfigFromFile()
     {
-        if (File.Exists(WheelWizardAppdataPath))
-            _config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(WheelWizardAppdataPath));
+        if (File.Exists(WheelWizardConfigFilePath))
+            _config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(WheelWizardConfigFilePath));
         else
             _config = new Config { ForceWiimote = true };
     }

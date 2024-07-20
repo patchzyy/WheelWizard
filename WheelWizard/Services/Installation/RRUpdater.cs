@@ -64,8 +64,7 @@ public static class RRUpdater
         
         var progressWindow = new ProgressWindow();
         progressWindow.Show();
-        try
-        {
+
             for (int i = 0; i < updatesToApply.Count; i++)
             {
                 var update = updatesToApply[i];
@@ -79,12 +78,7 @@ public static class RRUpdater
 
                 UpdateVersionFile(update.Version);
             }
-        }
-        finally
-        {
             progressWindow.Close();
-        }
-
         return true;
     }
     
@@ -160,11 +154,6 @@ public static class RRUpdater
             var extractionPath = Path.Combine(loadPath, "Riivolution");
             Directory.CreateDirectory(extractionPath);
             ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"An error occurred while applying the update: {ex.Message}");
-            return false;
         }
         finally
         {

@@ -48,7 +48,7 @@ public static class LaunchJsonGenerator
             ConfigManager.GetWheelWizardAppdataPath(),
             JsonFileName
         );
-
+        
         File.WriteAllText(outputPath, jsonString);
     }
 }
