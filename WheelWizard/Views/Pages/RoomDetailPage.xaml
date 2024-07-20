@@ -46,13 +46,13 @@
 
             <StackPanel Grid.Column="1">
                 <components:FormFieldLabel Text="Time Online" Margin="0,0,2,0" />
-                <TextBlock x:Name="TimeOnline"
+                <TextBlock Text="{Binding Room.TimeOnline}"
                            Style="{StaticResource BodyText}" />
             </StackPanel>
 
             <StackPanel Grid.Column="2">
                 <components:FormFieldLabel Text="Type" Margin="0,0,2,0" />
-                <TextBlock x:Name="RoomKind"
+                <TextBlock Text="{Binding Room.GameMode}"
                            Style="{StaticResource BodyText}" />
             </StackPanel>
 
@@ -93,7 +93,7 @@
                                 <DataTemplate>
                                     <Border Width="40" Height="40" Background="{StaticResource MiiIconBackground}"
                                             CornerRadius="20">
-                                        <Image Source="{Binding Value.MiiImage}" Stretch="Uniform">
+                                        <Image Source="{Binding MiiImage}" Stretch="Uniform">
                                             <Image.Clip>
                                                 <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20" />
                                             </Image.Clip>
@@ -102,11 +102,11 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Value.Name}" Width="105"
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="105"
                                         components:StaticListView.IsSortable="True" />
-                        <GridViewColumn Header="Friend code" DisplayMemberBinding="{Binding Value.Fc}" Width="135"
+                        <GridViewColumn Header="Friend code" DisplayMemberBinding="{Binding Fc}" Width="135"
                                         components:StaticListView.IsSortable="True" />
-                        <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Value.Ev}" Width="80"
+                        <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Ev}" Width="80"
                                         components:StaticListView.IsSortable="True" />
                     </GridView>
                 </ListView.View>

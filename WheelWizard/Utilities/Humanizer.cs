@@ -4,17 +4,7 @@ namespace CT_MKWII_WPF.Utilities;
 
 public static class Humanizer
 {
-    public static string HumanizeGameMode(string? mode)
-    {
-        return mode switch
-        {
-            "vs_10" => "VS",
-            "vs_11" => "TT",
-            "vs_751" => "VS",
-            _ => "??"
-        };
-    }
-        
+ 
     public static string HumanizeTimeSpan(TimeSpan timeSpan)
     {
         if (Math.Abs(timeSpan.TotalDays) >= 1)

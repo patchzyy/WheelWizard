@@ -1,16 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text.Json;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using CT_MKWII_WPF.Models;
+namespace CT_MKWII_WPF.Services;
 
-namespace CT_MKWII_WPF.Services.Networking;
-
-public class RRLiveInfo
+public class Mocker
 {
-    private static string _mockingData = @"[
+  // This file is temporary, and we will create a better mocking system in the future.
+  
+     private static string _mockingData = @"[
   {
     ""id"": ""PIFYVV"",
     ""game"": ""mariokartwii"",
@@ -221,65 +215,4 @@ public class RRLiveInfo
     }
   }
 ]";
-
-    private static readonly HttpClient Client = new HttpClient();
-
-
-    // Caching
-    private static RRInformation? _cachedData;
-    private static readonly TimeSpan CacheDuration = TimeSpan.FromSeconds(60);
-    private static DateTime _lastFetchTime;
-
-    public static async Task<RRInformation> GetCurrentGameData()
-    {
-        if (_cachedData != null && (DateTime.Now - _lastFetchTime) < CacheDuration)
-        {
-            return _cachedData;
-        }
-
-        string data;
-        bool useMockingData = false;
-        string apiUrl = "http://zplwii.xyz/api/groups";
-        try
-        {
-            if (useMockingData) data = _mockingData;
-            else
-            {
-                HttpResponseMessage response = await Client.GetAsync(apiUrl);
-                response.EnsureSuccessStatusCode();
-                data = await response.Content.ReadAsStringAsync();
-            }
-        }
-        catch (HttpRequestException)
-        {
-            return new RRInformation { Rooms = new List<RoomInfo>() };
-        }
-        catch (JsonException e)
-        {
-            MessageBox.Show(($"I messed up, here is why: {e.Message}"));
-            return new RRInformation { Rooms = new List<RoomInfo>() };
-        }
-
-        var  rooms = JsonSerializer.Deserialize<List<RoomInfo>>(data,
-            new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
-        );
-
-        _cachedData = new RRInformation { Rooms = rooms };
-        _lastFetchTime = DateTime.Now;
-        return _cachedData;
-    }
-
-    public static int GetCurrentOnlinePlayers(RRInformation info)
-    {
-        int playerCount = 0;
-        if (info.Rooms == null) return playerCount;
-        foreach (RoomInfo room in info.Rooms)
-          if (room.Players != null) playerCount += room.Players.Count;
-        return playerCount;
-    }
-
-    public class RRInformation
-    {
-        public List<RoomInfo>? Rooms;
-    }
 }

@@ -77,9 +77,9 @@ To join a specific room, you'll need to either join through a friend, or hope to
 
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=RoomNumber}" Header="ID" Width="110"
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="ID" Width="110"
                                         components:StaticListView.IsSortable="True" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Playtime}" Header="Time Online" Width="150"
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=TimeOnline}" Header="Time Online" Width="150"
                                         components:StaticListView.IsSortable="True" />
                         <GridViewColumn Header="Players" Width="80" components:StaticListView.IsSortable="True">
                             <GridViewColumn.CellTemplate>
@@ -103,7 +103,7 @@ To join a specific room, you'll need to either join through a friend, or hope to
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=RoomKind}" Header="Type" Width="110"
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=GameMode}" Header="Type" Width="110"
                                         components:StaticListView.IsSortable="True" />
                     </GridView>
                 </ListView.View>

@@ -12,7 +12,7 @@ public static class LiveAlertsManager
     private const string StatusUrl = "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/status.txt";
     
     private static Action<string, string>? _updateStatusMessage;
-    private static readonly DispatcherTimer Timer = new() { Interval = TimeSpan.FromSeconds(5) };
+    private static readonly DispatcherTimer Timer = new() { Interval = TimeSpan.FromSeconds(60) };
 
     public static void Start( Action<string, string> updateStatusMessage)
     {

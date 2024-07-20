@@ -4,105 +4,82 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using CT_MKWII_WPF.Models;
+using System.Windows.Navigation;
+using CT_MKWII_WPF.Models.RRInfo;
 using CT_MKWII_WPF.Services.Networking;
-using CT_MKWII_WPF.Utilities;
 
-namespace CT_MKWII_WPF.Views.Pages
+namespace CT_MKWII_WPF.Views.Pages;
+
+public sealed partial class RoomsPage : Page, INotifyPropertyChanged
 {
-    public partial class RoomsPage : Page, INotifyPropertyChanged
+    private readonly ObservableCollection<Room> _rooms = new();
+    public ObservableCollection<Room> Rooms
     {
-        private ObservableCollection<RoomViewModel> _rooms;
-
-        public ObservableCollection<RoomViewModel> Rooms
+        get => _rooms;
+        init
         {
-            get => _rooms;
-            set
-            {
-                _rooms = value;
-                OnPropertyChanged(nameof(Rooms));
-            }
-        }
-
-        public RoomsPage()
-        {
-            InitializeComponent();
-            DataContext = this;
-            Rooms = new ObservableCollection<RoomViewModel>();
-            LoadRoomsData();
-
-            RoomsView.SortingFunctions.Add("Players", PlayerComparable);
-        }
-
-        private static int PlayerComparable(object? x, object? y)
-        {
-            if (x is not RoomViewModel xItem || y is not RoomViewModel yItem) return 0;
-            if (!(int.TryParse(xItem.PlayerCount, out var xPlayerCount) &&
-                  int.TryParse(yItem.PlayerCount, out var yPlayerCount))) return 0;
-            return xPlayerCount.CompareTo(yPlayerCount);
-        }
-
-        private async void LoadRoomsData()
-        {
-            try
-            {
-                var rrInfo = await RRLiveInfo.GetCurrentGameData();
-                UpdateRoomsList(rrInfo);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error loading rooms data: {ex.Message}", "Error",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        private void UpdateRoomsList(RRLiveInfo.RRInformation rrInfo)
-        {
-            Rooms.Clear();
-            // TODO: Playtime looks cool, but the sorting is broken since its a string, not a real date anymore
-            //      that means if you want to shortest time on top, 1 hour would still be higher then 30 minutes
-            //      we can make a custom sorter function for this, but that is just moving the problem, so instead this model should probably contain a real DateTime object
-            //      (or like a number of seconds since creation if date is not possible)
-            foreach (var room in rrInfo.Rooms)
-            {
-                Rooms.Add(new RoomViewModel
-                {
-                    RoomInfo = room,
-                    RoomNumber = room.Id,
-                    PlayerCount = room.Players.Count.ToString(),
-                    Type = room.Type,
-                    RoomKind = Humanizer.HumanizeGameMode(room.Rk),
-                    Playtime = Humanizer.HumanizeTimeSpan(DateTime.UtcNow - room.Created)
-                });
-            }
-
-            EmptyRoomsView.Visibility = Rooms.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
-            RoomsView.Visibility = Rooms.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
-        }
-
-        private void Room_MouseDoubleClick(object sender, MouseButtonEventArgs e, ListViewItem clickedItem)
-        {
-            var selectedRoom = (RoomViewModel)clickedItem.DataContext;
-            var roomDetailPage = new RoomDetailPage(selectedRoom.RoomInfo);
-            NavigationService?.Navigate(roomDetailPage);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            _rooms = value;
+            OnPropertyChanged(nameof(Rooms));
         }
     }
 
-    public class RoomViewModel
+    public RoomsPage()
     {
-        public RoomInfo RoomInfo { get; set; }
-        public string RoomNumber { get; set; }
-        public string PlayerCount { get; set; }
-        public string Type { get; set; }
-        public string Playtime { get; set; }
-
-        public string RoomKind { get; set; }
+        InitializeComponent();
+        DataContext = this;
+        EmptyRoomsView.Visibility = RRLiveRooms.RoomCount == 0 ? Visibility.Visible : Visibility.Collapsed;
+        RoomsView.Visibility = RRLiveRooms.RoomCount == 0 ? Visibility.Collapsed : Visibility.Visible;
+        Rooms = new ObservableCollection<Room>(RRLiveRooms.CurrentRooms);
+        RRLiveRooms.SubscribeToRoomsUpdated(UpdateRoomsList);
+        RoomsView.SortingFunctions.Add("Players", PlayerCountComparable);
+        RoomsView.SortingFunctions.Add("TimeOnline", TimeOnlineComparable);
     }
+
+    private static int TimeOnlineComparable(object? x, object? y)
+    {
+        if (x is not Room xItem || y is not Room yItem) return 0;
+        return xItem.Created.CompareTo(yItem.Created);
+    }
+    
+    private static int PlayerCountComparable(object? x, object? y)
+    {
+        if (x is not Room xItem || y is not Room yItem) return 0;
+        return xItem.PlayerCount.CompareTo(yItem.PlayerCount);
+    }
+
+    private void UpdateRoomsList()
+    {
+        Console.WriteLine("THIS SUBSCRIBTION GETS ADDED BUT NEVER REMOVED, LEAVE THIS HERE UNTIL IT IS FIXED, KIND REGARDS, WANTTOBEEME");
+        Rooms.Clear();
+        var count = RRLiveRooms.RoomCount;
+        EmptyRoomsView.Visibility = count == 0 ? Visibility.Visible : Visibility.Collapsed;
+        RoomsView.Visibility = count == 0 ? Visibility.Collapsed : Visibility.Visible;
+        if (count == 0) return;
+        
+        foreach (var room in RRLiveRooms.CurrentRooms)
+        {
+            Rooms.Add(room);
+        }
+    }
+    
+
+    private void Room_MouseDoubleClick(object sender, MouseButtonEventArgs e, ListViewItem clickedItem)
+    {
+        var selectedRoom = (Room)clickedItem.DataContext;
+        var roomDetailPage = new RoomDetailPage(selectedRoom);
+        NavigationService?.Navigate(roomDetailPage);
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    private void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+    
+    //protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+    //{
+    //    Console.WriteLine("LEAVING TEST");
+    //    RRLiveRooms.UnsubscribeToRoomsUpdated(UpdateRoomsList);
+    //}
 }

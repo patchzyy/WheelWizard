@@ -45,7 +45,7 @@ public partial class StaticListView : BaseListView
         set => SetValue(ListTitleProperty, value);
     }
 
-    public Dictionary<string, Func<object?, object?, int>> SortingFunctions { get; set; } = new();
+    public Dictionary<string, Func<object?, object?, int>> SortingFunctions { get; } = new();
 
     public static readonly
         DependencyProperty IsSortableProperty = DependencyProperty.RegisterAttached(
@@ -110,16 +110,16 @@ public partial class StaticListView : BaseListView
 
     private void Sort(string sortBy, ListSortDirection direction)
     {
-        var dataView = CollectionViewSource.GetDefaultView(ItemsSource) as ListCollectionView;
-        if (dataView == null) return;
-
+        if (CollectionViewSource.GetDefaultView(ItemsSource) is not ListCollectionView dataView) return;
+   
         dataView.SortDescriptions.Clear();
-        var sd = new SortDescription(sortBy, direction);
-        dataView.SortDescriptions.Add(sd);
-
         if (SortingFunctions.TryGetValue(sortBy, out var customComparer))
             dataView.CustomSort = new LambdaComparer(customComparer, direction);
-
+        else
+        {
+            var sd = new SortDescription(sortBy, direction);
+            dataView.SortDescriptions.Add(sd);
+        }
         dataView.Refresh();
     }
 

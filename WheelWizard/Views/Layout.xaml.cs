@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using CT_MKWII_WPF.Services;
 using CT_MKWII_WPF.Services.Networking;
 using CT_MKWII_WPF.Services.WheelWizard;
 using CT_MKWII_WPF.Views.Components;
@@ -20,9 +18,10 @@ public partial class Layout : Window
         InitializeComponent();
         DataContext = this;
         NavigateToPage(new Dashboard());
-        PopulatePlayerText();
-        LiveAlertsManager.Start(UpdateLiveAlert);
-
+        LiveAlertsManager.Start(UpdateLiveAlert); // Temporary code
+        RRLiveRooms.Start(); // Temporary code
+        RRLiveRooms.SubscribeToRoomsUpdated(UpdatePlayerAndRoomCount); // Temporary code
+        
         // loadplayerdata();
     }
 
@@ -44,22 +43,11 @@ public partial class Layout : Window
                 button.IsChecked = button.PageType == page.GetType();
         }
     }
-
-    private async void PopulatePlayerText()
+    
+    private void UpdatePlayerAndRoomCount()
     {
-        var rrInfo = await RRLiveInfo.GetCurrentGameData();
-        UpdatePlayerAndRoomCount(RRLiveInfo.GetCurrentOnlinePlayers(rrInfo), rrInfo.Rooms.Count);
-
-        var periodicTimer = new PeriodicTimer(TimeSpan.FromSeconds(20));
-        while (await periodicTimer.WaitForNextTickAsync())
-        {
-            rrInfo = await RRLiveInfo.GetCurrentGameData();
-            UpdatePlayerAndRoomCount(RRLiveInfo.GetCurrentOnlinePlayers(rrInfo), rrInfo.Rooms.Count);
-        }
-    }
-
-    private void UpdatePlayerAndRoomCount(int playerCount, int roomCount)
-    {
+        var playerCount = RRLiveRooms.PlayerCount;
+        var roomCount = RRLiveRooms.RoomCount;
         PlayerCountBox.Text = playerCount.ToString();
         PlayerCountBox.TipText = playerCount switch
         {
@@ -147,6 +135,8 @@ public partial class Layout : Window
     protected override void OnClosed(EventArgs e)
     {
         base.OnClosed(e);
-        LiveAlertsManager.Stop();
+        LiveAlertsManager.Stop(); // Temporary code
+        RRLiveRooms.Stop(); // Temporary code
+        RRLiveRooms.UnsubscribeToRoomsUpdated(UpdatePlayerAndRoomCount); // Temporary code
     }
 }

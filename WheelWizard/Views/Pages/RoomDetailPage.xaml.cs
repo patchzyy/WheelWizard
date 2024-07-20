@@ -1,26 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
+
 using System.Collections.ObjectModel;
-using System.Net.Http;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.ComponentModel;
-using CT_MKWII_WPF.Models;
+using CT_MKWII_WPF.Models.RRInfo;
+using CT_MKWII_WPF.Services.Networking;
 using CT_MKWII_WPF.Services.WiiManagement;
-using CT_MKWII_WPF.Utilities;
+
 using static CT_MKWII_WPF.Views.ViewUtils;
 
 namespace CT_MKWII_WPF.Views.Pages
 {
     public partial class RoomDetailPage : Page, INotifyPropertyChanged
     {
-        private RoomInfo _room;
-
-        public RoomInfo Room
+        private Room _room;
+        public Room Room 
         {
             get => _room;
             set
@@ -29,62 +24,77 @@ namespace CT_MKWII_WPF.Views.Pages
                 OnPropertyChanged(nameof(Room));
             }
         }
-
-        public ObservableCollection<KeyValuePair<string, RoomInfo.Player>> PlayersList { get; set; }
         
-        public event PropertyChangedEventHandler PropertyChanged;
+        private readonly ObservableCollection<Player> _playersList = new();
+        public ObservableCollection<Player> PlayersList 
+        {
+            get => _playersList;
+            init
+            {
+                _playersList = value;
+                OnPropertyChanged(nameof(PlayersList));
+            }
+        }
+        
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        public RoomDetailPage(RoomInfo room)
+        public RoomDetailPage(Room room)
         {
             InitializeComponent();
             Room = room;
-            PlayersList = new ObservableCollection<KeyValuePair<string, RoomInfo.Player>>(Room.Players);
+            PlayersList = new ObservableCollection<Player>(Room.Players.Values);
             DataContext = this;
-            LoadMiiImagesAsync();
-            RoomKind.Text = Humanizer.HumanizeGameMode(room.Rk);
-            PlayersListView.SortingFunctions.Add("Value.Ev", EvComparable);
-            TimeOnline.Text = Humanizer.HumanizeTimeSpan(DateTime.UtcNow - room.Created);
+            
+            LoadMiiImagesAsync(); // Temporary code
+       
+            RRLiveRooms.SubscribeToRoomsUpdated(RefreshDetails);
+            PlayersListView.SortingFunctions.Add("Ev", VrComparable);
         }
         
-        private static int EvComparable(object? x, object? y)
+        private static int VrComparable(object? x, object? y)
         {
-            if (x is not KeyValuePair<string, RoomInfo.Player> xItem ||
-                y is not KeyValuePair<string, RoomInfo.Player> yItem) return 0;
-            if (!(int.TryParse(xItem.Value.Ev, out var xEv) &&
-                  int.TryParse(yItem.Value.Ev, out var yEv))) return 0;
-            return xEv.CompareTo(yEv);
+            if (x is not Player xItem || y is not Player yItem) return 0;
+            return xItem.Vr.CompareTo(yItem.Vr);
         }
 
-        private async void SetMiiImage(KeyValuePair<String, RoomInfo.Player> playerPair)
+        private void RefreshDetails()
         {
-            var player = playerPair.Value;
-            if (player.Mii == null || player.Mii.Count == 0 || string.IsNullOrEmpty(player.Mii[0]?.Data))
+            var room = RRLiveRooms.CurrentRooms.Find(r => r.Id == Room.Id);
+            if (room == null) return;
+            // TODO: if the room is not found we can show that in the page something like "this room has been closed"
+            
+            Room = room;
+            PlayersList.Clear();
+            foreach (var p in room.Players.Values)
             {
-                return;
-            }
-
-            if (player.Mii.Count > 0)
-            {
-                try
-                {
-                    var miiImage = await MiiGenerator.GetMiiImageAsync(player.Mii[0].Data);
-                    player.MiiImage = miiImage;
-                    Application.Current.Dispatcher.Invoke(() => OnPropertyChanged(nameof(PlayersList)));
-                }
-                catch (Exception ex)
-                {
-                    player.MiiImage = null;
-                }
+                PlayersList.Add(p);
             }
         }
-
+        
         private void LoadMiiImagesAsync()
         {
-            foreach (var playerPair in PlayersList)
-                SetMiiImage(playerPair);
+            foreach (var player in PlayersList)
+                SetMiiImageAsync(player);
         }
-
-
+        
+        private async void SetMiiImageAsync(Player player)
+        {
+            if ( player.Mii.Count == 0 ) // This is line 85
+                return;
+            
+            // TODO: should all go to a service thing that retrieves the image, as specially the try catch has to be removed from this file
+            try 
+            {
+                var miiImage = await MiiGenerator.GetMiiImageAsync(player.Mii[0].Data);
+                player.MiiImage = miiImage;
+                Application.Current.Dispatcher.Invoke(() => OnPropertyChanged(nameof(PlayersList)));
+            }
+            catch (Exception _)
+            {
+                // ignored
+            }
+        }
+        
         private void GoBackClick(object sender, RoutedEventArgs e) => NavigateToPage(new RoomsPage());
 
         protected virtual void OnPropertyChanged(string propertyName)
@@ -94,15 +104,11 @@ namespace CT_MKWII_WPF.Views.Pages
 
         private void CopyFriendCode_OnClick(object sender, RoutedEventArgs e)
         {
-            // TODO: This list should not be a dictionary, it also makes this method a bit of a mess, since now i have to get it by getting an object and cast it to a KeyValuePair later
-            var selectedMod = PlayersListView.GetCurrentContextItem<object>();
-
-            if (selectedMod is KeyValuePair<string, RoomInfo.Player> playerPair)
-            {
-                IDataObject dataObject = new DataObject();
-                dataObject.SetData(DataFormats.Text, playerPair.Value.Fc);
-                Clipboard.SetDataObject(dataObject);
-            }
+            var selectedPlayer = PlayersListView.GetCurrentContextItem<Player>();
+            if (selectedPlayer == null) return;
+            IDataObject dataObject = new DataObject();
+            dataObject.SetData(DataFormats.Text, selectedPlayer.Fc);
+            Clipboard.SetDataObject(dataObject);
         }
     }
 }
