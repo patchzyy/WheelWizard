@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using CT_MKWII_WPF.Utilities.Downloads;
 using CT_MKWII_WPF.Views;
 
-namespace CT_MKWII_WPF.Services;
+namespace CT_MKWII_WPF.Services.WheelWizard;
 
 public static class AutoUpdater
 {

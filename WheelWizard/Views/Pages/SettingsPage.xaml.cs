@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using CT_MKWII_WPF.Services;
 using CT_MKWII_WPF.Services.Validators;
+using CT_MKWII_WPF.Services.WheelWizard;
 using CT_MKWII_WPF.Services.WiiManagement;
 using CT_MKWII_WPF.Services.WiiManagement.DolphinHelpers;
 using CT_MKWII_WPF.Utilities.Configuration;

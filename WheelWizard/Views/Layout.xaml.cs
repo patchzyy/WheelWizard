@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using CT_MKWII_WPF.Services;
 using CT_MKWII_WPF.Services.Networking;
+using CT_MKWII_WPF.Services.WheelWizard;
 using CT_MKWII_WPF.Views.Components;
 using CT_MKWII_WPF.Views.Pages;
 using MahApps.Metro.IconPacks;
@@ -20,7 +21,7 @@ public partial class Layout : Window
         DataContext = this;
         NavigateToPage(new Dashboard());
         PopulatePlayerText();
-        LiveAlertsManager.Start(UpdateStatusIcon);
+        LiveAlertsManager.Start(UpdateLiveAlert);
 
         // loadplayerdata();
     }
@@ -75,45 +76,45 @@ public partial class Layout : Window
         };
     }
 
-    private void UpdateStatusIcon(string messageType, string message)
+    private void UpdateLiveAlert(string messageType, string message)
     {
-        if ((string)StatusIconToolTip.Content == message) return;
-        StatusIconToolTip.Content = message;
-        StatusIcon.IconPack = "FontAwesome";
+        if ((string)LiveAlertToolTip.Content == message) return;
+        LiveAlertToolTip.Content = message;
+        LiveAlert.IconPack = "FontAwesome";
         SolidColorBrush? brush = null;
         switch (messageType.ToLower())
         {
             case "party":
-                StatusIcon.IconPack = "Material";
-                StatusIcon.IconKind = PackIconMaterialKind.PartyPopper;
+                LiveAlert.IconPack = "Material";
+                LiveAlert.IconKind = PackIconMaterialKind.PartyPopper;
                 brush = Application.Current.FindResource("PartyColor") as SolidColorBrush;
                 break;
             case "info":
-                StatusIcon.IconKind = PackIconFontAwesomeKind.CircleInfoSolid;
+                LiveAlert.IconKind = PackIconFontAwesomeKind.CircleInfoSolid;
                 brush = Application.Current.FindResource("InfoColor") as SolidColorBrush;
                 break;
             case "warning":
             case "alert":
-                StatusIcon.IconKind = PackIconFontAwesomeKind.CircleExclamationSolid;
+                LiveAlert.IconKind = PackIconFontAwesomeKind.CircleExclamationSolid;
                 brush = Application.Current.FindResource("WarningColor") as SolidColorBrush;
                 break;
             case "error":
-                StatusIcon.IconKind = PackIconFontAwesomeKind.CircleXmarkSolid;
+                LiveAlert.IconKind = PackIconFontAwesomeKind.CircleXmarkSolid;
                 brush = Application.Current.FindResource("ErrorColor") as SolidColorBrush;
                 break;
             case "success":
-                StatusIcon.IconKind = PackIconFontAwesomeKind.CircleCheckSolid;
+                LiveAlert.IconKind = PackIconFontAwesomeKind.CircleCheckSolid;
                 brush = Application.Current.FindResource("SuccessColor") as SolidColorBrush;
                 break;
             default:
-                StatusIcon.IconPack = "";
-                StatusIcon.IconKind = "";
+                LiveAlert.IconPack = "";
+                LiveAlert.IconKind = "";
                 break;
         }
 
         // We never actually want Brushes.Gray,
         // but just in case the resource is missing for some unknown reason, we still want to display the icon
-        StatusIcon.ForegroundColor = brush ?? Brushes.Gray;
+        LiveAlert.ForegroundColor = brush ?? Brushes.Gray;
     }
     
     private void TopBar_MouseDown(object sender, MouseButtonEventArgs e)

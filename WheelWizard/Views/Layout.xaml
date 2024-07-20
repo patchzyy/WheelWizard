@@ -105,13 +105,13 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
 
                 <StackPanel>
                     <!-- Icon is not defined since that is done in the AlertManager -->
-                    <components:DynamicIcon IconPack="FontAwesome" x:Name="StatusIcon"
+                    <components:DynamicIcon IconPack="FontAwesome" x:Name="LiveAlert"
                                             ForegroundColor="{StaticResource WarningTitleTextColor}"
                                             IconSize="26" />
                 </StackPanel>
 
                 <Border.ToolTip>
-                    <components:ToolTipMessage Alignment="TopLeft" x:Name="StatusIconToolTip" ToolTip="">
+                    <components:ToolTipMessage Alignment="TopLeft" x:Name="LiveAlertToolTip" ToolTip="">
                     </components:ToolTipMessage>
                 </Border.ToolTip>
             </Border>

@@ -24,9 +24,8 @@ public static class RetroRewindLauncher
 
         if (!File.Exists(dolphinLocation) || !File.Exists(gamePath))
         {
-            MessageBox.Show("Message patchzy with the following error: " + dolphinLocation + " " + gamePath, "Error",
-                MessageBoxButton.OK,
-                MessageBoxImage.Error);
+            MessageBox.Show("Message patchzy with the following error: " + dolphinLocation + " " + gamePath, 
+                "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
         try

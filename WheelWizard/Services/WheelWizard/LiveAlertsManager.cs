@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace CT_MKWII_WPF.Services;
+namespace CT_MKWII_WPF.Services.WheelWizard;
 
 public static class LiveAlertsManager
 {
@@ -27,24 +27,35 @@ public static class LiveAlertsManager
 
     public static void Stop() => Timer.Stop();
 
-    private static async Task UpdateStatusAsync()
+    private static (string, string) ParseStatus(string status)
     {
-        var response = await HttpClientHelper.GetAsync<string>(StatusUrl);
-        if (!response.Succeeded || response.Content is null) return; 
-        // We DONT want to show anything if the request failed.
-        // There is no use-case for this and it will only confuse the user.
-        
-        var parts = response.Content.Split("\n");
+        var parts = status.Split("\n");
         var firstLine = parts.FirstOrDefault();
-        if (string.IsNullOrWhiteSpace(firstLine)) return;
+        if (string.IsNullOrWhiteSpace(firstLine))
+            return ("","");
         
         var firstLineParts = firstLine.Split("|");
-        if (firstLineParts.Length != 2) return;
-        
+        if (firstLineParts.Length != 2)
+            return  ("","");
+          
         var messageType = firstLineParts[0];
         var message = firstLineParts[1];
         message = Regex.Replace(message, @"\\u000A", "\n");
+        return (messageType, message);
+    }
+    
+    private static async Task UpdateStatusAsync()
+    {
+        var response = await HttpClientHelper.GetAsync<string>(StatusUrl);
+        if (!response.Succeeded || response.Content is null)
+        {
+            // We DONT want to show anything if the request failed.
+            // There is no use-case for this and it will only confuse the user.
+            _updateStatusMessage?.Invoke("", "");
+            return;
+        }
         
+        var (messageType, message) = ParseStatus(response.Content);
         Application.Current.Dispatcher.Invoke(() => _updateStatusMessage?.Invoke(messageType, message));
     }
 }
