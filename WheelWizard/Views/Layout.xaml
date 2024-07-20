@@ -111,8 +111,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                 </StackPanel>
 
                 <Border.ToolTip>
-                    <components:ToolTipMessage Alignment="TopLeft">
-                        <TextBlock Text="{Binding StatusMessage}" />
+                    <components:ToolTipMessage Alignment="TopLeft" x:Name="StatusIconToolTip" ToolTip="">
                     </components:ToolTipMessage>
                 </Border.ToolTip>
             </Border>

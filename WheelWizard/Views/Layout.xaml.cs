@@ -1,33 +1,27 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using CT_MKWII_WPF.Services;
 using CT_MKWII_WPF.Services.Networking;
 using CT_MKWII_WPF.Views.Components;
 using CT_MKWII_WPF.Views.Pages;
+using MahApps.Metro.IconPacks;
 
 namespace CT_MKWII_WPF.Views;
 
-public partial class Layout : Window, INotifyPropertyChanged
+public partial class Layout : Window
 {
-    public event PropertyChangedEventHandler PropertyChanged;
-
     public Layout()
     {
         InitializeComponent();
         DataContext = this;
         NavigateToPage(new Dashboard());
         PopulatePlayerText();
-        // Create and start the LiveAlertsManager
-        LiveAlertsManager.Start(StatusIcon, UpdateStatusMessage);
+        LiveAlertsManager.Start(UpdateStatusIcon);
 
-        var statusIconBorder = StatusIcon.Parent as Border;
-        if (statusIconBorder != null)
-            statusIconBorder.ToolTip = null;
         // loadplayerdata();
     }
 
@@ -50,27 +44,7 @@ public partial class Layout : Window, INotifyPropertyChanged
         }
     }
 
-    private string _statusMessage;
-
-    public string StatusMessage
-    {
-        get => _statusMessage;
-        set
-        {
-            if (_statusMessage == value) return;
-            _statusMessage = value;
-            OnPropertyChanged();
-        }
-    }
-
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    private void UpdateStatusMessage(string message) => Dispatcher.Invoke(() => StatusMessage = message);
-
-    public async void PopulatePlayerText()
+    private async void PopulatePlayerText()
     {
         var rrInfo = await RRLiveInfo.GetCurrentGameData();
         UpdatePlayerAndRoomCount(RRLiveInfo.GetCurrentOnlinePlayers(rrInfo), rrInfo.Rooms.Count);
@@ -83,7 +57,7 @@ public partial class Layout : Window, INotifyPropertyChanged
         }
     }
 
-    public void UpdatePlayerAndRoomCount(int playerCount, int roomCount)
+    private void UpdatePlayerAndRoomCount(int playerCount, int roomCount)
     {
         PlayerCountBox.Text = playerCount.ToString();
         PlayerCountBox.TipText = playerCount switch
@@ -101,11 +75,53 @@ public partial class Layout : Window, INotifyPropertyChanged
         };
     }
 
+    private void UpdateStatusIcon(string messageType, string message)
+    {
+        if ((string)StatusIconToolTip.Content == message) return;
+        StatusIconToolTip.Content = message;
+        StatusIcon.IconPack = "FontAwesome";
+        SolidColorBrush? brush = null;
+        switch (messageType.ToLower())
+        {
+            case "party":
+                StatusIcon.IconPack = "Material";
+                StatusIcon.IconKind = PackIconMaterialKind.PartyPopper;
+                brush = Application.Current.FindResource("PartyColor") as SolidColorBrush;
+                break;
+            case "info":
+                StatusIcon.IconKind = PackIconFontAwesomeKind.CircleInfoSolid;
+                brush = Application.Current.FindResource("InfoColor") as SolidColorBrush;
+                break;
+            case "warning":
+            case "alert":
+                StatusIcon.IconKind = PackIconFontAwesomeKind.CircleExclamationSolid;
+                brush = Application.Current.FindResource("WarningColor") as SolidColorBrush;
+                break;
+            case "error":
+                StatusIcon.IconKind = PackIconFontAwesomeKind.CircleXmarkSolid;
+                brush = Application.Current.FindResource("ErrorColor") as SolidColorBrush;
+                break;
+            case "success":
+                StatusIcon.IconKind = PackIconFontAwesomeKind.CircleCheckSolid;
+                brush = Application.Current.FindResource("SuccessColor") as SolidColorBrush;
+                break;
+            default:
+                StatusIcon.IconPack = "";
+                StatusIcon.IconKind = "";
+                break;
+        }
+
+        // We never actually want Brushes.Gray,
+        // but just in case the resource is missing for some unknown reason, we still want to display the icon
+        StatusIcon.ForegroundColor = brush ?? Brushes.Gray;
+    }
+    
     private void TopBar_MouseDown(object sender, MouseButtonEventArgs e)
     {
-        if (e.ChangedButton == MouseButton.Left) DragMove();
+        if (e.ChangedButton == MouseButton.Left) 
+            DragMove();
     }
-
+    
     private void MinimizeButton_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
     private void CloseButton_Click(object sender, RoutedEventArgs e) => Close();
 
@@ -126,7 +142,7 @@ public partial class Layout : Window, INotifyPropertyChanged
             UseShellExecute = true
         });
     }
-
+ 
     protected override void OnClosed(EventArgs e)
     {
         base.OnClosed(e);
