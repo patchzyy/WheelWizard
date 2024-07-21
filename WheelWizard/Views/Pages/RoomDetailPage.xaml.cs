@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.ComponentModel;
 using CT_MKWII_WPF.Models.RRInfo;
+using CT_MKWII_WPF.Services.Other;
 using CT_MKWII_WPF.Services.RetroRewind;
 using CT_MKWII_WPF.Services.WiiManagement;
 using CT_MKWII_WPF.Utilities.RepeatedTasks;
@@ -88,7 +89,7 @@ public partial class RoomDetailPage : Page, INotifyPropertyChanged, IRepeatedTas
         // TODO: should all go to a service thing that retrieves the image, as specially the try catch has to be removed from this file
         try 
         {
-            var miiImage = await MiiGenerator.GetMiiImageAsync(player.Mii[0].Data);
+            var miiImage = await MiiImageManager.GetMiiImageAsync(player.Mii[0].Data);
             player.MiiImage = miiImage;
             Application.Current.Dispatcher.Invoke(() => OnPropertyChanged(nameof(PlayersList)));
         }

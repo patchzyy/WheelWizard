@@ -4,7 +4,7 @@ public class Mocker
 {
   // This file is temporary, and we will create a better mocking system in the future.
   
-     private static string _mockingData = @"[
+  public static string GroupApiResponse = @"[
   {
     ""id"": ""PIFYVV"",
     ""game"": ""mariokartwii"",
