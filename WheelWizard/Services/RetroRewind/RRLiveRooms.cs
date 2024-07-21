@@ -24,7 +24,6 @@ public class RRLiveRooms : RepeatedTaskManager
 
     protected override async Task ExecuteTaskAsync()
     {
-        Console.WriteLine("LiveRooms");
         var response = await HttpClientHelper.GetAsync<List<Room>>(GroupUrl);
         
         // It is not important enough to bore the user with an error message or something.

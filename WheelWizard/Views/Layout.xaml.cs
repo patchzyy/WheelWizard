@@ -19,7 +19,8 @@ public partial class Layout : Window, IRepeatedTaskListener
         InitializeComponent();
         DataContext = this;
         NavigateToPage(new Dashboard());
-        LiveAlertsManager.Start(UpdateLiveAlert);
+        LiveAlertsManager.Instance.Start(); // Temporary code, should be moved to a more appropriate location
+        LiveAlertsManager.Instance.Subscribe(this);
         RRLiveRooms.Instance.Start(); // Temporary code, should be moved to a more appropriate location
         RRLiveRooms.Instance.Subscribe(this);
         // LoadPlayerData();
@@ -46,8 +47,15 @@ public partial class Layout : Window, IRepeatedTaskListener
     
     public void OnUpdate(RepeatedTaskManager sender)
     {
-        if (sender is RRLiveRooms liveRooms)
-            UpdatePlayerAndRoomCount(liveRooms);
+        switch (sender)
+        {
+            case RRLiveRooms liveRooms:
+                UpdatePlayerAndRoomCount(liveRooms);
+                break;
+            case LiveAlertsManager liveAlerts:
+                UpdateLiveAlert(liveAlerts);
+                break;
+        }
     }
     
     private void UpdatePlayerAndRoomCount(RRLiveRooms sender)
@@ -70,13 +78,14 @@ public partial class Layout : Window, IRepeatedTaskListener
         };
     }
 
-    private void UpdateLiveAlert(string messageType, string message)
+    private void UpdateLiveAlert(LiveAlertsManager sender)
     {
-        if ((string)LiveAlertToolTip.Content == message) return;
-        LiveAlertToolTip.Content = message;
+        
+        if ((string)LiveAlertToolTip.Content == sender.StatusMessage) return;
+        LiveAlertToolTip.Content = sender.StatusMessage;
         LiveAlert.IconPack = "FontAwesome";
         SolidColorBrush? brush = null;
-        switch (messageType.ToLower())
+        switch (sender.StatusMessageType.ToLower())
         {
             case "party":
                 LiveAlert.IconPack = "Material";

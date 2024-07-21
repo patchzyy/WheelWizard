@@ -1,33 +1,24 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Threading;
 using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Utilities.RepeatedTasks;
 
 namespace CT_MKWII_WPF.Services.WheelWizard;
 
-public static class LiveAlertsManager
+public class LiveAlertsManager : RepeatedTaskManager
 {
     private const string StatusUrl = "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/status.txt";
+    public string StatusMessage { get; private set; } = "";
+    public string StatusMessageType { get; private set; } = "";
+
+    private static LiveAlertsManager? _instance;
+    public static LiveAlertsManager Instance => _instance ??= new LiveAlertsManager();
     
-    private static Action<string, string>? _updateStatusMessage;
-    private static readonly DispatcherTimer Timer = new() { Interval = TimeSpan.FromSeconds(60) };
-
-    public static void Start( Action<string, string> updateStatusMessage)
+    private LiveAlertsManager() : base(60)
     {
-        _updateStatusMessage = updateStatusMessage;
-        Timer.Tick += async (_, _) => await UpdateStatusAsync();
-        
-        _updateStatusMessage("", "");
-
-        Timer.Start();
-        Task.Run(UpdateStatusAsync);
     }
-
-    public static void Stop() => Timer.Stop();
-
+    
     private static (string, string) ParseStatus(string status)
     {
         var parts = status.Split("\n");
@@ -44,19 +35,21 @@ public static class LiveAlertsManager
         message = Regex.Replace(message, @"\\u000A", "\n");
         return (messageType, message);
     }
-    
-    private static async Task UpdateStatusAsync()
+
+    protected override async Task ExecuteTaskAsync()
     {
         var response = await HttpClientHelper.GetAsync<string>(StatusUrl);
         if (!response.Succeeded || response.Content is null)
         {
             // We DONT want to show anything if the request failed.
             // There is no use-case for this and it will only confuse the user.
-            _updateStatusMessage?.Invoke("", "");
+            StatusMessage = "";
+            StatusMessageType = "";
             return;
         }
         
         var (messageType, message) = ParseStatus(response.Content);
-        Application.Current.Dispatcher.Invoke(() => _updateStatusMessage?.Invoke(messageType, message));
+        StatusMessage = message;
+        StatusMessageType = messageType;
     }
 }

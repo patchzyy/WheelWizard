@@ -13,8 +13,8 @@ public class Player : INotifyPropertyChanged
     public required string ConnFail { get; set; }
     public required string Suspend { get; set; }
     public required string Fc { get; set; }
-    public string Ev { get; set; } = "--"; // private games don't have EV and EB
-    public string Eb { get; set; }  = "--";
+    public required string Ev { get; set; } = "--"; // private games don't have EV and EB
+    public required string Eb { get; set; }  = "--";
     public required List<Mii> Mii { get; set; } = new List<Mii>();
 
     public int PlayerCount => int.Parse(Count);
