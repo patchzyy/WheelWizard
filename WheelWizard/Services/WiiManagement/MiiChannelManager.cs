@@ -30,9 +30,7 @@ public static class MiiChannelManager
     {
         var progressWindow = new ProgressWindow();
         progressWindow.Show();
-        await DownloadHelper.DownloadFileWithWindow(
-            "https://repo.mariocube.com/WADs/Other/Mii%20Channel%20Symbols%20-%20HACS.wad", GetSavedChannelLocation(),
-            progressWindow);
+        await DownloadHelper.DownloadFileWithWindow(Endpoints.MarioCubeUrl, GetSavedChannelLocation(), progressWindow);
         progressWindow.Close();
     }
 }

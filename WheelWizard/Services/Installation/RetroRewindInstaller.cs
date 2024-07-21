@@ -69,7 +69,7 @@ public static class RetroRewindInstaller
         }
 
         var tempZipPath = Path.Combine(loadPath, "Temp", "RetroRewind.zip");
-        await DownloadAndExtractRetroRewind(Endpoints.RRZipUrl, tempZipPath, loadPath);
+        await DownloadAndExtractRetroRewind(tempZipPath, loadPath);
     }
 
     private static async Task HandleReinstall(string loadPath)
@@ -83,14 +83,15 @@ public static class RetroRewindInstaller
         DeleteExistingRetroRewind(loadPath);
     }
     
-    private static async Task DownloadAndExtractRetroRewind(string retroRewindURL, string tempZipPath, string loadPath)
+    private static async Task DownloadAndExtractRetroRewind( string tempZipPath, string loadPath)
     {
         var progressWindow = new ProgressWindow();
+        progressWindow.ChangeExtraText("Downloading Retro Rewind...");
         progressWindow.Show();
             
         try
         {
-            await DownloadHelper.DownloadFileWithWindow(retroRewindURL, tempZipPath, progressWindow, "Downloading Retro Rewind...");
+            await DownloadHelper.DownloadFileWithWindow(Endpoints.RRZipUrl, tempZipPath, progressWindow);
             var extractionPath = Path.Combine(loadPath, RiivolutionFolderName);
             ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
         }

@@ -11,7 +11,6 @@ namespace CT_MKWII_WPF.Services.RetroRewind;
 
 public class RRLiveRooms : RepeatedTaskManager
 {
-    private const string GroupUrl = "http://zplwii.xyz/api/groups";
     public List<Room> CurrentRooms { get; private set; } = new();
     public int PlayerCount => CurrentRooms.Sum(room => room.PlayerCount);
     public int RoomCount => CurrentRooms.Count;
@@ -25,7 +24,7 @@ public class RRLiveRooms : RepeatedTaskManager
 
     protected override async Task ExecuteTaskAsync()
     {
-        var response = await HttpClientHelper.GetAsync<List<Room>>(GroupUrl);
+        var response = await HttpClientHelper.GetAsync<List<Room>>(Endpoints.RRGroupsUrl);
         //var response = HttpClientHelper.MockResult<List<Room>>(Mocker.GroupApiResponse);
             
         // It is not important enough to bore the user with an error message or something.

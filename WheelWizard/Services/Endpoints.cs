@@ -6,8 +6,9 @@ public static class Endpoints
     public const string RRUrl = "http://update.zplwii.xyz:8000/";
     public const string RRZipUrl = RRUrl + "RetroRewind/zip/RetroRewind.zip";
     public const string RRVersionUrl = RRUrl + "RetroRewind/RetroRewindVersion.txt";
+    public const string RRGroupsUrl = "http://zplwii.xyz/api/groups";
     
-    // WheelWizard
+    // Wheel Wizard
     public const string WhWzStatusUrl = "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/status.txt";
     public const string WhWzVersionUrl = "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/version.txt";
     public const string WhWzLatestReleasedUrl = "https://github.com/patchzyy/WheelWizard/releases/latest/download/WheelWizard.exe";
@@ -17,5 +18,5 @@ public static class Endpoints
     // Other
     public const string MiiStudioUrl = "https://qrcode.rc24.xyz/cgi-bin/studio.cgi";
     public const string MiiImageUrl = "https://studio.mii.nintendo.com/miis/image.png";
-
+    public const string MarioCubeUrl = "https://repo.mariocube.com/WADs/Other/Mii%20Channel%20Symbols%20-%20HACS.wad";
 }

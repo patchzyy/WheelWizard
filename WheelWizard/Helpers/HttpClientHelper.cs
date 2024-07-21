@@ -47,6 +47,7 @@ public static class HttpClientHelper
         try
         {
             var response = await HttpClient.GetAsync(url);
+      
             result = new HttpClientResult<T>()
             {
                 StatusCode = (int)response.StatusCode,

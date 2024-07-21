@@ -8,14 +8,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CT_MKWII_WPF.Helpers;
 using CT_MKWII_WPF.Services.Configuration;
-using CT_MKWII_WPF.Services.Networking;
 using CT_MKWII_WPF.Views;
 
 namespace CT_MKWII_WPF.Services.Installation;
 
 public static class RRUpdater
 {
-    private static readonly HttpClient HttpClient = new();
     public static async Task<bool> IsRRUpToDate(string currentVersion)
     {
         string latestVersion = await GetLatestVersionString();
@@ -146,10 +144,10 @@ public static class RRUpdater
         var tempZipPath = Path.GetTempFileName();
         try
         {
-            var extratext = $"Update {currentUpdateIndex}/{totalUpdates}: {update.Description}";
-            await DownloadHelper.DownloadFileWithWindow(update.Url, tempZipPath, window, extratext);
+            window.ChangeExtraText($"Update {currentUpdateIndex}/{totalUpdates}: {update.Description}");
+            await DownloadHelper.DownloadFileWithWindow(update.Url, tempZipPath, window);
             
-            window.UpdateProgress(100, "Extracting update...");
+            window.UpdateProgress(100, "Extracting update...","Extracting update...");
             var extractionPath = Path.Combine(loadPath, "Riivolution");
             Directory.CreateDirectory(extractionPath);
             ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);

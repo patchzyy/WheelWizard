@@ -10,14 +10,15 @@ public partial class ProgressWindow : Window
         InitializeComponent();
     }
 
-    public void UpdateProgress(int progress, string status, string extratext = "", string bottomText = "")
+    public void UpdateProgress(int progress, string status, string bottomText)
     {
         ProgressBar.Value = progress;
         StatusLabel.Text = status;
-        ExtraTextLabel.Text = extratext;
         BottomTextLabel.Text = bottomText;
     }
-
+    
+    public void ChangeExtraText(string text) =>  ExtraTextLabel.Text = text;
+    
     private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         DragMove();

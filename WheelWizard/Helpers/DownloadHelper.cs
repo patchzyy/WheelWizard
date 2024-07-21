@@ -10,10 +10,8 @@ namespace CT_MKWII_WPF.Helpers;
 
 public static class DownloadHelper
 {
-    public static async Task DownloadFileWithWindow(string url, string filePath, ProgressWindow progressWindow,
-        string bottomWindowText = "")
+    public static async Task DownloadFileWithWindow(string url, string filePath, ProgressWindow progressWindow)
     {
-        if (filePath == null) throw new ArgumentNullException(nameof(filePath));
         var directory = Path.GetDirectoryName(filePath)!;
         if (!Directory.Exists(directory))
             Directory.CreateDirectory(directory);
@@ -53,8 +51,7 @@ public static class DownloadHelper
 
                 progressWindow.Dispatcher.Invoke(() =>
                 {
-                    progressWindow.UpdateProgress(progress, status, bottomWindowText);
-                    progressWindow.BottomTextLabel.Text = bottomText;
+                    progressWindow.UpdateProgress(progress, status, bottomText);
                 });
             }
         }
