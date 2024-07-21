@@ -48,10 +48,7 @@ public static class AutoUpdater
         }
         var newFilePath = Path.Combine(currentFolder, "CT-MKWII-WPF_new.exe");
 
-        var progressWindow = new ProgressWindow();
-        progressWindow.Show();
-
-        await DownloadHelper.DownloadFileWithWindow(Endpoints.WhWzLatestReleasedUrl, newFilePath, progressWindow);
+        await DownloadHelper.DownloadToLocation(Endpoints.WhWzLatestReleasedUrl, newFilePath);
 
         // we need to wait a bit before running the batch file to ensure the file is saved on disk
         await Task.Delay(200);

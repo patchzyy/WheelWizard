@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Media.Imaging;
-using CT_MKWII_WPF.Services.Other;
+using CT_MKWII_WPF.Services.WiiManagement;
 
 namespace CT_MKWII_WPF.Models.RRInfo;
 

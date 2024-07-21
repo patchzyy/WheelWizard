@@ -145,7 +145,7 @@ public static class RRUpdater
         try
         {
             window.ChangeExtraText($"Update {currentUpdateIndex}/{totalUpdates}: {update.Description}");
-            await DownloadHelper.DownloadFileWithWindow(update.Url, tempZipPath, window);
+            await DownloadHelper.DownloadToLocation(update.Url, tempZipPath, window);
             
             window.UpdateProgress(100, "Extracting update...","Extracting update...");
             var extractionPath = Path.Combine(loadPath, "Riivolution");

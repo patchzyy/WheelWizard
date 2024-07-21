@@ -10,7 +10,16 @@ namespace CT_MKWII_WPF.Helpers;
 
 public static class DownloadHelper
 {
-    public static async Task DownloadFileWithWindow(string url, string filePath, ProgressWindow progressWindow)
+    // Not providing a progress window will just use a default one
+    public static async Task DownloadToLocation(string url, string filePath)
+    {
+        var progressWindow = new ProgressWindow();
+        progressWindow.Show();
+        await DownloadToLocation(url, filePath, progressWindow);
+        progressWindow.Close();
+    }
+    
+    public static async Task DownloadToLocation(string url, string filePath, ProgressWindow progressWindow)
     {
         var directory = Path.GetDirectoryName(filePath)!;
         if (!Directory.Exists(directory))

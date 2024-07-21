@@ -91,7 +91,8 @@ public static class RetroRewindInstaller
             
         try
         {
-            await DownloadHelper.DownloadFileWithWindow(Endpoints.RRZipUrl, tempZipPath, progressWindow);
+            await DownloadHelper.DownloadToLocation(Endpoints.RRZipUrl, tempZipPath, progressWindow);
+            progressWindow.ChangeExtraText("Extracting files...");
             var extractionPath = Path.Combine(loadPath, RiivolutionFolderName);
             ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
         }

@@ -7,7 +7,7 @@ using CT_MKWII_WPF.Helpers;
 using CT_MKWII_WPF.Models.RRInfo;
 using Newtonsoft.Json;
 
-namespace CT_MKWII_WPF.Services.Other;
+namespace CT_MKWII_WPF.Services.WiiManagement;
 
 public static class MiiImageManager
 {
