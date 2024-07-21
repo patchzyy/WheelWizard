@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using CT_MKWII_WPF.Helpers;
 
 namespace CT_MKWII_WPF.Services.WheelWizard;
 

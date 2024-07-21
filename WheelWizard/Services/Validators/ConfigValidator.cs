@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using CT_MKWII_WPF.Models;
-using CT_MKWII_WPF.Utilities.Configuration;
+using CT_MKWII_WPF.Services.Configuration;
 using Newtonsoft.Json;
 
 namespace CT_MKWII_WPF.Services.Validators

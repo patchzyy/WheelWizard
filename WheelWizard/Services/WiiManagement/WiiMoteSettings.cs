@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using CT_MKWII_WPF.Utilities.Configuration;
+using CT_MKWII_WPF.Services.Configuration;
 
 namespace CT_MKWII_WPF.Services.WiiManagement;
 

@@ -1,6 +1,6 @@
 using System;
 
-namespace CT_MKWII_WPF.Utilities;
+namespace CT_MKWII_WPF.Helpers;
 
 public static class Humanizer
 {

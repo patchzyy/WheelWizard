@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 using CT_MKWII_WPF.Models;
-using CT_MKWII_WPF.Utilities.Configuration;
+using CT_MKWII_WPF.Services.Configuration;
 
 namespace CT_MKWII_WPF.Services.Installation;
 

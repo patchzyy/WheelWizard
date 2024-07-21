@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
-using CT_MKWII_WPF.Utilities.Configuration;
+using CT_MKWII_WPF.Services.Configuration;
 
 namespace CT_MKWII_WPF.Services.WiiManagement.DolphinHelpers;
 

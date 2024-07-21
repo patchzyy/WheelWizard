@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Windows;
 
-namespace CT_MKWII_WPF.Utilities.Configuration;
+namespace CT_MKWII_WPF.Services.Configuration;
 
 public static class PathManager
 {

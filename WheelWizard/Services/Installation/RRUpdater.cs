@@ -6,9 +6,10 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Services.Configuration;
+using CT_MKWII_WPF.Services.Downloads;
 using CT_MKWII_WPF.Services.Networking;
-using CT_MKWII_WPF.Utilities.Configuration;
-using CT_MKWII_WPF.Utilities.Downloads;
 using CT_MKWII_WPF.Views;
 
 namespace CT_MKWII_WPF.Services.Installation;

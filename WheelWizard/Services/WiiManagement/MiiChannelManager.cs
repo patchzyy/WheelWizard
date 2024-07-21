@@ -2,9 +2,9 @@
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using CT_MKWII_WPF.Services.Configuration;
+using CT_MKWII_WPF.Services.Downloads;
 using CT_MKWII_WPF.Services.WiiManagement.DolphinHelpers;
-using CT_MKWII_WPF.Utilities.Configuration;
-using CT_MKWII_WPF.Utilities.Downloads;
 using CT_MKWII_WPF.Views;
 
 namespace CT_MKWII_WPF.Services.WiiManagement;

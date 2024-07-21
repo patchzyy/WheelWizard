@@ -33,6 +33,8 @@ public sealed partial class RoomsPage : Page, INotifyPropertyChanged
         RRLiveRooms.SubscribeToRoomsUpdated(UpdateRoomsList);
         RoomsView.SortingFunctions.Add("Players", PlayerCountComparable);
         RoomsView.SortingFunctions.Add("TimeOnline", TimeOnlineComparable);
+
+        this.Unloaded += RoomsPage_Unloaded;
     }
 
     private static int TimeOnlineComparable(object? x, object? y)
@@ -77,9 +79,9 @@ public sealed partial class RoomsPage : Page, INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
     
-    //protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
-    //{
-    //    Console.WriteLine("LEAVING TEST");
-    //    RRLiveRooms.UnsubscribeToRoomsUpdated(UpdateRoomsList);
-    //}
+    private void RoomsPage_Unloaded(object sender, RoutedEventArgs e)
+    {
+        Console.WriteLine("LEAVING TEST");
+        RRLiveRooms.UnsubscribeToRoomsUpdated(UpdateRoomsList);
+    }
 }

@@ -4,7 +4,7 @@ using System.Windows;
 using CT_MKWII_WPF.Models;
 using Newtonsoft.Json;
 
-namespace CT_MKWII_WPF.Utilities.Configuration;
+namespace CT_MKWII_WPF.Services.Configuration;
 
 public static class ConfigManager
 {

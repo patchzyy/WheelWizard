@@ -1,4 +1,4 @@
-namespace CT_MKWII_WPF.Services;
+namespace CT_MKWII_WPF.Utilities;
 
 public class Mocker
 {

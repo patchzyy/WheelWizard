@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using CT_MKWII_WPF.Models.GameData;
-using CT_MKWII_WPF.Utilities.Configuration;
+using CT_MKWII_WPF.Services.Configuration;
 using CT_MKWII_WPF.Utilities.Generators;
 
 namespace CT_MKWII_WPF.Services.WiiManagement.GameData;

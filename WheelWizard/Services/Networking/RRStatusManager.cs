@@ -2,7 +2,6 @@
 using CT_MKWII_WPF.Models.Enums;
 using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Validators;
-using CT_MKWII_WPF.Utilities.Configuration;
 
 namespace CT_MKWII_WPF.Services.Networking;
 
