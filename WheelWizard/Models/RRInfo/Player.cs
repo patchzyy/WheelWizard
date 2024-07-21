@@ -37,7 +37,6 @@ public class Player : INotifyPropertyChanged
     {
         get
         {
-            Console.WriteLine("CHECK");
             if (_miiImage != null || _requestingImage) return _miiImage;
             
             _requestingImage = true;

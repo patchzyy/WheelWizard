@@ -11,7 +11,6 @@ namespace CT_MKWII_WPF.Services.Other;
 
 public static class MiiImageManager
 {
-    private const string MiiStudioUrl = "https://qrcode.rc24.xyz/cgi-bin/studio.cgi";
     private const int MaxCachedImages = 126;
     private static readonly Dictionary<string, BitmapImage> Images = new();
     private static readonly Queue<string> ImageOrder = new();
@@ -46,7 +45,7 @@ public static class MiiImageManager
         using var formData = new MultipartFormDataContent();
         formData.Add(new ByteArrayContent(Convert.FromBase64String(base64MiiData)), "data", "mii.dat");
         formData.Add(new StringContent("wii"), "platform");
-        var response = await HttpClientHelper.PostAsync<MiiResponse>(MiiStudioUrl, formData);
+        var response = await HttpClientHelper.PostAsync<MiiResponse>(Endpoints.MiiStudioUrl, formData);
      
         if (!response.Succeeded || response.Content is null) return new BitmapImage();
         
@@ -56,8 +55,6 @@ public static class MiiImageManager
 
     private static string GetMiiImageUrlFromResponse(MiiResponse response)
     {
-        const string baseUrl = "https://studio.mii.nintendo.com/miis/image.png";
-
         var queryParams = new List<string>
         {
             $"data={response.MiiData}",
@@ -72,7 +69,7 @@ public static class MiiImageManager
             "instanceRotationMode=model"
         };
         var queryString = string.Join("&", queryParams);
-        return $"{baseUrl}?{queryString}";
+        return $"{Endpoints.MiiImageUrl}?{queryString}";
     }
 
     private class MiiResponse

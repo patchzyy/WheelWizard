@@ -24,8 +24,7 @@ public static class RRUpdater
     
     private static async Task<string> GetLatestVersionString()
     {
-        var fullTextURLText = $"{RRNetwork.Ip}/RetroRewind/RetroRewindVersion.txt";
-        var response = await HttpClientHelper.GetAsync<String>(fullTextURLText);
+        var response = await HttpClientHelper.GetAsync<string>(Endpoints.RRVersionUrl);
         if (!response.Succeeded || response.Content == null)
         {
             MessageBox.Show($"Failed to check for updates");
@@ -92,10 +91,10 @@ public static class RRUpdater
     private static async Task<List<(string Version, string Url, string Path, string Description)>> GetAllVersionData()
     {
         var versions = new List<(string Version, string Url, string Path, string Description)>();
-        var versionUrl = RRNetwork.Ip + "/RetroRewind/RetroRewindVersion.txt";
+     
 
         using var httpClient = new HttpClient();
-        var allVersionsText = await httpClient.GetStringAsync(versionUrl);
+        var allVersionsText = await httpClient.GetStringAsync(Endpoints.RRVersionUrl);
         var lines = allVersionsText.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
         foreach (var line in lines)

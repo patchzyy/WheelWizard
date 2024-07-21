@@ -16,10 +16,8 @@ public static class DownloadHelper
         if (filePath == null) throw new ArgumentNullException(nameof(filePath));
         var directory = Path.GetDirectoryName(filePath)!;
         if (!Directory.Exists(directory))
-        {
             Directory.CreateDirectory(directory);
-        }
-
+        
         try
         {
             using var client = new HttpClient();

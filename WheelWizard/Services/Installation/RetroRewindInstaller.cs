@@ -61,7 +61,6 @@ public static class RetroRewindInstaller
 
     public static async Task InstallRetroRewind()
     {
-        var retroRewindURL = $"{RRNetwork.Ip}/RetroRewind/zip/RetroRewind.zip";
         var loadPath = PathManager.GetLoadPathLocation();
 
         if (IsRetroRewindInstalled())
@@ -70,7 +69,7 @@ public static class RetroRewindInstaller
         }
 
         var tempZipPath = Path.Combine(loadPath, "Temp", "RetroRewind.zip");
-        await DownloadAndExtractRetroRewind(retroRewindURL, tempZipPath, loadPath);
+        await DownloadAndExtractRetroRewind(Endpoints.RRZipUrl, tempZipPath, loadPath);
     }
 
     private static async Task HandleReinstall(string loadPath)
@@ -130,13 +129,12 @@ public static class RetroRewindInstaller
 
     public static async Task<bool> IsServerEnabled()
     {
-        var serverUrl = RRNetwork.Ip;
         using (var httpClient = new HttpClient())
         {
             try
             {
                 httpClient.Timeout = TimeSpan.FromSeconds(5);
-                var response = await httpClient.GetAsync(serverUrl);
+                var response = await httpClient.GetAsync(Endpoints.RRUrl);
 
                 return response.IsSuccessStatusCode;
             }

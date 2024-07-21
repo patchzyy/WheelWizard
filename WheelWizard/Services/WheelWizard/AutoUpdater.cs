@@ -11,12 +11,10 @@ namespace CT_MKWII_WPF.Services.WheelWizard;
 public static class AutoUpdater
 {
     public const string CurrentVersion = "1.1.2";
-    private const string VersionFileUrl = "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/version.txt";
-    private const string ReleasesUrl = "https://github.com/patchzyy/WheelWizard/releases/latest/download/WheelWizard.exe";
-    
+
     public static async Task CheckForUpdatesAsync()
     {
-        var response = await HttpClientHelper.GetAsync<string>(VersionFileUrl);
+        var response = await HttpClientHelper.GetAsync<string>(Endpoints.WhWzVersionUrl);
         if (!response.Succeeded || response.Content is null)
         {
             if (response.StatusCodeGroup == 4 || response.StatusCode is 503 or 504)
@@ -53,7 +51,7 @@ public static class AutoUpdater
         var progressWindow = new ProgressWindow();
         progressWindow.Show();
 
-        await DownloadHelper.DownloadFileWithWindow(ReleasesUrl, newFilePath, progressWindow);
+        await DownloadHelper.DownloadFileWithWindow(Endpoints.WhWzLatestReleasedUrl, newFilePath, progressWindow);
 
         // we need to wait a bit before running the batch file to ensure the file is saved on disk
         await Task.Delay(200);

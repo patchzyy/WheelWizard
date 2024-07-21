@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using CT_MKWII_WPF.Services;
 using CT_MKWII_WPF.Services.RetroRewind;
 using CT_MKWII_WPF.Services.WheelWizard;
 using CT_MKWII_WPF.Utilities.RepeatedTasks;
@@ -133,7 +134,7 @@ public partial class Layout : Window, IRepeatedTaskListener
     {
         System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
         {
-            FileName = "https://discord.gg/vZ7T2wJnsq",
+            FileName = Endpoints.WhWzDiscordUrl,
             UseShellExecute = true
         });
     }
@@ -142,7 +143,7 @@ public partial class Layout : Window, IRepeatedTaskListener
     {
         System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
         {
-            FileName = "https://github.com/patchzyy/WheelWizard",
+            FileName = Endpoints.WhWzGithubUrl,
             UseShellExecute = true
         });
     }

@@ -8,7 +8,6 @@ namespace CT_MKWII_WPF.Services.WheelWizard;
 
 public class LiveAlertsManager : RepeatedTaskManager
 {
-    private const string StatusUrl = "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/status.txt";
     public string StatusMessage { get; private set; } = "";
     public string StatusMessageType { get; private set; } = "";
 
@@ -38,7 +37,7 @@ public class LiveAlertsManager : RepeatedTaskManager
 
     protected override async Task ExecuteTaskAsync()
     {
-        var response = await HttpClientHelper.GetAsync<string>(StatusUrl);
+        var response = await HttpClientHelper.GetAsync<string>(Endpoints.WhWzStatusUrl);
         if (!response.Succeeded || response.Content is null)
         {
             // We DONT want to show anything if the request failed.
