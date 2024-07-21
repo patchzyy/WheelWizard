@@ -1,3 +1,4 @@
+warning|Updater servers are DOWN! Please be patient if you can't launch the game
 info|Did you know that no word in the English language rhymes with "MONTH."
 
 The current status is the status that is inside of line 1
