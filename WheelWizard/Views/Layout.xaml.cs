@@ -3,29 +3,29 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using CT_MKWII_WPF.Services.Networking;
+using CT_MKWII_WPF.Services.RetroRewind;
 using CT_MKWII_WPF.Services.WheelWizard;
+using CT_MKWII_WPF.Utilities.RepeatedTasks;
 using CT_MKWII_WPF.Views.Components;
 using CT_MKWII_WPF.Views.Pages;
 using MahApps.Metro.IconPacks;
 
 namespace CT_MKWII_WPF.Views;
 
-public partial class Layout : Window
+public partial class Layout : Window, IRepeatedTaskListener
 {
     public Layout()
     {
         InitializeComponent();
         DataContext = this;
         NavigateToPage(new Dashboard());
-        LiveAlertsManager.Start(UpdateLiveAlert); // Temporary code
-        RRLiveRooms.Start(); // Temporary code
-        RRLiveRooms.SubscribeToRoomsUpdated(UpdatePlayerAndRoomCount); // Temporary code
-        
-        // loadplayerdata();
+        LiveAlertsManager.Start(UpdateLiveAlert);
+        RRLiveRooms.Instance.Start(); // Temporary code, should be moved to a more appropriate location
+        RRLiveRooms.Instance.Subscribe(this);
+        // LoadPlayerData();
     }
 
-    // public static void loadplayerdata()
+    // private static void LoadPlayerData()
     // {
     //     var data = new GameDataLoader();
     //     data.LoadGameData();
@@ -44,10 +44,16 @@ public partial class Layout : Window
         }
     }
     
-    private void UpdatePlayerAndRoomCount()
+    public void OnUpdate(RepeatedTaskManager sender)
     {
-        var playerCount = RRLiveRooms.PlayerCount;
-        var roomCount = RRLiveRooms.RoomCount;
+        if (sender is RRLiveRooms liveRooms)
+            UpdatePlayerAndRoomCount(liveRooms);
+    }
+    
+    private void UpdatePlayerAndRoomCount(RRLiveRooms sender)
+    {
+        var playerCount = sender.PlayerCount;
+        var roomCount = sender.RoomCount;
         PlayerCountBox.Text = playerCount.ToString();
         PlayerCountBox.TipText = playerCount switch
         {
@@ -135,8 +141,6 @@ public partial class Layout : Window
     protected override void OnClosed(EventArgs e)
     {
         base.OnClosed(e);
-        LiveAlertsManager.Stop(); // Temporary code
-        RRLiveRooms.Stop(); // Temporary code
-        RRLiveRooms.UnsubscribeToRoomsUpdated(UpdatePlayerAndRoomCount); // Temporary code
+        RepeatedTaskManager.CancelAllTasks();
     }
 }

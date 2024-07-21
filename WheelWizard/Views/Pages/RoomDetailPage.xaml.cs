@@ -5,110 +5,117 @@ using System.Windows;
 using System.Windows.Controls;
 using System.ComponentModel;
 using CT_MKWII_WPF.Models.RRInfo;
-using CT_MKWII_WPF.Services.Networking;
+using CT_MKWII_WPF.Services.RetroRewind;
 using CT_MKWII_WPF.Services.WiiManagement;
-
+using CT_MKWII_WPF.Utilities.RepeatedTasks;
 using static CT_MKWII_WPF.Views.ViewUtils;
 
-namespace CT_MKWII_WPF.Views.Pages
+namespace CT_MKWII_WPF.Views.Pages;
+
+public partial class RoomDetailPage : Page, INotifyPropertyChanged, IRepeatedTaskListener
 {
-    public partial class RoomDetailPage : Page, INotifyPropertyChanged
+    private Room _room;
+    public Room Room 
     {
-        private Room _room;
-        public Room Room 
+        get => _room;
+        set
         {
-            get => _room;
-            set
-            {
-                _room = value;
-                OnPropertyChanged(nameof(Room));
-            }
+            _room = value;
+            OnPropertyChanged(nameof(Room));
         }
-        
-        private readonly ObservableCollection<Player> _playersList = new();
-        public ObservableCollection<Player> PlayersList 
+    }
+    
+    private readonly ObservableCollection<Player> _playersList = new();
+    public ObservableCollection<Player> PlayersList 
+    {
+        get => _playersList;
+        init
         {
-            get => _playersList;
-            init
-            {
-                _playersList = value;
-                OnPropertyChanged(nameof(PlayersList));
-            }
+            _playersList = value;
+            OnPropertyChanged(nameof(PlayersList));
         }
-        
-        public event PropertyChangedEventHandler? PropertyChanged;
+    }
+    
+    public event PropertyChangedEventHandler? PropertyChanged;
 
-        public RoomDetailPage(Room room)
-        {
-            InitializeComponent();
-            Room = room;
-            PlayersList = new ObservableCollection<Player>(Room.Players.Values);
-            DataContext = this;
-            
-            LoadMiiImagesAsync(); // Temporary code
-       
-            RRLiveRooms.SubscribeToRoomsUpdated(RefreshDetails);
-            PlayersListView.SortingFunctions.Add("Ev", VrComparable);
-        }
+    public RoomDetailPage(Room room)
+    {
+        InitializeComponent();
+        Room = room;
+        PlayersList = new ObservableCollection<Player>(Room.Players.Values);
+        DataContext = this;
         
-        private static int VrComparable(object? x, object? y)
-        {
-            if (x is not Player xItem || y is not Player yItem) return 0;
-            return xItem.Vr.CompareTo(yItem.Vr);
-        }
+        LoadMiiImagesAsync(); // Temporary code
+   
+        RRLiveRooms.Instance.Subscribe(this);
+        PlayersListView.SortingFunctions.Add("Ev", VrComparable);
+        
+        this.Unloaded += RoomsDetailPage_Unloaded;
+    }
+    
+    private static int VrComparable(object? x, object? y)
+    {
+        if (x is not Player xItem || y is not Player yItem) return 0;
+        return xItem.Vr.CompareTo(yItem.Vr);
+    }
 
-        private void RefreshDetails()
-        {
-            var room = RRLiveRooms.CurrentRooms.Find(r => r.Id == Room.Id);
-            if (room == null) return;
-            // TODO: if the room is not found we can show that in the page something like "this room has been closed"
-            
-            Room = room;
-            PlayersList.Clear();
-            foreach (var p in room.Players.Values)
-            {
-                PlayersList.Add(p);
-            }
-        }
+    public void OnUpdate(RepeatedTaskManager sender)
+    {
+        if (sender is not RRLiveRooms liveRooms) return;
+        var room = liveRooms.CurrentRooms.Find(r => r.Id == Room.Id);
+        if (room == null) return;
+        // TODO: if the room is not found we can show that in the page something like "this room has been closed"
         
-        private void LoadMiiImagesAsync()
-        {
-            foreach (var player in PlayersList)
-                SetMiiImageAsync(player);
-        }
-        
-        private async void SetMiiImageAsync(Player player)
-        {
-            if ( player.Mii.Count == 0 ) // This is line 85
-                return;
-            
-            // TODO: should all go to a service thing that retrieves the image, as specially the try catch has to be removed from this file
-            try 
-            {
-                var miiImage = await MiiGenerator.GetMiiImageAsync(player.Mii[0].Data);
-                player.MiiImage = miiImage;
-                Application.Current.Dispatcher.Invoke(() => OnPropertyChanged(nameof(PlayersList)));
-            }
-            catch (Exception _)
-            {
-                // ignored
-            }
-        }
-        
-        private void GoBackClick(object sender, RoutedEventArgs e) => NavigateToPage(new RoomsPage());
+        Room = room;
+        PlayersList.Clear();
+        foreach (var p in room.Players.Values)
+            PlayersList.Add(p);
 
-        protected virtual void OnPropertyChanged(string propertyName)
+        LoadMiiImagesAsync();
+    }
+    
+    private void LoadMiiImagesAsync()
+    {
+        foreach (var player in PlayersList)
+            SetMiiImageAsync(player);
+    }
+    
+    private async void SetMiiImageAsync(Player player)
+    {
+        if ( player.Mii.Count == 0 ) // This is line 85
+            return;
+        
+        // TODO: should all go to a service thing that retrieves the image, as specially the try catch has to be removed from this file
+        try 
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            var miiImage = await MiiGenerator.GetMiiImageAsync(player.Mii[0].Data);
+            player.MiiImage = miiImage;
+            Application.Current.Dispatcher.Invoke(() => OnPropertyChanged(nameof(PlayersList)));
         }
+        catch (Exception _)
+        {
+            // ignored
+        }
+    }
+    
+    private void GoBackClick(object sender, RoutedEventArgs e) => NavigateToPage(new RoomsPage());
 
-        private void CopyFriendCode_OnClick(object sender, RoutedEventArgs e)
-        {
-            var selectedPlayer = PlayersListView.GetCurrentContextItem<Player>();
-            if (selectedPlayer == null) return;
-            IDataObject dataObject = new DataObject();
-            dataObject.SetData(DataFormats.Text, selectedPlayer.Fc);
-            Clipboard.SetDataObject(dataObject);
-        }
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    private void CopyFriendCode_OnClick(object sender, RoutedEventArgs e)
+    {
+        var selectedPlayer = PlayersListView.GetCurrentContextItem<Player>();
+        if (selectedPlayer == null) return;
+        IDataObject dataObject = new DataObject();
+        dataObject.SetData(DataFormats.Text, selectedPlayer.Fc);
+        Clipboard.SetDataObject(dataObject);
+    }
+    
+    private void RoomsDetailPage_Unloaded(object sender, RoutedEventArgs e)
+    {
+        RRLiveRooms.Instance.Unsubscribe(this);
     }
 }

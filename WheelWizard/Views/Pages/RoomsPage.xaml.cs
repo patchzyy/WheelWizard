@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Navigation;
 using CT_MKWII_WPF.Models.RRInfo;
-using CT_MKWII_WPF.Services.Networking;
+using CT_MKWII_WPF.Services.RetroRewind;
+using CT_MKWII_WPF.Utilities.RepeatedTasks;
 
 namespace CT_MKWII_WPF.Views.Pages;
 
-public sealed partial class RoomsPage : Page, INotifyPropertyChanged
+public sealed partial class RoomsPage : Page, INotifyPropertyChanged, IRepeatedTaskListener
 {
     private readonly ObservableCollection<Room> _rooms = new();
     public ObservableCollection<Room> Rooms
@@ -27,10 +26,11 @@ public sealed partial class RoomsPage : Page, INotifyPropertyChanged
     {
         InitializeComponent();
         DataContext = this;
-        EmptyRoomsView.Visibility = RRLiveRooms.RoomCount == 0 ? Visibility.Visible : Visibility.Collapsed;
-        RoomsView.Visibility = RRLiveRooms.RoomCount == 0 ? Visibility.Collapsed : Visibility.Visible;
-        Rooms = new ObservableCollection<Room>(RRLiveRooms.CurrentRooms);
-        RRLiveRooms.SubscribeToRoomsUpdated(UpdateRoomsList);
+        EmptyRoomsView.Visibility = RRLiveRooms.Instance.RoomCount == 0 ? Visibility.Visible : Visibility.Collapsed;
+        RoomsView.Visibility = RRLiveRooms.Instance.RoomCount == 0 ? Visibility.Collapsed : Visibility.Visible;
+        Rooms = new ObservableCollection<Room>(RRLiveRooms.Instance.CurrentRooms);
+        RRLiveRooms.Instance.Subscribe(this);
+        
         RoomsView.SortingFunctions.Add("Players", PlayerCountComparable);
         RoomsView.SortingFunctions.Add("TimeOnline", TimeOnlineComparable);
 
@@ -49,21 +49,19 @@ public sealed partial class RoomsPage : Page, INotifyPropertyChanged
         return xItem.PlayerCount.CompareTo(yItem.PlayerCount);
     }
 
-    private void UpdateRoomsList()
+    public void OnUpdate(RepeatedTaskManager sender)
     {
-        Console.WriteLine("THIS SUBSCRIBTION GETS ADDED BUT NEVER REMOVED, LEAVE THIS HERE UNTIL IT IS FIXED, KIND REGARDS, WANTTOBEEME");
+        if (sender is not RRLiveRooms liveRooms) return;
+        
         Rooms.Clear();
-        var count = RRLiveRooms.RoomCount;
+        var count = liveRooms.RoomCount;
         EmptyRoomsView.Visibility = count == 0 ? Visibility.Visible : Visibility.Collapsed;
         RoomsView.Visibility = count == 0 ? Visibility.Collapsed : Visibility.Visible;
         if (count == 0) return;
         
-        foreach (var room in RRLiveRooms.CurrentRooms)
-        {
+        foreach (var room in liveRooms.CurrentRooms)
             Rooms.Add(room);
-        }
     }
-    
 
     private void Room_MouseDoubleClick(object sender, MouseButtonEventArgs e, ListViewItem clickedItem)
     {
@@ -81,7 +79,6 @@ public sealed partial class RoomsPage : Page, INotifyPropertyChanged
     
     private void RoomsPage_Unloaded(object sender, RoutedEventArgs e)
     {
-        Console.WriteLine("LEAVING TEST");
-        RRLiveRooms.UnsubscribeToRoomsUpdated(UpdateRoomsList);
+        RRLiveRooms.Instance.Unsubscribe(this);
     }
 }
