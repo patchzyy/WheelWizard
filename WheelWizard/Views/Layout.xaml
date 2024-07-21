@@ -22,7 +22,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
 
     <Border Background="{StaticResource LightBackgroundColor}"
             CornerRadius="{StaticResource WindowCornerRadius}">
-        <Grid>
+        <Grid x:Name="CompleteGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="192" />
                 <ColumnDefinition />

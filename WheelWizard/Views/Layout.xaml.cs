@@ -153,4 +153,7 @@ public partial class Layout : Window, IRepeatedTaskListener
         base.OnClosed(e);
         RepeatedTaskManager.CancelAllTasks();
     }
+    
+    public void DisableEverything() => CompleteGrid.IsEnabled = false;
+    public void EnableEverything() => CompleteGrid.IsEnabled = true;
 }

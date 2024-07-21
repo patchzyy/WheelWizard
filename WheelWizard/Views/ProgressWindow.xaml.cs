@@ -1,13 +1,19 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
 
 namespace CT_MKWII_WPF.Views;
 
 public partial class ProgressWindow : Window
 {
-    public ProgressWindow()
+    private readonly bool _allowLayoutInteraction;
+    
+    public ProgressWindow(bool allowLayoutInteraction = false)
     {
+        _allowLayoutInteraction = allowLayoutInteraction;
         InitializeComponent();
+        
+        Loaded += ProgressWindow_Loaded;
     }
 
     public void UpdateProgress(int progress, string status, string bottomText)
@@ -19,8 +25,17 @@ public partial class ProgressWindow : Window
     
     public void ChangeExtraText(string text) =>  ExtraTextLabel.Text = text;
     
-    private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => DragMove();
+    
+    private void ProgressWindow_Loaded(object sender, RoutedEventArgs e)
     {
-        DragMove();
+        if (!_allowLayoutInteraction)
+            ViewUtils.GetLayout().DisableEverything();
+    }
+    
+    protected override void OnClosed(EventArgs e)
+    {
+        ViewUtils.GetLayout().EnableEverything();
+        base.OnClosed(e);
     }
 }

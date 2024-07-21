@@ -4,8 +4,9 @@ using System.Threading.Tasks;
 using CT_MKWII_WPF.Models.Enums;
 using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Launcher;
-using CT_MKWII_WPF.Services.Networking;
+using CT_MKWII_WPF.Services.RetroRewind;
 using CT_MKWII_WPF.Services.Validators;
+using CT_MKWII_WPF.Services.WheelWizard;
 using CT_MKWII_WPF.Services.WiiManagement;
 using CT_MKWII_WPF.Services.WiiManagement.DolphinHelpers;
 using static CT_MKWII_WPF.Views.ViewUtils;
@@ -23,32 +24,32 @@ public partial class Dashboard
 
     private async void PlayButton_Click(object sender, RoutedEventArgs e)
     {
-        ActionButtonStatus status = await RRStatusManager.GetCurrentStatus();
+        WheelWizardStatus status = await StatusManager.GetCurrentStatus();
         switch (status)
         {
-            case ActionButtonStatus.NoServer:
+            case WheelWizardStatus.NoServer:
                 NavigateToPage(new SettingsPage());
                 break;
-            case ActionButtonStatus.NoDolphin:
+            case WheelWizardStatus.NoDolphin:
                 NavigateToPage(new SettingsPage());
                 break;
-            case ActionButtonStatus.ConfigNotFinished:
+            case WheelWizardStatus.ConfigNotFinished:
                 NavigateToPage(new SettingsPage());
                 break;
-            case ActionButtonStatus.NoRR:
+            case WheelWizardStatus.NoRR:
                 SetButtonState("Installing...", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download,
                     false);
                 DisableSidebarButtons();
                 await RetroRewindInstaller.InstallRetroRewind();
                 EnableSidebarButtons();
                 break;
-            case ActionButtonStatus.OutOfDate:
+            case WheelWizardStatus.OutOfDate:
                 SetButtonState("Updating...", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Update, false);
                 DisableSidebarButtons();
                 await RRUpdater.UpdateRR();
                 EnableSidebarButtons();
                 break;
-            case ActionButtonStatus.UpToDate:
+            case WheelWizardStatus.UpToDate:
                 RetroRewindLauncher.PlayRetroRewind((bool)OnlineTTCheckbox.IsChecked!);
                 break;
         }
@@ -59,34 +60,34 @@ public partial class Dashboard
 
     private async void UpdateActionButton()
     {
-        ActionButtonStatus status = await RRStatusManager.GetCurrentStatus();
+        WheelWizardStatus status = await StatusManager.GetCurrentStatus();
         switch (status)
         {
-            case ActionButtonStatus.NoServer:
+            case WheelWizardStatus.NoServer:
                 SetButtonState("No Server", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.ServerNetworkOff);
                 break;
-            case ActionButtonStatus.NoDolphin:
+            case WheelWizardStatus.NoDolphin:
                 SetButtonState("Settings", Button.ButtonsVariantType.Secondary, PackIconFontAwesomeKind.FilePenSolid);
                 break;
-            case ActionButtonStatus.ConfigNotFinished:
+            case WheelWizardStatus.ConfigNotFinished:
                 SetButtonState("Config Not Finished", Button.ButtonsVariantType.Secondary,
                     PackIconFontAwesomeKind.FilePenSolid);
                 break;
-            case ActionButtonStatus.NoRR:
+            case WheelWizardStatus.NoRR:
                 SetButtonState("Install", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download);
                 break;
-            case ActionButtonStatus.NoRRActive:
+            case WheelWizardStatus.NoRRActive:
                 //this is here for future use,
                 //right now there is no de-activation, but if we want multiple mods this might be handy
                 SetButtonState("Activated", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Power);
                 break;
-            case ActionButtonStatus.RRNotReady:
+            case WheelWizardStatus.RRNotReady:
                 SetButtonState("Activate", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Power);
                 break;
-            case ActionButtonStatus.OutOfDate:
+            case WheelWizardStatus.OutOfDate:
                 SetButtonState("Update", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download);
                 break;
-            case ActionButtonStatus.UpToDate:
+            case WheelWizardStatus.UpToDate:
                 SetButtonState("Play", Button.ButtonsVariantType.Primary, PackIconFontAwesomeKind.PlaySolid);
                 break;
         }

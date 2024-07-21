@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using CT_MKWII_WPF.Services;
 using CT_MKWII_WPF.Services.WheelWizard;
 
 namespace CT_MKWII_WPF

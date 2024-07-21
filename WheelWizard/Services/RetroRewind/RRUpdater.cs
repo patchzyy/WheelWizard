@@ -10,7 +10,7 @@ using CT_MKWII_WPF.Helpers;
 using CT_MKWII_WPF.Services.Configuration;
 using CT_MKWII_WPF.Views;
 
-namespace CT_MKWII_WPF.Services.Installation;
+namespace CT_MKWII_WPF.Services.RetroRewind;
 
 public static class RRUpdater
 {

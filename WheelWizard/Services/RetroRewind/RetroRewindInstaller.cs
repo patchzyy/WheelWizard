@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using CT_MKWII_WPF.Helpers;
 using CT_MKWII_WPF.Services.Configuration;
-using CT_MKWII_WPF.Services.Networking;
 using CT_MKWII_WPF.Views;
 
-namespace CT_MKWII_WPF.Services.Installation;
+namespace CT_MKWII_WPF.Services.RetroRewind;
 
 public static class RetroRewindInstaller
 {
@@ -127,23 +126,5 @@ public static class RetroRewindInstaller
         var retroRewindPath = Path.Combine(loadPath, RiivolutionFolderName, RetroRewindFolderName);
         if (Directory.Exists(retroRewindPath))
             Directory.Delete(retroRewindPath, true);
-    }
-
-    public static async Task<bool> IsServerEnabled()
-    {
-        using (var httpClient = new HttpClient())
-        {
-            try
-            {
-                httpClient.Timeout = TimeSpan.FromSeconds(5);
-                var response = await httpClient.GetAsync(Endpoints.RRUrl);
-
-                return response.IsSuccessStatusCode;
-            }
-            catch
-            {
-                return false;
-            }
-        }
     }
 }

@@ -36,8 +36,7 @@
                     Background="{StaticResource BackgroundColorV2}">
                 <StackPanel Margin="{StaticResource EdgeGap}">
                     <TextBlock Style="{StaticResource BodyText}" x:Name="StatusLabel"
-                               Text="Downloading... Please do NOT use the application"
-                               TextWrapping="Wrap" />
+                               Text="Downloading..." />
                     <TextBlock Style="{StaticResource TinyText}" x:Name="ExtraTextLabel"
                                TextWrapping="Wrap" Margin="0,10,0,0" />
                     <ProgressBar x:Name="ProgressBar"
