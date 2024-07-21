@@ -5,9 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.ComponentModel;
 using CT_MKWII_WPF.Models.RRInfo;
-using CT_MKWII_WPF.Services.Other;
 using CT_MKWII_WPF.Services.RetroRewind;
-using CT_MKWII_WPF.Services.WiiManagement;
 using CT_MKWII_WPF.Utilities.RepeatedTasks;
 using static CT_MKWII_WPF.Views.ViewUtils;
 

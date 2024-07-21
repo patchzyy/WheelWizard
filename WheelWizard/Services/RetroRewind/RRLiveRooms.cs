@@ -19,15 +19,14 @@ public class RRLiveRooms : RepeatedTaskManager
     private static RRLiveRooms? _instance;
     public static RRLiveRooms Instance => _instance ??= new RRLiveRooms();
 
-    private RRLiveRooms() : base(10)
+    private RRLiveRooms() : base(40)
     {
     }
 
     protected override async Task ExecuteTaskAsync()
     {
-        Console.WriteLine("reset rooms");
-        //var response = await HttpClientHelper.GetAsync<List<Room>>(GroupUrl);
-        var response = HttpClientHelper.MockResult<List<Room>>(Mocker.GroupApiResponse);
+        var response = await HttpClientHelper.GetAsync<List<Room>>(GroupUrl);
+        //var response = HttpClientHelper.MockResult<List<Room>>(Mocker.GroupApiResponse);
             
         // It is not important enough to bore the user with an error message or something.
         // they are not hindered if there is an error, they just dont see the rooms. that's it.
