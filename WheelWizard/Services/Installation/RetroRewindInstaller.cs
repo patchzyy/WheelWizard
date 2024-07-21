@@ -4,8 +4,8 @@ using System.IO.Compression;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
+using CT_MKWII_WPF.Helpers;
 using CT_MKWII_WPF.Services.Configuration;
-using CT_MKWII_WPF.Services.Downloads;
 using CT_MKWII_WPF.Services.Networking;
 using CT_MKWII_WPF.Views;
 
@@ -91,7 +91,7 @@ public static class RetroRewindInstaller
             
         try
         {
-            await DownloadUtils.DownloadFileWithWindow(retroRewindURL, tempZipPath, progressWindow, "Downloading Retro Rewind...");
+            await DownloadHelper.DownloadFileWithWindow(retroRewindURL, tempZipPath, progressWindow, "Downloading Retro Rewind...");
             var extractionPath = Path.Combine(loadPath, RiivolutionFolderName);
             ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
         }

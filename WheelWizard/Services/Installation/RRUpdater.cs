@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CT_MKWII_WPF.Helpers;
 using CT_MKWII_WPF.Services.Configuration;
-using CT_MKWII_WPF.Services.Downloads;
 using CT_MKWII_WPF.Services.Networking;
 using CT_MKWII_WPF.Views;
 
@@ -149,7 +148,7 @@ public static class RRUpdater
         try
         {
             var extratext = $"Update {currentUpdateIndex}/{totalUpdates}: {update.Description}";
-            await DownloadUtils.DownloadFileWithWindow(update.Url, tempZipPath, window, extratext);
+            await DownloadHelper.DownloadFileWithWindow(update.Url, tempZipPath, window, extratext);
             
             window.UpdateProgress(100, "Extracting update...");
             var extractionPath = Path.Combine(loadPath, "Riivolution");

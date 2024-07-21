@@ -2,8 +2,8 @@
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using CT_MKWII_WPF.Helpers;
 using CT_MKWII_WPF.Services.Configuration;
-using CT_MKWII_WPF.Services.Downloads;
 using CT_MKWII_WPF.Services.WiiManagement.DolphinHelpers;
 using CT_MKWII_WPF.Views;
 
@@ -30,7 +30,7 @@ public static class MiiChannelManager
     {
         var progressWindow = new ProgressWindow();
         progressWindow.Show();
-        await DownloadUtils.DownloadFileWithWindow(
+        await DownloadHelper.DownloadFileWithWindow(
             "https://repo.mariocube.com/WADs/Other/Mii%20Channel%20Symbols%20-%20HACS.wad", GetSavedChannelLocation(),
             progressWindow);
         progressWindow.Close();

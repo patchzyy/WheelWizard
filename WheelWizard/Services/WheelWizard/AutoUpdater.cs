@@ -4,7 +4,6 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Services.Downloads;
 using CT_MKWII_WPF.Views;
 
 namespace CT_MKWII_WPF.Services.WheelWizard;
@@ -54,7 +53,7 @@ public static class AutoUpdater
         var progressWindow = new ProgressWindow();
         progressWindow.Show();
 
-        await DownloadUtils.DownloadFileWithWindow(ReleasesUrl, newFilePath, progressWindow);
+        await DownloadHelper.DownloadFileWithWindow(ReleasesUrl, newFilePath, progressWindow);
 
         // we need to wait a bit before running the batch file to ensure the file is saved on disk
         await Task.Delay(200);
