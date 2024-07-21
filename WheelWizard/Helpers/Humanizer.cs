@@ -4,7 +4,7 @@ namespace CT_MKWII_WPF.Helpers;
 
 public static class Humanizer
 {
- 
+
     public static string HumanizeTimeSpan(TimeSpan timeSpan)
     {
         if (Math.Abs(timeSpan.TotalDays) >= 1)

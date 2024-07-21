@@ -1,16 +1,16 @@
-﻿using System;
+﻿using CT_MKWII_WPF.Models;
+using Microsoft.Win32;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text.Json;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using Microsoft.Win32;
-using System.IO.Compression;
-using System.Threading.Tasks;
 using System.Windows.Threading;
-using CT_MKWII_WPF.Models;
 
 
 namespace CT_MKWII_WPF.Views.Pages
@@ -140,7 +140,7 @@ namespace CT_MKWII_WPF.Views.Pages
 
         private async Task InstallEachFileAsMod(string[] filePaths)
         {
-            for (int i = 0; i < filePaths.Length; i++)
+            for (var i = 0; i < filePaths.Length; i++)
             {
                 UpdateProgress(i + 1, filePaths.Length);
                 var modName = Path.GetFileNameWithoutExtension(filePaths[i]);
@@ -161,12 +161,12 @@ namespace CT_MKWII_WPF.Views.Pages
 
         private async Task CombineFilesIntoSingleMod(string[] filePaths)
         {
-            string modName = Microsoft.VisualBasic.Interaction
+            var modName = Microsoft.VisualBasic.Interaction
                 .InputBox("Enter mod name:", "Mod Name", "New Mod");
             if (!IsValidName(modName)) return;
             var modDirectory = GetModDirectoryPath(modName);
             CreateDirectory(modDirectory);
-            for (int i = 0; i < filePaths.Length; i++)
+            for (var i = 0; i < filePaths.Length; i++)
             {
                 UpdateProgress(i + 1, filePaths.Length);
                 await Task.Run(() => ProcessFile(filePaths[i], modDirectory));
@@ -202,7 +202,7 @@ namespace CT_MKWII_WPF.Views.Pages
                 {
                     // Extract the zip file to the destination directory
                     //get name of the zip file
-                    string zipFileName = Path.GetFileNameWithoutExtension(file);
+                    var zipFileName = Path.GetFileNameWithoutExtension(file);
                     //now we check if there isn't already a folder with the same name as the zip file, if so... cancel
                     if (Directory.Exists(Path.Combine(destinationDirectory, zipFileName)))
                     {
@@ -308,14 +308,14 @@ namespace CT_MKWII_WPF.Views.Pages
             var selectedMod = ModsListView.GetCurrentContextItem<Mod>();
             if (selectedMod == null) return;
 
-            string newTitle = Microsoft.VisualBasic.Interaction
+            var newTitle = Microsoft.VisualBasic.Interaction
                 .InputBox("Enter new title:", "Rename Mod", selectedMod.Title);
             if (!IsValidName(newTitle)) return;
 
             try
             {
-                string oldDirectoryName = GetModDirectoryPath(selectedMod.Title);
-                string newDirectoryName = GetModDirectoryPath(newTitle);
+                var oldDirectoryName = GetModDirectoryPath(selectedMod.Title);
+                var newDirectoryName = GetModDirectoryPath(newTitle);
                 Directory.Move(oldDirectoryName, newDirectoryName);
                 selectedMod.Title = newTitle; // rename only after the directory, just in case that fails, then 
                 // this renaming also does not run anymore
@@ -339,7 +339,7 @@ namespace CT_MKWII_WPF.Views.Pages
             Mods.Remove(selectedMod);
             try
             {
-                string modDirectory = GetModDirectoryPath(selectedMod.Title);
+                var modDirectory = GetModDirectoryPath(selectedMod.Title);
                 if (Directory.Exists(modDirectory))
                     Directory.Delete(modDirectory, true);
             }
@@ -359,7 +359,7 @@ namespace CT_MKWII_WPF.Views.Pages
             var selectedMod = ModsListView.GetCurrentContextItem<Mod>();
             if (selectedMod == null) return;
 
-            string modDirectory = GetModDirectoryPath(selectedMod!.Title);
+            var modDirectory = GetModDirectoryPath(selectedMod!.Title);
             if (Directory.Exists(modDirectory))
                 System.Diagnostics.Process.Start("explorer", modDirectory);
             else

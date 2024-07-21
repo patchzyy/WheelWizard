@@ -1,8 +1,8 @@
+using CT_MKWII_WPF.Services.WiiManagement;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Media.Imaging;
-using CT_MKWII_WPF.Services.WiiManagement;
 
 namespace CT_MKWII_WPF.Models.RRInfo;
 
@@ -16,11 +16,11 @@ public class Player : INotifyPropertyChanged
     public required string Suspend { get; set; }
     public required string Fc { get; set; }
     public required string Ev { get; set; } = "--"; // private games don't have EV and EB
-    public required string Eb { get; set; }  = "--";
+    public required string Eb { get; set; } = "--";
     public required List<Mii> Mii { get; set; } = new List<Mii>();
 
     public int PlayerCount => int.Parse(Count);
-    
+
     public int Vr
     {
         get
@@ -29,7 +29,7 @@ public class Player : INotifyPropertyChanged
             return int.TryParse(Ev, out evValue) ? evValue : -1;
         }
     }
-    
+
     private bool _requestingImage;
     private BitmapImage? _miiImage;
 
@@ -38,11 +38,11 @@ public class Player : INotifyPropertyChanged
         get
         {
             if (_miiImage != null || _requestingImage) return _miiImage;
-            
+
             _requestingImage = true;
             var miiData = Mii.Count > 0 ? Mii[0].Data : null;
             if (miiData == null) return null;
-                    
+
             _miiImage = MiiImageManager.GetCachedMiiImage(miiData);
             if (_miiImage == null)
                 MiiImageManager.LoadMiiImageAsync(this);

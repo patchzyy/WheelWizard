@@ -1,12 +1,12 @@
-﻿using System;
+﻿using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Services.Configuration;
+using CT_MKWII_WPF.Views;
+using System;
 using System.IO;
 using System.IO.Compression;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
-using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Services.Configuration;
-using CT_MKWII_WPF.Views;
 
 namespace CT_MKWII_WPF.Services.RetroRewind;
 
@@ -15,11 +15,11 @@ public static class RetroRewindInstaller
     private const string VersionFileName = "version.txt";
     private const string RetroRewindFolderName = "RetroRewind6";
     private const string RiivolutionFolderName = "Riivolution";
-    
+
     private static string GetVersionFilePath() => Path.Combine(PathManager.GetLoadPathLocation(), RiivolutionFolderName, RetroRewindFolderName, VersionFileName);
     public static bool IsRetroRewindInstalled()
     {
-        string versionFilePath = GetVersionFilePath();
+        var versionFilePath = GetVersionFilePath();
         return File.Exists(versionFilePath);
     }
 
@@ -28,9 +28,7 @@ public static class RetroRewindInstaller
         var versionFilePath = GetVersionFilePath();
         return File.Exists(versionFilePath) ? File.ReadAllText(versionFilePath).Trim() : "Not Installed";
     }
-    
-    
-    
+
     public static async Task<bool> HandleNotInstalled()
     {
         var result = MessageBox.Show(
@@ -38,25 +36,22 @@ public static class RetroRewindInstaller
             "Download Retro Rewind", MessageBoxButton.YesNo);
 
         if (result == MessageBoxResult.No) return false;
-        
+
         await InstallRetroRewind();
         return true;
     }
-    
+
     public static async Task<bool> HandleOldVersion()
     {
         var result = MessageBox.Show(
             "Your version of Retro Rewind is too old to update. Would you like to reinstall Retro Rewind?",
             "Reinstall Retro Rewind", MessageBoxButton.YesNo);
-            
+
         if (result == MessageBoxResult.No) return false;
-            
+
         await InstallRetroRewind();
         return true;
     }
-    
-    
-    
 
     public static async Task InstallRetroRewind()
     {
@@ -75,19 +70,19 @@ public static class RetroRewindInstaller
     {
         var result = MessageBox.Show("There are already files in your RetroRewind Folder. Would you like to install?",
             "Reinstall Retro Rewind", MessageBoxButton.YesNo);
-            
+
         if (result == MessageBoxResult.No) return;
 
         await BackupRksysFile(loadPath);
         DeleteExistingRetroRewind(loadPath);
     }
-    
-    private static async Task DownloadAndExtractRetroRewind( string tempZipPath, string loadPath)
+
+    private static async Task DownloadAndExtractRetroRewind(string tempZipPath, string loadPath)
     {
         var progressWindow = new ProgressWindow();
         progressWindow.ChangeExtraText("Downloading Retro Rewind...");
         progressWindow.Show();
-            
+
         try
         {
             await DownloadHelper.DownloadToLocation(Endpoints.RRZipUrl, tempZipPath, progressWindow);
@@ -102,7 +97,7 @@ public static class RetroRewindInstaller
                 File.Delete(tempZipPath);
         }
     }
-    
+
     private static async Task BackupRksysFile(string loadPath)
     {
         var rrWfc = Path.Combine(loadPath, RiivolutionFolderName, RetroRewindFolderName, "save", "RetroWFC");
@@ -120,7 +115,7 @@ public static class RetroRewindInstaller
         Directory.CreateDirectory(destinationFolder);
         await File.WriteAllBytesAsync(Path.Combine(destinationFolder, "rksys.dat"), datFileData);
     }
-    
+
     private static void DeleteExistingRetroRewind(string loadPath)
     {
         var retroRewindPath = Path.Combine(loadPath, RiivolutionFolderName, RetroRewindFolderName);

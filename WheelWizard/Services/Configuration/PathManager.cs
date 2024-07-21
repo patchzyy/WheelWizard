@@ -9,7 +9,7 @@ public static class PathManager
     public static string GetDolphinLocation() => ConfigManager.GetConfig().DolphinLocation!;
     public static string GetUserPathLocation() => ConfigManager.GetConfig().UserFolderPath!;
     public static bool GetForceWiimote() => ConfigManager.GetConfig().ForceWiimote;
-    
+
     public static string GetLoadPathLocation() => Path.Combine(GetUserPathLocation(), "Load");
 
     public static string FindWiiMoteNew()

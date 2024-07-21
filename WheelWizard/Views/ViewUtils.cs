@@ -2,8 +2,8 @@ using System.Windows.Controls;
 
 namespace CT_MKWII_WPF.Views;
 
-using System.Windows.Media;
 using System.Windows;
+using System.Windows.Media;
 
 // when using any of the utils, import using:
 //  using static CT_MKWII_WPF.Views.ViewUtils;

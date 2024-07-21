@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Services.Configuration;
+using CT_MKWII_WPF.Views;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -6,9 +9,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Services.Configuration;
-using CT_MKWII_WPF.Views;
 
 namespace CT_MKWII_WPF.Services.RetroRewind;
 
@@ -16,10 +16,10 @@ public static class RRUpdater
 {
     public static async Task<bool> IsRRUpToDate(string currentVersion)
     {
-        string latestVersion = await GetLatestVersionString();
+        var latestVersion = await GetLatestVersionString();
         return currentVersion.Trim() == latestVersion.Trim();
     }
-    
+
     private static async Task<string> GetLatestVersionString()
     {
         var response = await HttpClientHelper.GetAsync<string>(Endpoints.RRVersionUrl);
@@ -30,7 +30,7 @@ public static class RRUpdater
         }
         return response.Content.Split('\n').Last().Split(' ')[0];
     }
-    
+
     public static async Task<bool> UpdateRR()
     {
         var currentVersion = RetroRewindInstaller.CurrentRRVersion();
@@ -53,43 +53,43 @@ public static class RRUpdater
         }
         return await ApplyUpdates(currentVersion);
     }
-    
+
     private static async Task<bool> ApplyUpdates(string currentVersion)
     {
         var allVersions = await GetAllVersionData();
         var updatesToApply = GetUpdatesToApply(currentVersion, allVersions);
-        
+
         var progressWindow = new ProgressWindow();
         progressWindow.Show();
 
-            for (int i = 0; i < updatesToApply.Count; i++)
+        for (var i = 0; i < updatesToApply.Count; i++)
+        {
+            var update = updatesToApply[i];
+            var success = await DownloadAndApplyUpdate(update, updatesToApply.Count, i + 1, progressWindow);
+            if (!success)
             {
-                var update = updatesToApply[i];
-                var success = await DownloadAndApplyUpdate(update, updatesToApply.Count, i + 1, progressWindow);
-                if (!success)
-                {
-                    MessageBox.Show("Failed to apply an update. Aborting.");
-                    progressWindow.Close();
-                    return false;
-                }
-
-                UpdateVersionFile(update.Version);
+                MessageBox.Show("Failed to apply an update. Aborting.");
+                progressWindow.Close();
+                return false;
             }
-            progressWindow.Close();
+
+            UpdateVersionFile(update.Version);
+        }
+        progressWindow.Close();
         return true;
     }
-    
+
     private static void UpdateVersionFile(string newVersion)
     {
         var loadPath = PathManager.GetLoadPathLocation();
         var versionFilePath = Path.Combine(loadPath, "Riivolution", "RetroRewind6", "version.txt");
         File.WriteAllText(versionFilePath, newVersion);
     }
-    
+
     private static async Task<List<(string Version, string Url, string Path, string Description)>> GetAllVersionData()
     {
         var versions = new List<(string Version, string Url, string Path, string Description)>();
-     
+
 
         using var httpClient = new HttpClient();
         var allVersionsText = await httpClient.GetStringAsync(Endpoints.RRVersionUrl);
@@ -105,7 +105,7 @@ public static class RRUpdater
         return versions;
     }
 
-    
+
     private static List<(string Version, string Url, string Path, string Description)> GetUpdatesToApply(
         string currentVersion, List<(string Version, string Url, string Path, string Description)> allVersions)
     {
@@ -117,7 +117,7 @@ public static class RRUpdater
                 updatesToApply.Add(version);
             else break;
         }
-        
+
         updatesToApply.Reverse();
         return updatesToApply;
     }
@@ -146,8 +146,8 @@ public static class RRUpdater
         {
             window.ChangeExtraText($"Update {currentUpdateIndex}/{totalUpdates}: {update.Description}");
             await DownloadHelper.DownloadToLocation(update.Url, tempZipPath, window);
-            
-            window.UpdateProgress(100, "Extracting update...","Extracting update...");
+
+            window.UpdateProgress(100, "Extracting update...", "Extracting update...");
             var extractionPath = Path.Combine(loadPath, "Riivolution");
             Directory.CreateDirectory(extractionPath);
             ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
@@ -160,8 +160,4 @@ public static class RRUpdater
 
         return true;
     }
-    
-    
-    
-    
 }

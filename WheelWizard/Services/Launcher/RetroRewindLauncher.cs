@@ -1,11 +1,11 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Windows;
-using CT_MKWII_WPF.Services.Configuration;
+﻿using CT_MKWII_WPF.Services.Configuration;
 using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Validators;
 using CT_MKWII_WPF.Services.WiiManagement;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Windows;
 
 namespace CT_MKWII_WPF.Services.Launcher;
 
@@ -16,7 +16,7 @@ public static class RetroRewindLauncher
         KillDolphin();
         if (WiiMoteSettings.IsForceSettingsEnabled()) WiiMoteSettings.DisableVirtualWiiMote();
         PrepareModsForLaunch();
-        
+
         var dolphinLocation = PathManager.GetDolphinLocation();
         var gamePath = PathManager.GetGameLocation();
         LaunchJsonGenerator.GenerateLaunchJson(playTt);
@@ -24,7 +24,7 @@ public static class RetroRewindLauncher
 
         if (!File.Exists(dolphinLocation) || !File.Exists(gamePath))
         {
-            MessageBox.Show("Message patchzy with the following error: " + dolphinLocation + " " + gamePath, 
+            MessageBox.Show("Message patchzy with the following error: " + dolphinLocation + " " + gamePath,
                 "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
@@ -44,16 +44,15 @@ public static class RetroRewindLauncher
                 MessageBoxImage.Error);
         }
     }
-    
+
     private static void KillDolphin()
     {
         var dolphinLocation = PathManager.GetDolphinLocation();
-        if (Process.GetProcessesByName(Path.GetFileNameWithoutExtension(dolphinLocation)).Length != 0)
+        if (Process.GetProcessesByName(Path.GetFileNameWithoutExtension(dolphinLocation)).Length == 0) return;
+
+        foreach (var process in Process.GetProcessesByName(Path.GetFileNameWithoutExtension(dolphinLocation)))
         {
-            foreach (var process in Process.GetProcessesByName(Path.GetFileNameWithoutExtension(dolphinLocation)))
-            {
-                process.Kill();
-            }
+            process.Kill();
         }
     }
 

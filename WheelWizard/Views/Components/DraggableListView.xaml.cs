@@ -170,9 +170,9 @@ public partial class DraggableListView : BaseListView
         var index = 0;
         foreach (var listViewItem in GetAllListViewItems())
         {
-            Rect itemBounds = VisualTreeHelper.GetDescendantBounds(listViewItem);
-            Point itemPosition = listViewItem.TransformToAncestor(this).Transform(new Point(0, 0));
-            double itemBottom = itemPosition.Y + itemBounds.Height;
+            var itemBounds = VisualTreeHelper.GetDescendantBounds(listViewItem);
+            var itemPosition = listViewItem.TransformToAncestor(this).Transform(new Point(0, 0));
+            var itemBottom = itemPosition.Y + itemBounds.Height;
 
             var showBottom = false;
             if (_startDraggingPoint != null)

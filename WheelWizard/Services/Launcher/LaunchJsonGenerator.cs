@@ -1,8 +1,8 @@
-﻿using System.IO;
+﻿using CT_MKWII_WPF.Models.RRLaunchModels;
+using CT_MKWII_WPF.Services.Configuration;
+using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using CT_MKWII_WPF.Models.RRLaunchModels;
-using CT_MKWII_WPF.Services.Configuration;
 
 namespace CT_MKWII_WPF.Services.Launcher;
 
@@ -38,18 +38,18 @@ public static class LaunchJsonGenerator
             Version = 1
         };
 
-        string jsonString = JsonSerializer.Serialize(launchConfig, new JsonSerializerOptions
+        var jsonString = JsonSerializer.Serialize(launchConfig, new JsonSerializerOptions
         {
             WriteIndented = true,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         });
 
-        string outputPath = Path.Combine(
+        var outputPath = Path.Combine(
             ConfigManager.GetWheelWizardAppdataPath(),
             JsonFileName
         );
-        
+
         File.WriteAllText(outputPath, jsonString);
     }
 }

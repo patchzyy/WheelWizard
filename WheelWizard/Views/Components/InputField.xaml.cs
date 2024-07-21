@@ -39,7 +39,7 @@ namespace CT_MKWII_WPF.Views.Components
             if (d is InputField field)
             {
                 var type = (InputVariantType)e.NewValue;
-                string styleName = type switch
+                var styleName = type switch
                 {
                     InputVariantType.Dark => "DarkVariant",
                     _ => "DefaultVariant"

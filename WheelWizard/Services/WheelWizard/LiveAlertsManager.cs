@@ -1,8 +1,8 @@
-﻿using System.Linq;
+﻿using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Utilities.RepeatedTasks;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Utilities.RepeatedTasks;
 
 namespace CT_MKWII_WPF.Services.WheelWizard;
 
@@ -13,22 +13,20 @@ public class LiveAlertsManager : RepeatedTaskManager
 
     private static LiveAlertsManager? _instance;
     public static LiveAlertsManager Instance => _instance ??= new LiveAlertsManager();
-    
-    private LiveAlertsManager() : base(90)
-    {
-    }
-    
+
+    private LiveAlertsManager() : base(90) { }
+
     private static (string, string) ParseStatus(string status)
     {
         var parts = status.Split("\n");
         var firstLine = parts.FirstOrDefault();
         if (string.IsNullOrWhiteSpace(firstLine))
-            return ("","");
-        
+            return ("", "");
+
         var firstLineParts = firstLine.Split("|");
         if (firstLineParts.Length != 2)
-            return  ("","");
-          
+            return ("", "");
+
         var messageType = firstLineParts[0];
         var message = firstLineParts[1];
         message = Regex.Replace(message, @"\\u000A", "\n");
@@ -46,7 +44,7 @@ public class LiveAlertsManager : RepeatedTaskManager
             StatusMessageType = "";
             return;
         }
-        
+
         var (messageType, message) = ParseStatus(response.Content);
         StatusMessage = message;
         StatusMessageType = messageType;

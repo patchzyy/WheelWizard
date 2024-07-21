@@ -2,9 +2,9 @@ namespace CT_MKWII_WPF.Utilities;
 
 public class Mocker
 {
-  // This file is temporary, and we will create a better mocking system in the future.
-  
-  public static string GroupApiResponse = @"[
+    // This file is temporary, and we will create a better mocking system in the future.
+
+    public static string GroupApiResponse = @"[
   {
     ""id"": ""PIFYVV"",
     ""game"": ""mariokartwii"",

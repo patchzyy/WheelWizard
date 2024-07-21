@@ -1,8 +1,8 @@
-﻿using System;
+﻿using CT_MKWII_WPF.Models;
+using Newtonsoft.Json;
+using System;
 using System.IO;
 using System.Windows;
-using CT_MKWII_WPF.Models;
-using Newtonsoft.Json;
 
 namespace CT_MKWII_WPF.Services.Configuration;
 
@@ -10,7 +10,7 @@ public static class ConfigManager
 {
     private static readonly string WheelWizardConfigFilePath =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII", "config.json");
-    
+
     private static readonly string WheelWizardAppdataPath =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII");
 
@@ -26,9 +26,9 @@ public static class ConfigManager
         if (_config == null)
             throw new Exception("Config is null, this should never happen");
         return _config;
-    } 
+    }
     public static string GetWheelWizardAppdataPath() => WheelWizardAppdataPath;
-    
+
     public static string GetWheelWizardConfigPath() => WheelWizardConfigFilePath;
 
     public static void SaveSettings(string dolphinPath, string gamePath, string userFolderPath, bool hasRunNandTutorial,

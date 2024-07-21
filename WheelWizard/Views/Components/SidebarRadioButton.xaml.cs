@@ -1,8 +1,8 @@
-﻿using System;
+﻿using CT_MKWII_WPF.Views.Pages;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using CT_MKWII_WPF.Views.Pages;
 using static CT_MKWII_WPF.Views.ViewUtils;
 
 namespace CT_MKWII_WPF.Views.Components;

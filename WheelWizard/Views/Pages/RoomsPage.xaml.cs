@@ -1,11 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using CT_MKWII_WPF.Models.RRInfo;
+using CT_MKWII_WPF.Services.RetroRewind;
+using CT_MKWII_WPF.Utilities.RepeatedTasks;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using CT_MKWII_WPF.Models.RRInfo;
-using CT_MKWII_WPF.Services.RetroRewind;
-using CT_MKWII_WPF.Utilities.RepeatedTasks;
 
 namespace CT_MKWII_WPF.Views.Pages;
 
@@ -30,7 +30,7 @@ public sealed partial class RoomsPage : Page, INotifyPropertyChanged, IRepeatedT
         RoomsView.Visibility = RRLiveRooms.Instance.RoomCount == 0 ? Visibility.Collapsed : Visibility.Visible;
         Rooms = new ObservableCollection<Room>(RRLiveRooms.Instance.CurrentRooms);
         RRLiveRooms.Instance.Subscribe(this);
-        
+
         RoomsView.SortingFunctions.Add("Players", PlayerCountComparable);
         RoomsView.SortingFunctions.Add("TimeOnline", TimeOnlineComparable);
 
@@ -42,7 +42,7 @@ public sealed partial class RoomsPage : Page, INotifyPropertyChanged, IRepeatedT
         if (x is not Room xItem || y is not Room yItem) return 0;
         return xItem.Created.CompareTo(yItem.Created);
     }
-    
+
     private static int PlayerCountComparable(object? x, object? y)
     {
         if (x is not Room xItem || y is not Room yItem) return 0;
@@ -52,13 +52,13 @@ public sealed partial class RoomsPage : Page, INotifyPropertyChanged, IRepeatedT
     public void OnUpdate(RepeatedTaskManager sender)
     {
         if (sender is not RRLiveRooms liveRooms) return;
-        
+
         Rooms.Clear();
         var count = liveRooms.RoomCount;
         EmptyRoomsView.Visibility = count == 0 ? Visibility.Visible : Visibility.Collapsed;
         RoomsView.Visibility = count == 0 ? Visibility.Collapsed : Visibility.Visible;
         if (count == 0) return;
-        
+
         foreach (var room in liveRooms.CurrentRooms)
             Rooms.Add(room);
     }
@@ -76,7 +76,7 @@ public sealed partial class RoomsPage : Page, INotifyPropertyChanged, IRepeatedT
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
-    
+
     private void RoomsPage_Unloaded(object sender, RoutedEventArgs e)
     {
         RRLiveRooms.Instance.Unsubscribe(this);

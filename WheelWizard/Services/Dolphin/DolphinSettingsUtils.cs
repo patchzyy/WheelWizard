@@ -1,6 +1,7 @@
-﻿using System.Linq;
+﻿using CT_MKWII_WPF.Services.Configuration;
+using CT_MKWII_WPF.Services.Dolphin;
+using System.Linq;
 using System.Windows.Forms;
-using CT_MKWII_WPF.Services.Configuration;
 
 namespace CT_MKWII_WPF.Services.WiiManagement.DolphinHelpers;
 
@@ -12,7 +13,9 @@ public class DolphinSettingsUtils
         if (string.IsNullOrEmpty(gfxFile)) return;
 
         foreach (var (key, value) in settings)
+        {
             DolphinSettingHelper.ChangeIniSettings(gfxFile, "Settings", key, value);
+        }
     }
 
     public static void EnableRecommendedSettings()

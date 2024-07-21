@@ -1,10 +1,10 @@
-﻿using System;
+﻿using CT_MKWII_WPF.Services.Configuration;
+using System;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using CT_MKWII_WPF.Services.Configuration;
 
-namespace CT_MKWII_WPF.Services.WiiManagement.DolphinHelpers;
+namespace CT_MKWII_WPF.Services.Dolphin;
 
 public static class DolphinSettingHelper
 {
@@ -19,25 +19,16 @@ public static class DolphinSettingHelper
 
         //read through every line to find the section
         var lines = File.ReadAllLines(fileLocation);
-        var sectionFound = false;
-        foreach (var t in lines)
-        {
-            if (t != $"[{section}]") continue;
-            sectionFound = true;
-            break;
-        }
+        var sectionFound = lines.Any(t => t == $"[{section}]");
 
-        if (!sectionFound)
-        {
-            return "";
-        }
+        if (!sectionFound) return "";
 
         //now we know the section exists, we need to find the setting
-        for (var i = 0; i < lines.Length; i++)
+        foreach (var line in lines)
         {
-            if (!lines[i].Contains(settingToRead)) continue;
+            if (!line.Contains(settingToRead)) continue;
             //we found the setting, now we need to return the value
-            var setting = lines[i].Split("=");
+            var setting = line.Split("=");
             return setting[1].Trim();
         }
 
@@ -68,11 +59,10 @@ public static class DolphinSettingHelper
         var lines = File.ReadAllLines(fileLocation);
         foreach (var line in lines)
         {
-            if (line.StartsWith(settingToRead))
-            {
-                var setting = line.Split("=");
-                return setting[1].Trim();
-            }
+            if (!line.StartsWith(settingToRead)) continue;
+            
+            var setting = line.Split("=");
+            return setting[1].Trim();
         }
 
         return "";

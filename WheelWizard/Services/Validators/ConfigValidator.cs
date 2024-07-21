@@ -1,8 +1,8 @@
-﻿using System;
-using System.IO;
-using CT_MKWII_WPF.Models;
+﻿using CT_MKWII_WPF.Models;
 using CT_MKWII_WPF.Services.Configuration;
 using Newtonsoft.Json;
+using System;
+using System.IO;
 
 namespace CT_MKWII_WPF.Services.Validators
 {
@@ -32,7 +32,7 @@ namespace CT_MKWII_WPF.Services.Validators
         {
             var modConfigPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                 "CT-MKWII", "Mods", "modconfig.json");
-            
+
             if (!File.Exists(modConfigPath))
             {
                 return Array.Empty<ModData>();

@@ -1,15 +1,15 @@
+using MahApps.Metro.IconPacks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
-using MahApps.Metro.IconPacks;
 
 namespace CT_MKWII_WPF.Views.Components;
 
@@ -111,7 +111,7 @@ public partial class StaticListView : BaseListView
     private void Sort(string sortBy, ListSortDirection direction)
     {
         if (CollectionViewSource.GetDefaultView(ItemsSource) is not ListCollectionView dataView) return;
-   
+
         dataView.SortDescriptions.Clear();
         if (SortingFunctions.TryGetValue(sortBy, out var customComparer))
             dataView.CustomSort = new LambdaComparer(customComparer, direction);

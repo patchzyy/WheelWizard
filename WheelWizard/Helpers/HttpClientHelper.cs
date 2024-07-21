@@ -1,8 +1,8 @@
+using CT_MKWII_WPF.Models;
+using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using CT_MKWII_WPF.Models;
-using Newtonsoft.Json;
 
 namespace CT_MKWII_WPF.Helpers;
 
@@ -47,7 +47,7 @@ public static class HttpClientHelper
         try
         {
             var response = await HttpClient.GetAsync(url);
-      
+
             result = new HttpClientResult<T>()
             {
                 StatusCode = (int)response.StatusCode,

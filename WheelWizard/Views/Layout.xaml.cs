@@ -1,15 +1,15 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
-using CT_MKWII_WPF.Services;
+﻿using CT_MKWII_WPF.Services;
 using CT_MKWII_WPF.Services.RetroRewind;
 using CT_MKWII_WPF.Services.WheelWizard;
 using CT_MKWII_WPF.Utilities.RepeatedTasks;
 using CT_MKWII_WPF.Views.Components;
 using CT_MKWII_WPF.Views.Pages;
 using MahApps.Metro.IconPacks;
+using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace CT_MKWII_WPF.Views;
 
@@ -45,7 +45,7 @@ public partial class Layout : Window, IRepeatedTaskListener
                 button.IsChecked = button.PageType == page.GetType();
         }
     }
-    
+
     public void OnUpdate(RepeatedTaskManager sender)
     {
         switch (sender)
@@ -58,7 +58,7 @@ public partial class Layout : Window, IRepeatedTaskListener
                 break;
         }
     }
-    
+
     private void UpdatePlayerAndRoomCount(RRLiveRooms sender)
     {
         var playerCount = sender.PlayerCount;
@@ -81,7 +81,7 @@ public partial class Layout : Window, IRepeatedTaskListener
 
     private void UpdateLiveAlert(LiveAlertsManager sender)
     {
-        
+
         if ((string)LiveAlertToolTip.Content == sender.StatusMessage) return;
         LiveAlertToolTip.Content = sender.StatusMessage;
         LiveAlert.IconPack = "FontAwesome";
@@ -120,13 +120,13 @@ public partial class Layout : Window, IRepeatedTaskListener
         // but just in case the resource is missing for some unknown reason, we still want to display the icon
         LiveAlert.ForegroundColor = brush ?? Brushes.Gray;
     }
-    
+
     private void TopBar_MouseDown(object sender, MouseButtonEventArgs e)
     {
-        if (e.ChangedButton == MouseButton.Left) 
+        if (e.ChangedButton == MouseButton.Left)
             DragMove();
     }
-    
+
     private void MinimizeButton_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
     private void CloseButton_Click(object sender, RoutedEventArgs e) => Close();
 
@@ -147,13 +147,13 @@ public partial class Layout : Window, IRepeatedTaskListener
             UseShellExecute = true
         });
     }
- 
+
     protected override void OnClosed(EventArgs e)
     {
         base.OnClosed(e);
         RepeatedTaskManager.CancelAllTasks();
     }
-    
+
     public void DisableEverything() => CompleteGrid.IsEnabled = false;
     public void EnableEverything() => CompleteGrid.IsEnabled = true;
 }

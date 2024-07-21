@@ -11,8 +11,8 @@ namespace CT_MKWII_WPF.Views.Converters
         {
             if (values.Length == 2 && values[0] is CornerRadius && values[1] is Thickness)
             {
-                CornerRadius cornerRadius = (CornerRadius)values[0];
-                Thickness borderThickness = (Thickness)values[1];
+                var cornerRadius = (CornerRadius)values[0];
+                var borderThickness = (Thickness)values[1];
 
                 return new CornerRadius(
                     Math.Max(0, cornerRadius.TopLeft - borderThickness.Left),

@@ -1,18 +1,19 @@
-﻿using System.Drawing;
-using System.IO;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using CT_MKWII_WPF.Services;
+﻿using CT_MKWII_WPF.Services;
 using CT_MKWII_WPF.Services.Configuration;
+using CT_MKWII_WPF.Services.Dolphin;
 using CT_MKWII_WPF.Services.Validators;
 using CT_MKWII_WPF.Services.WheelWizard;
 using CT_MKWII_WPF.Services.WiiManagement;
 using CT_MKWII_WPF.Services.WiiManagement.DolphinHelpers;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using Button = CT_MKWII_WPF.Views.Components.Button;
+using System.Drawing;
+using System.IO;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 using static CT_MKWII_WPF.Views.ViewUtils;
+using Button = CT_MKWII_WPF.Views.Components.Button;
 
 namespace CT_MKWII_WPF.Views.Pages;
 

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Views;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Views;
 
 namespace CT_MKWII_WPF.Services.WheelWizard;
 
@@ -18,10 +18,16 @@ public static class AutoUpdater
         if (!response.Succeeded || response.Content is null)
         {
             if (response.StatusCodeGroup == 4 || response.StatusCode is 503 or 504)
+            {
                 MessageBox.Show("Unable to check if WheelWizard is up to date. " +
                                 "\nYou might be experiencing network issues.");
-            else MessageBox.Show("An error occurred while checking for updates. Please try again later. " +
-                                 "\nError: " + response.StatusMessage);
+            }
+            else
+            {
+                MessageBox.Show("An error occurred while checking for updates. Please try again later. " +
+                                "\nError: " + response.StatusMessage);
+            }
+
             return;
         }
         if (response.Content.Trim() == CurrentVersion) return;
@@ -38,7 +44,7 @@ public static class AutoUpdater
             // Retrieve the path of the currently executing process
             currentExecutablePath = process.MainModule!.FileName;
         }
-        
+
         var currentFolder = Path.GetDirectoryName(currentExecutablePath);
         if (currentFolder is null)
         {

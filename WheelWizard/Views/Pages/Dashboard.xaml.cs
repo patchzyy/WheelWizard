@@ -1,7 +1,5 @@
-﻿using System.Windows;
-using MahApps.Metro.IconPacks;
-using System.Threading.Tasks;
-using CT_MKWII_WPF.Models.Enums;
+﻿using CT_MKWII_WPF.Models.Enums;
+using CT_MKWII_WPF.Services.Dolphin;
 using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Launcher;
 using CT_MKWII_WPF.Services.RetroRewind;
@@ -9,6 +7,9 @@ using CT_MKWII_WPF.Services.Validators;
 using CT_MKWII_WPF.Services.WheelWizard;
 using CT_MKWII_WPF.Services.WiiManagement;
 using CT_MKWII_WPF.Services.WiiManagement.DolphinHelpers;
+using MahApps.Metro.IconPacks;
+using System.Threading.Tasks;
+using System.Windows;
 using static CT_MKWII_WPF.Views.ViewUtils;
 using Button = CT_MKWII_WPF.Views.Components.Button;
 
@@ -24,7 +25,7 @@ public partial class Dashboard
 
     private async void PlayButton_Click(object sender, RoutedEventArgs e)
     {
-        WheelWizardStatus status = await StatusManager.GetCurrentStatus();
+        var status = await StatusManager.GetCurrentStatus();
         switch (status)
         {
             case WheelWizardStatus.NoServer:
@@ -60,7 +61,7 @@ public partial class Dashboard
 
     private async void UpdateActionButton()
     {
-        WheelWizardStatus status = await StatusManager.GetCurrentStatus();
+        var status = await StatusManager.GetCurrentStatus();
         switch (status)
         {
             case WheelWizardStatus.NoServer:

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using CT_MKWII_WPF.Views;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CT_MKWII_WPF.Views;
 
 namespace CT_MKWII_WPF.Helpers;
 
@@ -18,13 +18,13 @@ public static class DownloadHelper
         await DownloadToLocation(url, filePath, progressWindow);
         progressWindow.Close();
     }
-    
+
     public static async Task DownloadToLocation(string url, string filePath, ProgressWindow progressWindow)
     {
         var directory = Path.GetDirectoryName(filePath)!;
         if (!Directory.Exists(directory))
             Directory.CreateDirectory(directory);
-        
+
         try
         {
             using var client = new HttpClient();

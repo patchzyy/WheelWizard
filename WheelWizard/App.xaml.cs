@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using CT_MKWII_WPF.Services.WheelWizard;
+﻿using CT_MKWII_WPF.Services.WheelWizard;
+using System.Windows;
 
 namespace CT_MKWII_WPF
 {
