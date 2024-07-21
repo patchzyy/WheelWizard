@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Media.Imaging;
+using CT_MKWII_WPF.Services.Other;
 
 namespace CT_MKWII_WPF.Models.RRInfo;
 
@@ -28,11 +30,26 @@ public class Player : INotifyPropertyChanged
         }
     }
     
+    private bool _requestingImage;
     private BitmapImage? _miiImage;
 
     public BitmapImage? MiiImage
     {
-        get => _miiImage;
+        get
+        {
+            Console.WriteLine("CHECK");
+            if (_miiImage != null || _requestingImage) return _miiImage;
+            
+            _requestingImage = true;
+            var miiData = Mii.Count > 0 ? Mii[0].Data : null;
+            if (miiData == null) return null;
+                    
+            _miiImage = MiiImageManager.GetCachedMiiImage(miiData);
+            if (_miiImage == null)
+                MiiImageManager.LoadMiiImageAsync(this);
+
+            return _miiImage;
+        }
         set
         {
             if (_miiImage == value) return;
@@ -41,7 +58,7 @@ public class Player : INotifyPropertyChanged
         }
     }
 
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged(string propertyName)
     {

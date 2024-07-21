@@ -25,9 +25,9 @@ public class RRLiveRooms : RepeatedTaskManager
 
     protected override async Task ExecuteTaskAsync()
     {
-        //Console.WriteLine("reset rooms");
-        var response = await HttpClientHelper.GetAsync<List<Room>>(GroupUrl);
-        //var response = HttpClientHelper.MockResult<List<Room>>(Mocker.GroupApiResponse);
+        Console.WriteLine("reset rooms");
+        //var response = await HttpClientHelper.GetAsync<List<Room>>(GroupUrl);
+        var response = HttpClientHelper.MockResult<List<Room>>(Mocker.GroupApiResponse);
             
         // It is not important enough to bore the user with an error message or something.
         // they are not hindered if there is an error, they just dont see the rooms. that's it.

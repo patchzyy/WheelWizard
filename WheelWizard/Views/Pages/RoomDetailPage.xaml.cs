@@ -45,9 +45,7 @@ public partial class RoomDetailPage : Page, INotifyPropertyChanged, IRepeatedTas
         Room = room;
         PlayersList = new ObservableCollection<Player>(Room.Players.Values);
         DataContext = this;
-        
-        LoadMiiImagesAsync(); // Temporary code
-   
+ 
         RRLiveRooms.Instance.Subscribe(this);
         PlayersListView.SortingFunctions.Add("Ev", VrComparable);
         
@@ -71,32 +69,6 @@ public partial class RoomDetailPage : Page, INotifyPropertyChanged, IRepeatedTas
         PlayersList.Clear();
         foreach (var p in room.Players.Values)
             PlayersList.Add(p);
-
-        LoadMiiImagesAsync();
-    }
-    
-    private void LoadMiiImagesAsync()
-    {
-        foreach (var player in PlayersList)
-            SetMiiImageAsync(player);
-    }
-    
-    private async void SetMiiImageAsync(Player player)
-    {
-        if ( player.Mii.Count == 0 ) // This is line 85
-            return;
-        
-        // TODO: should all go to a service thing that retrieves the image, as specially the try catch has to be removed from this file
-        try 
-        {
-            var miiImage = await MiiImageManager.GetMiiImageAsync(player.Mii[0].Data);
-            player.MiiImage = miiImage;
-            Application.Current.Dispatcher.Invoke(() => OnPropertyChanged(nameof(PlayersList)));
-        }
-        catch (Exception _)
-        {
-            // ignored
-        }
     }
     
     private void GoBackClick(object sender, RoutedEventArgs e) => NavigateToPage(new RoomsPage());

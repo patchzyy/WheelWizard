@@ -15,7 +15,7 @@ public class LiveAlertsManager : RepeatedTaskManager
     private static LiveAlertsManager? _instance;
     public static LiveAlertsManager Instance => _instance ??= new LiveAlertsManager();
     
-    private LiveAlertsManager() : base(60)
+    private LiveAlertsManager() : base(90)
     {
     }
     

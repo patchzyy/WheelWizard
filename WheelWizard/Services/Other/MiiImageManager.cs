@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Models.RRInfo;
 using Newtonsoft.Json;
 
 namespace CT_MKWII_WPF.Services.Other;
@@ -11,8 +12,36 @@ namespace CT_MKWII_WPF.Services.Other;
 public static class MiiImageManager
 {
     private const string MiiStudioUrl = "https://qrcode.rc24.xyz/cgi-bin/studio.cgi";
+    private const int MaxCachedImages = 126;
+    private static readonly Dictionary<string, BitmapImage> Images = new();
+    private static readonly Queue<string> ImageOrder = new();
     
-    public static async Task<BitmapImage> GetMiiImageAsync(string base64MiiData)
+    public static BitmapImage? GetCachedMiiImage(string miiData) => Images.GetValueOrDefault(miiData);
+    
+    private static void AddMiiImage(string miiData, BitmapImage image)
+    {
+        if (!Images.ContainsKey(miiData))
+            ImageOrder.Enqueue(miiData);
+        // if it already exists, it will replace the old one. so the dict will not grow
+        Images[miiData] = image;
+
+        if (Images.Count < MaxCachedImages) return;
+        var oldestMiiData = ImageOrder.Dequeue();
+        Images.Remove(oldestMiiData);
+    }
+
+    public static async void LoadMiiImageAsync(Player player)
+    {
+        if (player.Mii.Count <= 0) return;
+        
+        var miiData = player.Mii[0].Data;
+        var newImage = await GetMiiImageAsync(miiData);
+        AddMiiImage(miiData, newImage);
+        if(player.MiiImage != newImage) 
+            player.MiiImage = newImage;
+    }
+    
+    private static async Task<BitmapImage> GetMiiImageAsync(string base64MiiData)
     {
         using var formData = new MultipartFormDataContent();
         formData.Add(new ByteArrayContent(Convert.FromBase64String(base64MiiData)), "data", "mii.dat");
