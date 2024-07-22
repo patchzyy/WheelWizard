@@ -1,0 +1,20 @@
+<UserControl x:Class="CT_MKWII_WPF.Views.Pages.KitchenSink.KsGeneric"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+             xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             mc:Ignorable="d" d:DesignHeight="716" d:DesignWidth="444">
+    <Grid>
+        <components:IconLabel Grid.Row="0"
+                              IconPack="FontAwesome"
+                              IconKind="{x:Static icon:PackIconFontAwesomeKind.FaucetDripSolid}"
+                              Text="This is a kitchen sink page"
+                              FontSize="20"
+                              VerticalAlignment="Top"
+                              IconSize="24"
+                              Margin="20,0,0,0"
+                              Color="{StaticResource TitleTextColor}" />
+    </Grid>
+</UserControl>
