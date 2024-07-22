@@ -45,7 +45,7 @@
 
         <Style.Triggers>
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="{StaticResource BackgroundColorV2}" />
+                <Setter Property="Background" Value="{StaticResource BackgroundColor}" />
             </Trigger>
         </Style.Triggers>
 

@@ -21,11 +21,11 @@
     <!-- These styles are for the radio buttons that are at the top
      of a single page to swap between different pages inside a single page -->
     <SolidColorBrush x:Key="TopBarRadioForeground-Default" Color="{StaticResource Gray500}" />
-    <SolidColorBrush x:Key="TopBarRadioForeground-Hover" Color="{StaticResource Cyan200}" />
-    <SolidColorBrush x:Key="TopBarRadioForeground-Focus" Color="{StaticResource Cyan300}" />
+    <SolidColorBrush x:Key="TopBarRadioForeground-Hover" Color="{StaticResource Cyan300}" />
+    <SolidColorBrush x:Key="TopBarRadioForeground-Focus" Color="{StaticResource Cyan100}" />
     <SolidColorBrush x:Key="TopBarRadioBackground-Default" Color="Transparent" />
     <SolidColorBrush x:Key="TopBarRadioBackground-Hover" Color="{StaticResource Gray900}" />
-    <SolidColorBrush x:Key="TopBarRadioBackground-Focus" Color="Transparent" />
+    <SolidColorBrush x:Key="TopBarRadioBackground-Focus" Color="{StaticResource Gray700}"/>
     
     <!-- side bar radio button colors -->
     <SolidColorBrush x:Key="SideBarRadioBackground-Default" Color="{StaticResource Gray900}" />
@@ -314,8 +314,8 @@
         <Setter Property="Foreground" Value="{StaticResource TopBarRadioForeground-Default}" />
         <Setter Property="Background" Value="{StaticResource TopBarRadioBackground-Default}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Padding" Value="10,3" />
-        <Setter Property="Margin" Value="2,2"/>
+        <Setter Property="Padding" Value="10,5" />
+        <Setter Property="Margin" Value="0"/>
     
         <Setter Property="Template">
             <Setter.Value>
@@ -324,7 +324,7 @@
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="6"
+                            CornerRadius="6,6,0,0"
                             Margin="{TemplateBinding Margin    }">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>

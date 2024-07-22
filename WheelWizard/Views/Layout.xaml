@@ -55,7 +55,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
             <!-- Page container -->
             <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="4"
                     CornerRadius="{StaticResource WindowCornerRadiusLeftRightTwix}"
-                    Background="{StaticResource BackgroundColorV2}">
+                    Background="{StaticResource BackgroundColor}">
             </Border>
 
             <Frame Grid.Column="1" Grid.Row="1" Grid.RowSpan="4"

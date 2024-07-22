@@ -97,13 +97,13 @@
                      Height="20"
                      VerticalAlignment="Bottom"
                      Margin="10"
-                     Foreground="{StaticResource ForegroundColor}" />
+                     Foreground="{StaticResource TitleTextColor}" />
         <TextBlock x:Name="StatusTextBlock"
                    Visibility="Collapsed"
                    HorizontalAlignment="Center"
                    Height="20"
                    VerticalAlignment="Bottom"
                    Margin="10,0,0,30"
-                   Text="Processing..." Foreground="{StaticResource ForegroundColor}" />
+                   Text="Processing..." Foreground="{StaticResource TitleTextColor}" />
     </Grid>
 </Page>

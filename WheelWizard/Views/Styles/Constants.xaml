@@ -58,7 +58,7 @@
     <!-- Buttons are in the ButtonStyles since they took up to much space -->
 
     <!-- Layout colors -->
-    <SolidColorBrush x:Key="BackgroundColorV2" Color="{StaticResource Gray950}" />
+    <SolidColorBrush x:Key="BackgroundColor" Color="{StaticResource Gray950}" />
     <SolidColorBrush x:Key="LightBackgroundColor" Color="{StaticResource Gray900}" />
     <SolidColorBrush x:Key="BackgroundContactColor" Color="{StaticResource Gray800}" />
     <SolidColorBrush x:Key="BackgroundLine" Color="{StaticResource Gray700}" />

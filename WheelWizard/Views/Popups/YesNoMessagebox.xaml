@@ -29,7 +29,7 @@
 
                 <Border Grid.Row="1"
                         CornerRadius="{StaticResource WindowCornerRadiusLeftRightTwix}"
-                        Background="{StaticResource BackgroundColorV2}">
+                        Background="{StaticResource BackgroundColor}">
                     <StackPanel Margin="{StaticResource EdgeGap}">
                         <TextBlock Style="{StaticResource TitleText}" x:Name="MainTextBlock"
                                    HorizontalAlignment="Center"

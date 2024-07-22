@@ -19,16 +19,17 @@
         <TextBlock Grid.Row="0" Text="Kitchen Sink" HorizontalAlignment="Left" VerticalAlignment="Top"
                    Style="{StaticResource PageTitleText}" />
         
-        <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
-            <RadioButton Style="{StaticResource TopBar}" Tag="KsGeneric" 
-                         Click="TopBarRadio_OnClick" Content="Generic" IsChecked="True" />
-            <RadioButton Style="{StaticResource TopBar}" Tag="KsButtons" 
-                         Click="TopBarRadio_OnClick" Content="Buttons" />
-            <RadioButton Style="{StaticResource TopBar}" Tag="KsInputFields" 
-                         Click="TopBarRadio_OnClick" Content="Input Fields" />
-            <RadioButton Style="{StaticResource TopBar}" Tag="KsListViews"
-                         Click="TopBarRadio_OnClick" Content="List Views" />
-        </StackPanel>
+        <ScrollViewer Grid.Row="0"  HorizontalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                <RadioButton Style="{StaticResource TopBar}" Tag="KsGeneric" 
+                             Click="TopBarRadio_OnClick" Content="Generic" IsChecked="True" />
+                <RadioButton Style="{StaticResource TopBar}" Tag="KsButtons" 
+                             Click="TopBarRadio_OnClick" Content="Buttons" />
+       
+   
+            </StackPanel>
+        </ScrollViewer>
+   
         
         <ContentControl Grid.Row="1" x:Name="KitchenSinkContent" />
     </Grid>

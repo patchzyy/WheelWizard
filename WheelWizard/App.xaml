@@ -8,7 +8,6 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Views/Styles/Constants.xaml" />
-                <ResourceDictionary Source="Views/Styles/OldStyle.xaml" />
                 <ResourceDictionary Source="Views/Styles/ButtonStyles.xaml" />
                 <ResourceDictionary Source="Views/Styles/TextStyles.xaml" />
                 <ResourceDictionary Source="Views/Styles/CheckboxStyles.xaml" />
