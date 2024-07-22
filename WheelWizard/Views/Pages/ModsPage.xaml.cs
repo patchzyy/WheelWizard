@@ -90,7 +90,7 @@ namespace CT_MKWII_WPF.Views.Pages
         {
             var openFileDialog = new OpenFileDialog
             {
-                Filter = "Mod files (*.zip;*.brstm;*.szs)|*.zip;*.brstm;*.szs|All files (*.*)|*.*",
+                Filter = "Mod files (*.zip;*.brstm;*.brsar;*.szs;*.arc;*.thp;)|*.zip;*.brstm;*.brsar;*.szs;*.arc;*.thp|All files (*.*)|*.*",
                 Title = "Select Mod File",
                 Multiselect = true
             };
