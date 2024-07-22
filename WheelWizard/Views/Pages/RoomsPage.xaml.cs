@@ -63,7 +63,7 @@ public sealed partial class RoomsPage : Page, INotifyPropertyChanged, IRepeatedT
             Rooms.Add(room);
     }
 
-    private void Room_MouseDoubleClick(object sender, MouseButtonEventArgs e, ListViewItem clickedItem)
+    private void Room_MouseClick(object sender, MouseButtonEventArgs e, ListViewItem clickedItem)
     {
         var selectedRoom = (Room)clickedItem.DataContext;
         var roomDetailPage = new RoomDetailPage(selectedRoom);

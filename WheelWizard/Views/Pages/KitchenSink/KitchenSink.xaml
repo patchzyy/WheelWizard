@@ -23,9 +23,8 @@
             <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
                 <RadioButton Style="{StaticResource TopBar}" Tag="KsGeneric" 
                              Click="TopBarRadio_OnClick" Content="Generic" IsChecked="True" />
-                <RadioButton Style="{StaticResource TopBar}" Tag="KsButtons" 
-                             Click="TopBarRadio_OnClick" Content="Buttons" />
-       
+                <RadioButton Style="{StaticResource TopBar}" Tag="KsLists" 
+                             Click="TopBarRadio_OnClick" Content="List" />
    
             </StackPanel>
         </ScrollViewer>

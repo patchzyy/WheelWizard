@@ -42,7 +42,7 @@ To join a specific room, you'll need to either join through a friend, or hope to
 
         <StackPanel Grid.Row="1" x:Name="ListContainer">
             <components:StaticListView ItemsSource="{Binding Rooms}" x:Name="RoomsView" ListTitle="Rooms"
-                                       OnItemClick="Room_MouseDoubleClick"
+                                       OnItemClick="Room_MouseClick"
                                        MaxHeight="{Binding ElementName=ListContainer, Path=ActualHeight}">
                 <ListView.View>
                     <GridView AllowsColumnReorder="False">

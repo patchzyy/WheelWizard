@@ -24,16 +24,6 @@ public partial class DraggableListView : BaseListView
         AddHandler(DragDrop.QueryContinueDragEvent, new QueryContinueDragEventHandler(OnQueryContinueDrag));
     }
 
-    public static readonly DependencyProperty EnableLineIndicationProperty = DependencyProperty.Register(
-        nameof(EnableLineIndication), typeof(bool), typeof(DraggableListView),
-        new PropertyMetadata(true));
-
-    public bool EnableLineIndication
-    {
-        get => (bool)GetValue(EnableLineIndicationProperty);
-        set => SetValue(EnableLineIndicationProperty, value);
-    }
-
     public delegate void ItemsReorderEventHandler(ListViewItem movedItem, int newIndex);
 
     public event ItemsReorderEventHandler? OnItemsReorder;
@@ -93,7 +83,7 @@ public partial class DraggableListView : BaseListView
 
         // TODO: make it so it does not change the style if the smae targetData has been given,
         //       this will make it so it does not flicker
-        if (!EnableLineIndication || viewItem == null || (viewItem == _dragHoverListViewItem)) return;
+        if (viewItem == null || (viewItem == _dragHoverListViewItem)) return;
         if (_dragHoverListViewItem != null)
             _dragHoverListViewItem.Style = (Style)FindResource("DefaultItemStyle");
         if (viewItem != _draggingListViewItem)

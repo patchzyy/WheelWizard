@@ -60,7 +60,6 @@
             <!-- if you want to add something to this page, make sure you encapsulate the ListView in a standalone container,
              make that container stretch, and swap the ElementName for maxHeight to that container-->
             <components:DraggableListView OnItemsReorder="ModsListView_OnOnItemsReorder" x:Name="ModsListView"
-                                          EnableLineIndication="False"
                                           MaxHeight="{Binding ElementName=PageWithMods, Path=ActualHeight}"
                                           ItemsSource="{Binding Mods}">
                 <components:DraggableListView.ItemContextMenu>
