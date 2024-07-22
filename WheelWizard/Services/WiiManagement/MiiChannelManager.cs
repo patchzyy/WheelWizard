@@ -1,7 +1,6 @@
 ﻿using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Services.Configuration;
-using CT_MKWII_WPF.Services.Dolphin;
-using CT_MKWII_WPF.Services.WiiManagement.DolphinHelpers;
+using CT_MKWII_WPF.Services.IdkWhereThisShouldGo;
+using CT_MKWII_WPF.Services.Settings;
 using System.IO;
 using System.Threading.Tasks;
 

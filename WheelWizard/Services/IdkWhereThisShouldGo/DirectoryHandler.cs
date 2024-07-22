@@ -1,10 +1,9 @@
 ﻿using CT_MKWII_WPF.Models;
-using CT_MKWII_WPF.Services.Configuration;
 using System;
 using System.IO;
 using System.Linq;
 
-namespace CT_MKWII_WPF.Services.Installation;
+namespace CT_MKWII_WPF.Services.IdkWhereThisShouldGo;
 
 public static class DirectoryHandler
 {

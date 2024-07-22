@@ -1,12 +1,10 @@
 ﻿using CT_MKWII_WPF.Models.Enums;
-using CT_MKWII_WPF.Services.Dolphin;
+using CT_MKWII_WPF.Services.IdkWhereThisShouldGo;
 using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Launcher;
-using CT_MKWII_WPF.Services.RetroRewind;
-using CT_MKWII_WPF.Services.Validators;
-using CT_MKWII_WPF.Services.WheelWizard;
+using CT_MKWII_WPF.Services.Other;
+using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Services.WiiManagement;
-using CT_MKWII_WPF.Services.WiiManagement.DolphinHelpers;
 using MahApps.Metro.IconPacks;
 using System.Threading.Tasks;
 using System.Windows;

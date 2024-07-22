@@ -1,10 +1,9 @@
-﻿using CT_MKWII_WPF.Services.Configuration;
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Windows;
 
-namespace CT_MKWII_WPF.Services.Dolphin;
+namespace CT_MKWII_WPF.Services.IdkWhereThisShouldGo;
 
 public static class DolphinSettingHelper
 {

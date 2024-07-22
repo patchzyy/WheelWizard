@@ -1,10 +1,10 @@
 ﻿using CT_MKWII_WPF.Models.RRLaunchModels;
-using CT_MKWII_WPF.Services.Configuration;
+using CT_MKWII_WPF.Services.Settings;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace CT_MKWII_WPF.Services.Launcher;
+namespace CT_MKWII_WPF.Services.IdkWhereThisShouldGo;
 
 public static class LaunchJsonGenerator
 {

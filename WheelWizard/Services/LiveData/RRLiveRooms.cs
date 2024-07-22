@@ -1,13 +1,11 @@
 using CT_MKWII_WPF.Helpers;
 using CT_MKWII_WPF.Models.RRInfo;
-using CT_MKWII_WPF.Utilities;
 using CT_MKWII_WPF.Utilities.RepeatedTasks;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CT_MKWII_WPF.Services.RetroRewind;
+namespace CT_MKWII_WPF.Services.LiveData;
 
 public class RRLiveRooms : RepeatedTaskManager
 {

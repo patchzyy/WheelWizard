@@ -1,4 +1,4 @@
-﻿using CT_MKWII_WPF.Services.WheelWizard;
+﻿using CT_MKWII_WPF.Services.Installation;
 using System.Windows;
 
 namespace CT_MKWII_WPF

@@ -11,22 +11,21 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CT_MKWII_WPF.Services.WheelWizard;
+namespace CT_MKWII_WPF.Services.Installation;
 
 public static class AutoUpdater
 {
     public const string CurrentVersion = "1.1.2";
-    private const string GithubApiUrl = "https://api.github.com/repos/patchzyy/WheelWizard/releases/latest";
-    
     
     public static async Task CheckForUpdatesAsync()
     {
-        var response = await HttpClientHelper.GetAsync<string>(GithubApiUrl);
+        var response = await HttpClientHelper.GetAsync<string>(Endpoints.WhWzLatestReleasesUrl);
         if (!response.Succeeded || response.Content is null)
         {
             HandleUpdateCheckError(response);
             return;
         }
+        
         var latestRelease = JsonSerializer.Deserialize<GithubRelease>(response.Content);
         if (latestRelease?.TagName is null) return;
         
@@ -42,25 +41,23 @@ public static class AutoUpdater
         
         var initiatedUpdate = YesNoMessagebox.Show("Wheel Wizard Update!", "Update now!", "Maybe Later!", currentVersion.ToString() + "->" + latestVersion.ToString());
         if (!initiatedUpdate) return;
+        
         var adminResult = YesNoMessagebox.Show("Update as Admin?", "Yes", "No");
-        //     "Update Method", MessageBoxButtons.YesNo);
         if (adminResult)
-        {
             RestartAsAdmin();
-        }
         else
-        {
             await UpdateAsync(latestRelease.Assets[0].BrowserDownloadUrl);
-        }
     }
     
     private static void RestartAsAdmin()
     {
-        ProcessStartInfo startInfo = new ProcessStartInfo();
-        startInfo.UseShellExecute = true;
-        startInfo.WorkingDirectory = Environment.CurrentDirectory;
-        startInfo.FileName = GetActualExecutablePath();
-        startInfo.Verb = "runas";
+        var startInfo = new ProcessStartInfo
+        {
+            UseShellExecute = true,
+            WorkingDirectory = Environment.CurrentDirectory, 
+            FileName = GetActualExecutablePath(),
+            Verb = "runas"
+        };
         try
         {
             Process.Start(startInfo);
@@ -82,9 +79,9 @@ public static class AutoUpdater
     
     private static bool IsAdministrator()
     {
-        using (WindowsIdentity identity = WindowsIdentity.GetCurrent())
+        using (var identity = WindowsIdentity.GetCurrent())
         {
-            WindowsPrincipal principal = new WindowsPrincipal(identity);
+            var principal = new WindowsPrincipal(identity);
             return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
     }
@@ -143,6 +140,4 @@ del ""%~f0""
                             "\nError: " + response.StatusMessage);
         }
     }
-    
-    
 }

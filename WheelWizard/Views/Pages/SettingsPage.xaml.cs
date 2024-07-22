@@ -1,10 +1,8 @@
 ﻿using CT_MKWII_WPF.Services;
-using CT_MKWII_WPF.Services.Configuration;
-using CT_MKWII_WPF.Services.Dolphin;
-using CT_MKWII_WPF.Services.Validators;
-using CT_MKWII_WPF.Services.WheelWizard;
+using CT_MKWII_WPF.Services.IdkWhereThisShouldGo;
+using CT_MKWII_WPF.Services.Installation;
+using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Services.WiiManagement;
-using CT_MKWII_WPF.Services.WiiManagement.DolphinHelpers;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Drawing;
@@ -113,8 +111,7 @@ public partial class SettingsPage : Page
             // Ask user if they want to use the automatically found folder
             var result = MessageBox.Show(
                 "**If you dont know what all of this means, just click yes :)**\n\nDolphin Emulator folder found. Would you like to use this folder?\n\n" +
-                folderPath,
-                "Dolphin Emulator Folder Found", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                folderPath, "Dolphin Emulator Folder Found", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 DolphinUserPathInput.Text = folderPath;
@@ -138,7 +135,7 @@ public partial class SettingsPage : Page
 
     private void VSync_OnClick(object sender, RoutedEventArgs e)
     {
-        //todo: move this logic into the backend
+        //TODO: Move this when the dolphin settings stuff has been updated
         DolphinSettingHelper.ChangeIniSettings(PathManager.FindGfxFile(), "Hardware", "VSync",
             VSyncButton.IsChecked == true ? "True" : "False");
     }

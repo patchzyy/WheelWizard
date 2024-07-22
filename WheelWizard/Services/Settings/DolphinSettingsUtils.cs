@@ -1,9 +1,8 @@
-﻿using CT_MKWII_WPF.Services.Configuration;
-using CT_MKWII_WPF.Services.Dolphin;
+﻿using CT_MKWII_WPF.Services.IdkWhereThisShouldGo;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace CT_MKWII_WPF.Services.WiiManagement.DolphinHelpers;
+namespace CT_MKWII_WPF.Services.Settings;
 
 public class DolphinSettingsUtils
 {

@@ -1,5 +1,4 @@
 ﻿using CT_MKWII_WPF.Models.GameData;
-using CT_MKWII_WPF.Services.Configuration;
 using CT_MKWII_WPF.Utilities.Generators;
 using System;
 using System.Collections.Generic;
@@ -23,14 +22,12 @@ public class GameDataLoader
     private const int FriendDataOffset = 0x56D0;
     private const int FriendDataSize = 0x1C0;
     private const int MiiSize = 0x4A;
-
-
+    
     public GameDataLoader()
     {
         GameData = new Models.GameData.GameData();
     }
-
-
+    
     public void LoadGameData()
     {
         _saveData = LoadSaveDataFile();
@@ -117,14 +114,13 @@ public class GameDataLoader
         var pid = BitConverter.ToUInt32(_saveData, offset);
         return pid.ToString("D12").Insert(4, "-").Insert(9, "-");
     }
-
-
+    
     private bool ValidateMagicNumber()
     {
         return Encoding.ASCII.GetString(_saveData, 0, RksysMagic.Length) == RksysMagic;
     }
 
-    public static byte[]? LoadSaveDataFile()
+    private static byte[]? LoadSaveDataFile()
     {
         var saveFileLocation =
             Path.Combine(PathManager.GetLoadPathLocation(), "Riivolution", "RetroRewind6", "save");

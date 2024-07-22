@@ -1,5 +1,4 @@
-﻿using CT_MKWII_WPF.Services.Configuration;
-using System;
+﻿using System;
 using System.IO;
 
 namespace CT_MKWII_WPF.Services.WiiManagement;

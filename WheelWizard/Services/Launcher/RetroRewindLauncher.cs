@@ -1,6 +1,5 @@
-﻿using CT_MKWII_WPF.Services.Configuration;
-using CT_MKWII_WPF.Services.Installation;
-using CT_MKWII_WPF.Services.Validators;
+﻿using CT_MKWII_WPF.Services.IdkWhereThisShouldGo;
+using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Services.WiiManagement;
 using System;
 using System.Diagnostics;

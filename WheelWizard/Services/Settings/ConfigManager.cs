@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Windows;
 
-namespace CT_MKWII_WPF.Services.Configuration;
+namespace CT_MKWII_WPF.Services.Settings;
 
 public static class ConfigManager
 {

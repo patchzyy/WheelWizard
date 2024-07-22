@@ -1,10 +1,9 @@
 ﻿using CT_MKWII_WPF.Models;
-using CT_MKWII_WPF.Services.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.IO;
 
-namespace CT_MKWII_WPF.Services.Validators
+namespace CT_MKWII_WPF.Services.Settings
 {
     public static class ConfigValidator
     {

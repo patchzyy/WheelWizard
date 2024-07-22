@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace CT_MKWII_WPF.Services.WheelWizard;
+namespace CT_MKWII_WPF.Services.LiveData;
 
 public class LiveAlertsManager : RepeatedTaskManager
 {

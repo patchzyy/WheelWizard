@@ -1,15 +1,11 @@
 ﻿using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Services.Configuration;
-using CT_MKWII_WPF.Views;
 using CT_MKWII_WPF.Views.Popups;
-using System;
 using System.IO;
 using System.IO.Compression;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace CT_MKWII_WPF.Services.RetroRewind;
+namespace CT_MKWII_WPF.Services.Installation;
 
 public static class RetroRewindInstaller
 {

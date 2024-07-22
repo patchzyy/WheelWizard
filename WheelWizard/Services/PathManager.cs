@@ -1,7 +1,8 @@
-﻿using System.IO;
+﻿using CT_MKWII_WPF.Services.Settings;
+using System.IO;
 using System.Windows;
 
-namespace CT_MKWII_WPF.Services.Configuration;
+namespace CT_MKWII_WPF.Services;
 
 public static class PathManager
 {

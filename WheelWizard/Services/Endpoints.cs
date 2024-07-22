@@ -10,8 +10,7 @@ public static class Endpoints
 
     // Wheel Wizard
     public const string WhWzStatusUrl = "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/status.txt";
-    public const string WhWzVersionUrl = "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/version.txt";
-    public const string WhWzLatestReleasedUrl = "https://github.com/patchzyy/WheelWizard/releases/latest/download/WheelWizard.exe";
+    public const string WhWzLatestReleasesUrl = "https://api.github.com/repos/patchzyy/WheelWizard/releases/latest";
     public const string WhWzDiscordUrl = "https://discord.gg/vZ7T2wJnsq";
     public const string WhWzGithubUrl = "https://github.com/patchzyy/WheelWizard";
 
