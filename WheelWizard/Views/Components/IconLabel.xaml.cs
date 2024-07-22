@@ -2,23 +2,6 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-/*
-EXAMPLES:
- <local:IconLabelButton IconKind="{x:Static icon:PackIconGameIconsKind.CarWheel}"
-                 IconPack="GameIcons"
-                 Text="Dig"
-                 Color="Green"
-                 FontSize="18"
-                 IconSize="22"/>
-
-<local:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.SolidCoffee}"
-                 IconPack="FontAwesome"
-                 Text="Coffee"
-                 Color="Brown"
-                 FontSize="16"
-                 IconSize="20"/>
- */
-
 namespace CT_MKWII_WPF.Views.Components
 {
     public partial class IconLabel : UserControl
@@ -30,7 +13,7 @@ namespace CT_MKWII_WPF.Views.Components
 
         public static readonly DependencyProperty ColorProperty = DependencyProperty.Register(
             nameof(Color), typeof(Brush), typeof(IconLabel),
-            new PropertyMetadata(Brushes.Black));
+            new PropertyMetadata(Brushes.Black, OnColorChanged));
 
         public Brush Color
         {
@@ -38,6 +21,34 @@ namespace CT_MKWII_WPF.Views.Components
             set => SetValue(ColorProperty, value);
         }
 
+        public static readonly DependencyProperty IconColorProperty = DependencyProperty.Register(
+            nameof(IconColor), typeof(Brush), typeof(IconLabel),
+            new PropertyMetadata(Brushes.Black));
+
+        public Brush IconColor
+        {
+            get => (Brush)GetValue(IconColorProperty);
+            set => SetValue(IconColorProperty, value);
+        }
+
+        public static readonly DependencyProperty TextColorProperty = DependencyProperty.Register(
+            nameof(TextColor), typeof(Brush), typeof(IconLabel),
+            new PropertyMetadata(Brushes.Black));
+
+        public Brush TextColor
+        {
+            get => (Brush)GetValue(TextColorProperty);
+            set => SetValue(TextColorProperty, value);
+        }
+
+        private static void OnColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not IconLabel iconLabel) return;
+
+            iconLabel.IconColor = (Brush)e.NewValue;
+            iconLabel.TextColor = (Brush)e.NewValue;
+        }
+        
         public static readonly DependencyProperty IconSizeProperty = DependencyProperty.Register(
             nameof(IconSize), typeof(double), typeof(IconLabel),
             new PropertyMetadata(16.0));

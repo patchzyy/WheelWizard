@@ -17,7 +17,27 @@
     <SolidColorBrush x:Key="Switch-Background" Color="{StaticResource Gray700}" />
     <SolidColorBrush x:Key="Switch-Hover" Color="{StaticResource Gray500}" />
     <SolidColorBrush x:Key="SwitchDark-BackgroundHover" Color="{StaticResource Gray950}" />
-
+    
+    <!-- These styles are for the radio buttons that are at the top
+     of a single page to swap between different pages inside a single page -->
+    <SolidColorBrush x:Key="TopBarRadioForeground-Default" Color="{StaticResource Gray500}" />
+    <SolidColorBrush x:Key="TopBarRadioForeground-Hover" Color="{StaticResource Cyan200}" />
+    <SolidColorBrush x:Key="TopBarRadioForeground-Focus" Color="{StaticResource Cyan300}" />
+    <SolidColorBrush x:Key="TopBarRadioBackground-Default" Color="Transparent" />
+    <SolidColorBrush x:Key="TopBarRadioBackground-Hover" Color="{StaticResource Gray900}" />
+    <SolidColorBrush x:Key="TopBarRadioBackground-Focus" Color="Transparent" />
+    
+    <!-- side bar radio button colors -->
+    <SolidColorBrush x:Key="SideBarRadioBackground-Default" Color="{StaticResource Gray900}" />
+    <SolidColorBrush x:Key="SideBarRadioBackground-Hover" Color="{StaticResource Gray800}" />
+    <SolidColorBrush x:Key="SideBarRadioBackground-Focus" Color="{StaticResource Gray950}" />
+    <SolidColorBrush x:Key="SideBarRadioForeground-Default" Color="{StaticResource Gray400}" />
+    <SolidColorBrush x:Key="SideBarRadioForeground-Hover" Color="{StaticResource Cyan200}" />
+    <SolidColorBrush x:Key="SideBarRadioForeground-Focus" Color="{StaticResource Cyan300}" />
+    <SolidColorBrush x:Key="SideBarRadioIcon-Default" Color="{StaticResource Gray500}" />
+    <SolidColorBrush x:Key="SideBarRadioIcon-Hover" Color="{StaticResource Cyan300}" />
+    <SolidColorBrush x:Key="SideBarRadioIcon-Focus" Color="{StaticResource Cyan400}" />
+    
     <!-- ============ -->
     <!--   CHECKBOX   -->
     <!-- ============ -->
@@ -285,12 +305,40 @@
         </Setter>
     </Style>
     
-    
+    <!-- =============== -->
+    <!--  TOP-BAR RADIO  -->
+    <!-- =============== -->
     <Style TargetType="RadioButton" x:Key="TopBar">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Foreground" Value="{StaticResource TopBarRadioForeground-Default}" />
+        <Setter Property="Background" Value="{StaticResource TopBarRadioBackground-Default}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="10,3" />
+        <Setter Property="Margin" Value="2,2"/>
+    
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
-                    
+                    <Border Padding="{TemplateBinding Padding}" 
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="6"
+                            Margin="{TemplateBinding Margin    }">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Setter Property="Background" Value="{StaticResource TopBarRadioBackground-Hover}" />
+                            <Setter Property="Foreground" Value="{StaticResource TopBarRadioForeground-Hover}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Background" Value="{StaticResource TopBarRadioBackground-Focus}"/>
+                            <Setter Property="Foreground" Value="{StaticResource TopBarRadioForeground-Focus}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

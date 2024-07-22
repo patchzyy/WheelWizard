@@ -13,6 +13,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
         xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
         xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Pages"
+        xmlns:sink="clr-namespace:CT_MKWII_WPF.Views.Pages.KitchenSink"
         mc:Ignorable="d"
         Title="Wheel Wizard" Height="876" Width="656"
         WindowStyle='None'
@@ -168,10 +169,10 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                     <TextBlock Text="Other" Style="{StaticResource SidebarSectionText}"/>
                      -->
 
-                    <!-- <TextBlock Text="Components" Style="{StaticResource SidebarSectionText}"/> -->
-                    <!-- <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.SinkSolid}"  -->
-                    <!--                                IconPack="FontAwesome" Text="Kitchen Sink" -->
-                    <!--                               PageType="{x:Type local:KitchenSink}"/> -->
+                    <TextBlock Text="Components" Style="{StaticResource SidebarSectionText}"/> 
+                    <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.SinkSolid}"  
+                                                   IconPack="FontAwesome" Text="Kitchen Sink" 
+                                                   PageType="{x:Type sink:KitchenSink}"/> 
 
                 </StackPanel>
             </Border>

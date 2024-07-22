@@ -6,15 +6,15 @@
              xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Components"
              mc:Ignorable="d"
              x:Name="Root"
-             d:DesignHeight="90" d:DesignWidth="300">
+             d:DesignHeight="50" d:DesignWidth="200">
 
     <UserControl.Resources>
         <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
                TargetType="{x:Type RadioButton}"
                x:Key="SidebarMenuButton">
 
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="{StaticResource TitleTextColor}" />
+            <Setter Property="Background" Value="{StaticResource SideBarRadioBackground-Default}" />
+            <Setter Property="Foreground" Value="{StaticResource SideBarRadioForeground-Default}" />
             <Setter Property="Height" Value="50" />
 
             <Setter Property="Template">
@@ -24,23 +24,24 @@
                                 BorderThickness="0">
                             <local:IconLabel IconPack="{Binding IconPack, ElementName=Root}"
                                              IconKind="{Binding IconKind, ElementName=Root}"
-                                             IconSize="25"
-                                             FontSize="20"
+                                             IconSize="25" FontSize="20" x:Name="RadioIcon"
                                              Text="{Binding Text, ElementName=Root}"
-                                             Color="{TemplateBinding Foreground}"
-                                             HorizontalAlignment="Left"
-                                             VerticalAlignment="Center"
+                                             TextColor="{TemplateBinding Foreground}"
+                                             IconColor="{StaticResource SideBarRadioIcon-Default}"
+                                             HorizontalAlignment="Left" VerticalAlignment="Center"
                                              Margin="{StaticResource LeftEdgeGap}" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Cursor" Value="Hand" />
-                                <Setter Property="Background" Value="{StaticResource BackgroundContactColor}" />
-                                <Setter Property="Foreground" Value="{StaticResource TitleTextHover}" />
+                                <Setter Property="IconColor" Value="{StaticResource SideBarRadioIcon-Hover}" TargetName="RadioIcon"/>
+                                <Setter Property="Background" Value="{StaticResource SideBarRadioBackground-Hover}" />
+                                <Setter Property="Foreground" Value="{StaticResource SideBarRadioForeground-Hover}" />
                             </Trigger>
                             <Trigger Property="IsChecked" Value="True">
-                                <Setter Property="Background" Value="{StaticResource BackgroundColorV2}" />
-                                <Setter Property="Foreground" Value="{StaticResource TitleTextColor}" />
+                                <Setter Property="IconColor" Value="{StaticResource SideBarRadioIcon-Focus}" TargetName="RadioIcon"/>
+                                <Setter Property="Background" Value="{StaticResource SideBarRadioBackground-Focus}" />
+                                <Setter Property="Foreground" Value="{StaticResource SideBarRadioForeground-Focus}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

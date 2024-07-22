@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace CT_MKWII_WPF.Views.Pages.Popups;
+namespace CT_MKWII_WPF.Views.Popups;
 
 public partial class YesNoMessagebox : Window
 {
@@ -11,12 +11,13 @@ public partial class YesNoMessagebox : Window
     public YesNoMessagebox(string mainText, string yesText, string noText, string extraText = "", string bottomText = "")
     {
         InitializeComponent();
-        ViewUtils.GetLayout().DisableEverything();
         YesButton.Text = yesText;
         NoButton.Text = noText;
         MainTextBlock.Text = mainText;
         ExtraTextBlock.Text = extraText;
         BottomTextBlock.Text = bottomText;
+        
+        Loaded += YesNoWindow_Loaded;
     }
 
     private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => DragMove();
@@ -39,12 +40,16 @@ public partial class YesNoMessagebox : Window
         return messageBox.Result;
     }
     
+    private void YesNoWindow_Loaded(object sender, RoutedEventArgs e)
+    {
+        ViewUtils.GetLayout().DisableEverything();
+    }
+    
     protected override void OnClosed(EventArgs e)
     {
         ViewUtils.GetLayout().EnableEverything();
         base.OnClosed(e);
     }
-    
 }
 
 

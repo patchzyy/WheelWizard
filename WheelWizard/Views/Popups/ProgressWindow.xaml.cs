@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace CT_MKWII_WPF.Views;
+namespace CT_MKWII_WPF.Views.Popups;
 
 public partial class ProgressWindow : Window
 {

@@ -1,7 +1,7 @@
 ﻿using CT_MKWII_WPF.Helpers;
 using CT_MKWII_WPF.Models;
 using CT_MKWII_WPF.Models.Github;
-using CT_MKWII_WPF.Views.Pages.Popups;
+using CT_MKWII_WPF.Views.Popups;
 using Semver;
 using System;
 using System.Diagnostics;
