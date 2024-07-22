@@ -27,7 +27,7 @@ public static class RetroRewindLauncher
         if (mods.Length != 0)
         {
             Array.Reverse(mods);
-            var mystuffFolder = Path.Combine(SettingsUtils.GetLoadPathLocation(), "Riivolution", "RetroRewind6", "MyStuff");
+            var mystuffFolder = Path.Combine(SettingsUtils.GetLoadPathLocation(), "Riivolution", "WheelWizard", "RetroRewind6", "MyStuff");
             if (Directory.Exists(mystuffFolder))
             {
                 Directory.Delete(mystuffFolder, true);
@@ -112,7 +112,7 @@ public static class RetroRewindLauncher
         originalJSON = originalJSON.Replace("LINK TO ISO OR WBFS", correctedGamePath);
 
         // Replace the link to appdata riivolution folder with the correct path
-        string correctedRRPath = Path.Combine(SettingsUtils.GetLoadPathLocation(),"Riivolution");
+        string correctedRRPath = Path.Combine(SettingsUtils.GetLoadPathLocation(),"Riivolution", "WheelWizard");
         correctedRRPath = correctedRRPath.Replace(@"\", @"\/");
         originalJSON = originalJSON.Replace("LINK TO RIIVOLUTION FOLDER", correctedRRPath + @"\/");
 

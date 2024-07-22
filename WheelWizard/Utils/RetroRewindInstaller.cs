@@ -15,7 +15,7 @@ public static class RetroRewindInstaller
     public static bool IsRetroRewindInstalled()
     {
         var loadPath = SettingsUtils.GetLoadPathLocation();
-        var versionFilePath = Path.Combine(loadPath, "Riivolution", "RetroRewind6", "version.txt");
+        var versionFilePath = Path.Combine(loadPath, "Riivolution", "WheelWizard", "RetroRewind6", "version.txt");
         return File.Exists(versionFilePath);
 
     }
@@ -23,7 +23,7 @@ public static class RetroRewindInstaller
     public static string CurrentRRVersion()
     {
         var loadPath = SettingsUtils.GetLoadPathLocation();
-        var versionFilePath = Path.Combine(loadPath, "Riivolution", "RetroRewind6", "version.txt");
+        var versionFilePath = Path.Combine(loadPath, "Riivolution", "WheelWizard", "RetroRewind6", "version.txt");
         if (File.Exists(versionFilePath)) return File.ReadAllText(versionFilePath);
         return !File.Exists(versionFilePath) ? "Not Installed" : File.ReadAllText(versionFilePath);
     }
@@ -112,7 +112,7 @@ public static class RetroRewindInstaller
 private static void UpdateVersionFile(string newVersion)
 {
     var loadPath = SettingsUtils.GetLoadPathLocation();
-    var VersionFilePath = Path.Combine(loadPath, "Riivolution", "RetroRewind6", "version.txt");
+    var VersionFilePath = Path.Combine(loadPath, "Riivolution", "WheelWizard", "RetroRewind6", "version.txt");
     File.WriteAllText(VersionFilePath, newVersion);
 }
 private static async Task<List<(string Version, string Url, string Path, string Description)>> GetAllVersionData()
@@ -179,7 +179,7 @@ private static async Task<bool> DownloadAndApplyUpdate((string Version, string U
         string extratext = $"Update {currentUpdateIndex}/{totalUpdates}: {update.Description}";
         await DownloadUtils.DownloadFileWithWindow(update.Url, tempZipPath, window, extratext);
         window.UpdateProgress(100, "Extracting update...");
-        var extractionPath = Path.Combine(loadPath, "Riivolution");
+        var extractionPath = Path.Combine(loadPath, "Riivolution", "WheelWizard");
         Directory.CreateDirectory(extractionPath);
         ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
     }
@@ -213,7 +213,7 @@ public static async Task InstallRetroRewind()
             return;
         }
         var loadPath_ = SettingsUtils.GetLoadPathLocation();
-        var rrWFC = Path.Combine(loadPath_, "Riivolution", "RetroRewind6", "save","RetroWFC");
+        var rrWFC = Path.Combine(loadPath_, "Riivolution", "WheelWizard", "RetroRewind6", "save","RetroWFC");
         if (Directory.Exists(rrWFC))
         {
             var files = Directory.GetFiles(rrWFC, "rksys.dat", SearchOption.AllDirectories);
@@ -222,12 +222,12 @@ public static async Task InstallRetroRewind()
                 var regionFolder = Path.GetDirectoryName(files[0]);
                 var regionFoldername = Path.GetFileName(regionFolder);
                 var DATFILEDATA = await File.ReadAllBytesAsync(files[0]);
-                var riiWFCregion = Path.Combine(loadPath_, "Riivolution", "riivolution", "save", "RetroWFC", regionFoldername);
+                var riiWFCregion = Path.Combine(loadPath_, "Riivolution", "WheelWizard", "riivolution", "save", "RetroWFC", regionFoldername);
                 Directory.CreateDirectory(riiWFCregion);
                 await File.WriteAllBytesAsync(Path.Combine(riiWFCregion, "rksys.dat"), DATFILEDATA);
             }
         }
-        var retroRewindPath = Path.Combine(loadPath_, "Riivolution", "RetroRewind6");
+        var retroRewindPath = Path.Combine(loadPath_, "Riivolution", "WheelWizard", "RetroRewind6");
         Directory.Delete(retroRewindPath, true);
     }
     
@@ -238,7 +238,7 @@ public static async Task InstallRetroRewind()
     await DownloadUtils.DownloadFileWithWindow(RetroRewindURL, tempZipPath, progressWindow, "Downloading Retro Rewind...");
     progressWindow.Close();
     // Extract the zip to the Riivolution folder
-    var extractionPath = Path.Combine(loadPath, "Riivolution");
+    var extractionPath = Path.Combine(loadPath, "Riivolution", "WheelWizard");
     ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
     // Clean up the downloaded zip file
     File.Delete(tempZipPath);
