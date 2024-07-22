@@ -13,14 +13,13 @@ public static class StatusManager
 {
     public static async Task<WheelWizardStatus> GetCurrentStatus()
     {
-        var serverEnabled = await HttpClientHelper.GetAsync<string>(Endpoints.RRUrl);
-        if (!serverEnabled.Succeeded) return WheelWizardStatus.NoServer;
-
         var configCorrectAndExists = ConfigValidator.ConfigCorrectAndExists();
         if (!configCorrectAndExists) return WheelWizardStatus.ConfigNotFinished;
         var retroRewindInstalled = RetroRewindInstaller.IsRetroRewindInstalled();
         if (!retroRewindInstalled) return WheelWizardStatus.NoRR;
         if (!ConfigValidator.IsConfigFileFinishedSettingUp()) return WheelWizardStatus.ConfigNotFinished;
+        var serverEnabled = await HttpClientHelper.GetAsync<string>(Endpoints.RRUrl);
+        if (!serverEnabled.Succeeded) return WheelWizardStatus.NoServer;
         var retroRewindUpToDate = await RetroRewindUpdater.IsRRUpToDate(RetroRewindInstaller.CurrentRRVersion());
         if (!retroRewindUpToDate) return WheelWizardStatus.OutOfDate;
         return WheelWizardStatus.UpToDate;

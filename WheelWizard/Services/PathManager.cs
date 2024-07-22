@@ -13,7 +13,7 @@ public static class PathManager
     public static string UserFolderPath => ConfigManager.GetConfig().UserFolderPath!;
     public static string LoadFolderPath => Path.Combine(UserFolderPath, "Load");
     
-    // TODO: should be moved to some other class where it makes sence
+    // TODO: should be moved to some other class where it makes sense
     public static bool GetForceWiimote() => ConfigManager.GetConfig().ForceWiimote;
     
     public static string FindWiiMoteNew()
