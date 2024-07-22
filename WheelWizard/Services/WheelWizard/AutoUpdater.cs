@@ -1,8 +1,13 @@
 ﻿using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Views;
+using CT_MKWII_WPF.Models;
+using CT_MKWII_WPF.Models.Github;
+using CT_MKWII_WPF.Views.Pages.Popups;
+using Semver;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Security.Principal;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -11,40 +16,82 @@ namespace CT_MKWII_WPF.Services.WheelWizard;
 public static class AutoUpdater
 {
     public const string CurrentVersion = "1.1.2";
-
+    private const string GithubApiUrl = "https://api.github.com/repos/patchzyy/WheelWizard/releases/latest";
+    
+    
     public static async Task CheckForUpdatesAsync()
     {
-        var response = await HttpClientHelper.GetAsync<string>(Endpoints.WhWzVersionUrl);
+        var response = await HttpClientHelper.GetAsync<string>(GithubApiUrl);
         if (!response.Succeeded || response.Content is null)
         {
-            if (response.StatusCodeGroup == 4 || response.StatusCode is 503 or 504)
-            {
-                MessageBox.Show("Unable to check if WheelWizard is up to date. " +
-                                "\nYou might be experiencing network issues.");
-            }
-            else
-            {
-                MessageBox.Show("An error occurred while checking for updates. Please try again later. " +
-                                "\nError: " + response.StatusMessage);
-            }
-
+            HandleUpdateCheckError(response);
             return;
         }
-        if (response.Content.Trim() == CurrentVersion) return;
-        var initiatedUpdate = MessageBox.Show("A new version of WheelWizard is available. Would you like to update?",
-            "Update Available", MessageBoxButtons.YesNo);
-        if (initiatedUpdate == DialogResult.Yes) await UpdateAsync();
-    }
+        var latestRelease = JsonSerializer.Deserialize<GithubRelease>(response.Content);
+        if (latestRelease?.TagName is null) return;
+        
+        var currentVersion = SemVersion.Parse(CurrentVersion, SemVersionStyles.Any);
+        var latestVersion = SemVersion.Parse(latestRelease.TagName.TrimStart('v'), SemVersionStyles.Any);
 
-    private static async Task UpdateAsync()
+        if (currentVersion.ComparePrecedenceTo(latestVersion) >= 0) return;
+        if (IsAdministrator())
+        {
+            await UpdateAsync(latestRelease.Assets[0].BrowserDownloadUrl);
+            return;
+        }
+        
+        var initiatedUpdate = YesNoMessagebox.Show("Wheel Wizard Update!", "Update now!", "Maybe Later!", currentVersion.ToString() + "->" + latestVersion.ToString());
+        if (!initiatedUpdate) return;
+        var adminResult = YesNoMessagebox.Show("Update as Admin?", "Yes", "No");
+        //     "Update Method", MessageBoxButtons.YesNo);
+        if (adminResult)
+        {
+            RestartAsAdmin();
+        }
+        else
+        {
+            await UpdateAsync(latestRelease.Assets[0].BrowserDownloadUrl);
+        }
+    }
+    
+    private static void RestartAsAdmin()
     {
-        string currentExecutablePath;
+        ProcessStartInfo startInfo = new ProcessStartInfo();
+        startInfo.UseShellExecute = true;
+        startInfo.WorkingDirectory = Environment.CurrentDirectory;
+        startInfo.FileName = GetActualExecutablePath();
+        startInfo.Verb = "runas";
+        try
+        {
+            Process.Start(startInfo);
+            Environment.Exit(0);
+        }
+        catch (System.ComponentModel.Win32Exception)
+        {
+            MessageBox.Show("Failed to restart with administrator rights.");
+        }
+    }
+    
+    private static string GetActualExecutablePath()
+    {
         using (var process = Process.GetCurrentProcess())
         {
-            // Retrieve the path of the currently executing process
-            currentExecutablePath = process.MainModule!.FileName;
+            return process.MainModule.FileName;
         }
+    }
+    
+    private static bool IsAdministrator()
+    {
+        using (WindowsIdentity identity = WindowsIdentity.GetCurrent())
+        {
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
+            return principal.IsInRole(WindowsBuiltInRole.Administrator);
+        }
+    }
 
+    private static async Task UpdateAsync(string downloadUrl)
+    {
+        var currentExecutablePath = Process.GetCurrentProcess().MainModule!.FileName;
         var currentFolder = Path.GetDirectoryName(currentExecutablePath);
         if (currentFolder is null)
         {
@@ -54,7 +101,7 @@ public static class AutoUpdater
         }
         var newFilePath = Path.Combine(currentFolder, "CT-MKWII-WPF_new.exe");
 
-        await DownloadHelper.DownloadToLocation(Endpoints.WhWzLatestReleasedUrl, newFilePath);
+        await DownloadHelper.DownloadToLocation(downloadUrl, newFilePath);
 
         // we need to wait a bit before running the batch file to ensure the file is saved on disk
         await Task.Delay(200);
@@ -82,4 +129,20 @@ del ""%~f0""
 
         Process.Start(new ProcessStartInfo(batchFilePath) { CreateNoWindow = true });
     }
+    
+    private static void HandleUpdateCheckError(HttpClientResult<string> response)
+    {
+        if (response.StatusCodeGroup == 4 || response.StatusCode is 503 or 504)
+        {
+            MessageBox.Show("Unable to check if WheelWizard is up to date. " +
+                            "\nYou might be experiencing network issues.");
+        }
+        else
+        {
+            MessageBox.Show("An error occurred while checking for updates. Please try again later. " +
+                            "\nError: " + response.StatusMessage);
+        }
+    }
+    
+    
 }

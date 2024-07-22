@@ -22,6 +22,7 @@
         <PackageReference Include="Microsoft.WindowsAPICodePack.Shell" Version="1.1.0"/>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
         <PackageReference Include="NLog.Windows.Forms" Version="5.2.3"/>
+        <PackageReference Include="Semver" Version="3.0.0-beta.1" />
         <PackageReference Include="SharpVectors" Version="1.8.4"/>
         <PackageReference Include="System.Management" Version="9.0.0-preview.3.24172.9"/>
     </ItemGroup>
@@ -32,10 +33,10 @@
             <XamlRuntime>Wpf</XamlRuntime>
             <SubType>Designer</SubType>
         </Page>
-        <Page Update="Views\ProgressWindow.xaml">
-            <Generator>MSBuild:Compile</Generator>
-            <XamlRuntime>Wpf</XamlRuntime>
-            <SubType>Designer</SubType>
+        <Page Update="Views\Pages\Popups\ProgressWindow.xaml">
+          <Generator>MSBuild:Compile</Generator>
+          <XamlRuntime>Wpf</XamlRuntime>
+          <SubType>Designer</SubType>
         </Page>
     </ItemGroup>
     <PropertyGroup>

@@ -46,6 +46,7 @@ public static class HttpClientHelper
         HttpClientResult<T> result;
         try
         {
+            HttpClient.DefaultRequestHeaders.UserAgent.ParseAdd("WheelWizard/1.0");
             var response = await HttpClient.GetAsync(url);
 
             result = new HttpClientResult<T>()
