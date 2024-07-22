@@ -4,13 +4,14 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace CT_MKWII_WPF.Services.IdkWhereThisShouldGo;
+namespace CT_MKWII_WPF.Services.Launcher;
 
-public static class LaunchJsonGenerator
+public static class RetroRewindLaunchHelper
 {
-    private const string JsonFileName = "RR.json";
-    private const string XmlFileName = "RetroRewind6.xml";
-
+    private static string RootRiivolution => Path.Combine(PathManager.GetLoadPathLocation(), "Riivolution");
+    private static string XmlPath => Path.Combine(RootRiivolution, "riivolution", "RetroRewind6.xml");
+    private static string JsonPath => Path.Combine(ConfigManager.GetWheelWizardAppdataPath(), "RR.json");
+    
     public static void GenerateLaunchJson(bool launchTt)
     {
         var launchConfig = new LaunchConfig
@@ -29,8 +30,8 @@ public static class LaunchJsonGenerator
                             new OptionConfig { Choice = 2, OptionName = "My Stuff", SectionName = "Retro Rewind" },
                             new OptionConfig { Choice = launchTt ? 1 : 0, OptionName = "Online TT", SectionName = "Retro Rewind" }
                         },
-                        Root = Path.Combine(PathManager.GetLoadPathLocation(), "Riivolution"),
-                        Xml = Path.Combine(PathManager.GetLoadPathLocation(), "Riivolution", "riivolution", XmlFileName)
+                        Root = RootRiivolution,
+                        Xml = XmlPath
                     }
                 }
             },
@@ -44,12 +45,7 @@ public static class LaunchJsonGenerator
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         });
-
-        var outputPath = Path.Combine(
-            ConfigManager.GetWheelWizardAppdataPath(),
-            JsonFileName
-        );
-
-        File.WriteAllText(outputPath, jsonString);
+        
+        File.WriteAllText(JsonPath, jsonString);
     }
 }

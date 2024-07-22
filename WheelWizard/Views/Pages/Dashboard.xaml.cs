@@ -49,7 +49,7 @@ public partial class Dashboard
                 EnableSidebarButtons();
                 break;
             case WheelWizardStatus.UpToDate:
-                RetroRewindLauncher.PlayRetroRewind((bool)OnlineTTCheckbox.IsChecked!);
+                Launcher.LaunchRetroRewind((bool)OnlineTTCheckbox.IsChecked!);
                 break;
         }
 
@@ -128,14 +128,13 @@ public partial class Dashboard
 
     private void DolphinButton_OnClick(object sender, RoutedEventArgs e)
     {
-        DolphinSettingHelper.LaunchDolphin();
+        Launcher.LaunchDolphin();
         DisableAllButtonsTemporarily();
     }
 
     private void MiiButton_OnClick(object sender, RoutedEventArgs e)
     {
-        WiiMoteSettings.EnableVirtualWiiMote();
-        _ = MiiChannelManager.LaunchMiiChannel();
+        _ = Launcher.LaunchMiiChannel();
         DisableAllButtonsTemporarily();
     }
 

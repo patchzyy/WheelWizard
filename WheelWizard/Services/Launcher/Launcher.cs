@@ -1,0 +1,67 @@
+using CT_MKWII_WPF.Services.IdkWhereThisShouldGo;
+using CT_MKWII_WPF.Services.Settings;
+using CT_MKWII_WPF.Services.WiiManagement;
+using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
+using System.Windows;
+
+namespace CT_MKWII_WPF.Services.Launcher;
+
+public static class Launcher
+{
+    private static void KillDolphin()
+    {
+        var dolphinLocation = PathManager.GetDolphinLocation();
+        if (Process.GetProcessesByName(Path.GetFileNameWithoutExtension(dolphinLocation)).Length == 0) return;
+
+        var dolphinProcesses = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(dolphinLocation));
+        foreach (var process in dolphinProcesses)
+        {
+            process.Kill();
+        }
+    }
+    
+    public static void LaunchDolphin(string arguments = "", bool shellExecute = false)
+    {
+        var dolphinLocation = PathManager.GetDolphinLocation();
+        if (dolphinLocation == "")
+        {
+            MessageBox.Show("Could not find Dolphin Emulator, please set the path in settings",
+                            "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = dolphinLocation,
+            Arguments = arguments,
+            UseShellExecute = shellExecute
+        });
+    }
+    
+    public static void LaunchRetroRewind(bool playTt)
+    {
+        KillDolphin();
+        if (WiiMoteSettings.IsForceSettingsEnabled()) 
+            WiiMoteSettings.DisableVirtualWiiMote();
+        
+        ModsLaunchHelper.PrepareModsForLaunch();
+        if (!File.Exists(PathManager.GetGameLocation()))
+        {
+            MessageBox.Show("Could not find the game, please set the path in settings",
+                            "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+        RetroRewindLaunchHelper.GenerateLaunchJson(playTt);
+        var launchJson = Path.Combine(ConfigManager.GetWheelWizardAppdataPath(), "RR.json");
+
+        LaunchDolphin( $"-e \"{launchJson}\" --config=Dolphin.Core.EnableCheats=False");
+    }
+
+    public static async Task LaunchMiiChannel()
+    {
+        WiiMoteSettings.EnableVirtualWiiMote();
+        await MiiChannelLaunchHelper.LaunchMiiChannel();
+    }
+}

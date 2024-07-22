@@ -114,17 +114,4 @@ public static class DolphinSettingHelper
 
         File.WriteAllLines(fileLocation, lines);
     }
-
-    public static void LaunchDolphin(string arguments = "")
-    {
-        var dolphinLocation = PathManager.GetDolphinLocation();
-        if (dolphinLocation == "")
-        {
-            MessageBox.Show("Could not find Dolphin Emulator, please set the path in settings", "Error",
-                MessageBoxButton.OK, MessageBoxImage.Error);
-            return;
-        }
-
-        System.Diagnostics.Process.Start(dolphinLocation, arguments);
-    }
 }

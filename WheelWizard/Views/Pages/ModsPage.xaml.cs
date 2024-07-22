@@ -1,4 +1,5 @@
 ﻿using CT_MKWII_WPF.Models;
+using CT_MKWII_WPF.Services.Launcher;
 using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
@@ -95,9 +96,12 @@ namespace CT_MKWII_WPF.Views.Pages
 
         private void ImportMod_Click(object sender, RoutedEventArgs e)
         {
+            var joinedExtensions = string.Join(";",ModsLaunchHelper.AcceptedModExtensions);
+            joinedExtensions += ";*.zip";
+            
             var openFileDialog = new OpenFileDialog
             {
-                Filter = "Mod files (*.zip;*.brstm;*.brsar;*.szs;*.arc;*.thp;)|*.zip;*.brstm;*.brsar;*.szs;*.arc;*.thp|All files (*.*)|*.*",
+                Filter = $"Mod files ({joinedExtensions})|{joinedExtensions}|All files (*.*)|*.*",
                 Title = "Select Mod File",
                 Multiselect = true
             };
