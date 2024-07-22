@@ -8,12 +8,10 @@ namespace CT_MKWII_WPF.Services.Settings;
 
 public static class ConfigManager
 {
-    private static readonly string WheelWizardConfigFilePath =
-        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII", "config.json");
-
-    private static readonly string WheelWizardAppdataPath =
+    public static readonly string WheelWizardAppdataPath =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII");
-
+    public static readonly string WheelWizardConfigFilePath = Path.Combine(WheelWizardAppdataPath, "config.json");
+    
     private static Config? _config;
 
     static ConfigManager()
@@ -27,9 +25,6 @@ public static class ConfigManager
             throw new Exception("Config is null, this should never happen");
         return _config;
     }
-    public static string GetWheelWizardAppdataPath() => WheelWizardAppdataPath;
-
-    public static string GetWheelWizardConfigPath() => WheelWizardConfigFilePath;
 
     public static void SaveSettings(string dolphinPath, string gamePath, string userFolderPath, bool hasRunNandTutorial,
         bool forceDisableWiimote)

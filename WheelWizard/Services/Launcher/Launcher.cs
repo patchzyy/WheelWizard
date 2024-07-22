@@ -10,9 +10,11 @@ namespace CT_MKWII_WPF.Services.Launcher;
 
 public static class Launcher
 {
+    private static string RRLaunchJsonFilePath => Path.Combine(ConfigManager.WheelWizardAppdataPath, "RR.json");
+    
     private static void KillDolphin()
     {
-        var dolphinLocation = PathManager.GetDolphinLocation();
+        var dolphinLocation = PathManager.DolphinFilePath;
         if (Process.GetProcessesByName(Path.GetFileNameWithoutExtension(dolphinLocation)).Length == 0) return;
 
         var dolphinProcesses = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(dolphinLocation));
@@ -24,7 +26,7 @@ public static class Launcher
     
     public static void LaunchDolphin(string arguments = "", bool shellExecute = false)
     {
-        var dolphinLocation = PathManager.GetDolphinLocation();
+        var dolphinLocation = PathManager.DolphinFilePath;
         if (dolphinLocation == "")
         {
             MessageBox.Show("Could not find Dolphin Emulator, please set the path in settings",
@@ -47,16 +49,14 @@ public static class Launcher
             WiiMoteSettings.DisableVirtualWiiMote();
         
         ModsLaunchHelper.PrepareModsForLaunch();
-        if (!File.Exists(PathManager.GetGameLocation()))
+        if (!File.Exists(PathManager.GameFilePath))
         {
             MessageBox.Show("Could not find the game, please set the path in settings",
                             "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
         RetroRewindLaunchHelper.GenerateLaunchJson(playTt);
-        var launchJson = Path.Combine(ConfigManager.GetWheelWizardAppdataPath(), "RR.json");
-
-        LaunchDolphin( $"-e \"{launchJson}\" --config=Dolphin.Core.EnableCheats=False");
+        LaunchDolphin( $"-e \"{RRLaunchJsonFilePath}\" --config=Dolphin.Core.EnableCheats=False");
     }
 
     public static async Task LaunchMiiChannel()

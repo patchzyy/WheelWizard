@@ -13,7 +13,10 @@ public static class RetroRewindInstaller
     private const string RetroRewindFolderName = "RetroRewind6";
     private const string RiivolutionFolderName = "Riivolution";
 
-    private static string GetVersionFilePath() => Path.Combine(PathManager.GetLoadPathLocation(), RiivolutionFolderName, RetroRewindFolderName, VersionFileName);
+    private static string GetVersionFilePath() => Path.Combine(PathManager.LoadFolderPath, RiivolutionFolderName, RetroRewindFolderName, VersionFileName);
+    
+    private static string LoadFolderPath => PathManager.LoadFolderPath;
+    
     public static bool IsRetroRewindInstalled()
     {
         var versionFilePath = GetVersionFilePath();
@@ -52,29 +55,28 @@ public static class RetroRewindInstaller
 
     public static async Task InstallRetroRewind()
     {
-        var loadPath = PathManager.GetLoadPathLocation();
 
         if (IsRetroRewindInstalled())
         {
-            await HandleReinstall(loadPath);
+            await HandleReinstall();
         }
 
-        var tempZipPath = Path.Combine(loadPath, "Temp", "RetroRewind.zip");
-        await DownloadAndExtractRetroRewind(tempZipPath, loadPath);
+        var tempZipPath = Path.Combine(LoadFolderPath, "Temp", "RetroRewind.zip");
+        await DownloadAndExtractRetroRewind(tempZipPath);
     }
 
-    private static async Task HandleReinstall(string loadPath)
+    private static async Task HandleReinstall()
     {
         var result = MessageBox.Show("There are already files in your RetroRewind Folder. Would you like to install?",
             "Reinstall Retro Rewind", MessageBoxButton.YesNo);
 
         if (result == MessageBoxResult.No) return;
 
-        await BackupRksysFile(loadPath);
-        DeleteExistingRetroRewind(loadPath);
+        await BackupRksysFile();
+        DeleteExistingRetroRewind();
     }
 
-    private static async Task DownloadAndExtractRetroRewind(string tempZipPath, string loadPath)
+    private static async Task DownloadAndExtractRetroRewind(string tempZipPath)
     {
         var progressWindow = new ProgressWindow();
         progressWindow.ChangeExtraText("Downloading Retro Rewind...");
@@ -84,7 +86,7 @@ public static class RetroRewindInstaller
         {
             await DownloadHelper.DownloadToLocation(Endpoints.RRZipUrl, tempZipPath, progressWindow);
             progressWindow.ChangeExtraText("Extracting files...");
-            var extractionPath = Path.Combine(loadPath, RiivolutionFolderName);
+            var extractionPath = Path.Combine(LoadFolderPath, RiivolutionFolderName);
             ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
         }
         finally
@@ -95,9 +97,9 @@ public static class RetroRewindInstaller
         }
     }
 
-    private static async Task BackupRksysFile(string loadPath)
+    private static async Task BackupRksysFile()
     {
-        var rrWfc = Path.Combine(loadPath, RiivolutionFolderName, RetroRewindFolderName, "save", "RetroWFC");
+        var rrWfc = Path.Combine(LoadFolderPath, RiivolutionFolderName, RetroRewindFolderName, "save", "RetroWFC");
         if (!Directory.Exists(rrWfc)) return;
 
         var rksysFiles = Directory.GetFiles(rrWfc, "rksys.dat", SearchOption.AllDirectories);
@@ -108,14 +110,14 @@ public static class RetroRewindInstaller
         var regionFolderName = Path.GetFileName(regionFolder);
         var datFileData = await File.ReadAllBytesAsync(sourceFile);
         if (regionFolderName == null) return;
-        var destinationFolder = Path.Combine(loadPath, RiivolutionFolderName, "riivolution", "save", "RetroWFC", regionFolderName);
+        var destinationFolder = Path.Combine(LoadFolderPath, RiivolutionFolderName, "riivolution", "save", "RetroWFC", regionFolderName);
         Directory.CreateDirectory(destinationFolder);
         await File.WriteAllBytesAsync(Path.Combine(destinationFolder, "rksys.dat"), datFileData);
     }
 
-    private static void DeleteExistingRetroRewind(string loadPath)
+    private static void DeleteExistingRetroRewind()
     {
-        var retroRewindPath = Path.Combine(loadPath, RiivolutionFolderName, RetroRewindFolderName);
+        var retroRewindPath = Path.Combine(LoadFolderPath, RiivolutionFolderName, RetroRewindFolderName);
         if (Directory.Exists(retroRewindPath))
             Directory.Delete(retroRewindPath, true);
     }

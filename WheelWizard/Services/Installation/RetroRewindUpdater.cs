@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace CT_MKWII_WPF.Services.Installation;
 
-public static class RRUpdater
+public static class RetroRewindUpdater
 {
     public static async Task<bool> IsRRUpToDate(string currentVersion)
     {
@@ -80,8 +80,7 @@ public static class RRUpdater
 
     private static void UpdateVersionFile(string newVersion)
     {
-        var loadPath = PathManager.GetLoadPathLocation();
-        var versionFilePath = Path.Combine(loadPath, "Riivolution", "RetroRewind6", "version.txt");
+        var versionFilePath = Path.Combine(PathManager.LoadFolderPath, "Riivolution", "RetroRewind6", "version.txt");
         File.WriteAllText(versionFilePath, newVersion);
     }
 
@@ -139,7 +138,6 @@ public static class RRUpdater
         (string Version, string Url, string Path, string Description) update, int totalUpdates, int currentUpdateIndex,
         ProgressWindow window)
     {
-        var loadPath = PathManager.GetLoadPathLocation();
         var tempZipPath = Path.GetTempFileName();
         try
         {
@@ -147,7 +145,7 @@ public static class RRUpdater
             await DownloadHelper.DownloadToLocation(update.Url, tempZipPath, window);
 
             window.UpdateProgress(100, "Extracting update...", "Extracting update...");
-            var extractionPath = Path.Combine(loadPath, "Riivolution");
+            var extractionPath = Path.Combine(PathManager.LoadFolderPath, "Riivolution");
             Directory.CreateDirectory(extractionPath);
             ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
         }

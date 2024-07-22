@@ -10,8 +10,8 @@ public static class ModsLaunchHelper
 {
     public static readonly string[] AcceptedModExtensions = { "*.szs", "*.arc", "*.brstm", "*.brsar", "*.thp" };
 
-    private static string MyStuffFolder => Path.Combine(PathManager.GetLoadPathLocation(), "Riivolution", "RetroRewind6", "MyStuff");
-    private static string ModsFolder => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII", "Mods");
+    private static string MyStuffFolderPath => Path.Combine(PathManager.LoadFolderPath, "Riivolution", "RetroRewind6", "MyStuff");
+    private static string ModsFolderPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII", "Mods");
     
     public static void PrepareModsForLaunch()
     {
@@ -20,8 +20,8 @@ public static class ModsLaunchHelper
         
         Array.Reverse(mods);
         
-        if (Directory.Exists(MyStuffFolder))
-            Directory.Delete(MyStuffFolder, true);
+        if (Directory.Exists(MyStuffFolderPath))
+            Directory.Delete(MyStuffFolderPath, true);
         foreach (var mod in mods)
         {
             if (mod.IsEnabled)
@@ -31,7 +31,7 @@ public static class ModsLaunchHelper
     
     private static void InstallMod(ModData mod)
     {
-        var modFolder = Path.Combine(ModsFolder, mod.Title);
+        var modFolder = Path.Combine(ModsFolderPath, mod.Title);
 
         var allFiles = Array.Empty<string>();
         foreach (var extension in AcceptedModExtensions)
@@ -43,7 +43,7 @@ public static class ModsLaunchHelper
         foreach (var file in allFiles)
         {
             var relativePath = Path.GetFileName(file);
-            var destinationFile = Path.Combine(MyStuffFolder, relativePath);
+            var destinationFile = Path.Combine(MyStuffFolderPath, relativePath);
             Directory.CreateDirectory(Path.GetDirectoryName(destinationFile)!);
             File.Copy(file, destinationFile, true);
         }

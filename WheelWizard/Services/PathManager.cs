@@ -6,17 +6,19 @@ namespace CT_MKWII_WPF.Services;
 
 public static class PathManager
 {
-    public static string GetGameLocation() => ConfigManager.GetConfig().GameLocation!;
-    public static string GetDolphinLocation() => ConfigManager.GetConfig().DolphinLocation!;
-    public static string GetUserPathLocation() => ConfigManager.GetConfig().UserFolderPath!;
+    // NOTE: To keep things consistent all paths should be Attrib expressions,
+    //       and either end with `FilePath` or `FolderPath`
+    public static string GameFilePath => ConfigManager.GetConfig().GameLocation!;
+    public static string DolphinFilePath => ConfigManager.GetConfig().DolphinLocation!;
+    public static string UserFolderPath => ConfigManager.GetConfig().UserFolderPath!;
+    public static string LoadFolderPath => Path.Combine(UserFolderPath, "Load");
+    
+    // TODO: should be moved to some other class where it makes sence
     public static bool GetForceWiimote() => ConfigManager.GetConfig().ForceWiimote;
-
-    public static string GetLoadPathLocation() => Path.Combine(GetUserPathLocation(), "Load");
-
+    
     public static string FindWiiMoteNew()
     {
-        var folderPath = GetUserPathLocation();
-        var configFolder = Path.Combine(folderPath, "Config");
+        var configFolder = Path.Combine(UserFolderPath, "Config");
         var wiimoteFile = Path.Combine(configFolder, "WiimoteNew.ini");
 
         if (File.Exists(wiimoteFile))
@@ -28,8 +30,7 @@ public static class PathManager
 
     public static string FindGfxFile()
     {
-        var folderPath = GetUserPathLocation();
-        var configFolder = Path.Combine(folderPath, "Config");
+        var configFolder = Path.Combine(UserFolderPath, "Config");
         var gfxFile = Path.Combine(configFolder, "GFX.ini");
         if (File.Exists(gfxFile))
             return gfxFile;

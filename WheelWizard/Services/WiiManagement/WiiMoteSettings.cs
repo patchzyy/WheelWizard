@@ -8,7 +8,7 @@ public class WiiMoteSettings
     private const string WiimoteSection = "[Wiimote1]";
     private const string SourceParameter = "Source";
 
-    public static string GetSavedWiiMoteLocation() => PathManager.FindWiiMoteNew();
+    private static string GetSavedWiiMoteLocation() => PathManager.FindWiiMoteNew();
     public static void EnableVirtualWiiMote() => ModifyWiiMoteSource(1);
     public static void DisableVirtualWiiMote() => ModifyWiiMoteSource(0);
     public static bool IsForceSettingsEnabled() => PathManager.GetForceWiimote();

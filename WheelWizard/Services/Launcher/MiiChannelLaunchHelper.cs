@@ -8,7 +8,7 @@ namespace CT_MKWII_WPF.Services.Launcher;
 
 public static class MiiChannelLaunchHelper
 {
-    private static string MiiChannelPath => Path.Combine(ConfigManager.GetWheelWizardAppdataPath(), "MiiChannel.wad");
+    private static string MiiChannelPath => Path.Combine(ConfigManager.WheelWizardAppdataPath, "MiiChannel.wad");
     
     public static async Task LaunchMiiChannel()
     {

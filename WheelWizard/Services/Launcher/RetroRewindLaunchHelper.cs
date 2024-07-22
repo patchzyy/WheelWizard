@@ -8,15 +8,15 @@ namespace CT_MKWII_WPF.Services.Launcher;
 
 public static class RetroRewindLaunchHelper
 {
-    private static string RootRiivolution => Path.Combine(PathManager.GetLoadPathLocation(), "Riivolution");
-    private static string XmlPath => Path.Combine(RootRiivolution, "riivolution", "RetroRewind6.xml");
-    private static string JsonPath => Path.Combine(ConfigManager.GetWheelWizardAppdataPath(), "RR.json");
+    private static string RootRiivolutionFolderPath => Path.Combine(PathManager.LoadFolderPath, "Riivolution");
+    private static string XmlFilePath => Path.Combine(RootRiivolutionFolderPath, "riivolution", "RetroRewind6.xml");
+    private static string JsonFilePath => Path.Combine(ConfigManager.WheelWizardAppdataPath, "RR.json");
     
     public static void GenerateLaunchJson(bool launchTt)
     {
         var launchConfig = new LaunchConfig
         {
-            BaseFile = PathManager.GetGameLocation(),
+            BaseFile = PathManager.GameFilePath,
             DisplayName = "RR",
             Riivolution = new RiivolutionConfig
             {
@@ -30,8 +30,8 @@ public static class RetroRewindLaunchHelper
                             new OptionConfig { Choice = 2, OptionName = "My Stuff", SectionName = "Retro Rewind" },
                             new OptionConfig { Choice = launchTt ? 1 : 0, OptionName = "Online TT", SectionName = "Retro Rewind" }
                         },
-                        Root = RootRiivolution,
-                        Xml = XmlPath
+                        Root = RootRiivolutionFolderPath,
+                        Xml = XmlFilePath
                     }
                 }
             },
@@ -46,6 +46,6 @@ public static class RetroRewindLaunchHelper
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         });
         
-        File.WriteAllText(JsonPath, jsonString);
+        File.WriteAllText(JsonFilePath, jsonString);
     }
 }

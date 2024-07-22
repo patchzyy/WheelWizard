@@ -30,9 +30,9 @@ public partial class SettingsPage : Page
     private void LoadSettings()
     {
         if (!ConfigValidator.ConfigCorrectAndExists()) return;
-        DolphinExeInput.Text = PathManager.GetDolphinLocation();
-        MarioKartInput.Text = PathManager.GetGameLocation();
-        DolphinUserPathInput.Text = PathManager.GetUserPathLocation();
+        DolphinExeInput.Text = PathManager.DolphinFilePath;
+        MarioKartInput.Text = PathManager.GameFilePath;
+        DolphinUserPathInput.Text = PathManager.UserFolderPath;
     }
 
     private void UpdateResolution(object sender, RoutedEventArgs e)

@@ -21,7 +21,7 @@ public static class StatusManager
         var retroRewindInstalled = RetroRewindInstaller.IsRetroRewindInstalled();
         if (!retroRewindInstalled) return WheelWizardStatus.NoRR;
         if (!ConfigValidator.IsConfigFileFinishedSettingUp()) return WheelWizardStatus.ConfigNotFinished;
-        var retroRewindUpToDate = await RRUpdater.IsRRUpToDate(RetroRewindInstaller.CurrentRRVersion());
+        var retroRewindUpToDate = await RetroRewindUpdater.IsRRUpToDate(RetroRewindInstaller.CurrentRRVersion());
         if (!retroRewindUpToDate) return WheelWizardStatus.OutOfDate;
         return WheelWizardStatus.UpToDate;
     }

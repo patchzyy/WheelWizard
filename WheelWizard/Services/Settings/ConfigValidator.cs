@@ -17,7 +17,7 @@ namespace CT_MKWII_WPF.Services.Settings
                    File.Exists(gfxFile);
         }
 
-        public static bool DoesConfigExist() => File.Exists(ConfigManager.GetWheelWizardConfigPath());
+        private static bool DoesConfigExist() => File.Exists(ConfigManager.WheelWizardConfigFilePath);
         public static bool ConfigCorrectAndExists() => DoesConfigExist() && SetupCorrectly();
 
         public static bool IsConfigFileFinishedSettingUp()

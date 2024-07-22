@@ -9,6 +9,7 @@ namespace CT_MKWII_WPF.Services.WiiManagement.GameData;
 
 public class GameDataLoader
 {
+    private static string SaveFilePath => Path.Combine(PathManager.LoadFolderPath, "Riivolution", "RetroRewind6", "save");
     private byte[] _saveData;
 
     public Models.GameData.GameData GameData { get; }
@@ -122,9 +123,7 @@ public class GameDataLoader
 
     private static byte[]? LoadSaveDataFile()
     {
-        var saveFileLocation =
-            Path.Combine(PathManager.GetLoadPathLocation(), "Riivolution", "RetroRewind6", "save");
-        var saveFile = Directory.GetFiles(saveFileLocation, "rksys.dat", SearchOption.AllDirectories);
+        var saveFile = Directory.GetFiles(SaveFilePath, "rksys.dat", SearchOption.AllDirectories);
         return saveFile.Length == 0 ? null : File.ReadAllBytes(saveFile[0]);
     }
 }

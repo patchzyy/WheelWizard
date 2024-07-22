@@ -45,7 +45,7 @@ public partial class Dashboard
             case WheelWizardStatus.OutOfDate:
                 SetButtonState("Updating...", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Update, false);
                 DisableSidebarButtons();
-                await RRUpdater.UpdateRR();
+                await RetroRewindUpdater.UpdateRR();
                 EnableSidebarButtons();
                 break;
             case WheelWizardStatus.UpToDate:
