@@ -33,7 +33,7 @@ public static class RetroRewindLauncher
             Process.Start(new ProcessStartInfo
             {
                 FileName = dolphinLocation,
-                Arguments = $"-e \"{launchJson}\"",
+                Arguments = $"-e \"{launchJson}\" --config=Dolphin.Core.EnableCheats=False",
                 UseShellExecute = false
             });
         }

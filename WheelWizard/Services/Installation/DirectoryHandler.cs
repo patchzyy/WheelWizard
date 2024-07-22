@@ -20,12 +20,12 @@ public static class DirectoryHandler
 
         // Get all files with .szs and .brmstm extensions in the mod folder and its subfolders
         var szsFiles = Directory.GetFiles(modFolder, "*.szs", SearchOption.AllDirectories);
+        var arcFiles = Directory.GetFiles(modFolder, "*.arc", SearchOption.AllDirectories);
         var brstmFiles = Directory.GetFiles(modFolder, "*.brstm", SearchOption.AllDirectories);
         var brsarFiles = Directory.GetFiles(modFolder, "*.brsar", SearchOption.AllDirectories);
-
+        var thpFiles = Directory.GetFiles(modFolder, "*.thp", SearchOption.AllDirectories);
         // Create a combined list of all the files
-        var allFiles = szsFiles.Concat(brstmFiles).ToArray();
-        allFiles = allFiles.Concat(brsarFiles).ToArray();
+        var allFiles = szsFiles.Concat(arcFiles).Concat(brstmFiles).Concat(brsarFiles).Concat(thpFiles).ToArray();
 
         foreach (var file in allFiles)
         {

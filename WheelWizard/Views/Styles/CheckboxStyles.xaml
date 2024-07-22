@@ -284,4 +284,15 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    
+    <Style TargetType="RadioButton" x:Key="TopBar">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
