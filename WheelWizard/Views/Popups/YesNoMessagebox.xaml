@@ -36,8 +36,10 @@
                                    Foreground="{StaticResource FormFieldLabelColor}"
                                    FontSize="20"/>
                         <TextBlock Style="{StaticResource TinyText}" x:Name="ExtraTextBlock"
+                                   HorizontalAlignment="Center"
                                    TextWrapping="Wrap" Margin="0,10,0,0" />
                         <TextBlock Style="{StaticResource TinyText}" x:Name="BottomTextBlock"
+                                   HorizontalAlignment="Center"
                                    Margin="0,10,0,0" TextWrapping="Wrap" />
                         <UniformGrid Grid.Row="1" Columns="2" Rows="2" HorizontalAlignment="Stretch" VerticalAlignment="Top">
                             <components:Button x:Name="YesButton"

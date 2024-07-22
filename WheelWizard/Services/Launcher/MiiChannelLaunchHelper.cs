@@ -17,8 +17,8 @@ public static class MiiChannelLaunchHelper
         if (!miiChannelExists)
         {
             var adminResult = YesNoMessagebox.Show(
-                "You dont have the MiiChannel installed, do you want to install it?", 
-                "Yes", "No");
+                "Install MiiChannel?", 
+                "Yes", "No", "Do you want to install the MiiChannel to launch it?");
             if (adminResult)
             {
                 miiChannelExists = true;

@@ -109,22 +109,25 @@ public static class AutoUpdater
 
     private static void CreateAndRunBatchFile(string currentFilePath, string newFilePath)
     {
-        var batchFilePath = Path.Combine(Path.GetDirectoryName(currentFilePath), "update.bat");
+        var currentFolder = Path.GetDirectoryName(currentFilePath);
+        var batchFilePath = Path.Combine(currentFolder, "update.bat");
         var originalFileName = Path.GetFileName(currentFilePath);
         var newFileName = Path.GetFileName(newFilePath);
 
-        var batchContent = @"
-@echo off
-timeout /t 2 /nobreak
-del """ + originalFileName + @"""
-rename """ + newFileName + @""" """ + originalFileName + @"""
-start """" """ + originalFileName + @"""
-del ""%~f0""
-";
+        var batchContent = $"""
+
+                            @echo off
+                            cd /d "{currentFolder}"
+                            timeout /t 2 /nobreak
+                            del "{originalFileName}"
+                            rename "{newFileName}" "{originalFileName}"
+                            start "" "{originalFileName}"
+                            del "%~f0"
+                            """;
 
         File.WriteAllText(batchFilePath, batchContent);
 
-        Process.Start(new ProcessStartInfo(batchFilePath) { CreateNoWindow = true });
+        Process.Start(new ProcessStartInfo(batchFilePath) { CreateNoWindow = false, WorkingDirectory = currentFolder });
     }
     
     private static void HandleUpdateCheckError(HttpClientResult<string> response)
