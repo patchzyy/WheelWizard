@@ -54,7 +54,10 @@ namespace CT_MKWII_WPF.Views.Pages
             }
 
             foreach (var mod in Mods)
+            {
                 mod.PropertyChanged += Mod_PropertyChanged;
+            }
+
             UpdateEmptyListMessageVisibility();
         }
 
@@ -94,25 +97,24 @@ namespace CT_MKWII_WPF.Views.Pages
         {
             var openFileDialog = new OpenFileDialog
             {
-                Filter = "Mod files (*.zip;*.brstm;*.szs)|*.zip;*.brstm;*.szs|All files (*.*)|*.*",
+                Filter = "Mod files (*.zip;*.brstm;*.brsar;*.szs;*.arc;*.thp;)|*.zip;*.brstm;*.brsar;*.szs;*.arc;*.thp|All files (*.*)|*.*",
                 Title = "Select Mod File",
                 Multiselect = true
             };
 
-            if (openFileDialog.ShowDialog() == true)
+            if (openFileDialog.ShowDialog() != true) return;
+
+            var selectedFiles = openFileDialog.FileNames;
+
+            if (selectedFiles.Length == 1)
+                ProcessModFiles(selectedFiles, singleMod: true);
+            else
             {
-                var selectedFiles = openFileDialog.FileNames;
+                var result = MessageBox.Show("Do you want to combine all files into 1 mod?",
+                                             "Multiple Files Selected", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
 
-                if (selectedFiles.Length == 1)
-                    ProcessModFiles(selectedFiles, singleMod: true);
-                else
-                {
-                    var result = MessageBox.Show("Do you want to combine all files into 1 mod?",
-                        "Multiple Files Selected", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
-
-                    if (result == MessageBoxResult.No) ProcessModFiles(selectedFiles, singleMod: false);
-                    else if (result == MessageBoxResult.Yes) ProcessModFiles(selectedFiles, singleMod: true);
-                }
+                if (result == MessageBoxResult.No) ProcessModFiles(selectedFiles, singleMod: false);
+                else if (result == MessageBoxResult.Yes) ProcessModFiles(selectedFiles, singleMod: true);
             }
         }
 
@@ -277,11 +279,12 @@ namespace CT_MKWII_WPF.Views.Pages
         {
             //bool selectAll = Mods.Any(mod => !mod.IsEnabled);
             foreach (var mod in Mods)
+            {
                 mod.IsEnabled = _toggleAll;
+            }
+
             _toggleAll = !_toggleAll;
-            if (!_toggleAll)
-                EnableDisableButton.Text = "Disable All";
-            else EnableDisableButton.Text = "Enable All";
+            EnableDisableButton.Text = !_toggleAll ? "Disable All" : "Enable All";
         }
 
         private bool IsValidName(string name)
@@ -293,14 +296,12 @@ namespace CT_MKWII_WPF.Views.Pages
                 return false;
             }
 
-            if (Mods.Any(mod => mod.Title.Equals(name, StringComparison.OrdinalIgnoreCase)))
-            {
-                MessageBox.Show($"A mod with the name '{name}' already exists.", "Error",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
+            if (!Mods.Any(mod => mod.Title.Equals(name, StringComparison.OrdinalIgnoreCase))) return true;
 
-            return true;
+            MessageBox.Show($"A mod with the name '{name}' already exists.", "Error",
+                            MessageBoxButton.OK, MessageBoxImage.Error);
+            return false;
+
         }
 
         private void RenameMod_Click(object sender, RoutedEventArgs e)
@@ -363,8 +364,10 @@ namespace CT_MKWII_WPF.Views.Pages
             if (Directory.Exists(modDirectory))
                 System.Diagnostics.Process.Start("explorer", modDirectory);
             else
+            {
                 MessageBox.Show("Mod folder does not exist", "Error",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void ModsListView_OnOnItemsReorder(ListViewItem movedItem, int newIndex)
