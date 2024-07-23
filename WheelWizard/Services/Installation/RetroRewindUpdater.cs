@@ -80,7 +80,7 @@ public static class RetroRewindUpdater
 
     private static void UpdateVersionFile(string newVersion)
     {
-        var versionFilePath = Path.Combine(PathManager.LoadFolderPath, "Riivolution", "RetroRewind6", "version.txt");
+        var versionFilePath = Path.Combine(PathManager.RetroRewind6FolderPath, "version.txt");
         File.WriteAllText(versionFilePath, newVersion);
     }
 
@@ -145,7 +145,7 @@ public static class RetroRewindUpdater
             await DownloadHelper.DownloadToLocation(update.Url, tempZipPath, window);
 
             window.UpdateProgress(100, "Extracting update...", "Extracting update...");
-            var extractionPath = Path.Combine(PathManager.LoadFolderPath, "Riivolution");
+            var extractionPath = Path.Combine(PathManager.RiivolutionWhWzPath);
             Directory.CreateDirectory(extractionPath);
             ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
         }

@@ -9,7 +9,7 @@ namespace CT_MKWII_WPF.Services.WiiManagement.GameData;
 
 public class GameDataLoader
 {
-    private static string SaveFilePath => Path.Combine(PathManager.LoadFolderPath, "Riivolution", "RetroRewind6", "save");
+    private static string SaveFilePath => Path.Combine(PathManager.RetroRewind6FolderPath, "save");
     private byte[] _saveData;
 
     public Models.GameData.GameData GameData { get; }

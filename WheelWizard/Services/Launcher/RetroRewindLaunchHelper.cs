@@ -8,7 +8,7 @@ namespace CT_MKWII_WPF.Services.Launcher;
 
 public static class RetroRewindLaunchHelper
 {
-    private static string RootRiivolutionFolderPath => Path.Combine(PathManager.LoadFolderPath, "Riivolution");
+    private static string RootRiivolutionFolderPath => Path.Combine(PathManager.RiivolutionWhWzPath);
     private static string XmlFilePath => Path.Combine(RootRiivolutionFolderPath, "riivolution", "RetroRewind6.xml");
     private static string JsonFilePath => Path.Combine(ConfigManager.WheelWizardAppdataPath, "RR.json");
     

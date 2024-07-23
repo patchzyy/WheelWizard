@@ -11,6 +11,8 @@ public static class PathManager
     public static string GameFilePath => ConfigManager.GetConfig().GameLocation!;
     public static string DolphinFilePath => ConfigManager.GetConfig().DolphinLocation!;
     public static string UserFolderPath => ConfigManager.GetConfig().UserFolderPath!;
+    public static string RiivolutionWhWzPath => Path.Combine(LoadFolderPath, "Riivolution", "WheelWizard");
+    public static string RetroRewind6FolderPath => Path.Combine(RiivolutionWhWzPath, "RetroRewind6");
     public static string LoadFolderPath => Path.Combine(UserFolderPath, "Load");
     
     // TODO: should be moved to some other class where it makes sense
