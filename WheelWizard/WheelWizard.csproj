@@ -6,7 +6,7 @@
         <RootNamespace>CT_MKWII_WPF</RootNamespace>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
-    </PropertyGroup>
+	</PropertyGroup>
 
     <ItemGroup>
       <None Remove="Retro_Rewind_Cover.png" />
@@ -36,4 +36,5 @@
     <PropertyGroup>
         <ApplicationIcon>car-wheel.ico</ApplicationIcon>
     </PropertyGroup>
+
 </Project>
