@@ -52,8 +52,13 @@ Wheel Wizard was made by [patchzy](https://github.com/patchzyy) and [wanttobeeme
 
 Feel free to join our community on [Discord](https://discord.gg/vZ7T2wJnsq) for support and discussions! If you see any bugs, this is also the place to be :P
 
-![image](https://github.com/patchzyy/CT-MKWII-WPF/assets/64382339/f97125bf-b339-44ef-8719-05a592edc2f4)
 
+<p align="center">
+  <img src="https://github.com/patchzyy/WheelWizard/blob/main/images/dashboard.png" alt="Wheel Wizard Logo" width="450"/>
+  <img src="https://github.com/patchzyy/WheelWizard/blob/main/images/my_stuff.png" alt="Wheel Wizard Logo" width="450"/>
+  <img src="https://github.com/patchzyy/WheelWizard/blob/main/images/room_details.png" alt="Wheel Wizard Logo" width="450"/>
+  <img src="https://github.com/patchzyy/WheelWizard/blob/main/images/settings.png" alt="Wheel Wizard Logo" width="450"/>
+</p>
 ---
 ## Antivirus Warning
 
@@ -98,4 +103,4 @@ Remember, while we assure you of our software's safety, it's always good practic
 Retro Rewind was made by ZPL. More information about Retro Rewind can be found on the [Tockdom Wiki](https://wiki.tockdom.com/wiki/Retro_Rewind).
 
 Some of the icons used in Wheel Wizard are from [Game Icons](https://game-icons.net/about.html). Specifically, the [car wheel icon](https://game-icons.net/1x1/delapouite/car-wheel.html) and the [flat tire icon](https://game-icons.net/1x1/delapouite/flat-tire.html), both created by Delapouite.
-Also thanks to the MarioCube Repository.
+Also thanks to the MarioCube Repository for providing the symbols for ro's mii channel.
