@@ -1,4 +1,4 @@
-warning|The servers will be down for maintenance at 6pm (CT)
+warning|The servers might be down for maintenance later today
 
 The current status is the status that is inside of line 1
 (warning=yellow) (info=gray/white)  (alert=red)  (success=green)
