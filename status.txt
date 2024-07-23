@@ -1,4 +1,4 @@
-warning|Retro Rewind update servers have switched,\u000AIf you have a "No server error", please update your wheel wizard
+info|Hummingbirds are the only animals that can fly backward.
 
 The current status is the status that is inside of line 1
 (warning=yellow) (info=gray/white)  (alert=red)  (success=green)
