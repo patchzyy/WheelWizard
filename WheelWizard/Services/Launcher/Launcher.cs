@@ -11,7 +11,7 @@ public static class Launcher
 {
     private static string RRLaunchJsonFilePath => Path.Combine(PathManager.WheelWizardAppdataPath, "RR.json");
     
-    private static void KillDolphin()
+    private static void KillDolphin() //dont tell PETA
     {
         var dolphinLocation = PathManager.DolphinFilePath;
         if (Process.GetProcessesByName(Path.GetFileNameWithoutExtension(dolphinLocation)).Length == 0) return;
@@ -55,7 +55,8 @@ public static class Launcher
             return;
         }
         RetroRewindLaunchHelper.GenerateLaunchJson(playTt);
-        LaunchDolphin( $"-e \"{RRLaunchJsonFilePath}\" --config=Dolphin.Core.EnableCheats=False");
+        var dolphinLaunchType = ConfigManager.GetConfig().LaunchWithDolphin ? "" : "-b";
+        LaunchDolphin( $"{dolphinLaunchType} -e \"{RRLaunchJsonFilePath}\" --config=Dolphin.Core.EnableCheats=False");
     }
 
     public static async Task LaunchMiiChannel()

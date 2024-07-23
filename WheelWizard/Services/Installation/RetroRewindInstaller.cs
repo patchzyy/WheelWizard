@@ -1,4 +1,5 @@
 ﻿using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Views.Popups;
 using System;
 using System.IO;
@@ -52,6 +53,23 @@ public static class RetroRewindInstaller
             await HandleReinstall();
         }
 
+        if (hasOldrksys())
+        {
+            var result = YesNoMessagebox.Show("Old rksys.dat found", "Use", "Don't use",
+                "Old save data was found. Would you like to use it? (recomended)");
+            if (result) await backupOldrksys();
+
+        }
+        if (hasOldRR())
+        {
+            var result = YesNoMessagebox.Show("Old Retro Rewind found", "Move", "Don't move",
+                "Old Retro Rewind files were found. Would you like to move them to the new location?");
+            if (result)
+            {
+                HandleMovingOldRR();
+                return;
+            }
+        }
         var tempZipPath = Path.Combine(PathManager.LoadFolderPath, "Temp", "RetroRewind.zip");
         await DownloadAndExtractRetroRewind(tempZipPath);
     }
@@ -64,6 +82,27 @@ public static class RetroRewindInstaller
         if (result == MessageBoxResult.No) return;
         
         DeleteExistingRetroRewind();
+    }
+
+    private static void HandleMovingOldRR()
+    {
+        var oldRRFolder = Path.Combine(PathManager.LoadFolderPath, "Riivolution", "RetroRewind6");
+        var RRXml = Path.Combine(PathManager.LoadFolderPath, "Riivolution", "riivolution", "RetroRewind6.xml");
+        var RRXmlPath = Path.Combine(PathManager.RiivolutionWhWzFolderPath, "riivolution");
+        Directory.CreateDirectory(RRXmlPath);
+        var RRXmlFile = Path.Combine(RRXmlPath, "RetroRewind6.xml");
+        if (File.Exists(RRXmlFile)) File.Delete(RRXmlFile);
+        File.Move(RRXml, RRXmlFile);
+        var newRRFolder = PathManager.RetroRewind6FolderPath;
+        if (Directory.Exists(newRRFolder)) Directory.Delete(newRRFolder, true);
+        Directory.Move(oldRRFolder, newRRFolder);
+       
+    }
+    private static bool hasOldRR()
+    {
+        var oldRRFolder = Path.Combine(PathManager.LoadFolderPath, "Riivolution", "RetroRewind6");
+        var oldRRXml = Path.Combine(PathManager.LoadFolderPath, "Riivolution", "riivolution", "RetroRewind6.xml");
+        return Directory.Exists(oldRRFolder) && File.Exists(oldRRXml);
     }
 
     private static async Task DownloadAndExtractRetroRewind(string tempZipPath)
@@ -85,6 +124,32 @@ public static class RetroRewindInstaller
             if (File.Exists(tempZipPath))
                 File.Delete(tempZipPath);
         }
+    }
+
+    private static bool hasOldrksys()
+    {
+        var rrWfc = Path.Combine(PathManager.LoadFolderPath, "Riivolution", "riivolution", "save", "RetroWFC");
+        if (!Directory.Exists(rrWfc)) return false;
+        var rksysFiles = Directory.GetFiles(rrWfc, "rksys.dat", SearchOption.AllDirectories);
+        return rksysFiles.Length > 0;
+    }
+
+    private static async Task backupOldrksys()
+    {
+        var rrWfc = Path.Combine(PathManager.LoadFolderPath, "Riivolution", "riivolution", "save", "RetroWFC");
+        if (!Directory.Exists(rrWfc)) return;
+        var rksysFiles = Directory.GetFiles(rrWfc, "rksys.dat", SearchOption.AllDirectories);
+        if (rksysFiles.Length == 0) return;
+        var sourceFile = rksysFiles[0];
+        var regionFolder = Path.GetDirectoryName(sourceFile);
+        var regionFolderName = Path.GetFileName(regionFolder);
+        var datFileData = await File.ReadAllBytesAsync(sourceFile);
+        if (regionFolderName == null) return;
+        var destinationFolder = Path.Combine(PathManager.RiivolutionWhWzFolderPath, "riivolution", "save", "RetroWFC", regionFolderName);
+        Directory.CreateDirectory(destinationFolder);
+        var destinationFile = Path.Combine(destinationFolder, "rksys.dat");
+        await File.WriteAllBytesAsync(destinationFile, datFileData);
+        
     }
     
 

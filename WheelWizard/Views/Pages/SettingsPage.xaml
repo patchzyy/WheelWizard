@@ -188,14 +188,22 @@
             <StackPanel>
                 <components:FormFieldLabel Text="Wii Settings" />
                 <Border Style="{StaticResource SettingsBlockStyle}" x:Name="WiiBorder">
+                    <StackPanel>
                     <CheckBox Margin="0,2" IsChecked="False"
                               Style="{StaticResource DarkSwitch}"
                               x:Name="DisableForce"
                               Click="ClickForceWiimote">
                         <components:FormFieldLabel Text=" Force Disable Wiimote"
                                                    TipText="This setting disabled Wiimote ingame, but enables is for the Wii chanel" />
-
                     </CheckBox>
+                    <CheckBox Margin="0,2" IsChecked="False"
+                              Style="{StaticResource DarkSwitch}"
+                              x:Name="LaunchWithDolphin"
+                              Click="ClickLaunchWithDolphinWindow">
+                        <components:FormFieldLabel Text=" Launch Game With Dolphin Window"
+                                                   TipText="Will launch dolphin's main window along with the game" />
+                    </CheckBox>
+                    </StackPanel>
                 </Border>
             </StackPanel>
         </StackPanel>

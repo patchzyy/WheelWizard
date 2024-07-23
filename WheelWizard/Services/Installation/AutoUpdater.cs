@@ -15,7 +15,7 @@ namespace CT_MKWII_WPF.Services.Installation;
 
 public static class AutoUpdater
 {
-    public const string CurrentVersion = "1.1.2";
+    public const string CurrentVersion = "1.2.0";
     
     public static async Task CheckForUpdatesAsync()
     {
@@ -89,6 +89,8 @@ public static class AutoUpdater
     private static async Task UpdateAsync(string downloadUrl)
     {
         var currentExecutablePath = Process.GetCurrentProcess().MainModule!.FileName;
+        var currentExecutableName = Path.GetFileNameWithoutExtension(currentExecutablePath);
+        
         var currentFolder = Path.GetDirectoryName(currentExecutablePath);
         if (currentFolder is null)
         {
@@ -96,7 +98,7 @@ public static class AutoUpdater
                             "Please ensure the application is located in a folder that can be written to.");
             return;
         }
-        var newFilePath = Path.Combine(currentFolder, "CT-MKWII-WPF_new.exe");
+        var newFilePath = Path.Combine(currentFolder, currentExecutableName+"_new.exe");
 
         await DownloadHelper.DownloadToLocation(downloadUrl, newFilePath);
 

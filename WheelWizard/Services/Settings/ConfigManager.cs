@@ -23,7 +23,7 @@ public static class ConfigManager
     }
 
     public static void SaveSettings(string dolphinPath, string gamePath, string userFolderPath, bool hasRunNandTutorial,
-        bool forceDisableWiimote)
+        bool forceDisableWiimote, bool launchWithDolphin)
     {
         if (_config == null) return;
         _config.DolphinLocation = dolphinPath;
@@ -31,13 +31,14 @@ public static class ConfigManager
         _config.UserFolderPath = userFolderPath;
         _config.HasRunNandTutorial = hasRunNandTutorial;
         _config.ForceWiimote = forceDisableWiimote;
+        _config.LaunchWithDolphin = launchWithDolphin;
         SaveConfigToJson();
     }
 
-    private static void SaveConfigToJson()
+    public static void SaveConfigToJson()
     {
         var configJson = JsonConvert.SerializeObject(_config, Formatting.Indented);
-        Directory.CreateDirectory(PathManager.WheelWizardConfigFilePath);
+        Directory.CreateDirectory(Path.GetDirectoryName(PathManager.WheelWizardConfigFilePath)!);
         try
         {
             File.WriteAllText(PathManager.WheelWizardConfigFilePath, configJson);

@@ -21,7 +21,7 @@ public partial class SettingsPage : Page
         InitializeComponent();
         LoadSettings();
         FillUserPath();
-        UpdateResolutionButtonsState();
+        UpdateSettingsState();
         ToggleLocationSettings(false);
         VersionText.Text = "v" + AutoUpdater.CurrentVersion;
     }
@@ -41,7 +41,7 @@ public partial class SettingsPage : Page
         DolphinSettingHelper.ChangeIniSettings(PathManager.FindGfxFile(), "Settings", "InternalResolution", resolution);
     }
 
-    private void UpdateResolutionButtonsState()
+    private void UpdateSettingsState()
     {
         var enableControls = ConfigValidator.ConfigCorrectAndExists();
         VideoBorder.IsEnabled = enableControls;
@@ -63,9 +63,10 @@ public partial class SettingsPage : Page
             var radioButton = (RadioButton)ResolutionStackPanel.Children[finalResolution];
             radioButton.IsChecked = true;
         }
-
         var forcemote = WiiMoteSettings.IsForceSettingsEnabled();
         DisableForce.IsChecked = forcemote;
+        var launchWithDolphin = ConfigManager.GetConfig().LaunchWithDolphin;
+        LaunchWithDolphin.IsChecked = launchWithDolphin;
     }
 
     private void FillUserPath()
@@ -153,6 +154,7 @@ public partial class SettingsPage : Page
         var gamePath = MarioKartInput.Text;
         var userFolder = DolphinUserPathInput.Text;
         var forceDisableWiimote = DisableForce.IsChecked == true;
+        var launchWithDolphin = LaunchWithDolphin.IsChecked == false;
         if (!File.Exists(dolphinPath) || !File.Exists(gamePath) || !Directory.Exists(userFolder))
         {
             MessageBox.Show("Please ensure all paths are correct and try again.", "Error", MessageBoxButton.OK,
@@ -161,7 +163,7 @@ public partial class SettingsPage : Page
         }
 
         // Save settings to a configuration file or system registry
-        ConfigManager.SaveSettings(dolphinPath, gamePath, userFolder, true, forceDisableWiimote);
+        ConfigManager.SaveSettings(dolphinPath, gamePath, userFolder, true, forceDisableWiimote, launchWithDolphin);
         if (!ConfigValidator.SetupCorrectly())
         {
             MessageBox.Show("Please ensure all paths are correct and try again.", "Error", MessageBoxButton.OK,
@@ -170,7 +172,7 @@ public partial class SettingsPage : Page
             return;
         }
 
-        UpdateResolutionButtonsState();
+        UpdateSettingsState();
         ToggleLocationSettings(false);
         MessageBox.Show("Settings saved successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
     }
@@ -210,5 +212,10 @@ public partial class SettingsPage : Page
     private void ClickForceWiimote(object sender, RoutedEventArgs e)
     {
         ConfigValidator.SaveWiimoteSettings(DisableForce.IsChecked == true);
+    }
+
+    private void ClickLaunchWithDolphinWindow(object sender, RoutedEventArgs e)
+    {
+        ConfigValidator.SaveLaunchWithDolphinWindow(LaunchWithDolphin.IsChecked == true);
     }
 }

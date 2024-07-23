@@ -39,13 +39,23 @@ public static class ConfigValidator
         return mods ?? Array.Empty<ModData>();
     }
 
-    public static void SaveWiimoteSettings(bool forceWiimote)
+    public static void SaveWiimoteSettings(bool value)
     {
         var config = ConfigManager.GetConfig();
         if (config.DolphinLocation == null || config.GameLocation == null || config.UserFolderPath == null) 
             return;
-        
-        ConfigManager.SaveSettings(config.DolphinLocation, config.GameLocation, config.UserFolderPath,
-            config.HasRunNandTutorial, forceWiimote);
+        config.ForceWiimote = value;
+        ConfigManager.SaveConfigToJson();
+    }
+    
+    
+    
+    public static void SaveLaunchWithDolphinWindow(bool value)
+    {
+        var config = ConfigManager.GetConfig();
+        if (config.DolphinLocation == null || config.GameLocation == null || config.UserFolderPath == null) 
+            return;
+        config.LaunchWithDolphin = value;
+        ConfigManager.SaveConfigToJson();
     }
 }

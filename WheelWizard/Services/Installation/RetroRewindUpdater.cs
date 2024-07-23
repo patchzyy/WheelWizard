@@ -141,7 +141,7 @@ public static class RetroRewindUpdater
             window.UpdateProgress(100, "Extracting update...", "Extracting update...");
             var extractionPath = PathManager.RiivolutionWhWzFolderPath;
             Directory.CreateDirectory(extractionPath);
-            ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
+            ExtractZipFile(tempZipPath, extractionPath);
         }
         finally
         {
@@ -150,5 +150,32 @@ public static class RetroRewindUpdater
         }
 
         return true;
+    }
+
+    private static void ExtractZipFile(string zipFilePath, string extractionPath)
+    {
+        using (var archive = ZipFile.OpenRead(zipFilePath))
+        {
+            foreach (var entry in archive.Entries)
+            {
+                if (entry.FullName.EndsWith("desktop.ini", StringComparison.OrdinalIgnoreCase))
+                {
+                    continue; // Skip the desktop.ini file
+                }
+
+                var destinationPath = Path.Combine(extractionPath, entry.FullName);
+
+                // Create the directory if it doesn't exist
+                if (entry.FullName.EndsWith("/"))
+                {
+                    Directory.CreateDirectory(destinationPath);
+                }
+                else
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(destinationPath));
+                    entry.ExtractToFile(destinationPath, overwrite: true);
+                }
+            }
+        }
     }
 }

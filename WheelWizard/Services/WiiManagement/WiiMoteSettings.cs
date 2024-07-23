@@ -4,7 +4,7 @@ using System.IO;
 
 namespace CT_MKWII_WPF.Services.WiiManagement;
 
-public class WiiMoteSettings
+public static class WiiMoteSettings
 {
     private const string WiimoteSection = "[Wiimote1]";
     private const string SourceParameter = "Source";
