@@ -35,8 +35,7 @@
                     CornerRadius="{StaticResource WindowCornerRadiusLeftRightTwix}"
                     Background="{StaticResource BackgroundColor}">
                 <StackPanel Margin="{StaticResource EdgeGap}">
-                    <TextBlock Style="{StaticResource BodyText}" x:Name="StatusLabel"
-                               Text="Downloading..." />
+                    <TextBlock Style="{StaticResource BodyText}" x:Name="StatusLabel"/>
                     <TextBlock Style="{StaticResource TinyText}" x:Name="ExtraTextLabel"
                                TextWrapping="Wrap" Margin="0,10,0,0" />
                     <ProgressBar x:Name="ProgressBar"

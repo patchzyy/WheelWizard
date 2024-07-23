@@ -41,13 +41,13 @@ public static class Launcher
         });
     }
     
-    public static void LaunchRetroRewind(bool playTt)
+    public static async Task LaunchRetroRewind(bool playTt)
     {
         KillDolphin();
         if (WiiMoteSettings.IsForceSettingsEnabled()) 
             WiiMoteSettings.DisableVirtualWiiMote();
         
-        ModsLaunchHelper.PrepareModsForLaunch();
+        await ModsLaunchHelper.PrepareModsForLaunch();
         if (!File.Exists(PathManager.GameFilePath))
         {
             MessageBox.Show("Could not find the game, please set the path in settings",

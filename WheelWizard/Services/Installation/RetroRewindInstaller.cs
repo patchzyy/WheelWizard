@@ -47,7 +47,13 @@ public static class RetroRewindInstaller
 
     public static async Task InstallRetroRewind()
     {
-        
+        var serverResponse = await HttpClientHelper.GetAsync<string>(Endpoints.RRUrl);
+        if (!serverResponse.Succeeded)
+        {
+            MessageBox.Show("Could not connect to the server. Please try again later.", "Error", MessageBoxButton.OK,
+                MessageBoxImage.Error);
+            return;
+        }
         if (IsRetroRewindInstalled())
         {
             await HandleReinstall();

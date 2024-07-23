@@ -15,7 +15,7 @@ namespace CT_MKWII_WPF.Services.Installation;
 
 public static class AutoUpdater
 {
-    public const string CurrentVersion = "1.2.0";
+    public const string CurrentVersion = "1.0.0";
     
     public static async Task CheckForUpdatesAsync()
     {

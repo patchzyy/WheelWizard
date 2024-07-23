@@ -1,8 +1,11 @@
 ﻿using CT_MKWII_WPF.Models;
 using CT_MKWII_WPF.Services.Settings;
+using CT_MKWII_WPF.Views.Popups;
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace CT_MKWII_WPF.Services.Launcher;
 
@@ -13,26 +16,33 @@ public static class ModsLaunchHelper
     private static string MyStuffFolderPath => Path.Combine(PathManager.RetroRewind6FolderPath, "MyStuff");
     private static string ModsFolderPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII", "Mods");
     
-    public static void PrepareModsForLaunch()
+    public static async Task PrepareModsForLaunch()
     {
         var mods = ConfigValidator.GetMods();
         if (mods.Length == 0) return;
         
         Array.Reverse(mods);
-        
         if (Directory.Exists(MyStuffFolderPath))
             Directory.Delete(MyStuffFolderPath, true);
-        foreach (var mod in mods)
+        var progressWindow = new ProgressWindow();
+        progressWindow.Show();
+        await Task.Run(() =>
         {
-            if (mod.IsEnabled)
-                InstallMod(mod);
-        }
+            foreach (var mod in mods)
+            {
+                Console.WriteLine("working on mod: " + mod.Title);
+                if (mod.IsEnabled) 
+                    InstallMod(mod, progressWindow);
+            }
+        });
+        progressWindow.Close();
     }
     
-    private static void InstallMod(ModData mod)
+    private static void InstallMod(ModData mod, ProgressWindow progressWindow)
     {
+        Application.Current.Dispatcher.Invoke(() => 
+            progressWindow.UpdateProgress(0, $"Installing {mod.Title}", "Please wait..."));
         var modFolder = Path.Combine(ModsFolderPath, mod.Title);
-
         var allFiles = Array.Empty<string>();
         foreach (var extension in AcceptedModExtensions)
         {
@@ -40,9 +50,12 @@ public static class ModsLaunchHelper
             allFiles = allFiles.Concat(files).ToArray();
         }
 
-        foreach (var file in allFiles)
+        for (int i = 0; i < allFiles.Length; i++)
         {
-            var relativePath = Path.GetFileName(file);
+            var file = allFiles[i];
+            var progress = (int)((i + 1) / (double)allFiles.Length * 100);
+            Application.Current.Dispatcher.Invoke(() => 
+                progressWindow.UpdateProgress(progress, $"Installing {mod.Title}", $"Please wait... ({i + 1}/{allFiles.Length})"));            var relativePath = Path.GetFileName(file);
             var destinationFile = Path.Combine(MyStuffFolderPath, relativePath);
             Directory.CreateDirectory(Path.GetDirectoryName(destinationFile)!);
             File.Copy(file, destinationFile, true);

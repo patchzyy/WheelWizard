@@ -18,9 +18,12 @@ public partial class ProgressWindow : Window
 
     public void UpdateProgress(int progress, string status, string bottomText)
     {
-        ProgressBar.Value = progress;
-        StatusLabel.Text = status;
-        BottomTextLabel.Text = bottomText;
+        Dispatcher.Invoke(() =>
+        {
+            ProgressBar.Value = progress;
+            StatusLabel.Text = status;
+            BottomTextLabel.Text = bottomText;
+        });
     }
 
     public void ChangeExtraText(string text) => ExtraTextLabel.Text = text;

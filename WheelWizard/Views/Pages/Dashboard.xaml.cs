@@ -26,7 +26,7 @@ public partial class Dashboard
         switch (status)
         {
             case WheelWizardStatus.NoServer:
-                NavigateToPage(new SettingsPage());
+                await Launcher.LaunchRetroRewind((bool)OnlineTTCheckbox.IsChecked!);
                 break;
             case WheelWizardStatus.NoDolphin:
                 NavigateToPage(new SettingsPage());
@@ -40,15 +40,14 @@ public partial class Dashboard
                 DisableSidebarButtons();
                 await RetroRewindInstaller.InstallRetroRewind();
                 EnableSidebarButtons();
-                break;
-            case WheelWizardStatus.OutOfDate:
+                break;case WheelWizardStatus.OutOfDate:
                 SetButtonState("Updating...", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Update, false);
                 DisableSidebarButtons();
                 await RetroRewindUpdater.UpdateRR();
                 EnableSidebarButtons();
                 break;
             case WheelWizardStatus.UpToDate:
-                Launcher.LaunchRetroRewind((bool)OnlineTTCheckbox.IsChecked!);
+                await Launcher.LaunchRetroRewind((bool)OnlineTTCheckbox.IsChecked!);
                 break;
         }
 
