@@ -1,5 +1,4 @@
 ﻿using CT_MKWII_WPF.Models.Enums;
-using CT_MKWII_WPF.Services.IdkWhereThisShouldGo;
 using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Launcher;
 using CT_MKWII_WPF.Services.Other;

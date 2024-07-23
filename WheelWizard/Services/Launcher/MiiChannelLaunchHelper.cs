@@ -8,7 +8,7 @@ namespace CT_MKWII_WPF.Services.Launcher;
 
 public static class MiiChannelLaunchHelper
 {
-    private static string MiiChannelPath => Path.Combine(ConfigManager.WheelWizardAppdataPath, "MiiChannel.wad");
+    private static string MiiChannelPath => Path.Combine(PathManager.WheelWizardAppdataPath, "MiiChannel.wad");
     
     public static async Task LaunchMiiChannel()
     {
@@ -16,9 +16,8 @@ public static class MiiChannelLaunchHelper
         
         if (!miiChannelExists)
         {
-            var adminResult = YesNoMessagebox.Show(
-                "Install MiiChannel?", 
-                "Yes", "No", "Do you want to install the MiiChannel to launch it?");
+            var adminResult = YesNoMessagebox.Show("Install MiiChannel?", "Yes", "No", 
+                                                   "Do you want to install the MiiChannel to launch it?");
             if (adminResult)
             {
                 miiChannelExists = true;

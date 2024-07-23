@@ -1,6 +1,5 @@
 ﻿using CT_MKWII_WPF.Helpers;
 using CT_MKWII_WPF.Models.Enums;
-using CT_MKWII_WPF.Services.IdkWhereThisShouldGo;
 using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Settings;
 using System.Threading.Tasks;

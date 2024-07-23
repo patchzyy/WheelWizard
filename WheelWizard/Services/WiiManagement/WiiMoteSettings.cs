@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CT_MKWII_WPF.Services.Settings;
+using System;
 using System.IO;
 
 namespace CT_MKWII_WPF.Services.WiiManagement;
@@ -11,7 +12,7 @@ public class WiiMoteSettings
     private static string GetSavedWiiMoteLocation() => PathManager.FindWiiMoteNew();
     public static void EnableVirtualWiiMote() => ModifyWiiMoteSource(1);
     public static void DisableVirtualWiiMote() => ModifyWiiMoteSource(0);
-    public static bool IsForceSettingsEnabled() => PathManager.GetForceWiimote();
+    public static bool IsForceSettingsEnabled() => ConfigManager.GetConfig().ForceWiimote;
 
     private static void ModifyWiiMoteSource(int sourceValue)
     {

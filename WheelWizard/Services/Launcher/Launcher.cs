@@ -1,4 +1,3 @@
-using CT_MKWII_WPF.Services.IdkWhereThisShouldGo;
 using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Services.WiiManagement;
 using System.Diagnostics;
@@ -10,7 +9,7 @@ namespace CT_MKWII_WPF.Services.Launcher;
 
 public static class Launcher
 {
-    private static string RRLaunchJsonFilePath => Path.Combine(ConfigManager.WheelWizardAppdataPath, "RR.json");
+    private static string RRLaunchJsonFilePath => Path.Combine(PathManager.WheelWizardAppdataPath, "RR.json");
     
     private static void KillDolphin()
     {

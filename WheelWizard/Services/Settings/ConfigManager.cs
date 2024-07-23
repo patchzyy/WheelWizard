@@ -8,10 +8,6 @@ namespace CT_MKWII_WPF.Services.Settings;
 
 public static class ConfigManager
 {
-    public static readonly string WheelWizardAppdataPath =
-        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII");
-    public static readonly string WheelWizardConfigFilePath = Path.Combine(WheelWizardAppdataPath, "config.json");
-    
     private static Config? _config;
 
     static ConfigManager()
@@ -41,10 +37,10 @@ public static class ConfigManager
     private static void SaveConfigToJson()
     {
         var configJson = JsonConvert.SerializeObject(_config, Formatting.Indented);
-        Directory.CreateDirectory(Path.GetDirectoryName(WheelWizardConfigFilePath)!);
+        Directory.CreateDirectory(PathManager.WheelWizardConfigFilePath);
         try
         {
-            File.WriteAllText(WheelWizardConfigFilePath, configJson);
+            File.WriteAllText(PathManager.WheelWizardConfigFilePath, configJson);
         }
         catch (Exception e)
         {
@@ -55,8 +51,8 @@ public static class ConfigManager
 
     private static void LoadConfigFromFile()
     {
-        if (File.Exists(WheelWizardConfigFilePath))
-            _config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(WheelWizardConfigFilePath));
+        if (File.Exists(PathManager.WheelWizardConfigFilePath))
+            _config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(PathManager.WheelWizardConfigFilePath));
         else
             _config = new Config { ForceWiimote = true };
     }

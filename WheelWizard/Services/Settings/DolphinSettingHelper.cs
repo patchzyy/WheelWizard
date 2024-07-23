@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 
-namespace CT_MKWII_WPF.Services.IdkWhereThisShouldGo;
+namespace CT_MKWII_WPF.Services.Settings;
 
 public static class DolphinSettingHelper
 {

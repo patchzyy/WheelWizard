@@ -22,18 +22,16 @@ public static class RetroRewindUpdater
     private static async Task<string> GetLatestVersionString()
     {
         var response = await HttpClientHelper.GetAsync<string>(Endpoints.RRVersionUrl);
-        if (!response.Succeeded || response.Content == null)
-        {
-            MessageBox.Show($"Failed to check for updates");
-            return "Failed to check for updates";
-        }
-        return response.Content.Split('\n').Last().Split(' ')[0];
+        if (response.Succeeded && response.Content != null) 
+            return response.Content.Split('\n').Last().Split(' ')[0];
+
+        MessageBox.Show($"Failed to check for updates");
+        return "Failed to check for updates";
     }
 
     public static async Task<bool> UpdateRR()
     {
         var currentVersion = RetroRewindInstaller.CurrentRRVersion();
-
         if (await IsRRUpToDate(currentVersion))
         {
             MessageBox.Show("Retro Rewind is up to date.");
@@ -41,15 +39,12 @@ public static class RetroRewindUpdater
         }
 
         if (currentVersion == "Not Installed")
-        {
             return await RetroRewindInstaller.HandleNotInstalled();
-        }
 
-        //if currentversion is below 3.2.6 we need to do a full reinstall
+        //if current version is below 3.2.6 we need to do a full reinstall
         if (CompareVersions(currentVersion, "3.2.6") < 0)
-        {
             return await RetroRewindInstaller.HandleOldVersion();
-        }
+        
         return await ApplyUpdates(currentVersion);
     }
 
@@ -87,7 +82,6 @@ public static class RetroRewindUpdater
     private static async Task<List<(string Version, string Url, string Path, string Description)>> GetAllVersionData()
     {
         var versions = new List<(string Version, string Url, string Path, string Description)>();
-
 
         using var httpClient = new HttpClient();
         var allVersionsText = await httpClient.GetStringAsync(Endpoints.RRVersionUrl);
@@ -145,7 +139,7 @@ public static class RetroRewindUpdater
             await DownloadHelper.DownloadToLocation(update.Url, tempZipPath, window);
 
             window.UpdateProgress(100, "Extracting update...", "Extracting update...");
-            var extractionPath = Path.Combine(PathManager.RiivolutionWhWzPath);
+            var extractionPath = PathManager.RiivolutionWhWzFolderPath;
             Directory.CreateDirectory(extractionPath);
             ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
         }

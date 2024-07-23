@@ -1,5 +1,4 @@
 ﻿using CT_MKWII_WPF.Services;
-using CT_MKWII_WPF.Services.IdkWhereThisShouldGo;
 using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Services.WiiManagement;

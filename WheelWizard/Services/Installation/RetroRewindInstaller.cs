@@ -10,21 +10,14 @@ namespace CT_MKWII_WPF.Services.Installation;
 
 public static class RetroRewindInstaller
 {
-    private const string VersionFileName = "version.txt";
-    private static string GetVersionFilePath() => Path.Combine(PathManager.RetroRewind6FolderPath, VersionFileName);
+    private static string RetroRewindVersionFilePath => Path.Combine(PathManager.RetroRewind6FolderPath, "version.txt");
     
-    private static string LoadFolderPath => PathManager.LoadFolderPath;
-    
-    public static bool IsRetroRewindInstalled()
-    {
-        var versionFilePath = GetVersionFilePath();
-        return File.Exists(versionFilePath);
-    }
+    public static bool IsRetroRewindInstalled() => File.Exists(RetroRewindVersionFilePath);
 
     public static string CurrentRRVersion()
     {
-        var versionFilePath = GetVersionFilePath();
-        return File.Exists(versionFilePath) ? File.ReadAllText(versionFilePath).Trim() : "Not Installed";
+        var versionFilePath = RetroRewindVersionFilePath;
+        return IsRetroRewindInstalled() ? File.ReadAllText(versionFilePath).Trim() : "Not Installed";
     }
 
     public static async Task<bool> HandleNotInstalled()
@@ -59,7 +52,7 @@ public static class RetroRewindInstaller
             await HandleReinstall();
         }
 
-        var tempZipPath = Path.Combine(LoadFolderPath, "Temp", "RetroRewind.zip");
+        var tempZipPath = Path.Combine(PathManager.LoadFolderPath, "Temp", "RetroRewind.zip");
         await DownloadAndExtractRetroRewind(tempZipPath);
     }
 
@@ -83,7 +76,7 @@ public static class RetroRewindInstaller
         {
             await DownloadHelper.DownloadToLocation(Endpoints.RRZipUrl, tempZipPath, progressWindow);
             progressWindow.ChangeExtraText("Extracting files...");
-            var extractionPath = Path.Combine(PathManager.RiivolutionWhWzPath);
+            var extractionPath = PathManager.RiivolutionWhWzFolderPath;
             ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
         }
         finally
@@ -97,7 +90,7 @@ public static class RetroRewindInstaller
 
     private static void DeleteExistingRetroRewind()
     {
-        var retroRewindPath = Path.Combine(PathManager.RiivolutionWhWzPath);
+        var retroRewindPath = PathManager.RiivolutionWhWzFolderPath;
         if (Directory.Exists(retroRewindPath))
             Directory.Delete(retroRewindPath, true);
     }
