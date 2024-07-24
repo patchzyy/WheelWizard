@@ -47,13 +47,6 @@ public static class RetroRewindInstaller
 
     public static async Task InstallRetroRewind()
     {
-        var serverResponse = await HttpClientHelper.GetAsync<string>(Endpoints.RRUrl);
-        if (!serverResponse.Succeeded)
-        {
-            MessageBox.Show("Could not connect to the server. Please try again later.", "Error", MessageBoxButton.OK,
-                MessageBoxImage.Error);
-            return;
-        }
         if (IsRetroRewindInstalled())
         {
             await HandleReinstall();
@@ -66,7 +59,7 @@ public static class RetroRewindInstaller
             if (result) await backupOldrksys();
 
         }
-        if (hasOldRR())
+        if (HasOldRR())
         {
             var result = YesNoMessagebox.Show("Old Retro Rewind found", "Move", "Don't move",
                 "Old Retro Rewind files were found. Would you like to move them to the new location?");
@@ -75,6 +68,13 @@ public static class RetroRewindInstaller
                 HandleMovingOldRR();
                 return;
             }
+        }
+        var serverResponse = await HttpClientHelper.GetAsync<string>(Endpoints.RRUrl);
+        if (!serverResponse.Succeeded)
+        {
+            MessageBox.Show("Could not connect to the server. Please try again later.", "Error", MessageBoxButton.OK,
+                MessageBoxImage.Error);
+            return;
         }
         var tempZipPath = Path.Combine(PathManager.LoadFolderPath, "Temp", "RetroRewind.zip");
         await DownloadAndExtractRetroRewind(tempZipPath);
@@ -104,7 +104,7 @@ public static class RetroRewindInstaller
         Directory.Move(oldRRFolder, newRRFolder);
        
     }
-    private static bool hasOldRR()
+    public static bool HasOldRR()
     {
         var oldRRFolder = Path.Combine(PathManager.LoadFolderPath, "Riivolution", "RetroRewind6");
         var oldRRXml = Path.Combine(PathManager.LoadFolderPath, "Riivolution", "riivolution", "RetroRewind6.xml");

@@ -14,11 +14,19 @@ public static class StatusManager
     {
         var configCorrectAndExists = ConfigValidator.ConfigCorrectAndExists();
         if (!configCorrectAndExists) return WheelWizardStatus.ConfigNotFinished;
-        var retroRewindInstalled = RetroRewindInstaller.IsRetroRewindInstalled();
-        if (!retroRewindInstalled) return WheelWizardStatus.NoRR;
-        if (!ConfigValidator.IsConfigFileFinishedSettingUp()) return WheelWizardStatus.ConfigNotFinished;
         var serverEnabled = await HttpClientHelper.GetAsync<string>(Endpoints.RRUrl);
-        if (!serverEnabled.Succeeded) return WheelWizardStatus.NoServer;
+        if (!ConfigValidator.IsConfigFileFinishedSettingUp()) return WheelWizardStatus.ConfigNotFinished;
+        var retroRewindInstalled = RetroRewindInstaller.IsRetroRewindInstalled();
+        if (!retroRewindInstalled)
+        {
+            if (RetroRewindInstaller.HasOldRR()) return WheelWizardStatus.RRNotReady;
+            if (!serverEnabled.Succeeded) return WheelWizardStatus.NoServer;
+            return WheelWizardStatus.NoRR;
+        }
+        if (!serverEnabled.Succeeded)
+        {
+            return WheelWizardStatus.NoServerButInstalled;
+        }
         var retroRewindUpToDate = await RetroRewindUpdater.IsRRUpToDate(RetroRewindInstaller.CurrentRRVersion());
         if (!retroRewindUpToDate) return WheelWizardStatus.OutOfDate;
         return WheelWizardStatus.UpToDate;

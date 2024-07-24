@@ -3,7 +3,6 @@ using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Launcher;
 using CT_MKWII_WPF.Services.Other;
 using CT_MKWII_WPF.Services.Settings;
-using CT_MKWII_WPF.Services.WiiManagement;
 using MahApps.Metro.IconPacks;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,12 +19,16 @@ public partial class Dashboard
         UpdateActionButton();
     }
 
+    private WheelWizardStatus _status;
+
     private async void PlayButton_Click(object sender, RoutedEventArgs e)
     {
-        var status = await StatusManager.GetCurrentStatus();
+        var status = _status;
         switch (status)
         {
             case WheelWizardStatus.NoServer:
+                break;
+            case WheelWizardStatus.NoServerButInstalled:
                 await Launcher.LaunchRetroRewind((bool)OnlineTTCheckbox.IsChecked!);
                 break;
             case WheelWizardStatus.NoDolphin:
@@ -40,7 +43,14 @@ public partial class Dashboard
                 DisableSidebarButtons();
                 await RetroRewindInstaller.InstallRetroRewind();
                 EnableSidebarButtons();
-                break;case WheelWizardStatus.OutOfDate:
+                break;
+            case WheelWizardStatus.RRNotReady:
+                SetButtonState("Activating...", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Power, false);
+                DisableSidebarButtons();
+                await RetroRewindInstaller.InstallRetroRewind();
+                EnableSidebarButtons();
+                break;
+            case WheelWizardStatus.OutOfDate:
                 SetButtonState("Updating...", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Update, false);
                 DisableSidebarButtons();
                 await RetroRewindUpdater.UpdateRR();
@@ -50,18 +60,21 @@ public partial class Dashboard
                 await Launcher.LaunchRetroRewind((bool)OnlineTTCheckbox.IsChecked!);
                 break;
         }
-
         UpdateActionButton();
         DisableAllButtonsTemporarily();
     }
 
     private async void UpdateActionButton()
     {
-        var status = await StatusManager.GetCurrentStatus();
-        switch (status)
+        SetButtonState("Loading...", Button.ButtonsVariantType.Secondary, PackIconFontAwesomeKind.SpinnerSolid, false);
+        _status = await StatusManager.GetCurrentStatus();
+        switch (_status)
         {
             case WheelWizardStatus.NoServer:
                 SetButtonState("No Server", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.ServerNetworkOff);
+                break;
+            case WheelWizardStatus.NoServerButInstalled:
+                SetButtonState("Play Offline", Button.ButtonsVariantType.Secondary, PackIconFontAwesomeKind.PlaySolid);
                 break;
             case WheelWizardStatus.NoDolphin:
                 SetButtonState("Settings", Button.ButtonsVariantType.Secondary, PackIconFontAwesomeKind.FilePenSolid);

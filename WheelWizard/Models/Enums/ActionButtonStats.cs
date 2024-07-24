@@ -2,12 +2,13 @@
 
 public enum WheelWizardStatus
 {
-    NoServer, // no server for retro rewind could be found
+    NoServer,
     NoDolphin,
     ConfigNotFinished,
     NoRR,
     NoRRActive,
     RRNotReady,
+    NoServerButInstalled,
     OutOfDate,
     UpToDate
 }
