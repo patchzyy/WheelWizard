@@ -20,13 +20,9 @@ public static class StatusManager
         if (!retroRewindInstalled)
         {
             if (RetroRewindInstaller.HasOldRR()) return WheelWizardStatus.RRNotReady;
-            if (!serverEnabled.Succeeded) return WheelWizardStatus.NoServer;
-            return WheelWizardStatus.NoRR;
+            return !serverEnabled.Succeeded ? WheelWizardStatus.NoServer : WheelWizardStatus.NoRR;
         }
-        if (!serverEnabled.Succeeded)
-        {
-            return WheelWizardStatus.NoServerButInstalled;
-        }
+        if (!serverEnabled.Succeeded) return WheelWizardStatus.NoServerButInstalled;
         var retroRewindUpToDate = await RetroRewindUpdater.IsRRUpToDate(RetroRewindInstaller.CurrentRRVersion());
         if (!retroRewindUpToDate) return WheelWizardStatus.OutOfDate;
         return WheelWizardStatus.UpToDate;
