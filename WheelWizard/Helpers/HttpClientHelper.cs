@@ -8,7 +8,13 @@ namespace CT_MKWII_WPF.Helpers;
 
 public static class HttpClientHelper
 {
-    private static readonly HttpClient HttpClient = new();
+    private static readonly HttpClient HttpClient;
+
+    static HttpClientHelper()
+    {
+        HttpClient = new HttpClient();
+        HttpClient.DefaultRequestHeaders.UserAgent.ParseAdd("WheelWizard/1.0");
+    }
 
     public static async Task<HttpClientResult<T>> PostAsync<T>(string url, HttpContent? body)
     {
@@ -46,7 +52,6 @@ public static class HttpClientHelper
         HttpClientResult<T> result;
         try
         {
-            HttpClient.DefaultRequestHeaders.UserAgent.ParseAdd("WheelWizard/1.0");
             var response = await HttpClient.GetAsync(url);
 
             result = new HttpClientResult<T>()

@@ -24,7 +24,7 @@ public class RRLiveRooms : RepeatedTaskManager
         //var response = HttpClientHelper.MockResult<List<Room>>(Mocker.GroupApiResponse);
 
         // It is not important enough to bore the user with an error message or something.
-        // they are not hindered if there is an error, they just dont see the rooms. that's it.
+        // they are not hindered if there is an error, they just don't see the rooms. that's it.
         if (!response.Succeeded || response.Content is null)
             CurrentRooms = new List<Room>();
         else CurrentRooms = response.Content;
