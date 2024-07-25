@@ -1,3 +1,5 @@
+info|Convincing AI not to take over the world
+
 warning|Update servers are down! this means the following:\u000AYou can not install or update the game\u000AA play offline button may show up, if this is the case you CAN still play retro World Wides
 
 The current status is the status that is inside of line 1
