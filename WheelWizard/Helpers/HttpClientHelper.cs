@@ -3,24 +3,28 @@ using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CT_MKWII_WPF.Helpers;
 
 public static class HttpClientHelper
 {
-    private static readonly HttpClient HttpClient;
-
-    static HttpClientHelper()
+    
+    private static readonly Lazy<HttpClient> LazyHttpClient = new Lazy<HttpClient>(() =>
     {
-        HttpClient = new HttpClient();
-        HttpClient.DefaultRequestHeaders.UserAgent.ParseAdd("WheelWizard/1.0");
-    }
+        var client = new HttpClient();
+        client.DefaultRequestHeaders.UserAgent.ParseAdd("WheelWizard/1.0");
+        return client;
+    });
+    
+    private static HttpClient HttpClient => LazyHttpClient.Value;
 
     public static async Task<HttpClientResult<T>> PostAsync<T>(string url, HttpContent? body)
     {
         HttpClientResult<T> result;
         try
         {
+            MessageBox.Show(body.ToString());
             var response = await HttpClient.PostAsync(url, body);
             result = new HttpClientResult<T>()
             {
@@ -114,5 +118,30 @@ public static class HttpClientHelper
             result.Content = JsonConvert.DeserializeObject<T>(content);
 
         return result;
+    }
+    
+    public static void CleanupConnections()
+    {
+        if (LazyHttpClient.IsValueCreated)
+        {
+            HttpClient.DefaultRequestHeaders.Clear();
+            HttpClient.CancelPendingRequests();
+        }
+    }
+    
+    public static void ResetHttpClient()
+    {
+        if (LazyHttpClient.IsValueCreated)
+        {
+            HttpClient.Dispose();
+        }
+        
+        // This will force the creation of a new HttpClient on the next use
+        new Lazy<HttpClient>(() =>
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.UserAgent.ParseAdd("WheelWizard/1.0");
+            return client;
+        });
     }
 }
