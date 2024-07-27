@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CT_MKWII_WPF.Services.WiiManagement.GameData;
+using System;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -7,13 +8,9 @@ namespace CT_MKWII_WPF.Utilities.Generators;
 public class FriendCodeGenerator
 {
     
-    public static uint BufferToUint32(byte[] data, int offset)
-    {
-        return (uint)((data[offset] << 24) | (data[offset + 1] << 16) | (data[offset + 2] << 8) | data[offset + 3]);
-    }
     public static string GetFriendCode(byte[] data, int offset)
     {
-        var pid = BufferToUint32(data, offset);
+        var pid = GameDataLoader.BufferToUint32(data, offset);
         if (pid == 0) return string.Empty;
         
         var srcBuf = new byte[]

@@ -3,8 +3,10 @@ using CT_MKWII_WPF.Models.RRInfo;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace CT_MKWII_WPF.Services.WiiManagement;
@@ -28,8 +30,9 @@ public static class MiiImageManager
         var oldestMiiData = ImageOrder.Dequeue();
         Images.Remove(oldestMiiData);
     }
+    
 
-    public static async void LoadMiiImageAsync(Player player)
+    public static async void LoadPlayerMiiImageAsync(Player player)
     {
         if (player.Mii.Count <= 0) return;
 
@@ -40,8 +43,9 @@ public static class MiiImageManager
             player.MiiImage = newImage;
     }
 
-    private static async Task<BitmapImage> GetMiiImageAsync(string base64MiiData)
+    public static async Task<BitmapImage> GetMiiImageAsync(string base64MiiData)
     {
+        MessageBox.Show(base64MiiData);
         using var formData = new MultipartFormDataContent();
         formData.Add(new ByteArrayContent(Convert.FromBase64String(base64MiiData)), "data", "mii.dat");
         formData.Add(new StringContent("wii"), "platform");
@@ -50,6 +54,7 @@ public static class MiiImageManager
         if (!response.Succeeded || response.Content is null) return new BitmapImage();
 
         var miiImageUrl = GetMiiImageUrlFromResponse(response.Content);
+        
         return new BitmapImage(new Uri(miiImageUrl));
     }
 

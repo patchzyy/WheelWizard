@@ -24,14 +24,6 @@ public partial class Layout : Window, IRepeatedTaskListener
         LiveAlertsManager.Instance.Subscribe(this);
         RRLiveRooms.Instance.Start(); // Temporary code, should be moved to a more appropriate location
         RRLiveRooms.Instance.Subscribe(this);
-        LoadPlayerData();
-    }
-
-    private static void LoadPlayerData()
-    {
-        var data = new GameDataLoader();
-        data.LoadGameData();
-        var gameData = data.GameData;
     }
 
     public void NavigateToPage(Page page)
@@ -77,6 +69,7 @@ public partial class Layout : Window, IRepeatedTaskListener
             0 => "There are currently no rooms active",
             _ => $"There are currently {roomCount} rooms active"
         };
+        FriendsCounter.Text = "5";
     }
 
     private void UpdateLiveAlert(LiveAlertsManager sender)

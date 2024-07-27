@@ -3,7 +3,10 @@ using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Launcher;
 using CT_MKWII_WPF.Services.Other;
 using CT_MKWII_WPF.Services.Settings;
+using CT_MKWII_WPF.Services.WiiManagement;
+using CT_MKWII_WPF.Services.WiiManagement.GameData;
 using MahApps.Metro.IconPacks;
+using System;
 using System.Threading.Tasks;
 using System.Windows;
 using static CT_MKWII_WPF.Views.ViewUtils;
@@ -17,6 +20,25 @@ public partial class Dashboard
     {
         InitializeComponent();
         UpdateActionButton();
+        LoadPlayerData();
+    }
+    
+    private async Task LoadPlayerData()
+    {
+        var data = new GameDataLoader();
+        data.LoadGameData();
+        PlayerName.Text = data.GameData.Users[3].Name; 
+        FriendCode.Text = data.GameData.Users[3].FriendCode;
+        uint vr = data.GameData.Users[3].Vr;
+        uint br = data.GameData.Users[3].Br;
+        VrAndBr.Text = "VR: " + vr + " BR: " + br;
+        Console.WriteLine($"User: {data.GameData.Users[3].Name}");
+        Console.WriteLine($"Mii Avatar ID: {data.GameData.Users[3].MiiData.AvatarId}");
+        Console.WriteLine($"Mii Client ID: {data.GameData.Users[3].MiiData.ClientId}");
+        Console.WriteLine($"Base64 Mii Data: {data.GameData.Users[3].MiiData.Base64MiiData}");
+        byte[] miiBytes = data.GameData.Users[3].MiiData.GetMiiBytes();
+        Console.WriteLine($"Mii Data Length: {miiBytes.Length} bytes");
+        Console.WriteLine(BitConverter.ToString(miiBytes));
     }
 
     private WheelWizardStatus _status;

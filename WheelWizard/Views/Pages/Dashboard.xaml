@@ -20,26 +20,36 @@
                 VerticalAlignment="Bottom" />
         <TextBlock Grid.Row="0" Text="Home" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                    Style="{StaticResource PageTitleText}" />
-        <StackPanel Grid.Row="0" Margin="0,10,0,10" Orientation="Vertical" HorizontalAlignment="Right"
-                    VerticalAlignment="Top">
-            <!-- <Image x:Name="MainMii" Stretch="Uniform" > -->
-            <!--     <Image.Clip> -->
-            <!--         <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20"/> -->
-            <!--     </Image.Clip> -->
-            <!-- </Image> -->
-            <!-- <TextBlock HorizontalAlignment="Right" -->
-            <!--            Style="{StaticResource TitleText}" -->
-            <!--            x:Name="PlayerName" -->
-            <!--            Text="Player Name" -->
-            <!--            Margin="0,0,10,0"></TextBlock> -->
-            <!-- <TextBlock HorizontalAlignment="Right" -->
-            <!--            Style="{StaticResource BodyText}" -->
-            <!--               x:Name="FriendCode" -->
-            <!--            Text="1234-5678-1234" -->
-            <!--            Margin="0,0,10,0"></TextBlock> -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <StackPanel Grid.Row="0" Margin="0,10,0,10" Orientation="Vertical" HorizontalAlignment="Right"
+                            VerticalAlignment="Top">
+                <TextBlock HorizontalAlignment="Right"
+                           Style="{StaticResource TitleText}"
+                           x:Name="PlayerName"
+                           Text="Player Name"
+                           Margin="0,0,10,0"></TextBlock>
+                <TextBlock HorizontalAlignment="Right"
+                           Style="{StaticResource BodyText}"
+                              x:Name="FriendCode"
+                           Text="1234-5678-1234"
+                           Margin="0,0,10,0"></TextBlock>
+                <TextBlock HorizontalAlignment="Right"
+                           Style="{StaticResource BodyText}"
+                           x:Name="VrAndBr"
+                           Text="VR: xxxx BR: xxxx"
+                           Margin="0,0,10,0"></TextBlock>
+            </StackPanel>
+                <Border Width="40" Height="40" HorizontalAlignment="Right" Background="{StaticResource MiiIconBackground}"
+                        CornerRadius="20">
+                    <Image x:Name="MainMii" Stretch="Uniform">
+                        <Image.Clip>
+                            <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20" />
+                        </Image.Clip>
+                    </Image>
+                </Border>
         </StackPanel>
-        <StackPanel Grid.Row="0" Margin="0,10,0,10" Orientation="Horizontal" HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="1" Margin="0,10,0,10" Orientation="Horizontal" HorizontalAlignment="Right"
+                    VerticalAlignment="Top">
             <TextBlock
                 Style="{StaticResource BodyText}"
                 Text="Regular online"
