@@ -1,5 +1,6 @@
 ﻿using CT_MKWII_WPF.Services;
 using CT_MKWII_WPF.Services.LiveData;
+using CT_MKWII_WPF.Services.WiiManagement.GameData;
 using CT_MKWII_WPF.Utilities.RepeatedTasks;
 using CT_MKWII_WPF.Views.Components;
 using CT_MKWII_WPF.Views.Pages;
@@ -23,15 +24,15 @@ public partial class Layout : Window, IRepeatedTaskListener
         LiveAlertsManager.Instance.Subscribe(this);
         RRLiveRooms.Instance.Start(); // Temporary code, should be moved to a more appropriate location
         RRLiveRooms.Instance.Subscribe(this);
-        // LoadPlayerData();
+        LoadPlayerData();
     }
 
-    // private static void LoadPlayerData()
-    // {
-    //     var data = new GameDataLoader();
-    //     data.LoadGameData();
-    //     var gameData = data.GameData;
-    // }
+    private static void LoadPlayerData()
+    {
+        var data = new GameDataLoader();
+        data.LoadGameData();
+        var gameData = data.GameData;
+    }
 
     public void NavigateToPage(Page page)
     {

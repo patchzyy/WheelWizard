@@ -4,12 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Windows;
 
 namespace CT_MKWII_WPF.Services.WiiManagement.GameData;
 
 public class GameDataLoader
 {
-    private static string SaveFilePath => Path.Combine(PathManager.RetroRewind6FolderPath, "save");
+    private static string SaveFilePath => Path.Combine(PathManager.RiivolutionWhWzFolderPath, "riivolution", "save");
     private byte[] _saveData;
 
     public Models.GameData.GameData GameData { get; }
@@ -45,6 +46,7 @@ public class GameDataLoader
             if (Encoding.ASCII.GetString(_saveData, rkpdOffset, RkpdMagic.Length) != RkpdMagic) continue;
             var user = ParseUser(rkpdOffset);
             GameData.Users.Add(user);
+            MessageBox.Show("User " + user.Name + "FC: " + user.FriendCode);
         }
     }
 
