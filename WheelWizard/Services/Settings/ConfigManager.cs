@@ -19,13 +19,16 @@ public static class ConfigManager
     {
         if (_config == null)
             throw new Exception("Config is null, this should never happen");
+        
         return _config;
     }
 
     public static void SaveSettings(string dolphinPath, string gamePath, string userFolderPath, bool hasRunNandTutorial,
         bool forceDisableWiimote, bool launchWithDolphin)
     {
-        if (_config == null) return;
+        if (_config == null) 
+            return;
+        
         _config.DolphinLocation = dolphinPath;
         _config.GameLocation = gamePath;
         _config.UserFolderPath = userFolderPath;

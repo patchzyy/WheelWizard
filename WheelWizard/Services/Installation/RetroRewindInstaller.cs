@@ -157,7 +157,6 @@ public static class RetroRewindInstaller
         await File.WriteAllBytesAsync(destinationFile, datFileData);
         
     }
-    
 
     private static void DeleteExistingRetroRewind()
     {

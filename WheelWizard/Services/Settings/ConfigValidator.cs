@@ -15,7 +15,9 @@ public static class ConfigValidator
     public static bool SetupCorrectly()
     {
         var config = ConfigManager.GetConfig();
-        if (config.UserFolderPath == null) return false;
+        if (config.UserFolderPath == null) 
+            return false;
+        
         var gfxFile = Path.Combine(config.UserFolderPath, "Config", "GFX.ini");
         return File.Exists(config.DolphinLocation) &&
                File.Exists(config.GameLocation) &&
@@ -44,17 +46,17 @@ public static class ConfigValidator
         var config = ConfigManager.GetConfig();
         if (config.DolphinLocation == null || config.GameLocation == null || config.UserFolderPath == null) 
             return;
+        
         config.ForceWiimote = value;
         ConfigManager.SaveConfigToJson();
     }
-    
-    
     
     public static void SaveLaunchWithDolphinWindow(bool value)
     {
         var config = ConfigManager.GetConfig();
         if (config.DolphinLocation == null || config.GameLocation == null || config.UserFolderPath == null) 
             return;
+        
         config.LaunchWithDolphin = value;
         ConfigManager.SaveConfigToJson();
     }

@@ -20,12 +20,14 @@ public static class DolphinSettingHelper
         var lines = File.ReadAllLines(fileLocation);
         var sectionFound = lines.Any(t => t == $"[{section}]");
 
-        if (!sectionFound) return "";
+        if (!sectionFound) 
+            return "";
 
         //now we know the section exists, we need to find the setting
         foreach (var line in lines)
         {
-            if (!line.Contains(settingToRead)) continue;
+            if (!line.Contains(settingToRead)) 
+                continue;
             //we found the setting, now we need to return the value
             var setting = line.Split("=");
             return setting[1].Trim();
@@ -58,7 +60,8 @@ public static class DolphinSettingHelper
         var lines = File.ReadAllLines(fileLocation);
         foreach (var line in lines)
         {
-            if (!line.StartsWith(settingToRead)) continue;
+            if (!line.StartsWith(settingToRead)) 
+                continue;
             
             var setting = line.Split("=");
             return setting[1].Trim();
@@ -97,9 +100,7 @@ public static class DolphinSettingHelper
                 break;
             }
             else if (lines[i].Trim().StartsWith("[") && lines[i].Trim().EndsWith("]") && sectionFound)
-            {
                 break;
-            }
         }
 
         if (!sectionFound)
@@ -108,10 +109,8 @@ public static class DolphinSettingHelper
             lines.Add($"{settingToChange}={value}");
         }
         else if (!settingFound)
-        {
             lines.Insert(sectionIndex + 1, $"{settingToChange}={value}");
-        }
-
+        
         File.WriteAllLines(fileLocation, lines);
     }
 }
