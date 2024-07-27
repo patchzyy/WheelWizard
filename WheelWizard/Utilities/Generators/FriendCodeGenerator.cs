@@ -6,23 +6,26 @@ namespace CT_MKWII_WPF.Utilities.Generators;
 
 public class FriendCodeGenerator
 {
+    
+    public static uint BufferToUint32(byte[] data, int offset)
+    {
+        return (uint)((data[offset] << 24) | (data[offset + 1] << 16) | (data[offset + 2] << 8) | data[offset + 3]);
+    }
     public static string GetFriendCode(byte[] data, int offset)
     {
-        var pid = BitConverter.ToUInt32(data, offset);
+        var pid = BufferToUint32(data, offset);
         if (pid == 0) return string.Empty;
-
-        var srcBuf = new byte[8];
-        srcBuf[0] = data[offset + 3];
-        srcBuf[1] = data[offset + 2];
-        srcBuf[2] = data[offset + 1];
-        srcBuf[3] = data[offset + 0];
-        srcBuf[4] = 0x4A;
-        srcBuf[5] = 0x43;
-        srcBuf[6] = 0x4D;
-        srcBuf[7] = 0x52;
-
+        
+        var srcBuf = new byte[]
+        {
+            data[offset + 3],
+            data[offset + 2],
+            data[offset + 1],
+            data[offset + 0], 
+            0x4A, 0x43, 0x4D, 0x52
+        };
         var md5Hash = GetMd5Hash(srcBuf);
-        var fcDec = ((Convert.ToUInt64(md5Hash.Substring(0, 2), 16) >> 1) * (1UL << 32)) + pid;
+        var fcDec = ((Convert.ToUInt32(md5Hash.Substring(0, 2), 16) >> 1) * (1UL << 32)) + pid;
 
         return FormatFriendCode(fcDec);
     }
