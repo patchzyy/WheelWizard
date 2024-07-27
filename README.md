@@ -32,6 +32,7 @@ Feel free to join our community on [Discord](https://discord.gg/vZ7T2wJnsq) for 
   <img src="https://github.com/patchzyy/WheelWizard/blob/main/images/settings.png" alt="Wheel Wizard Logo" width="450"/>
 </p>
 ---
+
 ## Antivirus Warning
 
 ### False Positive Detections
