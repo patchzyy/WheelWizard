@@ -12,7 +12,7 @@ public static class DolphinSettingHelper
         if (!File.Exists(fileLocation))
         {
             MessageBox.Show(
-                "Something went wrong, INI file could not be read, Message Patchzy with the following error: " +
+                "Something went wrong, INI file could not be read, Plzz report this as a bug: " +
                 fileLocation, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
@@ -53,7 +53,7 @@ public static class DolphinSettingHelper
         if (!File.Exists(fileLocation))
         {
             MessageBox.Show(
-                "Something went wrong, INI file could not be read, Message Patchzy with the following error: " +
+                "Something went wrong, INI file could not be read, Plzz report this as a bug: " +
                 fileLocation, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
@@ -75,7 +75,7 @@ public static class DolphinSettingHelper
         if (!File.Exists(fileLocation))
         {
             MessageBox.Show(
-                $"Something went wrong, INI file could not be found, Message Patchzy with the following error: {fileLocation}",
+                $"Something went wrong, INI file could not be found, Plzz report this as a bug: {fileLocation}",
                 "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }

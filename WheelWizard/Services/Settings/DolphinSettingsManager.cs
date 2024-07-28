@@ -1,9 +1,8 @@
 ﻿using System.Linq;
-using System.Windows.Forms;
 
 namespace CT_MKWII_WPF.Services.Settings;
 
-public class DolphinSettingsUtils
+public class DolphinSettingsManager
 {
     private static void ChangeSettings(params (string Key, string Value)[] settings)
     {

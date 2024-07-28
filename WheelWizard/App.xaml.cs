@@ -1,16 +1,15 @@
 ﻿using CT_MKWII_WPF.Services.Installation;
-using System.Diagnostics;
-using System.IO;
+using CT_MKWII_WPF.Services.Settings;
 using System.Windows;
-using MessageBox = System.Windows.Forms.MessageBox;
 
-namespace CT_MKWII_WPF
+namespace CT_MKWII_WPF;
+
+public partial class App : Application
 {
-    public partial class App : Application
+    protected override void OnStartup(StartupEventArgs e)
     {
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            AutoUpdater.CheckForUpdatesAsync();
-        }
+        AutoUpdater.CheckForUpdatesAsync();
+
+        SettingsManager.Instance.Test();
     }
 }

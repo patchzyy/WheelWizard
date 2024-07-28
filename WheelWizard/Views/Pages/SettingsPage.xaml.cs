@@ -48,8 +48,8 @@ public partial class SettingsPage : Page
         WiiBorder.IsEnabled = enableControls;
 
         if (!enableControls) return;
-        VSyncButton.IsChecked = DolphinSettingsUtils.GetCurrentVSyncStatus();
-        RecommendedButton.IsChecked = DolphinSettingsUtils.IsRecommendedSettingsEnabled();
+        VSyncButton.IsChecked = DolphinSettingsManager.GetCurrentVSyncStatus();
+        RecommendedButton.IsChecked = DolphinSettingsManager.IsRecommendedSettingsEnabled();
         var finalResolution = 0;
         var resolution =
             DolphinSettingHelper.ReadIniSetting(PathManager.FindGfxFile(), "Settings", "InternalResolution");
@@ -143,9 +143,9 @@ public partial class SettingsPage : Page
     private void Recommended_OnClick(object sender, RoutedEventArgs e)
     {
         if (RecommendedButton.IsChecked == true)
-            DolphinSettingsUtils.EnableRecommendedSettings();
+            DolphinSettingsManager.EnableRecommendedSettings();
         else
-            DolphinSettingsUtils.DisableRecommendedSettings();
+            DolphinSettingsManager.DisableRecommendedSettings();
     }
 
     private void SaveButton_OnClick(object sender, RoutedEventArgs e)
