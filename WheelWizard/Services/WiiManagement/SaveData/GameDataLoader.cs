@@ -4,6 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using MessageBox = System.Windows.MessageBox;
 
 //big big thanks to https://kazuki-4ys.github.io/web_apps/FaceThief/ for the JS implementation of all of this
 //Things to keep in mind when working with the rksys.dat file:
@@ -14,6 +17,7 @@ namespace CT_MKWII_WPF.Services.WiiManagement.GameData;
 
 public class GameDataLoader
 {
+    public static GameDataLoader Instance { get; } = new GameDataLoader();
     private static string SaveFilePath => Path.Combine(PathManager.RiivolutionWhWzFolderPath, "riivolution", "save");
     private byte[] _saveData;
 
@@ -29,20 +33,13 @@ public class GameDataLoader
     private const int FriendDataSize = 0x1C0;
     private const int MiiSize = 0x4A;
     
-    public GameDataLoader()
+    private GameDataLoader()
     {
+        Console.WriteLine("hey");
         GameData = new Models.GameData.GameData();
+        LoadGameData();
     }
     
-    public static uint BufferToUint32(byte[] data, int offset)
-    {
-        return (uint)((data[offset] << 24) | (data[offset + 1] << 16) | (data[offset + 2] << 8) | data[offset + 3]);
-    }
-    
-    public static uint BufferToUint16(byte[] data, int offset)
-    {
-        return (uint)((data[offset] << 8) | data[offset + 1]);
-    }
     
     public void LoadGameData()
     {
@@ -67,42 +64,53 @@ public class GameDataLoader
     {
         var user = new User
         {
-            Name = GetUtf16String(offset + 0x14, 10),
+            MiiData = ParseMiiData(offset + 0x14),
             FriendCode = FriendCodeGenerator.GetFriendCode(_saveData, offset + 0x5C),
-            MiiData = ParseMiiData(offset + 0x6C),
-            Vr = BufferToUint16(_saveData, offset + 0xB0),
-            Br = BufferToUint16(_saveData, offset + 0xB2),
-            TotalRaceCount = BitConverter.ToInt32(_saveData, offset + 0xB4)
+            Vr = BigEdianBinaryReader.BufferToUint16(_saveData, offset + 0xB0),
+            Br = BigEdianBinaryReader.BufferToUint16(_saveData, offset + 0xB2),
+            TotalRaceCount = BitConverter.ToInt32(_saveData, offset + 0xB4),
+            TotalWinCount = BitConverter.ToInt32(_saveData, offset + 0x98)
         };
-
         ParseFriends(user, offset);
         return user;
     }
     
     private MiiData ParseMiiData(int offset)
     {
-        var miiData = new MiiData
+        var miiData =  new MiiData
         {
-            AvatarId = BitConverter.ToUInt32(_saveData, offset),
-            ClientId = BitConverter.ToUInt32(_saveData, offset + 4),
+            MiiName = BigEdianBinaryReader.GetUtf16String(_saveData,offset, 10),
+            AvatarId = BitConverter.ToUInt32(_saveData, offset + 0x10),
+            ClientId = BitConverter.ToUInt32(_saveData, offset + 0x14),
+            MiiBinaryData = GetMiiData(BitConverter.ToUInt32(_saveData, offset + 0x14))
         };
-        byte[] miiBytes = new byte[MiiSize];
-        Buffer.BlockCopy(_saveData, offset + 8, miiBytes, 0, MiiSize);
-        miiData.Base64MiiData = Convert.ToBase64String(miiBytes);
         return miiData;
     }
+
+    private static byte[] GetMiiData(UInt32 ClientId)
+    {
+        List<Byte[]> miis =  InternalMiiManager.GetAllMiiData();
+        foreach (var mii in miis)
+        {
+            uint AvatarId = 0;
+            for (int i = 0; i < 4; i++)
+                AvatarId |= (uint)(mii[0x18 + i] << (8 * i));
+            
+            if (AvatarId == ClientId)
+                return mii;
+        }
+        return Array.Empty<byte>();
+    }
+    
         
     public class MiiData
     {
+        public string MiiName { get; set; }
         public uint AvatarId { get; set; }
         public uint ClientId { get; set; }
         
-        public string Base64MiiData { get; set; }
+        public byte[] MiiBinaryData { get; set; }
 
-        public Byte[] GetMiiBytes()
-        {
-            return Convert.FromBase64String(Base64MiiData);
-        }
     }
 
     private void ParseFriends(User user, int userOffset)
@@ -114,7 +122,7 @@ public class GameDataLoader
             if (!CheckMiiData(currentOffset + 0x1A)) continue;
             var friend = new Friend
             {
-                Name = GetUtf16String(currentOffset + 0x1C, 10),
+                Name = BigEdianBinaryReader.GetUtf16String(_saveData, currentOffset + 0x1C, 10),
                 FriendCode = FriendCodeGenerator.GetFriendCode(_saveData, currentOffset + 4),
                 Wins = BitConverter.ToUInt16(_saveData, currentOffset + 0x14),
                 Losses = BitConverter.ToUInt16(_saveData, currentOffset + 0x12),
@@ -134,21 +142,7 @@ public class GameDataLoader
 
         return false;
     }
-
-    private string GetUtf16String(int offset, int maxLength)
-    {
-        var bytes = new List<byte>();
-        for (var i = 0; i < maxLength * 2; i += 2)
-        {
-            var b1 = _saveData[offset + i];
-            var b2 = _saveData[offset + i + 1];
-            if (b1 == 0 && b2 == 0) break;
-            bytes.Add(b1);
-            bytes.Add(b2);
-        }
-
-        return Encoding.BigEndianUnicode.GetString(bytes.ToArray());
-    }
+    
     
     private bool ValidateMagicNumber()
     {

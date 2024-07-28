@@ -20,25 +20,18 @@ public partial class Dashboard
     {
         InitializeComponent();
         UpdateActionButton();
-        LoadPlayerData();
+        PopulatePlayerData();
     }
     
-    private async Task LoadPlayerData()
+    private async Task PopulatePlayerData()
     {
-        var data = new GameDataLoader();
-        data.LoadGameData();
-        PlayerName.Text = data.GameData.Users[3].Name; 
+        var data = GameDataLoader.Instance;
+        PlayerName.Text = data.GameData.Users[3].MiiData.MiiName; 
         FriendCode.Text = data.GameData.Users[3].FriendCode;
         uint vr = data.GameData.Users[3].Vr;
         uint br = data.GameData.Users[3].Br;
         VrAndBr.Text = "VR: " + vr + " BR: " + br;
-        Console.WriteLine($"User: {data.GameData.Users[3].Name}");
-        Console.WriteLine($"Mii Avatar ID: {data.GameData.Users[3].MiiData.AvatarId}");
-        Console.WriteLine($"Mii Client ID: {data.GameData.Users[3].MiiData.ClientId}");
-        Console.WriteLine($"Base64 Mii Data: {data.GameData.Users[3].MiiData.Base64MiiData}");
-        byte[] miiBytes = data.GameData.Users[3].MiiData.GetMiiBytes();
-        Console.WriteLine($"Mii Data Length: {miiBytes.Length} bytes");
-        Console.WriteLine(BitConverter.ToString(miiBytes));
+        MainMii.Source = await MiiImageManager.GetMiiImageAsyncBytes(data.GameData.Users[3].MiiData.MiiBinaryData);
     }
 
     private WheelWizardStatus _status;

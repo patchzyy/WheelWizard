@@ -164,18 +164,12 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                         IconKind="{x:Static icon:PackIconFontAwesomeKind.UsersRectangleSolid}"
                         IconPack="FontAwesome" Text="Rooms" x:Name="RoomsButton"
                         PageType="{x:Type local:RoomsPage}" />
-                    <StackPanel Orientation="Horizontal" >
                     <components:SidebarRadioButton
-                        IconKind="{x:Static icon:PackIconFontAwesomeKind.UsersRectangleSolid}"
+                        IconKind="{x:Static icon:PackIconFontAwesomeKind.UserPlusSolid}"
                         IconPack="FontAwesome" Text="Friends" x:Name="FriendsButton"
-                        PageType="{x:Type local:RoomsPage}" />
-                    <components:StateBox x:Name="FriendsCounter" IsDark="True" Text="0"
-                                         VerticalAlignment="Center"
-                                         IconPack="FontAwesome" TipAlignment="TopLeft"
-                                         IconKind="{x:Static icon:PackIconFontAwesomeKind.UserGroupSolid}"
-                                         TipText="There are currently no friends online"
-                                         Margin="30,0,0,0" />
-                    </StackPanel>
+                        PageType="{x:Type local:RoomsPage}"
+                        BoxIconKind="{x:Static icon:PackIconFontAwesomeKind.ChildReachingSolid}"
+                        BoxText="0" />
 
                     <!-- add an other section by doing this:
                     <TextBlock Text="Other" Style="{StaticResource SidebarSectionText}"/>

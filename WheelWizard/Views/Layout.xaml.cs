@@ -69,7 +69,7 @@ public partial class Layout : Window, IRepeatedTaskListener
             0 => "There are currently no rooms active",
             _ => $"There are currently {roomCount} rooms active"
         };
-        FriendsCounter.Text = "5";
+        // FriendsCounter.Text = "5";
     }
 
     private void UpdateLiveAlert(LiveAlertsManager sender)

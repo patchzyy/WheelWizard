@@ -135,6 +135,7 @@
 
     <Thickness x:Key="EdgeGap">10</Thickness>
     <Thickness x:Key="LeftEdgeGap">10,0,0,0</Thickness>
+    <Thickness x:Key="RightEdgeGap">0,0,10,0</Thickness>
     <Thickness x:Key="LeftTopEdgeGap">10,10,0,0</Thickness>
     <Thickness x:Key="SidebarSectionGap">10,20,10,0</Thickness>
 

@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+             xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Components"
              mc:Ignorable="d"
              x:Name="Root"
@@ -22,14 +24,25 @@
                     <ControlTemplate TargetType="RadioButton">
                         <Border Background="{TemplateBinding Background}"
                                 BorderThickness="0">
-                            <local:IconLabel IconPack="{Binding IconPack, ElementName=Root}"
-                                             IconKind="{Binding IconKind, ElementName=Root}"
-                                             IconSize="25" FontSize="20" x:Name="RadioIcon"
-                                             Text="{Binding Text, ElementName=Root}"
-                                             TextColor="{TemplateBinding Foreground}"
-                                             IconColor="{StaticResource SideBarRadioIcon-Default}"
-                                             HorizontalAlignment="Left" VerticalAlignment="Center"
-                                             Margin="{StaticResource LeftEdgeGap}" />
+                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <local:IconLabel IconPack="{Binding IconPack, ElementName=Root}"
+                                                 IconKind="{Binding IconKind, ElementName=Root}"
+                                                 IconSize="25" FontSize="20" x:Name="RadioIcon"
+                                                 Text="{Binding Text, ElementName=Root}"
+                                                 TextColor="{TemplateBinding Foreground}"
+                                                 IconColor="{StaticResource SideBarRadioIcon-Default}"
+                                                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                 Margin="{StaticResource LeftEdgeGap}" />
+                                <StackPanel VerticalAlignment="Center"
+                                            HorizontalAlignment="Right" Margin="{StaticResource RightEdgeGap}">
+                                    <components:StateBox IsDark="True" Text="{Binding BoxText, ElementName=Root}"
+                                                         x:Name="StateBox"
+                                                         IconPack="FontAwesome" TipAlignment="TopLeft"
+                                                         IconKind="{Binding BoxIconKind, ElementName=Root}"
+                                                         TipText="There are currently no friends online"
+                                    />
+                                </StackPanel>
+                            </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -43,13 +56,19 @@
                                 <Setter Property="Background" Value="{StaticResource SideBarRadioBackground-Focus}" />
                                 <Setter Property="Foreground" Value="{StaticResource SideBarRadioForeground-Focus}" />
                             </Trigger>
+                            <DataTrigger Binding="{Binding BoxText, ElementName=Root}" Value="">
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="StateBox" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding BoxIconKind, ElementName=Root}" Value="{x:Null}">
+                                <Setter Property="IconSize" Value="0" TargetName="StateBox" />
+                            </DataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
     </UserControl.Resources>
-
+    
     <RadioButton Style="{StaticResource SidebarMenuButton}"
                  GroupName="SidebarGroup" Click="OnClick"
                  IsChecked="{Binding IsChecked, ElementName=Root, Mode=TwoWay}" />
