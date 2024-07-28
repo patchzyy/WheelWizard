@@ -45,7 +45,6 @@ public static class MiiImageManager
 
     public static async Task<BitmapImage> GetMiiImageAsync(string base64MiiData)
     {
-        MessageBox.Show(base64MiiData);
         using var formData = new MultipartFormDataContent();
         formData.Add(new ByteArrayContent(Convert.FromBase64String(base64MiiData)), "data", "mii.dat");
         formData.Add(new StringContent("wii"), "platform");
@@ -58,19 +57,6 @@ public static class MiiImageManager
         return new BitmapImage(new Uri(miiImageUrl));
     }
     
-    public static async Task<BitmapImage> GetMiiImageAsyncBytes(byte[] bytes)
-    {
-        using var formData = new MultipartFormDataContent();
-        formData.Add(new ByteArrayContent(bytes), "data", "mii.dat");
-        formData.Add(new StringContent("wii"), "platform");
-        var response = await HttpClientHelper.PostAsync<MiiResponse>(Endpoints.MiiStudioUrl, formData);
-
-        if (!response.Succeeded || response.Content is null) return new BitmapImage();
-
-        var miiImageUrl = GetMiiImageUrlFromResponse(response.Content);
-        
-        return new BitmapImage(new Uri(miiImageUrl));
-    }
 
 
     private static string GetMiiImageUrlFromResponse(MiiResponse response)

@@ -1,4 +1,5 @@
 ﻿using CT_MKWII_WPF.Models.GameData;
+using CT_MKWII_WPF.Models.RRInfo;
 using CT_MKWII_WPF.Utilities.Generators;
 using System;
 using System.Collections.Generic;
@@ -79,10 +80,14 @@ public class GameDataLoader
     {
         var miiData =  new MiiData
         {
-            MiiName = BigEdianBinaryReader.GetUtf16String(_saveData,offset, 10),
+            mii = new Mii
+            {
+                Name = BigEdianBinaryReader.GetUtf16String(_saveData,offset, 10),
+                Data = Convert.ToBase64String(GetMiiData(BitConverter.ToUInt32(_saveData, offset + 0x14)))
+            },
+            
             AvatarId = BitConverter.ToUInt32(_saveData, offset + 0x10),
             ClientId = BitConverter.ToUInt32(_saveData, offset + 0x14),
-            MiiBinaryData = GetMiiData(BitConverter.ToUInt32(_saveData, offset + 0x14))
         };
         return miiData;
     }
@@ -105,11 +110,9 @@ public class GameDataLoader
         
     public class MiiData
     {
-        public string MiiName { get; set; }
+        public Mii mii { get; set; }
         public uint AvatarId { get; set; }
         public uint ClientId { get; set; }
-        
-        public byte[] MiiBinaryData { get; set; }
 
     }
 
