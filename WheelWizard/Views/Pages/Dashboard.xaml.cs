@@ -9,8 +9,10 @@ using MahApps.Metro.IconPacks;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using static CT_MKWII_WPF.Views.ViewUtils;
 using Button = CT_MKWII_WPF.Views.Components.Button;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace CT_MKWII_WPF.Views.Pages;
 
@@ -35,6 +37,11 @@ public partial class Dashboard
     }
 
     private WheelWizardStatus _status;
+
+    private static void ViewProfile()
+    {
+        MessageBox.Show("tes");
+    }
 
     private async void PlayButton_Click(object sender, RoutedEventArgs e)
     {
@@ -169,5 +176,21 @@ public partial class Dashboard
         CompleteGrid.IsEnabled = false;
         //wait 5 seconds before re-enabling the buttons
         Task.Delay(5000).ContinueWith(_ => { Dispatcher.Invoke(() => CompleteGrid.IsEnabled = true); });
+    }
+    
+
+    private void Profile_click(object sender, MouseButtonEventArgs e)
+    {
+        MessageBox.Show("tes");
+    }
+
+    private void UIElement_OnMouseEnter(object sender, MouseEventArgs e)
+    {
+        Cursor = Cursors.Hand;
+    }
+
+    private void UIElement_OnMouseLeave(object sender, MouseEventArgs e)
+    {
+        Cursor = Cursors.Arrow;
     }
 }
