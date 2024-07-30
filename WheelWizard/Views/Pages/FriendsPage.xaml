@@ -5,77 +5,84 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Pages"
       xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
-      xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d"
       d:DesignHeight="831" d:DesignWidth="444"
-      Title="FriendsPage" Height="450" Width="800">
+      Title="FriendsPage" Background="Transparent">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="{StaticResource TopRowSize}" />
-            <!-- This is the total height as the (Title + infoSection) - (padding) -->
-            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
-                VerticalAlignment="Bottom" />
-        <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
-                VerticalAlignment="Bottom" />
-        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-            <TextBlock Text="Friends" Style="{StaticResource PageTitleText}" />
-            <Border ToolTipService.InitialShowDelay="50" VerticalAlignment="Center"
-                    ToolTipService.ShowDuration="50000" HorizontalAlignment="Center"
-                    ToolTipService.BetweenShowDelay="0">
-                <icon:PackIconMaterial Kind="Information" Width="18" Height="18" Margin="5,2,5,0"
-                                       Foreground="{StaticResource TitleIconColor}" />
-                <Border.ToolTip>
-                    <components:ToolTipMessage Alignment="TopCenter"
-                                               Content="
-Please note that this page does not offer any functionality to join a room directly. &#10;
-To join a specific room, you'll need to either join through a friend, or hope to join it by joining the online servers." />
-                </Border.ToolTip>
+
+        <TextBlock Grid.Row="0" Text="Friends" Style="{StaticResource PageTitleText}" Margin="10"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel Grid.Row="0" Margin="0,20,0,10" Orientation="Vertical" HorizontalAlignment="Right"
+                        VerticalAlignment="Top">
+                <TextBlock HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource BodyText}"
+                           x:Name="PlayerName"
+                           Text="Player Name"
+                           Margin="0,0,10,0"></TextBlock>
+                <TextBlock HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource TinyText}"
+                           x:Name="FriendCode"
+                           Text="1234-5678-1234"
+                           Margin="0,0,10,0"></TextBlock>
+                <TextBlock HorizontalAlignment="Right"
+                           Style="{StaticResource TinyText}"
+                           x:Name="VrAndBr"
+                           Text="VR: xxxx"
+                           Margin="0,0,10,0"></TextBlock>
+            </StackPanel>
+            <Border Width="40" Height="40" HorizontalAlignment="Right" Background="{StaticResource MiiIconBackground}"
+                    CornerRadius="20" VerticalAlignment="Center">
+                <Image x:Name="MainMii" Stretch="Uniform">
+                    <Image.Clip>
+                        <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20" />
+                    </Image.Clip>
+                </Image>
             </Border>
         </StackPanel>
-
-        <components:EmptyPageInfo Grid.Row="1" x:Name="EmptyRoomsView"
-                                  HorizontalAlignment="Center"
-                                  VerticalContentAlignment="Center"
-                                  Title="No rooms found"
-                                  Body="You might not have internet connection, or no-one might be playing." />
-
-        <StackPanel Grid.Row="2" x:Name="ModsListContainer" VerticalAlignment="Stretch">
-            <components:StaticListView x:Name="PlayersListView" IsClickable="False"
-                                       MaxHeight="{Binding ElementName=ModsListContainer, Path=ActualHeight}"
-                                       ItemsSource="{Binding PlayersList}" ListTitle="Players">
-                <components:StaticListView.ItemContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="Copy friend code" Click="CopyFriendCode_OnClick" />
-                    </ContextMenu>
-                </components:StaticListView.ItemContextMenu>
-
-                <ListView.View>
-                    <GridView AllowsColumnReorder="False">
-                        <GridViewColumn Header="">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Border Width="40" Height="40" Background="{StaticResource MiiIconBackground}"
-                                            CornerRadius="20">
-                                        <Image Source="{Binding MiiImage}" Stretch="Uniform">
-                                            <Image.Clip>
-                                                <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20" />
-                                            </Image.Clip>
-                                        </Image>
-                                    </Border>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="105"
-                                        components:StaticListView.IsSortable="True" />
-                        <GridViewColumn Header="Friend code" DisplayMemberBinding="{Binding Fc}" Width="135"
-                                        components:StaticListView.IsSortable="True" />
-                        <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Ev}" Width="80"
-                                        components:StaticListView.IsSortable="True" />
-                    </GridView>
-                </ListView.View>
-            </components:StaticListView>
-        </StackPanel>
+        
+        <components:StaticListView Grid.Row="1" x:Name="FriendsListView"
+                                   ItemsSource="{Binding FriendsList}" ListTitle="Friends"
+                                   MouseDoubleClick="FriendsListView_MouseDoubleClick">
+            <components:StaticListView.ItemContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Copy friend code" Click="CopyFriendCode_OnClick" />
+                </ContextMenu>
+            </components:StaticListView.ItemContextMenu>
+            
+            <ListView.View>
+                <GridView AllowsColumnReorder="False">
+                    <GridViewColumn Header="">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Width="40" Height="40" Background="{StaticResource MiiIconBackground}"
+                                        CornerRadius="20">
+                                    <Image Source="{Binding MiiImage}" Stretch="Uniform">
+                                        <Image.Clip>
+                                            <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20" />
+                                        </Image.Clip>
+                                    </Image>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"
+                                    components:StaticListView.IsSortable="True" />
+                    <GridViewColumn Header="Friend Code" DisplayMemberBinding="{Binding FriendCode}" Width="150"
+                                    components:StaticListView.IsSortable="True" />
+                    <!-- <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Vr}" Width="80" -->
+                    <!--                 components:StaticListView.IsSortable="True" /> -->
+                    <GridViewColumn Header="Wins" DisplayMemberBinding="{Binding Wins}" Width="80"
+                                    components:StaticListView.IsSortable="True" />
+                    <GridViewColumn Header="Losses" DisplayMemberBinding="{Binding Losses}" Width="80"
+                                    components:StaticListView.IsSortable="True" />
+                </GridView>
+            </ListView.View>
+        </components:StaticListView>
     </Grid>
 </Page>

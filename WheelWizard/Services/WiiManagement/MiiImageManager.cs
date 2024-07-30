@@ -31,7 +31,12 @@ public static class MiiImageManager
         Images.Remove(oldestMiiData);
     }
     
-
+    public static async Task<BitmapImage> LoadBase64MiiImageAsync(string base64MiiData)
+    {
+        var newImage = await GetMiiImageAsync(base64MiiData);
+        AddMiiImage(base64MiiData, newImage);
+        return newImage;
+    }
     public static async void LoadPlayerMiiImageAsync(Player player)
     {
         if (player.Mii.Count <= 0) return;
