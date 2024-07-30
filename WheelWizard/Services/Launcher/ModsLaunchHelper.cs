@@ -19,7 +19,16 @@ public static class ModsLaunchHelper
     public static async Task PrepareModsForLaunch()
     {
         var mods = ConfigValidator.GetMods();
-        if (mods.Length == 0) return;
+        if (mods.Length == 0 || !mods.Any(mod => mod.IsEnabled))
+        {
+            if (Directory.Exists(MyStuffFolderPath) && Directory.EnumerateFiles(MyStuffFolderPath).Any())
+            {
+                var result = YesNoMessagebox.Show("Mods found", "Delete","Keep", "MyStuff folder is not empty, do you want to clear it?");
+                if (result)
+                    Directory.Delete(MyStuffFolderPath, true);
+                return;
+            }
+        }
         
         Array.Reverse(mods);
         if (Directory.Exists(MyStuffFolderPath))

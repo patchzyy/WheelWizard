@@ -46,7 +46,7 @@ public static class Launcher
         KillDolphin();
         if (WiiMoteSettings.IsForceSettingsEnabled()) 
             WiiMoteSettings.DisableVirtualWiiMote();
-        
+        MessageBox.Show("beep");
         await ModsLaunchHelper.PrepareModsForLaunch();
         if (!File.Exists(PathManager.GameFilePath))
         {
