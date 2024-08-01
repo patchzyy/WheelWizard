@@ -11,6 +11,8 @@ public class User
     public required uint Br { get; set; }
     public required int TotalRaceCount { get; set; }
     
+    public bool IsOnline { get; set; }
+    
     public required int TotalWinCount { get; set; }
     public List<Friend> Friends { get; set; } = new List<Friend>();
 }

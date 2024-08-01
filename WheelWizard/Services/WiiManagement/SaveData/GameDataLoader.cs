@@ -1,18 +1,20 @@
 ﻿using CT_MKWII_WPF.Models.GameData;
 using CT_MKWII_WPF.Models.RRInfo;
+using CT_MKWII_WPF.Services.LiveData;
 using CT_MKWII_WPF.Utilities.Generators;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MessageBox = System.Windows.MessageBox;
 
-//big big thanks to https://kazuki-4ys.github.io/web_apps/FaceThief/ for the JS implementation of all of this
+//big big thanks to https://kazuki-4ys.github.io/web_apps/FaceThief/ for the JS implementation of reading the rksys file
 //Things to keep in mind when working with the rksys.dat file:
 // everything is big endian!!!!
-// the save file is 0x2BC000 bytes long
+
 
 namespace CT_MKWII_WPF.Services.WiiManagement.GameData;
 
@@ -20,7 +22,7 @@ public class GameDataLoader
 {
     public static GameDataLoader Instance { get; } = new GameDataLoader();
     private static string SaveFilePath => Path.Combine(PathManager.RiivolutionWhWzFolderPath, "riivolution", "save");
-    private byte[] _saveData;
+    private byte[]? _saveData;
 
     public Models.GameData.GameData GameData { get; }
 
@@ -34,9 +36,19 @@ public class GameDataLoader
     private const int FriendDataSize = 0x1C0;
     private const int MiiSize = 0x4A;
     
+    public User getCurrentUser => Instance.GameData.Users[Instance.GameData.CurrentUserIndex];
+    public string getCurrentUsername => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].MiiData.mii.Name;
+    public string getCurrentFriendCode => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].FriendCode;
+    public uint getCurrentVr => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].Vr;
+    public uint getCurrentBr => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].Br;
+    public int getCurrentTotalRaceCount => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].TotalRaceCount;
+    public int getCurrentTotalWinCount => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].TotalWinCount;
+    public List<Friend> getCurrentFriends => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].Friends;
+    public MiiData getCurrentMiiData => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].MiiData;
+    
+    
     private GameDataLoader()
     {
-        Console.WriteLine("hey");
         GameData = new Models.GameData.GameData();
         LoadGameData();
     }
@@ -45,9 +57,36 @@ public class GameDataLoader
     public void LoadGameData()
     {
         _saveData = LoadSaveDataFile();
-        if (_saveData is not { Length: RksysSize } || !ValidateMagicNumber())
-            throw new InvalidDataException("Invalid save file data");
-        ParseUsers();
+        if (_saveData != null && ValidateMagicNumber())
+        {
+            ParseUsers();
+            return;
+        }
+        CreateDummyUser();
+    }
+    
+    private void CreateDummyUser()
+    {
+        var dummyUser = new User
+        {
+            FriendCode = "0000-0000-0000",
+            MiiData = new MiiData
+            {
+                mii = new Mii
+                {
+                    Name = "Not Logged In",
+                    Data = Convert.ToBase64String(new byte[MiiSize])
+                },
+                AvatarId = 0,
+                ClientId = 0
+            },
+            Vr = 5000,
+            Br = 5000,
+            TotalRaceCount = 0,
+            TotalWinCount = 0,
+            Friends = new List<Friend>()
+        };
+        GameData.Users.Add(dummyUser);
     }
 
     private void ParseUsers()
@@ -59,6 +98,9 @@ public class GameDataLoader
             var user = ParseUser(rkpdOffset);
             GameData.Users.Add(user);
         }
+        
+        if (GameData.Users.Count == 0)
+            CreateDummyUser();
     }
 
     private User ParseUser(int offset)
@@ -72,6 +114,7 @@ public class GameDataLoader
             TotalRaceCount = BitConverter.ToInt32(_saveData, offset + 0xB4),
             TotalWinCount = BitConverter.ToInt32(_saveData, offset + 0x98)
         };
+        user.IsOnline = RRLiveRooms.Instance.CurrentRooms.SelectMany(room => room.Players.Values).Any(player => player.Fc == user.FriendCode);
         ParseFriends(user, offset);
         return user;
     }
@@ -119,6 +162,8 @@ public class GameDataLoader
     private void ParseFriends(User user, int userOffset)
     {
         var friendOffset = userOffset + FriendDataOffset;
+        var onlinePlayers = new List<Player>();
+        onlinePlayers = RRLiveRooms.Instance.CurrentRooms.SelectMany(room => room.Players.Values).ToList();
         for (var i = 0; i < MaxFriendNum; i++)
         {
             var currentOffset = friendOffset + i * FriendDataSize;
@@ -129,8 +174,9 @@ public class GameDataLoader
                 FriendCode = FriendCodeGenerator.GetFriendCode(_saveData, currentOffset + 4),
                 Wins = BitConverter.ToUInt16(_saveData, currentOffset + 0x14),
                 Losses = BitConverter.ToUInt16(_saveData, currentOffset + 0x12),
-                MiiData = Convert.ToBase64String(_saveData.AsSpan(currentOffset + 0x1A, MiiSize))
+                MiiData = Convert.ToBase64String(_saveData.AsSpan(currentOffset + 0x1A, MiiSize)),
             };
+            friend.IsOnline = onlinePlayers.Any(player => player.Fc == friend.FriendCode);
             user.Friends.Add(friend);
         }
     }

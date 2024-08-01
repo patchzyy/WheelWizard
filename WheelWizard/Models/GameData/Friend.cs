@@ -14,6 +14,8 @@ public class Friend : INotifyPropertyChanged
     public uint Vr { get; set; }
     public uint Br { get; set; }
     public string? MiiData { get; set; }
+    
+    public bool IsOnline { get; set; }
 
     private bool _requestingImage;
     private BitmapImage? _miiImage;

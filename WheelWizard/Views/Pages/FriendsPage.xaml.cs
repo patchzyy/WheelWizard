@@ -41,11 +41,7 @@ public partial class FriendsPage : Page, INotifyPropertyChanged
     {
         InitializeComponent();
         var data = GameDataLoader.Instance;
-        var currentUser = data.GameData.Users[3];
-        MessageBox.Show(currentUser.MiiData.mii.Name);
-        MessageBox.Show(currentUser.Friends.Count.ToString());
-        CurrentUser = currentUser;
-        FriendList = new ObservableCollection<Friend>(CurrentUser.Friends);
+        FriendList = new ObservableCollection<Friend>(data.getCurrentFriends);
         FriendsListView.SortingFunctions.Add("Vr", VrComparable);
         DataContext = this;
         FriendsListView.ItemsSource = FriendList; //for some reason not adding this line
@@ -57,12 +53,11 @@ public partial class FriendsPage : Page, INotifyPropertyChanged
     private async Task PopulatePlayerData()
     {
         var data = GameDataLoader.Instance;
-        PlayerName.Text = data.GameData.Users[3].MiiData.mii.Name; 
-        FriendCode.Text = data.GameData.Users[3].FriendCode;
-        uint vr = data.GameData.Users[3].Vr;
-        uint br = data.GameData.Users[3].Br;
+        PlayerName.Text = data.getCurrentUsername;
+        FriendCode.Text = data.getCurrentFriendCode;
+        uint vr = data.getCurrentVr;
         VrAndBr.Text = "VR: " + vr;
-        MainMii.Source = await MiiImageManager.GetMiiImageAsync(data.GameData.Users[3].MiiData.mii.Data);
+        MainMii.Source = await MiiImageManager.GetMiiImageAsync(data.getCurrentMiiData.mii.Data);
     }
     
     private static int VrComparable(object x, object y)
@@ -89,6 +84,21 @@ public partial class FriendsPage : Page, INotifyPropertyChanged
         var selectedFriend = FriendsListView.SelectedItem as Friend;
         if (selectedFriend == null) return;
         
+    }
+
+    private void Profile_click(object sender, MouseButtonEventArgs e)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    private void UIElement_OnMouseEnter(object sender, MouseEventArgs e)
+    {
+        Cursor = Cursors.Hand;
+    }
+
+    private void UIElement_OnMouseLeave(object sender, MouseEventArgs e)
+    {
+        Cursor = Cursors.Arrow;
     }
 }
 

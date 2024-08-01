@@ -10,41 +10,56 @@
       Title="FriendsPage" Background="Transparent">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="{StaticResource TopRowSize}" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Text="Friends" Style="{StaticResource PageTitleText}" Margin="10"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <StackPanel Grid.Row="0" Margin="0,20,0,10" Orientation="Vertical" HorizontalAlignment="Right"
-                        VerticalAlignment="Top">
-                <TextBlock HorizontalAlignment="Right"
-                           VerticalAlignment="Center"
-                           Style="{StaticResource BodyText}"
-                           x:Name="PlayerName"
-                           Text="Player Name"
-                           Margin="0,0,10,0"></TextBlock>
-                <TextBlock HorizontalAlignment="Right"
-                           VerticalAlignment="Center"
-                           Style="{StaticResource TinyText}"
-                           x:Name="FriendCode"
-                           Text="1234-5678-1234"
-                           Margin="0,0,10,0"></TextBlock>
-                <TextBlock HorizontalAlignment="Right"
-                           Style="{StaticResource TinyText}"
-                           x:Name="VrAndBr"
-                           Text="VR: xxxx"
-                           Margin="0,0,10,0"></TextBlock>
-            </StackPanel>
-            <Border Width="40" Height="40" HorizontalAlignment="Right" Background="{StaticResource MiiIconBackground}"
-                    CornerRadius="20" VerticalAlignment="Center">
-                <Image x:Name="MainMii" Stretch="Uniform">
-                    <Image.Clip>
-                        <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20" />
-                    </Image.Clip>
-                </Image>
-            </Border>
-        </StackPanel>
+        <Grid Grid.Row="0" 
+              HorizontalAlignment="Right"
+              Width="180" Height="60"
+              Margin="0,0,10,0"
+              MouseDown="Profile_click"
+              MouseEnter="UIElement_OnMouseEnter"
+              MouseLeave="UIElement_OnMouseLeave"
+              VerticalAlignment="Center">
+            
+
+            <Border Background="{StaticResource LightBackgroundColor}" 
+                    CornerRadius="10" />
+            
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right"
+                                VerticalAlignment="Top" Margin="0,5,0,0">
+                        <TextBlock HorizontalAlignment="Right"
+                                   VerticalAlignment="Top"
+                                   Style="{StaticResource BodyText}"
+                                   x:Name="PlayerName"
+                                   Text="Player Name"
+                                   Margin="0,0,10,0"/>
+                        <TextBlock HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource TinyText}"
+                                   x:Name="FriendCode"
+                                   Text="1234-5678-1234"
+                                   Margin="0,0,10,0"/>
+                        <TextBlock HorizontalAlignment="Right"
+                                   Style="{StaticResource TinyText}"
+                                   x:Name="VrAndBr"
+                                   Text="VR: xxxx"
+                                   Margin="0,0,10,0"/>
+                    </StackPanel>
+                    <Border Width="60" Height="60" HorizontalAlignment="Right" Background="{StaticResource MiiIconBackground}"
+                            Margin="0,0,10,0"
+                            CornerRadius="30" VerticalAlignment="Center">
+                        <Image x:Name="MainMii" Stretch="Uniform">
+                            <Image.Clip>
+                                <EllipseGeometry Center="30,30" RadiusX="30" RadiusY="30" />
+                            </Image.Clip>
+                        </Image>
+                    </Border>
+                </StackPanel>
+        </Grid>
         
         <components:StaticListView Grid.Row="1" x:Name="FriendsListView"
                                    ItemsSource="{Binding FriendsList}" ListTitle="Friends"
