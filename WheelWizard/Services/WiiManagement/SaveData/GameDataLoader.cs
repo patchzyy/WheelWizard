@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media.Imaging;
 using MessageBox = System.Windows.MessageBox;
 
 //big big thanks to https://kazuki-4ys.github.io/web_apps/FaceThief/ for the JS implementation of reading the rksys file
@@ -45,12 +46,38 @@ public class GameDataLoader
     public int getCurrentTotalWinCount => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].TotalWinCount;
     public List<Friend> getCurrentFriends => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].Friends;
     public MiiData getCurrentMiiData => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].MiiData;
-    
+    public bool isCurrentUserOnline => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].IsOnline;
+    public Models.GameData.GameData getGameData => Instance.GameData;
+    public User GetCurrentUser => GameData.Users[GameData.CurrentUserIndex];
+    public List<User> GetAllUsers => GameData.Users;
+    public User GetUserData(int index) => GameData.Users[index];
+
     
     private GameDataLoader()
     {
         GameData = new Models.GameData.GameData();
         LoadGameData();
+    }
+    
+    
+    public void RefreshOnlineStatus()
+    {
+        var currentRooms = RRLiveRooms.Instance.CurrentRooms;
+        if (currentRooms.Count > 0)
+        {
+            var onlinePlayers = currentRooms.SelectMany(room => room.Players.Values).ToList();
+            foreach (var user in GameData.Users)
+            {
+                user.IsOnline = onlinePlayers.Any(player => player.Fc == user.FriendCode);
+            }
+        }
+        else
+        {
+            foreach (var user in GameData.Users)
+            {
+                user.IsOnline = false;
+            }
+        }
     }
     
     
@@ -84,7 +111,8 @@ public class GameDataLoader
             Br = 5000,
             TotalRaceCount = 0,
             TotalWinCount = 0,
-            Friends = new List<Friend>()
+            Friends = new List<Friend>(),
+            IsOnline = false
         };
         GameData.Users.Add(dummyUser);
     }
@@ -112,9 +140,16 @@ public class GameDataLoader
             Vr = BigEdianBinaryReader.BufferToUint16(_saveData, offset + 0xB0),
             Br = BigEdianBinaryReader.BufferToUint16(_saveData, offset + 0xB2),
             TotalRaceCount = BitConverter.ToInt32(_saveData, offset + 0xB4),
-            TotalWinCount = BitConverter.ToInt32(_saveData, offset + 0x98)
+            TotalWinCount = BitConverter.ToInt32(_saveData, offset + 0x98),
+            IsOnline = false
         };
-        user.IsOnline = RRLiveRooms.Instance.CurrentRooms.SelectMany(room => room.Players.Values).Any(player => player.Fc == user.FriendCode);
+
+        var currentRooms = RRLiveRooms.Instance.CurrentRooms;
+        if (currentRooms.Count > 0)
+        {
+            var onlinePlayers = currentRooms.SelectMany(room => room.Players.Values).ToList();
+            user.IsOnline = onlinePlayers.Any(player => player.Fc == user.FriendCode);
+        }
         ParseFriends(user, offset);
         return user;
     }
@@ -170,11 +205,14 @@ public class GameDataLoader
             if (!CheckMiiData(currentOffset + 0x1A)) continue;
             var friend = new Friend
             {
+                Vr = 0,
+                Br = 0,
                 Name = BigEdianBinaryReader.GetUtf16String(_saveData, currentOffset + 0x1C, 10),
                 FriendCode = FriendCodeGenerator.GetFriendCode(_saveData, currentOffset + 4),
                 Wins = BitConverter.ToUInt16(_saveData, currentOffset + 0x14),
                 Losses = BitConverter.ToUInt16(_saveData, currentOffset + 0x12),
-                MiiData = Convert.ToBase64String(_saveData.AsSpan(currentOffset + 0x1A, MiiSize)),
+                MiiBinaryData = Convert.ToBase64String(_saveData.AsSpan(currentOffset + 0x1A, MiiSize)),
+                IsOnline = false
             };
             friend.IsOnline = onlinePlayers.Any(player => player.Fc == friend.FriendCode);
             user.Friends.Add(friend);

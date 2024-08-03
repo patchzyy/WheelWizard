@@ -1,57 +1,15 @@
-﻿using CT_MKWII_WPF.Services.WiiManagement;
-using System.ComponentModel;
-using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
+﻿namespace CT_MKWII_WPF.Models.GameData;
 
-namespace CT_MKWII_WPF.Models.GameData;
-
-public class Friend : INotifyPropertyChanged
+public class Friend : BasePlayer
 {
-    public string? Name { get; set; }
-    public string? FriendCode { get; set; }
+    public required string Name { get; set; }
     public uint Wins { get; set; }
     public uint Losses { get; set; }
-    public uint Vr { get; set; }
-    public uint Br { get; set; }
-    public string? MiiData { get; set; }
-    
-    public bool IsOnline { get; set; }
 
-    private bool _requestingImage;
-    private BitmapImage? _miiImage;
-    public BitmapImage? MiiImage
+    // MiiBinaryData is now in the base class
+    public new string? MiiBinaryData
     {
-        get
-        {
-            if (_miiImage != null || _requestingImage) return _miiImage;
-
-            _requestingImage = true;
-            if (MiiData == null) return null;
-            _miiImage = MiiImageManager.GetCachedMiiImage(MiiData);
-            if (_miiImage == null)
-            {
-                MiiImageManager.LoadBase64MiiImageAsync(MiiData).ContinueWith(t =>
-                {
-                    _miiImage = t.Result;
-                    _requestingImage = false;
-                    OnPropertyChanged(nameof(MiiImage));
-                }, TaskScheduler.FromCurrentSynchronizationContext());
-            }
-
-            return _miiImage;
-        }
-        set
-        {
-            if (_miiImage == value) return;
-            _miiImage = value;
-            OnPropertyChanged(nameof(MiiImage));
-        }
-    }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    protected virtual void OnPropertyChanged(string propertyName)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        get => base.MiiBinaryData;
+        set => base.MiiBinaryData = value;
     }
 }

@@ -14,7 +14,7 @@ public static class InternalMiiManager
     private static readonly string WiiDbFile = Path.Combine(PathManager.WiiFolderPath, "shared2", "menu", "FaceLib", "RFL_DB.dat");
     private const int MiiLength = 74;
     private const int MiiNameLength = 10;
-    private static readonly byte[] emptyMii = new byte[MiiLength]; // empty mii template
+    private static readonly byte[] emptyMii = new byte[MiiLength];
     
     public static List<byte[]> GetAllMiiData()
     {

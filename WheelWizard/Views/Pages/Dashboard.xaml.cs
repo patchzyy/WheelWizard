@@ -22,20 +22,8 @@ public partial class Dashboard
     {
         InitializeComponent();
         UpdateActionButton();
-        PopulatePlayerData();
     }
     
-    private async Task PopulatePlayerData()
-    {
-        var data = GameDataLoader.Instance;
-        var userId = data.GameData.CurrentUserIndex;
-        PlayerName.Text = data.GameData.Users[userId].MiiData.mii.Name; 
-        FriendCode.Text = data.GameData.Users[userId].FriendCode;
-        uint vr = data.GameData.Users[userId].Vr;
-        uint br = data.GameData.Users[userId].Br;
-        VrAndBr.Text = "VR: " + vr;
-        MainMii.Source = await MiiImageManager.GetMiiImageAsync(data.GameData.Users[userId].MiiData.mii.Data);
-    }
 
     private WheelWizardStatus _status;
 

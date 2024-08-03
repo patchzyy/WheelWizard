@@ -1,0 +1,60 @@
+﻿<Page x:Class="CT_MKWII_WPF.Views.Pages.UserProfilePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+      xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      mc:Ignorable="d"
+      d:DesignHeight="831" d:DesignWidth="444"
+      Title="UserProfilePage" Background="Transparent">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource TopRowSize}" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="My Profiles" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                   Style="{StaticResource PageTitleText}" />
+        <components:CurrentUserProfileComponent x:Name="CurrentUserProfile"
+                                                Grid.Row="0"
+                                                Width="200"
+                                                Height="60"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Center"
+                                                Margin="0,0,10,0"/>
+        <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
+        
+        <ScrollViewer Grid.Row="1"  HorizontalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <RadioButton Style="{StaticResource TopBar}" Tag="Mii1" 
+                             Click="TopBarRadio_OnClick" 
+                             Content="Mii1" 
+                             x:Name="Mii1"
+                             IsChecked="True" />
+                <RadioButton Style="{StaticResource TopBar}" Tag="Mii2" 
+                             Click="TopBarRadio_OnClick" 
+                             x:Name="Mii2"
+                             Content="Mii2" />
+                <RadioButton Style="{StaticResource TopBar}" Tag="Mii3" 
+                             Click="TopBarRadio_OnClick" 
+                             x:Name="Mii3"
+                             Content="Mii3" />
+                <RadioButton Style="{StaticResource TopBar}" Tag="Mii4" 
+                             Click="TopBarRadio_OnClick" 
+                             x:Name="Mii4"
+                             Content="Mii4" />
+            </StackPanel>
+        </ScrollViewer>
+        <components:PlayerStatsComponent 
+            x:Name="PlayerStats" 
+            Grid.Row="1"
+            Width="420"
+            Height="300"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Bottom"
+            Margin="0,10,0,0"/>
+    </Grid>
+</Page>
