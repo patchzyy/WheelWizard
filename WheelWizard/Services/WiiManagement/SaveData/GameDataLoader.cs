@@ -185,7 +185,7 @@ public class GameDataLoader
         return Array.Empty<byte>();
     }
     
-        
+         
     public class MiiData
     {
         public Mii mii { get; set; }

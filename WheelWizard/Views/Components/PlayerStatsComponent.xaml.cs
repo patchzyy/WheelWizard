@@ -79,7 +79,8 @@ namespace CT_MKWII_WPF.Views.Components
             FriendCode = user.FriendCode;
             VR = "VR: "+ user.Vr;
             BR = "BR: "+ user.Br;
-            MiiImage = await MiiImageManager.LoadBase64MiiImageAsync(user.MiiBinaryData);
+            MiiImage = user.MiiImage;
+
         }
 
         public void UpdateStats(Friend player)

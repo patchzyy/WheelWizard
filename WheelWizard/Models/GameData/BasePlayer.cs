@@ -11,7 +11,6 @@ public abstract class BasePlayer : INotifyPropertyChanged
     public required uint Vr { get; set; }
     public required uint Br { get; set; }
     public required bool IsOnline { get; set; }
-
     protected string? MiiBinaryData { get; set; }
 
     private bool _requestingImage;

@@ -45,6 +45,7 @@ public partial class UserProfilePage : Page
         {
             if (user.MiiData.mii.Name == null) continue;
             PlayerStats.UpdateStats(user);
+            break;
         }
     }
 

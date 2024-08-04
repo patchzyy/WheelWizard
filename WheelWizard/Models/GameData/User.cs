@@ -10,28 +10,6 @@ public class User : BasePlayer
     public required int TotalRaceCount { get; set; }
     public required int TotalWinCount { get; set; }
     public List<Friend> Friends { get; set; } = new List<Friend>();
-    public new string? MiiBinaryData
-    {
-        get => MiiData.mii.Data;
-        set
-        {
-            if (MiiData == null)
-            {
-                MiiData = new GameDataLoader.MiiData
-                {
-                    mii = new Mii { Data = value ?? "", Name = "" }
-                };
-            }
-            else if (MiiData.mii == null)
-            {
-                MiiData.mii = new Mii { Data = value ?? "", Name = "" };
-            }
-            else
-            {
-                MiiData.mii.Data = value ?? "";
-            }
-        }
-    }
 
     public string MiiName
     {
