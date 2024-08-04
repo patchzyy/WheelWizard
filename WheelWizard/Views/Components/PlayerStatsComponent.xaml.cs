@@ -85,7 +85,7 @@ namespace CT_MKWII_WPF.Views.Components
 
         public void UpdateStats(Friend player)
         {
-            PlayerName = player.Name;
+            PlayerName = player.MiiName;
             FriendCode = player.FriendCode;
             VR = "VR: "+ player.Vr;
             BR = "BR: "+player.Br;

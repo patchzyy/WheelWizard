@@ -207,11 +207,21 @@ public class GameDataLoader
             {
                 Vr = 0,
                 Br = 0,
-                Name = BigEdianBinaryReader.GetUtf16String(_saveData, currentOffset + 0x1C, 10),
+                // Name = BigEdianBinaryReader.GetUtf16String(_saveData, currentOffset + 0x1C, 10),
                 FriendCode = FriendCodeGenerator.GetFriendCode(_saveData, currentOffset + 4),
                 Wins = BitConverter.ToUInt16(_saveData, currentOffset + 0x14),
                 Losses = BitConverter.ToUInt16(_saveData, currentOffset + 0x12),
-                MiiBinaryData = Convert.ToBase64String(_saveData.AsSpan(currentOffset + 0x1A, MiiSize)),
+                // MiiBinaryData = Convert.ToBase64String(_saveData.AsSpan(currentOffset + 0x1A, MiiSize)),
+                MiiData = new MiiData
+                {
+                    mii = new Mii
+                    {
+                        Name = BigEdianBinaryReader.GetUtf16String(_saveData, currentOffset + 0x1C, 10),
+                        Data = Convert.ToBase64String(_saveData.AsSpan(currentOffset + 0x1A, MiiSize))
+                    },
+                    AvatarId = 0,
+                    ClientId = 0
+                },
                 IsOnline = false
             };
             friend.IsOnline = onlinePlayers.Any(player => player.Fc == friend.FriendCode);

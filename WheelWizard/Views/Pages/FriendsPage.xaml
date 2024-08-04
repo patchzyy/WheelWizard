@@ -51,7 +51,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding MiiName}" Width="150"
                                     components:StaticListView.IsSortable="True" />
                     <GridViewColumn Header="Friend Code" DisplayMemberBinding="{Binding FriendCode}" Width="150"
                                     components:StaticListView.IsSortable="True" />
