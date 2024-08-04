@@ -43,7 +43,7 @@ public partial class UserProfilePage : Page
         var users = GameDataLoader.Instance.GetAllUsers;
         foreach (var user in users)
         {
-            if (user.MiiData.mii.Name == null) continue;
+            if (user.MiiData.mii.Name == "" || user.MiiData.mii.Name == null) continue;
             PlayerStats.UpdateStats(user);
             break;
         }

@@ -79,6 +79,8 @@ namespace CT_MKWII_WPF.Views.Components
             FriendCode = user.FriendCode;
             VR = "VR: "+ user.Vr;
             BR = "BR: "+ user.Br;
+            BottomExtraStat = "Races Played: " + user.TotalRaceCount;
+            TopExtraStat = "Wins: " + user.TotalWinCount;
             MiiImage = user.MiiImage;
 
         }
