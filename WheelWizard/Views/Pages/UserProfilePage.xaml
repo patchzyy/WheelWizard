@@ -26,7 +26,7 @@
                                                 Margin="0,0,10,0"/>
         <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
                 VerticalAlignment="Bottom" />
-        
+        <StackPanel Grid.Row="1" Orientation="Vertical">
         <ScrollViewer Grid.Row="1"  HorizontalScrollBarVisibility="Auto">
             <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left">
                 <RadioButton Style="{StaticResource TopBar}" Tag="Mii1" 
@@ -48,13 +48,18 @@
                              Content="Mii4" />
             </StackPanel>
         </ScrollViewer>
+            <CheckBox
+                Margin="10,10,0,10" 
+                IsChecked="True">
+                <TextBlock Text="Make Favorite" />
+            </CheckBox>
         <components:PlayerStatsComponent 
             x:Name="PlayerStats" 
-            Grid.Row="1"
             Width="420"
             Height="300"
             HorizontalAlignment="Center" 
             VerticalAlignment="Bottom"
             Margin="0,10,0,0"/>
+        </StackPanel>
     </Grid>
 </Page>

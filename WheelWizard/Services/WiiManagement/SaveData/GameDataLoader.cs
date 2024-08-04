@@ -42,8 +42,8 @@ public class GameDataLoader
     public string getCurrentFriendCode => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].FriendCode;
     public uint getCurrentVr => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].Vr;
     public uint getCurrentBr => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].Br;
-    public int getCurrentTotalRaceCount => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].TotalRaceCount;
-    public int getCurrentTotalWinCount => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].TotalWinCount;
+    public uint getCurrentTotalRaceCount => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].TotalRaceCount;
+    public uint getCurrentTotalWinCount => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].TotalWinCount;
     public List<Friend> getCurrentFriends => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].Friends;
     public MiiData getCurrentMiiData => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].MiiData;
     public bool isCurrentUserOnline => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].IsOnline;
@@ -139,8 +139,8 @@ public class GameDataLoader
             FriendCode = FriendCodeGenerator.GetFriendCode(_saveData, offset + 0x5C),
             Vr = BigEdianBinaryReader.BufferToUint16(_saveData, offset + 0xB0),
             Br = BigEdianBinaryReader.BufferToUint16(_saveData, offset + 0xB2),
-            TotalRaceCount = BitConverter.ToInt32(_saveData, offset + 0xB4),
-            TotalWinCount = BitConverter.ToInt32(_saveData, offset + 0x98),
+            TotalRaceCount = BigEdianBinaryReader.BufferToUint32(_saveData, offset + 0xB4),
+            TotalWinCount = BigEdianBinaryReader.BufferToUint32(_saveData, offset + 0xDC),
             IsOnline = false
         };
 

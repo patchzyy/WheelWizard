@@ -6,8 +6,8 @@ namespace CT_MKWII_WPF.Models.GameData;
 
 public class User : BasePlayer
 {
-    public required int TotalRaceCount { get; set; }
-    public required int TotalWinCount { get; set; }
+    public required uint TotalRaceCount { get; set; }
+    public required uint TotalWinCount { get; set; }
     public List<Friend> Friends { get; set; } = new List<Friend>();
     
 }
