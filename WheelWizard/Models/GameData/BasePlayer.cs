@@ -1,4 +1,5 @@
-﻿using CT_MKWII_WPF.Models.RRInfo;
+﻿using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Models.RRInfo;
 using CT_MKWII_WPF.Services.LiveData;
 using System.ComponentModel;
 using System.Windows.Media.Imaging;
@@ -14,6 +15,11 @@ public abstract class BasePlayer : INotifyPropertyChanged
     public required string FriendCode { get; set; }
     public required uint Vr { get; set; }
     public required uint Br { get; set; }
+    
+    public required uint RegionID { get; set; } 
+    
+    public string RegionName => Humanizer.GetRegionName(RegionID);
+    
 
     public bool IsOnline
     {

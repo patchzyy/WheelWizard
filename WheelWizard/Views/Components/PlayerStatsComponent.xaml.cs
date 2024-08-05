@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -72,6 +73,14 @@ namespace CT_MKWII_WPF.Views.Components
             set => SetProperty(ref _miiImage, value);
         }
         
+        private String _regionName;
+        
+        public String RegionName
+        {
+            get => _regionName;
+            set => SetProperty(ref _regionName, value);
+        }
+        
 
         public PlayerStatsComponent()
         {
@@ -92,22 +101,24 @@ namespace CT_MKWII_WPF.Views.Components
             MiiImage = user.MiiImage;
             IsOnline = user.IsOnline;
             ViewRoomButton.Visibility = IsOnline ? Visibility.Visible : Visibility.Hidden;
+            RegionName = user.RegionName;
 
         }
 
-        public void UpdateStats(Friend player)
+        public void UpdateStats(Friend friend)
         {
-            PlayerName = player.MiiName;
-            FriendCode = player.FriendCode;
-            VR = "VR: "+ player.Vr;
-            BR = "BR: "+player.Br;
-            BottomExtraStat = "Wins: " + player.Wins;
-            TopExtraStat = "Losses: " + player.Losses;
-            MiiImage = player.MiiImage;
-            IsOnline = player.IsOnline;
+            PlayerName = friend.MiiName;
+            FriendCode = friend.FriendCode;
+            VR = "VR: "+ friend.Vr;
+            BR = "BR: "+friend.Br;
+            BottomExtraStat = "Wins: " + friend.Wins;
+            TopExtraStat = "Losses: " + friend.Losses;
+            MiiImage = friend.MiiImage;
+            IsOnline = friend.IsOnline;
             ViewRoomButton.Visibility = IsOnline ? Visibility.Visible : Visibility.Hidden;
+            RegionName = friend.CountryName;
         }
-
+        
 
         protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {

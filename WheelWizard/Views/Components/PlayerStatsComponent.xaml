@@ -55,6 +55,9 @@
                             Style="{StaticResource TitleText}"/>
                 <TextBlock Text="{Binding BottomExtraStat}" HorizontalAlignment="Left" VerticalAlignment="Top"
                            Style="{StaticResource TitleText}"/>
+                <TextBlock Text="{Binding RegionName}" HorizontalAlignment="Right" VerticalAlignment="Top"
+                           Style="{StaticResource BodyText}"
+                           Margin="0,0,10,0"/>
             </StackPanel>
         </Border>
         </StackPanel>

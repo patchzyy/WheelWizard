@@ -112,6 +112,7 @@ public class GameDataLoader
             TotalRaceCount = 0,
             TotalWinCount = 0,
             Friends = new List<Friend>(),
+            RegionID = 10, //10 will default to unknown
             IsOnline = false
         };
         GameData.Users.Add(dummyUser);
@@ -141,11 +142,12 @@ public class GameDataLoader
             Br = BigEdianBinaryReader.BufferToUint16(_saveData, offset + 0xB2),
             TotalRaceCount = BigEdianBinaryReader.BufferToUint32(_saveData, offset + 0xB4),
             TotalWinCount = BigEdianBinaryReader.BufferToUint32(_saveData, offset + 0xDC),
+            RegionID = (BigEdianBinaryReader.BufferToUint16(_saveData, 0x23308 + 0x3802) / 4096)
         };
-        
         ParseFriends(user, offset);
         return user;
     }
+    
     
     private MiiData ParseMiiData(int offset)
     {
@@ -198,13 +200,13 @@ public class GameDataLoader
             if (!CheckMiiData(currentOffset + 0x1A)) continue;
             var friend = new Friend
             {
-                Vr = 0,
-                Br = 0,
-                // Name = BigEdianBinaryReader.GetUtf16String(_saveData, currentOffset + 0x1C, 10),
+                Vr = BigEdianBinaryReader.BufferToUint16(_saveData, currentOffset + 0x16), // peaks at 9999 so kinda useless
+                Br = BigEdianBinaryReader.BufferToUint16(_saveData, currentOffset + 0x18), // same here
                 FriendCode = FriendCodeGenerator.GetFriendCode(_saveData, currentOffset + 4),
-                Wins = BitConverter.ToUInt16(_saveData, currentOffset + 0x14),
-                Losses = BitConverter.ToUInt16(_saveData, currentOffset + 0x12),
-                // MiiBinaryData = Convert.ToBase64String(_saveData.AsSpan(currentOffset + 0x1A, MiiSize)),
+                Wins = BigEdianBinaryReader.BufferToUint16(_saveData, currentOffset + 0x14),
+                Losses = BigEdianBinaryReader.BufferToUint16(_saveData, currentOffset + 0x12),
+                CountryCode = _saveData[currentOffset + 0x68],
+                RegionID = _saveData[currentOffset + 0x69],
                 MiiData = new MiiData
                 {
                     mii = new Mii

@@ -60,13 +60,13 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding MiiName}" Width="150"
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding MiiName}" Width="100"
                                     components:StaticListView.IsSortable="True" />
                     <GridViewColumn Header="Friend Code" DisplayMemberBinding="{Binding FriendCode}" Width="150"
                                     components:StaticListView.IsSortable="True" />
-                    <!-- <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Vr}" Width="80" -->
+                    <!-- <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Vr}" Width="60" -->
                     <!--                 components:StaticListView.IsSortable="True" /> -->
-                    <GridViewColumn Header="Wins" DisplayMemberBinding="{Binding Wins}" Width="80"
+                    <GridViewColumn Header="Wins" DisplayMemberBinding="{Binding Wins}" Width="60"
                                     components:StaticListView.IsSortable="True" />
                     <GridViewColumn Header="Losses" DisplayMemberBinding="{Binding Losses}" Width="80"
                                     components:StaticListView.IsSortable="True" />
