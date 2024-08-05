@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
@@ -55,7 +56,14 @@ namespace CT_MKWII_WPF.Views.Components
             get => _bottomExtraStat;
             set => SetProperty(ref _bottomExtraStat, value);
         }
-
+        
+        private bool _isOnline;
+        public bool IsOnline
+        {
+            get => _isOnline;
+            set => SetProperty(ref _isOnline, value);
+        }
+        
         private BitmapImage _miiImage;
         
         public BitmapImage MiiImage
@@ -82,6 +90,8 @@ namespace CT_MKWII_WPF.Views.Components
             BottomExtraStat = "Races Played: " + user.TotalRaceCount;
             TopExtraStat = "Wins: " + user.TotalWinCount;
             MiiImage = user.MiiImage;
+            IsOnline = user.IsOnline;
+            ViewRoomButton.Visibility = IsOnline ? Visibility.Visible : Visibility.Hidden;
 
         }
 
@@ -94,7 +104,8 @@ namespace CT_MKWII_WPF.Views.Components
             BottomExtraStat = "Wins: " + player.Wins;
             TopExtraStat = "Losses: " + player.Losses;
             MiiImage = player.MiiImage;
-
+            IsOnline = player.IsOnline;
+            ViewRoomButton.Visibility = IsOnline ? Visibility.Visible : Visibility.Hidden;
         }
 
 
@@ -109,6 +120,11 @@ namespace CT_MKWII_WPF.Views.Components
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void ViewButton_OnClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

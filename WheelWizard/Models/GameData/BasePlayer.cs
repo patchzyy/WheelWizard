@@ -1,8 +1,10 @@
 ﻿using CT_MKWII_WPF.Models.RRInfo;
+using CT_MKWII_WPF.Services.LiveData;
 using System.ComponentModel;
 using System.Windows.Media.Imaging;
 using CT_MKWII_WPF.Services.WiiManagement;
 using CT_MKWII_WPF.Services.WiiManagement.GameData;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CT_MKWII_WPF.Models.GameData;
@@ -12,7 +14,26 @@ public abstract class BasePlayer : INotifyPropertyChanged
     public required string FriendCode { get; set; }
     public required uint Vr { get; set; }
     public required uint Br { get; set; }
-    public required bool IsOnline { get; set; }
+
+    public bool IsOnline
+    {
+        get
+        {
+            var currentRooms = RRLiveRooms.Instance.CurrentRooms;
+            if (currentRooms.Count > 0)
+            {
+                var onlinePlayers = currentRooms.SelectMany(room => room.Players.Values).ToList();
+                return onlinePlayers.Any(player => player.Fc == FriendCode);
+            }
+            return false;
+        }
+        set
+        {
+            if (value == IsOnline) return;
+            OnPropertyChanged(nameof(IsOnline));
+        }
+    }
+
     public required GameDataLoader.MiiData MiiData { get; set; }
 
     private bool _requestingImage;

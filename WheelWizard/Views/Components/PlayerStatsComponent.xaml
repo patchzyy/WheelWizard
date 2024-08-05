@@ -4,6 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+    xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Components"
     mc:Ignorable="d"
     Background="Transparent"
@@ -19,12 +21,24 @@
             Background="{StaticResource LightBackgroundColor}"
             CornerRadius="20,20,0,0"
             Margin="0,0,0,2">
-            <StackPanel Orientation="Vertical"
-                        Margin="10,40,0,0">
-                <TextBlock  Text="{Binding VR}" HorizontalAlignment="Left" VerticalAlignment="Top"
-                            Style="{StaticResource TitleText}"/>
-                <TextBlock Text="{Binding BR}" HorizontalAlignment="Left" VerticalAlignment="Top"
-                           Style="{StaticResource TitleText}"/>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                <components:Button Variant="Default"
+                                   x:Name="ViewRoomButton"
+                                   IsEnabled="True"
+                                   HorizontalAlignment="Right"
+                                   IconPack="Material"
+                                   IconKind="{x:Static icon:PackIconMaterialKind.Home}"
+                                   Text="View Room"
+                                   Visibility="Visible"
+                                   Click="ViewButton_OnClick"
+                                   Margin="0,10,20,0" />
+                <StackPanel Orientation="Vertical"
+                            Margin="10,0,0,0">
+                    <TextBlock  Text="{Binding VR}" HorizontalAlignment="Left" VerticalAlignment="Top"
+                                Style="{StaticResource TitleText}"/>
+                    <TextBlock Text="{Binding BR}" HorizontalAlignment="Left" VerticalAlignment="Top"
+                               Style="{StaticResource TitleText}"/>
+                </StackPanel>
             </StackPanel>
         </Border>
             
@@ -44,14 +58,23 @@
             </StackPanel>
         </Border>
         </StackPanel>
-            <Border 
-                Width="100" 
-                Height="100" 
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top"
-                Background="{StaticResource MiiIconBackground}"
-                Margin="20,0,10,0"
-                CornerRadius="50">
+        <Border 
+            Width="100" 
+            Height="100" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"
+            Margin="20,0,10,0"
+            CornerRadius="50">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Background" Value="{StaticResource MiiIconBackground}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsOnline}" Value="True">
+                            <Setter Property="Background" Value="{StaticResource MiiIconBackgroundOnline}"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
                 <Image 
                     x:Name="MainMii" 
                     Source="{Binding MiiImage}" 

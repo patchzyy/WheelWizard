@@ -40,8 +40,17 @@
                     <GridViewColumn Header="">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Border Width="40" Height="40" Background="{StaticResource MiiIconBackground}"
-                                        CornerRadius="20">
+                                <Border Width="40" Height="40" CornerRadius="20">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="{StaticResource MiiIconBackground}"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsOnline}" Value="True">
+                                                    <Setter Property="Background" Value="{StaticResource MiiIconBackgroundOnline}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
                                     <Image Source="{Binding MiiImage}" Stretch="Uniform">
                                         <Image.Clip>
                                             <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20" />

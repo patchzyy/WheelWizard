@@ -141,15 +141,8 @@ public class GameDataLoader
             Br = BigEdianBinaryReader.BufferToUint16(_saveData, offset + 0xB2),
             TotalRaceCount = BigEdianBinaryReader.BufferToUint32(_saveData, offset + 0xB4),
             TotalWinCount = BigEdianBinaryReader.BufferToUint32(_saveData, offset + 0xDC),
-            IsOnline = false
         };
-
-        var currentRooms = RRLiveRooms.Instance.CurrentRooms;
-        if (currentRooms.Count > 0)
-        {
-            var onlinePlayers = currentRooms.SelectMany(room => room.Players.Values).ToList();
-            user.IsOnline = onlinePlayers.Any(player => player.Fc == user.FriendCode);
-        }
+        
         ParseFriends(user, offset);
         return user;
     }
@@ -222,9 +215,7 @@ public class GameDataLoader
                     AvatarId = 0,
                     ClientId = 0
                 },
-                IsOnline = false
             };
-            friend.IsOnline = onlinePlayers.Any(player => player.Fc == friend.FriendCode);
             user.Friends.Add(friend);
         }
     }
