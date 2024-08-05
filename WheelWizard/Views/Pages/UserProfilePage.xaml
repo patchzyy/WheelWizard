@@ -50,6 +50,7 @@
         </ScrollViewer>
             <CheckBox
                 Margin="10,10,0,10" 
+                x:Name="FavoriteCheckBox"
                 IsChecked="True">
                 <TextBlock Text="Make Favorite" />
             </CheckBox>

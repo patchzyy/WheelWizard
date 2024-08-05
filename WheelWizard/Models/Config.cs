@@ -7,6 +7,7 @@ public class Config
     public string? UserFolderPath { get; set; }
     public bool HasRunNandTutorial { get; set; }
     public bool ForceWiimote { get; set; }
-    
     public bool LaunchWithDolphin { get; set; }
+    
+    public int FavoriteUser { get; set; }
 }

@@ -1,9 +1,12 @@
 ﻿using CT_MKWII_WPF.Models.GameData;
 using CT_MKWII_WPF.Models.RRInfo;
+using CT_MKWII_WPF.Services.LiveData;
 using CT_MKWII_WPF.Services.WiiManagement;
+using CT_MKWII_WPF.Views.Pages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
@@ -135,7 +138,16 @@ namespace CT_MKWII_WPF.Views.Components
 
         private void ViewButton_OnClick(object sender, RoutedEventArgs e)
         {
-
+            var allRooms = RRLiveRooms.Instance.CurrentRooms;
+            foreach (var room in allRooms)
+            {
+                if (room.Players.Any(player => player.Value.Fc == FriendCode))
+                {
+                    var currentPage = (Layout)Window.GetWindow(this);
+                    currentPage?.NavigateToPage(new RoomDetailPage(room));
+                    return;
+                }
+            }
         }
     }
 }

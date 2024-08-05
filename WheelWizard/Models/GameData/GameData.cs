@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using CT_MKWII_WPF.Services.Settings;
+using System.Collections.Generic;
 
 namespace CT_MKWII_WPF.Models.GameData;
 
 public class GameData
 {
     public List<User> Users { get; set; }
-    public int CurrentUserIndex = 3;
+    public int CurrentUserIndex = ConfigManager.GetConfig().FavoriteUser;
 
     public GameData()
     {
