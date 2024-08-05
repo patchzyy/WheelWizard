@@ -8,11 +8,6 @@
              xmlns:utilities="clr-namespace:CT_MKWII_WPF.Utilities"
              mc:Ignorable="d" 
              d:DesignHeight="60" d:DesignWidth="180">
-    <UserControl.Resources>
-        <utilities:BooleanToColorConverter x:Key="BooleanToColorConverter" 
-                                 TrueColor="{StaticResource MiiIconBackgroundOnline}" 
-                                 FalseColor="{StaticResource MiiIconBackground}"/>
-    </UserControl.Resources>
     <Grid Width="180" Height="60"
           MouseDown="Profile_click"
           MouseEnter="UIElement_OnMouseEnter"
@@ -45,9 +40,18 @@
                            Margin="0,0,10,0"/>
             </StackPanel>
             <Border Width="60" Height="60" HorizontalAlignment="Right" 
-                    Background="{Binding IsOnline, Converter={StaticResource BooleanToColorConverter}}"
                     Margin="0,0,10,0"
                     CornerRadius="30" VerticalAlignment="Center">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Background" Value="{StaticResource MiiIconBackground}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsOnline}" Value="True">
+                                <Setter Property="Background" Value="{StaticResource MiiIconBackgroundOnline}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
                 <Image x:Name="MainMii" Source="{Binding MiiImage}" Stretch="Uniform">
                     <Image.Clip>
                         <EllipseGeometry Center="30,30" RadiusX="30" RadiusY="30" />

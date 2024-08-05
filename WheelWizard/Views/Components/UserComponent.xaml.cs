@@ -79,7 +79,6 @@ namespace CT_MKWII_WPF.Views.Components
             InitializeComponent();
             DataContext = this;
             PopulateComponent();
-            Console.WriteLine($"BooleanToColorConverter resource: {Resources["BooleanToColorConverter"]}");
         }
         private async void PopulateComponent()
         {
