@@ -41,7 +41,7 @@ public abstract class BasePlayer : INotifyPropertyChanged
         }
     }
 
-    public required GameDataLoader.MiiData MiiData { get; set; }
+    public required MiiData MiiData { get; set; }
 
     private bool _requestingImage;
     private bool _isLoadingMiiImage;
@@ -102,7 +102,7 @@ public abstract class BasePlayer : INotifyPropertyChanged
         {
             if (MiiData == null)
             {
-                MiiData = new GameDataLoader.MiiData
+                MiiData = new MiiData
                 {
                     mii = new Mii { Data = "", Name = value }
                 };

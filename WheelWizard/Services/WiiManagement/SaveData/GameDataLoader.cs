@@ -8,14 +8,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Media.Imaging;
-using MessageBox = System.Windows.MessageBox;
 
 //big big thanks to https://kazuki-4ys.github.io/web_apps/FaceThief/ for the JS implementation of reading the rksys file
-//Things to keep in mind when working with the rksys.dat file:
-// everything is big endian!!!!
+//reminder, big endian!!!!
 
 
 namespace CT_MKWII_WPF.Services.WiiManagement.GameData;
@@ -37,25 +32,11 @@ public class GameDataLoader
     private const int FriendDataOffset = 0x56D0;
     private const int FriendDataSize = 0x1C0;
     private const int MiiSize = 0x4A;
-    
-    
-    
-    public User getCurrentUser => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser];
-    public string getCurrentUsername => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser].MiiData.mii.Name;
-    public string getCurrentFriendCode => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser].FriendCode;
-    public uint getCurrentVr => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser].Vr;
-    public uint getCurrentBr => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser].Br;
-    public uint getCurrentTotalRaceCount => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser].TotalRaceCount;
-    public uint getCurrentTotalWinCount => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser].TotalWinCount;
-    public List<Friend> getCurrentFriends => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser].Friends;
-    public MiiData getCurrentMiiData => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser].MiiData;
-    public bool isCurrentUserOnline => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser].IsOnline;
+    public User GetCurrentUser => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser];
+    public List<Friend> GetCurrentFriends => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser].Friends;
     public Models.GameData.GameData getGameData => Instance.GameData;
-    public User GetCurrentUser => GameData.Users[ConfigManager.GetConfig().FavoriteUser];
-    public List<User> GetAllUsers => GameData.Users;
     public User GetUserData(int index) => GameData.Users[index];
-    
-    public bool hasAnyValidUsers => GameData.Users.Any(user => user.FriendCode != "0000-0000-0000");
+    public bool HasAnyValidUsers => GameData.Users.Any(user => user.FriendCode != "0000-0000-0000");
 
     
     private GameDataLoader()
@@ -94,7 +75,11 @@ public class GameDataLoader
             ParseUsers();
             return;
         }
-        CreateDummyUser();
+        GameData.Users.Clear();
+        for (var i = 0; i < MaxPlayerNum; i++)
+        {
+            CreateDummyUser();
+        }
     }
     
     private void CreateDummyUser()
@@ -126,6 +111,7 @@ public class GameDataLoader
     private void ParseUsers()
     {
         GameData.Users.Clear();
+        if (_saveData == null) return;
         for (var i = 0; i < MaxPlayerNum; i++)
         {
             var rkpdOffset = RksysMagic.Length + i * RkpdSize;
@@ -138,10 +124,6 @@ public class GameDataLoader
             {
                 CreateDummyUser();
             }
-        }
-        for (int i = 0; i < 4-GameData.Users.Count; i++)
-        {
-            CreateDummyUser();
         }
         if (GameData.Users.Count == 0)
             CreateDummyUser();
@@ -194,21 +176,10 @@ public class GameDataLoader
         }
         return Array.Empty<byte>();
     }
-    
-         
-    public class MiiData
-    {
-        public Mii mii { get; set; }
-        public uint AvatarId { get; set; }
-        public uint ClientId { get; set; }
-
-    }
 
     private void ParseFriends(User user, int userOffset)
     {
         var friendOffset = userOffset + FriendDataOffset;
-        var onlinePlayers = new List<Player>();
-        onlinePlayers = RRLiveRooms.Instance.CurrentRooms.SelectMany(room => room.Players.Values).ToList();
         for (var i = 0; i < MaxFriendNum; i++)
         {
             var currentOffset = friendOffset + i * FriendDataSize;

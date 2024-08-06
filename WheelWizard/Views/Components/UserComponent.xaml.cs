@@ -83,16 +83,17 @@ namespace CT_MKWII_WPF.Views.Components
         public async void PopulateComponent()
         {
             GameDataLoader.Instance.RefreshOnlineStatus();
-            PlayerName = GameDataLoader.Instance.getCurrentUsername;
-            FriendCode = GameDataLoader.Instance.getCurrentFriendCode;
-            VrAndBr = "VR: " + GameDataLoader.Instance.getCurrentVr;
-            MiiImage = await MiiImageManager.LoadBase64MiiImageAsync(GameDataLoader.Instance.getCurrentUser.MiiData.mii.Data);
-            IsOnline = GameDataLoader.Instance.isCurrentUserOnline;
+            var currentUser = GameDataLoader.Instance.GetCurrentUser;
+            PlayerName = currentUser.MiiName;
+            FriendCode = currentUser.FriendCode;
+            VrAndBr = "VR: " + currentUser.Vr;
+            MiiImage = await MiiImageManager.LoadBase64MiiImageAsync(currentUser.MiiData.mii.Data);
+            IsOnline = currentUser.IsOnline;
         }
 
         private void Profile_click(object sender, MouseButtonEventArgs e)
         {
-            if (!GameDataLoader.Instance.hasAnyValidUsers)
+            if (!GameDataLoader.Instance.HasAnyValidUsers)
             {
                 return;
             }

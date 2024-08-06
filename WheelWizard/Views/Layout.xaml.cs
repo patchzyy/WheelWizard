@@ -70,7 +70,7 @@ public partial class Layout : Window, IRepeatedTaskListener
             0 => "There are currently no rooms active",
             _ => $"There are currently {roomCount} rooms active"
         };
-        var friends = GameDataLoader.Instance.getCurrentFriends;
+        var friends = GameDataLoader.Instance.GetCurrentFriends;
         FriendsButton.BoxText = friends.Count(friend => friend.IsOnline).ToString();
     }
 
