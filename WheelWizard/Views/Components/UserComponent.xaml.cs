@@ -92,6 +92,10 @@ namespace CT_MKWII_WPF.Views.Components
 
         private void Profile_click(object sender, MouseButtonEventArgs e)
         {
+            if (!GameDataLoader.Instance.hasAnyValidUsers)
+            {
+                return;
+            }
             var currentPage = (Layout)Window.GetWindow(this);
             currentPage?.NavigateToPage(new UserProfilePage());
         }

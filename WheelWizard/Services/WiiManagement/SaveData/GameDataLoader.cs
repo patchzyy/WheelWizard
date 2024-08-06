@@ -54,6 +54,8 @@ public class GameDataLoader
     public User GetCurrentUser => GameData.Users[ConfigManager.GetConfig().FavoriteUser];
     public List<User> GetAllUsers => GameData.Users;
     public User GetUserData(int index) => GameData.Users[index];
+    
+    public bool hasAnyValidUsers => GameData.Users.Any(user => user.FriendCode != "0000-0000-0000");
 
     
     private GameDataLoader()
@@ -104,7 +106,7 @@ public class GameDataLoader
             {
                 mii = new Mii
                 {
-                    Name = "Not Logged In",
+                    Name = "No License",
                     Data = Convert.ToBase64String(new byte[MiiSize])
                 },
                 AvatarId = 0,
@@ -123,14 +125,24 @@ public class GameDataLoader
 
     private void ParseUsers()
     {
+        GameData.Users.Clear();
         for (var i = 0; i < MaxPlayerNum; i++)
         {
             var rkpdOffset = RksysMagic.Length + i * RkpdSize;
-            if (Encoding.ASCII.GetString(_saveData, rkpdOffset, RkpdMagic.Length) != RkpdMagic) continue;
-            var user = ParseUser(rkpdOffset);
-            GameData.Users.Add(user);
+            if (Encoding.ASCII.GetString(_saveData, rkpdOffset, RkpdMagic.Length) == RkpdMagic)
+            {
+                var user = ParseUser(rkpdOffset);
+                GameData.Users.Add(user);
+            }
+            else
+            {
+                CreateDummyUser();
+            }
         }
-        
+        for (int i = 0; i < 4-GameData.Users.Count; i++)
+        {
+            CreateDummyUser();
+        }
         if (GameData.Users.Count == 0)
             CreateDummyUser();
     }

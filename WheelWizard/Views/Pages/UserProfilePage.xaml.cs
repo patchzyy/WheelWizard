@@ -63,12 +63,21 @@ public partial class UserProfilePage : Page
     private void PopulateMiiNames()
     {
         var data = GameDataLoader.Instance.getGameData;
-        for (int i = 0; i < 4; i++)
+        var userAmount = data.Users.Count;
+        for (int i = 0; i < userAmount; i++)
         {
             var radioButton = (RadioButton)FindName($"Mii{i + 1}");
-            if (radioButton != null)
+            if (radioButton != null!)
             {
+                if(data.Users[i].MiiData.mii.Name == "No License")
+                {
+                    radioButton.Content = data.Users[i].MiiData.mii.Name;
+                    radioButton.IsEnabled = false;
+                    radioButton.FontStyle = FontStyles.Italic;
+                    continue;
+                }
                 radioButton.Content = data.Users[i].MiiData.mii.Name;
+                radioButton.IsEnabled = true;
             }
         }
     }

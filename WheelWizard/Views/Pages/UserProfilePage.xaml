@@ -32,19 +32,24 @@
                              Click="TopBarRadio_OnClick" 
                              Content="Mii1" 
                              x:Name="Mii1"
-                             IsChecked="True" />
+                             IsChecked="True"
+                             IsEnabled="False"/>
                 <RadioButton Style="{StaticResource TopBar}" Tag="Mii2" 
                              Click="TopBarRadio_OnClick" 
                              x:Name="Mii2"
-                             Content="Mii2" />
+                             Content="Mii2"
+                             IsEnabled="False"/>
                 <RadioButton Style="{StaticResource TopBar}" Tag="Mii3" 
                              Click="TopBarRadio_OnClick" 
                              x:Name="Mii3"
-                             Content="Mii3" />
+                             Content="Mii3"
+                             IsEnabled="False"/>
                 <RadioButton Style="{StaticResource TopBar}" Tag="Mii4" 
                              Click="TopBarRadio_OnClick" 
                              x:Name="Mii4"
-                             Content="Mii4" />
+                             Content="Mii4"
+                             IsEnabled="False"
+                             />
             </StackPanel>
         </ScrollViewer>
         <StackPanel Grid.Row="1" Orientation="Vertical">

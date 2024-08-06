@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Pages"
       xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+      xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d"
       d:DesignHeight="831" d:DesignWidth="444"
       Title="FriendsPage" Background="Transparent">
@@ -23,8 +24,6 @@
                                                 HorizontalAlignment="Right"
                                                 VerticalAlignment="Center"
                                                 Margin="0,0,10,0"/>
-    
-        
         <components:StaticListView Grid.Row="1" x:Name="FriendsListView"
                                    ItemsSource="{Binding FriendsList}" ListTitle="Friends"
                                    SelectionChanged="FriendListView_SelectionChanged"
@@ -73,7 +72,8 @@
                 </GridView>
             </ListView.View>
         </components:StaticListView>
-        
+        <Border Grid.Row="2" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Top" />
         <components:PlayerStatsComponent 
             x:Name="PlayerStats" 
             Grid.Row="2"
@@ -82,5 +82,10 @@
             HorizontalAlignment="Center" 
             VerticalAlignment="Bottom"
             Margin="0,10,0,0"/>
+        
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="NoFriendsLabel">
+            <components:EmptyPageInfo HorizontalAlignment="Center" Title="No Friends found"
+                                      Body="You can add friends in-game" />
+        </StackPanel>
     </Grid>
 </Page>

@@ -61,23 +61,24 @@
             </StackPanel>
         </Border>
         </StackPanel>
-        <Border 
-            Width="100" 
-            Height="100" 
-            HorizontalAlignment="Left" 
-            VerticalAlignment="Top"
-            Margin="20,0,10,0"
-            CornerRadius="50">
-            <Border.Style>
-                <Style TargetType="Border">
-                    <Setter Property="Background" Value="{StaticResource MiiIconBackground}"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsOnline}" Value="True">
-                            <Setter Property="Background" Value="{StaticResource MiiIconBackgroundOnline}"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Border.Style>
+        <StackPanel Orientation="Horizontal">
+            <Border 
+                Width="100" 
+                Height="100" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"
+                Margin="20,0,10,0"
+                CornerRadius="50">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Background" Value="{StaticResource MiiIconBackground}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsOnline}" Value="True">
+                                <Setter Property="Background" Value="{StaticResource MiiIconBackgroundOnline}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
                 <Image 
                     x:Name="MainMii" 
                     Source="{Binding MiiImage}" 
@@ -90,14 +91,19 @@
                     </Image.Clip>
                 </Image>
             </Border>
-        <StackPanel Orientation="Vertical">
-            <TextBlock Text="{Binding PlayerName}" HorizontalAlignment="Center" VerticalAlignment="Top"
-                       Style="{StaticResource TitleText}"
-                       FontSize="25"
-                       Margin="0,5,0,0"/>
-            <TextBlock Grid.Row="0" Text="{Binding FriendCode}" HorizontalAlignment="Center" VerticalAlignment="Top"
-                       Style="{StaticResource BodyText}"
-                       Margin="0,0,0,0"/>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="{Binding PlayerName}" HorizontalAlignment="Left" VerticalAlignment="Top"
+                           Style="{StaticResource TitleText}"
+                           FontSize="25"
+                           Margin="0,5,0,0"/>
+                <TextBlock Grid.Row="0" Text="{Binding FriendCode}" HorizontalAlignment="Left" VerticalAlignment="Top"
+                           Style="{StaticResource BodyText}"
+                           Margin="0,0,0,0"/>
+            </StackPanel>
         </StackPanel>
+        <TextBlock Text="{Binding OnlineText}" HorizontalAlignment="Right" VerticalAlignment="Top"
+                   Style="{StaticResource TitleText}"
+                   FontSize="25"
+                   Margin="0,20,20,0"/>
     </Grid>
 </UserControl>

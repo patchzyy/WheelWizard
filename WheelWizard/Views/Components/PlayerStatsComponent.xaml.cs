@@ -84,6 +84,15 @@ namespace CT_MKWII_WPF.Views.Components
             set => SetProperty(ref _regionName, value);
         }
         
+        
+        private string _onlineText;
+
+        public string OnlineText
+        {
+            get => _onlineText;
+            set => SetProperty(ref _onlineText, value);
+        }
+
 
         public PlayerStatsComponent()
         {
@@ -104,6 +113,7 @@ namespace CT_MKWII_WPF.Views.Components
             MiiImage = user.MiiImage;
             IsOnline = user.IsOnline;
             ViewRoomButton.Visibility = IsOnline ? Visibility.Visible : Visibility.Hidden;
+            OnlineText = IsOnline ? "Online" : "Offline";
             RegionName = user.RegionName;
 
         }
@@ -118,6 +128,7 @@ namespace CT_MKWII_WPF.Views.Components
             TopExtraStat = "Losses: " + friend.Losses;
             MiiImage = friend.MiiImage;
             IsOnline = friend.IsOnline;
+            OnlineText = IsOnline ? "Online" : "Offline";
             ViewRoomButton.Visibility = IsOnline ? Visibility.Visible : Visibility.Hidden;
             RegionName = friend.CountryName;
         }

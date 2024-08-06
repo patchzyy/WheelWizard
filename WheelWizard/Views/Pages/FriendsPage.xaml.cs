@@ -36,7 +36,24 @@ public partial class FriendsPage : Page, INotifyPropertyChanged
         DataContext = this;
         FriendsListView.ItemsSource = FriendList; 
         LoadFirstFriend();
+        HandleVisibility();
 
+    }
+    
+    private void HandleVisibility()
+    {
+        if (FriendList.Count == 0)
+        {
+            NoFriendsLabel.Visibility = Visibility.Visible;
+            PlayerStats.Visibility = Visibility.Collapsed;
+            FriendsListView.Visibility = Visibility.Collapsed;
+        }
+        else
+        {
+            NoFriendsLabel.Visibility = Visibility.Collapsed;
+            PlayerStats.Visibility = Visibility.Visible;
+            FriendsListView.Visibility = Visibility.Visible;
+        }
     }
 
     private void LoadFirstFriend()
