@@ -33,6 +33,9 @@ public static class MiiImageManager
     
     public static async Task<BitmapImage> LoadBase64MiiImageAsync(string base64MiiData)
     {
+        if (string.IsNullOrEmpty(base64MiiData)) return new BitmapImage();
+        if (Images.ContainsKey(base64MiiData))
+            return Images[base64MiiData];
         var newImage = await GetMiiImageAsync(base64MiiData);
         AddMiiImage(base64MiiData, newImage);
         return newImage;

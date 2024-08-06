@@ -39,7 +39,6 @@
                                                          x:Name="StateBox"
                                                          IconPack="FontAwesome" TipAlignment="TopLeft"
                                                          IconKind="{Binding BoxIconKind, ElementName=Root}"
-                                                         TipText="There are currently no friends online"
                                     />
                                 </StackPanel>
                             </Grid>
