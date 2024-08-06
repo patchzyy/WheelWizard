@@ -24,6 +24,8 @@
                                                 HorizontalAlignment="Right"
                                                 VerticalAlignment="Center"
                                                 Margin="0,0,10,0"/>
+        <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
         <components:StaticListView Grid.Row="1" x:Name="FriendsListView"
                                    ItemsSource="{Binding FriendsList}" ListTitle="Friends"
                                    SelectionChanged="FriendListView_SelectionChanged"

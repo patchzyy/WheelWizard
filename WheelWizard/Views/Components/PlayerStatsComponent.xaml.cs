@@ -109,7 +109,7 @@ namespace CT_MKWII_WPF.Views.Components
             BR = "BR: "+ user.Br;
             BottomExtraStat = "Races Played: " + user.TotalRaceCount;
             TopExtraStat = "Wins: " + user.TotalWinCount;
-            MiiImage = user.MiiImage;
+            MiiImage = await MiiImageManager.LoadBase64MiiImageAsync(user.MiiData.mii.Data);
             IsOnline = user.IsOnline;
             ViewRoomButton.Visibility = IsOnline ? Visibility.Visible : Visibility.Hidden;
             OnlineText = IsOnline ? "Online" : "Offline";
@@ -117,7 +117,7 @@ namespace CT_MKWII_WPF.Views.Components
 
         }
 
-        public void UpdateStats(Friend friend)
+        public async void UpdateStats(Friend friend)
         {
             PlayerName = friend.MiiName;
             FriendCode = friend.FriendCode;
@@ -125,7 +125,7 @@ namespace CT_MKWII_WPF.Views.Components
             BR = "BR: "+friend.Br;
             BottomExtraStat = "Wins: " + friend.Wins;
             TopExtraStat = "Losses: " + friend.Losses;
-            MiiImage = friend.MiiImage;
+            MiiImage = await MiiImageManager.LoadBase64MiiImageAsync(friend.MiiData.mii.Data);
             IsOnline = friend.IsOnline;
             OnlineText = IsOnline ? "Online" : "Offline";
             ViewRoomButton.Visibility = IsOnline ? Visibility.Visible : Visibility.Hidden;

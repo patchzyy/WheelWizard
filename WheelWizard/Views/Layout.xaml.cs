@@ -6,6 +6,7 @@ using CT_MKWII_WPF.Views.Components;
 using CT_MKWII_WPF.Views.Pages;
 using MahApps.Metro.IconPacks;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -69,6 +70,8 @@ public partial class Layout : Window, IRepeatedTaskListener
             0 => "There are currently no rooms active",
             _ => $"There are currently {roomCount} rooms active"
         };
+        var friends = GameDataLoader.Instance.getCurrentFriends;
+        FriendsButton.BoxText = friends.Count(friend => friend.IsOnline).ToString();
     }
 
     private void UpdateLiveAlert(LiveAlertsManager sender)

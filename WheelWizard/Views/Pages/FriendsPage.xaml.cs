@@ -32,6 +32,8 @@ public partial class FriendsPage : Page, INotifyPropertyChanged
         var data = GameDataLoader.Instance;
         data.LoadGameData();
         FriendList = new ObservableCollection<Friend>(data.getCurrentFriends);
+        //sort the friendslist by putting online people on top
+        FriendList = new ObservableCollection<Friend>(FriendList.OrderByDescending(f => f.IsOnline));
         FriendsListView.SortingFunctions.Add("Vr", VrComparable);
         DataContext = this;
         FriendsListView.ItemsSource = FriendList; 
