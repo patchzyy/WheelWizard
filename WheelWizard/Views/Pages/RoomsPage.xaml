@@ -11,12 +11,12 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="{StaticResource TopRowSize}" />
-            <!-- This is the total height as the (Title + infoSection) - (padding) -->
+            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
                 VerticalAlignment="Bottom" />
-        <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
+        <Border Grid.Row="2" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
                 VerticalAlignment="Bottom" />
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
             <TextBlock Text="Rooms" Style="{StaticResource PageTitleText}" />
@@ -33,22 +33,31 @@ To join a specific room, you'll need to either join through a friend, or hope to
                 </Border.ToolTip>
             </Border>
         </StackPanel>
+        <components:InputField
+            Grid.Row="0"
+            Width="200"
+            Placeholder="Search For Player..."
+            Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Right"
+            Margin="10,0,10,10"
+            x:Name="MyInputField" />
 
-        <components:EmptyPageInfo Grid.Row="1" x:Name="EmptyRoomsView"
-                                  HorizontalAlignment="Center"
-                                  VerticalContentAlignment="Center"
-                                  Title="No rooms found"
-                                  Body="You might not have internet connection, or no-one might be playing." />
+        <components:EmptyPageInfo Grid.Row="2" x:Name="EmptyRoomsView"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalContentAlignment="Center"
+                                                        Title="No rooms found"
+                                                        Body="You might not have internet connection, or no-one might be playing." />
 
-        <StackPanel Grid.Row="1" x:Name="ListContainer">
+        <StackPanel Grid.Row="2" x:Name="ListContainer">
             <components:StaticListView ItemsSource="{Binding Rooms}" x:Name="RoomsView" ListTitle="Rooms"
                                        OnItemClick="Room_MouseClick"
-                                       MaxHeight="{Binding ElementName=ListContainer, Path=ActualHeight}">
+                                       MaxHeight="{Binding ElementName=ListContainer, Path=ActualHeight}"
+                                       Visibility="{Binding RoomsListVisibility}">
                 <ListView.View>
                     <GridView AllowsColumnReorder="False">
                         <GridViewColumn Width="Auto">
                             <GridViewColumn.CellTemplate>
-
                                 <DataTemplate>
                                     <icon:PackIconFontAwesome Height="30" Width="30">
                                         <icon:PackIconFontAwesome.Style>
@@ -62,7 +71,6 @@ To join a specific room, you'll need to either join through a friend, or hope to
                                                     <DataTrigger Binding="{Binding Path=Type}" Value="anybody">
                                                         <Setter Property="Kind" Value="RoadSolid" />
                                                     </DataTrigger>
-
                                                     <DataTrigger
                                                         Binding="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=IsMouseOver}"
                                                         Value="True">
@@ -74,7 +82,6 @@ To join a specific room, you'll need to either join through a friend, or hope to
                                         </icon:PackIconFontAwesome.Style>
                                     </icon:PackIconFontAwesome>
                                 </DataTemplate>
-
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="ID" Width="110"
@@ -104,6 +111,41 @@ To join a specific room, you'll need to either join through a friend, or hope to
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=GameMode}" Header="Type" Width="110"
+                                        components:StaticListView.IsSortable="True" />
+                    </GridView>
+                </ListView.View>
+            </components:StaticListView>
+
+            <components:StaticListView ItemsSource="{Binding Players}" x:Name="PlayersListView" ListTitle="Players"
+                                       OnItemClick="Player_MouseClick"
+                                       MaxHeight="{Binding ElementName=ListContainer, Path=ActualHeight}"
+                                       Visibility="{Binding PlayersListVisibility}">
+                <components:StaticListView.ItemContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Copy friend code" Click="CopyFriendCode_OnClick" />
+                    </ContextMenu>
+                </components:StaticListView.ItemContextMenu>
+                <ListView.View>
+                    <GridView AllowsColumnReorder="False">
+                        <GridViewColumn Header="">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border Width="40" Height="40" Background="{StaticResource MiiIconBackground}"
+                                            CornerRadius="20">
+                                        <Image Source="{Binding MiiImage}" Stretch="Uniform">
+                                            <Image.Clip>
+                                                <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20" />
+                                            </Image.Clip>
+                                        </Image>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="105"
+                                        components:StaticListView.IsSortable="True" />
+                        <GridViewColumn Header="Friend code" DisplayMemberBinding="{Binding Fc}" Width="135"
+                                        components:StaticListView.IsSortable="True" />
+                        <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Ev}" Width="80"
                                         components:StaticListView.IsSortable="True" />
                     </GridView>
                 </ListView.View>
