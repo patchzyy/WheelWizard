@@ -7,6 +7,7 @@ using CT_MKWII_WPF.Services.WiiManagement;
 using CT_MKWII_WPF.Services.WiiManagement.GameData;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CT_MKWII_WPF.Models.GameData;
 
@@ -43,35 +44,57 @@ public abstract class BasePlayer : INotifyPropertyChanged
     public required GameDataLoader.MiiData MiiData { get; set; }
 
     private bool _requestingImage;
+    private bool _isLoadingMiiImage;
     private BitmapImage? _miiImage;
-    public BitmapImage? MiiImage
+    public BitmapImage MiiImage
     {
         get
         {
-            if (_miiImage != null || _requestingImage) return _miiImage;
-
-            _requestingImage = true;
-            if (MiiData.mii.Data == null) return null;
-            _miiImage = MiiImageManager.GetCachedMiiImage(MiiData.mii.Data);
-            if (_miiImage == null)
+            if (_miiImage != null) return _miiImage;
+            if (!_isLoadingMiiImage)
             {
-                MiiImageManager.LoadBase64MiiImageAsync(MiiData.mii.Data).ContinueWith(t =>
-                {
-                    _miiImage = t.Result;
-                    _requestingImage = false;
-                    OnPropertyChanged(nameof(MiiImage));
-                }, TaskScheduler.FromCurrentSynchronizationContext());
+                LoadMiiImageAsync();
             }
-
-            return _miiImage;
+            return null;
         }
         set
         {
-            if (_miiImage == value) return;
-            _miiImage = value;
-            OnPropertyChanged(nameof(MiiImage));
+            if (_miiImage != value)
+            {
+                _miiImage = value;
+                OnPropertyChanged(nameof(MiiImage));
+            }
         }
     }
+    
+    private async void LoadMiiImageAsync()
+    {
+        if (_isLoadingMiiImage || MiiData?.mii?.Data == null) return;
+
+        _isLoadingMiiImage = true;
+        try
+        {
+            var cachedImage = MiiImageManager.GetCachedMiiImage(MiiData.mii.Data);
+            if (cachedImage != null)
+            {
+                MiiImage = cachedImage;
+            }
+            else
+            {
+                var loadedImage = await MiiImageManager.LoadBase64MiiImageAsync(MiiData.mii.Data);
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    MiiImage = loadedImage;
+                });
+            }
+        }
+        finally
+        {
+            _isLoadingMiiImage = false;
+        }
+    }
+
+
     public string MiiName
     {
         get => MiiData?.mii?.Name ?? "";

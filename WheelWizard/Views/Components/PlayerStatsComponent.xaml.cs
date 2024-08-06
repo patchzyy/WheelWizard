@@ -103,7 +103,6 @@ namespace CT_MKWII_WPF.Views.Components
         
         public async void UpdateStats(User user)
         {
-            Console.WriteLine("Updating stats" + user.MiiName);
             PlayerName = user.MiiName;
             FriendCode = user.FriendCode;
             VR = "VR: "+ user.Vr;

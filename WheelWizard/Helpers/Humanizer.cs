@@ -42,271 +42,270 @@ public static class Humanizer
         }
     }
     
-    public static string GetCountryName(byte CountryId)
+    public static string GetCountryEmoji(byte countryId)
 {
-    switch (CountryId)
+    switch (countryId)
     {
         // Japan
         case 1:
-            return "Japan";
+            return "🇯🇵";
 
         // Americas
         case 8:
-            return "Anguilla";
+            return "🇦🇮"; // Anguilla
         case 9:
-            return "Antigua and Barbuda";
+            return "🇦🇬"; // Antigua and Barbuda
         case 10:
-            return "Argentina";
+            return "🇦🇷"; // Argentina
         case 11:
-            return "Aruba";
+            return "🇦🇲"; // Aruba
         case 12:
-            return "Bahamas";
+            return "🇧🇸"; // Bahamas
         case 13:
-            return "Barbados";
+            return "🇧🇧"; // Barbados
         case 14:
-            return "Belize";
+            return "🇧🇿"; // Belize
         case 15:
-            return "Bolivia";
+            return "🇧🇴"; // Bolivia
         case 16:
-            return "Brazil";
+            return "🇧🇷"; // Brazil
         case 17:
-            return "British Virgin Islands";
+            return "🇻🇬"; // British Virgin Islands
         case 18:
-            return "Canada";
+            return "🇨🇦"; // Canada
         case 19:
-            return "Cayman Islands";
+            return "🇰🇾"; // Cayman Islands
         case 20:
-            return "Chile";
+            return "🇨🇱"; // Chile
         case 21:
-            return "Colombia";
+            return "🇨🇴"; // Colombia
         case 22:
-            return "Costa Rica";
+            return "🇨🇷"; // Costa Rica
         case 23:
-            return "Dominica";
+            return "🇩🇲"; // Dominica
         case 24:
-            return "Dominican Republic";
+            return "🇩🇴"; // Dominican Republic
         case 25:
-            return "Ecuador";
+            return "🇪🇨"; // Ecuador
         case 26:
-            return "El Salvador";
+            return "🇸🇻"; // El Salvador
         case 27:
-            return "French Guiana";
+            return "🇫🇷"; // French Guiana
         case 28:
-            return "Grenada";
+            return "🇬🇩"; // Grenada
         case 29:
-            return "Guadeloupe";
+            return "🇲🇶"; // Guadeloupe
         case 30:
-            return "Guatemala";
+            return "🇵🇪"; // Guatemala
         case 31:
-            return "Guyana";
+            return "🇬🇾"; // Guyana
         case 32:
-            return "Haiti";
+            return "🇭🇹"; // Haiti
         case 33:
-            return "Honduras";
+            return "🇭🇳"; // Honduras
         case 34:
-            return "Jamaica";
+            return "🇯🇲"; // Jamaica
         case 35:
-            return "Martinique";
+            return "🇲🇶"; // Martinique
         case 36:
-            return "Mexico";
+            return "🇲🇽"; // Mexico
         case 37:
-            return "Montserrat";
+            return "🇲🇸"; // Montserrat
         case 38:
-            return "Netherlands Antilles";
+            return "🇳🇱"; // Netherlands Antilles
         case 39:
-            return "Nicaragua";
+            return "🇳🇮"; // Nicaragua
         case 40:
-            return "Panama";
+            return "🇵🇦"; // Panama
         case 41:
-            return "Paraguay";
+            return "🇵🇾"; // Paraguay
         case 42:
-            return "Peru";
+            return "🇵🇪"; // Peru
         case 43:
-            return "St. Kitts and Nevis";
+            return "🇰🇳"; // St. Kitts and Nevis
         case 44:
-            return "St. Lucia";
+            return "🇱🇨"; // St. Lucia
         case 45:
-            return "St. Vincent and the Grenadines";
+            return "🇻🇨"; // St. Vincent and the Grenadines
         case 46:
-            return "Suriname";
+            return "🇸🇷"; // Suriname
         case 47:
-            return "Trinidad and Tobago";
+            return "🇹🇹"; // Trinidad and Tobago
         case 48:
-            return "Turks and Caicos Islands";
+            return "🇹🇨"; // Turks and Caicos Islands
         case 49:
-            return "United States";
+            return "🇺🇸"; // United States
         case 50:
-            return "Uruguay";
+            return "🇺🇾"; // Uruguay
         case 51:
-            return "US Virgin Islands";
+            return "🇻🇮"; // US Virgin Islands
         case 52:
-            return "Venezuela";
+            return "🇻🇪"; // Venezuela
 
         // Europe & Africa
         case 64:
-            return "Albania";
+            return "🇦🇱"; // Albania
         case 65:
-            return "Australia";
+            return "🇦🇺"; // Australia
         case 66:
-            return "Austria";
+            return "🇦🇹"; // Austria
         case 67:
-            return "Belgium";
+            return "🇧🇪"; // Belgium
         case 68:
-            return "Bosnia and Herzegovina";
+            return "🇧🇦"; // Bosnia and Herzegovina
         case 69:
-            return "Botswana";
+            return "🇧🇼"; // Botswana
         case 70:
-            return "Bulgaria";
+            return "🇧🇬"; // Bulgaria
         case 71:
-            return "Croatia";
+            return "🇭🇷"; // Croatia
         case 72:
-            return "Cyprus";
+            return "🇨🇾"; // Cyprus
         case 73:
-            return "Czech Republic";
+            return "🇨🇿"; // Czech Republic
         case 74:
-            return "Denmark";
+            return "🇩🇰"; // Denmark
         case 75:
-            return "Estonia";
+            return "🇪🇪"; // Estonia
         case 76:
-            return "Finland";
+            return "🇫🇮"; // Finland
         case 77:
-            return "France";
+            return "🇫🇷"; // France
         case 78:
-            return "Germany";
+            return "🇩🇪"; // Germany
         case 79:
-            return "Greece";
+            return "🇬🇷"; // Greece
         case 80:
-            return "Hungary";
+            return "🇭🇺"; // Hungary
         case 81:
-            return "Iceland";
+            return "🇮🇸"; // Iceland
         case 82:
-            return "Ireland";
+            return "🇮🇪"; // Ireland
         case 83:
-            return "Italy";
+            return "🇮🇹"; // Italy
         case 84:
-            return "Latvia";
+            return "🇱🇻"; // Latvia
         case 85:
-            return "Lesotho";
+            return "🇱🇸"; // Lesotho
         case 86:
-            return "Liechtenstein";
+            return "🇱🇮"; // Liechtenstein
         case 87:
-            return "Lithuania";
+            return "🇱🇹"; // Lithuania
         case 88:
-            return "Luxembourg";
+            return "🇱🇺"; // Luxembourg
         case 89:
-            return "North Macedonia";
+            return "🇲🇰"; // North Macedonia
         case 90:
-            return "Malta";
+            return "🇲🇹"; // Malta
         case 91:
-            return "Montenegro";
+            return "🇲🇪"; // Montenegro
         case 92:
-            return "Mozambique";
+            return "🇲🇿"; // Mozambique
         case 93:
-            return "Namibia";
+            return "🇳🇦"; // Namibia
         case 94:
-            return "Netherlands";
+            return "🇳🇱"; // Netherlands
         case 95:
-            return "New Zealand";
+            return "🇳🇿"; // New Zealand
         case 96:
-            return "Norway";
+            return "🇳🇴"; // Norway
         case 97:
-            return "Poland";
+            return "🇵🇱"; // Poland
         case 98:
-            return "Portugal";
+            return "🇵🇹"; // Portugal
         case 99:
-            return "Romania";
+            return "🇷🇴"; // Romania
         case 100:
-            return "Russia";
+            return "🇷🇺"; // Russia
         case 101:
-            return "Serbia";
+            return "🇷🇸"; // Serbia
         case 102:
-            return "Slovakia";
+            return "🇸🇰"; // Slovakia
         case 103:
-            return "Slovenia";
+            return "🇸🇮"; // Slovenia
         case 104:
-            return "South Africa";
+            return "🇿🇦"; // South Africa
         case 105:
-            return "Spain";
+            return "🇪🇸"; // Spain
         case 106:
-            return "Eswatini";
+            return "🇸🇿"; // Eswatini
         case 107:
-            return "Sweden";
+            return "🇸🇪"; // Sweden
         case 108:
-            return "Switzerland";
+            return "🇨🇭"; // Switzerland
         case 109:
-            return "Turkey";
+            return "🇹🇷"; // Turkey
         case 110:
-            return "United Kingdom";
+            return "🇬🇧"; // United Kingdom
         case 111:
-            return "Zambia";
+            return "🇿🇲"; // Zambia
         case 112:
-            return "Zimbabwe";
+            return "🇿🇼"; // Zimbabwe
         case 113:
-            return "Azerbaijan";
+            return "🇦🇿"; // Azerbaijan
         case 114:
-            return "Mauritania";
+            return "🇲🇷"; // Mauritania
         case 115:
-            return "Mali";
+            return "🇲🇱"; // Mali
         case 116:
-            return "Niger";
+            return "🇳🇪"; // Niger
         case 117:
-            return "Chad";
+            return "🇹🇩"; // Chad
         case 118:
-            return "Sudan";
+            return "🇸🇩"; // Sudan
         case 119:
-            return "Eritrea";
+            return "🇪🇷"; // Eritrea
         case 120:
-            return "Djibouti";
+            return "🇩🇯"; // Djibouti
         case 121:
-            return "Somalia";
+            return "🇸🇴"; // Somalia
 
         // Southeast Asia
         case 128:
-            return "Taiwan";
+            return "🇹🇼"; // Taiwan
         case 136:
-            return "South Korea";
+            return "🇰🇷"; // South Korea
         case 144:
-            return "Hong Kong";
+            return "🇭🇰"; // Hong Kong
         case 145:
-            return "Macao";
+            return "🇲🇴"; // Macao
         case 152:
-            return "Indonesia";
+            return "🇮🇩"; // Indonesia
         case 153:
-            return "Singapore";
+            return "🇸🇬"; // Singapore
         case 154:
-            return "Thailand";
+            return "🇹🇭"; // Thailand
         case 155:
-            return "Philippines";
+            return "🇵🇭"; // Philippines
         case 156:
-            return "Malaysia";
+            return "🇲🇾"; // Malaysia
         case 160:
-            return "China";
+            return "🇨🇳"; // China
 
         // Middle East
         case 168:
-            return "U.A.E.";
+            return "🇦🇪"; // U.A.E.
         case 169:
-            return "India";
+            return "🇮🇳"; // India
         case 170:
-            return "Egypt";
+            return "🇪🇬"; // Egypt
         case 171:
-            return "Oman";
+            return "🇴🇲"; // Oman
         case 172:
-            return "Qatar";
+            return "🇶🇦"; // Qatar
         case 173:
-            return "Kuwait";
+            return "🇰🇼"; // Kuwait
         case 174:
-            return "Saudi Arabia";
+            return "🇸🇦"; // Saudi Arabia
         case 175:
-            return "Syria";
+            return "🇸🇾"; // Syria
         case 176:
-            return "Bahrain";
+            return "🇧🇭"; // Bahrain
         case 177:
-            return "Jordan";
+            return "🇯🇴"; // Jordan
 
         default:
-            return "Unknown";
+            return "🏳️"; // Unknown flag emoji
     }
 }
-
 }
