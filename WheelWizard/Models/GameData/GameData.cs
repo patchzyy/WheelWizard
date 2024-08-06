@@ -6,7 +6,6 @@ namespace CT_MKWII_WPF.Models.GameData;
 public class GameData
 {
     public List<User> Users { get; set; }
-    public int CurrentUserIndex = ConfigManager.GetConfig().FavoriteUser;
 
     public GameData()
     {

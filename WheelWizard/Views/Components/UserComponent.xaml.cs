@@ -80,7 +80,7 @@ namespace CT_MKWII_WPF.Views.Components
             DataContext = this;
             PopulateComponent();
         }
-        private async void PopulateComponent()
+        public async void PopulateComponent()
         {
             GameDataLoader.Instance.RefreshOnlineStatus();
             PlayerName = GameDataLoader.Instance.getCurrentUsername;

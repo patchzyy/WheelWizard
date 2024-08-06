@@ -1,6 +1,7 @@
 ﻿using CT_MKWII_WPF.Models.GameData;
 using CT_MKWII_WPF.Models.RRInfo;
 using CT_MKWII_WPF.Services.LiveData;
+using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Utilities.Generators;
 using System;
 using System.Collections.Generic;
@@ -37,18 +38,20 @@ public class GameDataLoader
     private const int FriendDataSize = 0x1C0;
     private const int MiiSize = 0x4A;
     
-    public User getCurrentUser => Instance.GameData.Users[Instance.GameData.CurrentUserIndex];
-    public string getCurrentUsername => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].MiiData.mii.Name;
-    public string getCurrentFriendCode => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].FriendCode;
-    public uint getCurrentVr => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].Vr;
-    public uint getCurrentBr => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].Br;
-    public uint getCurrentTotalRaceCount => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].TotalRaceCount;
-    public uint getCurrentTotalWinCount => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].TotalWinCount;
-    public List<Friend> getCurrentFriends => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].Friends;
-    public MiiData getCurrentMiiData => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].MiiData;
-    public bool isCurrentUserOnline => Instance.GameData.Users[Instance.GameData.CurrentUserIndex].IsOnline;
+    
+    
+    public User getCurrentUser => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser];
+    public string getCurrentUsername => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser].MiiData.mii.Name;
+    public string getCurrentFriendCode => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser].FriendCode;
+    public uint getCurrentVr => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser].Vr;
+    public uint getCurrentBr => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser].Br;
+    public uint getCurrentTotalRaceCount => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser].TotalRaceCount;
+    public uint getCurrentTotalWinCount => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser].TotalWinCount;
+    public List<Friend> getCurrentFriends => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser].Friends;
+    public MiiData getCurrentMiiData => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser].MiiData;
+    public bool isCurrentUserOnline => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser].IsOnline;
     public Models.GameData.GameData getGameData => Instance.GameData;
-    public User GetCurrentUser => GameData.Users[GameData.CurrentUserIndex];
+    public User GetCurrentUser => GameData.Users[ConfigManager.GetConfig().FavoriteUser];
     public List<User> GetAllUsers => GameData.Users;
     public User GetUserData(int index) => GameData.Users[index];
 

@@ -10,25 +10,24 @@
       Title="UserProfilePage" Background="Transparent">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="{StaticResource TopRowSize}" />
+            <RowDefinition Height="120" />
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="My Profiles" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+        <TextBlock Grid.Row="0" Text="My Profiles" HorizontalAlignment="Left" VerticalAlignment="Center"
                    Style="{StaticResource PageTitleText}" />
         <components:CurrentUserProfileComponent x:Name="CurrentUserProfile"
                                                 Grid.Row="0"
                                                 Width="200"
                                                 Height="60"
                                                 HorizontalAlignment="Right"
-                                                VerticalAlignment="Center"
-                                                Margin="0,0,10,0"/>
+                                                VerticalAlignment="Top"
+                                                Margin="0,15,10,0"/>
         <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
                 VerticalAlignment="Bottom" />
-        <StackPanel Grid.Row="1" Orientation="Vertical">
-        <ScrollViewer Grid.Row="1"  HorizontalScrollBarVisibility="Auto">
-            <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <ScrollViewer Grid.Row="0"  HorizontalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
                 <RadioButton Style="{StaticResource TopBar}" Tag="Mii1" 
                              Click="TopBarRadio_OnClick" 
                              Content="Mii1" 
@@ -48,11 +47,12 @@
                              Content="Mii4" />
             </StackPanel>
         </ScrollViewer>
+        <StackPanel Grid.Row="1" Orientation="Vertical">
             <CheckBox
                 Margin="10,10,0,10" 
                 x:Name="FavoriteCheckBox"
                 IsChecked="True">
-                <TextBlock Text="Make Favorite" />
+                <TextBlock Text="Make Primary" />
             </CheckBox>
         <components:PlayerStatsComponent 
             x:Name="PlayerStats" 
