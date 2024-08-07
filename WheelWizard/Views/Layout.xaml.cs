@@ -18,15 +18,23 @@ public partial class Layout : Window, IRepeatedTaskListener
 {
     public Layout()
     {
-        InitializeComponent();
-        DataContext = this;
-        NavigateToPage(new Dashboard());
-        LiveAlertsManager.Instance.Start(); // Temporary code, should be moved to a more appropriate location
-        LiveAlertsManager.Instance.Subscribe(this);
-        RRLiveRooms.Instance.Start(); // Temporary code, should be moved to a more appropriate location
-        RRLiveRooms.Instance.Subscribe(this);
-        GameDataLoader.Instance.Start(); // Temporary code, should be moved to a more appropriate location
-        GameDataLoader.Instance.Subscribe(this);
+        try
+        {
+            InitializeComponent();
+            DataContext = this;
+            NavigateToPage(new Dashboard());
+            LiveAlertsManager.Instance.Start(); // Temporary code, should be moved to a more appropriate location
+            LiveAlertsManager.Instance.Subscribe(this);
+            RRLiveRooms.Instance.Start(); // Temporary code, should be moved to a more appropriate location
+            RRLiveRooms.Instance.Subscribe(this);
+            GameDataLoader.Instance.Start(); // Temporary code, should be moved to a more appropriate location
+            GameDataLoader.Instance.Subscribe(this);
+        }
+        catch (Exception e)
+        {
+            MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            Environment.Exit(1);
+        }
     }
 
     public void NavigateToPage(Page page)

@@ -99,7 +99,7 @@ public static class AutoUpdater
             return;
         }
         var newFilePath = Path.Combine(currentFolder, currentExecutableName+"_new.exe");
-
+        
         await DownloadHelper.DownloadToLocation(downloadUrl, newFilePath);
 
         // we need to wait a bit before running the batch file to ensure the file is saved on disk

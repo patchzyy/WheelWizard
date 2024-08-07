@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 //big big thanks to https://kazuki-4ys.github.io/web_apps/FaceThief/ for the JS implementation of reading the rksys file
 //reminder, big endian!!!!
@@ -71,16 +72,24 @@ public class GameDataLoader : RepeatedTaskManager
     
     public void LoadGameData()
     {
-        _saveData = LoadSaveDataFile();
-        if (_saveData != null && ValidateMagicNumber())
+        try
         {
-            ParseUsers();
-            return;
+            _saveData = LoadSaveDataFile();
+            if (_saveData != null && ValidateMagicNumber())
+            {
+                ParseUsers();
+                return;
+            }
+
+            GameData.Users.Clear();
+            for (var i = 0; i < MaxPlayerNum; i++)
+            {
+                CreateDummyUser();
+            }
         }
-        GameData.Users.Clear();
-        for (var i = 0; i < MaxPlayerNum; i++)
+        catch (Exception e)
         {
-            CreateDummyUser();
+            MessageBox.Show("An error occurred while loading the game data: " + e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
     
@@ -229,9 +238,28 @@ public class GameDataLoader : RepeatedTaskManager
 
     private static byte[]? LoadSaveDataFile()
     {
-        var saveFile = Directory.GetFiles(SaveFilePath, "rksys.dat", SearchOption.AllDirectories);
-        return saveFile.Length == 0 ? null : File.ReadAllBytes(saveFile[0]);
+        try
+        {
+            if (!Directory.Exists(SaveFilePath))
+            {
+                return null;
+            }
+
+            var saveFile = Directory.GetFiles(SaveFilePath, "rksys.dat", SearchOption.AllDirectories);
+            if (saveFile.Length == 0)
+            {
+                return null;
+            }
+
+            return File.ReadAllBytes(saveFile[0]);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error loading save data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return null;
+        }
     }
+
 
     protected override Task ExecuteTaskAsync()
     {
