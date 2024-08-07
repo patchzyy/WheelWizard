@@ -27,6 +27,7 @@
         <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
                 VerticalAlignment="Bottom" />
         <components:FormFieldLabel
+            x:Name="HelpText"
             Grid.Row="1"
             VerticalAlignment="Top"
             HorizontalAlignment="Left"

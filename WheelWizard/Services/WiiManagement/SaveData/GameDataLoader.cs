@@ -21,7 +21,23 @@ namespace CT_MKWII_WPF.Services.WiiManagement.GameData;
 public class GameDataLoader : RepeatedTaskManager
 {
     public static GameDataLoader Instance { get; } = new GameDataLoader();
-    private static string SaveFilePath => Path.Combine(PathManager.RiivolutionWhWzFolderPath, "riivolution", "save");
+    private static string SaveFilePath
+    {
+        get
+        {
+            var path = Path.Combine(PathManager.RiivolutionWhWzFolderPath, "riivolution", "save");
+            if (Directory.Exists(path)) return path;
+            try
+            {
+                Directory.CreateDirectory(path);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error creating save directory: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            return path;
+        }
+    }
     private byte[]? _saveData;
 
     public Models.GameData.GameData GameData { get; }
@@ -89,7 +105,7 @@ public class GameDataLoader : RepeatedTaskManager
         }
         catch (Exception e)
         {
-            MessageBox.Show("An error occurred while loading the game data: " + e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show($"An error occurred while loading the game data: {e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
     

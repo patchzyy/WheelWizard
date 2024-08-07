@@ -76,12 +76,14 @@ public partial class FriendsPage : Page, INotifyPropertyChanged, IRepeatedTaskLi
             NoFriendsLabel.Visibility = Visibility.Visible;
             PlayerStats.Visibility = Visibility.Collapsed;
             FriendsListView.Visibility = Visibility.Collapsed;
+            HelpText.Visibility = Visibility.Collapsed;
         }
         else
         {
             NoFriendsLabel.Visibility = Visibility.Collapsed;
             PlayerStats.Visibility = Visibility.Visible;
             FriendsListView.Visibility = Visibility.Visible;
+            HelpText.Visibility = Visibility.Visible;
         }
     }
 
