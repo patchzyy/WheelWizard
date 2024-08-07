@@ -3,11 +3,13 @@ using CT_MKWII_WPF.Models.RRInfo;
 using CT_MKWII_WPF.Services.LiveData;
 using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Utilities.Generators;
+using CT_MKWII_WPF.Utilities.RepeatedTasks;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 //big big thanks to https://kazuki-4ys.github.io/web_apps/FaceThief/ for the JS implementation of reading the rksys file
 //reminder, big endian!!!!
@@ -34,7 +36,7 @@ public class GameDataLoader
     private const int MiiSize = 0x4A;
     public User GetCurrentUser => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser];
     public List<Friend> GetCurrentFriends => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser].Friends;
-    public Models.GameData.GameData getGameData => Instance.GameData;
+    public Models.GameData.GameData GetGameData => Instance.GameData;
     public User GetUserData(int index) => GameData.Users[index];
     public bool HasAnyValidUsers => GameData.Users.Any(user => user.FriendCode != "0000-0000-0000");
 

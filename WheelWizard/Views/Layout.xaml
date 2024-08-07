@@ -57,6 +57,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                     CornerRadius="{StaticResource WindowCornerRadiusLeftRightTwix}"
                     Background="{StaticResource BackgroundColor}">
             </Border>
+            
 
             <Frame Grid.Column="1" Grid.Row="1" Grid.RowSpan="4"
                    x:Name="ContentArea" Margin="{StaticResource EdgeGap}"
@@ -170,6 +171,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                         PageType="{x:Type local:FriendsPage}"
                         BoxIconKind="{x:Static icon:PackIconFontAwesomeKind.ChildReachingSolid}"
                         BoxText="0" />
+                    
 
                     <!-- add an other section by doing this:
                     <TextBlock Text="Other" Style="{StaticResource SidebarSectionText}"/>

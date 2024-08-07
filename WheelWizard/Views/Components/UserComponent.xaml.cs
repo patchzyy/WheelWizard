@@ -1,17 +1,11 @@
-﻿using CT_MKWII_WPF.Models.GameData;
-using CT_MKWII_WPF.Services.WiiManagement;
+﻿using CT_MKWII_WPF.Services.WiiManagement;
 using CT_MKWII_WPF.Services.WiiManagement.GameData;
-using CT_MKWII_WPF.Utilities;
 using CT_MKWII_WPF.Views.Pages;
-using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace CT_MKWII_WPF.Views.Components
 {

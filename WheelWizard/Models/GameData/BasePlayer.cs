@@ -4,9 +4,7 @@ using CT_MKWII_WPF.Services.LiveData;
 using System.ComponentModel;
 using System.Windows.Media.Imaging;
 using CT_MKWII_WPF.Services.WiiManagement;
-using CT_MKWII_WPF.Services.WiiManagement.GameData;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace CT_MKWII_WPF.Models.GameData;
@@ -42,11 +40,10 @@ public abstract class BasePlayer : INotifyPropertyChanged
     }
 
     public required MiiData MiiData { get; set; }
-
-    private bool _requestingImage;
+    
     private bool _isLoadingMiiImage;
     private BitmapImage? _miiImage;
-    public BitmapImage MiiImage
+    public BitmapImage? MiiImage
     {
         get
         {
@@ -59,11 +56,9 @@ public abstract class BasePlayer : INotifyPropertyChanged
         }
         set
         {
-            if (_miiImage != value)
-            {
-                _miiImage = value;
-                OnPropertyChanged(nameof(MiiImage));
-            }
+            if (_miiImage == value) return;
+            _miiImage = value;
+            OnPropertyChanged(nameof(MiiImage));
         }
     }
     
@@ -97,7 +92,7 @@ public abstract class BasePlayer : INotifyPropertyChanged
 
     public string MiiName
     {
-        get => MiiData?.mii?.Name ?? "";
+        get => MiiData.mii?.Name ?? "";
         set
         {
             if (MiiData == null)

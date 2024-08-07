@@ -62,7 +62,7 @@ public partial class UserProfilePage : Page
 
     private void PopulateMiiNames()
     {
-        var data = GameDataLoader.Instance.getGameData;
+        var data = GameDataLoader.Instance.GetGameData;
         var userAmount = data.Users.Count;
         for (int i = 0; i < userAmount; i++)
         {

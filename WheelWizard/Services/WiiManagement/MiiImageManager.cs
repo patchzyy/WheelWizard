@@ -23,20 +23,18 @@ public static class MiiImageManager
     {
         if (!Images.ContainsKey(miiData))
             ImageOrder.Enqueue(miiData);
-        // if it already exists, it will replace the old one. so the dict will not grow
         Images[miiData] = image;
 
         if (Images.Count < MaxCachedImages) return;
         var oldestMiiData = ImageOrder.Dequeue();
         Images.Remove(oldestMiiData);
     }
-    
     public static async Task<BitmapImage> LoadBase64MiiImageAsync(string base64MiiData)
     {
         if (string.IsNullOrEmpty(base64MiiData)) return new BitmapImage();
         if (Images.ContainsKey(base64MiiData))
             return Images[base64MiiData];
-        var newImage = await GetMiiImageAsync(base64MiiData);
+        var newImage = await RequestMiiImageAsync(base64MiiData);
         AddMiiImage(base64MiiData, newImage);
         return newImage;
     }
@@ -45,13 +43,13 @@ public static class MiiImageManager
         if (player.Mii.Count <= 0) return;
 
         var miiData = player.Mii[0].Data;
-        var newImage = await GetMiiImageAsync(miiData);
+        var newImage = await RequestMiiImageAsync(miiData);
         AddMiiImage(miiData, newImage);
         if (player.MiiImage != newImage)
             player.MiiImage = newImage;
     }
 
-    public static async Task<BitmapImage> GetMiiImageAsync(string base64MiiData)
+    private static async Task<BitmapImage> RequestMiiImageAsync(string base64MiiData)
     {
         using var formData = new MultipartFormDataContent();
         formData.Add(new ByteArrayContent(Convert.FromBase64String(base64MiiData)), "data", "mii.dat");

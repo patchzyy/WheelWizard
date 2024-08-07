@@ -89,6 +89,17 @@ public partial class SidebarRadioButton : UserControl
         set => SetValue(BoxTextProperty, value);
     }
     
+    public static readonly DependencyProperty TipTextProperty =
+        DependencyProperty.Register(nameof(BoxTip), typeof(string), typeof(SidebarRadioButton),
+            new PropertyMetadata(string.Empty));
+
+    public string BoxTip
+    {
+        get => (string)GetValue(TipTextProperty);
+        set => SetValue(TipTextProperty, value);
+    }
+    
+    
     public static readonly RoutedEvent ClickEvent = EventManager.RegisterRoutedEvent(
         nameof(Click), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SidebarRadioButton));
 

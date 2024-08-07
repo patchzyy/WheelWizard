@@ -38,7 +38,6 @@ public static class InternalMiiManager
         return miis;
     }
     
-
     public static byte[] GetMiiDb()
     {
         if (!File.Exists(WiiDbFile))

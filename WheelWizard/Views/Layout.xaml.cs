@@ -72,6 +72,12 @@ public partial class Layout : Window, IRepeatedTaskListener
         };
         var friends = GameDataLoader.Instance.GetCurrentFriends;
         FriendsButton.BoxText = friends.Count(friend => friend.IsOnline).ToString();
+        FriendsButton.BoxTip = friends.Count(friend => friend.IsOnline) switch
+        {
+            1 => "There is currently 1 friend online",
+            0 => "There are currently no friends online",
+            _ => $"There are currently {friends.Count(friend => friend.IsOnline)} friends online"
+        };
     }
 
     private void UpdateLiveAlert(LiveAlertsManager sender)

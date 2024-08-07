@@ -39,6 +39,7 @@
                                                          x:Name="StateBox"
                                                          IconPack="FontAwesome" TipAlignment="TopLeft"
                                                          IconKind="{Binding BoxIconKind, ElementName=Root}"
+                                                         TipText="{Binding BoxTip, ElementName=Root}"
                                     />
                                 </StackPanel>
                             </Grid>
