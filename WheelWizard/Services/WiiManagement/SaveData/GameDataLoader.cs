@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace CT_MKWII_WPF.Services.WiiManagement.GameData;
 
-public class GameDataLoader
+public class GameDataLoader : RepeatedTaskManager
 {
     public static GameDataLoader Instance { get; } = new GameDataLoader();
     private static string SaveFilePath => Path.Combine(PathManager.RiivolutionWhWzFolderPath, "riivolution", "save");
@@ -41,7 +41,7 @@ public class GameDataLoader
     public bool HasAnyValidUsers => GameData.Users.Any(user => user.FriendCode != "0000-0000-0000");
 
     
-    private GameDataLoader()
+    private GameDataLoader() : base(4)
     {
         GameData = new Models.GameData.GameData();
         LoadGameData();
@@ -231,5 +231,11 @@ public class GameDataLoader
     {
         var saveFile = Directory.GetFiles(SaveFilePath, "rksys.dat", SearchOption.AllDirectories);
         return saveFile.Length == 0 ? null : File.ReadAllBytes(saveFile[0]);
+    }
+
+    protected override Task ExecuteTaskAsync()
+    {
+        LoadGameData();
+        return Task.CompletedTask;
     }
 }

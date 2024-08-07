@@ -25,6 +25,8 @@ public partial class Layout : Window, IRepeatedTaskListener
         LiveAlertsManager.Instance.Subscribe(this);
         RRLiveRooms.Instance.Start(); // Temporary code, should be moved to a more appropriate location
         RRLiveRooms.Instance.Subscribe(this);
+        GameDataLoader.Instance.Start(); // Temporary code, should be moved to a more appropriate location
+        GameDataLoader.Instance.Subscribe(this);
     }
 
     public void NavigateToPage(Page page)
@@ -49,6 +51,7 @@ public partial class Layout : Window, IRepeatedTaskListener
             case LiveAlertsManager liveAlerts:
                 UpdateLiveAlert(liveAlerts);
                 break;
+            
         }
     }
 

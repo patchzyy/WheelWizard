@@ -1,15 +1,18 @@
 ﻿using CT_MKWII_WPF.Services.WiiManagement;
 using CT_MKWII_WPF.Services.WiiManagement.GameData;
+using CT_MKWII_WPF.Utilities.RepeatedTasks;
 using CT_MKWII_WPF.Views.Pages;
+using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace CT_MKWII_WPF.Views.Components
 {
-    public partial class CurrentUserProfileComponent : UserControl, INotifyPropertyChanged
+    public partial class CurrentUserProfileComponent : UserControl, INotifyPropertyChanged, IDisposable
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -67,11 +70,24 @@ namespace CT_MKWII_WPF.Views.Components
                 OnPropertyChanged(nameof(IsOnline));
             }
         }
+        
+        private DispatcherTimer _refreshTimer;
 
         public CurrentUserProfileComponent()
         {
             InitializeComponent();
             DataContext = this;
+            PopulateComponent();
+            
+            // Set up the refresh timer
+            _refreshTimer = new DispatcherTimer();
+            _refreshTimer.Interval = TimeSpan.FromSeconds(6);
+            _refreshTimer.Tick += RefreshTimer_Tick;
+            _refreshTimer.Start();
+        }
+        
+        private void RefreshTimer_Tick(object sender, EventArgs e)
+        {
             PopulateComponent();
         }
         public async void PopulateComponent()
@@ -108,6 +124,12 @@ namespace CT_MKWII_WPF.Views.Components
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        
+        public void Dispose()
+        {
+            _refreshTimer.Stop();
+            _refreshTimer = null;
         }
     }
 }
