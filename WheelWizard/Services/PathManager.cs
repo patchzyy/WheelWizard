@@ -24,6 +24,7 @@ public static class PathManager
     public static string RiivolutionWhWzFolderPath => Path.Combine(LoadFolderPath, "Riivolution", "WheelWizard");
     public static string RetroRewind6FolderPath => Path.Combine(RiivolutionWhWzFolderPath, "RetroRewind6");
     public static string LoadFolderPath => Path.Combine(UserFolderPath, "Load");
+    public static string WiiFolderPath => Path.Combine(UserFolderPath, "Wii");
 
     public static string FindWiiMoteNew()
     {

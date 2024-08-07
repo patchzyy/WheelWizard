@@ -45,7 +45,7 @@ public class Player : INotifyPropertyChanged
 
             _miiImage = MiiImageManager.GetCachedMiiImage(miiData);
             if (_miiImage == null)
-                MiiImageManager.LoadMiiImageAsync(this);
+                MiiImageManager.LoadPlayerMiiImageAsync(this);
 
             return _miiImage;
         }

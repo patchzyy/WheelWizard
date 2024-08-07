@@ -4,7 +4,6 @@
              xmlns:local="clr-namespace:CT_MKWII_WPF"
              StartupUri="Views/Layout.xaml">
     <Application.Resources>
-
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Views/Styles/Constants.xaml" />
@@ -17,6 +16,9 @@
                 <ResourceDictionary Source="Views/Styles/InputFieldStyles.xaml" />
                 <ResourceDictionary Source="Views/Styles/SettingsBlockStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="TextElement.FontFamily" Value="Arial, /Fonts/#ctmkf" />
+            </Style>
         </ResourceDictionary>
 
     </Application.Resources>

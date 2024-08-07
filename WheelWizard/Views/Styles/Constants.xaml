@@ -116,6 +116,7 @@
     <SolidColorBrush x:Key="PartyColor" Color="{StaticResource Yellow200}" />
 
     <SolidColorBrush x:Key="MiiIconBackground" Color="{StaticResource Gray800}" />
+    <SolidColorBrush x:Key="MiiIconBackgroundOnline" Color="{StaticResource Cyan400}" />
     <!-- Font size constants are:
     Title: 20
     body: 16
@@ -135,6 +136,7 @@
 
     <Thickness x:Key="EdgeGap">10</Thickness>
     <Thickness x:Key="LeftEdgeGap">10,0,0,0</Thickness>
+    <Thickness x:Key="RightEdgeGap">0,0,10,0</Thickness>
     <Thickness x:Key="LeftTopEdgeGap">10,10,0,0</Thickness>
     <Thickness x:Key="SidebarSectionGap">10,20,10,0</Thickness>
 

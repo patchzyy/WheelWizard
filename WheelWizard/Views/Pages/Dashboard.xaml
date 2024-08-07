@@ -20,26 +20,16 @@
                 VerticalAlignment="Bottom" />
         <TextBlock Grid.Row="0" Text="Home" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                    Style="{StaticResource PageTitleText}" />
-        <StackPanel Grid.Row="0" Margin="0,10,0,10" Orientation="Vertical" HorizontalAlignment="Right"
+        <components:CurrentUserProfileComponent x:Name="CurrentUserProfile"
+                                                Grid.Row="0"
+                                                Width="200"
+                                                Height="60"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Center"
+                                                Margin="0,0,10,0"/>
+        
+        <StackPanel Grid.Row="1" Margin="0,10,0,10" Orientation="Horizontal" HorizontalAlignment="Right"
                     VerticalAlignment="Top">
-            <!-- <Image x:Name="MainMii" Stretch="Uniform" > -->
-            <!--     <Image.Clip> -->
-            <!--         <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20"/> -->
-            <!--     </Image.Clip> -->
-            <!-- </Image> -->
-            <!-- <TextBlock HorizontalAlignment="Right" -->
-            <!--            Style="{StaticResource TitleText}" -->
-            <!--            x:Name="PlayerName" -->
-            <!--            Text="Player Name" -->
-            <!--            Margin="0,0,10,0"></TextBlock> -->
-            <!-- <TextBlock HorizontalAlignment="Right" -->
-            <!--            Style="{StaticResource BodyText}" -->
-            <!--               x:Name="FriendCode" -->
-            <!--            Text="1234-5678-1234" -->
-            <!--            Margin="0,0,10,0"></TextBlock> -->
-        </StackPanel>
-        <StackPanel Grid.Row="0" Margin="0,10,0,10" Orientation="Horizontal" HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom">
             <TextBlock
                 Style="{StaticResource BodyText}"
                 Text="Regular online"

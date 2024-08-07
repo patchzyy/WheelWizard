@@ -68,7 +68,38 @@ public partial class SidebarRadioButton : UserControl
         get => (Type)GetValue(PageTypeProperty);
         set => SetValue(PageTypeProperty, value);
     }
+    
+    public static readonly DependencyProperty BoxIconKindProperty =
+        DependencyProperty.Register(nameof(BoxIconKind), typeof(object), typeof(SidebarRadioButton),
+            new PropertyMetadata(null));
 
+    public object BoxIconKind
+    {
+        get => GetValue(BoxIconKindProperty);
+        set => SetValue(BoxIconKindProperty, value);
+    }
+    
+    public static readonly DependencyProperty BoxTextProperty =
+        DependencyProperty.Register(nameof(BoxText), typeof(string), typeof(SidebarRadioButton),
+            new PropertyMetadata(string.Empty));
+
+    public string BoxText
+    {
+        get => (string)GetValue(BoxTextProperty);
+        set => SetValue(BoxTextProperty, value);
+    }
+    
+    public static readonly DependencyProperty TipTextProperty =
+        DependencyProperty.Register(nameof(BoxTip), typeof(string), typeof(SidebarRadioButton),
+            new PropertyMetadata(string.Empty));
+
+    public string BoxTip
+    {
+        get => (string)GetValue(TipTextProperty);
+        set => SetValue(TipTextProperty, value);
+    }
+    
+    
     public static readonly RoutedEvent ClickEvent = EventManager.RegisterRoutedEvent(
         nameof(Click), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SidebarRadioButton));
 

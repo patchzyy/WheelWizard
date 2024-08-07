@@ -3,8 +3,10 @@ using CT_MKWII_WPF.Models.RRInfo;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace CT_MKWII_WPF.Services.WiiManagement;
@@ -21,26 +23,33 @@ public static class MiiImageManager
     {
         if (!Images.ContainsKey(miiData))
             ImageOrder.Enqueue(miiData);
-        // if it already exists, it will replace the old one. so the dict will not grow
         Images[miiData] = image;
 
         if (Images.Count < MaxCachedImages) return;
         var oldestMiiData = ImageOrder.Dequeue();
         Images.Remove(oldestMiiData);
     }
-
-    public static async void LoadMiiImageAsync(Player player)
+    public static async Task<BitmapImage> LoadBase64MiiImageAsync(string base64MiiData)
+    {
+        if (string.IsNullOrEmpty(base64MiiData)) return new BitmapImage();
+        if (Images.ContainsKey(base64MiiData))
+            return Images[base64MiiData];
+        var newImage = await RequestMiiImageAsync(base64MiiData);
+        AddMiiImage(base64MiiData, newImage);
+        return newImage;
+    }
+    public static async void LoadPlayerMiiImageAsync(Player player)
     {
         if (player.Mii.Count <= 0) return;
 
         var miiData = player.Mii[0].Data;
-        var newImage = await GetMiiImageAsync(miiData);
+        var newImage = await RequestMiiImageAsync(miiData);
         AddMiiImage(miiData, newImage);
         if (player.MiiImage != newImage)
             player.MiiImage = newImage;
     }
 
-    private static async Task<BitmapImage> GetMiiImageAsync(string base64MiiData)
+    private static async Task<BitmapImage> RequestMiiImageAsync(string base64MiiData)
     {
         using var formData = new MultipartFormDataContent();
         formData.Add(new ByteArrayContent(Convert.FromBase64String(base64MiiData)), "data", "mii.dat");
@@ -50,8 +59,11 @@ public static class MiiImageManager
         if (!response.Succeeded || response.Content is null) return new BitmapImage();
 
         var miiImageUrl = GetMiiImageUrlFromResponse(response.Content);
+        
         return new BitmapImage(new Uri(miiImageUrl));
     }
+    
+
 
     private static string GetMiiImageUrlFromResponse(MiiResponse response)
     {

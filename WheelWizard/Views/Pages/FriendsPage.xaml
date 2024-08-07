@@ -1,0 +1,93 @@
+﻿<Page x:Class="CT_MKWII_WPF.Views.Pages.FriendsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Pages"
+      xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+      xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      mc:Ignorable="d"
+      d:DesignHeight="831" d:DesignWidth="444"
+      Title="FriendsPage" Background="Transparent">
+    <Grid Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource TopRowSize}" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Friends" Style="{StaticResource PageTitleText}" Margin="10"/>
+        <components:CurrentUserProfileComponent x:Name="CurrentUserProfile"
+                                                Grid.Row="0"
+                                                Width="200"
+                                                Height="60"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Center"
+                                                Margin="0,0,10,0"/>
+        <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
+        <components:StaticListView Grid.Row="1" x:Name="FriendsListView"
+                                   ItemsSource="{Binding FriendsList}" ListTitle="Friends"
+                                   SelectionChanged="FriendListView_SelectionChanged"
+                                   MouseDoubleClick="FriendsListView_MouseDoubleClick">
+            <components:StaticListView.ItemContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Copy friend code" Click="CopyFriendCode_OnClick" />
+                </ContextMenu>
+            </components:StaticListView.ItemContextMenu>
+            
+            <ListView.View>
+                <GridView AllowsColumnReorder="False">
+                    <GridViewColumn Header="">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Width="40" Height="40" CornerRadius="20">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="{StaticResource MiiIconBackground}"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsOnline}" Value="True">
+                                                    <Setter Property="Background" Value="{StaticResource MiiIconBackgroundOnline}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <Image Source="{Binding MiiImage}" Stretch="Uniform">
+                                        <Image.Clip>
+                                            <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20" />
+                                        </Image.Clip>
+                                    </Image>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding MiiName}" Width="100"
+                                    components:StaticListView.IsSortable="True" />
+                    <GridViewColumn Header="Friend Code" DisplayMemberBinding="{Binding FriendCode}" Width="150"
+                                    components:StaticListView.IsSortable="True" />
+                    <!-- <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Vr}" Width="60" -->
+                    <!--                 components:StaticListView.IsSortable="True" /> -->
+                    <GridViewColumn Header="Wins" DisplayMemberBinding="{Binding Wins}" Width="60"
+                                    components:StaticListView.IsSortable="True" />
+                    <GridViewColumn Header="Losses" DisplayMemberBinding="{Binding Losses}" Width="80"
+                                    components:StaticListView.IsSortable="True" />
+                </GridView>
+            </ListView.View>
+        </components:StaticListView>
+        <Border Grid.Row="2" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Top" />
+        <components:PlayerStatsComponent 
+            x:Name="PlayerStats" 
+            Grid.Row="2"
+            Width="420"
+            Height="300"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Bottom"
+            Margin="0,10,0,0"/>
+        
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="NoFriendsLabel">
+            <components:EmptyPageInfo HorizontalAlignment="Center" Title="No Friends found"
+                                      Body="You can add friends in-game" />
+        </StackPanel>
+    </Grid>
+</Page>
