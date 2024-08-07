@@ -23,7 +23,7 @@ public static class ModsLaunchHelper
         {
             if (Directory.Exists(MyStuffFolderPath) && Directory.EnumerateFiles(MyStuffFolderPath).Any())
             {
-                var result = YesNoMessagebox.Show("Mods found", "Delete","Keep", "MyStuff folder is not empty, do you want to clear it?");
+                var result = YesNoMessagebox.Show("Mods found", "Delete","Keep", "you are about to launch the game without any mods", "Do you want to clear your my-stuff folder?");
                 if (result)
                     Directory.Delete(MyStuffFolderPath, true);
                 return;
