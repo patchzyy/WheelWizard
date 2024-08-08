@@ -58,7 +58,7 @@ public class GameDataLoader : RepeatedTaskManager
     public bool HasAnyValidUsers => GameData.Users.Any(user => user.FriendCode != "0000-0000-0000");
 
     
-    private GameDataLoader() : base(4)
+    private GameDataLoader() : base(40)
     {
         GameData = new Models.GameData.GameData();
         LoadGameData();
