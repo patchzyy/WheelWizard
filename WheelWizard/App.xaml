@@ -17,7 +17,7 @@
                 <ResourceDictionary Source="Views/Styles/SettingsBlockStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Style TargetType="{x:Type TextBlock}">
-                <Setter Property="TextElement.FontFamily" Value="Arial, /Fonts/#ctmkf" />
+                <Setter Property="TextElement.FontFamily" Value="Arial, /Resources/Fonts/#ctmkf" />
             </Style>
         </ResourceDictionary>
 

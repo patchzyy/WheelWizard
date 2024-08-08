@@ -53,7 +53,7 @@
           <XamlRuntime>Wpf</XamlRuntime>
           <SubType>Designer</SubType>
         </Page>
-        <Resource Include="Fonts\*.ttf" />
+        <Resource Include="Resources\Fonts\*.ttf" />
     </ItemGroup>
 
     <ItemGroup>
