@@ -1,6 +1,5 @@
 ﻿using CT_MKWII_WPF.Services.WiiManagement;
-using CT_MKWII_WPF.Services.WiiManagement.GameData;
-using CT_MKWII_WPF.Utilities.RepeatedTasks;
+using CT_MKWII_WPF.Services.WiiManagement.SaveData;
 using CT_MKWII_WPF.Views.Pages;
 using System;
 using System.ComponentModel;
@@ -12,9 +11,9 @@ using System.Windows.Threading;
 
 namespace CT_MKWII_WPF.Views.Components
 {
-    public partial class CurrentUserProfileComponent : UserControl, INotifyPropertyChanged, IDisposable
+    public sealed partial class CurrentUserProfileComponent : UserControl, INotifyPropertyChanged, IDisposable
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private string _playerName;
         public string PlayerName
@@ -71,7 +70,7 @@ namespace CT_MKWII_WPF.Views.Components
             }
         }
         
-        private DispatcherTimer _refreshTimer;
+        private DispatcherTimer? _refreshTimer;
 
         public CurrentUserProfileComponent()
         {
@@ -80,9 +79,8 @@ namespace CT_MKWII_WPF.Views.Components
             PopulateComponent();
             
             // Set up the refresh timer
-            _refreshTimer = new DispatcherTimer();
-            _refreshTimer.Interval = TimeSpan.FromSeconds(6);
-            _refreshTimer.Tick += RefreshTimer_Tick;
+            _refreshTimer = new() { Interval = TimeSpan.FromSeconds(60) };
+            _refreshTimer.Tick += RefreshTimer_Tick!;
             _refreshTimer.Start();
         }
         
@@ -107,7 +105,7 @@ namespace CT_MKWII_WPF.Views.Components
             {
                 return;
             }
-            var currentPage = (Layout)Window.GetWindow(this);
+            var currentPage = Window.GetWindow(this) as Layout;
             currentPage?.NavigateToPage(new UserProfilePage());
         }
 
@@ -121,14 +119,14 @@ namespace CT_MKWII_WPF.Views.Components
             Cursor = Cursors.Arrow;
         }
 
-        protected virtual void OnPropertyChanged(string propertyName)
+        private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         
         public void Dispose()
         {
-            _refreshTimer.Stop();
+            _refreshTimer?.Stop();
             _refreshTimer = null;
         }
     }

@@ -16,7 +16,7 @@ using System.Windows;
 //reminder, big endian!!!!
 
 
-namespace CT_MKWII_WPF.Services.WiiManagement.GameData;
+namespace CT_MKWII_WPF.Services.WiiManagement.SaveData;
 
 public class GameDataLoader : RepeatedTaskManager
 {
@@ -40,7 +40,7 @@ public class GameDataLoader : RepeatedTaskManager
     }
     private byte[]? _saveData;
 
-    public Models.GameData.GameData GameData { get; }
+    private Models.GameData.GameData GameData { get; }
 
     private const int RksysSize = 0x2BC000;
     private const string RksysMagic = "RKSD0006";
@@ -158,6 +158,7 @@ public class GameDataLoader : RepeatedTaskManager
 
     private User ParseUser(int offset)
     {
+        if (_saveData == null) throw new ArgumentNullException(nameof(_saveData));
         var user = new User
         {
             MiiData = ParseMiiData(offset + 0x14),
@@ -175,6 +176,7 @@ public class GameDataLoader : RepeatedTaskManager
     
     private MiiData ParseMiiData(int offset)
     {
+        if (_saveData == null) throw new ArgumentNullException(nameof(_saveData));
         var miiData =  new MiiData
         {
             mii = new Mii
@@ -195,9 +197,11 @@ public class GameDataLoader : RepeatedTaskManager
         foreach (var mii in miis)
         {
             uint AvatarId = 0;
-            for (int i = 0; i < 4; i++)
+            for (var i = 0; i < 4; i++)
+            {
                 AvatarId |= (uint)(mii[0x18 + i] << (8 * i));
-            
+            }
+
             if (AvatarId == ClientId)
                 return mii;
         }
@@ -239,7 +243,7 @@ public class GameDataLoader : RepeatedTaskManager
     {
         for (var i = 0; i < MiiSize; i++)
         {
-            if (_saveData[offset + i] != 0)
+            if (_saveData != null && _saveData[offset + i] != 0)
                 return true;
         }
 
@@ -257,17 +261,10 @@ public class GameDataLoader : RepeatedTaskManager
         try
         {
             if (!Directory.Exists(SaveFilePath))
-            {
                 return null;
-            }
 
             var saveFile = Directory.GetFiles(SaveFilePath, "rksys.dat", SearchOption.AllDirectories);
-            if (saveFile.Length == 0)
-            {
-                return null;
-            }
-
-            return File.ReadAllBytes(saveFile[0]);
+            return saveFile.Length == 0 ? null : File.ReadAllBytes(saveFile[0]);
         }
         catch (Exception ex)
         {

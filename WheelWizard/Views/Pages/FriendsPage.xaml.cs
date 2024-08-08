@@ -1,5 +1,5 @@
 ﻿using CT_MKWII_WPF.Models.GameData;
-using CT_MKWII_WPF.Services.WiiManagement.GameData;
+using CT_MKWII_WPF.Services.WiiManagement.SaveData;
 using CT_MKWII_WPF.Utilities.RepeatedTasks;
 using System.Collections.ObjectModel;
 using System.ComponentModel;

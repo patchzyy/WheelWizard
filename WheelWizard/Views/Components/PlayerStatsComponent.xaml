@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
     xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-    xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Components"
     mc:Ignorable="d"
     Background="Transparent"
     d:DesignHeight="300" 

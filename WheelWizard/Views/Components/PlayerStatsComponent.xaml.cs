@@ -1,5 +1,4 @@
 ﻿using CT_MKWII_WPF.Models.GameData;
-using CT_MKWII_WPF.Models.RRInfo;
 using CT_MKWII_WPF.Services.LiveData;
 using CT_MKWII_WPF.Services.WiiManagement;
 using CT_MKWII_WPF.Views.Pages;
@@ -8,16 +7,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
 namespace CT_MKWII_WPF.Views.Components
 {
-    public partial class PlayerStatsComponent : UserControl, INotifyPropertyChanged
+    public sealed partial class PlayerStatsComponent : UserControl, INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private string _playerName;
         public string PlayerName
@@ -62,11 +60,6 @@ namespace CT_MKWII_WPF.Views.Components
         }
         
         private bool _isOnline;
-        public bool IsOnline
-        {
-            get => _isOnline;
-            set => SetProperty(ref _isOnline, value);
-        }
         
         private BitmapImage _miiImage;
         
@@ -84,7 +77,6 @@ namespace CT_MKWII_WPF.Views.Components
             set => SetProperty(ref _regionName, value);
         }
         
-        
         private string _onlineText;
 
         public string OnlineText
@@ -92,14 +84,12 @@ namespace CT_MKWII_WPF.Views.Components
             get => _onlineText;
             set => SetProperty(ref _onlineText, value);
         }
-
-
-        public PlayerStatsComponent()
-        {
+        
+        public PlayerStatsComponent() 
+        { 
             InitializeComponent();
             DataContext = this;
         }
-        
         
         public async void UpdateStats(User user)
         {
@@ -110,11 +100,10 @@ namespace CT_MKWII_WPF.Views.Components
             BottomExtraStat = "Races Played: " + user.TotalRaceCount;
             TopExtraStat = "Wins: " + user.TotalWinCount;
             MiiImage = await MiiImageManager.LoadBase64MiiImageAsync(user.MiiData.mii.Data);
-            IsOnline = user.IsOnline;
-            ViewRoomButton.Visibility = IsOnline ? Visibility.Visible : Visibility.Hidden;
-            OnlineText = IsOnline ? "Online" : "Offline";
+            _isOnline = user.IsOnline;
+            ViewRoomButton.Visibility = _isOnline ? Visibility.Visible : Visibility.Hidden;
+            OnlineText = _isOnline ? "Online" : "Offline";
             RegionName = user.RegionName;
-
         }
 
         public async void UpdateStats(Friend friend)
@@ -126,14 +115,13 @@ namespace CT_MKWII_WPF.Views.Components
             BottomExtraStat = "Wins: " + friend.Wins;
             TopExtraStat = "Losses: " + friend.Losses;
             MiiImage = await MiiImageManager.LoadBase64MiiImageAsync(friend.MiiData.mii.Data);
-            IsOnline = friend.IsOnline;
-            OnlineText = IsOnline ? "Online" : "Offline";
-            ViewRoomButton.Visibility = IsOnline ? Visibility.Visible : Visibility.Hidden;
+            _isOnline = friend.IsOnline;
+            OnlineText = _isOnline ? "Online" : "Offline";
+            ViewRoomButton.Visibility = _isOnline ? Visibility.Visible : Visibility.Hidden;
             RegionName = friend.CountryName;
         }
         
-
-        protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        private bool SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return false;
             field = value;
@@ -141,7 +129,7 @@ namespace CT_MKWII_WPF.Views.Components
             return true;
         }
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -151,12 +139,11 @@ namespace CT_MKWII_WPF.Views.Components
             var allRooms = RRLiveRooms.Instance.CurrentRooms;
             foreach (var room in allRooms)
             {
-                if (room.Players.Any(player => player.Value.Fc == FriendCode))
-                {
-                    var currentPage = (Layout)Window.GetWindow(this);
-                    currentPage?.NavigateToPage(new RoomDetailPage(room));
-                    return;
-                }
+                if (room.Players.All(player => player.Value.Fc != FriendCode)) continue;
+
+                var currentPage = Window.GetWindow(this) as Layout;        
+                currentPage?.NavigateToPage(new RoomDetailPage(room));
+                return;
             }
         }
     }

@@ -1,5 +1,5 @@
 ﻿using CT_MKWII_WPF.Services.Settings;
-using CT_MKWII_WPF.Services.WiiManagement.GameData;
+using CT_MKWII_WPF.Services.WiiManagement.SaveData;
 using System;
 using System.Windows;
 using System.Windows.Controls;

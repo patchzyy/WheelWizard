@@ -4,7 +4,6 @@ using CT_MKWII_WPF.Services.Launcher;
 using CT_MKWII_WPF.Services.Other;
 using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Services.WiiManagement;
-using CT_MKWII_WPF.Services.WiiManagement.GameData;
 using MahApps.Metro.IconPacks;
 using System;
 using System.Threading.Tasks;
