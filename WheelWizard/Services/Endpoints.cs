@@ -13,6 +13,7 @@ public static class Endpoints
     public const string WhWzLatestReleasesUrl = "https://api.github.com/repos/patchzyy/WheelWizard/releases/latest";
     public const string WhWzDiscordUrl = "https://discord.gg/vZ7T2wJnsq";
     public const string WhWzGithubUrl = "https://github.com/patchzyy/WheelWizard";
+    public const string SupportLink = "https://ko-fi.com/wheelwizard";
 
     // Other
     public const string MiiStudioUrl = "https://qrcode.rc24.xyz/cgi-bin/studio.cgi";

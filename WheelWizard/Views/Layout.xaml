@@ -33,7 +33,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                 <RowDefinition Height="17" /> <!-- Reserved spacing for title -->   <!-- Also the page container -->
                 <RowDefinition Height="88" /> <!--Info section side bar -->         <!-- Also the page container -->
                 <RowDefinition />             <!--Side bar -->                      <!-- Also the page container -->
-                <RowDefinition Height="60" /> <!--Bottom info corner -->            <!-- Also the page container -->
+                <RowDefinition Height="80" /> <!--Bottom info corner -->            <!-- Also the page container -->
             </Grid.RowDefinitions>
 
             <!-- This border is only used as topBar in order so you can move the window around -->
@@ -141,6 +141,15 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                                                 HoverColor="{StaticResource SuccessTitleTextColor}"
                                                 Margin="{StaticResource LeftEdgeGap}"
                                                 Click="Github_Click"
+                                                IconSize="20" />
+                    <components:IconLabelButton IconKind="{x:Static icon:PackIconGameIconsKind.CoffeeCup}"
+                                                IconPack="GameIcons"
+                                                Text="Support us!"
+                                                Color="{StaticResource TitleTextColor}"
+                                                FontSize="13"
+                                                HoverColor="{StaticResource SuccessTitleTextColor}"
+                                                Margin="10,4,0,0"
+                                                Click="Support_Click"
                                                 IconSize="20" />
                 </StackPanel>
             </Border>

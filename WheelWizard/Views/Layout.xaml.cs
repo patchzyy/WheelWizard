@@ -159,6 +159,15 @@ public partial class Layout : Window, IRepeatedTaskListener
             UseShellExecute = true
         });
     }
+    
+    private void Support_Click(object sender, RoutedEventArgs e)
+    {
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+        {
+            FileName = Endpoints.SupportLink,
+            UseShellExecute = true
+        });
+    }
 
     protected override void OnClosed(EventArgs e)
     {
