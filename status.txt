@@ -1,4 +1,4 @@
-info|Love you baby
+warning|Server is down for maintenance!
 
 warning|Update servers are down! this means the following:\u000AYou can not install or update the game\u000AA play offline button may show up, if this is the case you CAN still play retro World Wides
 
