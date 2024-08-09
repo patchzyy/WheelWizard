@@ -9,8 +9,6 @@
           MouseDown="Profile_click"
           MouseEnter="UIElement_OnMouseEnter"
           MouseLeave="UIElement_OnMouseLeave">
-        
-        
 
         <Border Background="{StaticResource LightBackgroundColor}" 
                 CornerRadius="10" />
