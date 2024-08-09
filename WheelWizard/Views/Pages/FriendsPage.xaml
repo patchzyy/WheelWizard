@@ -52,10 +52,10 @@
                                 <Border Width="40" Height="40" CornerRadius="20">
                                     <Border.Style>
                                         <Style TargetType="Border">
-                                            <Setter Property="Background" Value="{StaticResource MiiIconBackground}"/>
+                                            <Setter Property="Background" Value="{StaticResource MiiIconDefault-Background}"/>
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding IsOnline}" Value="True">
-                                                    <Setter Property="Background" Value="{StaticResource MiiIconBackgroundOnline}"/>
+                                                    <Setter Property="Background" Value="{StaticResource MiiIconCyan-Background}"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>

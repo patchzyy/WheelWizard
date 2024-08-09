@@ -1,0 +1,57 @@
+<UserControl x:Class="CT_MKWII_WPF.Views.Components.MiiBall"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+ 
+    <Border x:Name="border" 
+            CornerRadius="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl}, 
+             Converter={StaticResource MultiplierValueConverter}}"
+            Width="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+            Height="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl}}">
+        <Grid>
+            <icon:PackIconFontAwesome Kind="UserSolid" HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                                      Width="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl},
+                                       Converter={StaticResource MultiplierValueConverter},  ConverterParameter=0.2}" 
+                                      Height="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl}, 
+                                      Converter={StaticResource MultiplierValueConverter},  ConverterParameter=0.2}" 
+                                      Foreground="{StaticResource MiiIconDefault-Foreground}"/>
+            
+            <Image Source="{Binding MiiImage, RelativeSource={RelativeSource AncestorType=UserControl}}" Stretch="Uniform">
+                <Image.Clip>
+                    <EllipseGeometry x:Name="ellipseGeometry" 
+                                     Center="{Binding Size,
+                                      RelativeSource={RelativeSource AncestorType=UserControl},
+                                      Converter={StaticResource MultiplierValueConverter}}" 
+                                     RadiusX="{Binding Size, 
+                                      RelativeSource={RelativeSource AncestorType=UserControl},
+                                      Converter={StaticResource MultiplierValueConverter}}" 
+                                     RadiusY="{Binding Size, 
+                                      RelativeSource={RelativeSource AncestorType=UserControl}, 
+                                      Converter={StaticResource MultiplierValueConverter}}" />
+                </Image.Clip>
+            </Image>
+        </Grid>
+     
+        <Border.Style>
+            <Style TargetType="Border">
+                <Setter Property="Background" Value="{StaticResource MiiIconDefault-Background}"/> 
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Color,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Light">
+                        <Setter Property="Background" Value="{StaticResource MiiIconLight-Background}"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Color, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Online">
+                        <Setter Property="Background" Value="{StaticResource MiiIconCyan-Background}"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Color, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Red">
+                        <Setter Property="Background" Value="{StaticResource MiiIconRed-Background}"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+           
+        </Border.Style>
+    </Border>
+</UserControl>

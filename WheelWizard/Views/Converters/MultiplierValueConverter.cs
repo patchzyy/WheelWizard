@@ -1,0 +1,33 @@
+using System;
+using System.Globalization;
+using System.Windows.Data;
+
+namespace CT_MKWII_WPF.Views.Converters
+{
+    public class MultiplierValueConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is not double doubleValue) return value;
+
+            var multiplier = 0.5; 
+            if (parameter != null && double.TryParse(parameter.ToString(), out var paramValue))
+                multiplier = paramValue;
+
+            Console.WriteLine(multiplier);
+            return doubleValue * multiplier;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is not double doubleValue) return value;
+
+            var multiplier = 0.5; 
+            if (parameter != null && double.TryParse(parameter.ToString(), out var paramValue))
+                multiplier = paramValue;
+
+            Console.WriteLine(multiplier);
+            return doubleValue / multiplier;
+        }
+    }
+}

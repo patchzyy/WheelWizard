@@ -91,7 +91,7 @@
                         <GridViewColumn Header="">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Border Width="40" Height="40" Background="{StaticResource MiiIconBackground}"
+                                    <Border Width="40" Height="40" Background="{StaticResource MiiIconDefault-Background}"
                                             CornerRadius="20">
                                         <Image Source="{Binding MiiImage}" Stretch="Uniform">
                                             <Image.Clip>

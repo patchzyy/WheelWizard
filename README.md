@@ -11,7 +11,7 @@
 # Wheel Wizard
 
 <p align="center">
-  <img src="https://github.com/patchzyy/WheelWizard/blob/main/images/WheelWizzard_with_icon.png" alt="Wheel Wizard Logo" width="500"/>
+  <img src="https://github.com/patchzyy/WheelWizard/blob/main/images/WheelWizard_text_icon.png" alt="Wheel Wizard Logo" width="500"/>
 </p>
 
 ## Mario Kart Mod Manager & Retro Rewind Auto Updater
