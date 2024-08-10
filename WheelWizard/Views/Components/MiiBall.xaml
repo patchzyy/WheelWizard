@@ -6,34 +6,102 @@
              xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
- 
-    <Border x:Name="border" 
+    <UserControl.Resources>
+        <Storyboard x:Key="SpinnerAnimation">
+            <DoubleAnimation
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                From="0"
+                To="360"
+                Duration="0:0:1"
+                RepeatBehavior="Forever"/>
+        </Storyboard>
+    </UserControl.Resources>
+    
+    <Border x:Name="Border" 
             CornerRadius="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl}, 
-             Converter={StaticResource MultiplierValueConverter}}"
+             Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.5}"
             Width="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl}}" 
             Height="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl}}">
+        
+        <Border.Clip>
+            <EllipseGeometry x:Name="EllipseGeometry"/>
+        </Border.Clip>
+        
         <Grid>
-            <icon:PackIconFontAwesome Kind="UserSolid" HorizontalAlignment="Center" VerticalAlignment="Bottom"
+            <icon:PackIconFontAwesome Kind="SpinnerSolid"
+                                      HorizontalAlignment="Center" VerticalAlignment="Center"
                                       Width="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl},
-                                       Converter={StaticResource MultiplierValueConverter},  ConverterParameter=0.2}" 
-                                      Height="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl}, 
-                                      Converter={StaticResource MultiplierValueConverter},  ConverterParameter=0.2}" 
-                                      Foreground="{StaticResource MiiIconDefault-Foreground}"/>
+                              Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.5}" 
+                                      Height="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl},
+                              Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.5}">
+                <icon:PackIconFontAwesome.RenderTransform>
+                    <!-- the center of this should be half the size of the icon itself (current 0.5, so that's why 0.25)-->
+                    <RotateTransform CenterX="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl},
+                              Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.25}" 
+                                     CenterY="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl},
+                              Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.25}"/>
+                </icon:PackIconFontAwesome.RenderTransform>
+                <icon:PackIconFontAwesome.Style>
+                    <Style TargetType="icon:PackIconFontAwesome">
+                        <Setter Property="Foreground" Value="{StaticResource MiiIconDefault-Foreground}"/>
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding MiiImage, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard Name="SpinnerStoryboard" Storyboard="{StaticResource SpinnerAnimation}"/>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <StopStoryboard BeginStoryboardName="SpinnerStoryboard"/>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                
+                            <DataTrigger Binding="{Binding Color,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Light">
+                                <Setter Property="Foreground" Value="{StaticResource MiiIconLight-Foreground}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Color, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Online">
+                                <Setter Property="Foreground" Value="{StaticResource MiiIconCyan-Foreground}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Color, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Red">
+                                <Setter Property="Foreground" Value="{StaticResource MiiIconRed-Foreground}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </icon:PackIconFontAwesome.Style>
+            </icon:PackIconFontAwesome>
             
-            <Image Source="{Binding MiiImage, RelativeSource={RelativeSource AncestorType=UserControl}}" Stretch="Uniform">
-                <Image.Clip>
-                    <EllipseGeometry x:Name="ellipseGeometry" 
-                                     Center="{Binding Size,
-                                      RelativeSource={RelativeSource AncestorType=UserControl},
-                                      Converter={StaticResource MultiplierValueConverter}}" 
-                                     RadiusX="{Binding Size, 
-                                      RelativeSource={RelativeSource AncestorType=UserControl},
-                                      Converter={StaticResource MultiplierValueConverter}}" 
-                                     RadiusY="{Binding Size, 
-                                      RelativeSource={RelativeSource AncestorType=UserControl}, 
-                                      Converter={StaticResource MultiplierValueConverter}}" />
-                </Image.Clip>
-            </Image>
+            <icon:PackIconFontAwesome Kind="UserSolid"
+                                      HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                                      Width="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl},
+                 Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.8}" 
+                                      Height="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl}, 
+                 Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.8}">
+                <icon:PackIconFontAwesome.Style>
+                    <Style TargetType="icon:PackIconFontAwesome">
+                        <Setter Property="Foreground" Value="{StaticResource MiiIconDefault-Foreground}"/>
+                   
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding MiiImage,
+                             RelativeSource={RelativeSource AncestorType=UserControl}}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                            
+                            <DataTrigger Binding="{Binding Color,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Light">
+                                <Setter Property="Foreground" Value="{StaticResource MiiIconLight-Foreground}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Color, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Online">
+                                <Setter Property="Foreground" Value="{StaticResource MiiIconCyan-Foreground}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Color, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Red">
+                                <Setter Property="Foreground" Value="{StaticResource MiiIconRed-Foreground}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </icon:PackIconFontAwesome.Style>
+            </icon:PackIconFontAwesome>
+            
+            <Image Source="{Binding MiiImage,
+             RelativeSource={RelativeSource AncestorType=UserControl}}" Stretch="Uniform"/>
         </Grid>
      
         <Border.Style>

@@ -56,10 +56,11 @@ public partial class MiiBall : UserControl
         if (d is not MiiBall control) return;
         
         var newSize = (double)e.NewValue;
-        control.border.Width = newSize;
-        control.border.Height = newSize;
-        control.ellipseGeometry.Center = new Point(newSize / 2, newSize / 2);
-        control.ellipseGeometry.RadiusX = newSize / 2;
-        control.ellipseGeometry.RadiusY = newSize / 2;
+        control.Border.Width = newSize;
+        control.Border.Height = newSize;
+        
+        control.EllipseGeometry.Center = new Point(newSize / 2, newSize / 2);
+        control.EllipseGeometry.RadiusX = newSize / 2;
+        control.EllipseGeometry.RadiusY = newSize / 2;
     }
 }

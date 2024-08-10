@@ -11,10 +11,10 @@ namespace CT_MKWII_WPF.Views.Converters
             if (value is not double doubleValue) return value;
 
             var multiplier = 0.5; 
-            if (parameter != null && double.TryParse(parameter.ToString(), out var paramValue))
+            if (parameter != null && double.TryParse(parameter.ToString(), NumberStyles.Any, 
+                                                     CultureInfo.InvariantCulture, out var paramValue))
                 multiplier = paramValue;
-
-            Console.WriteLine(multiplier);
+            
             return doubleValue * multiplier;
         }
 
@@ -23,8 +23,9 @@ namespace CT_MKWII_WPF.Views.Converters
             if (value is not double doubleValue) return value;
 
             var multiplier = 0.5; 
-            if (parameter != null && double.TryParse(parameter.ToString(), out var paramValue))
-                multiplier = paramValue;
+           if (parameter != null && double.TryParse(parameter.ToString(), NumberStyles.Any,
+                                                    CultureInfo.InvariantCulture, out var paramValue))
+                           multiplier = paramValue;
 
             Console.WriteLine(multiplier);
             return doubleValue / multiplier;
