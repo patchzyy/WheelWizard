@@ -88,6 +88,7 @@ namespace CT_MKWII_WPF.Views.Components
         {
             PopulateComponent();
         }
+        
         public async void PopulateComponent()
         {
             GameDataLoader.Instance.RefreshOnlineStatus();
@@ -95,7 +96,7 @@ namespace CT_MKWII_WPF.Views.Components
             PlayerName = currentUser.MiiName;
             FriendCode = currentUser.FriendCode;
             VrAndBr = "VR: " + currentUser.Vr;
-            MiiImage = await MiiImageManager.LoadBase64MiiImageAsync(currentUser.MiiData.mii.Data);
+            //MiiImage = await MiiImageManager.LoadBase64MiiImageAsync(currentUser.MiiData.Mii.Data);
             IsOnline = currentUser.IsOnline;
         }
 

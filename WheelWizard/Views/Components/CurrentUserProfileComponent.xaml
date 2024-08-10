@@ -49,11 +49,11 @@
                         </Style.Triggers>
                     </Style>
                 </Border.Style>
-                <Image x:Name="MainMii" Source="{Binding MiiImage}" Stretch="Uniform">
+                <!--<Image x:Name="MainMii" Source="{Binding MiiImage}" Stretch="Uniform">
                     <Image.Clip>
                         <EllipseGeometry Center="30,30" RadiusX="30" RadiusY="30" />
                     </Image.Clip>
-                </Image>
+                </Image> -->
             </Border>
         </StackPanel>
     </Grid>

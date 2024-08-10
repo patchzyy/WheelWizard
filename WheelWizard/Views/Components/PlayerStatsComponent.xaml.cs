@@ -1,4 +1,5 @@
 ﻿using CT_MKWII_WPF.Models.GameData;
+using CT_MKWII_WPF.Models.RRInfo;
 using CT_MKWII_WPF.Services.LiveData;
 using CT_MKWII_WPF.Services.WiiManagement;
 using CT_MKWII_WPF.Views.Pages;
@@ -17,6 +18,13 @@ namespace CT_MKWII_WPF.Views.Components
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        private bool _isOnline;
+        public bool IsOnline
+        {
+            get => _isOnline;
+            set => SetProperty(ref _isOnline, value);
+        }
+        
         private string _playerName;
         public string PlayerName
         {
@@ -59,18 +67,7 @@ namespace CT_MKWII_WPF.Views.Components
             set => SetProperty(ref _bottomExtraStat, value);
         }
         
-        private bool _isOnline;
-        
-        private BitmapImage _miiImage;
-        
-        public BitmapImage MiiImage
-        {
-            get => _miiImage;
-            set => SetProperty(ref _miiImage, value);
-        }
-        
         private String _regionName;
-        
         public String RegionName
         {
             get => _regionName;
@@ -78,11 +75,17 @@ namespace CT_MKWII_WPF.Views.Components
         }
         
         private string _onlineText;
-
         public string OnlineText
         {
             get => _onlineText;
             set => SetProperty(ref _onlineText, value);
+        }
+        
+        private Mii? _mii;
+        public Mii? Mii
+        {
+            get => _mii;
+            set => SetProperty(ref _mii, value);
         }
         
         public PlayerStatsComponent() 
@@ -91,39 +94,41 @@ namespace CT_MKWII_WPF.Views.Components
             DataContext = this;
         }
         
-        public async void UpdateStats(User user)
+        public void UpdateStats(User user)
         {
             PlayerName = user.MiiName;
             FriendCode = user.FriendCode;
-            VR = "VR: "+ user.Vr;
-            BR = "BR: "+ user.Br;
+            VR = "VR: " + user.Vr;
+            BR = "BR: " + user.Br;
             BottomExtraStat = "Races Played: " + user.TotalRaceCount;
             TopExtraStat = "Wins: " + user.TotalWinCount;
-            MiiImage = await MiiImageManager.LoadBase64MiiImageAsync(user.MiiData.mii.Data);
-            _isOnline = user.IsOnline;
-            ViewRoomButton.Visibility = _isOnline ? Visibility.Visible : Visibility.Hidden;
-            OnlineText = _isOnline ? "Online" : "Offline";
+            Mii = user?.MiiData?.Mii;
+            IsOnline = user!.IsOnline;
+            ViewRoomButton.Visibility = IsOnline ? Visibility.Visible : Visibility.Hidden;
+            OnlineText = IsOnline ? "Online" : "Offline";
             RegionName = user.RegionName;
         }
 
-        public async void UpdateStats(Friend friend)
+        public void UpdateStats(Friend friend)
         {
             PlayerName = friend.MiiName;
             FriendCode = friend.FriendCode;
-            VR = "VR: "+ friend.Vr;
-            BR = "BR: "+friend.Br;
+            VR = "VR: " + friend.Vr;
+            BR = "BR: " + friend.Br;
             BottomExtraStat = "Wins: " + friend.Wins;
             TopExtraStat = "Losses: " + friend.Losses;
-            MiiImage = await MiiImageManager.LoadBase64MiiImageAsync(friend.MiiData.mii.Data);
-            _isOnline = friend.IsOnline;
-            OnlineText = _isOnline ? "Online" : "Offline";
-            ViewRoomButton.Visibility = _isOnline ? Visibility.Visible : Visibility.Hidden;
+            Mii = friend?.MiiData?.Mii;
+            IsOnline = friend!.IsOnline;
+            OnlineText = IsOnline ? "Online" : "Offline";
+            ViewRoomButton.Visibility = IsOnline ? Visibility.Visible : Visibility.Hidden;
             RegionName = friend.CountryName;
         }
         
         private bool SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            if (EqualityComparer<T>.Default.Equals(field, value)) 
+                return false;
+            
             field = value;
             OnPropertyChanged(propertyName);
             return true;
@@ -139,7 +144,8 @@ namespace CT_MKWII_WPF.Views.Components
             var allRooms = RRLiveRooms.Instance.CurrentRooms;
             foreach (var room in allRooms)
             {
-                if (room.Players.All(player => player.Value.Fc != FriendCode)) continue;
+                if (room.Players.All(player => player.Value.Fc != FriendCode))
+                    continue;
 
                 var currentPage = Window.GetWindow(this) as Layout;        
                 currentPage?.NavigateToPage(new RoomDetailPage(room));

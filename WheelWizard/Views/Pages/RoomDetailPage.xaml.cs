@@ -51,7 +51,9 @@ public partial class RoomDetailPage : Page, INotifyPropertyChanged, IRepeatedTas
 
     private static int VrComparable(object? x, object? y)
     {
-        if (x is not Player xItem || y is not Player yItem) return 0;
+        if (x is not Player xItem || y is not Player yItem) 
+            return 0;
+        
         return xItem.Vr.CompareTo(yItem.Vr);
     }
 
@@ -65,7 +67,9 @@ public partial class RoomDetailPage : Page, INotifyPropertyChanged, IRepeatedTas
         Room = room;
         PlayersList.Clear();
         foreach (var p in room.Players.Values)
+        {
             PlayersList.Add(p);
+        }
     }
 
     private void GoBackClick(object sender, RoutedEventArgs e) => NavigateToPage(new RoomsPage());

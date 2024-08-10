@@ -11,35 +11,32 @@ namespace CT_MKWII_WPF.Models.GameData;
 
 public abstract class BasePlayer : INotifyPropertyChanged
 {
-    public required string FriendCode { get; set; }
-    public required uint Vr { get; set; }
-    public required uint Br { get; set; }
+    public required string FriendCode { get; init; }
+    public required uint Vr { get; init; }
+    public required uint Br { get; init; }
+    public required uint RegionId { get; init; } 
     
-    public required uint RegionID { get; set; } 
+    public string RegionName => Humanizer.GetRegionName(RegionId);
     
-    public string RegionName => Humanizer.GetRegionName(RegionID);
-    
-
     public bool IsOnline
     {
         get
         {
             var currentRooms = RRLiveRooms.Instance.CurrentRooms;
-            if (currentRooms.Count > 0)
-            {
-                var onlinePlayers = currentRooms.SelectMany(room => room.Players.Values).ToList();
-                return onlinePlayers.Any(player => player.Fc == FriendCode);
-            }
-            return false;
+            if (currentRooms.Count <= 0) return false;
+
+            var onlinePlayers = currentRooms.SelectMany(room => room.Players.Values).ToList();
+            return onlinePlayers.Any(player => player.Fc == FriendCode);
         }
         set
         {
             if (value == IsOnline) return;
+            
             OnPropertyChanged(nameof(IsOnline));
         }
     }
 
-    public required MiiData MiiData { get; set; }
+    public required MiiData? MiiData { get; set; }
     
     private bool _isLoadingMiiImage;
     private BitmapImage? _miiImage;
@@ -49,14 +46,13 @@ public abstract class BasePlayer : INotifyPropertyChanged
         {
             if (_miiImage != null) return _miiImage;
             if (!_isLoadingMiiImage)
-            {
                 LoadMiiImageAsync();
-            }
             return null;
         }
         set
         {
             if (_miiImage == value) return;
+            
             _miiImage = value;
             OnPropertyChanged(nameof(MiiImage));
         }
@@ -64,22 +60,20 @@ public abstract class BasePlayer : INotifyPropertyChanged
     
     private async void LoadMiiImageAsync()
     {
-        if (_isLoadingMiiImage || MiiData?.mii?.Data == null) return;
+        if (_isLoadingMiiImage || MiiData?.Mii?.Data == null) return;
 
         _isLoadingMiiImage = true;
         try
         {
-            var cachedImage = MiiImageManager.GetCachedMiiImage(MiiData.mii.Data);
+            var cachedImage = MiiImageManager.GetCachedMiiImage(MiiData.Mii.Data);
             if (cachedImage != null)
-            {
-                MiiImage = cachedImage;
-            }
+                MiiImage = new BitmapImage();
             else
             {
-                var loadedImage = await MiiImageManager.LoadBase64MiiImageAsync(MiiData.mii.Data);
+                var loadedImage = await MiiImageManager.LoadBase64MiiImageAsync(MiiData.Mii.Data);
                 await Application.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    MiiImage = loadedImage;
+                    MiiImage = new BitmapImage();
                 });
             }
         }
@@ -92,24 +86,20 @@ public abstract class BasePlayer : INotifyPropertyChanged
 
     public string MiiName
     {
-        get => MiiData.mii?.Name ?? "";
+        get => MiiData?.Mii?.Name ?? "";
         set
         {
             if (MiiData == null)
             {
                 MiiData = new MiiData
                 {
-                    mii = new Mii { Data = "", Name = value }
+                    Mii = new Mii { Data = "", Name = value }
                 };
             }
-            else if (MiiData.mii == null)
-            {
-                MiiData.mii = new Mii { Data = "", Name = value };
-            }
+            else if (MiiData.Mii == null)
+                MiiData.Mii = new Mii { Data = "", Name = value };
             else
-            {
-                MiiData.mii.Name = value;
-            }
+                MiiData.Mii.Name = value;
         }
     }
 

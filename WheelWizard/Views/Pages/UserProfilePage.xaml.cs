@@ -69,14 +69,14 @@ public partial class UserProfilePage : Page
             var radioButton = (RadioButton)FindName($"Mii{i + 1}");
             if (radioButton != null!)
             {
-                if(data.Users[i].MiiData.mii.Name == "No License")
+                if(data.Users[i].MiiData.Mii.Name == "No License")
                 {
-                    radioButton.Content = data.Users[i].MiiData.mii.Name;
+                    radioButton.Content = data.Users[i].MiiData.Mii.Name;
                     radioButton.IsEnabled = false;
                     radioButton.FontStyle = FontStyles.Italic;
                     continue;
                 }
-                radioButton.Content = data.Users[i].MiiData.mii.Name;
+                radioButton.Content = data.Users[i].MiiData.Mii.Name;
                 radioButton.IsEnabled = true;
             }
         }

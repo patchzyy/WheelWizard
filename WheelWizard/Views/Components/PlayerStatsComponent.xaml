@@ -62,12 +62,12 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             
-            <!-- TODO The boolean IsOnline seems to do literally nothing -->
-            <components:MiiBall Size="100" MiiImage="{Binding MiiImage}"
+            <components:MiiBall Size="100" Mii="{Binding Mii}"
                                 HorizontalAlignment="Left" VerticalAlignment="Top"
-                                Color="Light" Margin="20,0,10,0">
+                                Margin="20,0,10,0">
                 <components:MiiBall.Style>
                     <Style TargetType="components:MiiBall">
+                        <Setter Property="Color" Value="Light"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsOnline}" Value="True">
                                 <Setter Property="Color" Value="Online"/>

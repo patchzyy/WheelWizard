@@ -86,6 +86,13 @@
                                 <Setter Property="Visibility" Value="Collapsed"/>
                             </DataTrigger>
                             
+                            <!-- If the image loaded successfully, we also dont want this user icon to show, since 
+                                the image will show in this case-->
+                            <DataTrigger Binding="{Binding ImageLoadingSuccess,
+                             RelativeSource={RelativeSource AncestorType=UserControl}}" Value="True">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                            
                             <DataTrigger Binding="{Binding Color,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Light">
                                 <Setter Property="Foreground" Value="{StaticResource MiiIconLight-Foreground}"/>
                             </DataTrigger>
@@ -101,7 +108,20 @@
             </icon:PackIconFontAwesome>
             
             <Image Source="{Binding MiiImage,
-             RelativeSource={RelativeSource AncestorType=UserControl}}" Stretch="Uniform"/>
+             RelativeSource={RelativeSource AncestorType=UserControl}}" Stretch="Uniform">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Visibility" Value="Visible"/>
+                        
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ImageLoadingSuccess,
+                             RelativeSource={RelativeSource AncestorType=UserControl}}" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
         </Grid>
      
         <Border.Style>

@@ -88,17 +88,10 @@
 
                 <ListView.View>
                     <GridView AllowsColumnReorder="False">
-                        <GridViewColumn Header="">
+                        <GridViewColumn Header="" Width="60">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Border Width="40" Height="40" Background="{StaticResource MiiIconDefault-Background}"
-                                            CornerRadius="20">
-                                        <Image Source="{Binding MiiImage}" Stretch="Uniform">
-                                            <Image.Clip>
-                                                <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20" />
-                                            </Image.Clip>
-                                        </Image>
-                                    </Border>
+                                    <components:MiiBall Mii="{Binding FirstMii}" Size="40" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
