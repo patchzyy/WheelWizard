@@ -4,57 +4,76 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
-             mc:Ignorable="d" 
-             d:DesignHeight="60" d:DesignWidth="180">
-    <Grid Width="180" Height="60"
-          MouseDown="Profile_click"
-          MouseEnter="UIElement_OnMouseEnter"
-          MouseLeave="UIElement_OnMouseLeave">
+             mc:Ignorable="d" d:Background="Transparent"
+             d:DesignHeight="40" d:DesignWidth="180">
+    
+    <Button BorderThickness="0"
+            Margin="0"
+            BorderBrush="Transparent"
+            Click="Profile_click">
+        <Button.Template>
+            <ControlTemplate TargetType="Button">
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right"
+                                    VerticalAlignment="Top" Margin="0,6,0,0">
+                            <TextBlock HorizontalAlignment="Right"
+                                       VerticalAlignment="Top"
+                                       Style="{StaticResource SidebarSectionText}"
+                                       x:Name="PlayerNameBlock"
+                                       Text="{Binding PlayerName}"
+                                       Margin="0,0,10,0"/>
+                            
+                            <TextBlock HorizontalAlignment="Right"
+                                       VerticalAlignment="Center"
+                                       Style="{StaticResource TinyText}"
+                                       x:Name="FriendCodeBlock"
+                                       Text="{Binding FriendCode}"
+                                       Margin="0,0,10,0"/>
+                        </StackPanel>
+                        
+                        <components:MiiBall Size="40" x:Name="MiiBall" Mii="{Binding Mii}">
+                            <components:MiiBall.Style>
+                                <Style TargetType="components:MiiBall">
+                                    <Setter Property="Color" Value="Default"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsOnline}" Value="True">
+                                            <Setter Property="Color" Value="Online"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </components:MiiBall.Style> 
+                        </components:MiiBall>
+                    </StackPanel>
+                </Border>
 
-        <Border Background="{StaticResource LightBackgroundColor}" 
-                CornerRadius="10" />
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Color" TargetName="MiiBall" Value="Light"/>
+                        <Setter Property="Foreground" Value="{StaticResource TitleTextHover}" TargetName="FriendCodeBlock"/>
+                        <Setter Property="Foreground" Value="{StaticResource TitleTextHover}" TargetName="PlayerNameBlock"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+        </Button.Template>
+
+        <Button.Style>
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="Transparent" />
+                <Style.Triggers>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="Transparent" />
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Button.Style>
         
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Right"
-                        VerticalAlignment="Top" Margin="0,5,0,0">
-                <TextBlock HorizontalAlignment="Right"
-                           VerticalAlignment="Top"
-                           Style="{StaticResource BodyText}"
-                           x:Name="PlayerNameBlock"
-                           Text="{Binding PlayerName}"
-                           Margin="0,0,10,0"/>
-                <TextBlock HorizontalAlignment="Right"
-                           VerticalAlignment="Center"
-                           Style="{StaticResource TinyText}"
-                           x:Name="FriendCodeBlock"
-                           Text="{Binding FriendCode}"
-                           Margin="0,0,10,0"/>
-                <TextBlock HorizontalAlignment="Right"
-                           Style="{StaticResource TinyText}"
-                           x:Name="VrAndBrBlock"
-                           Text="{Binding VrAndBr}"
-                           Margin="0,0,10,0"/>
-            </StackPanel>
-            <!-- <components:MiiBall BallSize="60" MiiImage="{Binding MiiImage}"></components:MiiBall> --> 
-            <Border Width="60" Height="60" HorizontalAlignment="Right" 
-                    Margin="0,0,10,0"
-                    CornerRadius="30" VerticalAlignment="Center">
-                <Border.Style>
-                    <Style TargetType="Border">
-                        <Setter Property="Background" Value="{StaticResource MiiIconDefault-Background}"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsOnline}" Value="True">
-                                <Setter Property="Background" Value="{StaticResource MiiIconDefault-Background}"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Border.Style>
-                <!--<Image x:Name="MainMii" Source="{Binding MiiImage}" Stretch="Uniform">
-                    <Image.Clip>
-                        <EllipseGeometry Center="30,30" RadiusX="30" RadiusY="30" />
-                    </Image.Clip>
-                </Image> -->
-            </Border>
-        </StackPanel>
-    </Grid>
+    </Button>
+
 </UserControl>

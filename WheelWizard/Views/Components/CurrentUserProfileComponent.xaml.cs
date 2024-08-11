@@ -1,4 +1,5 @@
-﻿using CT_MKWII_WPF.Services.WiiManagement;
+﻿using CT_MKWII_WPF.Models.RRInfo;
+using CT_MKWII_WPF.Services.WiiManagement;
 using CT_MKWII_WPF.Services.WiiManagement.SaveData;
 using CT_MKWII_WPF.Views.Pages;
 using System;
@@ -48,14 +49,14 @@ namespace CT_MKWII_WPF.Views.Components
             }
         }
 
-        private ImageSource _miiImage;
-        public ImageSource MiiImage
+        private Mii? _mii;
+        public Mii? Mii
         {
-            get => _miiImage;
+            get => _mii;
             set
             {
-                _miiImage = value;
-                OnPropertyChanged(nameof(MiiImage));
+                _mii = value;
+                OnPropertyChanged(nameof(Mii));
             }
         }
         
@@ -84,10 +85,7 @@ namespace CT_MKWII_WPF.Views.Components
             _refreshTimer.Start();
         }
         
-        private void RefreshTimer_Tick(object sender, EventArgs e)
-        {
-            PopulateComponent();
-        }
+        private void RefreshTimer_Tick(object sender, EventArgs e) => PopulateComponent();
         
         public async void PopulateComponent()
         {
@@ -99,25 +97,14 @@ namespace CT_MKWII_WPF.Views.Components
             //MiiImage = await MiiImageManager.LoadBase64MiiImageAsync(currentUser.MiiData.Mii.Data);
             IsOnline = currentUser.IsOnline;
         }
-
-        private void Profile_click(object sender, MouseButtonEventArgs e)
+        
+        private void Profile_click(object sender, RoutedEventArgs e)
         {
             if (!GameDataLoader.Instance.HasAnyValidUsers)
-            {
                 return;
-            }
+ 
             var currentPage = Window.GetWindow(this) as Layout;
             currentPage?.NavigateToPage(new UserProfilePage());
-        }
-
-        private void UIElement_OnMouseEnter(object sender, MouseEventArgs e)
-        {
-            Cursor = Cursors.Hand;
-        }
-
-        private void UIElement_OnMouseLeave(object sender, MouseEventArgs e)
-        {
-            Cursor = Cursors.Arrow;
         }
 
         private void OnPropertyChanged(string propertyName)

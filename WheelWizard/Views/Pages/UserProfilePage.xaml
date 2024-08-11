@@ -19,8 +19,6 @@
                    Style="{StaticResource PageTitleText}" />
         <components:CurrentUserProfileComponent x:Name="CurrentUserProfile"
                                                 Grid.Row="0"
-                                                Width="200"
-                                                Height="60"
                                                 HorizontalAlignment="Right"
                                                 VerticalAlignment="Top"
                                                 Margin="0,15,10,0"/>
