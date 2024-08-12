@@ -120,7 +120,7 @@
     <SolidColorBrush x:Key="MiiIconLight-Background" Color="{StaticResource Gray600}" />
     <SolidColorBrush x:Key="MiiIconLight-Foreground" Color="{StaticResource Gray400}" />
     <SolidColorBrush x:Key="MiiIconCyan-Background" Color="{StaticResource Cyan500}" />
-    <SolidColorBrush x:Key="MiiIconCyan-Foreground" Color="{StaticResource Cyan400}" />
+    <SolidColorBrush x:Key="MiiIconCyan-Foreground" Color="{StaticResource Cyan300}" />
     <SolidColorBrush x:Key="MiiIconRed-Background" Color="{StaticResource Red700}" />
     <SolidColorBrush x:Key="MiiIconRed-Foreground" Color="{StaticResource Red400}" />
     <!-- Font size constants are:

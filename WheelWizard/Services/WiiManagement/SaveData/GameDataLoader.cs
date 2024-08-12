@@ -268,7 +268,7 @@ public class GameDataLoader : RepeatedTaskManager
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Error loading save data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //MessageBox.Show($"Error loading save data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return null;
         }
     }
