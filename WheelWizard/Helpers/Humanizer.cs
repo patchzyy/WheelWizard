@@ -21,291 +21,158 @@ public static class Humanizer
     
     public static string GetRegionName(uint regionID)
     {
-        switch (regionID)
+        return regionID switch
         {
-            case 0:
-                return "Japan";
-            case 1:
-                return "America";
-            case 2:
-                return "Europe";
-            case 3:
-                return "Australia";
-            case 4:
-                return "Taiwan";
-            case 5:
-                return "South Korea";
-            case 6:
-                return "China";
-            default:
-                return "Unknown";
-        }
+            0 => "Japan",
+            1 => "America",
+            2 => "Europe",
+            3 => "Australia",
+            4 => "Taiwan",
+            5 => "South Korea",
+            6 => "China",
+            _ => "Unknown"
+        };
     }
     
     public static string GetCountryEmoji(byte countryId)
-{
-    switch (countryId)
     {
-        // Japan
-        case 1:
-            return "🇯🇵";
+        return countryId switch
+        {
+            // Japan
+            1 => "🇯🇵",
 
-        // Americas
-        case 8:
-            return "🇦🇮"; // Anguilla
-        case 9:
-            return "🇦🇬"; // Antigua and Barbuda
-        case 10:
-            return "🇦🇷"; // Argentina
-        case 11:
-            return "🇦🇲"; // Aruba
-        case 12:
-            return "🇧🇸"; // Bahamas
-        case 13:
-            return "🇧🇧"; // Barbados
-        case 14:
-            return "🇧🇿"; // Belize
-        case 15:
-            return "🇧🇴"; // Bolivia
-        case 16:
-            return "🇧🇷"; // Brazil
-        case 17:
-            return "🇻🇬"; // British Virgin Islands
-        case 18:
-            return "🇨🇦"; // Canada
-        case 19:
-            return "🇰🇾"; // Cayman Islands
-        case 20:
-            return "🇨🇱"; // Chile
-        case 21:
-            return "🇨🇴"; // Colombia
-        case 22:
-            return "🇨🇷"; // Costa Rica
-        case 23:
-            return "🇩🇲"; // Dominica
-        case 24:
-            return "🇩🇴"; // Dominican Republic
-        case 25:
-            return "🇪🇨"; // Ecuador
-        case 26:
-            return "🇸🇻"; // El Salvador
-        case 27:
-            return "🇫🇷"; // French Guiana
-        case 28:
-            return "🇬🇩"; // Grenada
-        case 29:
-            return "🇲🇶"; // Guadeloupe
-        case 30:
-            return "🇵🇪"; // Guatemala
-        case 31:
-            return "🇬🇾"; // Guyana
-        case 32:
-            return "🇭🇹"; // Haiti
-        case 33:
-            return "🇭🇳"; // Honduras
-        case 34:
-            return "🇯🇲"; // Jamaica
-        case 35:
-            return "🇲🇶"; // Martinique
-        case 36:
-            return "🇲🇽"; // Mexico
-        case 37:
-            return "🇲🇸"; // Montserrat
-        case 38:
-            return "🇳🇱"; // Netherlands Antilles
-        case 39:
-            return "🇳🇮"; // Nicaragua
-        case 40:
-            return "🇵🇦"; // Panama
-        case 41:
-            return "🇵🇾"; // Paraguay
-        case 42:
-            return "🇵🇪"; // Peru
-        case 43:
-            return "🇰🇳"; // St. Kitts and Nevis
-        case 44:
-            return "🇱🇨"; // St. Lucia
-        case 45:
-            return "🇻🇨"; // St. Vincent and the Grenadines
-        case 46:
-            return "🇸🇷"; // Suriname
-        case 47:
-            return "🇹🇹"; // Trinidad and Tobago
-        case 48:
-            return "🇹🇨"; // Turks and Caicos Islands
-        case 49:
-            return "🇺🇸"; // United States
-        case 50:
-            return "🇺🇾"; // Uruguay
-        case 51:
-            return "🇻🇮"; // US Virgin Islands
-        case 52:
-            return "🇻🇪"; // Venezuela
+            // Americas
+            8 => "🇦🇮", // Anguilla
+            9 => "🇦🇬", // Antigua and Barbuda
+            10 => "🇦🇷", // Argentina
+            11 => "🇦🇲", // Aruba
+            12 => "🇧🇸", // Bahamas
+            13 => "🇧🇧", // Barbados
+            14 => "🇧🇿", // Belize
+            15 => "🇧🇴", // Bolivia
+            16 => "🇧🇷", // Brazil
+            17 => "🇻🇬", // British Virgin Islands
+            18 => "🇨🇦", // Canada
+            19 => "🇰🇾", // Cayman Islands
+            20 => "🇨🇱", // Chile
+            21 => "🇨🇴", // Colombia
+            22 => "🇨🇷", // Costa Rica
+            23 => "🇩🇲", // Dominica
+            24 => "🇩🇴", // Dominican Republic
+            25 => "🇪🇨", // Ecuador
+            26 => "🇸🇻", // El Salvador
+            27 => "🇫🇷", // French Guiana
+            28 => "🇬🇩", // Grenada
+            29 => "🇲🇶", // Guadeloupe
+            30 => "🇵🇪", // Guatemala
+            31 => "🇬🇾", // Guyana
+            32 => "🇭🇹", // Haiti
+            33 => "🇭🇳", // Honduras
+            34 => "🇯🇲", // Jamaica
+            35 => "🇲🇶", // Martinique
+            36 => "🇲🇽", // Mexico
+            37 => "🇲🇸", // Montserrat
+            38 => "🇳🇱", // Netherlands Antilles
+            39 => "🇳🇮", // Nicaragua
+            40 => "🇵🇦", // Panama
+            41 => "🇵🇾", // Paraguay
+            42 => "🇵🇪", // Peru
+            43 => "🇰🇳", // St. Kitts and Nevis
+            44 => "🇱🇨", // St. Lucia
+            45 => "🇻🇨", // St. Vincent and the Grenadines
+            46 => "🇸🇷", // Suriname
+            47 => "🇹🇹", // Trinidad and Tobago
+            48 => "🇹🇨", // Turks and Caicos Islands
+            49 => "🇺🇸", // United States
+            50 => "🇺🇾", // Uruguay
+            51 => "🇻🇮", // US Virgin Islands
+            52 => "🇻🇪", // Venezuela
 
-        // Europe & Africa
-        case 64:
-            return "🇦🇱"; // Albania
-        case 65:
-            return "🇦🇺"; // Australia
-        case 66:
-            return "🇦🇹"; // Austria
-        case 67:
-            return "🇧🇪"; // Belgium
-        case 68:
-            return "🇧🇦"; // Bosnia and Herzegovina
-        case 69:
-            return "🇧🇼"; // Botswana
-        case 70:
-            return "🇧🇬"; // Bulgaria
-        case 71:
-            return "🇭🇷"; // Croatia
-        case 72:
-            return "🇨🇾"; // Cyprus
-        case 73:
-            return "🇨🇿"; // Czech Republic
-        case 74:
-            return "🇩🇰"; // Denmark
-        case 75:
-            return "🇪🇪"; // Estonia
-        case 76:
-            return "🇫🇮"; // Finland
-        case 77:
-            return "🇫🇷"; // France
-        case 78:
-            return "🇩🇪"; // Germany
-        case 79:
-            return "🇬🇷"; // Greece
-        case 80:
-            return "🇭🇺"; // Hungary
-        case 81:
-            return "🇮🇸"; // Iceland
-        case 82:
-            return "🇮🇪"; // Ireland
-        case 83:
-            return "🇮🇹"; // Italy
-        case 84:
-            return "🇱🇻"; // Latvia
-        case 85:
-            return "🇱🇸"; // Lesotho
-        case 86:
-            return "🇱🇮"; // Liechtenstein
-        case 87:
-            return "🇱🇹"; // Lithuania
-        case 88:
-            return "🇱🇺"; // Luxembourg
-        case 89:
-            return "🇲🇰"; // North Macedonia
-        case 90:
-            return "🇲🇹"; // Malta
-        case 91:
-            return "🇲🇪"; // Montenegro
-        case 92:
-            return "🇲🇿"; // Mozambique
-        case 93:
-            return "🇳🇦"; // Namibia
-        case 94:
-            return "🇳🇱"; // Netherlands
-        case 95:
-            return "🇳🇿"; // New Zealand
-        case 96:
-            return "🇳🇴"; // Norway
-        case 97:
-            return "🇵🇱"; // Poland
-        case 98:
-            return "🇵🇹"; // Portugal
-        case 99:
-            return "🇷🇴"; // Romania
-        case 100:
-            return "🇷🇺"; // Russia
-        case 101:
-            return "🇷🇸"; // Serbia
-        case 102:
-            return "🇸🇰"; // Slovakia
-        case 103:
-            return "🇸🇮"; // Slovenia
-        case 104:
-            return "🇿🇦"; // South Africa
-        case 105:
-            return "🇪🇸"; // Spain
-        case 106:
-            return "🇸🇿"; // Eswatini
-        case 107:
-            return "🇸🇪"; // Sweden
-        case 108:
-            return "🇨🇭"; // Switzerland
-        case 109:
-            return "🇹🇷"; // Turkey
-        case 110:
-            return "🇬🇧"; // United Kingdom
-        case 111:
-            return "🇿🇲"; // Zambia
-        case 112:
-            return "🇿🇼"; // Zimbabwe
-        case 113:
-            return "🇦🇿"; // Azerbaijan
-        case 114:
-            return "🇲🇷"; // Mauritania
-        case 115:
-            return "🇲🇱"; // Mali
-        case 116:
-            return "🇳🇪"; // Niger
-        case 117:
-            return "🇹🇩"; // Chad
-        case 118:
-            return "🇸🇩"; // Sudan
-        case 119:
-            return "🇪🇷"; // Eritrea
-        case 120:
-            return "🇩🇯"; // Djibouti
-        case 121:
-            return "🇸🇴"; // Somalia
+            // Europe & Africa
+            64 => "🇦🇱", // Albania
+            65 => "🇦🇺", // Australia
+            66 => "🇦🇹", // Austria
+            67 => "🇧🇪", // Belgium
+            68 => "🇧🇦", // Bosnia and Herzegovina
+            69 => "🇧🇼", // Botswana
+            70 => "🇧🇬", // Bulgaria
+            71 => "🇭🇷", // Croatia
+            72 => "🇨🇾", // Cyprus
+            73 => "🇨🇿", // Czech Republic
+            74 => "🇩🇰", // Denmark
+            75 => "🇪🇪", // Estonia
+            76 => "🇫🇮", // Finland
+            77 => "🇫🇷", // France
+            78 => "🇩🇪", // Germany
+            79 => "🇬🇷", // Greece
+            80 => "🇭🇺", // Hungary
+            81 => "🇮🇸", // Iceland
+            82 => "🇮🇪", // Ireland
+            83 => "🇮🇹", // Italy
+            84 => "🇱🇻", // Latvia
+            85 => "🇱🇸", // Lesotho
+            86 => "🇱🇮", // Liechtenstein
+            87 => "🇱🇹", // Lithuania
+            88 => "🇱🇺", // Luxembourg
+            89 => "🇲🇰", // North Macedonia
+            90 => "🇲🇹", // Malta
+            91 => "🇲🇪", // Montenegro
+            92 => "🇲🇿", // Mozambique
+            93 => "🇳🇦", // Namibia
+            94 => "🇳🇱", // Netherlands
+            95 => "🇳🇿", // New Zealand
+            96 => "🇳🇴", // Norway
+            97 => "🇵🇱", // Poland
+            98 => "🇵🇹", // Portugal
+            99 => "🇷🇴", // Romania
+            100 => "🇷🇺", // Russia
+            101 => "🇷🇸", // Serbia
+            102 => "🇸🇰", // Slovakia
+            103 => "🇸🇮", // Slovenia
+            104 => "🇿🇦", // South Africa
+            105 => "🇪🇸", // Spain
+            106 => "🇸🇿", // Eswatini
+            107 => "🇸🇪", // Sweden
+            108 => "🇨🇭", // Switzerland
+            109 => "🇹🇷", // Turkey
+            110 => "🇬🇧", // United Kingdom
+            111 => "🇿🇲", // Zambia
+            112 => "🇿🇼", // Zimbabwe
+            113 => "🇦🇿", // Azerbaijan
+            114 => "🇲🇷", // Mauritania
+            115 => "🇲🇱", // Mali
+            116 => "🇳🇪", // Niger
+            117 => "🇹🇩", // Chad
+            118 => "🇸🇩", // Sudan
+            119 => "🇪🇷", // Eritrea
+            120 => "🇩🇯", // Djibouti
+            121 => "🇸🇴", // Somalia
 
-        // Southeast Asia
-        case 128:
-            return "🇹🇼"; // Taiwan
-        case 136:
-            return "🇰🇷"; // South Korea
-        case 144:
-            return "🇭🇰"; // Hong Kong
-        case 145:
-            return "🇲🇴"; // Macao
-        case 152:
-            return "🇮🇩"; // Indonesia
-        case 153:
-            return "🇸🇬"; // Singapore
-        case 154:
-            return "🇹🇭"; // Thailand
-        case 155:
-            return "🇵🇭"; // Philippines
-        case 156:
-            return "🇲🇾"; // Malaysia
-        case 160:
-            return "🇨🇳"; // China
+            // Southeast Asia
+            128 => "🇹🇼", // Taiwan
+            136 => "🇰🇷", // South Korea
+            144 => "🇭🇰", // Hong Kong
+            145 => "🇲🇴", // Macao
+            152 => "🇮🇩", // Indonesia
+            153 => "🇸🇬", // Singapore
+            154 => "🇹🇭", // Thailand
+            155 => "🇵🇭", // Philippines
+            156 => "🇲🇾", // Malaysia
+            160 => "🇨🇳", // China
 
-        // Middle East
-        case 168:
-            return "🇦🇪"; // U.A.E.
-        case 169:
-            return "🇮🇳"; // India
-        case 170:
-            return "🇪🇬"; // Egypt
-        case 171:
-            return "🇴🇲"; // Oman
-        case 172:
-            return "🇶🇦"; // Qatar
-        case 173:
-            return "🇰🇼"; // Kuwait
-        case 174:
-            return "🇸🇦"; // Saudi Arabia
-        case 175:
-            return "🇸🇾"; // Syria
-        case 176:
-            return "🇧🇭"; // Bahrain
-        case 177:
-            return "🇯🇴"; // Jordan
-
-        default:
-            return "🏳️"; // Unknown flag emoji
+            // Middle East
+            168 => "🇦🇪", // U.A.E.
+            169 => "🇮🇳", // India
+            170 => "🇪🇬", // Egypt
+            171 => "🇴🇲", // Oman
+            172 => "🇶🇦", // Qatar
+            173 => "🇰🇼", // Kuwait
+            174 => "🇸🇦", // Saudi Arabia
+            175 => "🇸🇾", // Syria
+            176 => "🇧🇭", // Bahrain
+            177 => "🇯🇴", // Jordan
+            
+            _ => "🏳️"
+        };
     }
-}
 }

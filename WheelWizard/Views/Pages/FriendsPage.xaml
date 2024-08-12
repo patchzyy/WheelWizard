@@ -63,23 +63,18 @@
                         <GridViewColumn Header="">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Border Width="40" Height="40" CornerRadius="20">
-                                        <Border.Style>
-                                            <Style TargetType="Border">
-                                                <Setter Property="Background" Value="{StaticResource MiiIconDefault-Background}"/>
+                                    <components:MiiBall Size="40" Mii="{Binding Mii}">
+                                        <components:MiiBall.Style>
+                                            <Style TargetType="components:MiiBall">
+                                                <Setter Property="Color" Value="Default"/>
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding IsOnline}" Value="True">
-                                                        <Setter Property="Background" Value="{StaticResource MiiIconCyan-Background}"/>
+                                                        <Setter Property="Color" Value="Online"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
-                                        </Border.Style>
-                                        <Image Source="{Binding MiiImage}" Stretch="Uniform">
-                                            <Image.Clip>
-                                                <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20" />
-                                            </Image.Clip>
-                                        </Image>
-                                    </Border>
+                                        </components:MiiBall.Style>
+                                    </components:MiiBall>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

@@ -94,7 +94,7 @@ namespace CT_MKWII_WPF.Views.Components
             PlayerName = currentUser.MiiName;
             FriendCode = currentUser.FriendCode;
             VrAndBr = "VR: " + currentUser.Vr;
-            //MiiImage = await MiiImageManager.LoadBase64MiiImageAsync(currentUser.MiiData.Mii.Data);
+            Mii = currentUser.MiiData.Mii;
             IsOnline = currentUser.IsOnline;
         }
         
