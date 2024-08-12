@@ -13,7 +13,6 @@ namespace CT_MKWII_WPF.Views.Pages;
 
 public partial class FriendsPage : Page, INotifyPropertyChanged, IRepeatedTaskListener
 {
-    
     private ObservableCollection<Friend> _friendlist = new();
     public ObservableCollection<Friend> FriendList
     {
@@ -69,34 +68,28 @@ public partial class FriendsPage : Page, INotifyPropertyChanged, IRepeatedTaskLi
             HandleVisibility();
         });
     }
+
     private void HandleVisibility()
     {
-        if (FriendList.Count == 0)
-        {
-            NoFriendsLabel.Visibility = Visibility.Visible;
-            PlayerStats.Visibility = Visibility.Collapsed;
-            FriendsListView.Visibility = Visibility.Collapsed;
-            HelpText.Visibility = Visibility.Collapsed;
-        }
-        else
-        {
-            NoFriendsLabel.Visibility = Visibility.Collapsed;
-            PlayerStats.Visibility = Visibility.Visible;
-            FriendsListView.Visibility = Visibility.Visible;
-            HelpText.Visibility = Visibility.Visible;
-        }
+        var empty = FriendList.Count == 0;
+        VisibleWithoutFriends.Visibility = empty ? Visibility.Visible : Visibility.Collapsed;
+        VisibleWithFriends.Visibility = empty ? Visibility.Collapsed : Visibility.Visible;
     }
 
     private void LoadFirstFriend()
     {
         var firstFriend = FriendList.FirstOrDefault();
-        if (firstFriend == null) return;
+        if (firstFriend == null) 
+            return;
+        
         PlayerStats.UpdateStats(firstFriend);
     }
     
     private static int VrComparable(object x, object y)
     {
-        if (x is not Friend xItem || y is not Friend yItem) return 0;
+        if (x is not Friend xItem || y is not Friend yItem)
+            return 0;
+        
         return xItem.Vr.CompareTo(yItem.Vr);
     }
     
@@ -112,14 +105,6 @@ public partial class FriendsPage : Page, INotifyPropertyChanged, IRepeatedTaskLi
         Clipboard.SetText(selectedFriend.FriendCode);
     }
 
-
-    private void FriendsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-    {
-        var selectedFriend = FriendsListView.SelectedItem as Friend;
-        if (selectedFriend == null) return;
-        
-    }
-
     private void FriendListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var selectedFriend = FriendsListView.SelectedItem as Friend;
@@ -127,4 +112,3 @@ public partial class FriendsPage : Page, INotifyPropertyChanged, IRepeatedTaskLi
         PlayerStats.UpdateStats(selectedFriend);
     }
 }
-

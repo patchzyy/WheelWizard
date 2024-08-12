@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
              mc:Ignorable="d" d:Background="Transparent"
-             d:DesignHeight="40" d:DesignWidth="180">
+             d:DesignHeight="100" d:DesignWidth="100">
     
     <Button BorderThickness="0"
-            Margin="0"
+            Margin="3,0"
             BorderBrush="Transparent"
             Click="Profile_click">
         <Button.Template>

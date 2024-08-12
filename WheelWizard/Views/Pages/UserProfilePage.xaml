@@ -10,46 +10,46 @@
       Title="UserProfilePage" Background="Transparent">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="120" />
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="{StaticResource TopRowSize}" />
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="My Profiles" HorizontalAlignment="Left" VerticalAlignment="Center"
+        
+        <TextBlock Grid.Row="0" Text="My Profiles" HorizontalAlignment="Left" VerticalAlignment="Top"
                    Style="{StaticResource PageTitleText}" />
         <components:CurrentUserProfileComponent x:Name="CurrentUserProfile"
                                                 Grid.Row="0"
                                                 HorizontalAlignment="Right"
-                                                VerticalAlignment="Top"
-                                                Margin="0,15,10,0"/>
+                                                VerticalAlignment="Top"/>
         <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
                 VerticalAlignment="Bottom" />
-        <ScrollViewer Grid.Row="0"  HorizontalScrollBarVisibility="Auto">
-            <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
-                <RadioButton Style="{StaticResource TopBar}" Tag="Mii1" 
-                             Click="TopBarRadio_OnClick" 
-                             Content="Mii1" 
-                             x:Name="Mii1"
-                             IsChecked="True"
-                             IsEnabled="False"/>
-                <RadioButton Style="{StaticResource TopBar}" Tag="Mii2" 
-                             Click="TopBarRadio_OnClick" 
-                             x:Name="Mii2"
-                             Content="Mii2"
-                             IsEnabled="False"/>
-                <RadioButton Style="{StaticResource TopBar}" Tag="Mii3" 
-                             Click="TopBarRadio_OnClick" 
-                             x:Name="Mii3"
-                             Content="Mii3"
-                             IsEnabled="False"/>
-                <RadioButton Style="{StaticResource TopBar}" Tag="Mii4" 
-                             Click="TopBarRadio_OnClick" 
-                             x:Name="Mii4"
-                             Content="Mii4"
-                             IsEnabled="False"
-                             />
-            </StackPanel>
-        </ScrollViewer>
+        <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <RadioButton Style="{StaticResource TopBar}" Tag="Mii1" 
+                         Click="TopBarRadio_OnClick" 
+                         Content="Mii1" 
+                         x:Name="Mii1"
+                         IsChecked="True"
+                         IsEnabled="False"/>
+            <RadioButton Style="{StaticResource TopBar}" Tag="Mii2" 
+                         Click="TopBarRadio_OnClick" 
+                         x:Name="Mii2"
+                         Content="Mii2"
+                         IsEnabled="False"/>
+            <RadioButton Style="{StaticResource TopBar}" Tag="Mii3" 
+                         Click="TopBarRadio_OnClick" 
+                         x:Name="Mii3"
+                         Content="Mii3"
+                         IsEnabled="False"/>
+            <RadioButton Style="{StaticResource TopBar}" Tag="Mii4" 
+                         Click="TopBarRadio_OnClick" 
+                         x:Name="Mii4"
+                         Content="Mii4"
+                         IsEnabled="False"
+                         />
+        </StackPanel>
+       
         <StackPanel Grid.Row="1" Orientation="Vertical">
             <CheckBox
                 Margin="10,10,0,10" 
