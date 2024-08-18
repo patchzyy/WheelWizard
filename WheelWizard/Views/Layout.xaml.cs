@@ -82,7 +82,7 @@ public partial class Layout : Window, IRepeatedTaskListener
             _ => $"There are currently {roomCount} rooms active"
         };
         var friends = GameDataLoader.Instance.GetCurrentFriends;
-        FriendsButton.BoxText = friends.Count(friend => friend.IsOnline).ToString();
+        FriendsButton.BoxText =$"{friends.Count(friend => friend.IsOnline)}/{friends.Count}";
         FriendsButton.BoxTip = friends.Count(friend => friend.IsOnline) switch
         {
             1 => "There is currently 1 friend online",

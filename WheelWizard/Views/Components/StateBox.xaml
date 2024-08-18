@@ -8,7 +8,7 @@
              d:DesignHeight="50" d:DesignWidth="70"
              HorizontalAlignment="Left" VerticalAlignment="Top">
 
-    <Border CornerRadius="3" Padding="4,3"
+    <Border CornerRadius="3" Padding="6,3"
             ToolTipService.InitialShowDelay="20"
             ToolTipService.ShowDuration="5000"
             ToolTipService.BetweenShowDelay="0">

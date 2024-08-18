@@ -178,7 +178,6 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                         IconKind="{x:Static icon:PackIconFontAwesomeKind.UserPlusSolid}"
                         IconPack="FontAwesome" Text="Friends" x:Name="FriendsButton"
                         PageType="{x:Type local:FriendsPage}"
-                        BoxIconKind="{x:Static icon:PackIconFontAwesomeKind.ChildReachingSolid}"
                         BoxText="0" />
                     
 
