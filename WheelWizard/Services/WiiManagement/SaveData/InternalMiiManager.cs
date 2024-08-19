@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace CT_MKWII_WPF.Services.WiiManagement.GameData;
+namespace CT_MKWII_WPF.Services.WiiManagement.SaveData;
 
 public static class InternalMiiManager
 {
@@ -24,28 +21,20 @@ public static class InternalMiiManager
         using (var memoryStream = new MemoryStream(allMiiData))
         {
             memoryStream.Seek(0x4, SeekOrigin.Begin); //plaza offset
-            for (int i = 0; i < 100; i++) //100 mii limit
+            for (var i = 0; i < 100; i++) //100 mii limit
             {
-                byte[] miiData = new byte[MiiLength];
-                int bytesRead = memoryStream.Read(miiData, 0, MiiLength);
+                var miiData = new byte[MiiLength];
+                var bytesRead = memoryStream.Read(miiData, 0, MiiLength);
                 if ((bytesRead == 0) || miiData.SequenceEqual(emptyMii))
-                {
                     break;
-                }
                 miis.Add(miiData);
             }
         }
         return miis;
     }
-    
-    public static byte[] GetMiiDb()
-    {
-        if (!File.Exists(WiiDbFile))
-        {
-            return Array.Empty<byte>();
-        }
 
-        return File.ReadAllBytes(WiiDbFile);
+    private static byte[] GetMiiDb()
+    {
+        return !File.Exists(WiiDbFile) ? Array.Empty<byte>() : File.ReadAllBytes(WiiDbFile);
     }
-    
 }

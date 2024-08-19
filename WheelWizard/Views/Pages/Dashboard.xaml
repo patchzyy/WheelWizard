@@ -22,11 +22,8 @@
                    Style="{StaticResource PageTitleText}" />
         <components:CurrentUserProfileComponent x:Name="CurrentUserProfile"
                                                 Grid.Row="0"
-                                                Width="200"
-                                                Height="60"
                                                 HorizontalAlignment="Right"
-                                                VerticalAlignment="Center"
-                                                Margin="0,0,10,0"/>
+                                                VerticalAlignment="Top"/>
         
         <StackPanel Grid.Row="1" Margin="0,10,0,10" Orientation="Horizontal" HorizontalAlignment="Right"
                     VerticalAlignment="Top">

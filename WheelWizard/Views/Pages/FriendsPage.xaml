@@ -12,90 +12,92 @@
     <Grid Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="{StaticResource TopRowSize}" />
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Friends" Style="{StaticResource PageTitleText}" Margin="10"/>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <TextBlock Text="Friends" Style="{StaticResource PageTitleText}" />
+            <Border ToolTipService.InitialShowDelay="50" VerticalAlignment="Center"
+                    ToolTipService.ShowDuration="50000" HorizontalAlignment="Center"
+                    ToolTipService.BetweenShowDelay="0">
+                <icon:PackIconMaterial Kind="Information" Width="18" Height="18" Margin="5,2,5,0"
+                                       Foreground="{StaticResource TitleIconColor}" />
+                <Border.ToolTip>
+                    <components:ToolTipMessage Alignment="TopCenter"
+                                               Content="To add friends you need to add them in-game." />
+                </Border.ToolTip>
+            </Border>
+        </StackPanel>
+        
         <components:CurrentUserProfileComponent x:Name="CurrentUserProfile"
                                                 Grid.Row="0"
-                                                Width="200"
-                                                Height="60"
                                                 HorizontalAlignment="Right"
-                                                VerticalAlignment="Center"
-                                                Margin="0,0,10,0"/>
+                                                VerticalAlignment="Top"/>
         <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
                 VerticalAlignment="Bottom" />
-        <components:FormFieldLabel
-            x:Name="HelpText"
-            Grid.Row="1"
-            VerticalAlignment="Top"
-            HorizontalAlignment="Left"
-            Margin="80,13,20,20"
-            TipText="To add friends you need to add them in-game"
-            ></components:FormFieldLabel>
-        <components:StaticListView Grid.Row="1" x:Name="FriendsListView"
-                                   ItemsSource="{Binding FriendsList}" ListTitle="Friends"
-                                   SelectionChanged="FriendListView_SelectionChanged"
-                                   MouseDoubleClick="FriendsListView_MouseDoubleClick">
-            <components:StaticListView.ItemContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Copy friend code" Click="CopyFriendCode_OnClick" />
-                </ContextMenu>
-            </components:StaticListView.ItemContextMenu>
-            
-            <ListView.View>
-                <GridView AllowsColumnReorder="False">
-                    <GridViewColumn Header="">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Border Width="40" Height="40" CornerRadius="20">
-                                    <Border.Style>
-                                        <Style TargetType="Border">
-                                            <Setter Property="Background" Value="{StaticResource MiiIconBackground}"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsOnline}" Value="True">
-                                                    <Setter Property="Background" Value="{StaticResource MiiIconBackgroundOnline}"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Border.Style>
-                                    <Image Source="{Binding MiiImage}" Stretch="Uniform">
-                                        <Image.Clip>
-                                            <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20" />
-                                        </Image.Clip>
-                                    </Image>
-                                </Border>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding MiiName}" Width="100"
-                                    components:StaticListView.IsSortable="True" />
-                    <GridViewColumn Header="Friend Code" DisplayMemberBinding="{Binding FriendCode}" Width="150"
-                                    components:StaticListView.IsSortable="True" />
-                    <!-- <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Vr}" Width="60" -->
-                    <!--                 components:StaticListView.IsSortable="True" /> -->
-                    <GridViewColumn Header="Wins" DisplayMemberBinding="{Binding Wins}" Width="60"
-                                    components:StaticListView.IsSortable="True" />
-                    <GridViewColumn Header="Losses" DisplayMemberBinding="{Binding Losses}" Width="80"
-                                    components:StaticListView.IsSortable="True" />
-                </GridView>
-            </ListView.View>
-        </components:StaticListView>
-        <Border Grid.Row="2" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
-                VerticalAlignment="Top" />
-        <components:PlayerStatsComponent 
-            x:Name="PlayerStats" 
-            Grid.Row="2"
-            Width="420"
-            Height="300"
-            HorizontalAlignment="Center" 
-            VerticalAlignment="Bottom"
-            Margin="0,10,0,0"/>
+        <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
         
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="NoFriendsLabel">
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="VisibleWithoutFriends">
             <components:EmptyPageInfo HorizontalAlignment="Center" Title="No Friends found"
                                       Body="You can add friends in-game" />
         </StackPanel>
+        
+        <Grid Grid.Row="1" VerticalAlignment="Stretch" x:Name="VisibleWithFriends">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <components:StaticListView Grid.Row="0" x:Name="FriendsListView"
+                                       ItemsSource="{Binding FriendsList}" ListTitle="Friends"
+                                       SelectionChanged="FriendListView_SelectionChanged">
+                <components:StaticListView.ItemContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Copy friend code" Click="CopyFriendCode_OnClick" />
+                    </ContextMenu>
+                </components:StaticListView.ItemContextMenu>
+                
+                <ListView.View>
+                    <GridView AllowsColumnReorder="False">
+                        <GridViewColumn Header="">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <components:MiiBall Size="40" Mii="{Binding Mii}">
+                                        <components:MiiBall.Style>
+                                            <Style TargetType="components:MiiBall">
+                                                <Setter Property="Color" Value="Default"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsOnline}" Value="True">
+                                                        <Setter Property="Color" Value="Online"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </components:MiiBall.Style>
+                                    </components:MiiBall>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding MiiName}" Width="100"
+                                        components:StaticListView.IsSortable="True" />
+                        <GridViewColumn Header="Friend Code" DisplayMemberBinding="{Binding FriendCode}" Width="150"
+                                        components:StaticListView.IsSortable="True" />
+                        <!-- <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Vr}" Width="60" -->
+                        <!--                 components:StaticListView.IsSortable="True" /> -->
+                        <GridViewColumn Header="Wins" DisplayMemberBinding="{Binding Wins}" Width="60"
+                                        components:StaticListView.IsSortable="True" />
+                        <GridViewColumn Header="Losses" DisplayMemberBinding="{Binding Losses}" Width="80"
+                                        components:StaticListView.IsSortable="True" />
+                    </GridView>
+                </ListView.View>
+            </components:StaticListView>
+ 
+            <components:PlayerStatsComponent  
+                Grid.Row="1" x:Name="PlayerStats"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Bottom"
+                Margin="0,10"/>
+        </Grid>
+        
     </Grid>
 </Page>

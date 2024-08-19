@@ -1,6 +1,6 @@
-﻿using CT_MKWII_WPF.Services.WiiManagement;
-using CT_MKWII_WPF.Services.WiiManagement.GameData;
-using CT_MKWII_WPF.Utilities.RepeatedTasks;
+﻿using CT_MKWII_WPF.Models.RRInfo;
+using CT_MKWII_WPF.Services.WiiManagement;
+using CT_MKWII_WPF.Services.WiiManagement.SaveData;
 using CT_MKWII_WPF.Views.Pages;
 using System;
 using System.ComponentModel;
@@ -12,9 +12,9 @@ using System.Windows.Threading;
 
 namespace CT_MKWII_WPF.Views.Components
 {
-    public partial class CurrentUserProfileComponent : UserControl, INotifyPropertyChanged, IDisposable
+    public sealed partial class CurrentUserProfileComponent : UserControl, INotifyPropertyChanged, IDisposable
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private string _playerName;
         public string PlayerName
@@ -49,14 +49,14 @@ namespace CT_MKWII_WPF.Views.Components
             }
         }
 
-        private ImageSource _miiImage;
-        public ImageSource MiiImage
+        private Mii? _mii;
+        public Mii? Mii
         {
-            get => _miiImage;
+            get => _mii;
             set
             {
-                _miiImage = value;
-                OnPropertyChanged(nameof(MiiImage));
+                _mii = value;
+                OnPropertyChanged(nameof(Mii));
             }
         }
         
@@ -71,7 +71,7 @@ namespace CT_MKWII_WPF.Views.Components
             }
         }
         
-        private DispatcherTimer _refreshTimer;
+        private DispatcherTimer? _refreshTimer;
 
         public CurrentUserProfileComponent()
         {
@@ -80,16 +80,13 @@ namespace CT_MKWII_WPF.Views.Components
             PopulateComponent();
             
             // Set up the refresh timer
-            _refreshTimer = new DispatcherTimer();
-            _refreshTimer.Interval = TimeSpan.FromSeconds(6);
-            _refreshTimer.Tick += RefreshTimer_Tick;
+            _refreshTimer = new() { Interval = TimeSpan.FromSeconds(60) };
+            _refreshTimer.Tick += RefreshTimer_Tick!;
             _refreshTimer.Start();
         }
         
-        private void RefreshTimer_Tick(object sender, EventArgs e)
-        {
-            PopulateComponent();
-        }
+        private void RefreshTimer_Tick(object sender, EventArgs e) => PopulateComponent();
+        
         public async void PopulateComponent()
         {
             GameDataLoader.Instance.RefreshOnlineStatus();
@@ -97,38 +94,20 @@ namespace CT_MKWII_WPF.Views.Components
             PlayerName = currentUser.MiiName;
             FriendCode = currentUser.FriendCode;
             VrAndBr = "VR: " + currentUser.Vr;
-            MiiImage = await MiiImageManager.LoadBase64MiiImageAsync(currentUser.MiiData.mii.Data);
+            Mii = currentUser.Mii;
             IsOnline = currentUser.IsOnline;
         }
+        
+        private void Profile_click(object sender, RoutedEventArgs e) => ViewUtils.NavigateToPage(new UserProfilePage());
 
-        private void Profile_click(object sender, MouseButtonEventArgs e)
-        {
-            if (!GameDataLoader.Instance.HasAnyValidUsers)
-            {
-                return;
-            }
-            var currentPage = (Layout)Window.GetWindow(this);
-            currentPage?.NavigateToPage(new UserProfilePage());
-        }
-
-        private void UIElement_OnMouseEnter(object sender, MouseEventArgs e)
-        {
-            Cursor = Cursors.Hand;
-        }
-
-        private void UIElement_OnMouseLeave(object sender, MouseEventArgs e)
-        {
-            Cursor = Cursors.Arrow;
-        }
-
-        protected virtual void OnPropertyChanged(string propertyName)
+        private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         
         public void Dispose()
         {
-            _refreshTimer.Stop();
+            _refreshTimer?.Stop();
             _refreshTimer = null;
         }
     }

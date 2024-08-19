@@ -16,31 +16,34 @@ using System.Windows;
 //reminder, big endian!!!!
 
 
-namespace CT_MKWII_WPF.Services.WiiManagement.GameData;
+namespace CT_MKWII_WPF.Services.WiiManagement.SaveData;
 
 public class GameDataLoader : RepeatedTaskManager
 {
-    public static GameDataLoader Instance { get; } = new GameDataLoader();
+    public static GameDataLoader Instance { get; } = new();
     private static string SaveFilePath
     {
         get
         {
             var path = Path.Combine(PathManager.RiivolutionWhWzFolderPath, "riivolution", "save");
-            if (Directory.Exists(path)) return path;
+            if (Directory.Exists(path)) 
+                return path;
+            
             try
             {
                 Directory.CreateDirectory(path);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error creating save directory: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Error creating save directory: {ex.Message}", 
+                                "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             return path;
         }
     }
     private byte[]? _saveData;
 
-    public Models.GameData.GameData GameData { get; }
+    private Models.GameData.GameData GameData { get; }
 
     private const int RksysSize = 0x2BC000;
     private const string RksysMagic = "RKSD0006";
@@ -116,7 +119,7 @@ public class GameDataLoader : RepeatedTaskManager
             FriendCode = "0000-0000-0000",
             MiiData = new MiiData
             {
-                mii = new Mii
+                Mii = new Mii
                 {
                     Name = "No License",
                     Data = Convert.ToBase64String(new byte[MiiSize])
@@ -129,7 +132,7 @@ public class GameDataLoader : RepeatedTaskManager
             TotalRaceCount = 0,
             TotalWinCount = 0,
             Friends = new List<Friend>(),
-            RegionID = 10, //10 will default to unknown
+            RegionId = 10, //10 will default to unknown
             IsOnline = false
         };
         GameData.Users.Add(dummyUser);
@@ -158,6 +161,7 @@ public class GameDataLoader : RepeatedTaskManager
 
     private User ParseUser(int offset)
     {
+        if (_saveData == null) throw new ArgumentNullException(nameof(_saveData));
         var user = new User
         {
             MiiData = ParseMiiData(offset + 0x14),
@@ -166,7 +170,7 @@ public class GameDataLoader : RepeatedTaskManager
             Br = BigEdianBinaryReader.BufferToUint16(_saveData, offset + 0xB2),
             TotalRaceCount = BigEdianBinaryReader.BufferToUint32(_saveData, offset + 0xB4),
             TotalWinCount = BigEdianBinaryReader.BufferToUint32(_saveData, offset + 0xDC),
-            RegionID = (BigEdianBinaryReader.BufferToUint16(_saveData, 0x23308 + 0x3802) / 4096)
+            RegionId = (BigEdianBinaryReader.BufferToUint16(_saveData, 0x23308 + 0x3802) / 4096)
         };
         ParseFriends(user, offset);
         return user;
@@ -175,9 +179,10 @@ public class GameDataLoader : RepeatedTaskManager
     
     private MiiData ParseMiiData(int offset)
     {
+        if (_saveData == null) throw new ArgumentNullException(nameof(_saveData));
         var miiData =  new MiiData
         {
-            mii = new Mii
+            Mii = new Mii
             {
                 Name = BigEdianBinaryReader.GetUtf16String(_saveData,offset, 10),
                 Data = Convert.ToBase64String(GetMiiData(BitConverter.ToUInt32(_saveData, offset + 0x14)))
@@ -195,9 +200,11 @@ public class GameDataLoader : RepeatedTaskManager
         foreach (var mii in miis)
         {
             uint AvatarId = 0;
-            for (int i = 0; i < 4; i++)
+            for (var i = 0; i < 4; i++)
+            {
                 AvatarId |= (uint)(mii[0x18 + i] << (8 * i));
-            
+            }
+
             if (AvatarId == ClientId)
                 return mii;
         }
@@ -219,10 +226,10 @@ public class GameDataLoader : RepeatedTaskManager
                 Wins = BigEdianBinaryReader.BufferToUint16(_saveData, currentOffset + 0x14),
                 Losses = BigEdianBinaryReader.BufferToUint16(_saveData, currentOffset + 0x12),
                 CountryCode = _saveData[currentOffset + 0x68],
-                RegionID = _saveData[currentOffset + 0x69],
+                RegionId = _saveData[currentOffset + 0x69],
                 MiiData = new MiiData
                 {
-                    mii = new Mii
+                    Mii = new Mii
                     {
                         Name = BigEdianBinaryReader.GetUtf16String(_saveData, currentOffset + 0x1C, 10),
                         Data = Convert.ToBase64String(_saveData.AsSpan(currentOffset + 0x1A, MiiSize))
@@ -239,7 +246,7 @@ public class GameDataLoader : RepeatedTaskManager
     {
         for (var i = 0; i < MiiSize; i++)
         {
-            if (_saveData[offset + i] != 0)
+            if (_saveData != null && _saveData[offset + i] != 0)
                 return true;
         }
 
@@ -257,17 +264,10 @@ public class GameDataLoader : RepeatedTaskManager
         try
         {
             if (!Directory.Exists(SaveFilePath))
-            {
                 return null;
-            }
 
             var saveFile = Directory.GetFiles(SaveFilePath, "rksys.dat", SearchOption.AllDirectories);
-            if (saveFile.Length == 0)
-            {
-                return null;
-            }
-
-            return File.ReadAllBytes(saveFile[0]);
+            return saveFile.Length == 0 ? null : File.ReadAllBytes(saveFile[0]);
         }
         catch (Exception ex)
         {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace CT_MKWII_WPF.Services.WiiManagement.GameData;
+namespace CT_MKWII_WPF.Services.WiiManagement.SaveData;
 
 public static class BigEdianBinaryReader
 {
@@ -16,7 +16,7 @@ public static class BigEdianBinaryReader
         return (uint)((data[offset] << 8) | data[offset + 1]);
     }
     
-    //big edian get the string
+    //big endian get the string
     public static string GetUtf16String(byte[] data, int offset, int maxLength)
     {
         var bytes = new List<byte>();

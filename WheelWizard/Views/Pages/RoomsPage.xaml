@@ -130,14 +130,7 @@ To join a specific room, you'll need to either join through a friend, or hope to
                         <GridViewColumn Header="">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Border Width="40" Height="40" Background="{StaticResource MiiIconBackground}"
-                                            CornerRadius="20">
-                                        <Image Source="{Binding MiiImage}" Stretch="Uniform">
-                                            <Image.Clip>
-                                                <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20" />
-                                            </Image.Clip>
-                                        </Image>
-                                    </Border>
+                                    <components:MiiBall Mii="{Binding FirstMii}" Size="40"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

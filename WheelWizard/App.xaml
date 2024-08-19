@@ -1,7 +1,7 @@
 ﻿<Application x:Class="CT_MKWII_WPF.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:CT_MKWII_WPF"
+             xmlns:converters="clr-namespace:CT_MKWII_WPF.Views.Converters"
              StartupUri="Views/Layout.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -16,10 +16,8 @@
                 <ResourceDictionary Source="Views/Styles/InputFieldStyles.xaml" />
                 <ResourceDictionary Source="Views/Styles/SettingsBlockStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="{x:Type TextBlock}">
-                <Setter Property="TextElement.FontFamily" Value="Arial, /Fonts/#ctmkf" />
-            </Style>
+            
+            <converters:MultiplierValueConverter x:Key="MultiplierValueConverter"/>
         </ResourceDictionary>
-
     </Application.Resources>
 </Application>

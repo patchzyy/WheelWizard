@@ -1,6 +1,6 @@
 ﻿using CT_MKWII_WPF.Services;
 using CT_MKWII_WPF.Services.LiveData;
-using CT_MKWII_WPF.Services.WiiManagement.GameData;
+using CT_MKWII_WPF.Services.WiiManagement.SaveData;
 using CT_MKWII_WPF.Utilities.RepeatedTasks;
 using CT_MKWII_WPF.Views.Components;
 using CT_MKWII_WPF.Views.Pages;
@@ -82,7 +82,7 @@ public partial class Layout : Window, IRepeatedTaskListener
             _ => $"There are currently {roomCount} rooms active"
         };
         var friends = GameDataLoader.Instance.GetCurrentFriends;
-        FriendsButton.BoxText = friends.Count(friend => friend.IsOnline).ToString();
+        FriendsButton.BoxText =$"{friends.Count(friend => friend.IsOnline)}/{friends.Count}";
         FriendsButton.BoxTip = friends.Count(friend => friend.IsOnline) switch
         {
             1 => "There is currently 1 friend online",

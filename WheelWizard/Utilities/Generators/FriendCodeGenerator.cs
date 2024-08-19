@@ -1,4 +1,4 @@
-﻿using CT_MKWII_WPF.Services.WiiManagement.GameData;
+﻿using CT_MKWII_WPF.Services.WiiManagement.SaveData;
 using System;
 using System.Security.Cryptography;
 using System.Text;
@@ -33,9 +33,9 @@ public class FriendCodeGenerator
         {
             var hashBytes = md5.ComputeHash(input);
             var sb = new StringBuilder();
-            for (var i = 0; i < hashBytes.Length; i++)
+            foreach (var t in hashBytes)
             {
-                sb.Append(hashBytes[i].ToString("x2"));
+                sb.Append(t.ToString("x2"));
             }
 
             return sb.ToString();

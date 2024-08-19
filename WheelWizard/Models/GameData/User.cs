@@ -1,5 +1,4 @@
 ﻿using CT_MKWII_WPF.Models.RRInfo;
-using CT_MKWII_WPF.Services.WiiManagement.GameData;
 using System.Collections.Generic;
 
 namespace CT_MKWII_WPF.Models.GameData;
