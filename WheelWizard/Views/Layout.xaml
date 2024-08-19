@@ -163,6 +163,9 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.HouseChimneySolid}"
                                                    IconPack="FontAwesome" Text="Home" IsChecked="True"
                                                    PageType="{x:Type local:Dashboard}" />
+                    <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.CircleUserSolid}"
+                                                   IconPack="FontAwesome" Text="My Profiles" x:Name="MyProfilesButton"
+                                                   PageType="{x:Type local:UserProfilePage}"/>
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.WrenchSolid}"
                                                    IconPack="FontAwesome" Text="Settings" x:Name="SettingsButton"
                                                    PageType="{x:Type local:SettingsPage}" />

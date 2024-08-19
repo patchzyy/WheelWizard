@@ -98,14 +98,7 @@ namespace CT_MKWII_WPF.Views.Components
             IsOnline = currentUser.IsOnline;
         }
         
-        private void Profile_click(object sender, RoutedEventArgs e)
-        {
-            if (!GameDataLoader.Instance.HasAnyValidUsers)
-                return;
- 
-            var currentPage = Window.GetWindow(this) as Layout;
-            currentPage?.NavigateToPage(new UserProfilePage());
-        }
+        private void Profile_click(object sender, RoutedEventArgs e) => ViewUtils.NavigateToPage(new UserProfilePage());
 
         private void OnPropertyChanged(string propertyName)
         {

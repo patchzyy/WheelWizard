@@ -4,7 +4,6 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
-      xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d"
       d:DesignHeight="831" d:DesignWidth="444"
       Title="UserProfilePage" Background="Transparent">
@@ -15,7 +14,7 @@
         </Grid.RowDefinitions>
         
         <TextBlock Grid.Row="0" Text="My Profiles" HorizontalAlignment="Left" VerticalAlignment="Top"
-                   Style="{StaticResource PageTitleText}" />
+                   Style="{StaticResource PageTitleText}" x:Name="PageTitle" />
         <components:CurrentUserProfileComponent x:Name="CurrentUserProfile"
                                                 Grid.Row="0"
                                                 HorizontalAlignment="Right"
@@ -25,45 +24,44 @@
         <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
                 VerticalAlignment="Bottom" />
         
-        <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
-            <RadioButton Style="{StaticResource TopBar}" Tag="Mii1" 
-                         Click="TopBarRadio_OnClick" 
-                         Content="Mii1" 
-                         x:Name="Mii1"
-                         IsChecked="True"
+        <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                     x:Name="RadioButtons">
+            <RadioButton Style="{StaticResource TopBar}"
+                         Click="TopBarRadio_OnClick" Tag="0" 
+                         x:Name="Mii0" Content="No License" 
+                         IsChecked="True" IsEnabled="False"/>
+            <RadioButton Style="{StaticResource TopBar}"
+                         Click="TopBarRadio_OnClick" Tag="1" 
+                         x:Name="Mii1" Content="No License"
                          IsEnabled="False"/>
-            <RadioButton Style="{StaticResource TopBar}" Tag="Mii2" 
-                         Click="TopBarRadio_OnClick" 
-                         x:Name="Mii2"
-                         Content="Mii2"
+            <RadioButton Style="{StaticResource TopBar}"
+                         Click="TopBarRadio_OnClick" Tag="2" 
+                         x:Name="Mii2" Content="No License"
                          IsEnabled="False"/>
-            <RadioButton Style="{StaticResource TopBar}" Tag="Mii3" 
-                         Click="TopBarRadio_OnClick" 
-                         x:Name="Mii3"
-                         Content="Mii3"
-                         IsEnabled="False"/>
-            <RadioButton Style="{StaticResource TopBar}" Tag="Mii4" 
-                         Click="TopBarRadio_OnClick" 
-                         x:Name="Mii4"
-                         Content="Mii4"
-                         IsEnabled="False"
-                         />
+            <RadioButton Style="{StaticResource TopBar}"
+                         Click="TopBarRadio_OnClick" Tag="3" 
+                         x:Name="Mii3" Content="No License"
+                         IsEnabled="False" />
         </StackPanel>
        
-        <StackPanel Grid.Row="1" Orientation="Vertical">
-            <CheckBox
+        <StackPanel Grid.Row="1" Orientation="Vertical" x:Name="VisibleWithProfiles">
+            <RadioButton
                 Margin="10,10,0,10" 
                 x:Name="FavoriteCheckBox"
                 IsChecked="True">
                 <TextBlock Text="Make Primary" />
-            </CheckBox>
-        <components:PlayerStatsComponent 
-            x:Name="PlayerStats" 
-            Width="420"
-            Height="300"
-            HorizontalAlignment="Center" 
-            VerticalAlignment="Bottom"
-            Margin="0,10,0,0"/>
+            </RadioButton>
+            <components:PlayerStatsComponent 
+                x:Name="PlayerStats" 
+                Width="420" Height="300"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Bottom"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                    x:Name="VisibleWithoutProfiles">
+            <components:EmptyPageInfo HorizontalAlignment="Center" Title="No Profiles"
+                                      Body="You have to play the game at least once in order to see your profiles listed here" />
         </StackPanel>
     </Grid>
 </Page>

@@ -20,20 +20,23 @@ namespace CT_MKWII_WPF.Services.WiiManagement.SaveData;
 
 public class GameDataLoader : RepeatedTaskManager
 {
-    public static GameDataLoader Instance { get; } = new GameDataLoader();
+    public static GameDataLoader Instance { get; } = new();
     private static string SaveFilePath
     {
         get
         {
             var path = Path.Combine(PathManager.RiivolutionWhWzFolderPath, "riivolution", "save");
-            if (Directory.Exists(path)) return path;
+            if (Directory.Exists(path)) 
+                return path;
+            
             try
             {
                 Directory.CreateDirectory(path);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error creating save directory: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Error creating save directory: {ex.Message}", 
+                                "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             return path;
         }
