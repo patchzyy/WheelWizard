@@ -99,6 +99,8 @@ public static class AutoUpdater
             return;
         }
         var newFilePath = Path.Combine(currentFolder, currentExecutableName+"_new.exe");
+        if (File.Exists(newFilePath))
+            File.Delete(newFilePath);
         
         await DownloadHelper.DownloadToLocation(downloadUrl, newFilePath);
 
@@ -112,6 +114,12 @@ public static class AutoUpdater
     private static void CreateAndRunBatchFile(string currentFilePath, string newFilePath)
     {
         var currentFolder = Path.GetDirectoryName(currentFilePath);
+        if (currentFolder is null)
+        {
+            MessageBox.Show("Unable to update WheelWizard. " +
+                            "Please ensure the application is located in a folder that can be written to.\n Could not find current folder.");
+            return;
+        }
         var batchFilePath = Path.Combine(currentFolder, "update.bat");
         var originalFileName = Path.GetFileName(currentFilePath);
         var newFileName = Path.GetFileName(newFilePath);
