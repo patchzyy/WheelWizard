@@ -1,10 +1,12 @@
 ﻿using CT_MKWII_WPF.Services;
 using CT_MKWII_WPF.Services.LiveData;
+using CT_MKWII_WPF.Services.WiiManagement.SaveData;
 using CT_MKWII_WPF.Utilities.RepeatedTasks;
 using CT_MKWII_WPF.Views.Components;
 using CT_MKWII_WPF.Views.Pages;
 using MahApps.Metro.IconPacks;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,22 +18,24 @@ public partial class Layout : Window, IRepeatedTaskListener
 {
     public Layout()
     {
-        InitializeComponent();
-        DataContext = this;
-        NavigateToPage(new Dashboard());
-        LiveAlertsManager.Instance.Start(); // Temporary code, should be moved to a more appropriate location
-        LiveAlertsManager.Instance.Subscribe(this);
-        RRLiveRooms.Instance.Start(); // Temporary code, should be moved to a more appropriate location
-        RRLiveRooms.Instance.Subscribe(this);
-        // LoadPlayerData();
+        try
+        {
+            InitializeComponent();
+            DataContext = this;
+            NavigateToPage(new Dashboard());
+            LiveAlertsManager.Instance.Start(); // Temporary code, should be moved to a more appropriate location
+            LiveAlertsManager.Instance.Subscribe(this);
+            RRLiveRooms.Instance.Start(); // Temporary code, should be moved to a more appropriate location
+            RRLiveRooms.Instance.Subscribe(this);
+            GameDataLoader.Instance.Start(); // Temporary code, should be moved to a more appropriate location
+            GameDataLoader.Instance.Subscribe(this);
+        }
+        catch (Exception e)
+        {
+            MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            Environment.Exit(1);
+        }
     }
-
-    // private static void LoadPlayerData()
-    // {
-    //     var data = new GameDataLoader();
-    //     data.LoadGameData();
-    //     var gameData = data.GameData;
-    // }
 
     public void NavigateToPage(Page page)
     {
@@ -55,6 +59,7 @@ public partial class Layout : Window, IRepeatedTaskListener
             case LiveAlertsManager liveAlerts:
                 UpdateLiveAlert(liveAlerts);
                 break;
+            
         }
     }
 
@@ -75,6 +80,14 @@ public partial class Layout : Window, IRepeatedTaskListener
             1 => "There is currently 1 room active",
             0 => "There are currently no rooms active",
             _ => $"There are currently {roomCount} rooms active"
+        };
+        var friends = GameDataLoader.Instance.GetCurrentFriends;
+        FriendsButton.BoxText =$"{friends.Count(friend => friend.IsOnline)}/{friends.Count}";
+        FriendsButton.BoxTip = friends.Count(friend => friend.IsOnline) switch
+        {
+            1 => "There is currently 1 friend online",
+            0 => "There are currently no friends online",
+            _ => $"There are currently {friends.Count(friend => friend.IsOnline)} friends online"
         };
     }
 
@@ -143,6 +156,15 @@ public partial class Layout : Window, IRepeatedTaskListener
         System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
         {
             FileName = Endpoints.WhWzGithubUrl,
+            UseShellExecute = true
+        });
+    }
+    
+    private void Support_Click(object sender, RoutedEventArgs e)
+    {
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+        {
+            FileName = Endpoints.SupportLink,
             UseShellExecute = true
         });
     }

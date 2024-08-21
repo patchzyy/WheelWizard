@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using CT_MKWII_WPF.Services.Settings;
+using System.Collections.Generic;
 
 namespace CT_MKWII_WPF.Models.GameData;
 
@@ -10,5 +11,4 @@ public class GameData
     {
         Users = new List<User>(4);
     }
-
 }

@@ -33,7 +33,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                 <RowDefinition Height="17" /> <!-- Reserved spacing for title -->   <!-- Also the page container -->
                 <RowDefinition Height="88" /> <!--Info section side bar -->         <!-- Also the page container -->
                 <RowDefinition />             <!--Side bar -->                      <!-- Also the page container -->
-                <RowDefinition Height="60" /> <!--Bottom info corner -->            <!-- Also the page container -->
+                <RowDefinition Height="80" /> <!--Bottom info corner -->            <!-- Also the page container -->
             </Grid.RowDefinitions>
 
             <!-- This border is only used as topBar in order so you can move the window around -->
@@ -57,6 +57,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                     CornerRadius="{StaticResource WindowCornerRadiusLeftRightTwix}"
                     Background="{StaticResource BackgroundColor}">
             </Border>
+            
 
             <Frame Grid.Column="1" Grid.Row="1" Grid.RowSpan="4"
                    x:Name="ContentArea" Margin="{StaticResource EdgeGap}"
@@ -141,6 +142,15 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                                                 Margin="{StaticResource LeftEdgeGap}"
                                                 Click="Github_Click"
                                                 IconSize="20" />
+                    <components:IconLabelButton IconKind="{x:Static icon:PackIconGameIconsKind.CoffeeCup}"
+                                                IconPack="GameIcons"
+                                                Text="Support us!"
+                                                Color="{StaticResource TitleTextColor}"
+                                                FontSize="13"
+                                                HoverColor="{StaticResource SuccessTitleTextColor}"
+                                                Margin="10,4,0,0"
+                                                Click="Support_Click"
+                                                IconSize="20" />
                 </StackPanel>
             </Border>
 
@@ -153,26 +163,35 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.HouseChimneySolid}"
                                                    IconPack="FontAwesome" Text="Home" IsChecked="True"
                                                    PageType="{x:Type local:Dashboard}" />
+                    <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.CircleUserSolid}"
+                                                   IconPack="FontAwesome" Text="My Profiles" x:Name="MyProfilesButton"
+                                                   PageType="{x:Type local:UserProfilePage}"/>
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.WrenchSolid}"
                                                    IconPack="FontAwesome" Text="Settings" x:Name="SettingsButton"
                                                    PageType="{x:Type local:SettingsPage}" />
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.CubesStackedSolid}"
                                                    IconPack="FontAwesome" Text="My Stuff"
                                                    PageType="{x:Type local:ModsPage}" />
-                    <TextBlock Text="Retro Rewind" Style="{StaticResource SidebarSectionText}" />
+                    <TextBlock Text="Online" Style="{StaticResource SidebarSectionText}" />
                     <components:SidebarRadioButton
                         IconKind="{x:Static icon:PackIconFontAwesomeKind.UsersRectangleSolid}"
                         IconPack="FontAwesome" Text="Rooms" x:Name="RoomsButton"
                         PageType="{x:Type local:RoomsPage}" />
+                    <components:SidebarRadioButton
+                        IconKind="{x:Static icon:PackIconFontAwesomeKind.UserPlusSolid}"
+                        IconPack="FontAwesome" Text="Friends" x:Name="FriendsButton"
+                        PageType="{x:Type local:FriendsPage}"
+                        BoxText="0" />
+                    
 
                     <!-- add an other section by doing this:
                     <TextBlock Text="Other" Style="{StaticResource SidebarSectionText}"/>
                      -->
-
-                    <!-- <TextBlock Text="Components" Style="{StaticResource SidebarSectionText}"/>  -->
-                    <!-- <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.SinkSolid}"   -->
-                    <!--                                IconPack="FontAwesome" Text="Kitchen Sink"  -->
-                    <!--                                PageType="{x:Type sink:KitchenSink}"/>  -->
+                    <!-- -->
+                    <!-- <TextBlock Text="Components" Style="{StaticResource SidebarSectionText}"/> -->
+                    <!-- <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.SinkSolid}" -->
+                    <!--                                IconPack="FontAwesome" Text="Kitchen Sink" -->
+                    <!--                                PageType="{x:Type sink:KitchenSink}"/> -->
 
                 </StackPanel>
             </Border>

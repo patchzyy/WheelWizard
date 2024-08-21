@@ -1,5 +1,6 @@
 using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Services.WiiManagement;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -43,20 +44,28 @@ public static class Launcher
     
     public static async Task LaunchRetroRewind(bool playTt)
     {
-        KillDolphin();
-        if (WiiMoteSettings.IsForceSettingsEnabled()) 
-            WiiMoteSettings.DisableVirtualWiiMote();
-        
-        await ModsLaunchHelper.PrepareModsForLaunch();
-        if (!File.Exists(PathManager.GameFilePath))
+        try
         {
-            MessageBox.Show("Could not find the game, please set the path in settings",
-                            "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            return;
+            KillDolphin();
+            if (WiiMoteSettings.IsForceSettingsEnabled())
+                WiiMoteSettings.DisableVirtualWiiMote();
+            await ModsLaunchHelper.PrepareModsForLaunch();
+            if (!File.Exists(PathManager.GameFilePath))
+            {
+                MessageBox.Show("Could not find the game, please set the path in settings",
+                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            RetroRewindLaunchHelper.GenerateLaunchJson(playTt);
+            var dolphinLaunchType = ConfigManager.GetConfig().LaunchWithDolphin ? "" : "-b";
+            LaunchDolphin(
+                $"{dolphinLaunchType} -e \"{RRLaunchJsonFilePath}\" --config=Dolphin.Core.EnableCheats=False");
         }
-        RetroRewindLaunchHelper.GenerateLaunchJson(playTt);
-        var dolphinLaunchType = ConfigManager.GetConfig().LaunchWithDolphin ? "" : "-b";
-        LaunchDolphin( $"{dolphinLaunchType} -e \"{RRLaunchJsonFilePath}\" --config=Dolphin.Core.EnableCheats=False");
+        catch (Exception e)
+        {
+            MessageBox.Show($"Failed to launch Retro Rewind\n: {e.Message}");
+        }
     }
 
     public static async Task LaunchMiiChannel()

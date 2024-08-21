@@ -48,6 +48,16 @@
           <XamlRuntime>Wpf</XamlRuntime>
           <SubType>Designer</SubType>
         </Page>
+        <Page Update="Views\Pages\UserProfilePage.xaml">
+          <Generator>MSBuild:Compile</Generator>
+          <XamlRuntime>Wpf</XamlRuntime>
+          <SubType>Designer</SubType>
+        </Page>
+        <Resource Include="Resources\Fonts\*.ttf" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Views\Pages\UserProfile\" />
     </ItemGroup>
     <PropertyGroup>
         <ApplicationIcon>car-wheel.ico</ApplicationIcon>

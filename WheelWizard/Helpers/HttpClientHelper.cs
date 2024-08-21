@@ -24,7 +24,6 @@ public static class HttpClientHelper
         HttpClientResult<T> result;
         try
         {
-            MessageBox.Show(body.ToString());
             var response = await HttpClient.PostAsync(url, body);
             result = new HttpClientResult<T>()
             {

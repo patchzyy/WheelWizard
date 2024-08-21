@@ -1,10 +1,12 @@
-﻿namespace CT_MKWII_WPF.Models.GameData;
+﻿using CT_MKWII_WPF.Helpers;
 
-public class Friend
+namespace CT_MKWII_WPF.Models.GameData;
+
+public class Friend : BasePlayer
 {
-    public string? Name { get; set; }
-    public string? FriendCode { get; set; }
-    public int Wins { get; set; }
-    public int Losses { get; set; }
-    public string? MiiData { get; set; } // Base64 encoded
+    public required uint Wins { get; set; }
+    public required uint Losses { get; set; }
+    
+    public required byte CountryCode { get; set; }
+    public string CountryName => Humanizer.GetCountryEmoji(CountryCode);
 }

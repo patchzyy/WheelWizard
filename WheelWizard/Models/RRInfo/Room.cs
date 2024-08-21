@@ -19,7 +19,7 @@ public class Room
 
     public int PlayerCount => Players.Sum(p => p.Value.PlayerCount);
 
-    public string TimeOnline => Humanizer.HumanizeTimeSpan(DateTime.UtcNow - Created + TimeSpan.FromHours(2));
+    public string TimeOnline => Humanizer.HumanizeTimeSpan(DateTime.UtcNow - Created);
     public bool IsPublic => Type == "public";
     public string GameMode => Rk switch
     {

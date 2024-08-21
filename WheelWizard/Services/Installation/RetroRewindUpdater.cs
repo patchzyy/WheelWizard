@@ -31,21 +31,28 @@ public static class RetroRewindUpdater
 
     public static async Task<bool> UpdateRR()
     {
-        var currentVersion = RetroRewindInstaller.CurrentRRVersion();
-        if (await IsRRUpToDate(currentVersion))
+        try
         {
-            MessageBox.Show("Retro Rewind is up to date.");
-            return true;
+            var currentVersion = RetroRewindInstaller.CurrentRRVersion();
+            if (await IsRRUpToDate(currentVersion))
+            {
+                MessageBox.Show("Retro Rewind is up to date.");
+                return true;
+            }
+
+            if (currentVersion == "Not Installed")
+                return await RetroRewindInstaller.HandleNotInstalled();
+
+            //if current version is below 3.2.6 we need to do a full reinstall
+            if (CompareVersions(currentVersion, "3.2.6") < 0)
+                return await RetroRewindInstaller.HandleOldVersion();
+            return await ApplyUpdates(currentVersion);
         }
-
-        if (currentVersion == "Not Installed")
-            return await RetroRewindInstaller.HandleNotInstalled();
-
-        //if current version is below 3.2.6 we need to do a full reinstall
-        if (CompareVersions(currentVersion, "3.2.6") < 0)
-            return await RetroRewindInstaller.HandleOldVersion();
-        
-        return await ApplyUpdates(currentVersion);
+        catch (Exception e)
+        {
+            MessageBox.Show($"Failed to update Retro Rewind\n: {e.Message}");
+            return false;
+        }
     }
 
     private static async Task<bool> ApplyUpdates(string currentVersion)

@@ -30,6 +30,12 @@ public static class ConfigValidator
         return Directory.Exists(config.UserFolderPath) && File.Exists(config.DolphinLocation) &&
                File.Exists(config.GameLocation);
     }
+    
+    public static bool isValidFavoriteUser(int favoriteUser)
+    {
+        var config = ConfigManager.GetConfig();
+        return favoriteUser is >= 0 and <= 3;
+    }
 
     public static ModData[] GetMods()
     {

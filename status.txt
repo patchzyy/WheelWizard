@@ -1,6 +1,6 @@
-info|Teaching cats to bark
+warning|Servers are having maintenance, so there might be periods where you cannot play online.
 
-warning|Update servers are down! this means the following:\u000AYou can not install or update the game\u000AA play offline button may show up, if this is the case you CAN still play retro World Wides
+-|no message :)
 
 The current status is the status that is inside of line 1
 (warning=yellow) (info=gray/white)  (alert=red)  (success=green)

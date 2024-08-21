@@ -1,0 +1,96 @@
+﻿<UserControl 
+    x:Class="CT_MKWII_WPF.Views.Components.PlayerStatsComponent"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+    xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    mc:Ignorable="d"
+    Background="Transparent"
+    d:DesignHeight="300" 
+    d:DesignWidth="420">
+    
+    <Grid Width="420" Height="300">
+        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
+        <Border
+            Width="420"
+            Height="120"
+            VerticalAlignment="Bottom"
+            Background="{StaticResource LightBackgroundColor}"
+            CornerRadius="6,6,0,0"
+            Margin="0,0,0,2">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                <components:Button Variant="Default"
+                                   x:Name="ViewRoomButton"
+                                   IsEnabled="True"
+                                   HorizontalAlignment="Right"
+                                   IconPack="Material"
+                                   IconKind="{x:Static icon:PackIconMaterialKind.Home}"
+                                   Text="View Room"
+                                   Visibility="Visible"
+                                   Click="ViewButton_OnClick"
+                                   Margin="0,10,10,0" />
+                <StackPanel Orientation="Vertical"
+                            Margin="10,0,0,0">
+                    <TextBlock  Text="{Binding VR}" HorizontalAlignment="Left" VerticalAlignment="Top"
+                                Style="{StaticResource TitleText}"/>
+                    <TextBlock Text="{Binding BR}" HorizontalAlignment="Left" VerticalAlignment="Top"
+                               Style="{StaticResource TitleText}"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+            
+            
+        <Border
+            Width="420"
+            Height="120"
+            VerticalAlignment="Bottom"
+            Background="{StaticResource LightBackgroundColor}"
+            CornerRadius="0,0,6,6">
+            <StackPanel Orientation="Vertical"
+                        Margin="10,20,0,0">
+                <TextBlock  Text="{Binding TopExtraStat}" HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Style="{StaticResource TitleText}"/>
+                <TextBlock Text="{Binding BottomExtraStat}" HorizontalAlignment="Left" VerticalAlignment="Top"
+                           Style="{StaticResource TitleText}"/>
+                <TextBlock Text="{Binding RegionName}" HorizontalAlignment="Right" VerticalAlignment="Top"
+                           Style="{StaticResource BodyText}"
+                           Margin="0,0,10,0"/>
+            </StackPanel>
+        </Border>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            
+            <components:MiiBall Size="100" Mii="{Binding Mii}"
+                                HorizontalAlignment="Left" VerticalAlignment="Top"
+                                Margin="20,0,10,0">
+                <components:MiiBall.Style>
+                    <Style TargetType="components:MiiBall">
+                        <Setter Property="Color" Value="Light"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsOnline}" Value="True">
+                                <Setter Property="Color" Value="Online"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </components:MiiBall.Style>
+            </components:MiiBall>
+            
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="{Binding PlayerName}" HorizontalAlignment="Left" VerticalAlignment="Top"
+                           Style="{StaticResource TitleText}"
+                           FontSize="25"
+                           Margin="0,5,0,0"/>
+                <TextBlock Grid.Row="0" Text="{Binding FriendCode}" HorizontalAlignment="Left" VerticalAlignment="Top"
+                           Style="{StaticResource BodyText}"
+                           Margin="0,0,0,0"/>
+            </StackPanel>
+            
+        </StackPanel>
+        <TextBlock Text="{Binding OnlineText}" HorizontalAlignment="Right" VerticalAlignment="Top"
+                   Style="{StaticResource TitleText}"
+                   FontSize="25"
+                   Margin="0,20,20,0"/>
+    </Grid>
+</UserControl>

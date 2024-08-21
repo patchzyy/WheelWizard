@@ -1,13 +1,10 @@
-using CT_MKWII_WPF.Services.WiiManagement;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Windows.Media.Imaging;
 
 namespace CT_MKWII_WPF.Models.RRInfo;
 
-public class Player : INotifyPropertyChanged
+public class Player 
 {
+    // These variables should not be renamed since they are directly mapped to the JSON object
     public required string Count { get; set; } // you can have one Wii that with 2 players (and hence the Mii list)
     public required string Pid { get; set; }
     public required string Name { get; set; }
@@ -20,7 +17,8 @@ public class Player : INotifyPropertyChanged
     public required List<Mii> Mii { get; set; } = new List<Mii>();
 
     public int PlayerCount => int.Parse(Count);
-
+    public Mii? FirstMii => Mii.Count <= 0 ? null : Mii[0];
+    
     public int Vr
     {
         get
@@ -28,39 +26,5 @@ public class Player : INotifyPropertyChanged
             int evValue;
             return int.TryParse(Ev, out evValue) ? evValue : -1;
         }
-    }
-
-    private bool _requestingImage;
-    private BitmapImage? _miiImage;
-
-    public BitmapImage? MiiImage
-    {
-        get
-        {
-            if (_miiImage != null || _requestingImage) return _miiImage;
-
-            _requestingImage = true;
-            var miiData = Mii.Count > 0 ? Mii[0].Data : null;
-            if (miiData == null) return null;
-
-            _miiImage = MiiImageManager.GetCachedMiiImage(miiData);
-            if (_miiImage == null)
-                MiiImageManager.LoadMiiImageAsync(this);
-
-            return _miiImage;
-        }
-        set
-        {
-            if (_miiImage == value) return;
-            _miiImage = value;
-            OnPropertyChanged(nameof(MiiImage));
-        }
-    }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    protected virtual void OnPropertyChanged(string propertyName)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

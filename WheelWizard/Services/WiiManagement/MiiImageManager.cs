@@ -3,8 +3,10 @@ using CT_MKWII_WPF.Models.RRInfo;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace CT_MKWII_WPF.Services.WiiManagement;
@@ -12,47 +14,65 @@ namespace CT_MKWII_WPF.Services.WiiManagement;
 public static class MiiImageManager
 {
     private const int MaxCachedImages = 126;
-    private static readonly Dictionary<string, BitmapImage> Images = new();
+    // There are always 2 values, the image itself, and a bool indicating if the image was loaded successfully
+    // If it wasn't, it means that that image is just empty, yet it still should not be requested again since it failed
+    private static readonly Dictionary<string, (BitmapImage, bool)> Images = new();
     private static readonly Queue<string> ImageOrder = new();
 
-    public static BitmapImage? GetCachedMiiImage(string miiData) => Images.GetValueOrDefault(miiData);
+    public static (BitmapImage, bool)? GetCachedMiiImage(string miiData) => Images.TryGetValue(miiData, out var image) ? image : null;
 
-    private static void AddMiiImage(string miiData, BitmapImage image)
+    private static void AddMiiImage(string miiData, (BitmapImage, bool) image)
     {
         if (!Images.ContainsKey(miiData))
             ImageOrder.Enqueue(miiData);
-        // if it already exists, it will replace the old one. so the dict will not grow
         Images[miiData] = image;
 
         if (Images.Count < MaxCachedImages) return;
         var oldestMiiData = ImageOrder.Dequeue();
         Images.Remove(oldestMiiData);
     }
-
-    public static async void LoadMiiImageAsync(Player player)
+    
+    // Returns the image related to this data, if it is not cached, it will request it
+    public static async Task<(BitmapImage, bool)> LoadBase64MiiImageAsync(string base64MiiData)
     {
-        if (player.Mii.Count <= 0) return;
-
-        var miiData = player.Mii[0].Data;
-        var newImage = await GetMiiImageAsync(miiData);
-        AddMiiImage(miiData, newImage);
-        if (player.MiiImage != newImage)
-            player.MiiImage = newImage;
+        if (string.IsNullOrEmpty(base64MiiData)) 
+            return (new BitmapImage(), false);
+        
+        if (Images.ContainsKey(base64MiiData))
+            return Images[base64MiiData];
+        
+        var newImage = await RequestMiiImageAsync(base64MiiData);
+        AddMiiImage(base64MiiData, newImage);
+        return newImage;
     }
 
-    private static async Task<BitmapImage> GetMiiImageAsync(string base64MiiData)
+    // Creates a new image of this Mii and adds it to the cache (if it was loaded successfully)
+    public static async void ResetMiiImageAsync(Mii mii)
+    {
+        var miiData = mii.Data;
+        var newImage = await RequestMiiImageAsync(miiData);
+        AddMiiImage(miiData, newImage);
+        if (mii.Image == newImage.Item1) return;
+
+        mii.SetImage(newImage.Item1, newImage.Item2);
+    }
+
+    // Return the image, and a bool indicating if the image was loaded successfully
+    private static async Task<(BitmapImage, bool)> RequestMiiImageAsync(string base64MiiData)
     {
         using var formData = new MultipartFormDataContent();
         formData.Add(new ByteArrayContent(Convert.FromBase64String(base64MiiData)), "data", "mii.dat");
         formData.Add(new StringContent("wii"), "platform");
         var response = await HttpClientHelper.PostAsync<MiiResponse>(Endpoints.MiiStudioUrl, formData);
 
-        if (!response.Succeeded || response.Content is null) return new BitmapImage();
+        if (!response.Succeeded || response.Content is null) 
+            return (new BitmapImage(), false);
 
         var miiImageUrl = GetMiiImageUrlFromResponse(response.Content);
-        return new BitmapImage(new Uri(miiImageUrl));
+        
+        return (new BitmapImage(new Uri(miiImageUrl)), true);
     }
-
+    
     private static string GetMiiImageUrlFromResponse(MiiResponse response)
     {
         var queryParams = new List<string>
