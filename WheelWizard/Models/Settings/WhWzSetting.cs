@@ -6,7 +6,10 @@ namespace CT_MKWII_WPF.Models.Settings;
 
 public class WhWzSetting : Setting
 {
-    public WhWzSetting(Type type, string name, object defaultValue) : base(type, name, defaultValue) { }
+    public WhWzSetting(Type type, string name, object defaultValue) : base(type, name, defaultValue)
+    {
+        WhWzSettingManager.Instance.RegisterSetting(this);
+    }
     
     public override bool Set(object value, bool skipSave = false)
     {
@@ -20,7 +23,7 @@ public class WhWzSetting : Setting
         Value = value;
         var newIsValid = SaveEvenIfNotValid || IsValid();
         if (newIsValid && !skipSave) 
-            WhWzSettingManager.SaveSettings(this);
+            WhWzSettingManager.Instance.SaveSettings(this);
         else
             Value = oldValue;
      

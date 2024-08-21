@@ -19,9 +19,16 @@ public abstract class Setting
     protected bool SaveEvenIfNotValid { get; set; }
     public Type ValueType { get; protected set; } 
  
-    public abstract bool Set(object value, bool skipSave = false);
+    public abstract bool Set(object value, bool forceSave = false);
     public abstract object Get();
-    public void Reset() => Set(DefaultValue);
+    public void Reset()
+    {
+        var s = SaveEvenIfNotValid;
+        SaveEvenIfNotValid = true;
+        Set(DefaultValue);
+        SaveEvenIfNotValid = s;
+    }
+
     public abstract bool IsValid();
     
     public Setting SetValidation(Func<object?, bool> validationFunc)

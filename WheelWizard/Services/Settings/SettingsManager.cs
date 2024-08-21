@@ -17,52 +17,17 @@ namespace CT_MKWII_WPF.Services.Settings;
 
 public class SettingsManager
 {
-    private readonly Dictionary<string, Setting> _settings = new();
+    public static Setting USER_FOLDER_PATH = new WhWzSetting(typeof(string),"UserFolderPath", "").SetValidation(value => Directory.Exists(value as string ?? string.Empty));
+    public static Setting DOLPHIN_LOCATION = new WhWzSetting(typeof(string),"DolphinLocation", "").SetValidation(value => File.Exists(value as string ?? string.Empty));
+    public static Setting GAME_LOCATION = new WhWzSetting(typeof(string),"GameLocation", "").SetValidation(value => File.Exists(value as string ?? string.Empty));
+    public static Setting FORCE_WIIMOTE = new WhWzSetting(typeof(bool),"ForceWiimote", false);
+    
+    // dont ever make this a static class, it is required to be an instance class to ensure all settings are loaded
     public static SettingsManager Instance { get; } = new();
+    private SettingsManager() { }
     
-    private SettingsManager()
+    public void LoadSettings()
     {
-        AddSettings(
-            new WhWzSetting(typeof(bool),"HasRunNANDTutorial", false), // Not sure if this is needed anymore
-            new WhWzSetting(typeof(bool),"ForceWiimote", false),
-            new WhWzSetting(typeof(string),"DolphinLocation", "")
-                .SetValidation(value => File.Exists(value as string ?? string.Empty)),
-            new WhWzSetting(typeof(string),"GameLocation", "")
-                .SetValidation(value => File.Exists(value as string ?? string.Empty)),
-            new WhWzSetting(typeof(string),"UserFolderPath", "")
-                .SetValidation(value => Directory.Exists(value as string ?? string.Empty))
-            );
-        
-        LoadSettings();
-    }
-
-    public void Test()
-    {
-     
-    }
-    
-    private void AddSettings(params Setting[] settings)
-    {
-        foreach (var s in settings)
-        {
-            _settings.Add(s.Name, s);
-        }
-    }
-    
-    private void LoadSettings()
-    {
-        WhWzSettingManager.LoadSettings(GetWhWzSettings());
-    }
-    
-    public Setting GetSetting(string name) => _settings[name];
-    public bool SetSetting(string name, object value) => _settings[name].Set(value);
-    public void ResetSetting(string name) => _settings[name].Reset();
-    
-    public Dictionary<string, Setting> GetSettings() => _settings;
-
-    public Dictionary<string, WhWzSetting> GetWhWzSettings()
-    {
-        return _settings.Where(kv => kv.Value is WhWzSetting)
-                        .ToDictionary(kv => kv.Key, kv => (WhWzSetting)kv.Value);
+        WhWzSettingManager.Instance.LoadSettings();
     }
 }

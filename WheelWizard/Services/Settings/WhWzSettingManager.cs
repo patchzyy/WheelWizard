@@ -1,5 +1,5 @@
 using CT_MKWII_WPF.Models.Settings;
-
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
@@ -8,19 +8,31 @@ using JsonSerializerOptions = System.Text.Json.JsonSerializerOptions;
 
 namespace CT_MKWII_WPF.Services.Settings;
 
-public static class WhWzSettingManager
+public class WhWzSettingManager
 {
-    private static readonly string TestPath = // fill your path in here
-    private static bool _loaded;
+    private static readonly string TestPath = "C:\\Users\\roose\\Downloads\\test_settings.json"; // fill your path in here
+    private bool _loaded;
+    private readonly Dictionary<string, WhWzSetting> _settings = new();
     
-    public static void SaveSettings(Setting invokingSetting)
+    public static WhWzSettingManager Instance { get; } = new();
+    private WhWzSettingManager() { }
+    
+    public void RegisterSetting(WhWzSetting setting)
     {
-        if (!_loaded) return;
-        var whWzSettings = SettingsManager.Instance.GetWhWzSettings();
+        if (_loaded) 
+            return;
+        
+        _settings.Add(setting.Name, setting);
+    }
+    
+    public void SaveSettings(Setting invokingSetting)
+    {
+        if (!_loaded) 
+            return;
         
         var settingsToSave = new Dictionary<string, object?>();
     
-        foreach (var (name,setting) in whWzSettings)
+        foreach (var (name, setting) in _settings)
         {
             settingsToSave[name] = setting.Get();
         }
@@ -28,9 +40,10 @@ public static class WhWzSettingManager
         File.WriteAllText(TestPath, jsonString);
     }
     
-    public static void LoadSettings(Dictionary<string, WhWzSetting> settings)
+    public void LoadSettings()
     {
-        if (_loaded) return;
+        if (_loaded) 
+            return;
         
         if (!File.Exists(TestPath)) 
             return;
@@ -42,7 +55,7 @@ public static class WhWzSettingManager
         
         foreach (var kvp in loadedSettings)
         {
-            if (!settings.TryGetValue(kvp.Key, out var setting))
+            if (!_settings.TryGetValue(kvp.Key, out var setting))
                 continue;
             
             setting.Set(kvp.Value);

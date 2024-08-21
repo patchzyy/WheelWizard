@@ -8,8 +8,7 @@ public partial class App : Application
 {
     protected override void OnStartup(StartupEventArgs e)
     {
+        SettingsManager.Instance.LoadSettings();
         AutoUpdater.CheckForUpdatesAsync();
-
-        SettingsManager.Instance.Test();
     }
 }
