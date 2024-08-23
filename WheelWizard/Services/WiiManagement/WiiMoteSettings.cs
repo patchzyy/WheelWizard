@@ -9,7 +9,7 @@ public static class WiiMoteSettings
     private const string WiimoteSection = "[Wiimote1]";
     private const string SourceParameter = "Source";
 
-    private static string GetSavedWiiMoteLocation() => PathManager.FindWiiMoteNew();
+    private static string GetSavedWiiMoteLocation() => DolphinSettingHelper.FindWiiMoteNew();
     public static void EnableVirtualWiiMote() => ModifyWiiMoteSource(1);
     public static void DisableVirtualWiiMote() => ModifyWiiMoteSource(0);
     public static bool IsForceSettingsEnabled() => ConfigManager.GetConfig().ForceWiimote;

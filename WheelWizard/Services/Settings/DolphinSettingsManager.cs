@@ -6,7 +6,7 @@ public class DolphinSettingsManager
 {
     private static void ChangeSettings(params (string Key, string Value)[] settings)
     {
-        var gfxFile = PathManager.FindGfxFile();
+        var gfxFile = DolphinSettingHelper.FindGfxFile();
         if (string.IsNullOrEmpty(gfxFile)) 
             return;
 
@@ -38,7 +38,7 @@ public class DolphinSettingsManager
 
     public static bool IsRecommendedSettingsEnabled()
     {
-        var gfxFile = PathManager.FindGfxFile();
+        var gfxFile = DolphinSettingHelper.FindGfxFile();
         if (string.IsNullOrEmpty(gfxFile)) 
             return false;
 
@@ -52,20 +52,20 @@ public class DolphinSettingsManager
 
     public static bool GetCurrentVSyncStatus()
     {
-        var gfxFile = PathManager.FindGfxFile();
+        var gfxFile = DolphinSettingHelper.FindGfxFile();
         if (gfxFile != "")
             return DolphinSettingHelper.ReadIniSetting(gfxFile, "VSync") == "True";
         return false;
     }
 
-    public static int GetCurrentResolution()
-    {
-        var gfxFile = PathManager.FindGfxFile();
-        if (gfxFile == "")
-            return -1;
-
-        var resolution = DolphinSettingHelper.ReadIniSetting(gfxFile, "Settings", "InternalResolution");
-        if (!int.TryParse(resolution, out _)) return -1;
-        return int.Parse(resolution);
-    }
+    // public static int GetCurrentResolution()
+    // {
+    //     var gfxFile = DolphinSettingHelper.FindGfxFile();
+    //     if (gfxFile == "")
+    //         return -1;
+    //
+    //     var resolution = DolphinSettingHelper.ReadIniSetting(gfxFile, "Settings", "InternalResolution");
+    //     if (!int.TryParse(resolution, out _)) return -1;
+    //     return int.Parse(resolution);
+    // }
 }

@@ -1,7 +1,6 @@
 ﻿using CT_MKWII_WPF.Services.Settings;
 using System;
 using System.IO;
-using System.Windows;
 
 namespace CT_MKWII_WPF.Services;
 
@@ -24,28 +23,6 @@ public static class PathManager
     public static string RiivolutionWhWzFolderPath => Path.Combine(LoadFolderPath, "Riivolution", "WheelWizard");
     public static string RetroRewind6FolderPath => Path.Combine(RiivolutionWhWzFolderPath, "RetroRewind6");
     public static string LoadFolderPath => Path.Combine(UserFolderPath, "Load");
+    public static string ConfigFolderPath => Path.Combine(UserFolderPath, "Config");
     public static string WiiFolderPath => Path.Combine(UserFolderPath, "Wii");
-
-    public static string FindWiiMoteNew()
-    {
-        var configFolder = Path.Combine(UserFolderPath, "Config");
-        var wiimoteFile = Path.Combine(configFolder, "WiimoteNew.ini");
-
-        if (File.Exists(wiimoteFile))
-            return wiimoteFile;
-        MessageBox.Show($"Could not find WiimoteNew file, tried looking in {wiimoteFile}", "Error", MessageBoxButton.OK,
-            MessageBoxImage.Error);
-        return string.Empty;
-    }
-
-    public static string FindGfxFile()
-    {
-        var configFolder = Path.Combine(UserFolderPath, "Config");
-        var gfxFile = Path.Combine(configFolder, "GFX.ini");
-        if (File.Exists(gfxFile))
-            return gfxFile;
-        MessageBox.Show($"Could not find GFX file, tried looking in {gfxFile}", "Error", MessageBoxButton.OK,
-            MessageBoxImage.Error);
-        return string.Empty;
-    }
 }

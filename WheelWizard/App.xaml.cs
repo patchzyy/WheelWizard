@@ -1,4 +1,5 @@
-﻿using CT_MKWII_WPF.Services.Installation;
+﻿using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Settings;
 using System.Windows;
 

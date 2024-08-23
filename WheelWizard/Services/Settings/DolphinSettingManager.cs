@@ -1,18 +1,43 @@
-﻿using CT_MKWII_WPF.Helpers;
-using System;
-using System.IO;
-using System.Linq;
-using System.Windows;
+using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Models.Settings;
+using System.Collections.Generic;
+using System.Text.Json;
+using JsonElement = System.Text.Json.JsonElement;
+using JsonSerializerOptions = System.Text.Json.JsonSerializerOptions;
 
 namespace CT_MKWII_WPF.Services.Settings;
 
-public static class DolphinSettingHelper
+public class DolphinSettingManager
 {
     private static string ConfigFolderPath => PathManager.ConfigFolderPath;
+    private bool _loaded;
+    private readonly Dictionary<string, DolphinSetting> _settings = new();
     
-    public static string ReadIniSetting(string fileLocation, string section, string settingToRead)
+    public static DolphinSettingManager Instance { get; } = new();
+    private DolphinSettingManager() { }
+    
+    public void RegisterSetting(DolphinSetting setting)
     {
-        if (!File.Exists(fileLocation))
+        if (_loaded) 
+            return;
+        
+        _settings.Add(setting.Name, setting);
+    }
+    
+    public void SaveSettings(DolphinSetting invokingSetting)
+    {
+  
+    }
+    
+    public void LoadSettings()
+    {
+    
+    }
+    
+    /*
+    private static string ReadIniSetting(string fileLocation, string section, string settingToRead)
+    {
+        if (!FileHelper.FileExists(fileLocation))
         {
             MessageBox.Show(
                 "Something went wrong, INI file could not be read, Plzz report this as a bug: " +
@@ -39,7 +64,7 @@ public static class DolphinSettingHelper
         return "";
     }
     
-    public static string ReadIniSetting(string fileLocation, string settingToRead)
+    private static string ReadIniSetting(string fileLocation, string settingToRead)
     {
         if (!File.Exists(fileLocation))
         {
@@ -61,7 +86,7 @@ public static class DolphinSettingHelper
         return "";
     }
 
-    public static void ChangeIniSettings(string fileLocation, string section, string settingToChange, string value)
+    private static void ChangeIniSettings(string fileLocation, string section, string settingToChange, string value)
     {
         if (!File.Exists(fileLocation))
         {
@@ -104,38 +129,5 @@ public static class DolphinSettingHelper
         
         File.WriteAllLines(fileLocation, lines);
     }
-    
-    public static string AutomaticallyFindDolphinPath()
-    {
-        var appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                                       "Dolphin Emulator");
-        if (FileHelper.DirectoryExists(appDataPath))
-            return appDataPath;
-
-        var documentsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                                         "Dolphin Emulator");
-        return FileHelper.DirectoryExists(documentsPath) ? documentsPath : string.Empty;
-    }
-    
-    public static string FindWiiMoteNew()
-    {
-        var wiimoteFile = Path.Combine(ConfigFolderPath, "WiimoteNew.ini");
-        if (FileHelper.FileExists(wiimoteFile))
-            return wiimoteFile;
-        
-        MessageBox.Show($"Could not find WiimoteNew file, tried looking in {wiimoteFile}", 
-                        "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        return string.Empty;
-    }
-
-    public static string FindGfxFile()
-    {
-        var gfxFile = Path.Combine(ConfigFolderPath, "GFX.ini");
-        if (FileHelper.FileExists(gfxFile))
-            return gfxFile;
-        
-        MessageBox.Show($"Could not find GFX file, tried looking in {gfxFile}", 
-                        "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        return string.Empty;
-    }
+    */
 }

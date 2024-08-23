@@ -1,7 +1,6 @@
+using CT_MKWII_WPF.Helpers;
 using CT_MKWII_WPF.Models.Settings;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using JsonElement = System.Text.Json.JsonElement;
 using JsonSerializerOptions = System.Text.Json.JsonSerializerOptions;
@@ -25,7 +24,7 @@ public class WhWzSettingManager
         _settings.Add(setting.Name, setting);
     }
     
-    public void SaveSettings(Setting invokingSetting)
+    public void SaveSettings(WhWzSetting invokingSetting)
     {
         if (!_loaded) 
             return;
@@ -37,7 +36,7 @@ public class WhWzSettingManager
             settingsToSave[name] = setting.Get();
         }
         var jsonString = JsonSerializer.Serialize(settingsToSave, new JsonSerializerOptions { WriteIndented = true });
-        File.WriteAllText(TestPath, jsonString);
+        FileHelper.WriteAllTextSafe(TestPath, jsonString);
     }
     
     public void LoadSettings()
@@ -45,10 +44,10 @@ public class WhWzSettingManager
         if (_loaded) 
             return;
         
-        if (!File.Exists(TestPath)) 
+        var jsonString = FileHelper.ReadAllTextSafe(TestPath);
+        if (jsonString == null)
             return;
-    
-        var jsonString = File.ReadAllText(TestPath);
+        
         var loadedSettings = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(jsonString);
         if (loadedSettings == null) 
             return;

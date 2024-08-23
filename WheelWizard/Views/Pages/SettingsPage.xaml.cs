@@ -38,7 +38,8 @@ public partial class SettingsPage : Page
     {
         if (sender is not RadioButton radioButton) return;
         var resolution = radioButton.Tag.ToString();
-        DolphinSettingHelper.ChangeIniSettings(PathManager.FindGfxFile(), "Settings", "InternalResolution", resolution);
+        DolphinSettingHelper.ChangeIniSettings(DolphinSettingHelper.FindGfxFile(), 
+                                               "Settings", "InternalResolution", resolution);
     }
 
     private void UpdateSettingsState()
@@ -52,7 +53,8 @@ public partial class SettingsPage : Page
         RecommendedButton.IsChecked = DolphinSettingsManager.IsRecommendedSettingsEnabled();
         var finalResolution = 0;
         var resolution =
-            DolphinSettingHelper.ReadIniSetting(PathManager.FindGfxFile(), "Settings", "InternalResolution");
+            DolphinSettingHelper.ReadIniSetting(DolphinSettingHelper.FindGfxFile(), 
+                                                "Settings", "InternalResolution");
         if (int.TryParse(resolution, out var parsedResolution))
         {
             finalResolution = parsedResolution - 1;
@@ -136,8 +138,8 @@ public partial class SettingsPage : Page
     private void VSync_OnClick(object sender, RoutedEventArgs e)
     {
         //TODO: Move this when the dolphin settings stuff has been updated
-        DolphinSettingHelper.ChangeIniSettings(PathManager.FindGfxFile(), "Hardware", "VSync",
-            VSyncButton.IsChecked == true ? "True" : "False");
+        DolphinSettingHelper.ChangeIniSettings(DolphinSettingHelper.FindGfxFile(), "Hardware", "VSync",
+                                               VSyncButton.IsChecked == true ? "True" : "False");
     }
 
     private void Recommended_OnClick(object sender, RoutedEventArgs e)

@@ -4,7 +4,7 @@ namespace CT_MKWII_WPF.Models.Settings;
 
 public abstract class Setting
 {
-    public Setting(Type type, string name, object defaultValue)
+    protected Setting(Type type, string name, object defaultValue)
     {
         Name = name;
         DefaultValue = defaultValue;
