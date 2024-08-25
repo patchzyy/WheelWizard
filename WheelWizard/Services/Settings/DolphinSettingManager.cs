@@ -1,15 +1,16 @@
 using CT_MKWII_WPF.Helpers;
 using CT_MKWII_WPF.Models.Settings;
+using System;
 using System.Collections.Generic;
-using System.Text.Json;
-using JsonElement = System.Text.Json.JsonElement;
-using JsonSerializerOptions = System.Text.Json.JsonSerializerOptions;
+using System.IO;
+using System.Linq;
+using System.Windows;
 
 namespace CT_MKWII_WPF.Services.Settings;
 
 public class DolphinSettingManager
 {
-    private static string ConfigFolderPath => PathManager.ConfigFolderPath;
+    private static string ConfigFolderPath(string fileName) => Path.Combine(PathManager.ConfigFolderPath, fileName);
     private bool _loaded;
     private readonly Dictionary<string, DolphinSetting> _settings = new();
     
@@ -31,28 +32,46 @@ public class DolphinSettingManager
     
     public void LoadSettings()
     {
-    
+        if (_loaded) 
+            return;
+        
+        _loaded = true;
     }
     
-    /*
-    private static string ReadIniSetting(string fileLocation, string section, string settingToRead)
+    private static string[]? ReadIniFile(string fileName)
     {
-        if (!FileHelper.FileExists(fileLocation))
-        {
-            MessageBox.Show(
-                "Something went wrong, INI file could not be read, Plzz report this as a bug: " +
-                fileLocation, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-
-        //read through every line to find the section
-        var lines = File.ReadAllLines(fileLocation);
-        var sectionFound = lines.Any(t => t == $"[{section}]");
-
-        if (!sectionFound) 
-            return "";
-
-        //now we know the section exists, we need to find the setting
-        foreach (var line in lines)
+        var filePath = ConfigFolderPath(fileName);
+        var lines =  FileHelper.ReadAllLinesSafe(filePath);
+            
+        // if (lines == null){
+        //     MessageBox.Show(
+        //         "Something went wrong, INI file could not be read, Plzz report this as a bug: " +
+        //         filePath, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        // }
+        
+        return lines;
+    }
+    
+    private static string? ReadIniSetting(string fileName, string section, string settingToRead)
+    {
+        var lines = ReadIniFile(fileName);
+        if (lines == null) 
+            return null;
+     
+        var sectionIndex = Array.IndexOf(lines, $"[{section}]");
+        if (sectionIndex == -1)
+            return null;
+        
+        // find all the settings related to this section, we dont want to read/influence other sections
+        var nextSectionName = lines.Skip(sectionIndex + 1)
+                                   .FirstOrDefault(x => x.Trim().StartsWith("[") && x.Trim().EndsWith("]"));
+        var nextSectionIndex = Array.IndexOf(lines, nextSectionName);
+        var sectionLines = lines.Skip(sectionIndex + 1);
+        if (nextSectionIndex != -1)
+            sectionLines = sectionLines.Take(nextSectionIndex - sectionIndex - 1);
+        
+        // finally we can read the setting
+        foreach (var line in sectionLines)
         {
             if (!line.Contains(settingToRead)) 
                 continue;
@@ -61,73 +80,41 @@ public class DolphinSettingManager
             return setting[1].Trim();
         }
 
-        return "";
+        return null;
     }
     
-    private static string ReadIniSetting(string fileLocation, string settingToRead)
+    // TODO: find out when to use `setting=value` and when to use `setting = value`
+    private static void ChangeIniSettings(string fileName, string section, string settingToChange, string value)
     {
-        if (!File.Exists(fileLocation))
+        var lines = ReadIniFile(fileName)?.ToList();
+        if (lines == null)
+            return;
+        
+        var sectionIndex = lines.IndexOf($"[{section}]");
+        if (sectionIndex == -1)
         {
-            MessageBox.Show(
-                "Something went wrong, INI file could not be read, Plzz report this as a bug: " +
-                fileLocation, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-
-        var lines = File.ReadAllLines(fileLocation);
-        foreach (var line in lines)
-        {
-            if (!line.StartsWith(settingToRead)) 
-                continue;
-            
-            var setting = line.Split("=");
-            return setting[1].Trim();
-        }
-
-        return "";
-    }
-
-    private static void ChangeIniSettings(string fileLocation, string section, string settingToChange, string value)
-    {
-        if (!File.Exists(fileLocation))
-        {
-            MessageBox.Show(
-                $"Something went wrong, INI file could not be found, Plzz report this as a bug: {fileLocation}",
-                "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            lines.Add($"[{section}]");
+            lines.Add($"{settingToChange} = {value}");
+            FileHelper.WriteAllLines(ConfigFolderPath(fileName), lines);
             return;
         }
 
-        var lines = File.ReadAllLines(fileLocation).ToList();
-        var sectionFound = false;
-        var settingFound = false;
-        var sectionIndex = -1;
-
-        for (var i = 0; i < lines.Count; i++)
+        for (var i = sectionIndex+1; i < lines.Count; i++)
         {
-            if (lines[i].Trim() == $"[{section}]")
-            {
-                sectionFound = true;
-                sectionIndex = i;
-            }
-            else if (sectionFound && (lines[i].StartsWith($"{settingToChange}=") ||
-                                      lines[i].StartsWith($"{settingToChange} =")))
-            {
-                lines[i] = $"{settingToChange} = {value}";
-                settingFound = true;
-                break;
-            }
-            else if (lines[i].Trim().StartsWith("[") && lines[i].Trim().EndsWith("]") && sectionFound)
-                break;
-        }
+            //
+            if (lines[i].Trim().StartsWith("[") && lines[i].Trim().EndsWith("]"))
+                break; // Setting was not found in this section, so we have to append it to the section
 
-        if (!sectionFound)
-        {
-            lines.Add($"[{section}]");
-            lines.Add($"{settingToChange}={value}");
+            if ((!lines[i].StartsWith($"{settingToChange}=") && !lines[i].StartsWith($"{settingToChange} =")))
+                continue;
+            
+            lines[i] = $"{settingToChange} = {value}";
+            FileHelper.WriteAllLines(ConfigFolderPath(fileName), lines);
+            return;
         }
-        else if (!settingFound)
-            lines.Insert(sectionIndex + 1, $"{settingToChange}={value}");
+        // you only get here if the setting was not found in the section
         
-        File.WriteAllLines(fileLocation, lines);
+        lines.Insert(sectionIndex + 1, $"{settingToChange} = {value}");
+        FileHelper.WriteAllLines(ConfigFolderPath(fileName), lines);
     }
-    */
 }

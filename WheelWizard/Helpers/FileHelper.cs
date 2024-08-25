@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace CT_MKWII_WPF.Helpers;
@@ -14,6 +15,9 @@ public static class FileHelper
     public static string ReadAllText(string path) => File.ReadAllText(path);
     public static string? ReadAllTextSafe(string path) => FileExists(path) ? ReadAllText(path) : null;
     
+    public static string[] ReadAllLines(string path) => File.ReadAllLines(path);
+    public static string[]? ReadAllLinesSafe(string path) => FileExists(path) ? ReadAllLines(path) : null;
+    
     public static void WriteAllText(string path, string contents) => File.WriteAllText(path, contents);
     public static void WriteAllTextSafe(string path, string contents)
     {
@@ -23,6 +27,17 @@ public static class FileHelper
             Directory.CreateDirectory(directoryPath);
 
         WriteAllText(path, contents);
+    }
+    
+    public static void WriteAllLines(string path, IEnumerable<string> contents) => File.WriteAllLines(path, contents);
+    public static void WriteAllLinesSafe(string path, IEnumerable<string> contents)
+    {
+        var directoryPath = Path.GetDirectoryName(path);
+        
+        if (!string.IsNullOrEmpty(directoryPath) && !DirectoryExists(directoryPath))
+            Directory.CreateDirectory(directoryPath);
+
+        WriteAllLines(path, contents);
     }
     
     public static void Touch(string path, string defaultValue = "")
