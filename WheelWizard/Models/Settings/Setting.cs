@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace CT_MKWII_WPF.Models.Settings;
 
@@ -12,14 +13,22 @@ public abstract class Setting
         ValueType = type;
     }
     
+    protected readonly List<VirtualSetting> DependentVirtualSettings = new();
     public string Name { get; protected set; }
     public object DefaultValue { get; protected set; }
     protected object Value { get; set; }
     protected Func<object, bool>? ValidationFunc { get; set; }
     protected bool SaveEvenIfNotValid { get; set; }
-    public Type ValueType { get; protected set; } 
- 
-    public abstract bool Set(object value, bool skipSave = false);
+    public Type ValueType { get; protected set; }
+
+    public virtual bool Set(object newValue, bool skipSave = false)
+    {
+        if (newValue.GetType() != ValueType)
+            return false;
+
+        SignalDependents();
+        return true;
+    }
     public abstract object Get();
     public void Reset()
     {
@@ -41,5 +50,18 @@ public abstract class Setting
     {
         SaveEvenIfNotValid = saveEvenIfNotValid;
         return this;
+    }
+    
+    public void RegisterDependentVirtualSetting(VirtualSetting dependent)
+    {
+        DependentVirtualSettings.Add(dependent);
+    }
+    
+    protected void SignalDependents()
+    {
+        foreach (var dependent in DependentVirtualSettings)
+        {
+            dependent.DependencyChanged();
+        }
     }
 }

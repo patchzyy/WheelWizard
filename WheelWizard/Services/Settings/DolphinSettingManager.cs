@@ -12,7 +12,7 @@ public class DolphinSettingManager
 {
     private static string ConfigFolderPath(string fileName) => Path.Combine(PathManager.ConfigFolderPath, fileName);
     private bool _loaded;
-    private readonly Dictionary<string, DolphinSetting> _settings = new();
+    private readonly List<DolphinSetting> _settings = new();
     
     public static DolphinSettingManager Instance { get; } = new();
     private DolphinSettingManager() { }
@@ -22,7 +22,7 @@ public class DolphinSettingManager
         if (_loaded) 
             return;
         
-        _settings.Add(setting.Name, setting);
+        _settings.Add(setting);
     }
     
     public void SaveSettings(DolphinSetting invokingSetting)
@@ -31,7 +31,7 @@ public class DolphinSettingManager
         if (!_loaded) 
             return;
         
-        foreach (var setting in _settings.Values)
+        foreach (var setting in _settings)
         {
             ChangeIniSettings(setting.FileName, setting.Section, setting.Name, setting.GetStringValue());
         }
@@ -55,7 +55,7 @@ public class DolphinSettingManager
         
         // TODO: This method can maybe be optimized in the future, since now it reads the file for every setting
         //       and on top of that for reach setting it loops over each line and section and stuff like that.
-        foreach (var setting in _settings.Values)
+        foreach (var setting in _settings)
         {
             var value = ReadIniSetting(setting.FileName, setting.Section, setting.Name);
             if (value == null)

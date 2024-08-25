@@ -13,8 +13,7 @@ public class WhWzSetting : Setting
     
     public override bool Set(object newValue, bool skipSave = false)
     {
-        // TODO: Find out if this method can be generalized and be put in to the base Setting class
-        if (newValue.GetType() != ValueType)
+        if (!base.Set(newValue, skipSave))
             return false;
         
         if (Value?.Equals(newValue) == true) 

@@ -10,8 +10,8 @@ namespace CT_MKWII_WPF.Services.Settings;
 //      This is e.g. used for the Recommended setting,  which instead gets and sets multiple DolphinSettings
 //      Do a little research before you implement this, since maybe you dont even have to do this using lambda's,
 //      but instead yuo could create another class like "GroupSetting" which just has a bunch of Settings and their value on both toggles
-//      However, if you make such a setting, it should probably be limited to bools and enums.
-//      You probably just need to make a Virtual setting and extend that with this GroupSeting that only allows bools and enums
+//      However, if you make such a setting, it should probably be limited to booleans and enums.
+//      You probably just need to make a Virtual setting and extend that with this GroupSetting that only allows booleans and enums
 
 public class SettingsManager
 {
@@ -20,7 +20,7 @@ public class SettingsManager
     public static Setting GAME_LOCATION = new WhWzSetting(typeof(string),"GameLocation", "").SetValidation(value => FileHelper.FileExists(value as string ?? string.Empty));
     public static Setting FORCE_WIIMOTE = new WhWzSetting(typeof(bool),"ForceWiimote", false);
 
-    // public static Setting DOLHPIN_CORE = new DolphinSetting(typeof(string), ("test.ini", "enum", "eeeee"), "hey").SetValidation(value => ((string)value!) != "");
+    // public static Setting DOLPHIN_CORE = new DolphinSetting(typeof(string), ("test.ini", "mySection", "key"), "hello world").SetValidation(value => ((string)value!) != "");
     
     // dont ever make this a static class, it is required to be an instance class to ensure all settings are loaded
     public static SettingsManager Instance { get; } = new();
@@ -30,5 +30,6 @@ public class SettingsManager
     {
         WhWzSettingManager.Instance.LoadSettings();
         DolphinSettingManager.Instance.LoadSettings();
+        VirtualSettingManager.Instance.LoadSettings();
     }
 }
