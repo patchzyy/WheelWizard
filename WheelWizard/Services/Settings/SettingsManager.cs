@@ -19,6 +19,8 @@ public class SettingsManager
     public static Setting DOLPHIN_LOCATION = new WhWzSetting(typeof(string),"DolphinLocation", "").SetValidation(value => FileHelper.FileExists(value as string ?? string.Empty));
     public static Setting GAME_LOCATION = new WhWzSetting(typeof(string),"GameLocation", "").SetValidation(value => FileHelper.FileExists(value as string ?? string.Empty));
     public static Setting FORCE_WIIMOTE = new WhWzSetting(typeof(bool),"ForceWiimote", false);
+
+    public static Setting DOLHPIN_CORE = new DolphinSetting(typeof(App.MyEnum), ("test.ini", "enum", "eeeee"), App.MyEnum.HEY); //.SetValidation(value => ((string)value!) != "");
     
     // dont ever make this a static class, it is required to be an instance class to ensure all settings are loaded
     public static SettingsManager Instance { get; } = new();

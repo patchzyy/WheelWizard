@@ -57,7 +57,7 @@ public class WhWzSettingManager
             if (!_settings.TryGetValue(kvp.Key, out var setting))
                 continue;
             
-            setting.Set(kvp.Value);
+            setting.SetFromJson(kvp.Value);
         }
         
         _loaded = true;

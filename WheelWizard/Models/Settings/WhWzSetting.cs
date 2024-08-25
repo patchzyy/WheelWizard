@@ -11,19 +11,23 @@ public class WhWzSetting : Setting
         WhWzSettingManager.Instance.RegisterSetting(this);
     }
     
-    public override bool Set(object value, bool skipSave = false)
+    public override bool Set(object newValue, bool skipSave = false)
     {
-        if (value.GetType() != ValueType)
+        // TODO: Find out if this method can be generalized and be put in to the base Setting class
+        if (newValue.GetType() != ValueType)
             return false;
         
-        if (Value?.Equals(value) == true) 
+        if (Value?.Equals(newValue) == true) 
             return true;
         
         var oldValue = Value;
-        Value = value;
+        Value = newValue;
         var newIsValid = SaveEvenIfNotValid || IsValid();
-        if (newIsValid && !skipSave) 
-            WhWzSettingManager.Instance.SaveSettings(this);
+        if (newIsValid)
+        {
+            if (!skipSave)
+              WhWzSettingManager.Instance.SaveSettings(this);   
+        }
         else
             Value = oldValue;
      
@@ -33,29 +37,29 @@ public class WhWzSetting : Setting
     public override object Get() => Value;
     public override bool IsValid() => ValidationFunc == null || ValidationFunc(Value);
     
-   public void Set(JsonElement value, bool skipSave = false)
-   {
-       switch (ValueType)
-       {
-           case { } t when t == typeof(bool):     Set(value.GetBoolean(), skipSave); break;
-           case { } t when t == typeof(int):      Set(value.GetInt32(), skipSave); break;
-           case { } t when t == typeof(long):     Set(value.GetInt64(), skipSave); break;
-           case { } t when t == typeof(float):    Set((float)value.GetDouble(), skipSave); break;
-           case { } t when t == typeof(double):   Set(value.GetDouble(), skipSave); break;
-           case { } t when t == typeof(string):   Set(value.GetString()!, skipSave); break;
-           case { } t when t == typeof(DateTime): Set(value.GetDateTime(), skipSave); break;
-           case { IsEnum: true } t: Set(Enum.ToObject(t, value.GetInt32()), skipSave); break;
-           case { IsArray: true } t: SetArray(value, t.GetElementType()!, skipSave); break;
-           default:
-               throw new InvalidOperationException($"Unsupported type: {ValueType.Name}");
-       }
-   }
+    public bool SetFromJson(JsonElement newValue, bool skipSave = false)
+    {
+        // Feel free to add more types if you find them
+        return ValueType switch
+        {
+            { } t when t == typeof(bool) =>     Set(newValue.GetBoolean(), skipSave),
+            { } t when t == typeof(int) =>      Set(newValue.GetInt32(), skipSave),
+            { } t when t == typeof(long) =>     Set(newValue.GetInt64(), skipSave),
+            { } t when t == typeof(float) =>    Set((float)newValue.GetDouble(), skipSave),
+            { } t when t == typeof(double) =>   Set(newValue.GetDouble(), skipSave),
+            { } t when t == typeof(string) =>   Set(newValue.GetString()!, skipSave),
+            { } t when t == typeof(DateTime) => Set(newValue.GetDateTime(), skipSave),
+            { IsEnum: true } t =>               Set(Enum.ToObject(t, newValue.GetInt32()), skipSave),
+            { IsArray: true } t =>              SetArray(newValue, t.GetElementType()!, skipSave),
+            _ => throw new InvalidOperationException($"Unsupported type: {ValueType.Name}")
+        };
+    }
    
-   private void SetArray(JsonElement value, Type elementType, bool skipSave = false)
+   private bool SetArray(JsonElement value, Type elementType, bool skipSave = false)
    {
        var json = value.GetRawText();
        var arrayType = Array.CreateInstance(elementType, 0).GetType();
        var array = (Array)JsonSerializer.Deserialize(json, arrayType)!;
-       Set(array, skipSave);
+       return Set(array, skipSave);
    }
 }

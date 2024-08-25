@@ -27,13 +27,42 @@ public class DolphinSettingManager
     
     public void SaveSettings(DolphinSetting invokingSetting)
     {
-  
+        // TODO: This method definitely has to be optimized
+        if (!_loaded) 
+            return;
+        
+        foreach (var setting in _settings.Values)
+        {
+            ChangeIniSettings(setting.FileName, setting.Section, setting.Name, setting.GetStringValue());
+        }
+    }
+    
+    public void ReloadSettings()
+    {
+        // TODO: this method could also be optimized by checking if the previously loaded directory
+        //       is still the current ConfigFolderPath and if so, just not run the LoadSettings method again
+        _loaded = false;
+        LoadSettings();
     }
     
     public void LoadSettings()
     {
         if (_loaded) 
             return;
+        
+        if (!FileHelper.DirectoryExists(PathManager.ConfigFolderPath))
+            return;
+        
+        // TODO: This method can maybe be optimized in the future, since now it reads the file for every setting
+        //       and on top of that for reach setting it loops over each line and section and stuff like that.
+        foreach (var setting in _settings.Values)
+        {
+            var value = ReadIniSetting(setting.FileName, setting.Section, setting.Name);
+            if (value == null)
+                ChangeIniSettings(setting.FileName, setting.Section, setting.Name, setting.GetStringValue());
+            else
+                setting.SetFromString(value, true); // we read it, which means there is no purpose in saving it again
+        }
         
         _loaded = true;
     }

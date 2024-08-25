@@ -19,7 +19,7 @@ public abstract class Setting
     protected bool SaveEvenIfNotValid { get; set; }
     public Type ValueType { get; protected set; } 
  
-    public abstract bool Set(object value, bool forceSave = false);
+    public abstract bool Set(object value, bool skipSave = false);
     public abstract object Get();
     public void Reset()
     {
