@@ -42,8 +42,14 @@ public class DolphinSetting : Setting
     
     public override object Get() => Value;
     public override bool IsValid()  => ValidationFunc == null || ValidationFunc(Value);
-    
-    public string GetStringValue() => Value?.ToString() ?? "null";
+
+    public string GetStringValue()
+    {
+        if (ValueType.IsEnum)
+            return ((int)Value).ToString();
+        
+        return Value?.ToString() ?? "null";
+    }
     
     public bool SetFromString(string newValue, bool skipSave = false)
     {
@@ -57,7 +63,7 @@ public class DolphinSetting : Setting
             { } t when t == typeof(float)  => Set(float.Parse(newValue), skipSave),
             { } t when t == typeof(double) => Set(double.Parse(newValue), skipSave),
             { } t when t == typeof(bool)   => Set(bool.Parse(newValue), skipSave),
-            { IsEnum: true } t             => Set(Enum.Parse(t, newValue), skipSave),
+            { IsEnum: true } t             => Set(Enum.ToObject(t, int.Parse(newValue)), skipSave),
             _  => throw new InvalidOperationException($"Unsupported type: {ValueType.Name}")
         };
     }
