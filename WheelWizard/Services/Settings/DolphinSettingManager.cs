@@ -102,7 +102,7 @@ public class DolphinSettingManager
         // finally we can read the setting
         foreach (var line in sectionLines)
         {
-            if (!line.Contains(settingToRead)) 
+            if ((!line.StartsWith($"{settingToRead}=") && !line.StartsWith($"{settingToRead} =")))
                 continue;
             //we found the setting, now we need to return the value
             var setting = line.Split("=");

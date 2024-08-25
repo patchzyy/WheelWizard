@@ -11,28 +11,22 @@ public class WhWzSetting : Setting
         WhWzSettingManager.Instance.RegisterSetting(this);
     }
     
-    public override bool Set(object newValue, bool skipSave = false)
+    protected override bool SetInternal(object newValue, bool skipSave = false)
     {
-        if (!base.Set(newValue, skipSave))
-            return false;
-        
-        if (Value?.Equals(newValue) == true) 
-            return true;
-        
         var oldValue = Value;
         Value = newValue;
         var newIsValid = SaveEvenIfNotValid || IsValid();
         if (newIsValid)
         {
             if (!skipSave)
-              WhWzSettingManager.Instance.SaveSettings(this);   
+                WhWzSettingManager.Instance.SaveSettings(this);   
         }
         else
             Value = oldValue;
      
         return newIsValid;
     }
-    
+
     public override object Get() => Value;
     public override bool IsValid() => ValidationFunc == null || ValidationFunc(Value);
     

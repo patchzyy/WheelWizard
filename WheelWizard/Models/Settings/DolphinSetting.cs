@@ -17,14 +17,8 @@ public class DolphinSetting : Setting
         DolphinSettingManager.Instance.RegisterSetting(this);
     }
     
-    public override bool Set(object newValue, bool skipSave = false)
+    protected override bool SetInternal(object newValue, bool skipSave = false)
     {
-        if (!base.Set(newValue, skipSave))
-            return false;
-        
-        if (Value?.Equals(newValue) == true) 
-            return true;
-
         var oldValue = Value;
         Value = newValue;
         var newIsValid = SaveEvenIfNotValid || IsValid();

@@ -10,47 +10,32 @@ public class VirtualSetting : Setting
     private Func<object> Getter;
     private bool _acceptsSignals = true;
     
-    public VirtualSetting(Type type, object defaultValue, Action<object> setter, Func<object> getter) 
-        : base(type, "virtual", defaultValue)
+    public VirtualSetting(Type type, Action<object> setter, Func<object> getter) 
+        : base(type, "virtual", getter())
     {
         _dependencies = Array.Empty<Setting>();
         Setter = setter;
         Getter = getter;
-        VirtualSettingManager.Instance.RegisterSetting(this);
     }
     
-    public override bool Set(object newValue, bool skipSave = false)
+    protected override bool SetInternal(object newValue, bool skipSave = false)
     {
-        // Its a virtual setting, so skipSave does nothing, since... well... its virtual, there is nowhere to save to
-       
+        // we don't use skipSave here since its a virtual setting, and so there is nothing to save
         _acceptsSignals = false;
-        var result = SetInternal(newValue);
-        _acceptsSignals = true;
-        
-        return result;
-    }
-
-    private bool SetInternal(object newValue)
-    {
-        if (!base.Set(newValue, false))
-            return false;
-
-        if (Value?.Equals(newValue) == true) 
-            return true;
-        
         var oldValue = Value;
         Value = newValue;
         var newIsValid = SaveEvenIfNotValid || IsValid();
+        var succeeded = false;
         if (newIsValid)
         {
-            Setter(newValue);   
-            SignalDependents();
-            VirtualSettingManager.Instance.SaveSettings(this);
+            Setter(newValue);
+            succeeded = true;
         }
         else
             Value = oldValue;
-
-        return true;
+        
+        _acceptsSignals = true;
+        return succeeded;
     }
       
     public override object Get() => Value; 
@@ -58,9 +43,9 @@ public class VirtualSetting : Setting
         // and they only change when the dependencies change, or when the users sets a new value
     public override bool IsValid()  => ValidationFunc == null || ValidationFunc(Value);
     
-    public void SetDependencies(params Setting[] dependencies)
+    public VirtualSetting SetDependencies(params Setting[] dependencies)
     {
-        if (dependencies.Length != 0)
+        if (_dependencies.Length != 0)
             throw new ArgumentException("Dependencies have already been set once");
         
         _dependencies = dependencies;
@@ -68,15 +53,16 @@ public class VirtualSetting : Setting
         {
             dependency.RegisterDependentVirtualSetting(this);
         }
+
+        return this;
     }
     
-    public object Recalculate()
+    public void Recalculate()
     {
         Value = Getter();
-        return Get();
     }
     
-    public void DependencyChanged()
+    public void DependencyChanged(Setting changedSetting)
     {
         if (!_acceptsSignals)
             return;

@@ -21,14 +21,22 @@ public abstract class Setting
     protected bool SaveEvenIfNotValid { get; set; }
     public Type ValueType { get; protected set; }
 
-    public virtual bool Set(object newValue, bool skipSave = false)
+    public bool Set(object newValue, bool skipSave = false)
     {
         if (newValue.GetType() != ValueType)
             return false;
-
-        SignalDependents();
-        return true;
+        
+        if (Value?.Equals(newValue) == true) 
+            return true;
+        
+        var succeeded = SetInternal(newValue, skipSave);
+        if (succeeded)
+            SignalDependents();
+        
+        return succeeded;
     }
+    protected abstract bool SetInternal(object newValue, bool skipSave = false);
+    
     public abstract object Get();
     public void Reset()
     {
@@ -61,7 +69,7 @@ public abstract class Setting
     {
         foreach (var dependent in DependentVirtualSettings)
         {
-            dependent.DependencyChanged();
+            dependent.DependencyChanged(this);
         }
     }
 }
