@@ -1,6 +1,7 @@
 using CT_MKWII_WPF.Helpers;
 using CT_MKWII_WPF.Models.Settings;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 using JsonElement = System.Text.Json.JsonElement;
 using JsonSerializerOptions = System.Text.Json.JsonSerializerOptions;
@@ -9,7 +10,7 @@ namespace CT_MKWII_WPF.Services.Settings;
 
 public class WhWzSettingManager
 {
-    private static readonly string TestPath = "C:\\Users\\roose\\Downloads\\test_settings.json"; // fill your path in here
+    private static string ConfigFilePath => Path.Combine(PathManager.WheelWizardAppdataPath, "test.json");
     private bool _loaded;
     private readonly Dictionary<string, WhWzSetting> _settings = new();
     
@@ -36,15 +37,17 @@ public class WhWzSettingManager
             settingsToSave[name] = setting.Get();
         }
         var jsonString = JsonSerializer.Serialize(settingsToSave, new JsonSerializerOptions { WriteIndented = true });
-        FileHelper.WriteAllTextSafe(TestPath, jsonString);
+        FileHelper.WriteAllTextSafe(ConfigFilePath, jsonString);
     }
     
     public void LoadSettings()
     {
         if (_loaded) 
             return;
-        
-        var jsonString = FileHelper.ReadAllTextSafe(TestPath);
+
+        _loaded = true;
+        // even if it will now return early, that means its still done loading since then there is nothing to load
+        var jsonString = FileHelper.ReadAllTextSafe(ConfigFilePath);
         if (jsonString == null)
             return;
         
@@ -59,7 +62,5 @@ public class WhWzSettingManager
             
             setting.SetFromJson(kvp.Value);
         }
-        
-        _loaded = true;
     }
 }
