@@ -7,8 +7,6 @@ namespace CT_MKWII_WPF.Services.Settings;
 
 public static class ConfigValidator
 {
-    private static string modConfigFilePath => Path.Combine(PathManager.WheelWizardAppdataPath, "Mods", "modconfig.json");
-    
     private static bool DoesConfigExist() => File.Exists(PathManager.WheelWizardConfigFilePath);
     public static bool ConfigCorrectAndExists() => DoesConfigExist() && SetupCorrectly();
     
@@ -29,22 +27,6 @@ public static class ConfigValidator
         var config = ConfigManager.GetConfig();
         return Directory.Exists(config.UserFolderPath) && File.Exists(config.DolphinLocation) &&
                File.Exists(config.GameLocation);
-    }
-    
-    public static bool isValidFavoriteUser(int favoriteUser)
-    {
-        var config = ConfigManager.GetConfig();
-        return favoriteUser is >= 0 and <= 3;
-    }
-
-    public static ModData[] GetMods()
-    {
-        if (!File.Exists(modConfigFilePath))
-            return Array.Empty<ModData>();
-
-        var json = File.ReadAllText(modConfigFilePath);
-        var mods = JsonConvert.DeserializeObject<ModData[]>(json);
-        return mods ?? Array.Empty<ModData>();
     }
 
     public static void SaveWiimoteSettings(bool value)

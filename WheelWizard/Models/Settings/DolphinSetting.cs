@@ -8,11 +8,15 @@ public class DolphinSetting : Setting
     public string FileName { get; private set; }
     public string Section { get; private set; }
     
-    public DolphinSetting(Type type, (string,string,string) location, object defaultValue) : base(type, location.Item3, defaultValue)
+    public DolphinSetting(Type type, (string,string,string) location, object defaultValue) 
+        : base(type, location.Item3, defaultValue)
     {
         FileName = location.Item1;
         Section = location.Item2;
         // name/key = location.Item3
+        
+        if (!FileName.EndsWith(".ini"))
+            throw new ArgumentException($"FileName for dolphin setting '[{Section}]{Name}' must end with .ini (given file is '{FileName}')");
         
         DolphinSettingManager.Instance.RegisterSetting(this);
     }

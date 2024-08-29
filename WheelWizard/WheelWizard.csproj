@@ -13,22 +13,22 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="Retro_Rewind_Cover.png"/>
-        <None Remove="Pages\RR.json"/>
-        <None Remove="background_cover.png"/>
-        <None Remove="wii.png"/>
+        <None Remove="Retro_Rewind_Cover.png" />
+        <None Remove="Pages\RR.json" />
+        <None Remove="background_cover.png" />
+        <None Remove="wii.png" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="MahApps.Metro.IconPacks" Version="5.0.0"/>
-        <PackageReference Include="MaterialDesignColors" Version="3.1.0-ci630"/>
-        <PackageReference Include="MaterialDesignThemes" Version="5.0.1-ci630"/>
-        <PackageReference Include="Microsoft.WindowsAPICodePack.Shell" Version="1.1.0"/>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
-        <PackageReference Include="NLog.Windows.Forms" Version="5.2.3"/>
+        <PackageReference Include="MahApps.Metro.IconPacks" Version="5.0.0" />
+        <PackageReference Include="MaterialDesignColors" Version="3.1.0-ci630" />
+        <PackageReference Include="MaterialDesignThemes" Version="5.0.1-ci630" />
+        <PackageReference Include="Microsoft.WindowsAPICodePack.Shell" Version="1.1.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="NLog.Windows.Forms" Version="5.2.3" />
         <PackageReference Include="Semver" Version="3.0.0-beta.1" />
-        <PackageReference Include="SharpVectors" Version="1.8.4"/>
-        <PackageReference Include="System.Management" Version="9.0.0-preview.3.24172.9"/>
+        <PackageReference Include="SharpVectors" Version="1.8.4" />
+        <PackageReference Include="System.Management" Version="9.0.0-preview.3.24172.9" />
     </ItemGroup>
 
     <ItemGroup>

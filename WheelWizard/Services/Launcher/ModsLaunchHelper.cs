@@ -1,4 +1,5 @@
 ﻿using CT_MKWII_WPF.Models;
+using CT_MKWII_WPF.Models.Settings;
 using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Views.Popups;
 using System;
@@ -18,7 +19,7 @@ public static class ModsLaunchHelper
     
     public static async Task PrepareModsForLaunch()
     {
-        var mods = ConfigValidator.GetMods();
+        var mods = ModConfigManager.GetMods();
         if (mods.Length == 0 || !mods.Any(mod => mod.IsEnabled))
         {
             if (Directory.Exists(MyStuffFolderPath) && Directory.EnumerateFiles(MyStuffFolderPath).Any())
@@ -26,6 +27,7 @@ public static class ModsLaunchHelper
                 var result = YesNoMessagebox.Show("Mods found", "Delete","Keep", "you are about to launch the game without any mods", "Do you want to clear your my-stuff folder?");
                 if (result)
                     Directory.Delete(MyStuffFolderPath, true);
+                
                 return;
             }
         }
@@ -59,7 +61,7 @@ public static class ModsLaunchHelper
             allFiles = allFiles.Concat(files).ToArray();
         }
 
-        for (int i = 0; i < allFiles.Length; i++)
+        for (var i = 0; i < allFiles.Length; i++)
         {
             var file = allFiles[i];
             var progress = (int)((i + 1) / (double)allFiles.Length * 100);

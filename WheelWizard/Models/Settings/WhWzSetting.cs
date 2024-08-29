@@ -10,7 +10,6 @@ public class WhWzSetting : Setting
     {
         WhWzSettingManager.Instance.RegisterSetting(this);
     }
-    
     protected override bool SetInternal(object newValue, bool skipSave = false)
     {
         var oldValue = Value;
