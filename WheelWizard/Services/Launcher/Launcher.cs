@@ -58,7 +58,7 @@ public static class Launcher
             }
 
             RetroRewindLaunchHelper.GenerateLaunchJson(playTt);
-            var dolphinLaunchType = ConfigManager.GetConfig().LaunchWithDolphin ? "" : "-b";
+            var dolphinLaunchType = (bool)SettingsManager.LAUNCH_WITH_DOLPHIN.Get() ? "" : "-b";
             LaunchDolphin(
                 $"{dolphinLaunchType} -e \"{RRLaunchJsonFilePath}\" --config=Dolphin.Core.EnableCheats=False");
         }

@@ -12,7 +12,7 @@ public static class WiiMoteSettings
     private static string GetSavedWiiMoteLocation() => DolphinSettingHelper.FindWiiMoteNew();
     public static void EnableVirtualWiiMote() => ModifyWiiMoteSource(1);
     public static void DisableVirtualWiiMote() => ModifyWiiMoteSource(0);
-    public static bool IsForceSettingsEnabled() => ConfigManager.GetConfig().ForceWiimote;
+    public static bool IsForceSettingsEnabled() => (bool)SettingsManager.FORCE_WIIMOTE.Get();
 
     private static void ModifyWiiMoteSource(int sourceValue)
     {

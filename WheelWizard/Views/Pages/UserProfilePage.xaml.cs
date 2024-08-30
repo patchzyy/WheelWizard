@@ -1,6 +1,5 @@
 ﻿using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Services.WiiManagement.SaveData;
-using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,19 +8,15 @@ namespace CT_MKWII_WPF.Views.Pages;
 public partial class UserProfilePage : Page
 {
     private int _currentUserIndex;
+    private int FocussedUser => (int)SettingsManager.FOCUSSED_USER.Get();
 
     public UserProfilePage()
     {
         InitializeComponent();
   
-        _currentUserIndex = ConfigManager.GetConfig().FavoriteUser;
+        _currentUserIndex = FocussedUser;
         PopulateMiiOnStartup();
         FavoriteCheckBox.Checked += SetFavoriteUser;
-        
-        // TODO: unchecked is not needed anymore when we make it a radio button
-        //       we also want to make the styles for checkbox and radio buttons universal that
-        //       they can be used interchangeably
-        FavoriteCheckBox.Unchecked += UnsetFavoriteUser;
     }
 
         
@@ -58,29 +53,14 @@ public partial class UserProfilePage : Page
     private void UpdatePage()
     {
         PlayerStats.UpdateStats(GameDataLoader.Instance.GetUserData(_currentUserIndex));
-        FavoriteCheckBox.IsChecked = ConfigManager.GetConfig().FavoriteUser == _currentUserIndex;
+        FavoriteCheckBox.IsChecked = FocussedUser == _currentUserIndex;
     }
     
     private void SetFavoriteUser(object sender, RoutedEventArgs e)
     {
-        var config = ConfigManager.GetConfig();
-        config.FavoriteUser = _currentUserIndex;
-        ConfigManager.SaveConfigToJson();
+        SettingsManager.FOCUSSED_USER.Set(_currentUserIndex);
         GameDataLoader.Instance.LoadGameData();
         GameDataLoader.Instance.RefreshOnlineStatus();
-        CurrentUserProfile.PopulateComponent();
-
-    }
-
-    private void UnsetFavoriteUser(object sender, RoutedEventArgs e)
-    {
-        var config = ConfigManager.GetConfig();
-        if (config.FavoriteUser != _currentUserIndex) 
-            return;
-
-        config.FavoriteUser = 0; // 0 is backup
-        ConfigManager.SaveConfigToJson();
-        GameDataLoader.Instance.LoadGameData();
         CurrentUserProfile.PopulateComponent();
     }
 

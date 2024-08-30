@@ -54,8 +54,8 @@ public class GameDataLoader : RepeatedTaskManager
     private const int FriendDataOffset = 0x56D0;
     private const int FriendDataSize = 0x1C0;
     private const int MiiSize = 0x4A;
-    public User GetCurrentUser => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser];
-    public List<Friend> GetCurrentFriends => Instance.GameData.Users[ConfigManager.GetConfig().FavoriteUser].Friends;
+    public User GetCurrentUser => Instance.GameData.Users[(int)SettingsManager.FOCUSSED_USER.Get()];
+    public List<Friend> GetCurrentFriends => Instance.GameData.Users[(int)SettingsManager.FOCUSSED_USER.Get()].Friends;
     public Models.GameData.GameData GetGameData => Instance.GameData;
     public User GetUserData(int index) => GameData.Users[index];
     public bool HasAnyValidUsers => GameData.Users.Any(user => user.FriendCode != "0000-0000-0000");

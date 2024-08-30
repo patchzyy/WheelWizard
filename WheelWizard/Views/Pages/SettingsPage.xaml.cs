@@ -19,9 +19,13 @@ public partial class SettingsPage : Page
     public SettingsPage()
     {
         InitializeComponent();
-        FillUserPath();
+        AutoFillUserPath();
         UpdateSettingsState();
         TogglePathSettings(false);
+            
+        DisableForce.IsChecked = (bool)SettingsManager.FORCE_WIIMOTE.Get();
+        LaunchWithDolphin.IsChecked = (bool)SettingsManager.LAUNCH_WITH_DOLPHIN.Get();
+        
         WhWzVersionText.Text = "WhWz: v" + AutoUpdater.CurrentVersion;
         RrVersionText.Text = "RR: " + RetroRewindInstaller.CurrentRRVersion();
     }
@@ -35,10 +39,12 @@ public partial class SettingsPage : Page
 
     private void UpdateResolution(object sender, RoutedEventArgs e)
     {
-        if (sender is not RadioButton radioButton) return;
-        var resolution = radioButton.Tag.ToString();
+        if (sender is not RadioButton radioButton) 
+            return;
+        
+        var resolution = radioButton.Tag.ToString()!;
         DolphinSettingHelper.ChangeIniSettings(DolphinSettingHelper.FindGfxFile(), 
-                                               "Settings", "InternalResolution", resolution);
+            "Settings", "InternalResolution", resolution);
     }
 
     private void UpdateSettingsState()
@@ -47,32 +53,29 @@ public partial class SettingsPage : Page
         VideoBorder.IsEnabled = enableControls;
         WiiBorder.IsEnabled = enableControls;
 
-        if (!enableControls) return;
+        if (!enableControls) 
+            return;
+        
         VSyncButton.IsChecked = DolphinSettingsManager.GetCurrentVSyncStatus();
         RecommendedButton.IsChecked = DolphinSettingsManager.IsRecommendedSettingsEnabled();
         var finalResolution = 0;
-        var resolution =
-            DolphinSettingHelper.ReadIniSetting(DolphinSettingHelper.FindGfxFile(), 
-                                                "Settings", "InternalResolution");
+        var resolution = DolphinSettingHelper.ReadIniSetting(DolphinSettingHelper.FindGfxFile(), 
+            "Settings", "InternalResolution");
         if (int.TryParse(resolution, out var parsedResolution))
-        {
             finalResolution = parsedResolution - 1;
-        }
 
         if (finalResolution >= 0 && finalResolution < ResolutionStackPanel.Children.Count)
         {
             var radioButton = (RadioButton)ResolutionStackPanel.Children[finalResolution];
             radioButton.IsChecked = true;
         }
-        var forcemote = WiiMoteSettings.IsForceSettingsEnabled();
-        DisableForce.IsChecked = forcemote;
-        var launchWithDolphin = ConfigManager.GetConfig().LaunchWithDolphin;
-        LaunchWithDolphin.IsChecked = launchWithDolphin;
     }
 
-    private void FillUserPath()
+    private void AutoFillUserPath()
     {
-        if (DolphinExeInput.Text != "") return;
+        if (DolphinExeInput.Text != "") 
+            return;
+        
         var folderPath = DolphinSettingHelper.AutomaticallyFindDolphinPath();
         if (!string.IsNullOrEmpty(folderPath))
             DolphinUserPathInput.Text = folderPath;
@@ -111,7 +114,7 @@ public partial class SettingsPage : Page
         {
             // Ask user if they want to use the automatically found folder
             var result = MessageBox.Show(
-                "**If you dont know what all of this means, just click yes :)**\n\nDolphin Emulator folder found. Would you like to use this folder?\n\n" +
+                "If you dont know what all of this means, just click yes :)\n\nDolphin Emulator folder found. Would you like to use this folder?\n" +
                 folderPath, "Dolphin Emulator Folder Found", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
@@ -205,11 +208,11 @@ public partial class SettingsPage : Page
 
     private void ClickForceWiimote(object sender, RoutedEventArgs e)
     {
-        ConfigValidator.SaveWiimoteSettings(DisableForce.IsChecked == true);
+        SettingsManager.FORCE_WIIMOTE.Set(DisableForce.IsChecked == true);
     }
 
     private void ClickLaunchWithDolphinWindow(object sender, RoutedEventArgs e)
     {
-        ConfigValidator.SaveLaunchWithDolphinWindow(LaunchWithDolphin.IsChecked == true);
+        SettingsManager.LAUNCH_WITH_DOLPHIN.Set(LaunchWithDolphin.IsChecked == true);
     }
 }

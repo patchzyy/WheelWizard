@@ -10,7 +10,7 @@ namespace CT_MKWII_WPF.Services.Settings;
 
 public class WhWzSettingManager
 {
-    private static string ConfigFilePath => Path.Combine(PathManager.WheelWizardAppdataPath, "test.json");
+    private static string ConfigFilePath => Path.Combine(PathManager.WheelWizardAppdataPath, "config.json");
     private bool _loaded;
     private readonly Dictionary<string, WhWzSetting> _settings = new();
     
