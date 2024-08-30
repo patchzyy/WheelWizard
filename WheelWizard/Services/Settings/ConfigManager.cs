@@ -23,15 +23,11 @@ public static class ConfigManager
         return _config;
     }
 
-    public static void SaveSettings(string dolphinPath, string gamePath, string userFolderPath, bool hasRunNandTutorial,
+    public static void SaveSettings(bool hasRunNandTutorial,
         bool forceDisableWiimote, bool launchWithDolphin)
     {
         if (_config == null) 
             return;
-        
-        _config.DolphinLocation = dolphinPath;
-        _config.GameLocation = gamePath;
-        _config.UserFolderPath = userFolderPath;
         _config.HasRunNandTutorial = hasRunNandTutorial;
         _config.ForceWiimote = forceDisableWiimote;
         _config.LaunchWithDolphin = launchWithDolphin;

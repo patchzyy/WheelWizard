@@ -7,44 +7,23 @@ namespace CT_MKWII_WPF.Services.Settings;
 
 public static class ConfigValidator
 {
-    private static bool DoesConfigExist() => File.Exists(PathManager.WheelWizardConfigFilePath);
-    public static bool ConfigCorrectAndExists() => DoesConfigExist() && SetupCorrectly();
-    
-    public static bool SetupCorrectly()
-    {
-        var config = ConfigManager.GetConfig();
-        if (config.UserFolderPath == null) 
-            return false;
-        
-        var gfxFile = Path.Combine(config.UserFolderPath, "Config", "GFX.ini");
-        return File.Exists(config.DolphinLocation) &&
-               File.Exists(config.GameLocation) &&
-               File.Exists(gfxFile);
-    }
-    
-    public static bool IsConfigFileFinishedSettingUp()
-    {
-        var config = ConfigManager.GetConfig();
-        return Directory.Exists(config.UserFolderPath) && File.Exists(config.DolphinLocation) &&
-               File.Exists(config.GameLocation);
-    }
 
     public static void SaveWiimoteSettings(bool value)
     {
-        var config = ConfigManager.GetConfig();
-        if (config.DolphinLocation == null || config.GameLocation == null || config.UserFolderPath == null) 
+        if (SettingsHelper.PathsSetupCorrectly()) 
             return;
         
+        var config = ConfigManager.GetConfig();
         config.ForceWiimote = value;
         ConfigManager.SaveConfigToJson();
     }
     
     public static void SaveLaunchWithDolphinWindow(bool value)
     {
-        var config = ConfigManager.GetConfig();
-        if (config.DolphinLocation == null || config.GameLocation == null || config.UserFolderPath == null) 
+        if (SettingsHelper.PathsSetupCorrectly()) 
             return;
         
+        var config = ConfigManager.GetConfig();
         config.LaunchWithDolphin = value;
         ConfigManager.SaveConfigToJson();
     }

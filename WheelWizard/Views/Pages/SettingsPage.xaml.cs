@@ -19,16 +19,15 @@ public partial class SettingsPage : Page
     public SettingsPage()
     {
         InitializeComponent();
-        LoadSettings();
         FillUserPath();
         UpdateSettingsState();
-        ToggleLocationSettings(false);
-        VersionText.Text = "v" + AutoUpdater.CurrentVersion;
+        TogglePathSettings(false);
+        WhWzVersionText.Text = "WhWz: v" + AutoUpdater.CurrentVersion;
+        RrVersionText.Text = "RR: " + RetroRewindInstaller.CurrentRRVersion();
     }
 
-    private void LoadSettings()
+    private void LoadPathSettings()
     {
-        if (!ConfigValidator.ConfigCorrectAndExists()) return;
         DolphinExeInput.Text = PathManager.DolphinFilePath;
         MarioKartInput.Text = PathManager.GameFilePath;
         DolphinUserPathInput.Text = PathManager.UserFolderPath;
@@ -44,7 +43,7 @@ public partial class SettingsPage : Page
 
     private void UpdateSettingsState()
     {
-        var enableControls = ConfigValidator.ConfigCorrectAndExists();
+        var enableControls = SettingsHelper.PathsSetupCorrectly();
         VideoBorder.IsEnabled = enableControls;
         WiiBorder.IsEnabled = enableControls;
 
@@ -152,47 +151,39 @@ public partial class SettingsPage : Page
 
     private void SaveButton_OnClick(object sender, RoutedEventArgs e)
     {
-        var dolphinPath = DolphinExeInput.Text;
-        var gamePath = MarioKartInput.Text;
-        var userFolder = DolphinUserPathInput.Text;
-        var forceDisableWiimote = DisableForce.IsChecked == true;
-        var launchWithDolphin = LaunchWithDolphin.IsChecked == false;
-        if (!File.Exists(dolphinPath) || !File.Exists(gamePath) || !Directory.Exists(userFolder))
-        {
-            MessageBox.Show("Please ensure all paths are correct and try again.", "Error", MessageBoxButton.OK,
-                MessageBoxImage.Error);
-            return;
-        }
-
-        // Save settings to a configuration file or system registry
-        ConfigManager.SaveSettings(dolphinPath, gamePath, userFolder, true, forceDisableWiimote, launchWithDolphin);
-        if (!ConfigValidator.SetupCorrectly())
-        {
-            MessageBox.Show("Please ensure all paths are correct and try again.", "Error", MessageBoxButton.OK,
-                MessageBoxImage.Error);
-            NavigateToPage(new SettingsPage());
-            return;
-        }
-
+        var path1 = SettingsManager.DOLPHIN_LOCATION.Set(DolphinExeInput.Text);
+        var path2 = SettingsManager.GAME_LOCATION.Set(MarioKartInput.Text);
+        var path3 = SettingsManager.USER_FOLDER_PATH.Set(DolphinUserPathInput.Text);
+        // These 3 lines is only saving the settings
+        
+        // The rest is all visual feedback
         UpdateSettingsState();
-        ToggleLocationSettings(false);
-        MessageBox.Show("Settings saved successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        TogglePathSettings(false);
+        if (!(SettingsHelper.PathsSetupCorrectly() && path1 && path2 && path3))
+        {
+            MessageBox.Show("Please ensure all paths are correct and try again.", 
+                "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        else
+        {
+            MessageBox.Show("Settings saved successfully!", 
+                "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 
     private void EditButton_OnClick(object sender, RoutedEventArgs e)
     {
-        ToggleLocationSettings(true);
+        TogglePathSettings(true);
     }
 
     private void CancelButton_OnClick(object sender, RoutedEventArgs e)
     {
-        ToggleLocationSettings(false);
-        LoadSettings();
+        TogglePathSettings(false);
     }
 
-    private void ToggleLocationSettings(bool enable)
+    private void TogglePathSettings(bool enable)
     {
-        if (!ConfigValidator.ConfigCorrectAndExists() && !enable)
+        if (!SettingsHelper.PathsSetupCorrectly() && !enable)
         {
             LocationBorder.BorderBrush = (SolidColorBrush)FindResource("SettingsBlockWarningHighlight");
             LocationEditButton.Variant = Button.ButtonsVariantType.Secondary;
@@ -209,6 +200,7 @@ public partial class SettingsPage : Page
         LocationEditButton.Visibility = enable ? Visibility.Collapsed : Visibility.Visible;
         LocationSaveButton.Visibility = enable ? Visibility.Visible : Visibility.Collapsed;
         LocationCancelButton.Visibility = enable ? Visibility.Visible : Visibility.Collapsed;
+        LoadPathSettings();
     }
 
     private void ClickForceWiimote(object sender, RoutedEventArgs e)

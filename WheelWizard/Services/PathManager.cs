@@ -10,9 +10,9 @@ public static class PathManager
     //            and either end with `FilePath` or `FolderPath`
     
     // pats set by the user
-    public static string GameFilePath => ConfigManager.GetConfig().GameLocation!;
-    public static string DolphinFilePath => ConfigManager.GetConfig().DolphinLocation!;
-    public static string UserFolderPath => ConfigManager.GetConfig().UserFolderPath!;
+    public static string GameFilePath => (string)SettingsManager.GAME_LOCATION.Get();
+    public static string DolphinFilePath => (string)SettingsManager.DOLPHIN_LOCATION.Get();
+    public static string UserFolderPath => (string)SettingsManager.USER_FOLDER_PATH.Get();
     
     // Wheel wizard's appdata paths  (dont have to be expressions since they dont depend on user input like the others)
     public static readonly string WheelWizardAppdataPath =
