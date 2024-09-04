@@ -178,6 +178,12 @@
                                 <components:FormFieldLabel Text="Recommended Settings"
                                                            TipText="This setting will change certain dolphin settings to reduce stuttering and lag spikes" />
                             </CheckBox>
+                            <CheckBox Margin="0,2" IsChecked="False"
+                                      Style="{StaticResource DarkSwitch}" Click="_30FPS_OnClick"
+                                      x:Name="Button30FPS">
+                                <components:FormFieldLabel Text="30 FPS"
+                                                           TipText="This setting will Force the game to run in 30 FPS (default is 60)" />
+                            </CheckBox>
                         </StackPanel>
                     </Grid>
                 </Border>

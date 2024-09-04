@@ -13,6 +13,7 @@ public class SettingsManager
     public static Setting FORCE_WIIMOTE = new WhWzSetting(typeof(bool),"ForceWiimote", false);
     public static Setting LAUNCH_WITH_DOLPHIN = new WhWzSetting(typeof(bool),"LaunchWithDolphin", false);
     public static Setting FOCUSSED_USER = new WhWzSetting(typeof(int), "FavoriteUser", 0); //.SetValidation(value => (int)(value ?? -1) >= 0 && (int)(value ?? -1) <= 4);
+    public static Setting FORCE_30FPS = new WhWzSetting(typeof(bool), "Force30FPS", false);
 
     // Dolphin Settings
     public static Setting VSYNC = new DolphinSetting(typeof(bool), ("GFX.ini", "Hardware", "VSync"), false);

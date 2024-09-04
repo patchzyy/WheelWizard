@@ -56,6 +56,7 @@ public partial class SettingsPage : Page
         
         VSyncButton.IsChecked = (bool)SettingsManager.VSYNC.Get();
         RecommendedButton.IsChecked = (bool)SettingsManager.RECOMMENDED_SETTINGS.Get();
+        Button30FPS.IsChecked = (bool)SettingsManager.FORCE_30FPS.Get();
         var finalResolution = (int)SettingsManager.INTERNAL_RESOLUTION.Get() - 1;
         if (finalResolution < 0 || finalResolution >= ResolutionStackPanel.Children.Count) 
             return;
@@ -195,5 +196,10 @@ public partial class SettingsPage : Page
     private void ClickLaunchWithDolphinWindow(object sender, RoutedEventArgs e)
     {
         SettingsManager.LAUNCH_WITH_DOLPHIN.Set(LaunchWithDolphin.IsChecked == true);
+    }
+
+    private void _30FPS_OnClick(object sender, RoutedEventArgs e)
+    {
+        SettingsManager.FORCE_30FPS.Set(Button30FPS.IsChecked == true);
     }
 }
