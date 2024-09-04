@@ -42,33 +42,26 @@ public partial class SettingsPage : Page
         if (sender is not RadioButton radioButton) 
             return;
         
-        var resolution = radioButton.Tag.ToString()!;
-        DolphinSettingHelper.ChangeIniSettings(DolphinSettingHelper.FindGfxFile(), 
-            "Settings", "InternalResolution", resolution);
+        SettingsManager.INTERNAL_RESOLUTION.Set(int.Parse(radioButton.Tag.ToString()!));
     }
 
     private void UpdateSettingsState()
     {
-        var enableControls = SettingsHelper.PathsSetupCorrectly();
-        VideoBorder.IsEnabled = enableControls;
-        WiiBorder.IsEnabled = enableControls;
+        var enableDolphinSettings = SettingsHelper.PathsSetupCorrectly();
+        VideoBorder.IsEnabled = enableDolphinSettings;
+        WiiBorder.IsEnabled = enableDolphinSettings;
 
-        if (!enableControls) 
+        if (!enableDolphinSettings) 
             return;
         
-        VSyncButton.IsChecked = DolphinSettingsManager.GetCurrentVSyncStatus();
-        RecommendedButton.IsChecked = DolphinSettingsManager.IsRecommendedSettingsEnabled();
-        var finalResolution = 0;
-        var resolution = DolphinSettingHelper.ReadIniSetting(DolphinSettingHelper.FindGfxFile(), 
-            "Settings", "InternalResolution");
-        if (int.TryParse(resolution, out var parsedResolution))
-            finalResolution = parsedResolution - 1;
+        VSyncButton.IsChecked = (bool)SettingsManager.VSYNC.Get();
+        RecommendedButton.IsChecked = (bool)SettingsManager.RECOMMENDED_SETTINGS.Get();
+        var finalResolution = (int)SettingsManager.INTERNAL_RESOLUTION.Get() - 1;
+        if (finalResolution < 0 || finalResolution >= ResolutionStackPanel.Children.Count) 
+            return;
 
-        if (finalResolution >= 0 && finalResolution < ResolutionStackPanel.Children.Count)
-        {
-            var radioButton = (RadioButton)ResolutionStackPanel.Children[finalResolution];
-            radioButton.IsChecked = true;
-        }
+        var radioButton = (RadioButton)ResolutionStackPanel.Children[finalResolution];
+        radioButton.IsChecked = true;
     }
 
     private void AutoFillUserPath()
@@ -76,7 +69,7 @@ public partial class SettingsPage : Page
         if (DolphinExeInput.Text != "") 
             return;
         
-        var folderPath = DolphinSettingHelper.AutomaticallyFindDolphinPath();
+        var folderPath = PathManager.TryFindDolphinPath();
         if (!string.IsNullOrEmpty(folderPath))
             DolphinUserPathInput.Text = folderPath;
     }
@@ -108,7 +101,7 @@ public partial class SettingsPage : Page
 
     private void DolphinUserPathBrowse_OnClick(object sender, RoutedEventArgs e)
     {
-        var folderPath = DolphinSettingHelper.AutomaticallyFindDolphinPath();
+        var folderPath = PathManager.TryFindDolphinPath();
 
         if (!string.IsNullOrEmpty(folderPath))
         {
@@ -137,20 +130,8 @@ public partial class SettingsPage : Page
             DolphinUserPathInput.Text = dialog.FileName;
     }
 
-    private void VSync_OnClick(object sender, RoutedEventArgs e)
-    {
-        //TODO: Move this when the dolphin settings stuff has been updated
-        DolphinSettingHelper.ChangeIniSettings(DolphinSettingHelper.FindGfxFile(), "Hardware", "VSync",
-                                               VSyncButton.IsChecked == true ? "True" : "False");
-    }
-
-    private void Recommended_OnClick(object sender, RoutedEventArgs e)
-    {
-        if (RecommendedButton.IsChecked == true)
-            DolphinSettingsManager.EnableRecommendedSettings();
-        else
-            DolphinSettingsManager.DisableRecommendedSettings();
-    }
+    private void VSync_OnClick(object sender, RoutedEventArgs e) => SettingsManager.VSYNC.Set(VSyncButton.IsChecked == true);
+    private void Recommended_OnClick(object sender, RoutedEventArgs e) => SettingsManager.RECOMMENDED_SETTINGS.Set(RecommendedButton.IsChecked == true);
 
     private void SaveButton_OnClick(object sender, RoutedEventArgs e)
     {

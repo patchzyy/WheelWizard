@@ -1,4 +1,5 @@
-﻿using CT_MKWII_WPF.Services.Settings;
+﻿using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Services.Settings;
 using System;
 using System.IO;
 
@@ -25,4 +26,17 @@ public static class PathManager
     public static string LoadFolderPath => Path.Combine(UserFolderPath, "Load");
     public static string ConfigFolderPath => Path.Combine(UserFolderPath, "Config");
     public static string WiiFolderPath => Path.Combine(UserFolderPath, "Wii");
+    
+    
+    public static string? TryFindDolphinPath()
+    {
+        var appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                                       "Dolphin Emulator");
+        if (FileHelper.DirectoryExists(appDataPath))
+            return appDataPath;
+
+        var documentsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                                         "Dolphin Emulator");
+        return FileHelper.DirectoryExists(documentsPath) ? documentsPath : null;
+    }
 }
