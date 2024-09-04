@@ -184,6 +184,11 @@
                                 <components:FormFieldLabel Text="30 FPS"
                                                            TipText="This setting will Force the game to run in 30 FPS (default is 60)" />
                             </CheckBox>
+                            <CheckBox Margin="0,2" IsChecked="False"
+                                      Style="{StaticResource DarkSwitch}" Click="ShowFPS_OnClick"
+                                      x:Name="ShowFPSButton">
+                                <components:FormFieldLabel Text="Show FPS"/>
+                            </CheckBox>
                         </StackPanel>
                     </Grid>
                 </Border>

@@ -21,8 +21,12 @@ public class SettingsManager
     public static Setting INTERNAL_RESOLUTION = new DolphinSetting(typeof(int), ("GFX.ini", "Settings", "InternalResolution"), 1)
         .SetValidation(value => (int)(value ?? -1) >= 0);
   
+    
+    public static Setting SHOW_FPS = new DolphinSetting(typeof(bool), ("GFX.ini", "Settings", "ShowFPS"), false);
+    
+    //recommended settings
     private static Setting DOLPHIN_COMPILATION_MODE = new DolphinSetting(typeof(DolphinShaderCompilationMode), ("GFX.ini", "Settings", "ShaderCompilationMode"),
-                                                                         DolphinShaderCompilationMode.Default);
+        DolphinShaderCompilationMode.Default);
     private static Setting DOLPHIN_COMPILE_SHADERS_AT_START = new DolphinSetting(typeof(bool), ("GFX.ini", "Settings", "WaitForShadersBeforeStarting"), false);
     private static Setting DOLPHIN_SSAA = new DolphinSetting(typeof(bool), ("GFX.ini", "Settings", "SSAA"), false);
     private static Setting DOLPHIN_MSAA = new DolphinSetting(typeof(string), ("GFX.ini", "Settings", "MSAA"), "0x00000001").SetValidation(
