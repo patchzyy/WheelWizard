@@ -19,16 +19,19 @@ public partial class SettingsPage : Page
     public SettingsPage()
     {
         InitializeComponent();
-        LoadSettings();
-        FillUserPath();
+        AutoFillUserPath();
         UpdateSettingsState();
-        ToggleLocationSettings(false);
-        VersionText.Text = "v" + AutoUpdater.CurrentVersion;
+        TogglePathSettings(false);
+            
+        DisableForce.IsChecked = (bool)SettingsManager.FORCE_WIIMOTE.Get();
+        LaunchWithDolphin.IsChecked = (bool)SettingsManager.LAUNCH_WITH_DOLPHIN.Get();
+        
+        WhWzVersionText.Text = "WhWz: v" + AutoUpdater.CurrentVersion;
+        RrVersionText.Text = "RR: " + RetroRewindInstaller.CurrentRRVersion();
     }
 
-    private void LoadSettings()
+    private void LoadPathSettings()
     {
-        if (!ConfigValidator.ConfigCorrectAndExists()) return;
         DolphinExeInput.Text = PathManager.DolphinFilePath;
         MarioKartInput.Text = PathManager.GameFilePath;
         DolphinUserPathInput.Text = PathManager.UserFolderPath;
@@ -36,43 +39,39 @@ public partial class SettingsPage : Page
 
     private void UpdateResolution(object sender, RoutedEventArgs e)
     {
-        if (sender is not RadioButton radioButton) return;
-        var resolution = radioButton.Tag.ToString();
-        DolphinSettingHelper.ChangeIniSettings(PathManager.FindGfxFile(), "Settings", "InternalResolution", resolution);
+        if (sender is not RadioButton radioButton) 
+            return;
+        
+        SettingsManager.INTERNAL_RESOLUTION.Set(int.Parse(radioButton.Tag.ToString()!));
     }
 
     private void UpdateSettingsState()
     {
-        var enableControls = ConfigValidator.ConfigCorrectAndExists();
-        VideoBorder.IsEnabled = enableControls;
-        WiiBorder.IsEnabled = enableControls;
+        var enableDolphinSettings = SettingsHelper.PathsSetupCorrectly();
+        VideoBorder.IsEnabled = enableDolphinSettings;
+        WiiBorder.IsEnabled = enableDolphinSettings;
 
-        if (!enableControls) return;
-        VSyncButton.IsChecked = DolphinSettingsUtils.GetCurrentVSyncStatus();
-        RecommendedButton.IsChecked = DolphinSettingsUtils.IsRecommendedSettingsEnabled();
-        var finalResolution = 0;
-        var resolution =
-            DolphinSettingHelper.ReadIniSetting(PathManager.FindGfxFile(), "Settings", "InternalResolution");
-        if (int.TryParse(resolution, out var parsedResolution))
-        {
-            finalResolution = parsedResolution - 1;
-        }
+        if (!enableDolphinSettings) 
+            return;
+        
+        VSyncButton.IsChecked = (bool)SettingsManager.VSYNC.Get();
+        RecommendedButton.IsChecked = (bool)SettingsManager.RECOMMENDED_SETTINGS.Get();
+        Button30FPS.IsChecked = (bool)SettingsManager.FORCE_30FPS.Get();
+        ShowFPSButton.IsChecked = (bool)SettingsManager.SHOW_FPS.Get();
+        var finalResolution = (int)SettingsManager.INTERNAL_RESOLUTION.Get() - 1;
+        if (finalResolution < 0 || finalResolution >= ResolutionStackPanel.Children.Count) 
+            return;
 
-        if (finalResolution >= 0 && finalResolution < ResolutionStackPanel.Children.Count)
-        {
-            var radioButton = (RadioButton)ResolutionStackPanel.Children[finalResolution];
-            radioButton.IsChecked = true;
-        }
-        var forcemote = WiiMoteSettings.IsForceSettingsEnabled();
-        DisableForce.IsChecked = forcemote;
-        var launchWithDolphin = ConfigManager.GetConfig().LaunchWithDolphin;
-        LaunchWithDolphin.IsChecked = launchWithDolphin;
+        var radioButton = (RadioButton)ResolutionStackPanel.Children[finalResolution];
+        radioButton.IsChecked = true;
     }
 
-    private void FillUserPath()
+    private void AutoFillUserPath()
     {
-        if (DolphinExeInput.Text != "") return;
-        var folderPath = DolphinSettingHelper.AutomaticallyFindDolphinPath();
+        if (DolphinExeInput.Text != "") 
+            return;
+        
+        var folderPath = PathManager.TryFindDolphinPath();
         if (!string.IsNullOrEmpty(folderPath))
             DolphinUserPathInput.Text = folderPath;
     }
@@ -104,13 +103,13 @@ public partial class SettingsPage : Page
 
     private void DolphinUserPathBrowse_OnClick(object sender, RoutedEventArgs e)
     {
-        var folderPath = DolphinSettingHelper.AutomaticallyFindDolphinPath();
+        var folderPath = PathManager.TryFindDolphinPath();
 
         if (!string.IsNullOrEmpty(folderPath))
         {
             // Ask user if they want to use the automatically found folder
             var result = MessageBox.Show(
-                "**If you dont know what all of this means, just click yes :)**\n\nDolphin Emulator folder found. Would you like to use this folder?\n\n" +
+                "If you dont know what all of this means, just click yes :)\n\nDolphin Emulator folder found. Would you like to use this folder?\n" +
                 folderPath, "Dolphin Emulator Folder Found", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
@@ -133,64 +132,44 @@ public partial class SettingsPage : Page
             DolphinUserPathInput.Text = dialog.FileName;
     }
 
-    private void VSync_OnClick(object sender, RoutedEventArgs e)
-    {
-        //TODO: Move this when the dolphin settings stuff has been updated
-        DolphinSettingHelper.ChangeIniSettings(PathManager.FindGfxFile(), "Hardware", "VSync",
-            VSyncButton.IsChecked == true ? "True" : "False");
-    }
-
-    private void Recommended_OnClick(object sender, RoutedEventArgs e)
-    {
-        if (RecommendedButton.IsChecked == true)
-            DolphinSettingsUtils.EnableRecommendedSettings();
-        else
-            DolphinSettingsUtils.DisableRecommendedSettings();
-    }
+    private void VSync_OnClick(object sender, RoutedEventArgs e) => SettingsManager.VSYNC.Set(VSyncButton.IsChecked == true);
+    private void Recommended_OnClick(object sender, RoutedEventArgs e) => SettingsManager.RECOMMENDED_SETTINGS.Set(RecommendedButton.IsChecked == true);
 
     private void SaveButton_OnClick(object sender, RoutedEventArgs e)
     {
-        var dolphinPath = DolphinExeInput.Text;
-        var gamePath = MarioKartInput.Text;
-        var userFolder = DolphinUserPathInput.Text;
-        var forceDisableWiimote = DisableForce.IsChecked == true;
-        var launchWithDolphin = LaunchWithDolphin.IsChecked == false;
-        if (!File.Exists(dolphinPath) || !File.Exists(gamePath) || !Directory.Exists(userFolder))
-        {
-            MessageBox.Show("Please ensure all paths are correct and try again.", "Error", MessageBoxButton.OK,
-                MessageBoxImage.Error);
-            return;
-        }
-
-        // Save settings to a configuration file or system registry
-        ConfigManager.SaveSettings(dolphinPath, gamePath, userFolder, true, forceDisableWiimote, launchWithDolphin);
-        if (!ConfigValidator.SetupCorrectly())
-        {
-            MessageBox.Show("Please ensure all paths are correct and try again.", "Error", MessageBoxButton.OK,
-                MessageBoxImage.Error);
-            NavigateToPage(new SettingsPage());
-            return;
-        }
-
+        var path1 = SettingsManager.DOLPHIN_LOCATION.Set(DolphinExeInput.Text);
+        var path2 = SettingsManager.GAME_LOCATION.Set(MarioKartInput.Text);
+        var path3 = SettingsManager.USER_FOLDER_PATH.Set(DolphinUserPathInput.Text);
+        // These 3 lines is only saving the settings
+        
+        // The rest is all visual feedback
         UpdateSettingsState();
-        ToggleLocationSettings(false);
-        MessageBox.Show("Settings saved successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        TogglePathSettings(false);
+        if (!(SettingsHelper.PathsSetupCorrectly() && path1 && path2 && path3))
+        {
+            MessageBox.Show("Please ensure all paths are correct and try again.", 
+                "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        else
+        {
+            MessageBox.Show("Settings saved successfully!", 
+                "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 
     private void EditButton_OnClick(object sender, RoutedEventArgs e)
     {
-        ToggleLocationSettings(true);
+        TogglePathSettings(true);
     }
 
     private void CancelButton_OnClick(object sender, RoutedEventArgs e)
     {
-        ToggleLocationSettings(false);
-        LoadSettings();
+        TogglePathSettings(false);
     }
 
-    private void ToggleLocationSettings(bool enable)
+    private void TogglePathSettings(bool enable)
     {
-        if (!ConfigValidator.ConfigCorrectAndExists() && !enable)
+        if (!SettingsHelper.PathsSetupCorrectly() && !enable)
         {
             LocationBorder.BorderBrush = (SolidColorBrush)FindResource("SettingsBlockWarningHighlight");
             LocationEditButton.Variant = Button.ButtonsVariantType.Secondary;
@@ -207,15 +186,26 @@ public partial class SettingsPage : Page
         LocationEditButton.Visibility = enable ? Visibility.Collapsed : Visibility.Visible;
         LocationSaveButton.Visibility = enable ? Visibility.Visible : Visibility.Collapsed;
         LocationCancelButton.Visibility = enable ? Visibility.Visible : Visibility.Collapsed;
+        LoadPathSettings();
     }
 
     private void ClickForceWiimote(object sender, RoutedEventArgs e)
     {
-        ConfigValidator.SaveWiimoteSettings(DisableForce.IsChecked == true);
+        SettingsManager.FORCE_WIIMOTE.Set(DisableForce.IsChecked == true);
     }
 
     private void ClickLaunchWithDolphinWindow(object sender, RoutedEventArgs e)
     {
-        ConfigValidator.SaveLaunchWithDolphinWindow(LaunchWithDolphin.IsChecked == true);
+        SettingsManager.LAUNCH_WITH_DOLPHIN.Set(LaunchWithDolphin.IsChecked == true);
+    }
+
+    private void _30FPS_OnClick(object sender, RoutedEventArgs e)
+    {
+        SettingsManager.FORCE_30FPS.Set(Button30FPS.IsChecked == true);
+    }
+
+    private void ShowFPS_OnClick(object sender, RoutedEventArgs e)
+    {
+        SettingsManager.SHOW_FPS.Set(ShowFPSButton.IsChecked == true);
     }
 }

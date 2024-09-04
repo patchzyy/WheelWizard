@@ -1,4 +1,5 @@
 ﻿using CT_MKWII_WPF.Models;
+using CT_MKWII_WPF.Models.Settings;
 using CT_MKWII_WPF.Services.Launcher;
 using Microsoft.Win32;
 using System;

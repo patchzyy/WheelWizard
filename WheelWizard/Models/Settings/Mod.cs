@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace CT_MKWII_WPF.Models;
+namespace CT_MKWII_WPF.Models.Settings;
 
 public class Mod : INotifyPropertyChanged
 {
@@ -12,7 +12,9 @@ public class Mod : INotifyPropertyChanged
         get => _isEnabled;
         set
         {
-            if (_isEnabled == value) return;
+            if (_isEnabled == value) 
+                return;
+            
             _isEnabled = value;
             OnPropertyChanged(nameof(IsEnabled));
         }
@@ -23,7 +25,9 @@ public class Mod : INotifyPropertyChanged
         get => _title;
         set
         {
-            if (_title == value) return;
+            if (_title == value) 
+                return;
+            
             _title = value;
             OnPropertyChanged(nameof(Title));
         }

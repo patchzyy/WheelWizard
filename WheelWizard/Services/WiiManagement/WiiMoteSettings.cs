@@ -1,6 +1,8 @@
-﻿using CT_MKWII_WPF.Services.Settings;
+﻿using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Services.Settings;
 using System;
 using System.IO;
+using System.Windows;
 
 namespace CT_MKWII_WPF.Services.WiiManagement;
 
@@ -8,12 +10,21 @@ public static class WiiMoteSettings
 {
     private const string WiimoteSection = "[Wiimote1]";
     private const string SourceParameter = "Source";
-
-    private static string GetSavedWiiMoteLocation() => PathManager.FindWiiMoteNew();
+    
     public static void EnableVirtualWiiMote() => ModifyWiiMoteSource(1);
     public static void DisableVirtualWiiMote() => ModifyWiiMoteSource(0);
-    public static bool IsForceSettingsEnabled() => ConfigManager.GetConfig().ForceWiimote;
-
+    public static bool IsForceSettingsEnabled() => (bool)SettingsManager.FORCE_WIIMOTE.Get();
+    private static string GetSavedWiiMoteLocation()
+    {
+        var wiimoteFile = Path.Combine( PathManager.ConfigFolderPath, "WiimoteNew.ini");
+        if (FileHelper.FileExists(wiimoteFile))
+            return wiimoteFile;
+        
+        MessageBox.Show($"Could not find WiimoteNew file, tried looking in {wiimoteFile}", 
+                        "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        return string.Empty;
+    }
+    
     private static void ModifyWiiMoteSource(int sourceValue)
     {
         var configPath = GetSavedWiiMoteLocation();

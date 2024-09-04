@@ -105,13 +105,12 @@ public partial class Dashboard
                 SetButtonState("Play", Button.ButtonsVariantType.Primary, PackIconFontAwesomeKind.PlaySolid);
                 break;
         }
-
-        if (!ConfigValidator.ConfigCorrectAndExists())
-        {
-            DolphinButton.IsEnabled = false;
-            MiiButton.IsEnabled = false;
-            OnlineTTCheckbox.IsEnabled = false;
-        }
+        if (SettingsHelper.PathsSetupCorrectly()) 
+            return;
+        
+        DolphinButton.IsEnabled = false;
+        MiiButton.IsEnabled = false;
+        OnlineTTCheckbox.IsEnabled = false;
     }
 
     private void SetButtonState(string text, Button.ButtonsVariantType variant, PackIconMaterialKind iconKind,

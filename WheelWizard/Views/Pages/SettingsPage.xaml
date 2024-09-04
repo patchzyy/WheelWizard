@@ -178,6 +178,17 @@
                                 <components:FormFieldLabel Text="Recommended Settings"
                                                            TipText="This setting will change certain dolphin settings to reduce stuttering and lag spikes" />
                             </CheckBox>
+                            <CheckBox Margin="0,2" IsChecked="False"
+                                      Style="{StaticResource DarkSwitch}" Click="_30FPS_OnClick"
+                                      x:Name="Button30FPS">
+                                <components:FormFieldLabel Text="30 FPS"
+                                                           TipText="This setting will Force the game to run in 30 FPS (default is 60)" />
+                            </CheckBox>
+                            <CheckBox Margin="0,2" IsChecked="False"
+                                      Style="{StaticResource DarkSwitch}" Click="ShowFPS_OnClick"
+                                      x:Name="ShowFPSButton">
+                                <components:FormFieldLabel Text="Show FPS"/>
+                            </CheckBox>
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -208,11 +219,16 @@
             </StackPanel>
         </StackPanel>
 
-        <TextBlock Grid.Row="1" x:Name="VersionText"
-                   Style="{StaticResource TinyText}"
-                   HorizontalAlignment="Right"
-                   VerticalAlignment="Bottom"
-                   Text="Example version 1.0.0" />
+        <StackPanel Grid.Row="1" HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom">
+            <TextBlock x:Name="WhWzVersionText" HorizontalAlignment="Right"
+                       Style="{StaticResource TinyText}"
+                       Text="Example WhWz version 1.0.0" />
+            <TextBlock x:Name="RrVersionText" HorizontalAlignment="Right"
+                       Style="{StaticResource TinyText}"
+                       Text="Example RR version 1.0.0" />
+        </StackPanel>
+      
         <!-- Version text is now retrieved from the updater -->
     </Grid>
 </Page>

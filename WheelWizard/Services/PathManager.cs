@@ -1,7 +1,7 @@
-﻿using CT_MKWII_WPF.Services.Settings;
+﻿using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Services.Settings;
 using System;
 using System.IO;
-using System.Windows;
 
 namespace CT_MKWII_WPF.Services;
 
@@ -11,9 +11,9 @@ public static class PathManager
     //            and either end with `FilePath` or `FolderPath`
     
     // pats set by the user
-    public static string GameFilePath => ConfigManager.GetConfig().GameLocation!;
-    public static string DolphinFilePath => ConfigManager.GetConfig().DolphinLocation!;
-    public static string UserFolderPath => ConfigManager.GetConfig().UserFolderPath!;
+    public static string GameFilePath => (string)SettingsManager.GAME_LOCATION.Get();
+    public static string DolphinFilePath => (string)SettingsManager.DOLPHIN_LOCATION.Get();
+    public static string UserFolderPath => (string)SettingsManager.USER_FOLDER_PATH.Get();
     
     // Wheel wizard's appdata paths  (dont have to be expressions since they dont depend on user input like the others)
     public static readonly string WheelWizardAppdataPath =
@@ -24,28 +24,19 @@ public static class PathManager
     public static string RiivolutionWhWzFolderPath => Path.Combine(LoadFolderPath, "Riivolution", "WheelWizard");
     public static string RetroRewind6FolderPath => Path.Combine(RiivolutionWhWzFolderPath, "RetroRewind6");
     public static string LoadFolderPath => Path.Combine(UserFolderPath, "Load");
+    public static string ConfigFolderPath => Path.Combine(UserFolderPath, "Config");
     public static string WiiFolderPath => Path.Combine(UserFolderPath, "Wii");
-
-    public static string FindWiiMoteNew()
+    
+    
+    public static string? TryFindDolphinPath()
     {
-        var configFolder = Path.Combine(UserFolderPath, "Config");
-        var wiimoteFile = Path.Combine(configFolder, "WiimoteNew.ini");
+        var appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                                       "Dolphin Emulator");
+        if (FileHelper.DirectoryExists(appDataPath))
+            return appDataPath;
 
-        if (File.Exists(wiimoteFile))
-            return wiimoteFile;
-        MessageBox.Show($"Could not find WiimoteNew file, tried looking in {wiimoteFile}", "Error", MessageBoxButton.OK,
-            MessageBoxImage.Error);
-        return string.Empty;
-    }
-
-    public static string FindGfxFile()
-    {
-        var configFolder = Path.Combine(UserFolderPath, "Config");
-        var gfxFile = Path.Combine(configFolder, "GFX.ini");
-        if (File.Exists(gfxFile))
-            return gfxFile;
-        MessageBox.Show($"Could not find GFX file, tried looking in {gfxFile}", "Error", MessageBoxButton.OK,
-            MessageBoxImage.Error);
-        return string.Empty;
+        var documentsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                                         "Dolphin Emulator");
+        return FileHelper.DirectoryExists(documentsPath) ? documentsPath : null;
     }
 }
