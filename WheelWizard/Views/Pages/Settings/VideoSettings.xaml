@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="CT_MKWII_WPF.Views.Pages.Settings.VideoSettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Pages.Settings"
+             xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+             xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             mc:Ignorable="d" d:DesignHeight="716" d:DesignWidth="444">
+    <Grid>
+        <StackPanel>
+                <components:FormFieldLabel Text="Video settings" />
+                <Border Style="{StaticResource SettingsBlockStyle}" x:Name="VideoBorder">
+                    <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" x:Name="ResolutionStackPanel">
+                            <RadioButton Margin="0,2" GroupName="ResolutionGroup1"
+                                         IsChecked="True" Click="UpdateResolution" Tag="1">
+
+                                <components:FormFieldLabel Text="1x (640x528)" TipText="1x is the native resolution" />
+                            </RadioButton>
+                            <RadioButton Margin="0,2" GroupName="ResolutionGroup1"
+                                         IsChecked="False" Click="UpdateResolution" Tag="2">
+                                2x (1280x1056)
+                            </RadioButton>
+                            <RadioButton Margin="0,2" GroupName="ResolutionGroup1"
+                                         IsChecked="False" Click="UpdateResolution" Tag="3">
+                                3x (1920x1584)
+                            </RadioButton>
+                            <RadioButton Margin="0,2" GroupName="ResolutionGroup1"
+                                         IsChecked="False" Click="UpdateResolution" Tag="4">
+                                4x (2560x2112)
+                            </RadioButton>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1">
+                            <CheckBox Margin="0,2" IsChecked="False"
+                                      Style="{StaticResource DarkSwitch}" Click="VSync_OnClick" x:Name="VSyncButton">
+                                VSync
+                            </CheckBox>
+                            <CheckBox Margin="0,2" IsChecked="False"
+                                      Style="{StaticResource DarkSwitch}" Click="Recommended_OnClick"
+                                      x:Name="RecommendedButton">
+                                <components:FormFieldLabel Text="Recommended Settings"
+                                                           TipText="This setting will change certain dolphin settings to reduce stuttering and lag spikes" />
+                            </CheckBox>
+                            <CheckBox Margin="0,2" IsChecked="False"
+                                      Style="{StaticResource DarkSwitch}" Click="_30FPS_OnClick"
+                                      x:Name="Button30FPS">
+                                <components:FormFieldLabel Text="30 FPS"
+                                                           TipText="This setting will Force the game to run in 30 FPS (default is 60)" />
+                            </CheckBox>
+                            <CheckBox Margin="0,2" IsChecked="False"
+                                      Style="{StaticResource DarkSwitch}" Click="ShowFPS_OnClick"
+                                      x:Name="ShowFPSButton">
+                                <components:FormFieldLabel Text="Show FPS"/>
+                            </CheckBox>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </StackPanel>
+    </Grid>
+</UserControl>

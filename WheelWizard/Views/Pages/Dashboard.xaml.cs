@@ -36,10 +36,10 @@ public partial class Dashboard
                 await Launcher.LaunchRetroRewind((bool)OnlineTTCheckbox.IsChecked!);
                 break;
             case WheelWizardStatus.NoDolphin:
-                NavigateToPage(new SettingsPage());
+                NavigateToPage(new Settings.SettingsPage());
                 break;
             case WheelWizardStatus.ConfigNotFinished:
-                NavigateToPage(new SettingsPage());
+                NavigateToPage(new Settings.SettingsPage());
                 break;
             case WheelWizardStatus.NoRR:
                 SetButtonState("Installing...", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download,
