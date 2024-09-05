@@ -1,0 +1,26 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <SolidColorBrush x:Key="DropdownBackground-Default" Color="{StaticResource Gray700}" />
+    <SolidColorBrush x:Key="DropdownForeground-Default" Color="{StaticResource Gray200}" />
+    <SolidColorBrush x:Key="DropdownChevron-Default" Color="{StaticResource Gray900}" />
+       
+    <SolidColorBrush x:Key="DropdownBackground-Disabled" Color="{StaticResource Gray800}" />
+    <SolidColorBrush x:Key="DropdownForeground-Disabled" Color="{StaticResource Gray600}" />
+    <SolidColorBrush x:Key="DropdownChevron-Disabled" Color="{StaticResource Gray900}" />
+    
+    <SolidColorBrush x:Key="DropdownBackground-Hover" Color="{StaticResource Gray600}" />
+    <SolidColorBrush x:Key="DropdownForeground-Hover" Color="{StaticResource Gray200}" />
+    <SolidColorBrush x:Key="DropdownChevron-Hover" Color="{StaticResource Gray300}" />
+    
+    <!-- Not sure if this is needed, also since its the as the default
+    <SolidColorBrush x:Key="DropdownBackground-Open" Color="{StaticResource Gray700}" />
+    <SolidColorBrush x:Key="DropdownForeground-Open" Color="{StaticResource Gray200}" />
+    <SolidColorBrush x:Key="DropdownChevron-Open" Color="{StaticResource Gray900}" /> --> 
+    
+    <SolidColorBrush x:Key="DropdownItem-Default" Color="{StaticResource Gray700}" />
+    <SolidColorBrush x:Key="DropdownItem-Hover" Color="{StaticResource Gray600}" />
+    <SolidColorBrush x:Key="DropdownItem-Selected" Color="{StaticResource Gray500}" />
+    <SolidColorBrush x:Key="DropdownItemForeground" Color="{StaticResource Gray200}" />
+    <SolidColorBrush x:Key="DropdownItemSelectedCheck" Color="{StaticResource Cyan300}" />
+</ResourceDictionary>
