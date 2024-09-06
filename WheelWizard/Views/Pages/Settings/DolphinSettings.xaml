@@ -9,7 +9,7 @@
              mc:Ignorable="d"
              d:DesignHeight="831" d:DesignWidth="444">
     <Grid>
-        <StackPanel>
+        <StackPanel Margin="0,15,0,0">
             <components:FormFieldLabel Text="Wii Settings" />
             <Border Style="{StaticResource SettingsBlockStyle}" x:Name="WiiBorder">
                 <StackPanel>

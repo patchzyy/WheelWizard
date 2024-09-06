@@ -18,5 +18,5 @@ public static class Endpoints
     // Other
     public const string MiiStudioUrl = "https://qrcode.rc24.xyz/cgi-bin/studio.cgi";
     public const string MiiImageUrl = "https://studio.mii.nintendo.com/miis/image.png";
-    public const string MarioCubeUrl = "https://repo.mariocube.com/WADs/Other/Mii%20Channel%20Symbols%20-%20HACS.wad";
+    public const string MiiChannelWAD = "-";
 }

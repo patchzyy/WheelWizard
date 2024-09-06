@@ -21,7 +21,7 @@ public static class MiiChannelLaunchHelper
             if (adminResult)
             {
                 miiChannelExists = true;
-                await DownloadHelper.DownloadToLocation(Endpoints.MarioCubeUrl, MiiChannelPath);
+                await DownloadHelper.DownloadToLocation(Endpoints.MiiChannelWAD, MiiChannelPath);
                 //we wait to make sure the file is written to disk
                 await Task.Delay(200);
             }

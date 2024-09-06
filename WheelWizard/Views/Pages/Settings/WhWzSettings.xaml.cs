@@ -2,6 +2,8 @@
 using CT_MKWII_WPF.Services.Settings;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -15,6 +17,18 @@ public partial class WhWzSettings : UserControl
     public WhWzSettings()
     {
         InitializeComponent();
+        AutoFillUserPath();
+        TogglePathSettings(false);
+    }
+
+    private void AutoFillUserPath()
+    {
+        if (DolphinExeInput.Text != "") 
+            return;
+        
+        var folderPath = PathManager.TryFindDolphinPath();
+        if (!string.IsNullOrEmpty(folderPath))
+            DolphinUserPathInput.Text = folderPath;
     }
 
     private void DolphinExeBrowse_OnClick(object sender, RoutedEventArgs e)
@@ -131,5 +145,16 @@ public partial class WhWzSettings : UserControl
     }
 
 
+    private void Folder_Click(object sender, RoutedEventArgs e)
+    {
+        if (!Directory.Exists(PathManager.WheelWizardAppdataPath))
+            Directory.CreateDirectory(PathManager.WheelWizardAppdataPath);
+        Process.Start("explorer.exe",PathManager.WheelWizardAppdataPath);
+    }
+
+    private void SaveFile_Click(object sender, RoutedEventArgs e)
+    {
+        throw new System.NotImplementedException();
+    }
 }
 

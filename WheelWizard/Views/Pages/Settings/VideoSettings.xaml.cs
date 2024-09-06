@@ -9,6 +9,31 @@ public partial class VideoSettings : UserControl
     public VideoSettings()
     {
         InitializeComponent();
+        UpdateSettingsState();
+    }
+
+    private void UpdateSettingsState()
+    {
+        var enableDolphinSettings = SettingsHelper.PathsSetupCorrectly();
+        VideoBorder.IsEnabled = enableDolphinSettings;
+        if (!enableDolphinSettings) 
+            return;
+        
+        VSyncButton.IsChecked = (bool)SettingsManager.VSYNC.Get();
+        RecommendedButton.IsChecked = (bool)SettingsManager.RECOMMENDED_SETTINGS.Get();
+        Button30FPS.IsChecked = (bool)SettingsManager.FORCE_30FPS.Get();
+        ShowFPSButton.IsChecked = (bool)SettingsManager.SHOW_FPS.Get();
+        var finalResolution = (int)SettingsManager.INTERNAL_RESOLUTION.Get();
+        if (finalResolution < 0 || finalResolution > ResolutionStackPanel.Children.Count) 
+            return;
+    
+        foreach (var element in ResolutionStackPanel.Children)
+        {
+            if (element is not RadioButton radioButton) 
+                continue;
+            radioButton.IsChecked = (radioButton.Tag.ToString() == finalResolution.ToString());
+        }
+        
     }
 
     private void UpdateResolution(object sender, RoutedEventArgs e)

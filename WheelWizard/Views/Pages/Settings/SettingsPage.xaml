@@ -28,7 +28,7 @@
                 <RadioButton Style="{StaticResource TopBar}" Tag="VideoSettings" 
                              Click="TopBarRadio_OnClick" Content="Video" />
                 <RadioButton Style="{StaticResource TopBar}" Tag="DolphinSettings" 
-                             Click="TopBarRadio_OnClick" Content="Other" />
+                             Click="TopBarRadio_OnClick" Content="Dolphin" />
             </StackPanel>
         </ScrollViewer>
         <ContentControl Grid.Row="1" x:Name="SettingsContent" />
