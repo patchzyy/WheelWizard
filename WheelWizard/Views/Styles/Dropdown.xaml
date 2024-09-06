@@ -18,9 +18,11 @@
     <SolidColorBrush x:Key="DropdownForeground-Open" Color="{StaticResource Gray200}" />
     <SolidColorBrush x:Key="DropdownChevron-Open" Color="{StaticResource Gray900}" /> --> 
     
+    
     <SolidColorBrush x:Key="DropdownItem-Default" Color="{StaticResource Gray700}" />
     <SolidColorBrush x:Key="DropdownItem-Hover" Color="{StaticResource Gray600}" />
     <SolidColorBrush x:Key="DropdownItem-Selected" Color="{StaticResource Gray500}" />
     <SolidColorBrush x:Key="DropdownItemForeground" Color="{StaticResource Gray200}" />
     <SolidColorBrush x:Key="DropdownItemSelectedCheck" Color="{StaticResource Cyan300}" />
+    <SolidColorBrush x:Key="DropdownItemEdge" Color="{StaticResource Gray900}" />
 </ResourceDictionary>

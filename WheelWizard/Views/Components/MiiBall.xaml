@@ -28,8 +28,7 @@
         </Border.Clip>
         
         <Grid>
-            <icon:PackIconFontAwesome Kind="SpinnerSolid"
-                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+            <icon:PackIconFontAwesome Kind="SpinnerSolid" HorizontalAlignment="Center" VerticalAlignment="Center"
                                       Width="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl},
                               Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.5}" 
                                       Height="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl},
@@ -70,8 +69,7 @@
                 </icon:PackIconFontAwesome.Style>
             </icon:PackIconFontAwesome>
             
-            <icon:PackIconFontAwesome Kind="UserSolid"
-                                      HorizontalAlignment="Center" VerticalAlignment="Bottom"
+            <icon:PackIconFontAwesome Kind="UserSolid" HorizontalAlignment="Center" VerticalAlignment="Bottom"
                                       Width="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl},
                  Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.8}" 
                                       Height="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl}, 

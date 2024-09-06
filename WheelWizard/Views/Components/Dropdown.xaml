@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
              xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d"
              d:DesignHeight="50" d:DesignWidth="300"
@@ -13,8 +12,32 @@
     <ComboBox.Resources>
         <!-- Style for ComboBox Items -->
         <Style TargetType="ComboBoxItem">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="{StaticResource DropdownItemForeground}"/>
+            <Setter Property="Background" Value="{StaticResource DropdownItem-Default}"/>
+             <Setter Property="Template">
+                 <Setter.Value>
+                     <ControlTemplate TargetType="ComboBoxItem">
+                         <Border x:Name="border"
+                                 Background="{TemplateBinding Background}"
+                                 Padding="{TemplateBinding Padding}"
+                                 BorderThickness="{TemplateBinding BorderThickness}">
+                             <ContentPresenter />
+                         </Border>
+                         <ControlTemplate.Triggers>
+                             <Trigger Property="IsMouseOver" Value="True">
+                                 <Setter TargetName="border" Property="Background" Value="{StaticResource DropdownItem-Hover}" />
+                             </Trigger>
+                             <Trigger Property="IsSelected" Value="True">
+                                 <Setter TargetName="border" Property="Background" Value="{StaticResource DropdownItem-Selected}" />
+                             </Trigger>
+                             
+                         </ControlTemplate.Triggers>
+                     </ControlTemplate>
+                 </Setter.Value>
+             </Setter>
         </Style>
         
         <!-- Template for ToggleButton with large arrow -->
@@ -52,27 +75,24 @@
 
                  </Border>
              
-                 <Popup Name="Popup"
-                        Placement="Bottom"
+                 <Popup Name="Popup" Placement="Bottom"
                         IsOpen="{TemplateBinding IsDropDownOpen}"
-                        AllowsTransparency="True"
-                        Focusable="False"
+                        AllowsTransparency="True" Focusable="False"
                         PopupAnimation="Slide">
-                     <Grid Name="DropDown"
-                           SnapsToDevicePixels="True"
-                           MinWidth="{TemplateBinding ActualWidth}"
-                           MaxHeight="{TemplateBinding MaxDropDownHeight}">
-                         <Border x:Name="DropDownBorder"
-                                 BorderBrush="Gray"
-                                 BorderThickness="1"
-                                 Background="Black"/>
-                         <ScrollViewer Margin="4,6,4,6"
-                                       SnapsToDevicePixels="True">
-                             <StackPanel IsItemsHost="True"
-                                         KeyboardNavigation.DirectionalNavigation="Contained"
-                                         Background="Black"/>
+                     <Border Name="DropDown" SnapsToDevicePixels="True" CornerRadius="6"
+                             MinWidth="{TemplateBinding ActualWidth}"
+                             MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                             BorderThickness="1" BorderBrush="{StaticResource DropdownItemEdge}"
+                             Background="{StaticResource DropdownItem-Default}"
+                             SizeChanged="DropDown_SizeChanged">
+                         <ScrollViewer SnapsToDevicePixels="True">
+                             <ScrollViewer.Resources>
+                                 <Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollBarLight}"/>
+                             </ScrollViewer.Resources>
+                             
+                             <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
                          </ScrollViewer>
-                     </Grid>
+                     </Border>
                  </Popup>
              </Grid>
          </ControlTemplate>

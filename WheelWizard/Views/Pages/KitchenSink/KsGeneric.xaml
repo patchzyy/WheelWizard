@@ -182,10 +182,16 @@
     
         <UniformGrid Grid.Row="6" Columns="1" Rows="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,10">
             <components:Dropdown Margin="5,0,0,0" HorizontalAlignment="Stretch">
-                <ComboBoxItem Content="Option 1" IsSelected="True"/>
+                <ComboBoxItem Content="Option 1"/>
                 <ComboBoxItem Content="Option 2"/>
-                <ComboBoxItem Content="Option 3"/>
+                <ComboBoxItem Content="Option 3" IsSelected="True"/>
                 <ComboBoxItem Content="Option 4"/>
+                <ComboBoxItem Content="Option 5"/>
+                <ComboBoxItem Content="Option 6"/>
+                <ComboBoxItem Content="Option 7"/>
+                <ComboBoxItem Content="Option 8"/>
+                <ComboBoxItem Content="Option 9"/>
+                <ComboBoxItem Content="Option 10"/>
             </components:Dropdown>
        </UniformGrid>
     </Grid>
