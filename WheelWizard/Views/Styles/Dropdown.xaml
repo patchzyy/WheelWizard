@@ -4,14 +4,17 @@
     <SolidColorBrush x:Key="DropdownBackground-Default" Color="{StaticResource Gray700}" />
     <SolidColorBrush x:Key="DropdownForeground-Default" Color="{StaticResource Gray200}" />
     <SolidColorBrush x:Key="DropdownChevron-Default" Color="{StaticResource Gray900}" />
-       
+    <SolidColorBrush x:Key="DropdownPlaceholder-Default" Color="{StaticResource Gray400}" />
+    
     <SolidColorBrush x:Key="DropdownBackground-Disabled" Color="{StaticResource Gray800}" />
     <SolidColorBrush x:Key="DropdownForeground-Disabled" Color="{StaticResource Gray600}" />
     <SolidColorBrush x:Key="DropdownChevron-Disabled" Color="{StaticResource Gray900}" />
+    <SolidColorBrush x:Key="DropdownPlaceholder-Disabled" Color="{StaticResource Gray600}" />
     
     <SolidColorBrush x:Key="DropdownBackground-Hover" Color="{StaticResource Gray600}" />
     <SolidColorBrush x:Key="DropdownForeground-Hover" Color="{StaticResource Gray200}" />
     <SolidColorBrush x:Key="DropdownChevron-Hover" Color="{StaticResource Gray300}" />
+    <SolidColorBrush x:Key="DropdownPlaceholder-Hover" Color="{StaticResource Gray300}" />
     
     <!-- Not sure if this is needed, also since its the as the default
     <SolidColorBrush x:Key="DropdownBackground-Open" Color="{StaticResource Gray700}" />
@@ -23,6 +26,6 @@
     <SolidColorBrush x:Key="DropdownItem-Hover" Color="{StaticResource Gray600}" />
     <SolidColorBrush x:Key="DropdownItem-Selected" Color="{StaticResource Gray500}" />
     <SolidColorBrush x:Key="DropdownItemForeground" Color="{StaticResource Gray200}" />
-    <SolidColorBrush x:Key="DropdownItemSelectedCheck" Color="{StaticResource Cyan300}" />
+    <SolidColorBrush x:Key="DropdownItemSelectedCheck" Color="{StaticResource Cyan200}" />
     <SolidColorBrush x:Key="DropdownItemEdge" Color="{StaticResource Gray900}" />
 </ResourceDictionary>

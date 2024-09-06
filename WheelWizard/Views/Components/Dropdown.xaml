@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
              mc:Ignorable="d"
-             d:DesignHeight="50" d:DesignWidth="300">
+             d:DesignHeight="70" d:DesignWidth="300">
 
     <ComboBox.Resources>
         <!-- Style for ComboBox Items -->
@@ -22,7 +23,13 @@
                                  Background="{TemplateBinding Background}"
                                  Padding="{TemplateBinding Padding}"
                                  BorderThickness="{TemplateBinding BorderThickness}">
-                             <ContentPresenter />
+                             <Grid>
+                                 <ContentPresenter />
+                                 <icon:PackIconFontAwesome x:Name="SelectedCheck" VerticalAlignment="Center" Kind="CircleCheckSolid" Visibility="Collapsed"
+                                                           HorizontalAlignment="Right" Foreground="{StaticResource DropdownItemSelectedCheck}"
+                                                           Width="16" Height="16" Margin="6,0"/>
+                             </Grid>
+                           
                          </Border>
                          <ControlTemplate.Triggers>
                              <Trigger Property="IsMouseOver" Value="True">
@@ -30,6 +37,7 @@
                              </Trigger>
                              <Trigger Property="IsSelected" Value="True">
                                  <Setter TargetName="border" Property="Background" Value="{StaticResource DropdownItem-Selected}" />
+                                 <Setter TargetName="SelectedCheck" Property="Visibility" Value="Visible" />
                              </Trigger>
                              
                          </ControlTemplate.Triggers>
@@ -78,32 +86,46 @@
     
     <ComboBox.Template>
          <ControlTemplate TargetType="ComboBox">
-             <Grid>
+             <StackPanel>
+                 <components:FormFieldLabel x:Name="LabelElement"
+                                            Text="{Binding Label, RelativeSource={RelativeSource TemplatedParent}}"
+                                            TipText="{Binding LabelTip, RelativeSource={RelativeSource TemplatedParent}}"
+                                            VerticalAlignment="Bottom" />
+                 
+                 <Grid>
                  <ToggleButton Name="ToggleButton" Focusable="false" ClickMode="Press"
                                Style="{StaticResource ComboBoxToggleButtonStyle}"
                                IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
                  
                  <Border VerticalAlignment="Center" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" 
                          Padding="6" IsHitTestVisible="False">
-                     <ContentPresenter Name="ContentSite" IsHitTestVisible="False"
-                                       Content="{TemplateBinding SelectionBoxItem}"
-                                       ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                                       ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                                       Margin="3,3,23,3">
-                         <ContentPresenter.Resources>
-                             <Style TargetType="TextBlock">
-                                 <Setter Property="Foreground" Value="{StaticResource DropdownForeground-Default}"/>
-                                 <Style.Triggers>
-                                     <DataTrigger Binding="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
-                                         <Setter Property="Foreground" Value="{StaticResource DropdownForeground-Hover}"/>
-                                     </DataTrigger>
-                                     <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=ComboBox}}" Value="False">
-                                         <Setter Property="Foreground" Value="{StaticResource DropdownForeground-Disabled}"/>
-                                     </DataTrigger>
-                                 </Style.Triggers>
-                             </Style>
-                         </ContentPresenter.Resources>
-                     </ContentPresenter>
+                     <Grid>
+                         <ContentPresenter Name="ContentSite" IsHitTestVisible="False"
+                                           Content="{TemplateBinding SelectionBoxItem}"
+                                           ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                           ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                           Margin="3,3,23,3">
+                             <ContentPresenter.Resources>
+                                 <Style TargetType="TextBlock">
+                                     <Setter Property="Foreground" Value="{StaticResource DropdownForeground-Default}"/>
+                                     <Style.Triggers>
+                                         <DataTrigger Binding="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                                             <Setter Property="Foreground" Value="{StaticResource DropdownForeground-Hover}"/>
+                                         </DataTrigger>
+                                         <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=ComboBox}}" Value="False">
+                                             <Setter Property="Foreground" Value="{StaticResource DropdownForeground-Disabled}"/>
+                                         </DataTrigger>
+                                     </Style.Triggers>
+                                 </Style>
+                             </ContentPresenter.Resources>
+                         </ContentPresenter>
+                         
+                         <TextBlock x:Name="PlaceholderText"
+                                    Text="{Binding Placeholder, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Foreground="{StaticResource DropdownPlaceholder-Default}"
+                                    Visibility="Collapsed" VerticalAlignment="Center"
+                                    Margin="3,3,23,3" />
+                     </Grid>
                  </Border>
              
                  <Popup Name="Popup" Placement="Bottom"
@@ -126,6 +148,19 @@
                      </Border>
                  </Popup>
              </Grid>
+             </StackPanel>
+             <ControlTemplate.Triggers>
+                 <Trigger Property="SelectedItem" Value="{x:Null}">
+                     <Setter TargetName="PlaceholderText" Property="Visibility" Value="Visible" />
+                 </Trigger>
+                 
+                 <DataTrigger Binding="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                     <Setter TargetName="PlaceholderText" Property="Foreground" Value="{StaticResource DropdownPlaceholder-Hover}"/>
+                 </DataTrigger>
+                 <Trigger Property="IsEnabled" Value="False">
+                     <Setter TargetName="PlaceholderText" Property="Foreground" Value="{StaticResource DropdownPlaceholder-Disabled}"/>
+                 </Trigger>
+             </ControlTemplate.Triggers>
          </ControlTemplate>
     </ComboBox.Template>
 </ComboBox>
