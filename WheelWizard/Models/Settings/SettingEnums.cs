@@ -9,6 +9,13 @@ public enum DolphinShaderCompilationMode {
 
 public static class SettingValues
 {
-public static string[] GFXRenderers = { "D3D11", "D3D12", "Vulkan", "OGL", "Software Renderer" };
+    public static class GFXRenderers
+    {
+        public const string D3D11 = "D3D11";
+        public const string D3D12 = "D3D12";
+        public const string Vulkan = "Vulkan";
+        public const string OpenGL = "OGL";
+        public const string SoftwareRenderer = "Software Renderer";
+    }
 }
    

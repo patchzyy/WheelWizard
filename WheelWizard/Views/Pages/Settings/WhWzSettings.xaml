@@ -128,14 +128,14 @@
                                    Text="Open Config Folder"
                                    Click="Folder_Click"
                                    Margin="3" />
-                <components:Button Variant="Default"
-                                   IsEnabled="True"
-                                   IconPack="Material"
-                                   IconKind="{x:Static icon:PackIconMaterialKind.ContentSaveEdit}"
-                                   HorizontalAlignment="Right"
-                                   Text="Open Save File"
-                                   Click="SaveFile_Click"
-                                   Margin="3" />
+                <!-- <components:Button Variant="Default" -->
+                <!--                    IsEnabled="True" -->
+                <!--                    IconPack="Material" -->
+                <!--                    IconKind="{x:Static icon:PackIconMaterialKind.ContentSaveEdit}" -->
+                <!--                    HorizontalAlignment="Right" -->
+                <!--                    Text="Open Save File" -->
+                <!--                    Click="SaveFile_Click" -->
+                <!--                    Margin="3" /> -->
                 </Grid>
             </StackPanel>
         </StackPanel>
