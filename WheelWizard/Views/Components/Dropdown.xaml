@@ -5,10 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d"
-             d:DesignHeight="50" d:DesignWidth="300"
-             Foreground="{StaticResource DropdownForeground-Default}">
-    
-    <!-- Define styles for ComboBoxItem to set Foreground for dropdown items -->
+             d:DesignHeight="50" d:DesignWidth="300">
+
     <ComboBox.Resources>
         <!-- Style for ComboBox Items -->
         <Style TargetType="ComboBoxItem">
@@ -40,39 +38,72 @@
              </Setter>
         </Style>
         
-        <!-- Template for ToggleButton with large arrow -->
-        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
-            <Grid>
-                <Border x:Name="Border" CornerRadius="6" BorderThickness="0"
-                        Background="{StaticResource DropdownBackground-Default}"/>
-                <!-- Create a larger arrow for the dropdown -->
-                <icon:PackIconFontAwesome x:Name="Arrow" VerticalAlignment="Center" Kind="ChevronDownSolid"
-                                          HorizontalAlignment="Right" Foreground="{StaticResource DropdownForeground-Default}"
-                                          Width="16" Height="16" Margin="12,0"/>
-            </Grid>
-        </ControlTemplate>
+        <Style x:Key="ComboBoxToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Background" Value="{StaticResource DropdownBackground-Default}"/>
+            <Setter Property="Foreground" Value="{StaticResource DropdownChevron-Default}" />
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Grid>
+                            <Border x:Name="Border" CornerRadius="6" BorderThickness="0"
+                                    Background="{TemplateBinding Background}"/>
+                            <icon:PackIconFontAwesome x:Name="Arrow" VerticalAlignment="Center" Kind="ChevronDownSolid"
+                                                      HorizontalAlignment="Right" Foreground="{TemplateBinding Foreground}"
+                                                      Width="16" Height="16" Margin="12,0"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+              
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource DropdownBackground-Hover}"/>
+                    <Setter Property="Foreground" Value="{StaticResource DropdownChevron-Hover}"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="{StaticResource DropdownBackground-Hover}"/>
+                    <Setter Property="Foreground" Value="{StaticResource DropdownChevron-Hover}"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{StaticResource DropdownBackground-Disabled}"/>
+                    <Setter Property="Foreground" Value="{StaticResource DropdownChevron-Disabled}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </ComboBox.Resources>
     
     <ComboBox.Template>
          <ControlTemplate TargetType="ComboBox">
              <Grid>
-                 <ToggleButton Name="ToggleButton"
-                               Template="{StaticResource ComboBoxToggleButton}"
-                               Focusable="false"
-                               IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                               ClickMode="Press"
-                               Background="{TemplateBinding Background}"
-                               BorderBrush="{TemplateBinding BorderBrush}"/>
+                 <ToggleButton Name="ToggleButton" Focusable="false" ClickMode="Press"
+                               Style="{StaticResource ComboBoxToggleButtonStyle}"
+                               IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
                  
                  <Border VerticalAlignment="Center" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" 
                          Padding="6" IsHitTestVisible="False">
-                     <ContentPresenter Name="ContentSite"
-                                       IsHitTestVisible="False"
+                     <ContentPresenter Name="ContentSite" IsHitTestVisible="False"
                                        Content="{TemplateBinding SelectionBoxItem}"
                                        ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
                                        ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                                       Margin="3,3,23,3"/>
-
+                                       Margin="3,3,23,3">
+                         <ContentPresenter.Resources>
+                             <Style TargetType="TextBlock">
+                                 <Setter Property="Foreground" Value="{StaticResource DropdownForeground-Default}"/>
+                                 <Style.Triggers>
+                                     <DataTrigger Binding="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                                         <Setter Property="Foreground" Value="{StaticResource DropdownForeground-Hover}"/>
+                                     </DataTrigger>
+                                     <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=ComboBox}}" Value="False">
+                                         <Setter Property="Foreground" Value="{StaticResource DropdownForeground-Disabled}"/>
+                                     </DataTrigger>
+                                 </Style.Triggers>
+                             </Style>
+                         </ContentPresenter.Resources>
+                     </ContentPresenter>
                  </Border>
              
                  <Popup Name="Popup" Placement="Bottom"

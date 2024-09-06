@@ -11,7 +11,7 @@ public partial class Dropdown : ComboBox
     {
         InitializeComponent();
         FontSize = 16.0;
-        MaxDropDownHeight = 220.0;
+        MaxDropDownHeight = 225.0;
     }
     
    private void DropDown_SizeChanged(object sender, SizeChangedEventArgs e)
