@@ -173,6 +173,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.CubesStackedSolid}"
                                                    IconPack="FontAwesome" Text="My Stuff"
                                                    PageType="{x:Type local:ModsPage}" />
+                    
                     <TextBlock Text="Online" Style="{StaticResource SidebarSectionText}" />
                     <components:SidebarRadioButton
                         IconKind="{x:Static icon:PackIconFontAwesomeKind.UsersRectangleSolid}"
@@ -184,15 +185,14 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                         PageType="{x:Type local:FriendsPage}"
                         BoxText="0" />
                     
-
-                    <!-- add an other section by doing this:
-                    <TextBlock Text="Other" Style="{StaticResource SidebarSectionText}"/>
-                     -->
-                    <!-- -->
-                    <!-- <TextBlock Text="Components" Style="{StaticResource SidebarSectionText}"/> -->
-                    <!-- <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.SinkSolid}" -->
-                    <!--                                IconPack="FontAwesome" Text="Kitchen Sink" -->
-                    <!--                                PageType="{x:Type sink:KitchenSink}"/> -->
+                    <TextBlock Text="Other" Style="{StaticResource SidebarSectionText}" />
+                    <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.WrenchSolid}"
+                                                   IconPack="FontAwesome" Text="Settings" x:Name="SettingsButton"
+                                                   PageType="{x:Type local:SettingsPage}" />
+                    
+                    <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.SinkSolid}"
+                                                   IconPack="FontAwesome" Text="Kitchen Sink"
+                                                   PageType="{x:Type sink:KitchenSink}"/>
 
                 </StackPanel>
             </Border>
