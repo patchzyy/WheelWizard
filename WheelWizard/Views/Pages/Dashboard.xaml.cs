@@ -36,10 +36,10 @@ public partial class Dashboard
                 await Launcher.LaunchRetroRewind((bool)OnlineTTCheckbox.IsChecked!);
                 break;
             case WheelWizardStatus.NoDolphin:
-                NavigateToPage(new SettingsPage());
+                NavigateToPage(new Settings.SettingsPage());
                 break;
             case WheelWizardStatus.ConfigNotFinished:
-                NavigateToPage(new SettingsPage());
+                NavigateToPage(new Settings.SettingsPage());
                 break;
             case WheelWizardStatus.NoRR:
                 SetButtonState("Installing...", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download,
@@ -109,7 +109,7 @@ public partial class Dashboard
             return;
         
         DolphinButton.IsEnabled = false;
-        MiiButton.IsEnabled = false;
+        // MiiButton.IsEnabled = false;
         OnlineTTCheckbox.IsEnabled = false;
     }
 
@@ -121,7 +121,7 @@ public partial class Dashboard
         PlayButton.IsEnabled = enabled;
         PlayButton.IconPack = "Material";
         PlayButton.IconKind = iconKind;
-        MiiButton.IsEnabled = subButtonsEnabled;
+        // MiiButton.IsEnabled = subButtonsEnabled;
         DolphinButton.IsEnabled = subButtonsEnabled;
     }
 
@@ -133,7 +133,7 @@ public partial class Dashboard
         PlayButton.IsEnabled = enabled;
         PlayButton.IconPack = "FontAwesome";
         PlayButton.IconKind = iconKind;
-        MiiButton.IsEnabled = subButtonsEnabled;
+        // MiiButton.IsEnabled = subButtonsEnabled;
         DolphinButton.IsEnabled = subButtonsEnabled;
     }
 

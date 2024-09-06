@@ -1,4 +1,5 @@
 using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Models.Enums;
 using CT_MKWII_WPF.Models.Settings;
 using System;
 
@@ -23,6 +24,7 @@ public class SettingsManager
   
     
     public static Setting SHOW_FPS = new DolphinSetting(typeof(bool), ("GFX.ini", "Settings", "ShowFPS"), false);
+    public static Setting GFX_BACKEND = new DolphinSetting(typeof(string), ("Dolphin.ini", "Core", "GFXBackend"), SettingValues.GFXRenderers.D3D11);
     
     //recommended settings
     private static Setting DOLPHIN_COMPILATION_MODE = new DolphinSetting(typeof(DolphinShaderCompilationMode), ("GFX.ini", "Settings", "ShaderCompilationMode"),
