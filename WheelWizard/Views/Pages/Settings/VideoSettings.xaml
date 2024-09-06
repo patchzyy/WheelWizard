@@ -88,15 +88,17 @@
             </Border>
             
             <components:FormFieldLabel Text="Renderer Settings" />
-            <Border Style="{StaticResource SettingsBlockStyle}" x:Name="Renderer Border">
+            <Border Style="{StaticResource SettingsBlockStyle}" 
+                    x:Name="RendererBorder">
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
-
-                    <StackPanel>
-                        
-                    </StackPanel>
+                    <components:Dropdown
+                        Label="Renderer"
+                        x:Name="RendererDropdown"
+                        SelectionChanged="RendererDropdown_OnSelectionChanged"
+                        ></components:Dropdown>
                 </Grid>
             </Border>
         </StackPanel>

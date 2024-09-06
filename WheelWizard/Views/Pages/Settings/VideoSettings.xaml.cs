@@ -1,4 +1,5 @@
-﻿using CT_MKWII_WPF.Services.Settings;
+﻿using CT_MKWII_WPF.Models.Settings;
+using CT_MKWII_WPF.Services.Settings;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -10,6 +11,15 @@ public partial class VideoSettings : UserControl
     {
         InitializeComponent();
         UpdateSettingsState();
+        PopulateRenderers();
+    }
+
+    private void PopulateRenderers()
+    {
+        foreach (var renderer in SettingValues.GFXRenderers.AllRenderers)
+        {
+            RendererDropdown.Items.Add(renderer);
+        }
     }
 
     private void UpdateSettingsState()
@@ -54,6 +64,11 @@ public partial class VideoSettings : UserControl
     private void ShowFPS_OnClick(object sender, RoutedEventArgs e)
     {
         SettingsManager.SHOW_FPS.Set(ShowFPSButton.IsChecked == true);
+    }
+
+    private void RendererDropdown_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        SettingsManager.GFX_BACKEND.Set(RendererDropdown.SelectedItem.ToString());
     }
 }
 

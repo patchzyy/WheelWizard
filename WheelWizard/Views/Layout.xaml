@@ -167,9 +167,6 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.CircleUserSolid}"
                                                    IconPack="FontAwesome" Text="My Profiles" x:Name="MyProfilesButton"
                                                    PageType="{x:Type local:UserProfilePage}"/>
-                    <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.WrenchSolid}"
-                                                   IconPack="FontAwesome" Text="Settings" x:Name="SettingsButton"
-                                                   PageType="{x:Type settings:SettingsPage}" />
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.CubesStackedSolid}"
                                                    IconPack="FontAwesome" Text="My Stuff"
                                                    PageType="{x:Type local:ModsPage}" />
@@ -188,7 +185,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                     <TextBlock Text="Other" Style="{StaticResource SidebarSectionText}" />
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.WrenchSolid}"
                                                    IconPack="FontAwesome" Text="Settings" x:Name="SettingsButton"
-                                                   PageType="{x:Type local:SettingsPage}" />
+                                                   PageType="{x:Type settings:SettingsPage}" />
                     
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.SinkSolid}"
                                                    IconPack="FontAwesome" Text="Kitchen Sink"
