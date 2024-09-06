@@ -19,15 +19,17 @@ public static class SettingValues
         public const string OpenGL = "OGL";
         public const string SoftwareRenderer = "Software Renderer";
 
-        // List of all renderer constants
-        public static readonly List<string> AllRenderers = new List<string>
+        // Dictionary to map display names to actual values
+        public static readonly Dictionary<string, string> RendererMapping = new Dictionary<string, string>
         {
-            D3D11,
-            D3D12,
-            Vulkan,
-            OpenGL,
-            "Software Renderer"
+            { "DirectX 11", D3D11 },
+            { "DirectX 12", D3D12 },
+            { "Vulkan", Vulkan },
+            { "OpenGL", OpenGL },
+            { "Software Renderer", SoftwareRenderer }
         };
+        
+        public static readonly List<string> AllRenderers = new List<string>(RendererMapping.Keys);
     }
 }
    

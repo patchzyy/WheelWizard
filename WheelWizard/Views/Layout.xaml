@@ -187,9 +187,9 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                                                    IconPack="FontAwesome" Text="Settings" x:Name="SettingsButton"
                                                    PageType="{x:Type settings:SettingsPage}" />
                     
-                    <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.SinkSolid}"
-                                                   IconPack="FontAwesome" Text="Kitchen Sink"
-                                                   PageType="{x:Type sink:KitchenSink}"/>
+                    <!-- <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.SinkSolid}" -->
+                    <!--                                IconPack="FontAwesome" Text="Kitchen Sink" -->
+                    <!--                                PageType="{x:Type sink:KitchenSink}"/> -->
 
                 </StackPanel>
             </Border>
