@@ -63,24 +63,22 @@
             <Grid Margin="0,10,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
-                    <ColumnDefinition Width="10" />
-                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <components:Button Grid.Column="0"
-                                   x:Name="MiiButton"
-                                   IsEnabled="False"
-                                   IconPack="GameIcons" Text=""
-                                   IconKind="{x:Static icon:PackIconGameIconsKind.Mustache}"
-                                   Click="MiiButton_OnClick"
-
-                                   ToolTipService.InitialShowDelay="50"
-                                   ToolTipService.ShowDuration="5000"
-                                   ToolTipService.BetweenShowDelay="0">
-                    <components:Button.ToolTip>
-                        <components:ToolTipMessage Content="Launch the Mii creator" Alignment="BottomCenter" />
-                    </components:Button.ToolTip>
-                </components:Button>
+                <!-- <components:Button Grid.Column="0" -->
+                <!--                    x:Name="MiiButton" -->
+                <!--                    IsEnabled="False" -->
+                <!--                    IconPack="GameIcons" Text="" -->
+                <!--                    IconKind="{x:Static icon:PackIconGameIconsKind.Mustache}" -->
+                <!--                    Click="MiiButton_OnClick" -->
+                <!-- -->
+                <!--                    ToolTipService.InitialShowDelay="50" -->
+                <!--                    ToolTipService.ShowDuration="5000" -->
+                <!--                    ToolTipService.BetweenShowDelay="0"> -->
+                <!--     <components:Button.ToolTip> -->
+                <!--         <components:ToolTipMessage Content="Launch the Mii creator" Alignment="BottomCenter" /> -->
+                <!--     </components:Button.ToolTip> -->
+                <!-- </components:Button> -->
 
                 <components:Button Grid.Column="2"
                                    x:Name="DolphinButton"
@@ -88,7 +86,7 @@
                                    IconPack="GameIcons" Text=""
                                    IconKind="{x:Static icon:PackIconGameIconsKind.Dolphin}"
                                    Click="DolphinButton_OnClick"
-
+                                   Width="100"
                                    ToolTipService.InitialShowDelay="50"
                                    ToolTipService.ShowDuration="5000"
                                    ToolTipService.BetweenShowDelay="0">

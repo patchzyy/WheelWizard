@@ -14,6 +14,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
         xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
         xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Pages"
         xmlns:sink="clr-namespace:CT_MKWII_WPF.Views.Pages.KitchenSink"
+        xmlns:settings="clr-namespace:CT_MKWII_WPF.Views.Pages.Settings"
         mc:Ignorable="d"
         Title="Wheel Wizard" Height="876" Width="656"
         WindowStyle='None'
@@ -166,6 +167,9 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.CircleUserSolid}"
                                                    IconPack="FontAwesome" Text="My Profiles" x:Name="MyProfilesButton"
                                                    PageType="{x:Type local:UserProfilePage}"/>
+                    <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.WrenchSolid}"
+                                                   IconPack="FontAwesome" Text="Settings" x:Name="SettingsButton"
+                                                   PageType="{x:Type settings:SettingsPage}" />
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.CubesStackedSolid}"
                                                    IconPack="FontAwesome" Text="My Stuff"
                                                    PageType="{x:Type local:ModsPage}" />

@@ -54,6 +54,11 @@
           <SubType>Designer</SubType>
         </Page>
         <Resource Include="Resources\Fonts\*.ttf" />
+        <Page Update="Views\Pages\SettingsPage\SettingsPage.xaml">
+          <Generator>MSBuild:Compile</Generator>
+          <XamlRuntime>Wpf</XamlRuntime>
+          <SubType>Designer</SubType>
+        </Page>
     </ItemGroup>
 
     <ItemGroup>
