@@ -25,10 +25,8 @@
                              Click="TopBarRadio_OnClick" Content="Generic" IsChecked="True" />
                 <RadioButton Style="{StaticResource TopBar}" Tag="KsLists" 
                              Click="TopBarRadio_OnClick" Content="List" />
-   
             </StackPanel>
         </ScrollViewer>
-   
         
         <ContentControl Grid.Row="1" x:Name="KitchenSinkContent" />
     </Grid>
