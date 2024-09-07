@@ -21,8 +21,6 @@ public class SettingsManager
 
     public static Setting INTERNAL_RESOLUTION = new DolphinSetting(typeof(int), ("GFX.ini", "Settings", "InternalResolution"), 1)
         .SetValidation(value => (int)(value ?? -1) >= 0);
-  
-    
     public static Setting SHOW_FPS = new DolphinSetting(typeof(bool), ("GFX.ini", "Settings", "ShowFPS"), false);
     public static Setting GFX_BACKEND = new DolphinSetting(typeof(string), ("Dolphin.ini", "Core", "GFXBackend"), SettingValues.GFXRenderers.D3D11);
     
