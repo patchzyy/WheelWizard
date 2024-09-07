@@ -18,18 +18,11 @@ public partial class DolphinSettings : UserControl
         WiiBorder.IsEnabled = enableDolphinSettings;
         if (!enableDolphinSettings) 
             return;
+        
         DisableForce.IsChecked = (bool)SettingsManager.FORCE_WIIMOTE.Get();
         LaunchWithDolphin.IsChecked = (bool)SettingsManager.LAUNCH_WITH_DOLPHIN.Get();
     }
 
-    private void ClickForceWiimote(object sender, RoutedEventArgs e)
-    {
-        SettingsManager.FORCE_WIIMOTE.Set(DisableForce.IsChecked == true);
-    }
-
-    private void ClickLaunchWithDolphinWindow(object sender, RoutedEventArgs e)
-    {
-        SettingsManager.LAUNCH_WITH_DOLPHIN.Set(LaunchWithDolphin.IsChecked == true);
-    }
+    private void ClickForceWiimote(object sender, RoutedEventArgs e) => SettingsManager.FORCE_WIIMOTE.Set(DisableForce.IsChecked == true);
+    private void ClickLaunchWithDolphinWindow(object sender, RoutedEventArgs e) => SettingsManager.LAUNCH_WITH_DOLPHIN.Set(LaunchWithDolphin.IsChecked == true);
 }
-

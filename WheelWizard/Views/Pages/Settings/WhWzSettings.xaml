@@ -134,7 +134,6 @@
                 <!--                    IconKind="{x:Static icon:PackIconMaterialKind.ContentSaveEdit}" -->
                 <!--                    HorizontalAlignment="Right" -->
                 <!--                    Text="Open Save File" -->
-                <!--                    Click="SaveFile_Click" -->
                 <!--                    Margin="3" /> -->
                 </Grid>
             </StackPanel>

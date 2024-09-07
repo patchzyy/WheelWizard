@@ -144,17 +144,10 @@ public partial class WhWzSettings : UserControl
         TogglePathSettings(true);
     }
 
-
     private void Folder_Click(object sender, RoutedEventArgs e)
     {
         if (!Directory.Exists(PathManager.WheelWizardAppdataPath))
             Directory.CreateDirectory(PathManager.WheelWizardAppdataPath);
         Process.Start("explorer.exe",PathManager.WheelWizardAppdataPath);
     }
-
-    private void SaveFile_Click(object sender, RoutedEventArgs e)
-    {
-        throw new System.NotImplementedException();
-    }
 }
-
