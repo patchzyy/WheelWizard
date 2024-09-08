@@ -31,7 +31,7 @@ public abstract class Setting
         
         var succeeded = SetInternal(newValue, skipSave);
         if (succeeded)
-            SignalDependents();
+            SignalChange();
         
         return succeeded;
     }
@@ -65,11 +65,11 @@ public abstract class Setting
         DependentVirtualSettings.Add(dependent);
     }
     
-    protected void SignalDependents()
+    protected void SignalChange()
     {
         foreach (var dependent in DependentVirtualSettings)
         {
-            dependent.DependencyChanged(this);
+            dependent.OnSettingChanged(this);
         }
     }
 }

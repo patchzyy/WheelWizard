@@ -15,7 +15,7 @@ public class SettingsManager
     public static Setting LAUNCH_WITH_DOLPHIN = new WhWzSetting(typeof(bool),"LaunchWithDolphin", false);
     public static Setting FOCUSSED_USER = new WhWzSetting(typeof(int), "FavoriteUser", 0).SetValidation(value => (int)(value ?? -1) >= 0 && (int)(value ?? -1) <= 4);
     public static Setting FORCE_30FPS = new WhWzSetting(typeof(bool), "Force30FPS", false);
-    public static Setting WINDOW_SCALE = new WhWzSetting(typeof(double), "WindowScale", 1.0).SetValidation(value => (double)(value ?? -1) >= 0.5 && (double)(value ?? -1) <= 2.0);
+    public static Setting SAVED_WINDOW_SCALE = new WhWzSetting(typeof(double), "WindowScale", 1.0).SetValidation(value => (double)(value ?? -1) >= 0.5 && (double)(value ?? -1) <= 2.0);
     
     // Dolphin Settings
     public static Setting VSYNC = new DolphinSetting(typeof(bool), ("GFX.ini", "Hardware", "VSync"), false);
@@ -34,6 +34,11 @@ public class SettingsManager
         value => ( value?.ToString() ?? "") is "0x00000001" or "0x00000002" or "0x00000004" or "0x00000008");
     
     // Virtual Settings
+    private static double _internalScale = -1.0;
+    public static Setting WINDOW_SCALE = new VirtualSetting(typeof(double), value => _internalScale = (double)value!,
+                                                            () => _internalScale == -1.0 ? SAVED_WINDOW_SCALE.Get() : _internalScale
+                                                            ).SetDependencies(SAVED_WINDOW_SCALE);
+    
     public static Setting RECOMMENDED_SETTINGS = new VirtualSetting(typeof(bool), value => {
                                                                 var newValue = (bool)value!;
                                                                 DOLPHIN_COMPILATION_MODE.Set(newValue ? DolphinShaderCompilationMode.HybridUberShaders : DolphinShaderCompilationMode.Default);

@@ -1,4 +1,5 @@
-﻿using CT_MKWII_WPF.Services;
+﻿using CT_MKWII_WPF.Models.Settings;
+using CT_MKWII_WPF.Services;
 using CT_MKWII_WPF.Services.LiveData;
 using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Services.WiiManagement.SaveData;
@@ -17,35 +18,17 @@ using System.Windows.Media;
 
 namespace CT_MKWII_WPF.Views;
 
-public partial class Layout : Window, IRepeatedTaskListener, INotifyPropertyChanged
+public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
 {
-    private double _scaleFactor = 1;
-    public double WindowHeight => 876 * _scaleFactor;
-    public double WindowWidth => 656 * _scaleFactor;
-    
-    public double ScaleFactor
-    {
-        get => _scaleFactor; 
-        set
-        {
-            if (_scaleFactor == value) 
-                return;
-
-            _scaleFactor = value;
-            OnPropertyChanged(nameof(ScaleFactor));
-            OnPropertyChanged(nameof(WindowWidth));
-            OnPropertyChanged(nameof(WindowHeight));
-        }
-    }
+    public readonly double WindowHeight = 876;
+    public readonly double WindowWidth = 656;
     
     public Layout()
     {
         InitializeComponent();
         DataContext = this;
 
-        ScaleFactor = (double)SettingsManager.WINDOW_SCALE.Get();
-        Height = WindowHeight;
-        Width = WindowWidth;
+        OnSettingChanged(SettingsManager.SAVED_WINDOW_SCALE);
         
         try
         {
@@ -57,6 +40,16 @@ public partial class Layout : Window, IRepeatedTaskListener, INotifyPropertyChan
             MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             Environment.Exit(1);
         }
+    }
+    
+    public void OnSettingChanged(Setting setting)
+    {
+        // Note that this method will also be called whenever the setting changes
+        var scaleFactor = (double)setting.Get();
+        Height = WindowHeight * scaleFactor;
+        Width = WindowWidth * scaleFactor;
+        ScaleTransform.ScaleX = scaleFactor;
+        ScaleTransform.ScaleY = scaleFactor;
     }
     
     private void InitializeManagers()
@@ -209,10 +202,4 @@ public partial class Layout : Window, IRepeatedTaskListener, INotifyPropertyChan
 
     public void DisableEverything() => CompleteGrid.IsEnabled = false;
     public void EnableEverything() => CompleteGrid.IsEnabled = true;
-    
-    public event PropertyChangedEventHandler? PropertyChanged;
-    protected void OnPropertyChanged(string propertyName)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
 }

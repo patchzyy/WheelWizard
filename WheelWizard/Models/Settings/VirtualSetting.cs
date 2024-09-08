@@ -3,7 +3,7 @@ using System;
 
 namespace CT_MKWII_WPF.Models.Settings;
 
-public class VirtualSetting : Setting
+public class VirtualSetting : Setting, ISettingListener
 {
     private Setting[] _dependencies;
     private Action<object> Setter;
@@ -62,12 +62,12 @@ public class VirtualSetting : Setting
         Value = Getter();
     }
     
-    public void DependencyChanged(Setting changedSetting)
+    public void OnSettingChanged(Setting changedSetting)
     {
         if (!_acceptsSignals)
             return;
         
-        SignalDependents();
+        SignalChange();
         Recalculate();
     }
 }

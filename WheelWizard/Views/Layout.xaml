@@ -17,7 +17,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
         xmlns:settings="clr-namespace:CT_MKWII_WPF.Views.Pages.Settings"
         mc:Ignorable="d"
         d:DesignHeight="876" d:DesignWidth="656"
-        Height="{Binding WindowHeight}" Width="{Binding WindowWidth}"
+        Height="876" Width="656"
         Title="Wheel Wizard" 
         WindowStyle='None'
         ResizeMode='CanMinimize'
@@ -27,7 +27,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
 
     <Grid>
         <Grid.LayoutTransform>
-            <ScaleTransform ScaleX="{Binding ScaleFactor}" ScaleY="{Binding ScaleFactor}" />
+            <ScaleTransform x:Name="ScaleTransform"/>
         </Grid.LayoutTransform>
         <!-- Apply LayoutTransform to scale the content -->
        
