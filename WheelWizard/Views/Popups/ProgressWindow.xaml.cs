@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CT_MKWII_WPF.Services.Settings;
+using System;
 using System.Windows;
 using System.Windows.Input;
 
@@ -12,6 +13,12 @@ public partial class ProgressWindow : Window
     {
         _allowLayoutInteraction = allowLayoutInteraction;
         InitializeComponent();
+        
+        var scaleFactor = (double)SettingsManager.WINDOW_SCALE.Get();
+        Height *= scaleFactor;
+        Width *= scaleFactor;
+        ScaleTransform.ScaleX = scaleFactor;
+        ScaleTransform.ScaleY = scaleFactor;
 
         Loaded += ProgressWindow_Loaded;
     }

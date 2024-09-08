@@ -5,6 +5,7 @@ using CT_MKWII_WPF.Services.WiiManagement.SaveData;
 using CT_MKWII_WPF.Utilities.RepeatedTasks;
 using CT_MKWII_WPF.Views.Components;
 using CT_MKWII_WPF.Views.Pages;
+using CT_MKWII_WPF.Views.Popups;
 using MahApps.Metro.IconPacks;
 using System;
 using System.ComponentModel;
@@ -45,6 +46,10 @@ public partial class Layout : Window, IRepeatedTaskListener, INotifyPropertyChan
         ScaleFactor = (double)SettingsManager.WINDOW_SCALE.Get();
         Height = WindowHeight;
         Width = WindowWidth;
+        
+        var messageBox = new YesNoMessagebox("scale","yes", "no");
+        messageBox.ShowDialog();
+        
         try
         {
             NavigateToPage(new Dashboard());

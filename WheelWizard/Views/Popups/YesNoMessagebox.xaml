@@ -13,6 +13,10 @@
         AllowsTransparency="True"
         Background="Transparent">
     <Grid>
+        <Grid.LayoutTransform>
+            <ScaleTransform x:Name="ScaleTransform" ScaleX="1.0" ScaleY="1.0" />
+        </Grid.LayoutTransform>
+        
         <Border Background="{StaticResource LightBackgroundColor}" Margin="10">
             <Grid>
                 <Grid.RowDefinitions>
