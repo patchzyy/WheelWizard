@@ -1,11 +1,13 @@
 ﻿using CT_MKWII_WPF.Services;
 using CT_MKWII_WPF.Services.LiveData;
+using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Services.WiiManagement.SaveData;
 using CT_MKWII_WPF.Utilities.RepeatedTasks;
 using CT_MKWII_WPF.Views.Components;
 using CT_MKWII_WPF.Views.Pages;
 using MahApps.Metro.IconPacks;
 using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,21 +16,39 @@ using System.Windows.Media;
 
 namespace CT_MKWII_WPF.Views;
 
-public partial class Layout : Window, IRepeatedTaskListener
+public partial class Layout : Window, IRepeatedTaskListener, INotifyPropertyChanged
 {
+    private double _scaleFactor = 1;
+    public double WindowHeight => 876 * _scaleFactor;
+    public double WindowWidth => 656 * _scaleFactor;
+    
+    public double ScaleFactor
+    {
+        get => _scaleFactor; 
+        set
+        {
+            if (_scaleFactor == value) 
+                return;
+
+            _scaleFactor = value;
+            OnPropertyChanged(nameof(ScaleFactor));
+            OnPropertyChanged(nameof(WindowWidth));
+            OnPropertyChanged(nameof(WindowHeight));
+        }
+    }
+    
     public Layout()
     {
+        InitializeComponent();
+        DataContext = this;
+
+        ScaleFactor = (double)SettingsManager.WINDOW_SCALE.Get();
+        Height = WindowHeight;
+        Width = WindowWidth;
         try
         {
-            InitializeComponent();
-            DataContext = this;
             NavigateToPage(new Dashboard());
-            LiveAlertsManager.Instance.Start(); // Temporary code, should be moved to a more appropriate location
-            LiveAlertsManager.Instance.Subscribe(this);
-            RRLiveRooms.Instance.Start(); // Temporary code, should be moved to a more appropriate location
-            RRLiveRooms.Instance.Subscribe(this);
-            GameDataLoader.Instance.Start(); // Temporary code, should be moved to a more appropriate location
-            GameDataLoader.Instance.Subscribe(this);
+            InitializeManagers();
         }
         catch (Exception e)
         {
@@ -36,7 +56,17 @@ public partial class Layout : Window, IRepeatedTaskListener
             Environment.Exit(1);
         }
     }
-
+    
+    private void InitializeManagers()
+    {
+        LiveAlertsManager.Instance.Start(); // Temporary code, should be moved to a more appropriate location
+        LiveAlertsManager.Instance.Subscribe(this);
+        RRLiveRooms.Instance.Start(); // Temporary code, should be moved to a more appropriate location
+        RRLiveRooms.Instance.Subscribe(this);
+        GameDataLoader.Instance.Start(); // Temporary code, should be moved to a more appropriate location
+        GameDataLoader.Instance.Subscribe(this);
+    }
+    
     public void NavigateToPage(Page page)
     {
         ContentArea.Navigate(page);
@@ -177,4 +207,10 @@ public partial class Layout : Window, IRepeatedTaskListener
 
     public void DisableEverything() => CompleteGrid.IsEnabled = false;
     public void EnableEverything() => CompleteGrid.IsEnabled = true;
+    
+    public event PropertyChangedEventHandler? PropertyChanged;
+    protected void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 }

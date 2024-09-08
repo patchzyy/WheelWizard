@@ -153,10 +153,7 @@ public partial class WhWzSettings : UserControl
         LocationEditButton.Visibility = enable ? Visibility.Collapsed : Visibility.Visible;
         LocationSaveButton.Visibility = enable ? Visibility.Visible : Visibility.Collapsed;
         LocationCancelButton.Visibility = enable ? Visibility.Visible : Visibility.Collapsed;
-        LoadPathSettings();
-    }
-    private void LoadPathSettings()
-    {
+        
         DolphinExeInput.Text = PathManager.DolphinFilePath;
         MarioKartInput.Text = PathManager.GameFilePath;
         DolphinUserPathInput.Text = PathManager.UserFolderPath;

@@ -16,12 +16,21 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
         xmlns:sink="clr-namespace:CT_MKWII_WPF.Views.Pages.KitchenSink"
         xmlns:settings="clr-namespace:CT_MKWII_WPF.Views.Pages.Settings"
         mc:Ignorable="d"
-        Title="Wheel Wizard" Height="876" Width="656"
+        d:DesignHeight="876" d:DesignWidth="656"
+        Height="{Binding WindowHeight}" Width="{Binding WindowWidth}"
+        Title="Wheel Wizard" 
         WindowStyle='None'
         ResizeMode='CanMinimize'
         AllowsTransparency="True"
         Background="Transparent">
+    <!-- Main content container -->
 
+    <Grid>
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="{Binding ScaleFactor}" ScaleY="{Binding ScaleFactor}" />
+        </Grid.LayoutTransform>
+        <!-- Apply LayoutTransform to scale the content -->
+       
     <Border Background="{StaticResource LightBackgroundColor}"
             CornerRadius="{StaticResource WindowCornerRadius}">
         <Grid x:Name="CompleteGrid">
@@ -180,7 +189,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                         IconKind="{x:Static icon:PackIconFontAwesomeKind.UserPlusSolid}"
                         IconPack="FontAwesome" Text="Friends" x:Name="FriendsButton"
                         PageType="{x:Type local:FriendsPage}"
-                        BoxText="0" />
+                        BoxText="0/0" />
                     
                     <TextBlock Text="Other" Style="{StaticResource SidebarSectionText}" />
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.WrenchSolid}"
@@ -195,4 +204,5 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
             </Border>
         </Grid>
     </Border>
+    </Grid>
 </Window>
