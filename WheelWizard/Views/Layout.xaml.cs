@@ -200,6 +200,15 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
         RepeatedTaskManager.CancelAllTasks();
     }
 
-    public void DisableEverything() => CompleteGrid.IsEnabled = false;
-    public void EnableEverything() => CompleteGrid.IsEnabled = true;
+    public void DisableEverything()
+    {
+        DisabledDarkenEffect.Visibility = Visibility.Visible;
+        CompleteGrid.IsEnabled = false;
+    }
+
+    public void EnableEverything()
+    {
+        CompleteGrid.IsEnabled = true;
+        DisabledDarkenEffect.Visibility = Visibility.Collapsed;
+    } 
 }

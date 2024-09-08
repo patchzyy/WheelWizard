@@ -45,7 +45,24 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                 <RowDefinition />             <!--Side bar -->                      <!-- Also the page container -->
                 <RowDefinition Height="80" /> <!--Bottom info corner -->            <!-- Also the page container -->
             </Grid.RowDefinitions>
-
+            
+            <!-- <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <BlurEffect Radius="5"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>-->
+            <Border Grid.RowSpan="999" Grid.ColumnSpan="999" Panel.ZIndex="999" Visibility="Collapsed"
+                    x:Name="DisabledDarkenEffect" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                    Background="Black"  Opacity="0.3"/> 
+            
             <!-- This border is only used as topBar in order so you can move the window around -->
             <Border Grid.ColumnSpan="2"
                     CornerRadius="{StaticResource WindowCornerRadius}"
