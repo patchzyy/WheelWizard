@@ -5,6 +5,10 @@ using System.Windows.Input;
 
 namespace CT_MKWII_WPF.Views.Popups;
 
+// TODO: There should come a generic approuch to popup windows
+//      - This would include one definative base class for the window for all popups
+//      - This base class would include the OnClose code and stuff like that, it would also include the scale code
+//      - All other things that should not be generic would be in the specific popup classes
 public partial class ProgressWindow : Window
 {
     private readonly bool _allowLayoutInteraction;

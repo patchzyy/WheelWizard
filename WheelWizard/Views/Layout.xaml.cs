@@ -47,9 +47,6 @@ public partial class Layout : Window, IRepeatedTaskListener, INotifyPropertyChan
         Height = WindowHeight;
         Width = WindowWidth;
         
-        var messageBox = new YesNoMessagebox("scale","yes", "no");
-        messageBox.ShowDialog();
-        
         try
         {
             NavigateToPage(new Dashboard());
