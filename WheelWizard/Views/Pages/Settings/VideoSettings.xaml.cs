@@ -9,27 +9,21 @@ namespace CT_MKWII_WPF.Views.Pages.Settings;
 
 public partial class VideoSettings : UserControl
 {
+    private readonly bool _settingsAreDisabled;
+    
     public VideoSettings()
     {
         InitializeComponent();
-        UpdateSettingsState();
-        PopulateRenderers();
-        InitializeRendererDropdown();
+        _settingsAreDisabled = !SettingsHelper.PathsSetupCorrectly();
+        DisabledWarningText.Visibility = _settingsAreDisabled ? Visibility.Visible : Visibility.Collapsed;
+        LoadSettings();
+        LoadRendererDropdown();
     }
 
-    private void PopulateRenderers()
+    private void LoadSettings()
     {
-        foreach (var renderer in SettingValues.GFXRenderers.AllRenderers)
-        {
-            RendererDropdown.Items.Add(renderer);
-        }
-    }
-
-    private void UpdateSettingsState()
-    {
-        var enableDolphinSettings = SettingsHelper.PathsSetupCorrectly();
-        VideoBorder.IsEnabled = enableDolphinSettings;
-        if (!enableDolphinSettings)
+        VideoBorder.IsEnabled = !_settingsAreDisabled;
+        if (_settingsAreDisabled)
             return;
 
         VSyncButton.IsChecked = (bool)SettingsManager.VSYNC.Get();
@@ -47,7 +41,22 @@ public partial class VideoSettings : UserControl
             
             radioButton.IsChecked = (radioButton.Tag.ToString() == finalResolution.ToString());
         }
-
+    }
+    
+    private void LoadRendererDropdown()
+    {
+        // This is not in the LoadSettings method since we want to load it even if they are disabled.
+        // Its not really nessesairy for the app to work, but we want to show DirectX 11 as default, which requires it to be loaded.
+        foreach (var renderer in SettingValues.GFXRenderers.AllRenderers)
+        {
+            RendererDropdown.Items.Add(renderer);
+        }
+        
+        var currentRenderer = (string)SettingsManager.GFX_BACKEND.Get();
+        var displayName = SettingValues.GFXRenderers.RendererMapping
+                                       .FirstOrDefault(x => x.Value == currentRenderer).Key;
+        if (displayName != null)
+            RendererDropdown.SelectedItem = displayName;
     }
 
     private void UpdateResolution(object sender, RoutedEventArgs e)
@@ -70,18 +79,5 @@ public partial class VideoSettings : UserControl
             SettingsManager.GFX_BACKEND.Set(actualValue);
         else
             MessageBox.Show($"Warning: Unknown renderer selected: {selectedDisplayName}");
-    }
-
-    private void InitializeRendererDropdown()
-    {
-        var currentRenderer = (string)SettingsManager.GFX_BACKEND.Get();
-    
-        // Find the display name for the current renderer value
-        var displayName = SettingValues.GFXRenderers.RendererMapping
-            .FirstOrDefault(x => x.Value == currentRenderer).Key;
-
-        // Set the selected item in the dropdown
-        if (displayName != null)
-            RendererDropdown.SelectedItem = displayName;
     }
 }

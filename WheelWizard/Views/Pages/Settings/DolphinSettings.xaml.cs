@@ -6,17 +6,21 @@ namespace CT_MKWII_WPF.Views.Pages.Settings;
 
 public partial class DolphinSettings : UserControl
 {
+    private readonly bool _settingsAreDisabled;
+        
     public DolphinSettings()
     {
         InitializeComponent();
-        UpdateSettingsState();
+        _settingsAreDisabled = !SettingsHelper.PathsSetupCorrectly();
+        DisabledWarningText.Visibility = _settingsAreDisabled ? Visibility.Visible : Visibility.Collapsed;
+        
+        LoadSettings();
     }
 
-    private void UpdateSettingsState()
+    private void LoadSettings()
     {
-        var enableDolphinSettings = SettingsHelper.PathsSetupCorrectly();
-        WiiBorder.IsEnabled = enableDolphinSettings;
-        if (!enableDolphinSettings) 
+        WiiBorder.IsEnabled = !_settingsAreDisabled;
+        if (_settingsAreDisabled) 
             return;
         
         DisableForce.IsChecked = (bool)SettingsManager.FORCE_WIIMOTE.Get();

@@ -116,12 +116,16 @@ public partial class WhWzSettings : UserControl
         }
     }
     
-    
+    private void CancelButton_OnClick(object sender, RoutedEventArgs e) => TogglePathSettings(false);
+    private void EditButton_OnClick(object sender, RoutedEventArgs e) => TogglePathSettings(true);
 
-    private void CancelButton_OnClick(object sender, RoutedEventArgs e)
+    private void Folder_Click(object sender, RoutedEventArgs e)
     {
-        TogglePathSettings(false);
+        if (!Directory.Exists(PathManager.WheelWizardAppdataPath))
+            Directory.CreateDirectory(PathManager.WheelWizardAppdataPath);
+        Process.Start("explorer.exe",PathManager.WheelWizardAppdataPath);
     }
+    
     private void TogglePathSettings(bool enable)
     {
         if (!SettingsHelper.PathsSetupCorrectly() && !enable)
@@ -148,17 +152,5 @@ public partial class WhWzSettings : UserControl
         DolphinExeInput.Text = PathManager.DolphinFilePath;
         MarioKartInput.Text = PathManager.GameFilePath;
         DolphinUserPathInput.Text = PathManager.UserFolderPath;
-    }
-
-    private void EditButton_OnClick(object sender, RoutedEventArgs e)
-    {
-        TogglePathSettings(true);
-    }
-
-    private void Folder_Click(object sender, RoutedEventArgs e)
-    {
-        if (!Directory.Exists(PathManager.WheelWizardAppdataPath))
-            Directory.CreateDirectory(PathManager.WheelWizardAppdataPath);
-        Process.Start("explorer.exe",PathManager.WheelWizardAppdataPath);
     }
 }

@@ -9,6 +9,17 @@
              mc:Ignorable="d" d:DesignHeight="716" d:DesignWidth="444">
     <Grid x:Name="VideoBorder">
         <StackPanel Margin="0,15,0,0">
+            
+            <Border Padding="4" Margin="0,-10,0,10"  x:Name="DisabledWarningText"
+                    CornerRadius="{StaticResource GlobalCornerRadius}" 
+                    HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                    Background="{StaticResource WarningColor}">
+                <TextBlock HorizontalAlignment="Center"
+                           FontWeight="SemiBold" Text="Settings are disabled, complete the location settings first"
+                           Foreground="{StaticResource BackgroundColor}" >
+                </TextBlock>
+            </Border>
+            
             <!-- Resolution Section -->
             <components:FormFieldLabel Text="Resolution" />
             <Border Style="{StaticResource SettingsBlockStyle}" x:Name="ResolutionBorder">

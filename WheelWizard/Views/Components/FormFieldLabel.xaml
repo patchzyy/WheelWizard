@@ -16,7 +16,7 @@
         </TextBlock>
 
         <Border ToolTipService.InitialShowDelay="50"
-                ToolTipService.ShowDuration="5000"
+                ToolTipService.ShowDuration="10000"
                 ToolTipService.BetweenShowDelay="0">
             <Border.Style>
                 <Style TargetType="Border">
