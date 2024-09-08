@@ -33,55 +33,66 @@ public partial class WhWzSettings : UserControl
 
     private void DolphinExeBrowse_OnClick(object sender, RoutedEventArgs e)
     {
+        var currentPath = (string)SettingsManager.DOLPHIN_LOCATION.Get();
         var openFileDialog = new OpenFileDialog
         {
             Filter = "Executable files (*.exe)|*.exe|All files (*.*)|*.*",
             Title = "Select Dolphin Emulator"
         };
+        
+        if (!string.IsNullOrEmpty(currentPath) && Directory.Exists(Path.GetDirectoryName(currentPath)))
+            openFileDialog.InitialDirectory = Path.GetDirectoryName(currentPath)!;
     
         if (openFileDialog.ShowDialog() == true)
             DolphinExeInput.Text = openFileDialog.FileName;
     }
 
-    private void MarioKartBrowse_OnClick(object sender, RoutedEventArgs e)
+    private void GameLocationBrowse_OnClick(object sender, RoutedEventArgs e)
     {
+        var currentPath = (string)SettingsManager.GAME_LOCATION.Get();
         var openFileDialog = new OpenFileDialog
         {
             Filter = "Game files (*.iso;*.wbfs;*.rvz)|*.iso;*.wbfs;*.rvz|All files (*.*)|*.*",
             Title = "Select Mario Kart Wii Game File"
         };
     
+        if (!string.IsNullOrEmpty(currentPath) && Directory.Exists(Path.GetDirectoryName(currentPath)))
+            openFileDialog.InitialDirectory = Path.GetDirectoryName(currentPath)!;
+        
         if (openFileDialog.ShowDialog() == true)
             MarioKartInput.Text = openFileDialog.FileName;
     }
 
     private void DolphinUserPathBrowse_OnClick(object sender, RoutedEventArgs e)
     {
-        var folderPath = PathManager.TryFindDolphinPath();
-    
-        if (!string.IsNullOrEmpty(folderPath))
-        {
-            // Ask user if they want to use the automatically found folder
-            var result = MessageBox.Show(
-                "If you dont know what all of this means, just click yes :)\n\nDolphin Emulator folder found. Would you like to use this folder?\n" +
-                folderPath, "Dolphin Emulator Folder Found", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
-            {
-                DolphinUserPathInput.Text = folderPath;
-                return;
-            }
-        }
-        else
-        {
-            MessageBox.Show(
-                "Dolphin Emulator folder not automatically found. Please try and find the folder manually, click 'help' for more information.",
-                "Dolphin Emulator Folder Not Found", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-    
-        // If we end up here, this means either the path wasn't found, or the user wants to manually select the path
-        // Make it so we have to select a folder, not an executable
+        var currentFolder = (string)SettingsManager.USER_FOLDER_PATH.Get();
         CommonOpenFileDialog dialog = new();
         dialog.IsFolderPicker = true;
+        if (!string.IsNullOrEmpty(currentFolder) && Directory.Exists(currentFolder))
+            dialog.InitialDirectory = currentFolder;
+        else
+        {
+            var folderPath = PathManager.TryFindDolphinPath();
+            if (!string.IsNullOrEmpty(folderPath))
+            {
+                // Ask user if they want to use the automatically found folder
+                var result = MessageBox.Show(
+                    "If you dont know what all of this means, just click yes :)\n\nDolphin Emulator folder found. Would you like to use this folder?\n" +
+                    folderPath, "Dolphin Emulator Folder Found", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    DolphinUserPathInput.Text = folderPath;
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Dolphin Emulator folder not automatically found. Please try and find the folder manually, click 'help' for more information.",
+                    "Dolphin Emulator Folder Not Found", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+        
         if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             DolphinUserPathInput.Text = dialog.FileName;
     }

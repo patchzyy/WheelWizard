@@ -72,7 +72,7 @@
                                                    Text="" FontSize="16" Height="40"
                                                    IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}"
                                                    IconPack="FontAwesome"
-                                                   Click="MarioKartBrowse_OnClick"
+                                                   Click="GameLocationBrowse_OnClick"
                                                    Margin="10,0,0,0" />
                             </Grid>
 
