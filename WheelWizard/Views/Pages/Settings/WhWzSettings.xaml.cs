@@ -99,6 +99,10 @@ public partial class WhWzSettings : UserControl
 
     private void SaveButton_OnClick(object sender, RoutedEventArgs e)
     {
+        var oldPath1 = (string)SettingsManager.DOLPHIN_LOCATION.Get();
+        var oldPath2 = (string)SettingsManager.GAME_LOCATION.Get();
+        var oldPath3 = (string)SettingsManager.USER_FOLDER_PATH.Get();
+        
         var path1 = SettingsManager.DOLPHIN_LOCATION.Set(DolphinExeInput.Text);
         var path2 = SettingsManager.GAME_LOCATION.Set(MarioKartInput.Text);
         var path3 = SettingsManager.USER_FOLDER_PATH.Set(DolphinUserPathInput.Text);
@@ -113,6 +117,10 @@ public partial class WhWzSettings : UserControl
         {
             MessageBox.Show("Settings saved successfully!", 
                 "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            
+            // This is not really the best approach, but it works for now
+            if (oldPath1 + oldPath2 + oldPath3 != DolphinExeInput.Text + MarioKartInput.Text + DolphinUserPathInput.Text)
+                DolphinSettingManager.Instance.ReloadSettings();
         }
     }
     

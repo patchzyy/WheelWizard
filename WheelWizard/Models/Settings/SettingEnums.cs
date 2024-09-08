@@ -22,7 +22,7 @@ public static class SettingValues
         // Dictionary to map display names to actual values
         public static readonly Dictionary<string, string> RendererMapping = new Dictionary<string, string>
         {
-            { "DirectX 11", D3D11 },
+            { "DirectX 11 (Default)", D3D11 },
             { "DirectX 12", D3D12 },
             { "Vulkan", Vulkan },
             { "OpenGL", OpenGL },

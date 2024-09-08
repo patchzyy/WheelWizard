@@ -35,7 +35,5 @@
                 <components:ToolTipMessage Alignment="TopCenter" x:Name="FormFieldLabelTip" />
             </Border.ToolTip>
         </Border>
-
-
     </StackPanel>
 </UserControl>
