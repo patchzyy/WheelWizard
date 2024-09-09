@@ -11,12 +11,17 @@ public partial class PopupWindow : Window
     public PopupWindow(bool allowLayoutInteraction = false)
     {
         _allowLayoutInteraction = allowLayoutInteraction;
+        var mainWindow = ViewUtils.GetLayout();
+        if(mainWindow.IsVisible)
+            Owner = mainWindow;
+        
         InitializeComponent();
         Loaded += PopupWindow_Loaded;
     }
     
     private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => DragMove();
-
+    private void CloseButton_Click(object sender, RoutedEventArgs e) => Close();
+    
     private void PopupWindow_Loaded(object sender, RoutedEventArgs e)
     {
         if (!_allowLayoutInteraction)

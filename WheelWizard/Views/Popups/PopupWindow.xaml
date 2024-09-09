@@ -3,10 +3,34 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Popups"
+        xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="PopupWindow" Height="450" Width="800">
+        WindowStyle="None" WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize" Topmost="True"
+        AllowsTransparency="True" Background="Transparent"
+        Title="PopupWindow" Height="200" Width="400">
     <Grid>
-        <!-- TODO --> 
+        <Grid.LayoutTransform>
+            <ScaleTransform x:Name="ScaleTransform" ScaleX="1.0" ScaleY="1.0" />
+        </Grid.LayoutTransform>
+        
+        <Border Background="{StaticResource  BackgroundColor}" CornerRadius="3"
+                BorderThickness="1" BorderBrush="{StaticResource BackgroundLine}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                
+                <Border Grid.Row="0" Background="{StaticResource LightBackgroundColor }"  CornerRadius="3,3,0,0"
+                        MouseDown="Border_MouseLeftButtonDown">
+                    <DockPanel HorizontalAlignment="Right" VerticalAlignment="Top">
+                        <Button Width="30" Height="25" Style="{StaticResource TopButton}" Click="CloseButton_Click">
+                            <icon:FontAwesome Kind="XmarkSolid" Width="12" Height="12"/>
+                        </Button>
+                    </DockPanel>
+                </Border>
+            </Grid>
+        </Border>
     </Grid>
 </Window>
