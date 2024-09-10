@@ -22,14 +22,25 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 
-                <Border Grid.Row="0" Background="{StaticResource LightBackgroundColor }"  CornerRadius="3,3,0,0"
-                        MouseDown="Border_MouseLeftButtonDown">
+                <Border Grid.Row="0" Background="{StaticResource LightBackgroundColor}" CornerRadius="3,3,0,0" MouseDown="Border_MouseLeftButtonDown">
                     <DockPanel HorizontalAlignment="Right" VerticalAlignment="Top">
-                        <Button Width="30" Height="25" Style="{StaticResource TopButton}" Click="CloseButton_Click">
+                        <Button Width="30" Height="25" Click="CloseButton_Click">
                             <icon:FontAwesome Kind="XmarkSolid" Width="12" Height="12"/>
+                          
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource TopButton}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding CanClose}" Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
                         </Button>
                     </DockPanel>
                 </Border>
+                
+                <ContentPresenter x:Name="PopupContent" Grid.Row="1" Margin="10"/>
             </Grid>
         </Border>
     </Grid>

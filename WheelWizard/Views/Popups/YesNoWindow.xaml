@@ -1,0 +1,38 @@
+<local:PopupContent x:Class="CT_MKWII_WPF.Views.Popups.YesNoWindow"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Popups"
+                    xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+                    xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                    mc:Ignorable="d" d:Background="{StaticResource BackgroundColor}"
+                    d:DesignHeight="200" d:DesignWidth="400">
+    <StackPanel Margin="{StaticResource EdgeGap}">
+        <TextBlock Style="{StaticResource TitleText}" x:Name="MainTextBlock"
+                   HorizontalAlignment="Center"
+                   Foreground="{StaticResource FormFieldLabelColor}"
+                   FontSize="20"/>
+        <TextBlock Style="{StaticResource TinyText}" x:Name="ExtraTextBlock"
+                   HorizontalAlignment="Center"
+                   TextWrapping="Wrap" Margin="0,10,0,0" />
+        <UniformGrid Grid.Row="1" Columns="2" Rows="2" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <components:Button x:Name="YesButton"
+                               Variant="Primary"
+                               IsEnabled="True"
+                               IconPack="Material"
+                               Width="150"
+                               IconKind="{x:Static icon:PackIconMaterialKind.Check}"
+                               Click="yesButton_Click"
+                               Margin="3" />
+            <components:Button x:Name="NoButton"
+                                Variant="Default"
+                               IsEnabled="True"
+                               IconPack="Material"
+                               Width="150"
+                               IconKind="{x:Static icon:PackIconMaterialKind.Close}"
+                               Click="noButton_Click"
+                               Margin="3" />
+        </UniformGrid>
+    </StackPanel>
+</local:PopupContent>
