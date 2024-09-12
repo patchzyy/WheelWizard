@@ -8,7 +8,7 @@
         WindowStyle="None" WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize" Topmost="True"
         AllowsTransparency="True" Background="Transparent"
-        Title="PopupWindow" Height="200" Width="400">
+        Title="{Binding WindowTitle}" Width="400" Height="200">
     <Grid>
         <Grid.LayoutTransform>
             <ScaleTransform x:Name="ScaleTransform" ScaleX="1.0" ScaleY="1.0" />
@@ -22,22 +22,29 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 
-                <Border Grid.Row="0" Background="{StaticResource LightBackgroundColor}" CornerRadius="3,3,0,0" MouseDown="Border_MouseLeftButtonDown">
-                    <DockPanel HorizontalAlignment="Right" VerticalAlignment="Top">
-                        <Button Width="30" Height="25" Click="CloseButton_Click">
-                            <icon:FontAwesome Kind="XmarkSolid" Width="12" Height="12"/>
+                <Border Grid.Row="0" Background="{StaticResource LightBackgroundColor}" 
+                        CornerRadius="3,3,0,0" MouseDown="Border_MouseLeftButtonDown">
+                    <Grid>
+                        <TextBlock FontSize="16" Margin="10,0" Text="{Binding WindowTitle}"
+                                   VerticalAlignment="Center" HorizontalAlignment="Left"
+                                   Foreground="{StaticResource TitleTextHover}"/>
+                        
+                        <DockPanel HorizontalAlignment="Right" VerticalAlignment="Top">
+                            <Button Width="30" Height="25" Click="CloseButton_Click">
+                                <icon:FontAwesome Kind="XmarkSolid" Width="12" Height="12"/>
                           
-                            <Button.Style>
-                                <Style TargetType="Button" BasedOn="{StaticResource TopButton}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding CanClose}" Value="False">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-                    </DockPanel>
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource TopButton}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CanClose}" Value="False">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </DockPanel>
+                    </Grid>
                 </Border>
                 
                 <ContentPresenter x:Name="PopupContent" Grid.Row="1" Margin="10"/>

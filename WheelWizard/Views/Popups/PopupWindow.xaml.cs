@@ -1,3 +1,4 @@
+using CT_MKWII_WPF.Services.Settings;
 using System;
 using System.ComponentModel;
 using System.Windows;
@@ -17,12 +18,27 @@ public partial class PopupWindow : Window, INotifyPropertyChanged
             OnPropertyChanged(nameof(CanClose));
         }
     }
+    
+    private string _windowTitle = "Wheel Wizard Popup";
+    public string WindowTitle
+    {
+        get => _windowTitle;
+        set
+        {   
+            _windowTitle = value;
+            OnPropertyChanged(nameof(WindowTitle));
+        }
+    }
 
     private readonly bool _allowLayoutInteraction;
     
-    public PopupWindow(bool allowClose = true, bool allowLayoutInteraction = false)
+    // Most (if not all) of these parameters should be set in the popup you create, and not kept as a parameter for that popup
+    public PopupWindow(bool allowClose, bool allowLayoutInteraction, string title = "", Vector? size = null)
     {
+        size ??= new(400, 200);
+        
         CanClose = allowClose;
+        WindowTitle = title;
         _allowLayoutInteraction = allowLayoutInteraction;
         var mainWindow = ViewUtils.GetLayout();
         if(mainWindow.IsVisible)
@@ -30,6 +46,13 @@ public partial class PopupWindow : Window, INotifyPropertyChanged
         
         InitializeComponent();
         DataContext = this;
+                
+        var scaleFactor = (double)SettingsManager.WINDOW_SCALE.Get();
+        ScaleTransform.ScaleX = scaleFactor;
+        ScaleTransform.ScaleY = scaleFactor;
+        Width = size!.Value.X * scaleFactor;
+        Height = size.Value.Y * scaleFactor;
+        
         Loaded += PopupWindow_Loaded;
     }
     

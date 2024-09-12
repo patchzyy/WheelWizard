@@ -72,6 +72,10 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
             if (child is SidebarRadioButton button)
                 button.IsChecked = button.PageType == page.GetType();
         }
+
+        var window = new YesNoWindow();
+        window.SetMainText("Do you want to save your progress?");
+        window.ShowDialog();
     }
 
     public void OnUpdate(RepeatedTaskManager sender)

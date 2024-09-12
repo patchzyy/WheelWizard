@@ -6,7 +6,7 @@ public partial class YesNoWindow : PopupContent
 {
     public bool Result { get; private set; }
     
-    public YesNoWindow() : base(false)
+    public YesNoWindow() : base(false, false, "Wheel Wizard")
     {
         InitializeComponent();
         YesButton.Text = "Yes";
