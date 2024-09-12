@@ -74,7 +74,8 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
         }
 
         var window = new YesNoWindow();
-        window.SetMainText("Do you want to save your progress?");
+        window.SetMainText("Test window");
+        window.SetExtraText(" This sis some example text that can be set below the title and stuff like that, idk what to put here");
         window.ShowDialog();
     }
 
