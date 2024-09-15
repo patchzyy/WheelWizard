@@ -72,11 +72,6 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
             if (child is SidebarRadioButton button)
                 button.IsChecked = button.PageType == page.GetType();
         }
-
-        var window = new YesNoWindow();
-        window.SetMainText("Test window");
-        window.SetExtraText(" This sis some example text that can be set below the title and stuff like that, idk what to put here");
-        window.ShowDialog();
     }
 
     public void OnUpdate(RepeatedTaskManager sender)

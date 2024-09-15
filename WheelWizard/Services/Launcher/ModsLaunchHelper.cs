@@ -1,5 +1,4 @@
-﻿using CT_MKWII_WPF.Models;
-using CT_MKWII_WPF.Models.Settings;
+﻿using CT_MKWII_WPF.Models.Settings;
 using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Views.Popups;
 using System;
@@ -24,8 +23,11 @@ public static class ModsLaunchHelper
         {
             if (Directory.Exists(MyStuffFolderPath) && Directory.EnumerateFiles(MyStuffFolderPath).Any())
             {
-                var result = YesNoMessagebox.Show("Mods found", "Delete","Keep", "you are about to launch the game without any mods", "Do you want to clear your my-stuff folder?");
-                if (result)
+                var modsFoundQuestion = new YesNoWindow()
+                                        .SetButtonText("Delete", "Keep")
+                                        .SetMainText("Mods found")
+                                        .SetExtraText("you are about to launch the game without any mods. Do you want to clear your my-stuff folder?");
+                if (modsFoundQuestion.AwaitAnswer())
                     Directory.Delete(MyStuffFolderPath, true);
                 
                 return;
@@ -66,7 +68,9 @@ public static class ModsLaunchHelper
             var file = allFiles[i];
             var progress = (int)((i + 1) / (double)allFiles.Length * 100);
             Application.Current.Dispatcher.Invoke(() => 
-                progressWindow.UpdateProgress(progress, $"Installing {mod.Title}", $"Please wait... ({i + 1}/{allFiles.Length})"));            var relativePath = Path.GetFileName(file);
+                progressWindow.UpdateProgress(progress, $"Installing {mod.Title}", $"Please wait... ({i + 1}/{allFiles.Length})"
+                    ));
+            var relativePath = Path.GetFileName(file);
             var destinationFile = Path.Combine(MyStuffFolderPath, relativePath);
             Directory.CreateDirectory(Path.GetDirectoryName(destinationFile)!);
             File.Copy(file, destinationFile, true);

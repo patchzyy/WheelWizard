@@ -29,6 +29,10 @@ public partial class YesNoWindow : PopupContent
     {
         YesButton.Text = yesText;
         NoButton.Text = noText;
+        
+        // It really depends on the text length what looks best
+        ButtonContainer.HorizontalAlignment = (yesText.Length + noText.Length) > 12
+            ? HorizontalAlignment.Stretch : HorizontalAlignment.Right;
         return this;
     }
     

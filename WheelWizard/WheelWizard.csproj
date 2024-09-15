@@ -40,9 +40,6 @@
         <Page Update="Views\Popups\ProgressWindow.xaml">
           <Generator>MSBuild:Compile</Generator>
         </Page>
-        <Page Update="Views\Popups\YesNoMessagebox.xaml">
-          <Generator>MSBuild:Compile</Generator>
-        </Page>
         <Page Update="Views\Pages\KitchenSink\KitchenSink.xaml">
           <Generator>MSBuild:Compile</Generator>
           <XamlRuntime>Wpf</XamlRuntime>

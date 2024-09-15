@@ -48,22 +48,25 @@ public static class RetroRewindInstaller
     public static async Task InstallRetroRewind()
     {
         if (IsRetroRewindInstalled())
-        {
             await HandleReinstall();
-        }
 
         if (hasOldrksys())
         {
-            var result = YesNoMessagebox.Show("Old rksys.dat found", "Use", "Don't use",
-                "Old save data was found. Would you like to use it? (recomended)");
-            if (result) await backupOldrksys();
+            var rksysQuestion = new YesNoWindow()
+                                    .SetButtonText("Use", "Don't use")
+                                    .SetMainText("Old rksys.dat found")
+                                    .SetExtraText("Old save data was found. Would you like to use it? (recommended)");
+            if (rksysQuestion.AwaitAnswer()) 
+                await backupOldrksys();
 
         }
         if (HasOldRR())
         {
-            var result = YesNoMessagebox.Show("Old Retro Rewind found", "Move", "Don't move",
-                "Old Retro Rewind files were found. Would you like to move them to the new location?");
-            if (result)
+            var retroRewindFound = new YesNoWindow()
+                                .SetButtonText("Use", "Don't use")
+                                .SetMainText("Old Retro Rewind found")
+                                .SetExtraText(  "Old Retro Rewind files were found. Would you like to move them to the new location?");
+            if (retroRewindFound.AwaitAnswer()) 
             {
                 HandleMovingOldRR();
                 return;
@@ -72,8 +75,8 @@ public static class RetroRewindInstaller
         var serverResponse = await HttpClientHelper.GetAsync<string>(Endpoints.RRUrl);
         if (!serverResponse.Succeeded)
         {
-            MessageBox.Show("Could not connect to the server. Please try again later.", "Error", MessageBoxButton.OK,
-                MessageBoxImage.Error);
+            MessageBox.Show("Could not connect to the server. Please try again later.", 
+                            "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
         var tempZipPath = Path.Combine(PathManager.LoadFolderPath, "Temp", "RetroRewind.zip");
@@ -85,7 +88,8 @@ public static class RetroRewindInstaller
         var result = MessageBox.Show("There are already files in your RetroRewind Folder. Would you like to install?",
             "Reinstall Retro Rewind", MessageBoxButton.YesNo);
 
-        if (result == MessageBoxResult.No) return;
+        if (result == MessageBoxResult.No) 
+            return;
         
         DeleteExistingRetroRewind();
     }
@@ -97,10 +101,14 @@ public static class RetroRewindInstaller
         var RRXmlPath = Path.Combine(PathManager.RiivolutionWhWzFolderPath, "riivolution");
         Directory.CreateDirectory(RRXmlPath);
         var RRXmlFile = Path.Combine(RRXmlPath, "RetroRewind6.xml");
-        if (File.Exists(RRXmlFile)) File.Delete(RRXmlFile);
+        if (File.Exists(RRXmlFile)) 
+            File.Delete(RRXmlFile);
+        
         File.Move(RRXml, RRXmlFile);
         var newRRFolder = PathManager.RetroRewind6FolderPath;
-        if (Directory.Exists(newRRFolder)) Directory.Delete(newRRFolder, true);
+        if (Directory.Exists(newRRFolder)) 
+            Directory.Delete(newRRFolder, true);
+        
         Directory.Move(oldRRFolder, newRRFolder);
        
     }
@@ -135,7 +143,9 @@ public static class RetroRewindInstaller
     private static bool hasOldrksys()
     {
         var rrWfc = Path.Combine(PathManager.LoadFolderPath, "Riivolution", "riivolution", "save", "RetroWFC");
-        if (!Directory.Exists(rrWfc)) return false;
+        if (!Directory.Exists(rrWfc)) 
+            return false;
+        
         var rksysFiles = Directory.GetFiles(rrWfc, "rksys.dat", SearchOption.AllDirectories);
         return rksysFiles.Length > 0;
     }

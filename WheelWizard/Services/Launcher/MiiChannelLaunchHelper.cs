@@ -16,9 +16,11 @@ public static class MiiChannelLaunchHelper
         
         if (!miiChannelExists)
         {
-            var adminResult = YesNoMessagebox.Show("Install MiiChannel?", "Yes", "No", 
-                                                   "Do you want to install the MiiChannel to launch it?");
-            if (adminResult)
+            var downloadQuestion = new YesNoWindow()
+                                .SetMainText("Install MiiChannel?")
+                                .SetExtraText("Do you want to install the MiiChannel to launch it?");
+            
+            if (downloadQuestion.AwaitAnswer())
             {
                 miiChannelExists = true;
                 await DownloadHelper.DownloadToLocation(Endpoints.MiiChannelWAD, MiiChannelPath);

@@ -9,15 +9,17 @@
                     mc:Ignorable="d" d:DesignHeight="200" d:DesignWidth="400">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10">
+            
             <TextBlock Style="{StaticResource TitleText}" x:Name="MainTextBlock"
-                       HorizontalAlignment="Center" TextWrapping="Wrap"
+                       HorizontalAlignment="Left" TextWrapping="Wrap"
                        Foreground="{StaticResource FormFieldLabelColor}"
                        FontSize="20"/>
             <TextBlock Style="{StaticResource BodyText}" x:Name="ExtraTextBlock"
                        HorizontalAlignment="Center" Margin="0,10,0,0" />
         </StackPanel>
         
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+        <UniformGrid Columns="2" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                     x:Name="ButtonContainer">
             <components:Button x:Name="YesButton" Variant="Primary"
                                IsEnabled="True" IconPack="Material"
                                Text="Yes"
@@ -28,6 +30,6 @@
                                Text="No" 
                                IconKind="{x:Static icon:PackIconMaterialKind.Close}"
                                Click="noButton_Click" Margin="5,0,0,0"/>
-        </StackPanel>
+        </UniformGrid>
     </Grid>
 </local:PopupContent>

@@ -15,7 +15,7 @@ namespace CT_MKWII_WPF.Services.Installation;
 
 public static class AutoUpdater
 {
-    public const string CurrentVersion = "1.5.1";
+    public const string CurrentVersion = "1.5.0";
     
     public static async Task CheckForUpdatesAsync()
     {
@@ -38,12 +38,18 @@ public static class AutoUpdater
             await UpdateAsync(latestRelease.Assets[0].BrowserDownloadUrl);
             return;
         }
+        var updateQuestion = new YesNoWindow()
+                            .SetButtonText("Update now", "Maybe Later")
+                            .SetMainText("WheelWizard update available")
+                            .SetExtraText($"Version {latestVersion} of WheelWizard is available " +
+                                          $"(currently on {currentVersion}). Do you want to update now?");
+        if (!updateQuestion.AwaitAnswer()) 
+            return;
         
-        var initiatedUpdate = YesNoMessagebox.Show("Wheel Wizard Update!", "Update now!", "Maybe Later!", currentVersion.ToString() + "->" + latestVersion.ToString());
-        if (!initiatedUpdate) return;
-        
-        var adminResult = YesNoMessagebox.Show("Update as Admin?", "Yes", "No");
-        if (adminResult)
+        var adminQuestion = new YesNoWindow()
+                            .SetMainText("Update using admin")  
+                            .SetExtraText("Sometimes an update requires admin rights, do you want to active them for this update?");
+        if (adminQuestion.AwaitAnswer())
             RestartAsAdmin();
         else
             await UpdateAsync(latestRelease.Assets[0].BrowserDownloadUrl);
