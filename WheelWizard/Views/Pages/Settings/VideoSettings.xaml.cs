@@ -15,6 +15,31 @@ public partial class VideoSettings : UserControl
         UpdateSettingsState();
         PopulateRenderers();
         InitializeRendererDropdown();
+        PopulateLanguages();
+        InitializeLanguageDropdown();
+    }
+
+    private void InitializeLanguageDropdown()
+    {
+        int currentLanguage = (int)SettingsManager.RR_LANGUAGE.Get();
+
+        // Find the display name for the current language value
+        string displayName = SettingValues.Languages.LanguageMapping
+            .FirstOrDefault(x => x.Value == currentLanguage).Key;
+
+        if (displayName != null)
+        {
+            // Set the selected item in the dropdown
+            LanguageDropdown.SelectedItem = displayName;
+        }
+    }
+
+    private void PopulateLanguages()
+    {
+        foreach (var language in SettingValues.Languages.AllLanguages)
+        {
+            LanguageDropdown.Items.Add(language);
+        }
     }
 
     private void PopulateRenderers()
@@ -101,5 +126,17 @@ public partial class VideoSettings : UserControl
         }
     }
 
+    private void LanguageDropdown_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        string selectedLanguage = LanguageDropdown.SelectedItem.ToString();
+        if (SettingValues.Languages.LanguageMapping.TryGetValue(selectedLanguage, out int actualValue))
+        {
+            SettingsManager.RR_LANGUAGE.Set(actualValue);
+        }
+        else
+        {
+            Console.WriteLine($"Warning: Unknown language selected: {selectedLanguage}");
+        }
+    }
 }
 

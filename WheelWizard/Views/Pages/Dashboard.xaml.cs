@@ -33,7 +33,7 @@ public partial class Dashboard
             case WheelWizardStatus.NoServer:
                 break;
             case WheelWizardStatus.NoServerButInstalled:
-                await Launcher.LaunchRetroRewind((bool)OnlineTTCheckbox.IsChecked!);
+                await Launcher.LaunchRetroRewind();
                 break;
             case WheelWizardStatus.NoDolphin:
                 NavigateToPage(new Settings.SettingsPage());
@@ -61,7 +61,7 @@ public partial class Dashboard
                 EnableSidebarButtons();
                 break;
             case WheelWizardStatus.UpToDate:
-                await Launcher.LaunchRetroRewind((bool)OnlineTTCheckbox.IsChecked!);
+                await Launcher.LaunchRetroRewind();
                 break;
         }
         UpdateActionButton();
@@ -109,8 +109,6 @@ public partial class Dashboard
             return;
         
         DolphinButton.IsEnabled = false;
-        // MiiButton.IsEnabled = false;
-        OnlineTTCheckbox.IsEnabled = false;
     }
 
     private void SetButtonState(string text, Button.ButtonsVariantType variant, PackIconMaterialKind iconKind,

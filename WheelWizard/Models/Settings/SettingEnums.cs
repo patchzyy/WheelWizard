@@ -31,5 +31,24 @@ public static class SettingValues
         
         public static readonly List<string> AllRenderers = new List<string>(RendererMapping.Keys);
     }
+
+    public static class Languages
+    {
+        public const int English = 0;
+        public const int Japanese = 1;
+        public const int French = 2;
+        public const int German = 3;
+
+        // Dictionary to map display names to actual values
+        public static readonly Dictionary<string, int> LanguageMapping = new Dictionary<string, int>
+        {
+            { "English", English },
+            { "Japanese", Japanese },
+            { "French", French },
+            { "German", German }
+        };
+
+        public static readonly List<string> AllLanguages = new List<string>(LanguageMapping.Keys);
+    }
 }
    
