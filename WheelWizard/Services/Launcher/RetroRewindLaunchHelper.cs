@@ -12,9 +12,10 @@ public static class RetroRewindLaunchHelper
     private static string XmlFilePath => Path.Combine(PathManager.RiivolutionWhWzFolderPath, "riivolution", "RetroRewind6.xml");
     private static string JsonFilePath => Path.Combine(PathManager.WheelWizardAppdataPath, "RR.json");
     
-    public static void GenerateLaunchJson(bool launchTt)
+    public static void GenerateLaunchJson()
     {
         bool fps30 = (bool)SettingsManager.FORCE_30FPS.Get();
+        int language = (int)SettingsManager.RR_LANGUAGE.Get();
         var launchConfig = new LaunchConfig
         {
             BaseFile = PathManager.GameFilePath,
@@ -29,7 +30,7 @@ public static class RetroRewindLaunchHelper
                         {
                             new OptionConfig { Choice = 1, OptionName = "Pack", SectionName = "Retro Rewind" },
                             new OptionConfig { Choice = 2, OptionName = "My Stuff", SectionName = "Retro Rewind" },
-                            new OptionConfig { Choice = launchTt ? 1 : 0, OptionName = "Online TT", SectionName = "Retro Rewind" },
+                            new OptionConfig { Choice = language, OptionName = "Language", SectionName = "Retro Rewind" },
                             new OptionConfig { Choice = fps30 ? 1 : 0, OptionName = "Force 30 FPS", SectionName = "Retro Rewind" }
                         },
                         Root = PathManager.RiivolutionWhWzFolderPath,

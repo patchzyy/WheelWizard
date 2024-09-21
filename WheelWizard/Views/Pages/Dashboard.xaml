@@ -24,26 +24,6 @@
                                                 Grid.Row="0"
                                                 HorizontalAlignment="Right"
                                                 VerticalAlignment="Top"/>
-        
-        <StackPanel Grid.Row="1" Margin="0,10,0,10" Orientation="Horizontal" HorizontalAlignment="Right"
-                    VerticalAlignment="Top">
-            <TextBlock
-                Style="{StaticResource BodyText}"
-                Text="Regular online"
-                Margin="0,0,10,0">
-            </TextBlock>
-            <CheckBox
-                x:Name="OnlineTTCheckbox"
-                Style="{StaticResource Switch}"
-                HorizontalAlignment="Right">
-            </CheckBox>
-            <TextBlock
-                Style="{StaticResource BodyText}"
-                Text="Online TT"
-                Margin="0,0,10,0">
-            </TextBlock>
-        </StackPanel>
-
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock HorizontalAlignment="Center"
                        Style="{StaticResource TitleText}"

@@ -42,7 +42,7 @@ public static class Launcher
         });
     }
     
-    public static async Task LaunchRetroRewind(bool playTt)
+    public static async Task LaunchRetroRewind()
     {
         try
         {
@@ -57,7 +57,7 @@ public static class Launcher
                 return;
             }
 
-            RetroRewindLaunchHelper.GenerateLaunchJson(playTt);
+            RetroRewindLaunchHelper.GenerateLaunchJson();
             var dolphinLaunchType = (bool)SettingsManager.LAUNCH_WITH_DOLPHIN.Get() ? "" : "-b";
             LaunchDolphin(
                 $"{dolphinLaunchType} -e \"{RRLaunchJsonFilePath}\" --config=Dolphin.Core.EnableCheats=False");

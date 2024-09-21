@@ -6,6 +6,7 @@ public static class Endpoints
     public const string RRUrl = "http://update.zplwii.xyz:8000/";
     public const string RRZipUrl = RRUrl + "RetroRewind/zip/RetroRewind.zip";
     public const string RRVersionUrl = RRUrl + "RetroRewind/RetroRewindVersion.txt";
+    public const string RRVersionDeleteUrl = RRUrl + "RetroRewind/RetroRewindDelete.txt";
     public const string RRGroupsUrl = "http://zplwii.xyz/api/groups";
 
     // Wheel Wizard

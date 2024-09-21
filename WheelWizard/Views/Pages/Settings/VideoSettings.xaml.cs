@@ -16,16 +16,17 @@ public partial class VideoSettings : UserControl
         InitializeComponent();
         _settingsAreDisabled = !SettingsHelper.PathsSetupCorrectly();
         DisabledWarningText.Visibility = _settingsAreDisabled ? Visibility.Visible : Visibility.Collapsed;
-        LoadSettings();
-        LoadRendererDropdown();
+        VideoBorder.IsEnabled = !_settingsAreDisabled;
+        
+        if (!_settingsAreDisabled)
+            LoadSettings();
+        ForceLoadSettings();
     }
 
     private void LoadSettings()
     {
-        VideoBorder.IsEnabled = !_settingsAreDisabled;
-        if (_settingsAreDisabled)
-            return;
-
+        // These are all the settings that are loaded when the settings page is opened.
+        // Note that all the settings in this method only load when editing settings is enabled.
         VSyncButton.IsChecked = (bool)SettingsManager.VSYNC.Get();
         RecommendedButton.IsChecked = (bool)SettingsManager.RECOMMENDED_SETTINGS.Get();
         Button30FPS.IsChecked = (bool)SettingsManager.FORCE_30FPS.Get();
@@ -33,7 +34,7 @@ public partial class VideoSettings : UserControl
         var finalResolution = (int)SettingsManager.INTERNAL_RESOLUTION.Get();
         if (finalResolution < 0 || finalResolution > ResolutionStackPanel.Children.Count)
             return;
-
+   
         foreach (var element in ResolutionStackPanel.Children)
         {
             if (element is not RadioButton radioButton)
@@ -42,21 +43,42 @@ public partial class VideoSettings : UserControl
             radioButton.IsChecked = (radioButton.Tag.ToString() == finalResolution.ToString());
         }
     }
-    
-    private void LoadRendererDropdown()
+ 
+    private void ForceLoadSettings()
     {
-        // This is not in the LoadSettings method since we want to load it even if they are disabled.
-        // Its not really nessesairy for the app to work, but we want to show DirectX 11 as default, which requires it to be loaded.
+        // These are all the settings that are loaded when the settings page is opened.
+        // Note that all the settings in this method always load, regardless of editing settings being enabled.
+        // Its not really nessesairy for the app to work, but we want to at least show the user what the current settings are,
+        // even though they can't change them.
+        
+        // -----------------
+        // Render Dropdown
+        // -----------------
         foreach (var renderer in SettingValues.GFXRenderers.AllRenderers)
         {
             RendererDropdown.Items.Add(renderer);
         }
         
         var currentRenderer = (string)SettingsManager.GFX_BACKEND.Get();
-        var displayName = SettingValues.GFXRenderers.RendererMapping
+        var renderDisplayName = SettingValues.GFXRenderers.RendererMapping
                                        .FirstOrDefault(x => x.Value == currentRenderer).Key;
-        if (displayName != null)
-            RendererDropdown.SelectedItem = displayName;
+        if (renderDisplayName != null)
+            RendererDropdown.SelectedItem = renderDisplayName;
+        
+        // -----------------
+        // Language Dropdown
+        // -----------------
+        foreach (var language in SettingValues.Languages.AllLanguages)
+        {
+            LanguageDropdown.Items.Add(language);
+        }
+        
+        var currentLanguage = (int)SettingsManager.RR_LANGUAGE.Get();
+        var languageDisplayName = SettingValues.Languages.LanguageMapping
+                                       .FirstOrDefault(x => x.Value == currentLanguage).Key;
+
+        if (languageDisplayName != null)
+            LanguageDropdown.SelectedItem = languageDisplayName;
     }
 
     private void UpdateResolution(object sender, RoutedEventArgs e)
@@ -79,5 +101,16 @@ public partial class VideoSettings : UserControl
             SettingsManager.GFX_BACKEND.Set(actualValue);
         else
             MessageBox.Show($"Warning: Unknown renderer selected: {selectedDisplayName}");
+    }
+    
+    private void LanguageDropdown_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var selectedLanguage = LanguageDropdown.SelectedItem.ToString();
+        if (SettingValues.Languages.LanguageMapping.TryGetValue(selectedLanguage, out var actualValue))
+            SettingsManager.RR_LANGUAGE.Set(actualValue);
+        else
+        {
+            Console.WriteLine($"Warning: Unknown language selected: {selectedLanguage}");
+        }
     }
 }

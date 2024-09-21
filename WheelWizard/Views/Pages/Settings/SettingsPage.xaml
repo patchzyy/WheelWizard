@@ -24,7 +24,7 @@
                 <RadioButton Style="{StaticResource TopBar}" Tag="WhWzSettings" 
                              Click="TopBarRadio_OnClick" Content="Wheel Wizard" IsChecked="True" />
                 <RadioButton Style="{StaticResource TopBar}" Tag="VideoSettings" 
-                             Click="TopBarRadio_OnClick" Content="Video" />
+                             Click="TopBarRadio_OnClick" Content="Visual" />
                 <RadioButton Style="{StaticResource TopBar}" Tag="DolphinSettings" 
                              Click="TopBarRadio_OnClick" Content="Dolphin" />
             </StackPanel>

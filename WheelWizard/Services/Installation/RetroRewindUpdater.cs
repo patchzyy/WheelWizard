@@ -63,9 +63,23 @@ public static class RetroRewindUpdater
         var progressWindow = new ProgressWindow("Updating Retro Rewind");
         progressWindow.Show();
 
+        // Step 1: Get the version we are updating to
+        var targetVersion = updatesToApply.Any() ? updatesToApply.Last().Version : currentVersion;
+
+        // Step 2: Apply file deletions for versions between current and targetVersion
+        var deleteSuccess = await ApplyFileDeletionsBetweenVersions(currentVersion, targetVersion);
+        if (!deleteSuccess)
+        {
+            MessageBox.Show("Failed to delete files for the update. Aborting.");
+            progressWindow.Close();
+            return false;
+        }
+
+        // Step 3: Download and apply the updates (if any)
         for (var i = 0; i < updatesToApply.Count; i++)
         {
             var update = updatesToApply[i];
+        
             var success = await DownloadAndApplyUpdate(update, updatesToApply.Count, i + 1, progressWindow);
             if (!success)
             {
@@ -74,10 +88,94 @@ public static class RetroRewindUpdater
                 return false;
             }
 
+            // Update the version file after each successful update
             UpdateVersionFile(update.Version);
         }
+
         progressWindow.Close();
         return true;
+    }
+    
+    private static async Task<bool> ApplyFileDeletionsBetweenVersions(string currentVersion, string targetVersion)
+    {
+        try
+        {
+            var deleteList = await GetFileDeletionList();
+            var deletionsToApply = GetDeletionsToApply(currentVersion, targetVersion, deleteList);
+
+            foreach (var file in deletionsToApply)
+            {
+                var filePath = Path.GetFullPath(Path.Combine(PathManager.RiivolutionWhWzFolderPath, file.Path.TrimStart('/')));
+                //because we are actually getting the path from the server,
+                //we need to make sure we are not getting hacked, so we check if the path is in the riivolution folder
+                var resolvedPath = Path.GetFullPath(new FileInfo(filePath).FullName);
+                if (!resolvedPath.StartsWith(PathManager.RiivolutionWhWzFolderPath, StringComparison.OrdinalIgnoreCase))
+                {
+                    MessageBox.Show("Invalid file path detected. Aborting. Please contact the developers.\n Server error: " + resolvedPath);
+                    return false;
+                }
+                if (!filePath.StartsWith(PathManager.RiivolutionWhWzFolderPath, StringComparison.OrdinalIgnoreCase))
+                {
+                    MessageBox.Show("Invalid file path detected. Aborting. Please contact the developers.\n Server error: " + filePath );
+                    return false;
+                }
+                if (filePath.Contains(".."))
+                {
+                    MessageBox.Show("Invalid file path detected. Aborting. Please contact the developers.\n Server error: " + filePath );
+                    return false;
+                }
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                }
+                else if (Directory.Exists(filePath))
+                {
+                    Directory.Delete(filePath, recursive: true);
+                }
+            }
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            MessageBox.Show($"Failed to delete files: {e.Message}");
+            return false;
+        }
+    }
+    
+    private static List<(string Version, string Path)> GetDeletionsToApply(
+        string currentVersion, string targetVersion, List<(string Version, string Path)> allDeletions)
+    {
+        var deletionsToApply = new List<(string Version, string Path)>();
+        allDeletions.Sort((a, b) => CompareVersions(b.Version, a.Version)); // Sort in descending order
+        foreach (var deletion in allDeletions)
+        {
+            if (CompareVersions(deletion.Version, currentVersion) > 0 && CompareVersions(deletion.Version, targetVersion) <= 0)
+            {
+                deletionsToApply.Add(deletion);
+            }
+        }
+
+        deletionsToApply.Reverse();
+        return deletionsToApply;
+    }
+
+    private static async Task<List<(string Version, string Path)>> GetFileDeletionList()
+    {
+        var deleteList = new List<(string Version, string Path)>();
+
+        using var httpClient = new HttpClient();
+        var deleteListText = await httpClient.GetStringAsync(Endpoints.RRVersionDeleteUrl);
+        var lines = deleteListText.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+        foreach (var line in lines)
+        {
+            var parts = line.Split(new[] { ' ' }, 2);
+            if (parts.Length < 2) continue;
+            deleteList.Add((parts[0].Trim(), parts[1].Trim()));
+        }
+
+        return deleteList;
     }
 
     private static void UpdateVersionFile(string newVersion)

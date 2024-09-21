@@ -98,6 +98,21 @@
                 </Grid>
             </Border>
             
+            <components:FormFieldLabel Text="In-Game" />
+            <Border Style="{StaticResource SettingsBlockStyle}" 
+                    x:Name="InGame">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <components:Dropdown
+                        Label="Language"
+                        x:Name="LanguageDropdown"
+                        SelectionChanged="LanguageDropdown_OnSelectionChanged"
+                        ></components:Dropdown>
+                </Grid>
+            </Border>
+            
             <components:FormFieldLabel Text="Renderer Settings" />
             <Border Style="{StaticResource SettingsBlockStyle}" 
                     x:Name="RendererBorder">
