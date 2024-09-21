@@ -64,11 +64,12 @@
     <SolidColorBrush x:Key="BackgroundLine" Color="{StaticResource Gray700}" />
 
     <!-- Generic text stuff -->
-    <SolidColorBrush x:Key="BodyTextColor" Color="{StaticResource Gray500}" />
-    <SolidColorBrush x:Key="TitleTextColor" Color="{StaticResource Gray500}" />
-    <SolidColorBrush x:Key="TitleIconColor" Color="{StaticResource Gray600}" />
+    <SolidColorBrush x:Key="BodyTextColor" Color="{StaticResource Gray400}" />
+    <SolidColorBrush x:Key="TitleTextColor" Color="{StaticResource Gray400}" />
+    <SolidColorBrush x:Key="TitleIconColor" Color="{StaticResource Gray500}" />
     <SolidColorBrush x:Key="TitleTextHover" Color="{StaticResource Gray300}" />
     <SolidColorBrush x:Key="FormFieldLabelColor" Color="{StaticResource Gray300}" />
+    <SolidColorBrush x:Key="WhiteTitle" Color="{StaticResource Gray50}" />
 
     <!-- List Views (static & drag and drop) -->
     <SolidColorBrush x:Key="HeaderAttributes" Color="{StaticResource Gray400}" />

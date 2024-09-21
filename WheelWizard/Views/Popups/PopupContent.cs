@@ -9,9 +9,17 @@ public abstract class PopupContent : UserControl
     
     protected PopupContent( bool allowClose, bool allowLayoutInteraction, string title = "", Vector? size = null)
     {
-        Window = new(allowClose, allowLayoutInteraction, title, size) { PopupContent = { Content = this } };
+        Window = new(allowClose, allowLayoutInteraction, title, size)
+        {
+            PopupContent = { Content = this },
+            BeforeClose = BeforeClose,
+            BeforeOpen = BeforeOpen
+        };
     }
 
+    protected virtual void BeforeClose() { } // Meant to be overwritten if needed
+    protected virtual void BeforeOpen() { }  // Meant to be overwritten if needed
+    
     public void Show() => Window.Show();
     public bool? ShowDialog() => Window.ShowDialog();
     public void Close() => Window.Close();

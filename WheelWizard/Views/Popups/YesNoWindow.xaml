@@ -8,14 +8,15 @@
                     xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
                     mc:Ignorable="d" d:DesignHeight="200" d:DesignWidth="400">
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10">
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,10">
             
             <TextBlock Style="{StaticResource TitleText}" x:Name="MainTextBlock"
                        HorizontalAlignment="Left" TextWrapping="Wrap"
                        Foreground="{StaticResource FormFieldLabelColor}"
-                       FontSize="20"/>
+                       FontSize="18"/>
             <TextBlock Style="{StaticResource BodyText}" x:Name="ExtraTextBlock"
-                       HorizontalAlignment="Center" Margin="0,10,0,0" />
+                       FontSize="14"
+                       HorizontalAlignment="Left" Margin="0,10,0,0" />
         </StackPanel>
         
         <UniformGrid Columns="2" HorizontalAlignment="Right" VerticalAlignment="Bottom"

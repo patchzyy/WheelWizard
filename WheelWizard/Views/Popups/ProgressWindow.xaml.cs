@@ -1,55 +1,78 @@
-﻿using CT_MKWII_WPF.Services.Settings;
+using CT_MKWII_WPF.Helpers;
 using System;
-using System.Windows;
-using System.Windows.Input;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
 
 namespace CT_MKWII_WPF.Views.Popups;
 
-// TODO: There should come a generic approuch to popup windows
-//      - This would include one definative base class for the window for all popups
-//      - This base class would include the OnClose code and stuff like that, it would also include the scale code
-//      - All other things that should not be generic would be in the specific popup classes
-public partial class ProgressWindow : Window
+public partial class ProgressWindow : PopupContent
 {
-    private readonly bool _allowLayoutInteraction;
-
-    public ProgressWindow(bool allowLayoutInteraction = false)
+    
+    // WindowTitle = what this means for the user (e.g: "updating retro rewind")
+    // goalText    = what this means for the computer (e.g: "downloading 23 files (5.4 MB)")
+    // extraText   = A little description of what is happening (e.g: "This may take a while" or "placing files in the mods folder")
+    // progress    = i hope this is straight forward lol
+    private Stopwatch _stopwatch = new();
+    private int _progress = 0;
+    private double? _totalMb = null;
+    
+    public ProgressWindow(string windowTitle) : base(false, false, windowTitle, new(400,230))
     {
-        _allowLayoutInteraction = allowLayoutInteraction;
         InitializeComponent();
-        
-        var scaleFactor = (double)SettingsManager.WINDOW_SCALE.Get();
-        Height *= scaleFactor;
-        Width *= scaleFactor;
-        ScaleTransform.ScaleX = scaleFactor;
-        ScaleTransform.ScaleY = scaleFactor;
-
-        Loaded += ProgressWindow_Loaded;
     }
 
-    public void UpdateProgress(int progress, string status, string bottomText)
+    protected override void BeforeOpen()
     {
-        Dispatcher.Invoke(() =>
+        _stopwatch.Start();
+    }
+
+    protected override void BeforeClose()
+    {
+        _stopwatch.Stop();
+    }
+
+    private void InternalUpdate()
+    {
+        var elapsedSeconds = _stopwatch.Elapsed.TotalSeconds;
+        var remainingSeconds = (100 - _progress) / (_progress / elapsedSeconds);
+        var remainingText = Humanizer.HumanizeSeconds((int)remainingSeconds);
+        if (_progress <= 0)
+            remainingText = "unknown";
+        var bottomText = $"Estimated time remaining: { remainingText }";
+        if (_totalMb != null)
         {
-            ProgressBar.Value = progress;
-            StatusLabel.Text = status;
-            BottomTextLabel.Text = bottomText;
-        });
+            var downloadedMb = (_progress / 100.0) * (double)_totalMb;
+            bottomText = $"Speed: {downloadedMb / elapsedSeconds:F2} MB/s | {bottomText}";
+        }
+        
+        LiveTextBlock.Text = bottomText;
+        ProgressBar.Value = _progress;
+    }
+    
+    public ProgressWindow SetExtraText(string mainText)
+    {
+        ExtraTextBlock.Text = mainText;
+        return this;
+    }
+    
+    public ProgressWindow SetGoal(string extraText, double? megaBytes = null)
+    {
+        _totalMb = megaBytes;
+        GoalTextBlock.Text = extraText + $" ({megaBytes:F2} MB)";
+        return this;
+    }
+    public ProgressWindow SetGoal(double megaBytes)
+    {
+        _totalMb = megaBytes;
+        GoalTextBlock.Text = $"downloading {megaBytes:F2} MB";
+        return this;
     }
 
-    public void ChangeExtraText(string text) => ExtraTextLabel.Text = text;
-
-    private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => DragMove();
-
-    private void ProgressWindow_Loaded(object sender, RoutedEventArgs e)
+    public void UpdateProgress(int progress)
     {
-        if (!_allowLayoutInteraction)
-            ViewUtils.GetLayout().DisableEverything();
-    }
-
-    protected override void OnClosed(EventArgs e)
-    {
-        ViewUtils.GetLayout().EnableEverything();
-        base.OnClosed(e);
+        _progress = progress;
+        InternalUpdate();
     }
 }

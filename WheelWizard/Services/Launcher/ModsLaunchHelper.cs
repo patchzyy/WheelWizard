@@ -37,7 +37,7 @@ public static class ModsLaunchHelper
         Array.Reverse(mods);
         if (Directory.Exists(MyStuffFolderPath))
             Directory.Delete(MyStuffFolderPath, true);
-        var progressWindow = new ProgressWindow();
+        var progressWindow = new ProgressWindow("Installing Mods").SetGoal($"Installing {mods.Length} mods");
         progressWindow.Show();
         await Task.Run(() =>
         {
@@ -51,12 +51,13 @@ public static class ModsLaunchHelper
         progressWindow.Close();
     }
     
-    private static void InstallMod(ModData mod, ProgressWindow progressWindow)
+    private static void InstallMod(ModData mod, ProgressWindow progressPopupWindow)
     {
-        Application.Current.Dispatcher.Invoke(() => 
-            progressWindow.UpdateProgress(0, $"Installing {mod.Title}", "Please wait..."));
+              
         var modFolder = Path.Combine(ModsFolderPath, mod.Title);
         var allFiles = Array.Empty<string>();
+        progressPopupWindow.SetExtraText( $"Installing {mod.Title} ({allFiles.Length} files)" );
+        
         foreach (var extension in AcceptedModExtensions)
         {
             var files = Directory.GetFiles(modFolder, extension, SearchOption.AllDirectories);
@@ -67,9 +68,7 @@ public static class ModsLaunchHelper
         {
             var file = allFiles[i];
             var progress = (int)((i + 1) / (double)allFiles.Length * 100);
-            Application.Current.Dispatcher.Invoke(() => 
-                progressWindow.UpdateProgress(progress, $"Installing {mod.Title}", $"Please wait... ({i + 1}/{allFiles.Length})"
-                    ));
+            Application.Current.Dispatcher.Invoke(() => progressPopupWindow.UpdateProgress(progress));
             var relativePath = Path.GetFileName(file);
             var destinationFile = Path.Combine(MyStuffFolderPath, relativePath);
             Directory.CreateDirectory(Path.GetDirectoryName(destinationFile)!);

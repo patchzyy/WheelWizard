@@ -121,14 +121,14 @@ public static class RetroRewindInstaller
 
     private static async Task DownloadAndExtractRetroRewind(string tempZipPath)
     {
-        var progressWindow = new ProgressWindow();
-        progressWindow.ChangeExtraText("Downloading Retro Rewind...");
+        var progressWindow = new ProgressWindow("Installing Retro Rewind");
+        progressWindow.SetExtraText("Downloading Retro Rewind for the first time");
         progressWindow.Show();
 
         try
         {
             await DownloadHelper.DownloadToLocation(Endpoints.RRZipUrl, tempZipPath, progressWindow);
-            progressWindow.ChangeExtraText("Extracting files...");
+            progressWindow.SetExtraText("Extracting files...");
             var extractionPath = PathManager.RiivolutionWhWzFolderPath;
             ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
         }

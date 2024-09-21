@@ -30,6 +30,9 @@ public partial class PopupWindow : Window, INotifyPropertyChanged
         }
     }
 
+    public Action BeforeOpen { get; set; } = () => { };
+    public Action BeforeClose { get; set; } = () => { };
+    
     private readonly bool _allowLayoutInteraction;
     
     // Most (if not all) of these parameters should be set in the popup you create, and not kept as a parameter for that popup
@@ -61,12 +64,14 @@ public partial class PopupWindow : Window, INotifyPropertyChanged
     
     private void PopupWindow_Loaded(object sender, RoutedEventArgs e)
     {
+        BeforeOpen();
         if (!_allowLayoutInteraction)
             ViewUtils.GetLayout().DisableEverything();
     }
     
     protected override void OnClosed(EventArgs e)
     {
+        BeforeClose();
         ViewUtils.GetLayout().EnableEverything();
         base.OnClosed(e);
     }

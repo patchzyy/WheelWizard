@@ -108,7 +108,7 @@ public static class AutoUpdater
         if (File.Exists(newFilePath))
             File.Delete(newFilePath);
         
-        await DownloadHelper.DownloadToLocation(downloadUrl, newFilePath);
+        await DownloadHelper.DownloadToLocation(downloadUrl, newFilePath, "Updating WheelWizard", "getting the latest WheelWizard from github releases");
 
         // we need to wait a bit before running the batch file to ensure the file is saved on disk
         await Task.Delay(200);

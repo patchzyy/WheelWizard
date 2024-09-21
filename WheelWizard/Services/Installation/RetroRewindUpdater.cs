@@ -60,7 +60,7 @@ public static class RetroRewindUpdater
         var allVersions = await GetAllVersionData();
         var updatesToApply = GetUpdatesToApply(currentVersion, allVersions);
 
-        var progressWindow = new ProgressWindow();
+        var progressWindow = new ProgressWindow("Updating Retro Rewind");
         progressWindow.Show();
 
         for (var i = 0; i < updatesToApply.Count; i++)
@@ -136,16 +136,17 @@ public static class RetroRewindUpdater
     }
 
     private static async Task<bool> DownloadAndApplyUpdate(
-        (string Version, string Url, string Path, string Description) update, int totalUpdates, int currentUpdateIndex,
-        ProgressWindow window)
+        (string Version, string Url, string Path, string Description) update, 
+        int totalUpdates, int currentUpdateIndex, ProgressWindow popupWindow)
     {
         var tempZipPath = Path.GetTempFileName();
         try
         {
-            window.ChangeExtraText($"Update {currentUpdateIndex}/{totalUpdates}: {update.Description}");
-            await DownloadHelper.DownloadToLocation(update.Url, tempZipPath, window);
+            popupWindow.SetExtraText($"Update {currentUpdateIndex}/{totalUpdates}: {update.Description}");
+            await DownloadHelper.DownloadToLocation(update.Url, tempZipPath, popupWindow);
 
-            window.UpdateProgress(100, "Extracting update...", "Extracting update...");
+            popupWindow.UpdateProgress(100);
+            popupWindow.SetExtraText("Extracting files...");
             var extractionPath = PathManager.RiivolutionWhWzFolderPath;
             Directory.CreateDirectory(extractionPath);
             ExtractZipFile(tempZipPath, extractionPath);

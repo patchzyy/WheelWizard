@@ -18,6 +18,8 @@ public static class Humanizer
         // internal method to simplify the pluralization of words
         string P(int count) => Math.Abs(count) != 1 ? "s" : "";
     }
+
+    public static string HumanizeSeconds(int seconds) => HumanizeTimeSpan(TimeSpan.FromSeconds(seconds));
     
     public static string GetRegionName(uint regionID)
     {
