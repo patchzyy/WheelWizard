@@ -1,6 +1,8 @@
-﻿using CT_MKWII_WPF.Models.Settings;
+﻿using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Models.Settings;
 using CT_MKWII_WPF.Services;
 using CT_MKWII_WPF.Services.Settings;
+using CT_MKWII_WPF.Views.Popups;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
@@ -10,6 +12,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Threading;
 using Button = CT_MKWII_WPF.Views.Components.Button;
 
 
@@ -17,12 +20,16 @@ namespace CT_MKWII_WPF.Views.Pages.Settings;
 
 public partial class WhWzSettings : UserControl
 {
+    private readonly bool _pageLoaded;
+    private bool _editingScale;
+    
     public WhWzSettings()
     {
         InitializeComponent();
         AutoFillUserPath();
         TogglePathSettings(false);
         LoadSettings();
+        _pageLoaded = true;
     }
 
     private void LoadSettings()
@@ -34,24 +41,27 @@ public partial class WhWzSettings : UserControl
         
         // IMPORTANT: Make sure that the number and percentage is always the last word in the string,
         // If you don want this, you should change the code below that parses the string back to an actual value
-        foreach(double scale in SettingValues.WindowScales)
+        foreach(var scale in SettingValues.WindowScales)
         {
-            var scaleText = (int)Math.Round(scale * 100) + "%";
-            WindowScaleDropdown.Items.Add(scaleText);
+            WindowScaleDropdown.Items.Add(ScaleToString(scale));
         }
-        var selectedItemText = (int)Math.Round((double)SettingsManager.WINDOW_SCALE.Get() * 100) + "%";
-        // check if the selected item is in the list
+        var selectedItemText = ScaleToString((double)SettingsManager.WINDOW_SCALE.Get());
         if (WindowScaleDropdown.Items.Contains(selectedItemText))
             WindowScaleDropdown.SelectedItem = selectedItemText;
         else
         {
-            // This will most users never see. This will only be visible if you change the WindowScale value in the json itself
-            // to a value that is not listed in the WindowScales array. It is mandatory however, since we dont want
-            // To break the app just because some users have a different scale. (also if we change the dropdown values in the future)
-            selectedItemText = "Custom: " + selectedItemText;
             WindowScaleDropdown.Items.Add(selectedItemText);
             WindowScaleDropdown.SelectedItem = selectedItemText;
         }
+    }
+
+    private string ScaleToString(double scale)
+    {
+        var percentageString = (int)Math.Round(scale * 100) + "%";
+        if (SettingValues.WindowScales.Contains(scale))
+            return percentageString;
+        
+        return "Custom: " + percentageString;
     }
     
     private void AutoFillUserPath()
@@ -194,10 +204,46 @@ public partial class WhWzSettings : UserControl
     
     private void WindowScaleDropdown_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
+        if (!_pageLoaded || _editingScale)
+            return;
+        
+        _editingScale = true;
         var selectedLanguage = WindowScaleDropdown.SelectedItem.ToString();
-        var scale = double.Parse(selectedLanguage.Split(" ").Last()
-                                                 .Replace("%", "")) / 100;
+        var scale = double.Parse(selectedLanguage!.Split(" ").Last()
+                                                  .Replace("%", "")) / 100;
    
         SettingsManager.WINDOW_SCALE.Set(scale);
+        var seconds = 10;
+        string ExtraText() => $"This change will revert in {Humanizer.HumanizeSeconds(seconds)} " 
+                              + $"unless you decide to keep the change.";
+        
+        var yesNoWindow = new YesNoWindow()
+                          .SetButtonText("Keep", "Revert")
+                          .SetMainText("Do you want to apply the new scale?")
+                          .SetExtraText(ExtraText());
+        // we want to now set up a timer every second to update the text, and at the last second close the window
+        var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+       
+        timer.Tick += (_, args) =>
+        {
+            seconds--;
+            yesNoWindow.SetExtraText(ExtraText());
+            if (seconds != 0) 
+                return;
+            yesNoWindow.Close();
+            timer.Stop();
+        };
+        
+        timer.Start();
+        
+        if (yesNoWindow.AwaitAnswer())
+            SettingsManager.SAVED_WINDOW_SCALE.Set(SettingsManager.WINDOW_SCALE.Get());
+        else
+        {
+            SettingsManager.WINDOW_SCALE.Set(SettingsManager.SAVED_WINDOW_SCALE.Get());
+            WindowScaleDropdown.SelectedItem = ScaleToString((double)SettingsManager.WINDOW_SCALE.Get());
+        }
+        
+        _editingScale = false;
     }
 }

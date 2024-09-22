@@ -12,7 +12,7 @@ public enum DolphinShaderCompilationMode {
 
 public static class SettingValues
 {
-    public static readonly Array WindowScales = new[] { 0.7, 0.8, 0.9, 1.0, 1.15, 1.3, 1.45 };
+    public static readonly double[] WindowScales = { 0.7, 0.8, 0.9, 1.0, 1.15, 1.3, 1.45 };
     
     public static class GFXRenderers
     {
