@@ -51,7 +51,7 @@ public class VirtualSetting : Setting, ISettingListener
         _dependencies = dependencies;
         foreach (var dependency in dependencies)
         {
-            dependency.RegisterDependentVirtualSetting(this);
+            dependency.Subscribe(this);
         }
 
         return this;

@@ -30,6 +30,8 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
 
         OnSettingChanged(SettingsManager.SAVED_WINDOW_SCALE);
         
+        SettingsManager.WINDOW_SCALE.Subscribe(this);
+        
         try
         {
             NavigateToPage(new Dashboard());

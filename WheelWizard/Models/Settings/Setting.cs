@@ -60,9 +60,11 @@ public abstract class Setting
         return this;
     }
     
-    public void RegisterDependentVirtualSetting(VirtualSetting dependent)
+    public bool Unsubscribe(ISettingListener dependent) => DependentVirtualSettings.Remove(dependent);
+    public void Subscribe(ISettingListener dependent)
     {
-        DependentVirtualSettings.Add(dependent);
+        if (!DependentVirtualSettings.Contains(dependent))
+            DependentVirtualSettings.Add(dependent);
     }
     
     protected void SignalChange()
