@@ -36,7 +36,8 @@ public class SettingsManager
     
     // Virtual Settings
     private static double _internalScale = -1.0;
-    public static Setting WINDOW_SCALE = new VirtualSetting(typeof(double), value => _internalScale = (double)value!,
+    public static Setting WINDOW_SCALE = new VirtualSetting(typeof(double), 
+                                                            value => _internalScale = (double)value!,
                                                             () => _internalScale == -1.0 ? SAVED_WINDOW_SCALE.Get() : _internalScale
                                                             ).SetDependencies(SAVED_WINDOW_SCALE);
     

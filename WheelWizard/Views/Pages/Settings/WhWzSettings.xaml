@@ -137,6 +137,18 @@
                 <!--                    Margin="3" /> -->
                 </Grid>
             </StackPanel>
+            
+            <components:FormFieldLabel Text="Wheel Wizard appearance" Margin="0,10,0,0"/>
+            <Border Style="{StaticResource SettingsBlockStyle}" 
+                    x:Name="WhWzAppearance">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                    <components:Dropdown
+                        Label="Window Scale"
+                        SelectionChanged="WindowScaleDropdown_OnSelectionChanged"
+                        x:Name="WindowScaleDropdown">
+                    </components:Dropdown>
+                </Grid>
+            </Border>
         </StackPanel>
     </Grid>
 </UserControl>

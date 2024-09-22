@@ -14,15 +14,13 @@ public partial class DolphinSettings : UserControl
         _settingsAreDisabled = !SettingsHelper.PathsSetupCorrectly();
         DisabledWarningText.Visibility = _settingsAreDisabled ? Visibility.Visible : Visibility.Collapsed;
         
-        LoadSettings();
+        DolphinBorder.IsEnabled = !_settingsAreDisabled;
+        if (!_settingsAreDisabled)
+            LoadSettings();
     }
 
     private void LoadSettings()
     {
-        WiiBorder.IsEnabled = !_settingsAreDisabled;
-        if (_settingsAreDisabled) 
-            return;
-        
         DisableForce.IsChecked = (bool)SettingsManager.FORCE_WIIMOTE.Get();
         LaunchWithDolphin.IsChecked = (bool)SettingsManager.LAUNCH_WITH_DOLPHIN.Get();
     }

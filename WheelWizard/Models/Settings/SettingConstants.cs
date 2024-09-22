@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CT_MKWII_WPF.Models.Settings;
 
@@ -11,6 +12,8 @@ public enum DolphinShaderCompilationMode {
 
 public static class SettingValues
 {
+    public static readonly double[] WindowScales = { 0.7, 0.8, 0.9, 1.0, 1.15, 1.3, 1.45 };
+    
     public static class GFXRenderers
     {
         public const string D3D11 = "D3D11";
