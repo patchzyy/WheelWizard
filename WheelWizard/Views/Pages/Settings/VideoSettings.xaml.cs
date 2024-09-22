@@ -54,13 +54,13 @@ public partial class VideoSettings : UserControl
         // -----------------
         // Render Dropdown
         // -----------------
-        foreach (var renderer in SettingValues.GFXRenderers.AllRenderers)
+        foreach (var renderer in SettingValues.GFXRenderers.AllKeys)
         {
             RendererDropdown.Items.Add(renderer);
         }
         
         var currentRenderer = (string)SettingsManager.GFX_BACKEND.Get();
-        var renderDisplayName = SettingValues.GFXRenderers.RendererMapping
+        var renderDisplayName = SettingValues.GFXRenderers.Mapping
                                        .FirstOrDefault(x => x.Value == currentRenderer).Key;
         if (renderDisplayName != null)
             RendererDropdown.SelectedItem = renderDisplayName;
@@ -68,13 +68,13 @@ public partial class VideoSettings : UserControl
         // -----------------
         // Language Dropdown
         // -----------------
-        foreach (var language in SettingValues.Languages.AllLanguages)
+        foreach (var language in SettingValues.Languages.AllKeys)
         {
             LanguageDropdown.Items.Add(language);
         }
         
         var currentLanguage = (int)SettingsManager.RR_LANGUAGE.Get();
-        var languageDisplayName = SettingValues.Languages.LanguageMapping
+        var languageDisplayName = SettingValues.Languages.Mapping
                                        .FirstOrDefault(x => x.Value == currentLanguage).Key;
 
         if (languageDisplayName != null)
@@ -97,7 +97,7 @@ public partial class VideoSettings : UserControl
     private void RendererDropdown_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var selectedDisplayName = RendererDropdown.SelectedItem.ToString();
-        if (SettingValues.GFXRenderers.RendererMapping.TryGetValue(selectedDisplayName, out var actualValue))
+        if (SettingValues.GFXRenderers.Mapping.TryGetValue(selectedDisplayName, out var actualValue))
             SettingsManager.GFX_BACKEND.Set(actualValue);
         else
             MessageBox.Show($"Warning: Unknown renderer selected: {selectedDisplayName}");
@@ -106,7 +106,7 @@ public partial class VideoSettings : UserControl
     private void LanguageDropdown_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var selectedLanguage = LanguageDropdown.SelectedItem.ToString();
-        if (SettingValues.Languages.LanguageMapping.TryGetValue(selectedLanguage, out var actualValue))
+        if (SettingValues.Languages.Mapping.TryGetValue(selectedLanguage, out var actualValue))
             SettingsManager.RR_LANGUAGE.Set(actualValue);
         else
         {

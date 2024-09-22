@@ -16,7 +16,7 @@ public class SettingsManager
     public static Setting FOCUSSED_USER = new WhWzSetting(typeof(int), "FavoriteUser", 0).SetValidation(value => (int)(value ?? -1) >= 0 && (int)(value ?? -1) <= 4);
     public static Setting FORCE_30FPS = new WhWzSetting(typeof(bool), "Force30FPS", false);
     public static Setting SAVED_WINDOW_SCALE = new WhWzSetting(typeof(double), "WindowScale", 1.0).SetValidation(value => (double)(value ?? -1) >= 0.5 && (double)(value ?? -1) <= 2.0);
-    public static Setting RR_LANGUAGE = new WhWzSetting(typeof(int), "RR_Language", 0);
+    public static Setting RR_LANGUAGE = new WhWzSetting(typeof(int), "RR_Language", SettingValues.Languages.DefaultValue);
 
     // Dolphin Settings
     public static Setting VSYNC = new DolphinSetting(typeof(bool), ("GFX.ini", "Hardware", "VSync"), false);
@@ -24,7 +24,7 @@ public class SettingsManager
     public static Setting INTERNAL_RESOLUTION = new DolphinSetting(typeof(int), ("GFX.ini", "Settings", "InternalResolution"), 1)
         .SetValidation(value => (int)(value ?? -1) >= 0);
     public static Setting SHOW_FPS = new DolphinSetting(typeof(bool), ("GFX.ini", "Settings", "ShowFPS"), false);
-    public static Setting GFX_BACKEND = new DolphinSetting(typeof(string), ("Dolphin.ini", "Core", "GFXBackend"), SettingValues.GFXRenderers.D3D11);
+    public static Setting GFX_BACKEND = new DolphinSetting(typeof(string), ("Dolphin.ini", "Core", "GFXBackend"), SettingValues.GFXRenderers.DefaultValue);
     
     //recommended settings
     private static Setting DOLPHIN_COMPILATION_MODE = new DolphinSetting(typeof(DolphinShaderCompilationMode), ("GFX.ini", "Settings", "ShaderCompilationMode"),
