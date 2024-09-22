@@ -13,7 +13,7 @@ public abstract class Setting
         ValueType = type;
     }
     
-    protected readonly List<VirtualSetting> DependentVirtualSettings = new();
+    protected readonly List<ISettingListener> DependentVirtualSettings = new();
     public string Name { get; protected set; }
     public object DefaultValue { get; protected set; }
     protected object Value { get; set; }

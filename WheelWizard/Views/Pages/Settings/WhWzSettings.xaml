@@ -144,14 +144,8 @@
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
                     <components:Dropdown
                         Label="Window Scale"
+                        SelectionChanged="WindowScaleDropdown_OnSelectionChanged"
                         x:Name="WindowScaleDropdown">
-                        <ComboBoxItem Content="70%" IsEnabled="False" IsSelected="True"/>
-                        <ComboBoxItem Content="80%"/>
-                        <ComboBoxItem Content="90%"/>
-                        <ComboBoxItem Content="100%"/>
-                        <ComboBoxItem Content="115%"/>
-                        <ComboBoxItem Content="130%"/>
-                        <ComboBoxItem Content="145%"/>
                     </components:Dropdown>
                 </Grid>
             </Border>

@@ -1,9 +1,12 @@
-﻿using CT_MKWII_WPF.Services;
+﻿using CT_MKWII_WPF.Models.Settings;
+using CT_MKWII_WPF.Services;
 using CT_MKWII_WPF.Services.Settings;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -19,8 +22,38 @@ public partial class WhWzSettings : UserControl
         InitializeComponent();
         AutoFillUserPath();
         TogglePathSettings(false);
+        LoadSettings();
     }
 
+    private void LoadSettings()
+    {
+        
+        // -----------------
+        // Loading all the Window Scale settings
+        // -----------------
+        
+        // IMPORTANT: Make sure that the number and percentage is always the last word in the string,
+        // If you don want this, you should change the code below that parses the string back to an actual value
+        foreach(double scale in SettingValues.WindowScales)
+        {
+            var scaleText = (int)Math.Round(scale * 100) + "%";
+            WindowScaleDropdown.Items.Add(scaleText);
+        }
+        var selectedItemText = (int)Math.Round((double)SettingsManager.WINDOW_SCALE.Get() * 100) + "%";
+        // check if the selected item is in the list
+        if (WindowScaleDropdown.Items.Contains(selectedItemText))
+            WindowScaleDropdown.SelectedItem = selectedItemText;
+        else
+        {
+            // This will most users never see. This will only be visible if you change the WindowScale value in the json itself
+            // to a value that is not listed in the WindowScales array. It is mandatory however, since we dont want
+            // To break the app just because some users have a different scale. (also if we change the dropdown values in the future)
+            selectedItemText = "Custom: " + selectedItemText;
+            WindowScaleDropdown.Items.Add(selectedItemText);
+            WindowScaleDropdown.SelectedItem = selectedItemText;
+        }
+    }
+    
     private void AutoFillUserPath()
     {
         if (DolphinExeInput.Text != "") 
@@ -157,5 +190,14 @@ public partial class WhWzSettings : UserControl
         DolphinExeInput.Text = PathManager.DolphinFilePath;
         MarioKartInput.Text = PathManager.GameFilePath;
         DolphinUserPathInput.Text = PathManager.UserFolderPath;
+    }
+    
+    private void WindowScaleDropdown_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var selectedLanguage = WindowScaleDropdown.SelectedItem.ToString();
+        var scale = double.Parse(selectedLanguage.Split(" ").Last()
+                                                 .Replace("%", "")) / 100;
+   
+        SettingsManager.WINDOW_SCALE.Set(scale);
     }
 }
