@@ -18,9 +18,6 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="Sidebar_Home" xml:space="preserve">
-        <value>Start</value>
-    </data>
     <data name="Sidebar_Mods" xml:space="preserve">
         <value>Mods</value>
     </data>
@@ -29,5 +26,8 @@
     </data>
     <data name="Sidebar_Settings" xml:space="preserve">
         <value>Instellingen</value>
+    </data>
+    <data name="Sidebar_Home" xml:space="preserve">
+        <value>Start</value>
     </data>
 </root>

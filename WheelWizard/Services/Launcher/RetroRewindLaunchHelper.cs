@@ -14,8 +14,8 @@ public static class RetroRewindLaunchHelper
     
     public static void GenerateLaunchJson()
     {
-        bool fps30 = (bool)SettingsManager.FORCE_30FPS.Get();
-        int language = (int)SettingsManager.RR_LANGUAGE.Get();
+        var fps30 = (bool)SettingsManager.FORCE_30FPS.Get();
+        var language = (int)SettingsManager.RR_LANGUAGE.Get();
         var launchConfig = new LaunchConfig
         {
             BaseFile = PathManager.GameFilePath,
