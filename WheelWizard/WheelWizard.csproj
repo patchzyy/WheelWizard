@@ -58,6 +58,30 @@
     <ItemGroup>
       <Folder Include="Views\Pages\UserProfile\" />
     </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\Languages\Lang.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Lang.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Lang.nl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Lang.nl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Resources\Languages\Lang.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Lang.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Languages\Lang.nl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Lang.nl.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
     <PropertyGroup>
         <ApplicationIcon>car-wheel.ico</ApplicationIcon>
     </PropertyGroup>

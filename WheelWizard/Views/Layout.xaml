@@ -14,6 +14,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
         xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
         xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Pages"
         xmlns:sink="clr-namespace:CT_MKWII_WPF.Views.Pages.KitchenSink"
+        xmlns:lang="clr-namespace:CT_MKWII_WPF.Resources.Languages"
         xmlns:settings="clr-namespace:CT_MKWII_WPF.Views.Pages.Settings"
         mc:Ignorable="d"
         d:DesignHeight="876" d:DesignWidth="656"
@@ -188,13 +189,13 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
             <Border Grid.Column="0" Grid.Row="3" VerticalAlignment="Top">
                 <StackPanel x:Name="SidePanelButtons">
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.HouseChimneySolid}"
-                                                   IconPack="FontAwesome" Text="Home" IsChecked="True"
+                                                   IconPack="FontAwesome" Text="{x:Static lang:Lang.Sidebar_Home}" IsChecked="True"
                                                    PageType="{x:Type local:Dashboard}" />
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.CircleUserSolid}"
-                                                   IconPack="FontAwesome" Text="My Profiles" x:Name="MyProfilesButton"
+                                                   IconPack="FontAwesome" Text="{x:Static lang:Lang.Sidebar_MyProfiles}" x:Name="MyProfilesButton"
                                                    PageType="{x:Type local:UserProfilePage}"/>
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.CubesStackedSolid}"
-                                                   IconPack="FontAwesome" Text="My Stuff"
+                                                   IconPack="FontAwesome" Text="{x:Static lang:Lang.Sidebar_Mods}"
                                                    PageType="{x:Type local:ModsPage}" />
                     
                     <TextBlock Text="Online" Style="{StaticResource SidebarSectionText}" />

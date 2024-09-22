@@ -58,5 +58,41 @@ namespace CT_MKWII_WPF.Resources.Languages {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        internal static string Sidebar_Home {
+            get {
+                return ResourceManager.GetString("Sidebar_Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mods.
+        /// </summary>
+        internal static string Sidebar_Mods {
+            get {
+                return ResourceManager.GetString("Sidebar_Mods", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profielen.
+        /// </summary>
+        internal static string Sidebar_MyProfiles {
+            get {
+                return ResourceManager.GetString("Sidebar_MyProfiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instellingen.
+        /// </summary>
+        internal static string Sidebar_Settings {
+            get {
+                return ResourceManager.GetString("Sidebar_Settings", resourceCulture);
+            }
+        }
     }
 }
