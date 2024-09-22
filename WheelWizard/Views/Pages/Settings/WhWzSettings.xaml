@@ -137,6 +137,24 @@
                 <!--                    Margin="3" /> -->
                 </Grid>
             </StackPanel>
+            
+            <components:FormFieldLabel Text="Wheel Wizard appearance" Margin="0,10,0,0"/>
+            <Border Style="{StaticResource SettingsBlockStyle}" 
+                    x:Name="WhWzAppearance">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                    <components:Dropdown
+                        Label="Window Scale"
+                        x:Name="WindowScaleDropdown">
+                        <ComboBoxItem Content="70%" IsEnabled="False" IsSelected="True"/>
+                        <ComboBoxItem Content="80%"/>
+                        <ComboBoxItem Content="90%"/>
+                        <ComboBoxItem Content="100%"/>
+                        <ComboBoxItem Content="115%"/>
+                        <ComboBoxItem Content="130%"/>
+                        <ComboBoxItem Content="145%"/>
+                    </components:Dropdown>
+                </Grid>
+            </Border>
         </StackPanel>
     </Grid>
 </UserControl>

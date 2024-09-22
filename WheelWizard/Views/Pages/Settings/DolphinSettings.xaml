@@ -8,7 +8,7 @@
              xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d"
              d:DesignHeight="831" d:DesignWidth="444">
-    <Grid>
+    <Grid  x:Name="DolphinBorder">
         <StackPanel Margin="0,15,0,0">
             
             <Border Padding="4" Margin="0,-10,0,10"  x:Name="DisabledWarningText"
@@ -22,7 +22,7 @@
             </Border>
             
             <components:FormFieldLabel Text="Wii Settings" />
-            <Border Style="{StaticResource SettingsBlockStyle}" x:Name="WiiBorder">
+            <Border Style="{StaticResource SettingsBlockStyle}">
                 <StackPanel>
                     <CheckBox Margin="0,2" IsChecked="False"
                               Style="{StaticResource DarkSwitch}"
