@@ -60,38 +60,110 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Home.
+        ///   Looks up a localized string similar to Friends.
         /// </summary>
-        public static string Sidebar_Home {
+        public static string Sidebar_Button_Friends {
             get {
-                return ResourceManager.GetString("Sidebar_Home", resourceCulture);
+                return ResourceManager.GetString("Sidebar_Button_Friends", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to My Stuff.
+        ///   Looks up a localized string similar to Home.
         /// </summary>
-        public static string Sidebar_Mods {
+        public static string Sidebar_Button_Home {
             get {
-                return ResourceManager.GetString("Sidebar_Mods", resourceCulture);
+                return ResourceManager.GetString("Sidebar_Button_Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My stuff.
+        /// </summary>
+        public static string Sidebar_Button_Mods {
+            get {
+                return ResourceManager.GetString("Sidebar_Button_Mods", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to My profiles.
         /// </summary>
-        public static string Sidebar_MyProfiles {
+        public static string Sidebar_Button_MyProfiles {
             get {
-                return ResourceManager.GetString("Sidebar_MyProfiles", resourceCulture);
+                return ResourceManager.GetString("Sidebar_Button_MyProfiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rooms.
+        /// </summary>
+        public static string Sidebar_Button_Rooms {
+            get {
+                return ResourceManager.GetString("Sidebar_Button_Rooms", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
-        public static string Sidebar_Settings {
+        public static string Sidebar_Button_Settings {
             get {
-                return ResourceManager.GetString("Sidebar_Settings", resourceCulture);
+                return ResourceManager.GetString("Sidebar_Button_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General.
+        /// </summary>
+        public static string Sidebar_Category_General {
+            get {
+                return ResourceManager.GetString("Sidebar_Category_General", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Online.
+        /// </summary>
+        public static string Sidebar_Category_Online {
+            get {
+                return ResourceManager.GetString("Sidebar_Category_Online", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other.
+        /// </summary>
+        public static string Sidebar_Category_Other {
+            get {
+                return ResourceManager.GetString("Sidebar_Category_Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Talk to us!.
+        /// </summary>
+        public static string Sidebar_Links_Discord {
+            get {
+                return ResourceManager.GetString("Sidebar_Links_Discord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Source code.
+        /// </summary>
+        public static string Sidebar_Links_Github {
+            get {
+                return ResourceManager.GetString("Sidebar_Links_Github", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support us!.
+        /// </summary>
+        public static string Sidebar_Links_Support {
+            get {
+                return ResourceManager.GetString("Sidebar_Links_Support", resourceCulture);
             }
         }
     }

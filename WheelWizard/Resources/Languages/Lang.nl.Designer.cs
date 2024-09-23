@@ -60,38 +60,110 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start.
+        ///   Looks up a localized string similar to Vrienden.
         /// </summary>
-        internal static string Sidebar_Home {
+        internal static string Sidebar_Button_Friends {
             get {
-                return ResourceManager.GetString("Sidebar_Home", resourceCulture);
+                return ResourceManager.GetString("Sidebar_Button_Friends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Startpagina.
+        /// </summary>
+        internal static string Sidebar_Button_Home {
+            get {
+                return ResourceManager.GetString("Sidebar_Button_Home", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Mods.
         /// </summary>
-        internal static string Sidebar_Mods {
+        internal static string Sidebar_Button_Mods {
             get {
-                return ResourceManager.GetString("Sidebar_Mods", resourceCulture);
+                return ResourceManager.GetString("Sidebar_Button_Mods", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Profielen.
+        ///   Looks up a localized string similar to Mijn profielen.
         /// </summary>
-        internal static string Sidebar_MyProfiles {
+        internal static string Sidebar_Button_MyProfiles {
             get {
-                return ResourceManager.GetString("Sidebar_MyProfiles", resourceCulture);
+                return ResourceManager.GetString("Sidebar_Button_MyProfiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Speel ruimtes.
+        /// </summary>
+        internal static string Sidebar_Button_Rooms {
+            get {
+                return ResourceManager.GetString("Sidebar_Button_Rooms", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Instellingen.
         /// </summary>
-        internal static string Sidebar_Settings {
+        internal static string Sidebar_Button_Settings {
             get {
-                return ResourceManager.GetString("Sidebar_Settings", resourceCulture);
+                return ResourceManager.GetString("Sidebar_Button_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Algemeen.
+        /// </summary>
+        internal static string Sidebar_Category_General {
+            get {
+                return ResourceManager.GetString("Sidebar_Category_General", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Online.
+        /// </summary>
+        internal static string Sidebar_Category_Online {
+            get {
+                return ResourceManager.GetString("Sidebar_Category_Online", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overig.
+        /// </summary>
+        internal static string Sidebar_Category_Other {
+            get {
+                return ResourceManager.GetString("Sidebar_Category_Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kom gezellig praten!.
+        /// </summary>
+        internal static string Sidebar_Links_Discord {
+            get {
+                return ResourceManager.GetString("Sidebar_Links_Discord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Source code.
+        /// </summary>
+        internal static string Sidebar_Links_Github {
+            get {
+                return ResourceManager.GetString("Sidebar_Links_Github", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Steun ons.
+        /// </summary>
+        internal static string Sidebar_Links_Support {
+            get {
+                return ResourceManager.GetString("Sidebar_Links_Support", resourceCulture);
             }
         }
     }
