@@ -31,4 +31,17 @@ public static class ViewUtils
 
     public static Layout GetLayout() => (Layout)Application.Current.MainWindow!;
     public static void NavigateToPage(Page page) => GetLayout().NavigateToPage(page);
+
+    public static void RefreshWindow(Page? destinationPage = null)
+    {
+        Layout newWindow = destinationPage == null ? new() : new(destinationPage);
+        
+        var oldWindow = Application.Current.MainWindow;
+        Application.Current.MainWindow = newWindow;
+        // Set position of new window to the position of the old window
+        newWindow.Left = oldWindow!.Left;
+        newWindow.Top = oldWindow.Top;
+        newWindow.Show();
+        oldWindow.Close();
+    }
 }

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="CT_MKWII_WPF.Views.Pages.Settings.DolphinSettings"
+﻿<UserControl x:Class="CT_MKWII_WPF.Views.Pages.Settings.OtherSettings"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -38,6 +38,22 @@
                         <components:FormFieldLabel Text=" Launch Game With Dolphin Window"
                                                    TipText="Will launch dolphin's main window along with the game" />
                     </CheckBox>
+                </StackPanel>
+            </Border>
+            
+                       
+            <components:FormFieldLabel Text="Language" />
+            <Border Style="{StaticResource SettingsBlockStyle}">
+                <StackPanel>
+                    <components:Dropdown
+                        Label="Retro Rewind Language"
+                        SelectionChanged="RrLanguageDropdown_OnSelectionChanged"
+                        x:Name="InGameLanguageDropdown"/>
+                    
+                    <components:Dropdown Margin="0,6,0,0"
+                                         Label="Wheel Wizard Language"
+                                         SelectionChanged="WhWzLanguageDropdown_OnSelectionChanged"
+                                         x:Name="WhWzLanguageDropdown"/>
                 </StackPanel>
             </Border>
         </StackPanel>

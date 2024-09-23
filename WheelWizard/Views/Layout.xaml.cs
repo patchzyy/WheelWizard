@@ -23,7 +23,8 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
     public readonly double WindowHeight = 876;
     public readonly double WindowWidth = 656;
     
-    public Layout()
+    public Layout() : this(new Dashboard()) { }
+    public Layout(Page initialPage)
     {
         InitializeComponent();
         DataContext = this;
@@ -33,7 +34,7 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
         
         try
         {
-            NavigateToPage(new Dashboard());
+            NavigateToPage(initialPage);
             InitializeManagers();
         }
         catch (Exception e)

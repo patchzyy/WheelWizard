@@ -10,7 +10,7 @@
     <Grid>
         <StackPanel Grid.Row="1">
             <!-- File location settings -->
-            <StackPanel Margin="0,15,0,0">
+            <StackPanel Margin="0,10,0,0">
                 <StackPanel Orientation="Horizontal">
                     <components:FormFieldLabel Text="Location settings" />
                     <Border ToolTipService.InitialShowDelay="5" x:Name="LocationWarningIcon"
@@ -63,7 +63,8 @@
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
                                 <components:FormFieldLabel Text="Mario Kart Wii Game File"
-                                                           TipText="Path can end with: .wbfs/.iso/.rvz" />
+                                                           TipText="Path can end with: .wbfs/.iso/.rvz" 
+                                                           Margin="0,6,0,0"/>
                                 <components:InputField Grid.Row="1" Grid.Column="0" Height="40"
                                                        Placeholder="Enter desired path here..."
                                                        HorizontalAlignment="Stretch" Variant="Dark"
@@ -85,10 +86,11 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
-                                <components:FormFieldLabel Text="Dolphin User Folder" />
+                                <components:FormFieldLabel Text="Dolphin User Folder" 
+                                                           Margin="0,6,0,0"/>
                                 <components:InputField Grid.Row="1" Grid.Column="0"
                                                        HorizontalAlignment="Stretch"
-                                                       Variant="Dark" Height="40"
+                                                       Variant="Dark" Height="40" 
                                                        Placeholder="Enter desired path here..."
                                                        x:Name="DolphinUserPathInput" />
                                 <components:Button Grid.Row="1" Grid.Column="1"

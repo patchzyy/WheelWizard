@@ -62,10 +62,11 @@ public class SettingsManager
     // dont ever make this a static class, it is required to be an instance class to ensure all settings are loaded
     public static SettingsManager Instance { get; } = new();
     private SettingsManager() { }
-    
+    // dont make this a static method
     public void LoadSettings()
     {
         WhWzSettingManager.Instance.LoadSettings();
         DolphinSettingManager.Instance.LoadSettings();
+        SettingsHelper.LoadExtraStuff();
     }
 }

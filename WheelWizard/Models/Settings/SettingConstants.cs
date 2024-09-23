@@ -29,10 +29,7 @@ public static class SettingValues
         { "French", 2 },
         { "German", 3 }
     };
-    public static readonly Dictionary<int, string> RrToWhWzLanguages = new()
-    {
-        {0, "en"},
-    };
+
     public static readonly Dictionary<string, string> WhWzLanguages = new()
     {
         { "English", "en" },

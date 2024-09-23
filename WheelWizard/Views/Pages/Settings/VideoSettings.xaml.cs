@@ -64,21 +64,6 @@ public partial class VideoSettings : UserControl
                                        .FirstOrDefault(x => x.Value == currentRenderer).Key;
         if (renderDisplayName != null)
             RendererDropdown.SelectedItem = renderDisplayName;
-        
-        // -----------------
-        // Language Dropdown
-        // -----------------
-        foreach (var language in SettingValues.RrLanguages.Keys)
-        {
-            LanguageDropdown.Items.Add(language);
-        }
-        
-        var currentLanguage = (int)SettingsManager.RR_LANGUAGE.Get();
-        var languageDisplayName = SettingValues.RrLanguages
-                                       .FirstOrDefault(x => x.Value == currentLanguage).Key;
-
-        if (languageDisplayName != null)
-            LanguageDropdown.SelectedItem = languageDisplayName;
     }
 
     private void UpdateResolution(object sender, RoutedEventArgs e)
@@ -101,16 +86,5 @@ public partial class VideoSettings : UserControl
             SettingsManager.GFX_BACKEND.Set(actualValue);
         else
             MessageBox.Show($"Warning: Unknown renderer selected: {selectedDisplayName}");
-    }
-    
-    private void LanguageDropdown_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        var selectedLanguage = LanguageDropdown.SelectedItem.ToString();
-        if (SettingValues.RrLanguages.TryGetValue(selectedLanguage, out var actualValue))
-            SettingsManager.RR_LANGUAGE.Set(actualValue);
-        else
-        {
-            Console.WriteLine($"Warning: Unknown language selected: {selectedLanguage}");
-        }
     }
 }

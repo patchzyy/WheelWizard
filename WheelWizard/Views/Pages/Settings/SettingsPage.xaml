@@ -20,13 +20,13 @@
                    Style="{StaticResource PageTitleText}" />
         
         <ScrollViewer Grid.Row="0"  HorizontalScrollBarVisibility="Auto">
-            <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal" x:Name="SettingPages" VerticalAlignment="Bottom" HorizontalAlignment="Left">
                 <RadioButton Style="{StaticResource TopBar}" Tag="WhWzSettings" 
                              Click="TopBarRadio_OnClick" Content="Wheel Wizard" IsChecked="True" />
                 <RadioButton Style="{StaticResource TopBar}" Tag="VideoSettings" 
-                             Click="TopBarRadio_OnClick" Content="Visual" />
-                <RadioButton Style="{StaticResource TopBar}" Tag="DolphinSettings" 
-                             Click="TopBarRadio_OnClick" Content="Dolphin" />
+                             Click="TopBarRadio_OnClick" Content="Video" />
+                <RadioButton Style="{StaticResource TopBar}" Tag="OtherSettings" 
+                             Click="TopBarRadio_OnClick" Content="Other" />
             </StackPanel>
         </ScrollViewer>
         <ContentControl Grid.Row="1" x:Name="SettingsContent" />

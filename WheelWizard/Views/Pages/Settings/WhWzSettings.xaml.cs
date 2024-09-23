@@ -55,7 +55,7 @@ public partial class WhWzSettings : UserControl
         }
     }
 
-    private string ScaleToString(double scale)
+    private static string ScaleToString(double scale)
     {
         var percentageString = (int)Math.Round(scale * 100) + "%";
         if (SettingValues.WindowScales.Contains(scale))
