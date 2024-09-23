@@ -18,8 +18,7 @@ public static class SettingValues
             ("DirectX 11 (Default)", "D3D11"),
         ("DirectX 12", "D3D12"),
         ("Vulkan", "Vulkan"),
-        ("OpenGL", "OGL"),
-        ("Software Renderer", "Software Renderer")
+        ("OpenGL", "OGL")
     );
 
     public static readonly ListedSetting<int> Languages = new("English",
