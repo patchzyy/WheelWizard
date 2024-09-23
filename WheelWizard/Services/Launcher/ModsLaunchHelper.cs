@@ -4,6 +4,7 @@ using CT_MKWII_WPF.Views.Popups;
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -43,7 +44,6 @@ public static class ModsLaunchHelper
         {
             foreach (var mod in mods)
             {
-                Console.WriteLine("working on mod: " + mod.Title);
                 if (mod.IsEnabled) 
                     InstallMod(mod, progressWindow);
             }
@@ -56,8 +56,9 @@ public static class ModsLaunchHelper
               
         var modFolder = Path.Combine(ModsFolderPath, mod.Title);
         var allFiles = Array.Empty<string>();
-        progressPopupWindow.SetExtraText( $"Installing {mod.Title} ({allFiles.Length} files)" );
-        
+        //important to use Dispatcher otherwise program has thread issues or smth
+        Application.Current.Dispatcher.Invoke(() =>
+            progressPopupWindow.SetExtraText($"Installing {mod.Title} ({allFiles.Length} files)")); 
         foreach (var extension in AcceptedModExtensions)
         {
             var files = Directory.GetFiles(modFolder, extension, SearchOption.AllDirectories);
