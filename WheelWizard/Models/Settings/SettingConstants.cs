@@ -13,14 +13,13 @@ public enum DolphinShaderCompilationMode {
 public static class SettingValues
 {
     public static readonly double[] WindowScales = { 0.7, 0.8, 0.9, 1.0, 1.15, 1.3, 1.45 };
-
+    
     public static readonly Dictionary<string, string> GFXRenderers = new()
     {
         { "DirectX 11 (Default)", "D3D11" },
         { "DirectX 12", "D3D12" },
         { "Vulkan", "Vulkan" },
-        { "OpenGL", "OGL" },
-        { "Software Renderer", "Software Renderer" }
+        { "OpenGL", "OGL" }
     };
 
     public static readonly Dictionary<string, int> RrLanguages = new()

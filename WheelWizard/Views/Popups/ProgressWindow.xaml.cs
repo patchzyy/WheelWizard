@@ -60,7 +60,11 @@ public partial class ProgressWindow : PopupContent
     public ProgressWindow SetGoal(string extraText, double? megaBytes = null)
     {
         _totalMb = megaBytes;
-        GoalTextBlock.Text = extraText + $" ({megaBytes:F2} MB)";
+        if (megaBytes == null)
+            GoalTextBlock.Text = extraText;
+        else
+            GoalTextBlock.Text = extraText + $" ({megaBytes:F2} MB)";
+        
         return this;
     }
     public ProgressWindow SetGoal(double megaBytes)
