@@ -1,4 +1,6 @@
-﻿using CT_MKWII_WPF.Models.Settings;
+﻿using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Models.Settings;
+using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services;
 using CT_MKWII_WPF.Services.LiveData;
 using CT_MKWII_WPF.Services.Settings;
@@ -31,6 +33,14 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
 
         OnSettingChanged(SettingsManager.SAVED_WINDOW_SCALE);
         SettingsManager.WINDOW_SCALE.Subscribe(this);
+       
+        var completeString = Humanizer.ReplaceDynamic(Phrases.Sidebar_MadeByString, new object[] { "Patchzy", "WantToBeeMe" });
+        if (completeString != null && completeString.Contains("\\n"))
+        {
+            var split = completeString.Split("\\n");
+            MadeBy_Part1.Text = split[0];
+            MadeBy_Part2.Text = split[1];
+        }
         
         try
         {

@@ -18,40 +18,31 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="Sidebar_Button_Mods" xml:space="preserve">
-        <value>Mods</value>
-    </data>
-    <data name="Sidebar_Button_MyProfiles" xml:space="preserve">
-        <value>Mijn profielen</value>
+    <data name="Sidebar_Button_Home" xml:space="preserve">
+        <value>Home</value>
     </data>
     <data name="Sidebar_Button_Settings" xml:space="preserve">
-        <value>Instellingen</value>
+        <value>Settings</value>
     </data>
-    <data name="Sidebar_Button_Home" xml:space="preserve">
-        <value>Startpagina</value>
+    <data name="Sidebar_Button_Mods" xml:space="preserve">
+        <value>My stuff</value>
+    </data>
+    <data name="Sidebar_Button_MyProfiles" xml:space="preserve">
+        <value>My profiles</value>
     </data>
     <data name="Sidebar_Button_Rooms" xml:space="preserve">
-        <value>Speel ruimtes</value>
+        <value>Rooms</value>
     </data>
     <data name="Sidebar_Button_Friends" xml:space="preserve">
-        <value>Vrienden</value>
+        <value>Friends</value>
     </data>
     <data name="Sidebar_Category_General" xml:space="preserve">
-        <value>Algemeen</value>
+        <value>General</value>
     </data>
     <data name="Sidebar_Category_Other" xml:space="preserve">
-        <value>Overig</value>
+        <value>Other</value>
     </data>
     <data name="Sidebar_Category_Online" xml:space="preserve">
         <value>Online</value>
-    </data>
-    <data name="Sidebar_Links_Discord" xml:space="preserve">
-        <value>Kom gezellig praten!</value>
-    </data>
-    <data name="Sidebar_Links_Github" xml:space="preserve">
-        <value>Source code</value>
-    </data>
-    <data name="Sidebar_Links_Support" xml:space="preserve">
-        <value>Steun ons</value>
     </data>
 </root>

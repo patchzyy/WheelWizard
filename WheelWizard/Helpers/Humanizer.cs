@@ -4,6 +4,17 @@ namespace CT_MKWII_WPF.Helpers;
 
 public static class Humanizer
 {
+    public static string? ReplaceDynamic(string? langString, object[] replacements)
+    {
+        // any dynamic part should be as follows: {$1}, {$2}, etc.
+        for (var i = 0; i < replacements.Length; i++)
+        {
+            langString = langString?.Replace("{$" + (i + 1) + "}", replacements[i]?.ToString() ?? "");
+        }
+
+        return langString;
+    }
+    
     public static string HumanizeTimeSpan(TimeSpan timeSpan)
     {
         if (Math.Abs(timeSpan.TotalDays) >= 1)

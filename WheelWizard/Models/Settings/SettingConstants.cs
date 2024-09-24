@@ -33,7 +33,8 @@ public static class SettingValues
     public static readonly Dictionary<string, string> WhWzLanguages = new()
     {
         { "English", "en" },
-        { "Dutch", "nl" }
+        { "Dutch", "nl" },
+        { "France", "fr" }
     };
 }
    

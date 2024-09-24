@@ -60,53 +60,49 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Update="Resources\Languages\Lang.resx">
+      <EmbeddedResource Update="Resources\Languages\Common.resx">
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>Lang.Designer.cs</LastGenOutput>
       </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Languages\Lang.nl.resx">
+      <EmbeddedResource Update="Resources\Languages\Common.nl.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Lang.nl.Designer.cs</LastGenOutput>
+        <DependentUpon>Common.resx</DependentUpon>
       </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Languages\Lang.fr.resx">
+      <EmbeddedResource Update="Resources\Languages\Common.fr.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Lang.fr.Designer.cs</LastGenOutput>
+        <DependentUpon>Common.resx</DependentUpon>
       </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Languages\Lang.it.resx">
+      <EmbeddedResource Update="Resources\Languages\Common.it.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Lang.it.Designer.cs</LastGenOutput>
+        <DependentUpon>Common.resx</DependentUpon>
       </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Languages\Lang.de.resx">
+      <EmbeddedResource Update="Resources\Languages\Common.de.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Lang.de.Designer.cs</LastGenOutput>
+        <DependentUpon>Common.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Phrases.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Phrases.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Phrases.nl.resx">
+        <DependentUpon>Phrases.resx</DependentUpon>
       </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Resources\Languages\Lang.Designer.cs">
+      <Compile Update="Resources\Languages\Common.Designer.cs">
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
-        <DependentUpon>Lang.resx</DependentUpon>
+        <DependentUpon>Common.resx</DependentUpon>
       </Compile>
-      <Compile Update="Resources\Languages\Lang.nl.Designer.cs">
+      <Compile Update="Resources\Languages\Phrases.Designer.cs">
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
-        <DependentUpon>Lang.nl.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Languages\Lang.fr.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Lang.fr.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Languages\Lang.it.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Lang.it.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Languages\Lang.de.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Lang.de.resx</DependentUpon>
+        <DependentUpon>Phrases.resx</DependentUpon>
       </Compile>
     </ItemGroup>
     <PropertyGroup>
