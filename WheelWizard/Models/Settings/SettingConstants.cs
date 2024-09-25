@@ -21,13 +21,14 @@ public static class SettingValues
         { "Vulkan", "Vulkan" },
         { "OpenGL", "OGL" }
     };
-
+    
     public static readonly Dictionary<string, int> RrLanguages = new()
     {
         { "English", 0 },
         { "Japanese", 1 },
         { "French", 2 },
-        { "German", 3 }
+        { "German", 3 },
+        { "Dutch", 4 }
     };
 
     public static readonly Dictionary<string, string> WhWzLanguages = new()
