@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Pages"
              xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
              xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:lang="clr-namespace:CT_MKWII_WPF.Resources.Languages"
              mc:Ignorable="d"
              d:DesignHeight="831" d:DesignWidth="444">
     <Grid  x:Name="DolphinBorder">
@@ -16,44 +17,47 @@
                     HorizontalAlignment="Stretch" VerticalAlignment="Top" 
                     Background="{StaticResource WarningColor}">
                 <TextBlock HorizontalAlignment="Center"
-                           FontWeight="SemiBold" Text="Settings are disabled, complete the location settings first"
+                           FontWeight="SemiBold" Text="{x:Static lang:Settings.InfoText_Topbar_LocationWarning}"
                            Foreground="{StaticResource BackgroundColor}" >
                 </TextBlock>
             </Border>
             
-            <components:FormFieldLabel Text="Wii Settings" />
+            <components:FormFieldLabel Text="{x:Static lang:Settings.Section_Wii}" />
             <Border Style="{StaticResource SettingsBlockStyle}">
                 <StackPanel>
                     <CheckBox Margin="0,2" IsChecked="False"
                               Style="{StaticResource DarkSwitch}"
                               x:Name="DisableForce"
                               Click="ClickForceWiimote">
-                        <components:FormFieldLabel Text=" Force Disable Wiimote"
-                                                   TipText="This setting disabled Wiimote ingame, but enables is for the Wii chanel" />
+                        <components:FormFieldLabel Text="{x:Static lang:Settings.Option_ForceDisableWiimote}"
+                                                   TipText="{x:Static lang:Settings.InfoText_ForceDisableWiimote}" />
                     </CheckBox>
                     <CheckBox Margin="0,2" IsChecked="False"
                               Style="{StaticResource DarkSwitch}"
                               x:Name="LaunchWithDolphin"
                               Click="ClickLaunchWithDolphinWindow">
-                        <components:FormFieldLabel Text=" Launch Game With Dolphin Window"
-                                                   TipText="Will launch dolphin's main window along with the game" />
+                        <components:FormFieldLabel Text="{x:Static lang:Settings.Option_LaunchWithDolphin}"
+                                                   TipText="{x:Static lang:Settings.InfoText_LaunchWithDolphin}"/>
                     </CheckBox>
                 </StackPanel>
             </Border>
             
                        
-            <components:FormFieldLabel Text="Language" />
+            <components:FormFieldLabel Text="{x:Static lang:Settings.Section_Language}" />
             <Border Style="{StaticResource SettingsBlockStyle}">
                 <StackPanel>
                     <components:Dropdown
-                        Label="Retro Rewind Language"
+                        Label="{x:Static lang:Settings.Option_RRLanguage}"
                         SelectionChanged="RrLanguageDropdown_OnSelectionChanged"
                         x:Name="InGameLanguageDropdown"/>
                     
                     <components:Dropdown Margin="0,6,0,0"
-                                         Label="Wheel Wizard Language"
+                                         Label="{x:Static lang:Settings.Option_WhWzLanguage}"
                                          SelectionChanged="WhWzLanguageDropdown_OnSelectionChanged"
                                          x:Name="WhWzLanguageDropdown"/>
+                    <TextBlock Style="{StaticResource TinyText}" Text="{x:Static lang:Phrases.Text_ThanksTranslators}"
+                               Margin="0,10,0,0"/>
+                    <TextBlock Style="{StaticResource TinyText}" Text="Eppe, Weebo, Noël, Kytronix, Haru"/>
                 </StackPanel>
             </Border>
         </StackPanel>

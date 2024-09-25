@@ -74,11 +74,6 @@
         <LastGenOutput>Lang.fr.Designer.cs</LastGenOutput>
         <DependentUpon>Common.resx</DependentUpon>
       </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Languages\Common.it.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Lang.it.Designer.cs</LastGenOutput>
-        <DependentUpon>Common.resx</DependentUpon>
-      </EmbeddedResource>
       <EmbeddedResource Update="Resources\Languages\Common.de.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Lang.de.Designer.cs</LastGenOutput>
@@ -89,6 +84,35 @@
         <LastGenOutput>Phrases.Designer.cs</LastGenOutput>
       </EmbeddedResource>
       <EmbeddedResource Update="Resources\Languages\Phrases.nl.resx">
+        <DependentUpon>Phrases.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Phrases.fr.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Phrases.fr.Designer.cs</LastGenOutput>
+        <DependentUpon>Phrases.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Settings.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Settings.fr.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Settings.fr.Designer.cs</LastGenOutput>
+        <DependentUpon>Settings.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Settings.de.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Settings.de.Designer.cs</LastGenOutput>
+        <DependentUpon>Settings.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Settings.nl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Settings.nl.Designer.cs</LastGenOutput>
+        <DependentUpon>Settings.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Phrases.de.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Phrases.de.Designer.cs</LastGenOutput>
         <DependentUpon>Phrases.resx</DependentUpon>
       </EmbeddedResource>
     </ItemGroup>
@@ -103,6 +127,11 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>Phrases.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Languages\Settings.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Settings.resx</DependentUpon>
       </Compile>
     </ItemGroup>
     <PropertyGroup>

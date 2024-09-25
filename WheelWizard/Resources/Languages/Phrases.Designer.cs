@@ -94,5 +94,14 @@ namespace CT_MKWII_WPF.Resources.Languages {
                 return ResourceManager.GetString("Sidebar_MadeByString", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thanks a lot to all the translators:.
+        /// </summary>
+        public static string Text_ThanksTranslators {
+            get {
+                return ResourceManager.GetString("Text_ThanksTranslators", resourceCulture);
+            }
+        }
     }
 }

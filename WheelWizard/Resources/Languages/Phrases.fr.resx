@@ -18,31 +18,16 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="Sidebar_Button_Friends" xml:space="preserve">
-        <value>Amis</value>
+    <data name="Sidebar_Link_Discord" xml:space="preserve">
+        <value>Parlez-nous-en !</value>
     </data>
-    <data name="Sidebar_Button_Mods" xml:space="preserve">
-        <value>My Stuff</value>
+    <data name="Sidebar_Link_Github" xml:space="preserve">
+        <value>Code Source</value>
     </data>
-    <data name="Sidebar_Button_MyProfiles" xml:space="preserve">
-        <value>Mon Profil</value>
+    <data name="Sidebar_Link_Support" xml:space="preserve">
+        <value>Supportez-nous !</value>
     </data>
-    <data name="Sidebar_Button_Rooms" xml:space="preserve">
-        <value>Salles</value>
-    </data>
-    <data name="Sidebar_Button_Settings" xml:space="preserve">
-        <value>Paremètres</value>
-    </data>
-    <data name="Sidebar_Category_General" xml:space="preserve">
-        <value>Général</value>
-    </data>
-    <data name="Sidebar_Category_Online" xml:space="preserve">
-        <value>En Ligne </value>
-    </data>
-    <data name="Sidebar_Category_Other" xml:space="preserve">
-        <value>Autre</value>
-    </data>
-    <data name="Sidebar_Button_Home" xml:space="preserve">
-        <value>Accueil</value>
+    <data name="Sidebar_MadeByString" xml:space="preserve">
+        <value>Fait par: {$1} \n et {$2}</value>
     </data>
 </root>

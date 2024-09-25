@@ -23,4 +23,7 @@
     <data name="Sidebar_MadeByString" xml:space="preserve">
         <value>Gemaakt door: {$1} \n en {$2}</value>
     </data>
+    <data name="Text_ThanksTranslators" xml:space="preserve">
+        <value>Hartelijk dank aan alle vertalers:</value>
+    </data>
 </root>
