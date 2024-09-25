@@ -25,7 +25,8 @@ public static class SettingValues
         ("English", 0),
         ("Japanese", 1),
         ("French", 2),
-        ("German", 3)
+        ("German", 3),
+        ("Dutch", 4)
     ); 
 }
    
