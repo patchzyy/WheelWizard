@@ -45,4 +45,7 @@
     <data name="Sidebar_Category_Online" xml:space="preserve">
         <value>Online</value>
     </data>
+    <data name="Generic_Loading" xml:space="preserve">
+        <value>Loading...</value>
+    </data>
 </root>

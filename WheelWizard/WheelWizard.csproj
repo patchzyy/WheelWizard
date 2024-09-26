@@ -62,21 +62,21 @@
     <ItemGroup>
       <EmbeddedResource Update="Resources\Languages\Common.resx">
         <Generator>PublicResXFileCodeGenerator</Generator>
-        <LastGenOutput>Lang.Designer.cs</LastGenOutput>
+        <LastGenOutput>Common.Designer.cs</LastGenOutput>
       </EmbeddedResource>
       <EmbeddedResource Update="Resources\Languages\Common.nl.resx">
         <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Lang.nl.Designer.cs</LastGenOutput>
+        <LastGenOutput>Common.nl.Designer.cs</LastGenOutput>
         <DependentUpon>Common.resx</DependentUpon>
       </EmbeddedResource>
       <EmbeddedResource Update="Resources\Languages\Common.fr.resx">
         <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Lang.fr.Designer.cs</LastGenOutput>
+        <LastGenOutput>Common.fr.Designer.cs</LastGenOutput>
         <DependentUpon>Common.resx</DependentUpon>
       </EmbeddedResource>
       <EmbeddedResource Update="Resources\Languages\Common.de.resx">
         <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Lang.de.Designer.cs</LastGenOutput>
+        <LastGenOutput>Common.de.Designer.cs</LastGenOutput>
         <DependentUpon>Common.resx</DependentUpon>
       </EmbeddedResource>
       <EmbeddedResource Update="Resources\Languages\Phrases.resx">
