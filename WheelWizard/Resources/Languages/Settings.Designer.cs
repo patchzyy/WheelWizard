@@ -348,6 +348,150 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dutch.
+        /// </summary>
+        public static string Value_Language_Dutch {
+            get {
+                return ResourceManager.GetString("Value_Language_Dutch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nederlands.
+        /// </summary>
+        public static string Value_Language_DutchOg {
+            get {
+                return ResourceManager.GetString("Value_Language_DutchOg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English.
+        /// </summary>
+        public static string Value_Language_English {
+            get {
+                return ResourceManager.GetString("Value_Language_English", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English.
+        /// </summary>
+        public static string Value_Language_EnglishOg {
+            get {
+                return ResourceManager.GetString("Value_Language_EnglishOg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to French.
+        /// </summary>
+        public static string Value_Language_France {
+            get {
+                return ResourceManager.GetString("Value_Language_France", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to français.
+        /// </summary>
+        public static string Value_Language_FranceOg {
+            get {
+                return ResourceManager.GetString("Value_Language_FranceOg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to German.
+        /// </summary>
+        public static string Value_Language_German {
+            get {
+                return ResourceManager.GetString("Value_Language_German", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deutsch.
+        /// </summary>
+        public static string Value_Language_GermanOg {
+            get {
+                return ResourceManager.GetString("Value_Language_GermanOg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Italian.
+        /// </summary>
+        public static string Value_Language_Italian {
+            get {
+                return ResourceManager.GetString("Value_Language_Italian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -.
+        /// </summary>
+        public static string Value_Language_ItalianOg {
+            get {
+                return ResourceManager.GetString("Value_Language_ItalianOg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Japanese.
+        /// </summary>
+        public static string Value_Language_Japanese {
+            get {
+                return ResourceManager.GetString("Value_Language_Japanese", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -.
+        /// </summary>
+        public static string Value_Language_JapaneseOg {
+            get {
+                return ResourceManager.GetString("Value_Language_JapaneseOg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spanish.
+        /// </summary>
+        public static string Value_Language_Spanish {
+            get {
+                return ResourceManager.GetString("Value_Language_Spanish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -.
+        /// </summary>
+        public static string Value_Language_SpanishOg {
+            get {
+                return ResourceManager.GetString("Value_Language_SpanishOg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turkish.
+        /// </summary>
+        public static string Value_Language_Turkish {
+            get {
+                return ResourceManager.GetString("Value_Language_Turkish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -.
+        /// </summary>
+        public static string Value_Language_TurkishOg {
+            get {
+                return ResourceManager.GetString("Value_Language_TurkishOg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter desired path here....
         /// </summary>
         public static string Value_Placeholder_EnterPath {

@@ -22,20 +22,21 @@ public static class SettingValues
         { "OpenGL", "OGL" }
     };
     
-    public static readonly Dictionary<string, int> RrLanguages = new()
+
+    public static readonly Dictionary<int, Func<string>> RrLanguages = new()
     {
-        { "English", 0 },
-        { "Japanese", 1 },
-        { "French", 2 },
-        { "German", 3 },
-        { "Dutch", 4 }
+        { 0 ,() => $"{Resources.Languages.Settings.Value_Language_English} ({Resources.Languages.Settings.Value_Language_EnglishOg})" }, // English
+        { 1 ,() => $"{Resources.Languages.Settings.Value_Language_Japanese} ({Resources.Languages.Settings.Value_Language_JapaneseOg})" }, // Japanese
+        { 2 ,() => $"{Resources.Languages.Settings.Value_Language_France} ({Resources.Languages.Settings.Value_Language_FranceOg})" }, // French
+        { 3 ,() => $"{Resources.Languages.Settings.Value_Language_German} ({Resources.Languages.Settings.Value_Language_GermanOg})" }, // German
+        { 4 ,() => $"{Resources.Languages.Settings.Value_Language_Dutch} ({Resources.Languages.Settings.Value_Language_DutchOg})" } // Dutch
     };
 
-    public static readonly Dictionary<string, string> WhWzLanguages = new()
+    public static readonly Dictionary<string, Func<string>> WhWzLanguages = new()
     {
-        { "English", "en" },
-        { "Dutch", "nl" },
-        { "France", "fr" }
+        { "en", () => $"{Resources.Languages.Settings.Value_Language_English} ({Resources.Languages.Settings.Value_Language_EnglishOg})" },
+        { "nl", () => $"{Resources.Languages.Settings.Value_Language_Dutch} ({Resources.Languages.Settings.Value_Language_DutchOg})" },
+        { "fr", () => $"{Resources.Languages.Settings.Value_Language_France} ({Resources.Languages.Settings.Value_Language_FranceOg})" }
     };
 }
    

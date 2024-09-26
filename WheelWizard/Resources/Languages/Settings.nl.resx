@@ -34,7 +34,7 @@
         <value>Wiimote uitzetten forceren</value>
     </data>
     <data name="Option_LaunchWithDolphin" xml:space="preserve">
-        <value>Start spel met een Dolphin scherm</value>
+        <value>Start spel met een Dolphin Venster</value>
     </data>
     <data name="InfoText_Topbar_LocationWarning" xml:space="preserve">
         <value>Instellingen zijn op slot, maak eerste de locatie instellingen compleet</value>
@@ -101,5 +101,68 @@
     </data>
     <data name="Option_Save" xml:space="preserve">
         <value>Opslaan</value>
+    </data>
+    <data name="Option_WindowScale" xml:space="preserve">
+        <value>Venster grootte</value>
+    </data>
+    <data name="InfoText_ForceDisableWiimote" xml:space="preserve">
+        <value>Met deze instelling wordt de Wiimote in de game uitgeschakeld, maar voor het Wii-kanaal ingeschakeld.</value>
+    </data>
+    <data name="InfoText_LaunchWithDolphin" xml:space="preserve">
+        <value>Opent de dolphin venster samen met het spel</value>
+    </data>
+    <data name="InfoText_Recommended" xml:space="preserve">
+        <value>Met deze instelling worden bepaalde dolpin-instellingen gewijzigd voor de meest geoptimalizeerde speel ervaring</value>
+    </data>
+    <data name="InfoText_30FPS" xml:space="preserve">
+        <value>Met deze instelling wordt het spel gedwongen om te draaien op 30 FPS (standaard is 60)</value>
+    </data>
+    <data name="Value_Language_Dutch" xml:space="preserve">
+        <value>Nederlands</value>
+    </data>
+    <data name="Value_Language_DutchOg" xml:space="preserve">
+        <value>Nederlands</value>
+    </data>
+    <data name="Value_Language_English" xml:space="preserve">
+        <value>Engels</value>
+    </data>
+    <data name="Value_Language_EnglishOg" xml:space="preserve">
+        <value>English</value>
+    </data>
+    <data name="Value_Language_German" xml:space="preserve">
+        <value>Duits</value>
+    </data>
+    <data name="Value_Language_GermanOg" xml:space="preserve">
+        <value>Deutsch</value>
+    </data>
+    <data name="Value_Language_France" xml:space="preserve">
+        <value>Frans</value>
+    </data>
+    <data name="Value_Language_FranceOg" xml:space="preserve">
+        <value>français</value>
+    </data>
+    <data name="Value_Language_Italian" xml:space="preserve">
+        <value>Italiaans</value>
+    </data>
+    <data name="Value_Language_ItalianOg" xml:space="preserve">
+        <value>-</value>
+    </data>
+    <data name="Value_Language_JapaneseOg" xml:space="preserve">
+        <value>-</value>
+    </data>
+    <data name="Value_Language_Japanese" xml:space="preserve">
+        <value>Japans</value>
+    </data>
+    <data name="Value_Language_Spanish" xml:space="preserve">
+        <value>Spaans</value>
+    </data>
+    <data name="Value_Language_SpanishOg" xml:space="preserve">
+        <value>-</value>
+    </data>
+    <data name="Value_Language_Turkish" xml:space="preserve">
+        <value>Turks</value>
+    </data>
+    <data name="Value_Language_TurkishOg" xml:space="preserve">
+        <value>-</value>
     </data>
 </root>

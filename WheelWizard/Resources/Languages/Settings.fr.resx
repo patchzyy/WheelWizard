@@ -18,4 +18,31 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="Value_Language_DutchOg" xml:space="preserve">
+        <value>Nederlands</value>
+    </data>
+    <data name="Value_Language_EnglishOg" xml:space="preserve">
+        <value>English</value>
+    </data>
+    <data name="Value_Language_GermanOg" xml:space="preserve">
+        <value>Deutsch</value>
+    </data>
+    <data name="Value_Language_France" xml:space="preserve">
+        <value>français</value>
+    </data>
+    <data name="Value_Language_FranceOg" xml:space="preserve">
+        <value>français</value>
+    </data>
+    <data name="Value_Language_ItalianOg" xml:space="preserve">
+        <value>-</value>
+    </data>
+    <data name="Value_Language_JapaneseOg" xml:space="preserve">
+        <value>-</value>
+    </data>
+    <data name="Value_Language_SpanishOg" xml:space="preserve">
+        <value>-</value>
+    </data>
+    <data name="Value_Language_TurkishOg" xml:space="preserve">
+        <value>-</value>
+    </data>
 </root>
