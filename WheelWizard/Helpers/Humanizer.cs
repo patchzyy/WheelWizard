@@ -4,7 +4,7 @@ namespace CT_MKWII_WPF.Helpers;
 
 public static class Humanizer
 {
-    public static string? ReplaceDynamic(string? langString, object[] replacements)
+    public static string? ReplaceDynamic(string? langString,params object[] replacements)
     {
         // any dynamic part should be as follows: {$1}, {$2}, etc.
         for (var i = 0; i < replacements.Length; i++)

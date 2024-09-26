@@ -60,6 +60,87 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are currently no friends online.
+        /// </summary>
+        public static string Hover_FriendsOnline_0 {
+            get {
+                return ResourceManager.GetString("Hover_FriendsOnline_0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is currently 1 friend online.
+        /// </summary>
+        public static string Hover_FriendsOnline_1 {
+            get {
+                return ResourceManager.GetString("Hover_FriendsOnline_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are currently {$1} friends online.
+        /// </summary>
+        public static string Hover_FriendsOnline_x {
+            get {
+                return ResourceManager.GetString("Hover_FriendsOnline_x", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are currently no players online.
+        /// </summary>
+        public static string Hover_PlayersOnline_0 {
+            get {
+                return ResourceManager.GetString("Hover_PlayersOnline_0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is currently 1 player online.
+        /// </summary>
+        public static string Hover_PlayersOnline_1 {
+            get {
+                return ResourceManager.GetString("Hover_PlayersOnline_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are currently {$1} players online.
+        /// </summary>
+        public static string Hover_PlayersOnline_x {
+            get {
+                return ResourceManager.GetString("Hover_PlayersOnline_x", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are currently no active rooms.
+        /// </summary>
+        public static string Hover_RoomsOnline_0 {
+            get {
+                return ResourceManager.GetString("Hover_RoomsOnline_0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is currently 1 room active.
+        /// </summary>
+        public static string Hover_RoomsOnline_1 {
+            get {
+                return ResourceManager.GetString("Hover_RoomsOnline_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are currently {$1} rooms active.
+        /// </summary>
+        public static string Hover_RoomsOnline_x {
+            get {
+                return ResourceManager.GetString("Hover_RoomsOnline_x", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Talk to us!.
         /// </summary>
         public static string Sidebar_Link_Discord {
@@ -89,9 +170,9 @@ namespace CT_MKWII_WPF.Resources.Languages {
         /// <summary>
         ///   Looks up a localized string similar to Made by: {$1} \n And {$2}.
         /// </summary>
-        public static string Sidebar_MadeByString {
+        public static string Text_MadeByString {
             get {
-                return ResourceManager.GetString("Sidebar_MadeByString", resourceCulture);
+                return ResourceManager.GetString("Text_MadeByString", resourceCulture);
             }
         }
         

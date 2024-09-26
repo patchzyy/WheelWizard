@@ -1,7 +1,7 @@
 ﻿using CT_MKWII_WPF.Models.GameData;
 using CT_MKWII_WPF.Models.RRInfo;
+using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services.LiveData;
-using CT_MKWII_WPF.Services.WiiManagement;
 using CT_MKWII_WPF.Views.Pages;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 
 namespace CT_MKWII_WPF.Views.Components
 {
@@ -29,7 +28,13 @@ namespace CT_MKWII_WPF.Views.Components
         public string PlayerName
         {
             get => _playerName;
-            set => SetProperty(ref _playerName, value);
+            set
+            {
+                if(value != "no name")
+                    SetProperty(ref _playerName, value);
+                else 
+                    SetProperty(ref _playerName, Online.NoName);
+            }
         }
 
         private string _friendCode;
@@ -73,7 +78,7 @@ namespace CT_MKWII_WPF.Views.Components
             get => _regionName;
             set => SetProperty(ref _regionName, value);
         }
-        
+
         private string _onlineText;
         public string OnlineText
         {

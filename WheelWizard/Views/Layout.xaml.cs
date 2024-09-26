@@ -34,7 +34,7 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
         OnSettingChanged(SettingsManager.SAVED_WINDOW_SCALE);
         SettingsManager.WINDOW_SCALE.Subscribe(this);
        
-        var completeString = Humanizer.ReplaceDynamic(Phrases.Sidebar_MadeByString, new object[] { "Patchzy", "WantToBeeMe" });
+        var completeString = Humanizer.ReplaceDynamic(Phrases.Text_MadeByString,  "Patchzy", "WantToBeeMe" );
         if (completeString != null && completeString.Contains("\\n"))
         {
             var split = completeString.Split("\\n");
@@ -107,24 +107,27 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
         PlayerCountBox.Text = playerCount.ToString();
         PlayerCountBox.TipText = playerCount switch
         {
-            1 => "There is currently 1 player online",
-            0 => "There are currently no players online",
-            _ => $"There are currently {playerCount} players online"
+            1 => Phrases.Hover_PlayersOnline_1,
+            0 => Phrases.Hover_PlayersOnline_0,
+            _ => Humanizer.ReplaceDynamic(Phrases.Hover_PlayersOnline_x, playerCount) ?? 
+                 $"There are currently {playerCount} players online"
         };
         RoomCountBox.Text = roomCount.ToString();
         RoomCountBox.TipText = roomCount switch
         {
-            1 => "There is currently 1 room active",
-            0 => "There are currently no rooms active",
-            _ => $"There are currently {roomCount} rooms active"
+            1 => Phrases.Hover_RoomsOnline_1,
+            0 => Phrases.Hover_RoomsOnline_0,
+            _ => Humanizer.ReplaceDynamic(Phrases.Hover_RoomsOnline_x, roomCount) ?? 
+                 $"There are currently {roomCount} rooms active"
         };
         var friends = GameDataLoader.Instance.GetCurrentFriends;
         FriendsButton.BoxText =$"{friends.Count(friend => friend.IsOnline)}/{friends.Count}";
         FriendsButton.BoxTip = friends.Count(friend => friend.IsOnline) switch
         {
-            1 => "There is currently 1 friend online",
-            0 => "There are currently no friends online",
-            _ => $"There are currently {friends.Count(friend => friend.IsOnline)} friends online"
+            1 => Phrases.Hover_FriendsOnline_1,
+            0 => Phrases.Hover_FriendsOnline_0,
+            _ => Humanizer.ReplaceDynamic(Phrases.Hover_FriendsOnline_x, friends.Count(friend => friend.IsOnline)) ?? 
+                 $"There are currently {friends.Count(friend => friend.IsOnline)} friends online"
         };
     }
 

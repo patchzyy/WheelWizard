@@ -60,11 +60,56 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading....
+        ///   Looks up a localized string similar to Config Not Finished.
         /// </summary>
-        public static string Generic_Loading {
+        public static string ButtonState_ConfigNotFinished {
             get {
-                return ResourceManager.GetString("Generic_Loading", resourceCulture);
+                return ResourceManager.GetString("ButtonState_ConfigNotFinished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install.
+        /// </summary>
+        public static string ButtonState_Install {
+            get {
+                return ResourceManager.GetString("ButtonState_Install", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Server.
+        /// </summary>
+        public static string ButtonState_NoServer {
+            get {
+                return ResourceManager.GetString("ButtonState_NoServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Play.
+        /// </summary>
+        public static string ButtonState_Play {
+            get {
+                return ResourceManager.GetString("ButtonState_Play", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Play Offline.
+        /// </summary>
+        public static string ButtonState_PlayOffline {
+            get {
+                return ResourceManager.GetString("ButtonState_PlayOffline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        public static string ButtonState_Update {
+            get {
+                return ResourceManager.GetString("ButtonState_Update", resourceCulture);
             }
         }
         
@@ -146,6 +191,33 @@ namespace CT_MKWII_WPF.Resources.Languages {
         public static string Sidebar_Category_Other {
             get {
                 return ResourceManager.GetString("Sidebar_Category_Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installing....
+        /// </summary>
+        public static string State_Installing {
+            get {
+                return ResourceManager.GetString("State_Installing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading....
+        /// </summary>
+        public static string State_Loading {
+            get {
+                return ResourceManager.GetString("State_Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updating....
+        /// </summary>
+        public static string State_Updating {
+            get {
+                return ResourceManager.GetString("State_Updating", resourceCulture);
             }
         }
     }

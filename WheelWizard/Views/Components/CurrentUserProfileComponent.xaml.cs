@@ -1,4 +1,5 @@
 ﻿using CT_MKWII_WPF.Models.RRInfo;
+using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services.WiiManagement;
 using CT_MKWII_WPF.Services.WiiManagement.SaveData;
 using CT_MKWII_WPF.Views.Pages;
@@ -22,7 +23,7 @@ namespace CT_MKWII_WPF.Views.Components
             get => _playerName;
             set
             {
-                _playerName = value;
+                _playerName = value == "no name" ? Online.NoName : value;
                 OnPropertyChanged(nameof(PlayerName));
             }
         }

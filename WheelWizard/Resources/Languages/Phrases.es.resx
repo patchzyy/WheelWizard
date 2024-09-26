@@ -18,16 +18,4 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="Sidebar_Link_Discord" xml:space="preserve">
-        <value>Parlez-nous-en !</value>
-    </data>
-    <data name="Sidebar_Link_Github" xml:space="preserve">
-        <value>Code Source</value>
-    </data>
-    <data name="Sidebar_Link_Support" xml:space="preserve">
-        <value>Supportez-nous !</value>
-    </data>
-    <data name="Text_MadeByString" xml:space="preserve">
-        <value>Fait par: {$1} \n et {$2}</value>
-    </data>
 </root>

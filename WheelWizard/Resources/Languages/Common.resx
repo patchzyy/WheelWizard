@@ -45,7 +45,31 @@
     <data name="Sidebar_Category_Online" xml:space="preserve">
         <value>Online</value>
     </data>
-    <data name="Generic_Loading" xml:space="preserve">
+    <data name="State_Loading" xml:space="preserve">
         <value>Loading...</value>
+    </data>
+    <data name="State_Installing" xml:space="preserve">
+        <value>Installing...</value>
+    </data>
+    <data name="State_Updating" xml:space="preserve">
+        <value>Updating...</value>
+    </data>
+    <data name="ButtonState_Play" xml:space="preserve">
+        <value>Play</value>
+    </data>
+    <data name="ButtonState_PlayOffline" xml:space="preserve">
+        <value>Play Offline</value>
+    </data>
+    <data name="ButtonState_Install" xml:space="preserve">
+        <value>Install</value>
+    </data>
+    <data name="ButtonState_Update" xml:space="preserve">
+        <value>Update</value>
+    </data>
+    <data name="ButtonState_ConfigNotFinished" xml:space="preserve">
+        <value>Config Not Finished</value>
+    </data>
+    <data name="ButtonState_NoServer" xml:space="preserve">
+        <value>No Server</value>
     </data>
 </root>

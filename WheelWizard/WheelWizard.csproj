@@ -115,6 +115,45 @@
         <LastGenOutput>Phrases.de.Designer.cs</LastGenOutput>
         <DependentUpon>Phrases.resx</DependentUpon>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Common.es.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Common.es.Designer.cs</LastGenOutput>
+        <DependentUpon>Common.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Phrases.es.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Phrases.es.Designer.cs</LastGenOutput>
+        <DependentUpon>Phrases.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Settings.es.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Settings.es.Designer.cs</LastGenOutput>
+        <DependentUpon>Settings.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Online.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Online.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Online.de.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Online.de.Designer.cs</LastGenOutput>
+        <DependentUpon>Online.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Online.es.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Online.es.Designer.cs</LastGenOutput>
+        <DependentUpon>Online.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Online.fr.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Online.fr.Designer.cs</LastGenOutput>
+        <DependentUpon>Online.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Online.nl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Online.nl.Designer.cs</LastGenOutput>
+        <DependentUpon>Online.resx</DependentUpon>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -132,6 +171,11 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>Settings.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Languages\Online.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Online.resx</DependentUpon>
       </Compile>
     </ItemGroup>
     <PropertyGroup>

@@ -465,7 +465,7 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to -.
+        ///   Looks up a localized string similar to español.
         /// </summary>
         public static string Value_Language_SpanishOg {
             get {
