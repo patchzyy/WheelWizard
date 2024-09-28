@@ -72,4 +72,7 @@
     <data name="ButtonState_NoServer" xml:space="preserve">
         <value>Geen server</value>
     </data>
+    <data name="Unknown" xml:space="preserve">
+        <value>Onbekend</value>
+    </data>
 </root>

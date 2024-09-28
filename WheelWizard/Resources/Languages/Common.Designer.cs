@@ -220,5 +220,14 @@ namespace CT_MKWII_WPF.Resources.Languages {
                 return ResourceManager.GetString("State_Updating", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown.
+        /// </summary>
+        public static string Unknown {
+            get {
+                return ResourceManager.GetString("Unknown", resourceCulture);
+            }
+        }
     }
 }

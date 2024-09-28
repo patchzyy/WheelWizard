@@ -45,4 +45,40 @@
     <data name="NoProfiles" xml:space="preserve">
         <value>No profiles</value>
     </data>
+    <data name="Region_Japan" xml:space="preserve">
+        <value>Japan</value>
+    </data>
+    <data name="Region_Europe" xml:space="preserve">
+        <value>Europe</value>
+    </data>
+    <data name="Region_China" xml:space="preserve">
+        <value>China</value>
+    </data>
+    <data name="Region_SouthKorea" xml:space="preserve">
+        <value>South Korea</value>
+    </data>
+    <data name="Region_Taiwan" xml:space="preserve">
+        <value>Taiwan</value>
+    </data>
+    <data name="Region_America" xml:space="preserve">
+        <value>America</value>
+    </data>
+    <data name="Region_Australia" xml:space="preserve">
+        <value>Australia</value>
+    </data>
+    <data name="ListTitle_Friends" xml:space="preserve">
+        <value>Friends</value>
+    </data>
+    <data name="Stat_FriendCode" xml:space="preserve">
+        <value>Friend Code</value>
+    </data>
+    <data name="Stat_Name" xml:space="preserve">
+        <value>Name</value>
+    </data>
+    <data name="ListTitle_Players" xml:space="preserve">
+        <value>Players</value>
+    </data>
+    <data name="Stat_PlayerCount" xml:space="preserve">
+        <value>Players</value>
+    </data>
 </root>

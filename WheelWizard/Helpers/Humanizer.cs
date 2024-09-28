@@ -1,3 +1,4 @@
+using CT_MKWII_WPF.Resources.Languages;
 using System;
 
 namespace CT_MKWII_WPF.Helpers;
@@ -36,14 +37,14 @@ public static class Humanizer
     {
         return regionID switch
         {
-            0 => "Japan",
-            1 => "America",
-            2 => "Europe",
-            3 => "Australia",
-            4 => "Taiwan",
-            5 => "South Korea",
-            6 => "China",
-            _ => "Unknown"
+            0 => Online.Region_Japan,
+            1 => Online.Region_America,
+            2 => Online.Region_Europe,
+            3 => Online.Region_Australia,
+            4 => Online.Region_Taiwan,
+            5 => Online.Region_SouthKorea,
+            6 => Online.Region_China,
+            _ => Common.Unknown
         };
     }
     

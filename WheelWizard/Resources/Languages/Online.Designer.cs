@@ -69,6 +69,24 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Friends.
+        /// </summary>
+        public static string ListTitle_Friends {
+            get {
+                return ResourceManager.GetString("ListTitle_Friends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Players.
+        /// </summary>
+        public static string ListTitle_Players {
+            get {
+                return ResourceManager.GetString("ListTitle_Players", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No license.
         /// </summary>
         public static string NoLicense {
@@ -96,11 +114,101 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to America.
+        /// </summary>
+        public static string Region_America {
+            get {
+                return ResourceManager.GetString("Region_America", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Australia.
+        /// </summary>
+        public static string Region_Australia {
+            get {
+                return ResourceManager.GetString("Region_Australia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to China.
+        /// </summary>
+        public static string Region_China {
+            get {
+                return ResourceManager.GetString("Region_China", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Europe.
+        /// </summary>
+        public static string Region_Europe {
+            get {
+                return ResourceManager.GetString("Region_Europe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Japan.
+        /// </summary>
+        public static string Region_Japan {
+            get {
+                return ResourceManager.GetString("Region_Japan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to South Korea.
+        /// </summary>
+        public static string Region_SouthKorea {
+            get {
+                return ResourceManager.GetString("Region_SouthKorea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Taiwan.
+        /// </summary>
+        public static string Region_Taiwan {
+            get {
+                return ResourceManager.GetString("Region_Taiwan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Friend Code.
+        /// </summary>
+        public static string Stat_FriendCode {
+            get {
+                return ResourceManager.GetString("Stat_FriendCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Losses.
         /// </summary>
         public static string Stat_Losses {
             get {
                 return ResourceManager.GetString("Stat_Losses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Stat_Name {
+            get {
+                return ResourceManager.GetString("Stat_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Players.
+        /// </summary>
+        public static string Stat_PlayerCount {
+            get {
+                return ResourceManager.GetString("Stat_PlayerCount", resourceCulture);
             }
         }
         

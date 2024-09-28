@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
       xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      xmlns:lang="clr-namespace:CT_MKWII_WPF.Resources.Languages"
       mc:Ignorable="d"
       d:DesignHeight="831" d:DesignWidth="444"
       Title="RoomsPage" Background="Transparent">
@@ -88,7 +89,7 @@ To join a specific room, you'll need to either join through a friend, or hope to
                                         components:StaticListView.IsSortable="True" />
                         <GridViewColumn DisplayMemberBinding="{Binding Path=TimeOnline}" Header="Time Online" Width="150"
                                         components:StaticListView.IsSortable="True" />
-                        <GridViewColumn Header="Players" Width="80" components:StaticListView.IsSortable="True">
+                        <GridViewColumn Header="{x:Static lang:Online.Stat_PlayerCount}" Width="80" components:StaticListView.IsSortable="True">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <components:StateBox Text="{Binding PlayerCount}"
@@ -116,7 +117,8 @@ To join a specific room, you'll need to either join through a friend, or hope to
                 </ListView.View>
             </components:StaticListView>
 
-            <components:StaticListView ItemsSource="{Binding Players}" x:Name="PlayersListView" ListTitle="Players"
+            <components:StaticListView ItemsSource="{Binding Players}" x:Name="PlayersListView" 
+                                       ListTitle="{x:Static lang:Online.ListTitle_Players}"
                                        OnItemClick="Player_MouseClick"
                                        MaxHeight="{Binding ElementName=ListContainer, Path=ActualHeight}"
                                        Visibility="{Binding PlayersListVisibility}">
