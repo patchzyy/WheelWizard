@@ -34,7 +34,7 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
         OnSettingChanged(SettingsManager.SAVED_WINDOW_SCALE);
         SettingsManager.WINDOW_SCALE.Subscribe(this);
        
-        var completeString = Humanizer.ReplaceDynamic(Phrases.Text_MadeByString,  "Patchzy", "WantToBeeMe" );
+        var completeString = Humanizer.ReplaceDynamic(Phrases.Text_MadeByString, "Patchzy", "WantToBeeMe" );
         if (completeString != null && completeString.Contains("\\n"))
         {
             var split = completeString.Split("\\n");
@@ -100,7 +100,7 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
         }
     }
 
-    private void UpdatePlayerAndRoomCount(RRLiveRooms sender)
+    public void UpdatePlayerAndRoomCount(RRLiveRooms sender)
     {
         var playerCount = sender.PlayerCount;
         var roomCount = sender.RoomCount;

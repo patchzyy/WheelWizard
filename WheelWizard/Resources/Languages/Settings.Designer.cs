@@ -141,7 +141,7 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancle.
+        ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Option_Cancle {
             get {

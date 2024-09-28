@@ -60,11 +60,65 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View Room.
+        /// </summary>
+        public static string Button_ViewRoom {
+            get {
+                return ResourceManager.GetString("Button_ViewRoom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to no name.
         /// </summary>
         public static string NoName {
             get {
                 return ResourceManager.GetString("NoName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Losses.
+        /// </summary>
+        public static string Stat_Losses {
+            get {
+                return ResourceManager.GetString("Stat_Losses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Races played.
+        /// </summary>
+        public static string Stat_RacesPlayed {
+            get {
+                return ResourceManager.GetString("Stat_RacesPlayed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wins.
+        /// </summary>
+        public static string Stat_Wins {
+            get {
+                return ResourceManager.GetString("Stat_Wins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Offline.
+        /// </summary>
+        public static string Status_Offline {
+            get {
+                return ResourceManager.GetString("Status_Offline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Online.
+        /// </summary>
+        public static string Status_Online {
+            get {
+                return ResourceManager.GetString("Status_Online", resourceCulture);
             }
         }
     }

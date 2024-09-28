@@ -21,4 +21,22 @@
     <data name="NoName" xml:space="preserve">
         <value>no name</value>
     </data>
+    <data name="Status_Online" xml:space="preserve">
+        <value>Online</value>
+    </data>
+    <data name="Status_Offline" xml:space="preserve">
+        <value>Offline</value>
+    </data>
+    <data name="Stat_Losses" xml:space="preserve">
+        <value>Losses</value>
+    </data>
+    <data name="Stat_Wins" xml:space="preserve">
+        <value>Wins</value>
+    </data>
+    <data name="Stat_RacesPlayed" xml:space="preserve">
+        <value>Races played</value>
+    </data>
+    <data name="Button_ViewRoom" xml:space="preserve">
+        <value>View Room</value>
+    </data>
 </root>

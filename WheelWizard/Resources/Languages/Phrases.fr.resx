@@ -30,4 +30,34 @@
     <data name="Text_MadeByString" xml:space="preserve">
         <value>Fait par: {$1} \n et {$2}</value>
     </data>
+    <data name="Hover_FriendsOnline_0" xml:space="preserve">
+        <value>Il n'y a actuellement aucun amis en ligne</value>
+    </data>
+    <data name="Hover_FriendsOnline_1" xml:space="preserve">
+        <value>Il y a actuellement 1 ami en ligne</value>
+    </data>
+    <data name="Hover_FriendsOnline_x" xml:space="preserve">
+        <value>Il y a actuellement {$1} amis en ligne</value>
+    </data>
+    <data name="Hover_PlayersOnline_0" xml:space="preserve">
+        <value>Il n'y a actuellement aucun joueurs en ligne</value>
+    </data>
+    <data name="Hover_PlayersOnline_1" xml:space="preserve">
+        <value>Il y a actuellement 1 joueur en ligne</value>
+    </data>
+    <data name="Hover_PlayersOnline_x" xml:space="preserve">
+        <value>Il y a actuellement {$1} joueurs en ligne</value>
+    </data>
+    <data name="Hover_RoomsOnline_0" xml:space="preserve">
+        <value>Il n'y a actuellement aucune salles active</value>
+    </data>
+    <data name="Hover_RoomsOnline_1" xml:space="preserve">
+        <value>Il y a actuellement 1 salle active</value>
+    </data>
+    <data name="Hover_RoomsOnline_x" xml:space="preserve">
+        <value>Il y a actuellement {$1} salles active</value>
+    </data>
+    <data name="Text_ThanksTranslators" xml:space="preserve">
+        <value>Merci à tous les traducteurs:</value>
+    </data>
 </root>

@@ -105,12 +105,12 @@ namespace CT_MKWII_WPF.Views.Components
             FriendCode = user.FriendCode;
             VR = "VR: " + user.Vr;
             BR = "BR: " + user.Br;
-            BottomExtraStat = "Races Played: " + user.TotalRaceCount;
-            TopExtraStat = "Wins: " + user.TotalWinCount;
+            BottomExtraStat = $"{Online.Stat_RacesPlayed}: {user.TotalRaceCount}";
+            TopExtraStat = $"{Online.Stat_Wins}: {user.TotalWinCount}";
             Mii = user?.MiiData?.Mii;
             IsOnline = user!.IsOnline;
             ViewRoomButton.Visibility = IsOnline ? Visibility.Visible : Visibility.Hidden;
-            OnlineText = IsOnline ? "Online" : "Offline";
+            OnlineText = IsOnline ? Online.Status_Online : Online.Status_Offline;
             RegionName = user.RegionName;
         }
 
@@ -120,11 +120,11 @@ namespace CT_MKWII_WPF.Views.Components
             FriendCode = friend.FriendCode;
             VR = "VR: " + friend.Vr;
             BR = "BR: " + friend.Br;
-            BottomExtraStat = "Wins: " + friend.Wins;
-            TopExtraStat = "Losses: " + friend.Losses;
+            BottomExtraStat = $"{Online.Stat_Wins}: {friend.Wins}";
+            TopExtraStat = $"{Online.Stat_Losses}: {friend.Losses}";
             Mii = friend?.MiiData?.Mii;
             IsOnline = friend!.IsOnline;
-            OnlineText = IsOnline ? "Online" : "Offline";
+            OnlineText = IsOnline ? Online.Status_Online : Online.Status_Offline;
             ViewRoomButton.Visibility = IsOnline ? Visibility.Visible : Visibility.Hidden;
             RegionName = friend.CountryName;
         }

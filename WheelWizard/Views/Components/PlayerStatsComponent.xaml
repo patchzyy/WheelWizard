@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
     xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:lang="clr-namespace:CT_MKWII_WPF.Resources.Languages"
     mc:Ignorable="d"
     Background="Transparent"
     d:DesignHeight="300" 
@@ -27,7 +28,7 @@
                                    HorizontalAlignment="Right"
                                    IconPack="Material"
                                    IconKind="{x:Static icon:PackIconMaterialKind.Home}"
-                                   Text="View Room"
+                                   Text="{x:Static lang:Online.Button_ViewRoom }"
                                    Visibility="Visible"
                                    Click="ViewButton_OnClick"
                                    Margin="0,10,10,0" />

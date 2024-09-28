@@ -36,7 +36,8 @@ public static class SettingValues
     {
         { "en", () => $"{Resources.Languages.Settings.Value_Language_English} ({Resources.Languages.Settings.Value_Language_EnglishOg})" },
         { "nl", () => $"{Resources.Languages.Settings.Value_Language_Dutch} ({Resources.Languages.Settings.Value_Language_DutchOg})" },
-        { "fr", () => $"{Resources.Languages.Settings.Value_Language_France} ({Resources.Languages.Settings.Value_Language_FranceOg})" }
+        { "fr", () => $"{Resources.Languages.Settings.Value_Language_France} ({Resources.Languages.Settings.Value_Language_FranceOg})" },
+        { "de", () => $"{Resources.Languages.Settings.Value_Language_German} ({Resources.Languages.Settings.Value_Language_GermanOg})" }
     };
 }
    

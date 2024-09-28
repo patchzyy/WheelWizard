@@ -1,3 +1,4 @@
+using CT_MKWII_WPF.Services.LiveData;
 using System.Windows.Controls;
 
 namespace CT_MKWII_WPF.Views;
@@ -43,5 +44,7 @@ public static class ViewUtils
         newWindow.Top = oldWindow.Top;
         newWindow.Show();
         oldWindow.Close();
+
+        newWindow.UpdatePlayerAndRoomCount(RRLiveRooms.Instance);
     }
 }

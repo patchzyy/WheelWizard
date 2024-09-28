@@ -18,4 +18,58 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="ButtonState_ConfigNotFinished" xml:space="preserve">
+        <value>Installation nicht abgeschlossen</value>
+    </data>
+    <data name="ButtonState_Install" xml:space="preserve">
+        <value>Installieren</value>
+    </data>
+    <data name="ButtonState_NoServer" xml:space="preserve">
+        <value>Kein Server</value>
+    </data>
+    <data name="ButtonState_Play" xml:space="preserve">
+        <value>Spielen</value>
+    </data>
+    <data name="ButtonState_PlayOffline" xml:space="preserve">
+        <value>Spiele Offline</value>
+    </data>
+    <data name="ButtonState_Update" xml:space="preserve">
+        <value>Aktualisierung</value>
+    </data>
+    <data name="Sidebar_Button_Friends" xml:space="preserve">
+        <value>Freunde</value>
+    </data>
+    <data name="Sidebar_Button_Home" xml:space="preserve">
+        <value>Startseite</value>
+    </data>
+    <data name="Sidebar_Button_Mods" xml:space="preserve">
+        <value>My Stuff</value>
+    </data>
+    <data name="Sidebar_Button_MyProfiles" xml:space="preserve">
+        <value>Mein Profil</value>
+    </data>
+    <data name="Sidebar_Button_Rooms" xml:space="preserve">
+        <value>Räume</value>
+    </data>
+    <data name="Sidebar_Button_Settings" xml:space="preserve">
+        <value>Einstellungen</value>
+    </data>
+    <data name="Sidebar_Category_General" xml:space="preserve">
+        <value>Allgemein</value>
+    </data>
+    <data name="Sidebar_Category_Online" xml:space="preserve">
+        <value>Online</value>
+    </data>
+    <data name="Sidebar_Category_Other" xml:space="preserve">
+        <value>Sonstiges</value>
+    </data>
+    <data name="State_Installing" xml:space="preserve">
+        <value>Installiert...</value>
+    </data>
+    <data name="State_Loading" xml:space="preserve">
+        <value>Lädt...</value>
+    </data>
+    <data name="State_Updating" xml:space="preserve">
+        <value>Aktualisieren...</value>
+    </data>
 </root>

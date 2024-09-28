@@ -18,4 +18,46 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="Hover_FriendsOnline_0" xml:space="preserve">
+        <value>Zurzeit sind keine Freunde online</value>
+    </data>
+    <data name="Hover_FriendsOnline_1" xml:space="preserve">
+        <value>Zurzeit ist nur 1 Freund online</value>
+    </data>
+    <data name="Hover_FriendsOnline_x" xml:space="preserve">
+        <value>Zurzeit sind {$1} Freunde online</value>
+    </data>
+    <data name="Hover_PlayersOnline_0" xml:space="preserve">
+        <value>Zurzeit sind keine Spieler online</value>
+    </data>
+    <data name="Hover_PlayersOnline_1" xml:space="preserve">
+        <value>Zurzeit ist nur 1 Spieler online</value>
+    </data>
+    <data name="Hover_PlayersOnline_x" xml:space="preserve">
+        <value>Zurzeit sind {$1} Spieler online</value>
+    </data>
+    <data name="Hover_RoomsOnline_0" xml:space="preserve">
+        <value>Zurzeit gibt es keine aktiven Räume</value>
+    </data>
+    <data name="Hover_RoomsOnline_1" xml:space="preserve">
+        <value>Zurzeit ist nur 1 Raum aktiv</value>
+    </data>
+    <data name="Hover_RoomsOnline_x" xml:space="preserve">
+        <value>Zurzeit gibt es {$1} aktive Räume</value>
+    </data>
+    <data name="Sidebar_Link_Discord" xml:space="preserve">
+        <value>Rede mit uns!</value>
+    </data>
+    <data name="Sidebar_Link_Github" xml:space="preserve">
+        <value>Source Code</value>
+    </data>
+    <data name="Sidebar_Link_Support" xml:space="preserve">
+        <value>Unterstützt uns!</value>
+    </data>
+    <data name="Text_MadeByString" xml:space="preserve">
+        <value>Erstellt von: {$1} \n und {$2}</value>
+    </data>
+    <data name="Text_ThanksTranslators" xml:space="preserve">
+        <value>Vielen Dank an alle Übersetzer:</value>
+    </data>
 </root>

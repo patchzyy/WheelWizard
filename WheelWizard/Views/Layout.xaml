@@ -106,12 +106,12 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                 <components:StateBox x:Name="PlayerCountBox" IsDark="True" Text="0"
                                      IconPack="FontAwesome" TipAlignment="TopLeft"
                                      IconKind="{x:Static icon:PackIconFontAwesomeKind.UserGroupSolid}"
-                                     TipText="There are currently no players online"
+                                     TipText="{x:Static lang:Phrases.Hover_PlayersOnline_0}"
                                      Margin="10,0,0,0" />
                 <components:StateBox x:Name="RoomCountBox" IsDark="True" Text="0"
                                      IconPack="FontAwesome" TipAlignment="TopLeft"
                                      IconKind="{x:Static icon:PackIconFontAwesomeKind.UsersRectangleSolid}"
-                                     TipText="There are currently no rooms active"
+                                     TipText="{x:Static lang:Phrases.Hover_RoomsOnline_0}"
                                      Margin="10,0,0,0" />
             </StackPanel>
 
@@ -207,7 +207,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                         IconKind="{x:Static icon:PackIconFontAwesomeKind.UserPlusSolid}"
                         IconPack="FontAwesome" Text="{x:Static lang:Common.Sidebar_Button_Friends}" x:Name="FriendsButton"
                         PageType="{x:Type local:FriendsPage}"
-                        BoxText="0/0" />
+                        BoxText="0/0"/>
                     
                     <TextBlock Text="{x:Static lang:Common.Sidebar_Category_Other}" Style="{StaticResource SidebarSectionText}" />
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.WrenchSolid}"
