@@ -116,54 +116,54 @@ namespace CT_MKWII_WPF.Resources.Languages {
         /// <summary>
         ///   Looks up a localized string similar to Friends.
         /// </summary>
-        public static string Sidebar_Button_Friends {
+        public static string PageTitle_Friends {
             get {
-                return ResourceManager.GetString("Sidebar_Button_Friends", resourceCulture);
+                return ResourceManager.GetString("PageTitle_Friends", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
-        public static string Sidebar_Button_Home {
+        public static string PageTitle_Home {
             get {
-                return ResourceManager.GetString("Sidebar_Button_Home", resourceCulture);
+                return ResourceManager.GetString("PageTitle_Home", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to My stuff.
         /// </summary>
-        public static string Sidebar_Button_Mods {
+        public static string PageTitle_Mods {
             get {
-                return ResourceManager.GetString("Sidebar_Button_Mods", resourceCulture);
+                return ResourceManager.GetString("PageTitle_Mods", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to My profiles.
         /// </summary>
-        public static string Sidebar_Button_MyProfiles {
+        public static string PageTitle_MyProfiles {
             get {
-                return ResourceManager.GetString("Sidebar_Button_MyProfiles", resourceCulture);
+                return ResourceManager.GetString("PageTitle_MyProfiles", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Rooms.
         /// </summary>
-        public static string Sidebar_Button_Rooms {
+        public static string PageTitle_Rooms {
             get {
-                return ResourceManager.GetString("Sidebar_Button_Rooms", resourceCulture);
+                return ResourceManager.GetString("PageTitle_Rooms", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
-        public static string Sidebar_Button_Settings {
+        public static string PageTitle_Settings {
             get {
-                return ResourceManager.GetString("Sidebar_Button_Settings", resourceCulture);
+                return ResourceManager.GetString("PageTitle_Settings", resourceCulture);
             }
         }
         

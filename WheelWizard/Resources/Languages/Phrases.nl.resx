@@ -53,4 +53,7 @@
     <data name="Hover_FriendsOnline_0" xml:space="preserve">
         <value>Er zijn momenteel geen vrienden online</value>
     </data>
+    <data name="EmptyText_NoProfiles" xml:space="preserve">
+        <value>Je moet het spel minimaal 1 keer hebben gespeeld om hier je profielen te kunnen bekijken</value>
+    </data>
 </root>

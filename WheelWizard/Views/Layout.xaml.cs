@@ -22,8 +22,8 @@ namespace CT_MKWII_WPF.Views;
 
 public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
 {
-    public readonly double WindowHeight = 876;
-    public readonly double WindowWidth = 656;
+    public const double WindowHeight = 876;
+    public const double WindowWidth = 656;
     
     public Layout() : this(new Dashboard()) { }
     public Layout(Page initialPage)

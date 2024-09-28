@@ -195,6 +195,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Make Primary.
+        /// </summary>
+        public static string Option_MakePrimary {
+            get {
+                return ResourceManager.GetString("Option_MakePrimary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mario Kart Wii Game File.
         /// </summary>
         public static string Option_MarioKartGame {

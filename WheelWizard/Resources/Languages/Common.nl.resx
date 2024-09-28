@@ -18,22 +18,22 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="Sidebar_Button_Mods" xml:space="preserve">
+    <data name="PageTitle_Mods" xml:space="preserve">
         <value>My Stuff</value>
     </data>
-    <data name="Sidebar_Button_MyProfiles" xml:space="preserve">
+    <data name="PageTitle_MyProfiles" xml:space="preserve">
         <value>Mijn profielen</value>
     </data>
-    <data name="Sidebar_Button_Settings" xml:space="preserve">
+    <data name="PageTitle_Settings" xml:space="preserve">
         <value>Instellingen</value>
     </data>
-    <data name="Sidebar_Button_Home" xml:space="preserve">
+    <data name="PageTitle_Home" xml:space="preserve">
         <value>Startpagina</value>
     </data>
-    <data name="Sidebar_Button_Rooms" xml:space="preserve">
-        <value>Speel ruimtes</value>
+    <data name="PageTitle_Rooms" xml:space="preserve">
+        <value>Lobbies</value>
     </data>
-    <data name="Sidebar_Button_Friends" xml:space="preserve">
+    <data name="PageTitle_Friends" xml:space="preserve">
         <value>Vrienden</value>
     </data>
     <data name="Sidebar_Category_General" xml:space="preserve">

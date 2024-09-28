@@ -60,4 +60,7 @@
     <data name="Hover_FriendsOnline_x" xml:space="preserve">
         <value>There are currently {$1} friends online</value>
     </data>
+    <data name="EmptyText_NoProfiles" xml:space="preserve">
+        <value>You have to play the game at least once in order to see your profiles listed here</value>
+    </data>
 </root>

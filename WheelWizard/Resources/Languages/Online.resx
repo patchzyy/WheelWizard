@@ -19,7 +19,7 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="NoName" xml:space="preserve">
-        <value>no name</value>
+        <value>No name</value>
     </data>
     <data name="Status_Online" xml:space="preserve">
         <value>Online</value>
@@ -38,5 +38,11 @@
     </data>
     <data name="Button_ViewRoom" xml:space="preserve">
         <value>View Room</value>
+    </data>
+    <data name="NoLicense" xml:space="preserve">
+        <value>No license</value>
+    </data>
+    <data name="NoProfiles" xml:space="preserve">
+        <value>No profiles</value>
     </data>
 </root>

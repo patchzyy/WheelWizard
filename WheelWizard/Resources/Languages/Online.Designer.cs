@@ -69,11 +69,29 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to no name.
+        ///   Looks up a localized string similar to No license.
+        /// </summary>
+        public static string NoLicense {
+            get {
+                return ResourceManager.GetString("NoLicense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No name.
         /// </summary>
         public static string NoName {
             get {
                 return ResourceManager.GetString("NoName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No profiles.
+        /// </summary>
+        public static string NoProfiles {
+            get {
+                return ResourceManager.GetString("NoProfiles", resourceCulture);
             }
         }
         

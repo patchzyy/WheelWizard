@@ -19,7 +19,7 @@
                 VerticalAlignment="Bottom" />
         <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
                 VerticalAlignment="Bottom" />
-        <TextBlock Grid.Row="0" Text="{x:Static lang:Common.Sidebar_Button_Home}" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+        <TextBlock Grid.Row="0" Text="{x:Static lang:Common.PageTitle_Home}" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                    Style="{StaticResource PageTitleText}" />
         <components:CurrentUserProfileComponent x:Name="CurrentUserProfile"
                                                 Grid.Row="0"

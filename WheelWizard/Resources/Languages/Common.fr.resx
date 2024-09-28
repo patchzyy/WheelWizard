@@ -18,19 +18,19 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="Sidebar_Button_Friends" xml:space="preserve">
+    <data name="PageTitle_Friends" xml:space="preserve">
         <value>Amis</value>
     </data>
-    <data name="Sidebar_Button_Mods" xml:space="preserve">
+    <data name="PageTitle_Mods" xml:space="preserve">
         <value>My Stuff</value>
     </data>
-    <data name="Sidebar_Button_MyProfiles" xml:space="preserve">
+    <data name="PageTitle_MyProfiles" xml:space="preserve">
         <value>Mes Licences</value>
     </data>
-    <data name="Sidebar_Button_Rooms" xml:space="preserve">
+    <data name="PageTitle_Rooms" xml:space="preserve">
         <value>Salles</value>
     </data>
-    <data name="Sidebar_Button_Settings" xml:space="preserve">
+    <data name="PageTitle_Settings" xml:space="preserve">
         <value>Paremètres</value>
     </data>
     <data name="Sidebar_Category_General" xml:space="preserve">
@@ -42,7 +42,7 @@
     <data name="Sidebar_Category_Other" xml:space="preserve">
         <value>Autre</value>
     </data>
-    <data name="Sidebar_Button_Home" xml:space="preserve">
+    <data name="PageTitle_Home" xml:space="preserve">
         <value>Accueil</value>
     </data>
     <data name="ButtonState_ConfigNotFinished" xml:space="preserve">

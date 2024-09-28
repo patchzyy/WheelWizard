@@ -121,7 +121,7 @@ public class GameDataLoader : RepeatedTaskManager
             {
                 Mii = new Mii
                 {
-                    Name = "No License",
+                    Name = "no license",
                     Data = Convert.ToBase64String(new byte[MiiSize])
                 },
                 AvatarId = 0,

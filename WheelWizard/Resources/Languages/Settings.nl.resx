@@ -165,4 +165,7 @@
     <data name="Value_Language_TurkishOg" xml:space="preserve">
         <value>-</value>
     </data>
+    <data name="Option_MakePrimary" xml:space="preserve">
+        <value>Zet als hoofd profiel</value>
+    </data>
 </root>

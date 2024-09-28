@@ -60,6 +60,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have to play the game at least once in order to see your profiles listed here.
+        /// </summary>
+        public static string EmptyText_NoProfiles {
+            get {
+                return ResourceManager.GetString("EmptyText_NoProfiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There are currently no friends online.
         /// </summary>
         public static string Hover_FriendsOnline_0 {

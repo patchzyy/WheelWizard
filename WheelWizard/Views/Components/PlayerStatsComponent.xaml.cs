@@ -1,5 +1,6 @@
 ﻿using CT_MKWII_WPF.Models.GameData;
 using CT_MKWII_WPF.Models.RRInfo;
+using CT_MKWII_WPF.Models.Settings;
 using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services.LiveData;
 using CT_MKWII_WPF.Views.Pages;
@@ -30,10 +31,12 @@ namespace CT_MKWII_WPF.Views.Components
             get => _playerName;
             set
             {
-                if(value != "no name")
-                    SetProperty(ref _playerName, value);
-                else 
+                if(value == SettingValues.NoName)
                     SetProperty(ref _playerName, Online.NoName);
+                if(value == SettingValues.NoLicense)
+                    SetProperty(ref _playerName, Online.NoLicense);
+                else 
+                    SetProperty(ref _playerName, value);
             }
         }
 
@@ -102,6 +105,11 @@ namespace CT_MKWII_WPF.Views.Components
         public void UpdateStats(User user)
         {
             PlayerName = user.MiiName;
+            if (PlayerName == SettingValues.NoName)
+                PlayerName = Online.NoName;
+            if (PlayerName == SettingValues.NoLicense)
+                PlayerName = Online.NoLicense;
+            
             FriendCode = user.FriendCode;
             VR = "VR: " + user.Vr;
             BR = "BR: " + user.Br;
@@ -117,6 +125,11 @@ namespace CT_MKWII_WPF.Views.Components
         public void UpdateStats(Friend friend)
         {
             PlayerName = friend.MiiName;
+            if (PlayerName == SettingValues.NoName)
+                PlayerName = Online.NoName;
+            if (PlayerName == SettingValues.NoLicense)
+                PlayerName = Online.NoLicense;
+            
             FriendCode = friend.FriendCode;
             VR = "VR: " + friend.Vr;
             BR = "BR: " + friend.Br;

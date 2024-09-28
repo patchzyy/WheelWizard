@@ -12,6 +12,11 @@ public enum DolphinShaderCompilationMode {
 
 public static class SettingValues
 {
+    // These should not be seen, but are instead a placeholder for values. When you then use them to display something
+    // you check for this value and replace it with its corresponding value in the language file
+    public const string NoName = "no name";
+    public const string NoLicense = "no license";
+    
     public static readonly double[] WindowScales = { 0.7, 0.8, 0.9, 1.0, 1.15, 1.3, 1.45 };
     
     public static readonly Dictionary<string, string> GFXRenderers = new()
