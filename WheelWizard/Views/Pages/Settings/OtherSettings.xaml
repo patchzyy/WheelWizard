@@ -55,9 +55,25 @@
                                          Label="{x:Static lang:Settings.Option_WhWzLanguage}"
                                          SelectionChanged="WhWzLanguageDropdown_OnSelectionChanged"
                                          x:Name="WhWzLanguageDropdown"/>
-                    <TextBlock Style="{StaticResource TinyText}" Text="{x:Static lang:Phrases.Text_ThanksTranslators}"
-                               Margin="0,10,0,0"/>
-                    <TextBlock Style="{StaticResource TinyText}" Text="Eppe, Weebo, Noël, Kytronix, Haru"/>
+                    <Grid Margin="0,10,0,0">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource TinyText}" Text="{x:Static lang:Phrases.Text_ThanksTranslators}"/>
+                            <TextBlock Style="{StaticResource TinyText}" Text="Eppe, GreenWeebo38/Weebo, kytronix, Noël, Haru00007, JGavidia"/>
+                        </StackPanel>
+                        
+                        <Border ToolTipService.InitialShowDelay="50"
+                                ToolTipService.ShowDuration="10000"
+                                ToolTipService.BetweenShowDelay="0" VerticalAlignment="Top" HorizontalAlignment="Right">
+                            <icon:PackIconMaterial Kind="Information" Width="14" Height="14"
+                                                   Foreground="{StaticResource FormFieldLabelColor}"/>
+                            <Border.ToolTip>
+                                <components:ToolTipMessage Alignment="TopCenter" Content="If you are willing to translate for RetroRewind and WheelWizard. Be sure to reach out to Eppe or WantToBeeMe :)" />
+                            </Border.ToolTip>
+                        </Border>
+                       
+                     
+                    </Grid>
+                 
                 </StackPanel>
             </Border>
         </StackPanel>
