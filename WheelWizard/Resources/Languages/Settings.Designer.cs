@@ -402,7 +402,7 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to français.
+        ///   Looks up a localized string similar to Français.
         /// </summary>
         public static string Value_Language_FranceOg {
             get {
@@ -474,7 +474,7 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to español.
+        ///   Looks up a localized string similar to Español.
         /// </summary>
         public static string Value_Language_SpanishOg {
             get {
