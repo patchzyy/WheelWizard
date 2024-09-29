@@ -60,56 +60,56 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Config Not Finished.
+        ///   Looks up a localized string similar to Delete.
         /// </summary>
-        public static string ButtonState_ConfigNotFinished {
+        public static string Button_Delete {
             get {
-                return ResourceManager.GetString("ButtonState_ConfigNotFinished", resourceCulture);
+                return ResourceManager.GetString("Button_Delete", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Install.
+        ///   Looks up a localized string similar to Disable All.
         /// </summary>
-        public static string ButtonState_Install {
+        public static string Button_DisableAll {
             get {
-                return ResourceManager.GetString("ButtonState_Install", resourceCulture);
+                return ResourceManager.GetString("Button_DisableAll", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No Server.
+        ///   Looks up a localized string similar to Enable All.
         /// </summary>
-        public static string ButtonState_NoServer {
+        public static string Button_EnableAll {
             get {
-                return ResourceManager.GetString("ButtonState_NoServer", resourceCulture);
+                return ResourceManager.GetString("Button_EnableAll", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Play.
+        ///   Looks up a localized string similar to Import.
         /// </summary>
-        public static string ButtonState_Play {
+        public static string Button_Import {
             get {
-                return ResourceManager.GetString("ButtonState_Play", resourceCulture);
+                return ResourceManager.GetString("Button_Import", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Play Offline.
+        ///   Looks up a localized string similar to Open Folder.
         /// </summary>
-        public static string ButtonState_PlayOffline {
+        public static string Button_OpenFolder {
             get {
-                return ResourceManager.GetString("ButtonState_PlayOffline", resourceCulture);
+                return ResourceManager.GetString("Button_OpenFolder", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update.
+        ///   Looks up a localized string similar to Rename.
         /// </summary>
-        public static string ButtonState_Update {
+        public static string Button_Rename {
             get {
-                return ResourceManager.GetString("ButtonState_Update", resourceCulture);
+                return ResourceManager.GetString("Button_Rename", resourceCulture);
             }
         }
         
@@ -168,6 +168,60 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Config Not Finished.
+        /// </summary>
+        public static string PlayButtonState_ConfigNotFinished {
+            get {
+                return ResourceManager.GetString("PlayButtonState_ConfigNotFinished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install.
+        /// </summary>
+        public static string PlayButtonState_Install {
+            get {
+                return ResourceManager.GetString("PlayButtonState_Install", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Server.
+        /// </summary>
+        public static string PlayButtonState_NoServer {
+            get {
+                return ResourceManager.GetString("PlayButtonState_NoServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Play.
+        /// </summary>
+        public static string PlayButtonState_Play {
+            get {
+                return ResourceManager.GetString("PlayButtonState_Play", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Play Offline.
+        /// </summary>
+        public static string PlayButtonState_PlayOffline {
+            get {
+                return ResourceManager.GetString("PlayButtonState_PlayOffline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        public static string PlayButtonState_Update {
+            get {
+                return ResourceManager.GetString("PlayButtonState_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to General.
         /// </summary>
         public static string Sidebar_Category_General {
@@ -191,6 +245,24 @@ namespace CT_MKWII_WPF.Resources.Languages {
         public static string Sidebar_Category_Other {
             get {
                 return ResourceManager.GetString("Sidebar_Category_Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabled.
+        /// </summary>
+        public static string Stat_Enabled {
+            get {
+                return ResourceManager.GetString("Stat_Enabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string Stat_Title {
+            get {
+                return ResourceManager.GetString("Stat_Title", resourceCulture);
             }
         }
         

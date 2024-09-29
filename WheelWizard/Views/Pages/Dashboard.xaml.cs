@@ -77,20 +77,20 @@ public partial class Dashboard
         switch (_status)
         {
             case WheelWizardStatus.NoServer:
-                SetButtonState(Common.ButtonState_NoServer, Button.ButtonsVariantType.Secondary, PackIconMaterialKind.ServerNetworkOff);
+                SetButtonState(Common.PlayButtonState_NoServer, Button.ButtonsVariantType.Secondary, PackIconMaterialKind.ServerNetworkOff);
                 break;
             case WheelWizardStatus.NoServerButInstalled:
-                SetButtonState(Common.ButtonState_PlayOffline, Button.ButtonsVariantType.Secondary, PackIconFontAwesomeKind.PlaySolid);
+                SetButtonState(Common.PlayButtonState_PlayOffline, Button.ButtonsVariantType.Secondary, PackIconFontAwesomeKind.PlaySolid);
                 break;
             case WheelWizardStatus.NoDolphin:
                 SetButtonState("Settings", Button.ButtonsVariantType.Secondary, PackIconFontAwesomeKind.FilePenSolid);
                 break;
             case WheelWizardStatus.ConfigNotFinished:
-                SetButtonState(Common.ButtonState_ConfigNotFinished, Button.ButtonsVariantType.Secondary,
+                SetButtonState(Common.PlayButtonState_ConfigNotFinished, Button.ButtonsVariantType.Secondary,
                     PackIconFontAwesomeKind.FilePenSolid);
                 break;
             case WheelWizardStatus.NoRR:
-                SetButtonState(Common.ButtonState_Install, Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download);
+                SetButtonState(Common.PlayButtonState_Install, Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download);
                 break;
             case WheelWizardStatus.NoRRActive:
                 //this is here for future use,
@@ -101,10 +101,10 @@ public partial class Dashboard
                 SetButtonState("Activate", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Power);
                 break;
             case WheelWizardStatus.OutOfDate:
-                SetButtonState(Common.ButtonState_Update, Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download);
+                SetButtonState(Common.PlayButtonState_Update, Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download);
                 break;
             case WheelWizardStatus.UpToDate:
-                SetButtonState(Common.ButtonState_Play, Button.ButtonsVariantType.Primary, PackIconFontAwesomeKind.PlaySolid);
+                SetButtonState(Common.PlayButtonState_Play, Button.ButtonsVariantType.Primary, PackIconFontAwesomeKind.PlaySolid);
                 break;
         }
         if (SettingsHelper.PathsSetupCorrectly()) 

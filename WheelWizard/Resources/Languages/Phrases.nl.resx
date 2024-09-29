@@ -56,4 +56,10 @@
     <data name="EmptyText_NoProfiles" xml:space="preserve">
         <value>Je moet het spel minimaal 1 keer hebben gespeeld om hier je profielen te kunnen bekijken</value>
     </data>
+    <data name="EmptyText_NoFriends_Title" xml:space="preserve">
+        <value>Je hebt nog geen vrienden</value>
+    </data>
+    <data name="EmptyText_NoFriends" xml:space="preserve">
+        <value>Je kunt vrienden toevoegen door het spel op te starten</value>
+    </data>
 </root>

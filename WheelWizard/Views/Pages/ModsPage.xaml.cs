@@ -1,5 +1,6 @@
 ﻿using CT_MKWII_WPF.Models;
 using CT_MKWII_WPF.Models.Settings;
+using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services.Launcher;
 using Microsoft.Win32;
 using System;
@@ -289,7 +290,7 @@ namespace CT_MKWII_WPF.Views.Pages
             }
 
             _toggleAll = !_toggleAll;
-            EnableDisableButton.Text = !_toggleAll ? "Disable All" : "Enable All";
+            EnableDisableButton.Text = !_toggleAll ? Common.Button_DisableAll : Common.Button_EnableAll;
         }
 
         private bool IsValidName(string name)

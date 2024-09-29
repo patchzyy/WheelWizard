@@ -54,25 +54,49 @@
     <data name="State_Updating" xml:space="preserve">
         <value>Updaten...</value>
     </data>
-    <data name="ButtonState_Install" xml:space="preserve">
+    <data name="PlayButtonState_Install" xml:space="preserve">
         <value>Installeer</value>
     </data>
-    <data name="ButtonState_Play" xml:space="preserve">
+    <data name="PlayButtonState_Play" xml:space="preserve">
         <value>Speel</value>
     </data>
-    <data name="ButtonState_PlayOffline" xml:space="preserve">
+    <data name="PlayButtonState_PlayOffline" xml:space="preserve">
         <value>Speel offline</value>
     </data>
-    <data name="ButtonState_Update" xml:space="preserve">
+    <data name="PlayButtonState_Update" xml:space="preserve">
         <value>Update</value>
     </data>
-    <data name="ButtonState_ConfigNotFinished" xml:space="preserve">
+    <data name="PlayButtonState_ConfigNotFinished" xml:space="preserve">
         <value>Instellingen niet compleet</value>
     </data>
-    <data name="ButtonState_NoServer" xml:space="preserve">
+    <data name="PlayButtonState_NoServer" xml:space="preserve">
         <value>Geen server</value>
     </data>
     <data name="Unknown" xml:space="preserve">
         <value>Onbekend</value>
+    </data>
+    <data name="Stat_Enabled" xml:space="preserve">
+        <value>Aan/Uit</value>
+    </data>
+    <data name="Stat_Title" xml:space="preserve">
+        <value>Titel</value>
+    </data>
+    <data name="Button_DisableAll" xml:space="preserve">
+        <value>Alles uit zetten</value>
+    </data>
+    <data name="Button_EnableAll" xml:space="preserve">
+        <value>Alles aan zetten</value>
+    </data>
+    <data name="Button_Import" xml:space="preserve">
+        <value>Importeren</value>
+    </data>
+    <data name="Button_Delete" xml:space="preserve">
+        <value>Verwijderen</value>
+    </data>
+    <data name="Button_OpenFolder" xml:space="preserve">
+        <value>Open Map</value>
+    </data>
+    <data name="Button_Rename" xml:space="preserve">
+        <value>Hernoem</value>
     </data>
 </root>

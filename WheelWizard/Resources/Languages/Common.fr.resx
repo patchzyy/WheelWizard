@@ -45,22 +45,22 @@
     <data name="PageTitle_Home" xml:space="preserve">
         <value>Accueil</value>
     </data>
-    <data name="ButtonState_ConfigNotFinished" xml:space="preserve">
+    <data name="PlayButtonState_ConfigNotFinished" xml:space="preserve">
         <value>Configuration non terminée </value>
     </data>
-    <data name="ButtonState_Install" xml:space="preserve">
+    <data name="PlayButtonState_Install" xml:space="preserve">
         <value>Installer </value>
     </data>
-    <data name="ButtonState_NoServer" xml:space="preserve">
+    <data name="PlayButtonState_NoServer" xml:space="preserve">
         <value>Aucun Seveurs </value>
     </data>
-    <data name="ButtonState_Play" xml:space="preserve">
+    <data name="PlayButtonState_Play" xml:space="preserve">
         <value>Jouer</value>
     </data>
-    <data name="ButtonState_PlayOffline" xml:space="preserve">
+    <data name="PlayButtonState_PlayOffline" xml:space="preserve">
         <value>Jouer en Hors-Ligne</value>
     </data>
-    <data name="ButtonState_Update" xml:space="preserve">
+    <data name="PlayButtonState_Update" xml:space="preserve">
         <value>Mettre à Jour</value>
     </data>
     <data name="State_Installing" xml:space="preserve">

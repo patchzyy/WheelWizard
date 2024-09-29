@@ -81,4 +81,7 @@
     <data name="Stat_PlayerCount" xml:space="preserve">
         <value>Spelers</value>
     </data>
+    <data name="ContextMenu_CopyFriendCode" xml:space="preserve">
+        <value>Vriendcode kopiëren</value>
+    </data>
 </root>

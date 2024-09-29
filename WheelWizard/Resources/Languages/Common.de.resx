@@ -18,22 +18,22 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="ButtonState_ConfigNotFinished" xml:space="preserve">
+    <data name="PlayButtonState_ConfigNotFinished" xml:space="preserve">
         <value>Installation nicht abgeschlossen</value>
     </data>
-    <data name="ButtonState_Install" xml:space="preserve">
+    <data name="PlayButtonState_Install" xml:space="preserve">
         <value>Installieren</value>
     </data>
-    <data name="ButtonState_NoServer" xml:space="preserve">
+    <data name="PlayButtonState_NoServer" xml:space="preserve">
         <value>Kein Server</value>
     </data>
-    <data name="ButtonState_Play" xml:space="preserve">
+    <data name="PlayButtonState_Play" xml:space="preserve">
         <value>Spielen</value>
     </data>
-    <data name="ButtonState_PlayOffline" xml:space="preserve">
+    <data name="PlayButtonState_PlayOffline" xml:space="preserve">
         <value>Spiele Offline</value>
     </data>
-    <data name="ButtonState_Update" xml:space="preserve">
+    <data name="PlayButtonState_Update" xml:space="preserve">
         <value>Aktualisierung</value>
     </data>
     <data name="PageTitle_Friends" xml:space="preserve">

@@ -69,6 +69,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy friend code.
+        /// </summary>
+        public static string ContextMenu_CopyFriendCode {
+            get {
+                return ResourceManager.GetString("ContextMenu_CopyFriendCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Friends.
         /// </summary>
         public static string ListTitle_Friends {
