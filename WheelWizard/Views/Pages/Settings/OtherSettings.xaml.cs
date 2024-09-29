@@ -85,9 +85,8 @@ public partial class OtherSettings : UserControl
         if (!yesNoWindow.AwaitAnswer())
         {
             var currentWhWzLanguage = (string)SettingsManager.WW_LANGUAGE.Get();
-            var whWzLanguageDisplayName = SettingValues.WhWzLanguages
-                                                       .FirstOrDefault(x => x.Value() == currentWhWzLanguage).Key;
-            if (whWzLanguageDisplayName != null) WhWzLanguageDropdown.SelectedItem = whWzLanguageDisplayName;
+            var whWzLanguageDisplayName = SettingValues.WhWzLanguages[currentWhWzLanguage];
+            WhWzLanguageDropdown.SelectedItem = whWzLanguageDisplayName();
             return; // We only want to change the setting if we really apply this change
         }
         

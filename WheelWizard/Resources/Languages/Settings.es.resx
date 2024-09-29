@@ -19,7 +19,7 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="Value_Language_SpanishOg" xml:space="preserve">
-        <value>español</value>
+        <value>Español</value>
     </data>
     <data name="Value_Language_Spanish" xml:space="preserve">
         <value>español</value>
@@ -28,7 +28,7 @@
         <value>Deutsch</value>
     </data>
     <data name="Value_Language_FranceOg" xml:space="preserve">
-        <value>français</value>
+        <value>Français</value>
     </data>
     <data name="Value_Language_EnglishOg" xml:space="preserve">
         <value>English</value>

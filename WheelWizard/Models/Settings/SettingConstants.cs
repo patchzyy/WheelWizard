@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace CT_MKWII_WPF.Models.Settings;
 
@@ -27,22 +28,30 @@ public static class SettingValues
         { "OpenGL", "OGL" }
     };
     
-
-    public static readonly Dictionary<int, Func<string>> RrLanguages = new()
+    public static readonly Dictionary<int,Func<string>> RrLanguages = new()
     {
-        { 0 ,() => $"{Resources.Languages.Settings.Value_Language_English} ({Resources.Languages.Settings.Value_Language_EnglishOg})" }, // English
-        { 1 ,() => $"{Resources.Languages.Settings.Value_Language_Japanese} ({Resources.Languages.Settings.Value_Language_JapaneseOg})" }, // Japanese
-        { 2 ,() => $"{Resources.Languages.Settings.Value_Language_France} ({Resources.Languages.Settings.Value_Language_FranceOg})" }, // French
-        { 3 ,() => $"{Resources.Languages.Settings.Value_Language_German} ({Resources.Languages.Settings.Value_Language_GermanOg})" }, // German
-        { 4 ,() => $"{Resources.Languages.Settings.Value_Language_Dutch} ({Resources.Languages.Settings.Value_Language_DutchOg})" } // Dutch
+        { 0, () => CreateLanguageString("English") },
+        { 1, () => CreateLanguageString("Japanese") },
+        { 2, () => CreateLanguageString("France") },
+        { 3, () => CreateLanguageString("German") },
+        { 4, () => CreateLanguageString("Dutch") }
     };
 
     public static readonly Dictionary<string, Func<string>> WhWzLanguages = new()
     {
-        { "en", () => $"{Resources.Languages.Settings.Value_Language_English} ({Resources.Languages.Settings.Value_Language_EnglishOg})" },
-        { "nl", () => $"{Resources.Languages.Settings.Value_Language_Dutch} ({Resources.Languages.Settings.Value_Language_DutchOg})" },
-        { "fr", () => $"{Resources.Languages.Settings.Value_Language_France} ({Resources.Languages.Settings.Value_Language_FranceOg})" },
-        { "de", () => $"{Resources.Languages.Settings.Value_Language_German} ({Resources.Languages.Settings.Value_Language_GermanOg})" }
+        { "en", () => CreateLanguageString("English") },
+        { "nl", () => CreateLanguageString("Dutch") },
+        { "fr", () => CreateLanguageString("France") },
+        { "de", () => CreateLanguageString("German") }
     };
+    
+    private static string CreateLanguageString(string language)
+    {
+        var lang = Resources.Languages.Settings.ResourceManager.GetString($"Value_Language_{language}")!; 
+        var langOg =  Resources.Languages.Settings.ResourceManager.GetString($"Value_Language_{language}Og");
+        if (lang == langOg || langOg == null || langOg == "-")
+            return lang;
+        
+        return $"{lang} - ({langOg})";
+    } 
 }
-   

@@ -132,7 +132,7 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to My stuff.
+        ///   Looks up a localized string similar to My Stuff.
         /// </summary>
         public static string PageTitle_Mods {
             get {

@@ -82,11 +82,11 @@
                         </GridViewColumn>
                         <GridViewColumn Header="{x:Static lang:Online.Stat_Name}" DisplayMemberBinding="{Binding MiiName}" Width="100"
                                         components:StaticListView.IsSortable="True" />
-                        <GridViewColumn Header="{x:Static lang:Online.Stat_FriendCode}" DisplayMemberBinding="{Binding FriendCode}" Width="150"
+                        <GridViewColumn Header="{x:Static lang:Online.Stat_FriendCode}" DisplayMemberBinding="{Binding FriendCode}" Width="140"
                                         components:StaticListView.IsSortable="True" />
                         <!-- <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Vr}" Width="60" -->
                         <!--                 components:StaticListView.IsSortable="True" /> -->
-                        <GridViewColumn Header="{x:Static lang:Online.Stat_Wins}" DisplayMemberBinding="{Binding Wins}" Width="60"
+                        <GridViewColumn Header="{x:Static lang:Online.Stat_Wins}" DisplayMemberBinding="{Binding Wins}" Width="70"
                                         components:StaticListView.IsSortable="True" />
                         <GridViewColumn Header="{x:Static lang:Online.Stat_Losses}" DisplayMemberBinding="{Binding Losses}" Width="80"
                                         components:StaticListView.IsSortable="True" />

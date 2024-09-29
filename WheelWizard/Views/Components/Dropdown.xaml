@@ -24,7 +24,7 @@
                                  Padding="{TemplateBinding Padding}"
                                  BorderThickness="{TemplateBinding BorderThickness}">
                              <Grid>
-                                 <ContentPresenter />
+                                 <ContentPresenter Margin="0,0,40,0"/>
                                  <icon:PackIconFontAwesome x:Name="SelectedCheck" VerticalAlignment="Center" Kind="CircleCheckSolid" Visibility="Collapsed"
                                                            HorizontalAlignment="Right" Foreground="{StaticResource DropdownItemSelectedCheck}"
                                                            Width="16" Height="16" Margin="6,0"/>
