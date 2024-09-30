@@ -15,6 +15,7 @@ public class DolphinSetting : Setting
         Section = location.Item2;
         // name/key = location.Item3
         
+        // I rather not translate this message, makes it easier to check where a given error came from
         if (!FileName.EndsWith(".ini"))
             throw new ArgumentException($"FileName for dolphin setting '[{Section}]{Name}' must end with .ini (given file is '{FileName}')");
         

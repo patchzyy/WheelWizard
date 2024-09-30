@@ -60,6 +60,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply.
+        /// </summary>
+        public static string Action_Apply {
+            get {
+                return ResourceManager.GetString("Action_Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Action_Cancel {
@@ -114,6 +123,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export.
+        /// </summary>
+        public static string Action_Export {
+            get {
+                return ResourceManager.GetString("Action_Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Import.
         /// </summary>
         public static string Action_Import {
@@ -128,6 +146,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         public static string Action_Install {
             get {
                 return ResourceManager.GetString("Action_Install", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keep.
+        /// </summary>
+        public static string Action_Keep {
+            get {
+                return ResourceManager.GetString("Action_Keep", resourceCulture);
             }
         }
         
@@ -357,6 +384,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string Term_No {
+            get {
+                return ResourceManager.GetString("Term_No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Offline.
         /// </summary>
         public static string Term_Offline {
@@ -384,11 +420,38 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Speed.
+        /// </summary>
+        public static string Term_Speed {
+            get {
+                return ResourceManager.GetString("Term_Speed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknown.
         /// </summary>
         public static string Term_Unknown {
             get {
                 return ResourceManager.GetString("Term_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning.
+        /// </summary>
+        public static string Term_Warning {
+            get {
+                return ResourceManager.GetString("Term_Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string Term_Yes {
+            get {
+                return ResourceManager.GetString("Term_Yes", resourceCulture);
             }
         }
     }

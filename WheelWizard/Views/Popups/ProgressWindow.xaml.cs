@@ -1,4 +1,5 @@
 using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Resources.Languages;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -39,12 +40,12 @@ public partial class ProgressWindow : PopupContent
         var remainingSeconds = (100 - _progress) / (_progress / elapsedSeconds);
         var remainingText = Humanizer.HumanizeSeconds((int)remainingSeconds);
         if (_progress <= 0)
-            remainingText = "unknown";
-        var bottomText = $"Estimated time remaining: { remainingText }";
+            remainingText = Common.Term_Unknown;
+        var bottomText = $"{Phrases.PopupText_EsimatedTimeRemaining} { remainingText }";
         if (_totalMb != null)
         {
             var downloadedMb = (_progress / 100.0) * (double)_totalMb;
-            bottomText = $"Speed: {downloadedMb / elapsedSeconds:F2} MB/s | {bottomText}";
+            bottomText = $"{Common.Term_Speed}: {downloadedMb / elapsedSeconds:F2} MB/s | {bottomText}";
         }
         
         LiveTextBlock.Text = bottomText;
@@ -70,7 +71,7 @@ public partial class ProgressWindow : PopupContent
     public ProgressWindow SetGoal(double megaBytes)
     {
         _totalMb = megaBytes;
-        GoalTextBlock.Text = $"downloading {megaBytes:F2} MB";
+        GoalTextBlock.Text = Humanizer.ReplaceDynamic(Phrases.PupupText_DownloadingMb, $"{megaBytes:F2}");
         return this;
     }
 

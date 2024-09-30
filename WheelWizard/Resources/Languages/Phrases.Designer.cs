@@ -232,6 +232,78 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Estimated time remaining:.
+        /// </summary>
+        public static string PopupText_EsimatedTimeRemaining {
+            get {
+                return ResourceManager.GetString("PopupText_EsimatedTimeRemaining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installing mods.
+        /// </summary>
+        public static string PopupText_InstallingMods {
+            get {
+                return ResourceManager.GetString("PopupText_InstallingMods", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installing {$1} mods.
+        /// </summary>
+        public static string PopupText_InstallingModsCount {
+            get {
+                return ResourceManager.GetString("PopupText_InstallingModsCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mods found.
+        /// </summary>
+        public static string PopupText_ModsFound {
+            get {
+                return ResourceManager.GetString("PopupText_ModsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are about to launch the game without any mods. Do you want to clear your my-stuff folder?.
+        /// </summary>
+        public static string PopupText_ModsFoundQuestion {
+            get {
+                return ResourceManager.GetString("PopupText_ModsFoundQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not find Dolphin Emulator, please set the path in settings.
+        /// </summary>
+        public static string PopupText_NotFindDolphin {
+            get {
+                return ResourceManager.GetString("PopupText_NotFindDolphin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not find the game, please set the path in settings.
+        /// </summary>
+        public static string PopupText_NotFindGame {
+            get {
+                return ResourceManager.GetString("PopupText_NotFindGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to downloading {$1} MB.
+        /// </summary>
+        public static string PupupText_DownloadingMb {
+            get {
+                return ResourceManager.GetString("PupupText_DownloadingMb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Talk to us!.
         /// </summary>
         public static string Sidebar_Link_Discord {

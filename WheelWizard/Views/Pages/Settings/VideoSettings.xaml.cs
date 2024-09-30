@@ -1,4 +1,5 @@
 ﻿using CT_MKWII_WPF.Models.Settings;
+using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services.Settings;
 using System;
 using System.Linq;
@@ -85,6 +86,6 @@ public partial class VideoSettings : UserControl
         if (SettingValues.GFXRenderers.TryGetValue(selectedDisplayName, out var actualValue))
             SettingsManager.GFX_BACKEND.Set(actualValue);
         else
-            MessageBox.Show($"Warning: Unknown renderer selected: {selectedDisplayName}");
+            MessageBox.Show($"{Common.Term_Warning}: Unknown renderer selected: {selectedDisplayName}");
     }
 }

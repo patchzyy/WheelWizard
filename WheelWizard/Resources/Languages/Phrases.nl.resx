@@ -111,4 +111,28 @@ Om aan een specifieke lobby, moet je deelnemen via een vriend, of hopen deel te 
     <data name="EmptyText_NoRooms" xml:space="preserve">
         <value>Het kan zijn dat je momenteel geen internet hebt. Of er is momenteel niemand aan het spelen.</value>
     </data>
+    <data name="PopupText_EsimatedTimeRemaining" xml:space="preserve">
+        <value>Geschatte resterende tijd:</value>
+    </data>
+    <data name="PupupText_DownloadingMb" xml:space="preserve">
+        <value>downloading {$1} MB</value>
+    </data>
+    <data name="PopupText_ModsFound" xml:space="preserve">
+        <value>Mods gevonden</value>
+    </data>
+    <data name="PopupText_ModsFoundQuestion" xml:space="preserve">
+        <value>Je staat op het punt om het spel te starten zonder mods. Wil je de my-stuff folder leegmaken?</value>
+    </data>
+    <data name="PopupText_InstallingMods" xml:space="preserve">
+        <value>Mods installeren</value>
+    </data>
+    <data name="PopupText_InstallingModsCount" xml:space="preserve">
+        <value>{$1} mods installeren</value>
+    </data>
+    <data name="PopupText_NotFindDolphin" xml:space="preserve">
+        <value>Kan Dolphin Emulator niet vinden, vul eerst de corectly bestand locatie in in de instellingen</value>
+    </data>
+    <data name="PopupText_NotFindGame" xml:space="preserve">
+        <value>Kan hetspel bestand niet vinden,  vul eerst de corectly bestand locatie in in de instellingen</value>
+    </data>
 </root>

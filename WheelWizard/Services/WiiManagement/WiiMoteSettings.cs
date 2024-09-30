@@ -1,4 +1,5 @@
 ﻿using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services.Settings;
 using System;
 using System.IO;
@@ -20,14 +21,17 @@ public static class WiiMoteSettings
         if (FileHelper.FileExists(wiimoteFile))
             return wiimoteFile;
         
+        // I rather not translate this message, makes it easier to check where a given error came from
         MessageBox.Show($"Could not find WiimoteNew file, tried looking in {wiimoteFile}", 
-                        "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        Common.Term_Error, MessageBoxButton.OK, MessageBoxImage.Error);
         return string.Empty;
     }
     
     private static void ModifyWiiMoteSource(int sourceValue)
     {
         var configPath = GetSavedWiiMoteLocation();
+        
+        // I rather not translate this message, makes it easier to check where a given error came from
         if (string.IsNullOrEmpty(configPath) || !File.Exists(configPath))
             throw new FileNotFoundException("WiiMote configuration file not found.");
 

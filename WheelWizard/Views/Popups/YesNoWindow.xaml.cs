@@ -1,3 +1,4 @@
+using CT_MKWII_WPF.Resources.Languages;
 using System.Windows;
 
 namespace CT_MKWII_WPF.Views.Popups;
@@ -10,8 +11,8 @@ public partial class YesNoWindow : PopupContent
     public YesNoWindow() : base(true, false, "Wheel Wizard")
     {
         InitializeComponent();
-        YesButton.Text = "Yes";
-        NoButton.Text = "No";
+        YesButton.Text = Common.Term_Yes;
+        NoButton.Text = Common.Term_No;
     }
     
     public YesNoWindow SetMainText(string mainText)

@@ -1,5 +1,6 @@
 ﻿using CT_MKWII_WPF.Helpers;
 using CT_MKWII_WPF.Models.Settings;
+using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Views.Popups;
 using System;
@@ -90,7 +91,7 @@ public partial class OtherSettings : UserControl
         var yesNoWindow = new YesNoWindow()
                           .SetMainText("Do you want to apply the new language settings?")
                           .SetExtraText("This will close the current window and open a new one with the new language settings.")
-                          .SetButtonText("Apply", "Cancel");
+                          .SetButtonText(Common.Action_Apply, Common.Action_Cancel);
         if (!yesNoWindow.AwaitAnswer())
         {
             var currentWhWzLanguage = (string)SettingsManager.WW_LANGUAGE.Get();

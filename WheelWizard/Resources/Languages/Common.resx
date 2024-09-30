@@ -129,4 +129,25 @@
     <data name="PageTitle_RoomDetails" xml:space="preserve">
         <value>Room Details</value>
     </data>
+    <data name="Action_Export" xml:space="preserve">
+        <value>Export</value>
+    </data>
+    <data name="Term_Warning" xml:space="preserve">
+        <value>Warning</value>
+    </data>
+    <data name="Action_Apply" xml:space="preserve">
+        <value>Apply</value>
+    </data>
+    <data name="Term_Yes" xml:space="preserve">
+        <value>Yes</value>
+    </data>
+    <data name="Term_No" xml:space="preserve">
+        <value>No</value>
+    </data>
+    <data name="Term_Speed" xml:space="preserve">
+        <value>Speed</value>
+    </data>
+    <data name="Action_Keep" xml:space="preserve">
+        <value>Keep</value>
+    </data>
 </root>

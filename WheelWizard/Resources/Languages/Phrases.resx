@@ -118,4 +118,28 @@ To join a specific room, you'll need to either join through a friend, or hope to
     <data name="EmptyText_NoRooms_Title" xml:space="preserve">
         <value>No rooms found</value>
     </data>
+    <data name="PopupText_EsimatedTimeRemaining" xml:space="preserve">
+        <value>Estimated time remaining:</value>
+    </data>
+    <data name="PupupText_DownloadingMb" xml:space="preserve">
+        <value>downloading {$1} MB</value>
+    </data>
+    <data name="PopupText_ModsFound" xml:space="preserve">
+        <value>Mods found</value>
+    </data>
+    <data name="PopupText_ModsFoundQuestion" xml:space="preserve">
+        <value>You are about to launch the game without any mods. Do you want to clear your my-stuff folder?</value>
+    </data>
+    <data name="PopupText_InstallingMods" xml:space="preserve">
+        <value>Installing mods</value>
+    </data>
+    <data name="PopupText_InstallingModsCount" xml:space="preserve">
+        <value>Installing {$1} mods</value>
+    </data>
+    <data name="PopupText_NotFindDolphin" xml:space="preserve">
+        <value>Could not find Dolphin Emulator, please set the path in settings</value>
+    </data>
+    <data name="PopupText_NotFindGame" xml:space="preserve">
+        <value>Could not find the game, please set the path in settings</value>
+    </data>
 </root>

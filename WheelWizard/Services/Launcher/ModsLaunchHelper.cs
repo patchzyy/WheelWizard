@@ -1,4 +1,6 @@
-﻿using CT_MKWII_WPF.Models.Settings;
+﻿using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Models.Settings;
+using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Views.Popups;
 using System;
@@ -25,9 +27,9 @@ public static class ModsLaunchHelper
             if (Directory.Exists(MyStuffFolderPath) && Directory.EnumerateFiles(MyStuffFolderPath).Any())
             {
                 var modsFoundQuestion = new YesNoWindow()
-                                        .SetButtonText("Delete", "Keep")
-                                        .SetMainText("Mods found")
-                                        .SetExtraText("you are about to launch the game without any mods. Do you want to clear your my-stuff folder?");
+                                        .SetButtonText(Common.Action_Delete, Common.Action_Keep)
+                                        .SetMainText(Phrases.PopupText_ModsFound)
+                                        .SetExtraText(Phrases.PopupText_ModsFoundQuestion);
                 if (modsFoundQuestion.AwaitAnswer())
                     Directory.Delete(MyStuffFolderPath, true);
                 
@@ -38,7 +40,8 @@ public static class ModsLaunchHelper
         Array.Reverse(mods);
         if (Directory.Exists(MyStuffFolderPath))
             Directory.Delete(MyStuffFolderPath, true);
-        var progressWindow = new ProgressWindow("Installing Mods").SetGoal($"Installing {mods.Length} mods");
+        var progressWindow = new ProgressWindow(Phrases.PopupText_InstallingMods)
+            .SetGoal(Humanizer.ReplaceDynamic(Phrases.PopupText_InstallingModsCount, mods.Length)!);
         progressWindow.Show();
         await Task.Run(() =>
         {
@@ -58,7 +61,7 @@ public static class ModsLaunchHelper
         var allFiles = Array.Empty<string>();
         //important to use Dispatcher otherwise program has thread issues or smth
         Application.Current.Dispatcher.Invoke(() =>
-            progressPopupWindow.SetExtraText($"Installing {mod.Title} ({allFiles.Length} files)")); 
+            progressPopupWindow.SetExtraText($"{Common.State_Installing} {mod.Title} ({allFiles.Length} files)")); 
         foreach (var extension in AcceptedModExtensions)
         {
             var files = Directory.GetFiles(modFolder, extension, SearchOption.AllDirectories);

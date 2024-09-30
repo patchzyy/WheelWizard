@@ -52,6 +52,7 @@ public static class DownloadHelper
         }
         catch (Exception x)
         {
+            // I rather not translate this message, makes it easier to check where a given error came from
             MessageBox.Show($"An error occurred while downloading the file: {x.Message}");
         }
     }
