@@ -78,9 +78,6 @@
     <data name="Category_Video" xml:space="preserve">
         <value>Video</value>
     </data>
-    <data name="Category_Other" xml:space="preserve">
-        <value>Other</value>
-    </data>
     <data name="Section_LocationPaths" xml:space="preserve">
         <value>Location Settings</value>
     </data>
@@ -107,15 +104,6 @@
     </data>
     <data name="InfoText_EndWithExe" xml:space="preserve">
         <value>Path must end with .exe</value>
-    </data>
-    <data name="Option_Edit" xml:space="preserve">
-        <value>Edit</value>
-    </data>
-    <data name="Option_Cancle" xml:space="preserve">
-        <value>Cancel</value>
-    </data>
-    <data name="Option_Save" xml:space="preserve">
-        <value>Save</value>
     </data>
     <data name="Value_Language_France" xml:space="preserve">
         <value>French</value>
@@ -167,5 +155,8 @@
     </data>
     <data name="Option_MakePrimary" xml:space="preserve">
         <value>Make Primary</value>
+    </data>
+    <data name="CompletePercentage" xml:space="preserve">
+        <value>100</value>
     </data>
 </root>

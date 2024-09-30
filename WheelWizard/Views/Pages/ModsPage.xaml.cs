@@ -290,7 +290,7 @@ namespace CT_MKWII_WPF.Views.Pages
             }
 
             _toggleAll = !_toggleAll;
-            EnableDisableButton.Text = !_toggleAll ? Common.Button_DisableAll : Common.Button_EnableAll;
+            EnableDisableButton.Text = !_toggleAll ? Common.DisableAll : Common.EnableAll;
         }
 
         private bool IsValidName(string name)

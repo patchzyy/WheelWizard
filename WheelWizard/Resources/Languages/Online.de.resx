@@ -21,7 +21,4 @@
     <data name="NoName" xml:space="preserve">
         <value>Kein name</value>
     </data>
-    <data name="Status_Online" xml:space="preserve">
-        <value>Online</value>
-    </data>
 </root>

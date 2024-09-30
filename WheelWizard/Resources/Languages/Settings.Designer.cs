@@ -60,20 +60,20 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Other.
-        /// </summary>
-        public static string Category_Other {
-            get {
-                return ResourceManager.GetString("Category_Other", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Video.
         /// </summary>
         public static string Category_Video {
             get {
                 return ResourceManager.GetString("Category_Video", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 100.
+        /// </summary>
+        public static string CompletePercentage {
+            get {
+                return ResourceManager.GetString("CompletePercentage", resourceCulture);
             }
         }
         
@@ -141,15 +141,6 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel.
-        /// </summary>
-        public static string Option_Cancle {
-            get {
-                return ResourceManager.GetString("Option_Cancle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Dolphin Emulator executable.
         /// </summary>
         public static string Option_DolphinEmulatorExe {
@@ -164,15 +155,6 @@ namespace CT_MKWII_WPF.Resources.Languages {
         public static string Option_DolphinUserPath {
             get {
                 return ResourceManager.GetString("Option_DolphinUserPath", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Edit.
-        /// </summary>
-        public static string Option_Edit {
-            get {
-                return ResourceManager.GetString("Option_Edit", resourceCulture);
             }
         }
         
@@ -245,15 +227,6 @@ namespace CT_MKWII_WPF.Resources.Languages {
         public static string Option_RRLanguage {
             get {
                 return ResourceManager.GetString("Option_RRLanguage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Save.
-        /// </summary>
-        public static string Option_Save {
-            get {
-                return ResourceManager.GetString("Option_Save", resourceCulture);
             }
         }
         

@@ -21,12 +21,6 @@
     <data name="NoName" xml:space="preserve">
         <value>Geen naam</value>
     </data>
-    <data name="Status_Online" xml:space="preserve">
-        <value>Online</value>
-    </data>
-    <data name="Status_Offline" xml:space="preserve">
-        <value>Offline</value>
-    </data>
     <data name="Stat_Wins" xml:space="preserve">
         <value>Gewonnen</value>
     </data>
@@ -37,7 +31,7 @@
         <value>Aantal races</value>
     </data>
     <data name="Button_ViewRoom" xml:space="preserve">
-        <value>Kijk lobby</value>
+        <value>Bekijk lobby</value>
     </data>
     <data name="NoLicense" xml:space="preserve">
         <value>Geen licentie</value>
@@ -68,9 +62,6 @@
     </data>
     <data name="ListTitle_Friends" xml:space="preserve">
         <value>Vrienden</value>
-    </data>
-    <data name="Stat_Name" xml:space="preserve">
-        <value>Naam</value>
     </data>
     <data name="Stat_FriendCode" xml:space="preserve">
         <value>Vriendcode</value>

@@ -18,4 +18,55 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="EmptyText_NoFriends" xml:space="preserve">
+        <value>ゲームでフレンドを追加することができます</value>
+    </data>
+    <data name="EmptyText_NoFriends_Title" xml:space="preserve">
+        <value>まだフレンドがいません！</value>
+    </data>
+    <data name="EmptyText_NoProfiles" xml:space="preserve">
+        <value>ここにプロフィールをのせるには　一度プレイする必要があります</value>
+    </data>
+    <data name="Hover_FriendsOnline_0" xml:space="preserve">
+        <value>現在　オンラインのフレンドがいません</value>
+    </data>
+    <data name="Hover_FriendsOnline_1" xml:space="preserve">
+        <value>現在　オンラインのフレンドが　1人います</value>
+    </data>
+    <data name="Hover_FriendsOnline_x" xml:space="preserve">
+        <value>現在　オンラインのフレンドが　{$1}人います</value>
+    </data>
+    <data name="Hover_PlayersOnline_0" xml:space="preserve">
+        <value>現在　オンラインのプレイヤーがいません</value>
+    </data>
+    <data name="Hover_PlayersOnline_1" xml:space="preserve">
+        <value>現在　オンラインのプレイヤーが　1人います</value>
+    </data>
+    <data name="Hover_PlayersOnline_x" xml:space="preserve">
+        <value>現在　オンラインのプレイヤーが　{$1}人います</value>
+    </data>
+    <data name="Hover_RoomsOnline_0" xml:space="preserve">
+        <value>現在　開いているルームがありません</value>
+    </data>
+    <data name="Hover_RoomsOnline_1" xml:space="preserve">
+        <value>現在　開いているルームが　1部屋あります</value>
+    </data>
+    <data name="Hover_RoomsOnline_x" xml:space="preserve">
+        <value>現在　開いているルームが　{$1}部屋あります</value>
+    </data>
+    <data name="Sidebar_Link_Discord" xml:space="preserve">
+        <value>お問い合わせ</value>
+    </data>
+    <data name="Sidebar_Link_Github" xml:space="preserve">
+        <value>ソースコード</value>
+    </data>
+    <data name="Sidebar_Link_Support" xml:space="preserve">
+        <value>サポート</value>
+    </data>
+    <data name="Text_MadeByString" xml:space="preserve">
+        <value>作成者: {$1} \nと {$2}</value>
+    </data>
+    <data name="Text_ThanksTranslators" xml:space="preserve">
+        <value>すべての翻訳者さんに感謝します:</value>
+    </data>
 </root>

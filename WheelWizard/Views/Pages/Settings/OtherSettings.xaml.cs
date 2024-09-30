@@ -1,4 +1,5 @@
-﻿using CT_MKWII_WPF.Models.Settings;
+﻿using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Models.Settings;
 using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Views.Popups;
 using System;
@@ -56,6 +57,14 @@ public partial class OtherSettings : UserControl
         var currentWhWzLanguage = (string)SettingsManager.WW_LANGUAGE.Get();
         var whWzLanguageDisplayName = SettingValues.WhWzLanguages[currentWhWzLanguage];
         WhWzLanguageDropdown.SelectedItem = whWzLanguageDisplayName();
+
+        if (CT_MKWII_WPF.Resources.Languages.Settings.CompletePercentage != "100")
+        {
+            TranslationsPercentageText.Visibility = Visibility.Visible;
+            var percentage = CT_MKWII_WPF.Resources.Languages.Settings.CompletePercentage;
+            var phrase = CT_MKWII_WPF.Resources.Languages.Phrases.Text_WhWzTranslationPercentage;
+            TranslationsPercentageText.Text = Humanizer.ReplaceDynamic(phrase, percentage);
+        }
     }
 
     private void ClickForceWiimote(object sender, RoutedEventArgs e) => SettingsManager.FORCE_WIIMOTE.Set(DisableForce.IsChecked == true);

@@ -36,67 +36,82 @@
     <data name="PageTitle_Friends" xml:space="preserve">
         <value>Friends</value>
     </data>
-    <data name="Sidebar_Category_General" xml:space="preserve">
+    <data name="General" xml:space="preserve">
         <value>General</value>
     </data>
-    <data name="Sidebar_Category_Other" xml:space="preserve">
+    <data name="Other" xml:space="preserve">
         <value>Other</value>
     </data>
-    <data name="Sidebar_Category_Online" xml:space="preserve">
+    <data name="Online" xml:space="preserve">
         <value>Online</value>
     </data>
-    <data name="State_Loading" xml:space="preserve">
+    <data name="Loading_State" xml:space="preserve">
         <value>Loading...</value>
     </data>
-    <data name="State_Installing" xml:space="preserve">
+    <data name="Installing_State" xml:space="preserve">
         <value>Installing...</value>
     </data>
-    <data name="State_Updating" xml:space="preserve">
+    <data name="Updating_State" xml:space="preserve">
         <value>Updating...</value>
     </data>
-    <data name="PlayButtonState_Play" xml:space="preserve">
+    <data name="Play" xml:space="preserve">
         <value>Play</value>
     </data>
-    <data name="PlayButtonState_PlayOffline" xml:space="preserve">
+    <data name="PlayOffline" xml:space="preserve">
         <value>Play Offline</value>
     </data>
-    <data name="PlayButtonState_Install" xml:space="preserve">
+    <data name="Install" xml:space="preserve">
         <value>Install</value>
     </data>
-    <data name="PlayButtonState_Update" xml:space="preserve">
+    <data name="Update" xml:space="preserve">
         <value>Update</value>
     </data>
-    <data name="PlayButtonState_ConfigNotFinished" xml:space="preserve">
+    <data name="ConfigNotFinished" xml:space="preserve">
         <value>Config Not Finished</value>
     </data>
-    <data name="PlayButtonState_NoServer" xml:space="preserve">
+    <data name="NoServer" xml:space="preserve">
         <value>No Server</value>
     </data>
     <data name="Unknown" xml:space="preserve">
         <value>Unknown</value>
     </data>
-    <data name="Stat_Enabled" xml:space="preserve">
+    <data name="Enabled" xml:space="preserve">
         <value>Enabled</value>
     </data>
-    <data name="Stat_Title" xml:space="preserve">
+    <data name="Title" xml:space="preserve">
         <value>Title</value>
     </data>
-    <data name="Button_Import" xml:space="preserve">
+    <data name="Import" xml:space="preserve">
         <value>Import</value>
     </data>
-    <data name="Button_EnableAll" xml:space="preserve">
+    <data name="EnableAll" xml:space="preserve">
         <value>Enable All</value>
     </data>
-    <data name="Button_DisableAll" xml:space="preserve">
+    <data name="DisableAll" xml:space="preserve">
         <value>Disable All</value>
     </data>
-    <data name="Button_Rename" xml:space="preserve">
+    <data name="Rename" xml:space="preserve">
         <value>Rename</value>
     </data>
-    <data name="Button_Delete" xml:space="preserve">
+    <data name="Delete" xml:space="preserve">
         <value>Delete</value>
     </data>
-    <data name="Button_OpenFolder" xml:space="preserve">
+    <data name="OpenFolder" xml:space="preserve">
         <value>Open Folder</value>
+    </data>
+    <data name="Offline" xml:space="preserve">
+        <value>Offline</value>
+    </data>
+    <data name="Name" xml:space="preserve">
+        <value>Name</value>
+    </data>
+    <data name="Edit" xml:space="preserve">
+        <value>Edit</value>
+    </data>
+    <data name="Cancel" xml:space="preserve">
+        <value>Cancel</value>
+    </data>
+    <data name="Save" xml:space="preserve">
+        <value>Save</value>
     </data>
 </root>

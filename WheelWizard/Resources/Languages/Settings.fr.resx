@@ -45,9 +45,6 @@
     <data name="Value_Language_TurkishOg" xml:space="preserve">
         <value>-</value>
     </data>
-    <data name="Category_Other" xml:space="preserve">
-        <value>Autre</value>
-    </data>
     <data name="Category_Video" xml:space="preserve">
         <value>Vidéo</value>
     </data>
@@ -72,17 +69,11 @@
     <data name="InfoText_Topbar_LocationWarning" xml:space="preserve">
         <value>Les paramètres sont désactivés, complétez d'abord les paramètres de localisation</value>
     </data>
-    <data name="Option_Cancle" xml:space="preserve">
-        <value>Annuler</value>
-    </data>
     <data name="Option_DolphinEmulatorExe" xml:space="preserve">
         <value>Éxécutable Dolphin Emulator</value>
     </data>
     <data name="Option_DolphinUserPath" xml:space="preserve">
         <value>Dossier d'utilisateur Dolphin</value>
-    </data>
-    <data name="Option_Edit" xml:space="preserve">
-        <value>Modifer</value>
     </data>
     <data name="Option_ForceDisableWiimote" xml:space="preserve">
         <value>Forcer la désactivation des Wiimotes</value>
@@ -104,9 +95,6 @@
     </data>
     <data name="Option_RRLanguage" xml:space="preserve">
         <value>Langue de Retro Rewind</value>
-    </data>
-    <data name="Option_Save" xml:space="preserve">
-        <value>Sauvegarder</value>
     </data>
     <data name="Option_ShowFPS" xml:space="preserve">
         <value>Montrer les FPS</value>
@@ -164,5 +152,8 @@
     </data>
     <data name="Value_Placeholder_EnterPath" xml:space="preserve">
         <value>Choisissez le chemin désiré ici...</value>
+    </data>
+    <data name="CompletePercentage" xml:space="preserve">
+        <value>69</value>
     </data>
 </root>

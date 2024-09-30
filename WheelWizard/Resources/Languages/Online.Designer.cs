@@ -204,15 +204,6 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name.
-        /// </summary>
-        public static string Stat_Name {
-            get {
-                return ResourceManager.GetString("Stat_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Players.
         /// </summary>
         public static string Stat_PlayerCount {
@@ -236,24 +227,6 @@ namespace CT_MKWII_WPF.Resources.Languages {
         public static string Stat_Wins {
             get {
                 return ResourceManager.GetString("Stat_Wins", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Offline.
-        /// </summary>
-        public static string Status_Offline {
-            get {
-                return ResourceManager.GetString("Status_Offline", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Online.
-        /// </summary>
-        public static string Status_Online {
-            get {
-                return ResourceManager.GetString("Status_Online", resourceCulture);
             }
         }
     }

@@ -211,5 +211,14 @@ namespace CT_MKWII_WPF.Resources.Languages {
                 return ResourceManager.GetString("Text_ThanksTranslators", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Translations for this language are {$1}% complete.
+        /// </summary>
+        public static string Text_WhWzTranslationPercentage {
+            get {
+                return ResourceManager.GetString("Text_WhWzTranslationPercentage", resourceCulture);
+            }
+        }
     }
 }

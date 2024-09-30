@@ -62,4 +62,7 @@
     <data name="EmptyText_NoFriends" xml:space="preserve">
         <value>Je kunt vrienden toevoegen door het spel op te starten</value>
     </data>
+    <data name="Text_WhWzTranslationPercentage" xml:space="preserve">
+        <value>Vertalingen voor deze taal zijn {$1} compleet</value>
+    </data>
 </root>

@@ -45,9 +45,6 @@
     <data name="Value_Language_TurkishOg" xml:space="preserve">
         <value>-</value>
     </data>
-    <data name="Category_Other" xml:space="preserve">
-        <value>Sonstiges</value>
-    </data>
     <data name="Category_Video" xml:space="preserve">
         <value>Video</value>
     </data>
@@ -72,17 +69,11 @@
     <data name="InfoText_Topbar_LocationWarning" xml:space="preserve">
         <value>Einstellungen sind deaktiviert, komplettiere erst den Dateispeicherort</value>
     </data>
-    <data name="Option_Cancle" xml:space="preserve">
-        <value>Beenden</value>
-    </data>
     <data name="Option_DolphinEmulatorExe" xml:space="preserve">
         <value>Dolphin Emulator executeable</value>
     </data>
     <data name="Option_DolphinUserPath" xml:space="preserve">
         <value>Dolphin Benutzer Ordner</value>
-    </data>
-    <data name="Option_Edit" xml:space="preserve">
-        <value>Bearbeiten</value>
     </data>
     <data name="Option_ForceDisableWiimote" xml:space="preserve">
         <value>Wiimote ausschalten erzwingen</value>
@@ -104,9 +95,6 @@
     </data>
     <data name="Option_RRLanguage" xml:space="preserve">
         <value>Retro Rewind Sprache</value>
-    </data>
-    <data name="Option_Save" xml:space="preserve">
-        <value>Speichern</value>
     </data>
     <data name="Option_ShowFPS" xml:space="preserve">
         <value>Zeige FPS an</value>
@@ -164,5 +152,8 @@
     </data>
     <data name="Value_Placeholder_EnterPath" xml:space="preserve">
         <value>Gewünschten Pfad hier eingeben...</value>
+    </data>
+    <data name="CompletePercentage" xml:space="preserve">
+        <value>69</value>
     </data>
 </root>

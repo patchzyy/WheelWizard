@@ -42,4 +42,118 @@
     <data name="Value_Language_FranceOg" xml:space="preserve">
         <value>Français</value>
     </data>
+    <data name="Category_Video" xml:space="preserve">
+        <value>ビデオ</value>
+    </data>
+    <data name="InfoText_30FPS" xml:space="preserve">
+        <value>ゲームが30FPSで動作するようになります(通常は60FPS)</value>
+    </data>
+    <data name="InfoText_EndWithExe" xml:space="preserve">
+        <value>パスの終わりを必ず .exe にします</value>
+    </data>
+    <data name="InfoText_ForceDisableWiimote" xml:space="preserve">
+        <value>ゲーム内ではWiimoteを無効にしますが、Wiiチャンネルでは有効にします</value>
+    </data>
+    <data name="InfoText_LaunchWithDolphin" xml:space="preserve">
+        <value>ゲームと一緒にDolphinのメインウィンドウを起動させます</value>
+    </data>
+    <data name="InfoText_Recommended" xml:space="preserve">
+        <value>スタッタリングやラグスパイクなどを軽減するために、特定のDolphinの設定を変更します</value>
+    </data>
+    <data name="InfoText_ResolutionScale" xml:space="preserve">
+        <value>デフォルト解像度は1xです</value>
+    </data>
+    <data name="InfoText_Topbar_LocationWarning" xml:space="preserve">
+        <value>設定が無効になっているのでロケーション設定を最初に完了させてください</value>
+    </data>
+    <data name="Option_DolphinEmulatorExe" xml:space="preserve">
+        <value>Dolphinエミュレーターを実行可能にする</value>
+    </data>
+    <data name="Option_DolphinUserPath" xml:space="preserve">
+        <value>Dophinのユーザーフォルダ</value>
+    </data>
+    <data name="Option_ForceDisableWiimote" xml:space="preserve">
+        <value>Wiimoteを強制的に無効にする</value>
+    </data>
+    <data name="Option_LaunchWithDolphin" xml:space="preserve">
+        <value>Doplhinウィンドウでゲームを起動する</value>
+    </data>
+    <data name="Option_MakePrimary" xml:space="preserve">
+        <value>このライセンスに切り替える</value>
+    </data>
+    <data name="Option_MarioKartGame" xml:space="preserve">
+        <value>マリオカートWiiのゲームファイル</value>
+    </data>
+    <data name="Option_OpenConfig" xml:space="preserve">
+        <value>コンフィグフォルダを開く</value>
+    </data>
+    <data name="Option_Recommended" xml:space="preserve">
+        <value>推奨設定</value>
+    </data>
+    <data name="Option_Renderer" xml:space="preserve">
+        <value>レンダラー</value>
+    </data>
+    <data name="Option_RRLanguage" xml:space="preserve">
+        <value>Retro Rewindの言語</value>
+    </data>
+    <data name="Option_ShowFPS" xml:space="preserve">
+        <value>FPSの表示</value>
+    </data>
+    <data name="Option_VSync" xml:space="preserve">
+        <value>VSync</value>
+    </data>
+    <data name="Option_WhWzLanguage" xml:space="preserve">
+        <value>Wheel Wizardの言語</value>
+    </data>
+    <data name="Option_WindowScale" xml:space="preserve">
+        <value>ウインドウサイズ</value>
+    </data>
+    <data name="Section_Language" xml:space="preserve">
+        <value>言語</value>
+    </data>
+    <data name="Section_LocationPaths" xml:space="preserve">
+        <value>ロケーション設定</value>
+    </data>
+    <data name="Section_Performance" xml:space="preserve">
+        <value>パフォーマンス設定</value>
+    </data>
+    <data name="Section_Renderer" xml:space="preserve">
+        <value>レンダラー設定</value>
+    </data>
+    <data name="Section_Resolution" xml:space="preserve">
+        <value>決定</value>
+    </data>
+    <data name="Section_WhWzAppearance" xml:space="preserve">
+        <value>Wheel Wizardの外観</value>
+    </data>
+    <data name="Section_Wii" xml:space="preserve">
+        <value>Wii設定</value>
+    </data>
+    <data name="Value_Language_Dutch" xml:space="preserve">
+        <value>オランダ語</value>
+    </data>
+    <data name="Value_Language_English" xml:space="preserve">
+        <value>英語</value>
+    </data>
+    <data name="Value_Language_France" xml:space="preserve">
+        <value>フランス語</value>
+    </data>
+    <data name="Value_Language_German" xml:space="preserve">
+        <value>ドイツ語</value>
+    </data>
+    <data name="Value_Language_Italian" xml:space="preserve">
+        <value>イタリア語</value>
+    </data>
+    <data name="Value_Language_Japanese" xml:space="preserve">
+        <value>日本語</value>
+    </data>
+    <data name="Value_Language_Spanish" xml:space="preserve">
+        <value>スペイン語</value>
+    </data>
+    <data name="Value_Language_Turkish" xml:space="preserve">
+        <value>トルコ語</value>
+    </data>
+    <data name="CompletePercentage" xml:space="preserve">
+        <value>90</value>
+    </data>
 </root>

@@ -45,4 +45,7 @@
     <data name="Value_Language_TurkishOg" xml:space="preserve">
         <value>-</value>
     </data>
+    <data name="CompletePercentage" xml:space="preserve">
+        <value>0</value>
+    </data>
 </root>

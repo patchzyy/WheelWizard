@@ -21,12 +21,6 @@
     <data name="NoName" xml:space="preserve">
         <value>No name</value>
     </data>
-    <data name="Status_Online" xml:space="preserve">
-        <value>Online</value>
-    </data>
-    <data name="Status_Offline" xml:space="preserve">
-        <value>Offline</value>
-    </data>
     <data name="Stat_Losses" xml:space="preserve">
         <value>Losses</value>
     </data>
@@ -71,9 +65,6 @@
     </data>
     <data name="Stat_FriendCode" xml:space="preserve">
         <value>Friend Code</value>
-    </data>
-    <data name="Stat_Name" xml:space="preserve">
-        <value>Name</value>
     </data>
     <data name="ListTitle_Players" xml:space="preserve">
         <value>Players</value>

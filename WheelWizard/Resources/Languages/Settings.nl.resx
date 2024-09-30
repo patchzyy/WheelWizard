@@ -66,9 +66,6 @@
     <data name="Category_Video" xml:space="preserve">
         <value>Beeld</value>
     </data>
-    <data name="Category_Other" xml:space="preserve">
-        <value>Overig</value>
-    </data>
     <data name="Section_LocationPaths" xml:space="preserve">
         <value>Locatie Instellingen</value>
     </data>
@@ -92,15 +89,6 @@
     </data>
     <data name="InfoText_EndWithExe" xml:space="preserve">
         <value>Locatie moet eindigen met .exe</value>
-    </data>
-    <data name="Option_Edit" xml:space="preserve">
-        <value>Bewerk</value>
-    </data>
-    <data name="Option_Cancle" xml:space="preserve">
-        <value>Annuleren</value>
-    </data>
-    <data name="Option_Save" xml:space="preserve">
-        <value>Opslaan</value>
     </data>
     <data name="Option_WindowScale" xml:space="preserve">
         <value>Venster grootte</value>
@@ -167,5 +155,8 @@
     </data>
     <data name="Option_MakePrimary" xml:space="preserve">
         <value>Zet als hoofd profiel</value>
+    </data>
+    <data name="CompletePercentage" xml:space="preserve">
+        <value>100</value>
     </data>
 </root>

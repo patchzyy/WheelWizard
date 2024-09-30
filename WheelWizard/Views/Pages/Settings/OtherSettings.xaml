@@ -55,6 +55,8 @@
                                          Label="{x:Static lang:Settings.Option_WhWzLanguage}"
                                          SelectionChanged="WhWzLanguageDropdown_OnSelectionChanged"
                                          x:Name="WhWzLanguageDropdown"/>
+                    <TextBlock Style="{StaticResource TinyText}" Visibility="Collapsed" x:Name="TranslationsPercentageText"/>
+                    
                     <Grid Margin="0,10,0,0">
                         <StackPanel>
                             <TextBlock Style="{StaticResource TinyText}" Text="{x:Static lang:Phrases.Text_ThanksTranslators}"/>

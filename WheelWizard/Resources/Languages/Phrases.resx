@@ -69,4 +69,7 @@
     <data name="EmptyText_NoFriends" xml:space="preserve">
         <value>You can add friends in-game</value>
     </data>
+    <data name="Text_WhWzTranslationPercentage" xml:space="preserve">
+        <value>Translations for this language are {$1}% complete</value>
+    </data>
 </root>

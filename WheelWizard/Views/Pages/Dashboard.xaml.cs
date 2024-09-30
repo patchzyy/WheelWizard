@@ -43,7 +43,7 @@ public partial class Dashboard
                 NavigateToPage(new Settings.SettingsPage());
                 break;
             case WheelWizardStatus.NoRR:
-                SetButtonState(Common.State_Installing, Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download,
+                SetButtonState(Common.Installing_State, Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download,
                     false);
                 DisableSidebarButtons();
                 await RetroRewindInstaller.InstallRetroRewind();
@@ -56,7 +56,7 @@ public partial class Dashboard
                 EnableSidebarButtons();
                 break;
             case WheelWizardStatus.OutOfDate:
-                SetButtonState(Common.State_Updating, Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Update, false);
+                SetButtonState(Common.Updating_State, Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Update, false);
                 DisableSidebarButtons();
                 await RetroRewindUpdater.UpdateRR();
                 EnableSidebarButtons();
@@ -71,26 +71,26 @@ public partial class Dashboard
 
     private async void UpdateActionButton()
     {
-        SetButtonState(Common.State_Loading, Button.ButtonsVariantType.Secondary, 
+        SetButtonState(Common.Loading_State, Button.ButtonsVariantType.Secondary, 
                        PackIconFontAwesomeKind.SpinnerSolid, false);
         _status = await StatusManager.GetCurrentStatus();
         switch (_status)
         {
             case WheelWizardStatus.NoServer:
-                SetButtonState(Common.PlayButtonState_NoServer, Button.ButtonsVariantType.Secondary, PackIconMaterialKind.ServerNetworkOff);
+                SetButtonState(Common.NoServer, Button.ButtonsVariantType.Secondary, PackIconMaterialKind.ServerNetworkOff);
                 break;
             case WheelWizardStatus.NoServerButInstalled:
-                SetButtonState(Common.PlayButtonState_PlayOffline, Button.ButtonsVariantType.Secondary, PackIconFontAwesomeKind.PlaySolid);
+                SetButtonState(Common.PlayOffline, Button.ButtonsVariantType.Secondary, PackIconFontAwesomeKind.PlaySolid);
                 break;
             case WheelWizardStatus.NoDolphin:
                 SetButtonState("Settings", Button.ButtonsVariantType.Secondary, PackIconFontAwesomeKind.FilePenSolid);
                 break;
             case WheelWizardStatus.ConfigNotFinished:
-                SetButtonState(Common.PlayButtonState_ConfigNotFinished, Button.ButtonsVariantType.Secondary,
+                SetButtonState(Common.ConfigNotFinished, Button.ButtonsVariantType.Secondary,
                     PackIconFontAwesomeKind.FilePenSolid);
                 break;
             case WheelWizardStatus.NoRR:
-                SetButtonState(Common.PlayButtonState_Install, Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download);
+                SetButtonState(Common.Install, Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download);
                 break;
             case WheelWizardStatus.NoRRActive:
                 //this is here for future use,
@@ -101,10 +101,10 @@ public partial class Dashboard
                 SetButtonState("Activate", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Power);
                 break;
             case WheelWizardStatus.OutOfDate:
-                SetButtonState(Common.PlayButtonState_Update, Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download);
+                SetButtonState(Common.Update, Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download);
                 break;
             case WheelWizardStatus.UpToDate:
-                SetButtonState(Common.PlayButtonState_Play, Button.ButtonsVariantType.Primary, PackIconFontAwesomeKind.PlaySolid);
+                SetButtonState(Common.Play, Button.ButtonsVariantType.Primary, PackIconFontAwesomeKind.PlaySolid);
                 break;
         }
         if (SettingsHelper.PathsSetupCorrectly()) 

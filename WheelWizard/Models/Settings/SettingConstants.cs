@@ -42,7 +42,8 @@ public static class SettingValues
         { "en", () => CreateLanguageString("English") },
         { "nl", () => CreateLanguageString("Dutch") },
         { "fr", () => CreateLanguageString("France") },
-        { "de", () => CreateLanguageString("German") }
+        { "de", () => CreateLanguageString("German") },
+        { "ja", () => CreateLanguageString("Japanese") }
     };
     
     private static string CreateLanguageString(string language)
@@ -53,5 +54,5 @@ public static class SettingValues
             return lang;
         
         return $"{lang} - ({langOg})";
-    } 
+    }
 }

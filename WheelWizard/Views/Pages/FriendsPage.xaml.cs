@@ -51,7 +51,7 @@ public partial class FriendsPage : Page, INotifyPropertyChanged, IRepeatedTaskLi
             var newList = gameDataLoader.GetCurrentFriends.OrderByDescending(f => f.IsOnline).ToList();
             
             // Update existing items and add new ones
-            for (int i = 0; i < newList.Count; i++)
+            for (var i = 0; i < newList.Count; i++)
             {
                 if (i < FriendList.Count)
                     FriendList[i] = newList[i];

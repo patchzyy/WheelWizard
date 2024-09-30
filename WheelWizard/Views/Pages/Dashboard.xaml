@@ -36,7 +36,7 @@
                                IsEnabled="False"
                                IconPack="FontAwesome"
                                IconKind="{x:Static icon:PackIconFontAwesomeKind.PlaySolid}"
-                               Text="{x:Static lang:Common.State_Loading}"
+                               Text="{x:Static lang:Common.Loading_State}"
                                FontSize="16"
                                Click="PlayButton_Click"
                                Width="210" Height="50"

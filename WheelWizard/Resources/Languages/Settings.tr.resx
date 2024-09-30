@@ -42,4 +42,7 @@
     <data name="Value_Language_FranceOg" xml:space="preserve">
         <value>Français</value>
     </data>
+    <data name="CompletePercentage" xml:space="preserve">
+        <value>0</value>
+    </data>
 </root>
