@@ -33,52 +33,52 @@
     <data name="PageTitle_Settings" xml:space="preserve">
         <value>Paremètres</value>
     </data>
-    <data name="General" xml:space="preserve">
+    <data name="Term_General" xml:space="preserve">
         <value>Général</value>
     </data>
-    <data name="Online" xml:space="preserve">
+    <data name="Term_Online" xml:space="preserve">
         <value>En Ligne </value>
     </data>
-    <data name="Other" xml:space="preserve">
+    <data name="Term_Other" xml:space="preserve">
         <value>Autre</value>
     </data>
     <data name="PageTitle_Home" xml:space="preserve">
         <value>Accueil</value>
     </data>
-    <data name="ConfigNotFinished" xml:space="preserve">
+    <data name="State_ConfigNotFinished" xml:space="preserve">
         <value>Configuration non terminée </value>
     </data>
-    <data name="Install" xml:space="preserve">
+    <data name="Action_Install" xml:space="preserve">
         <value>Installer </value>
     </data>
-    <data name="NoServer" xml:space="preserve">
+    <data name="State_NoServer" xml:space="preserve">
         <value>Aucun Seveurs </value>
     </data>
-    <data name="Play" xml:space="preserve">
+    <data name="Action_Play" xml:space="preserve">
         <value>Jouer</value>
     </data>
-    <data name="PlayOffline" xml:space="preserve">
+    <data name="Action_PlayOffline" xml:space="preserve">
         <value>Jouer en Hors-Ligne</value>
     </data>
-    <data name="Update" xml:space="preserve">
+    <data name="Action_Update" xml:space="preserve">
         <value>Mettre à Jour</value>
     </data>
-    <data name="Installing_State" xml:space="preserve">
+    <data name="State_Installing" xml:space="preserve">
         <value>Installation...</value>
     </data>
-    <data name="Loading_State" xml:space="preserve">
+    <data name="State_Loading" xml:space="preserve">
         <value>Chargement...</value>
     </data>
-    <data name="Updating_State" xml:space="preserve">
+    <data name="State_Updating" xml:space="preserve">
         <value>Mise à jour...</value>
     </data>
-    <data name="Edit" xml:space="preserve">
+    <data name="Action_Edit" xml:space="preserve">
         <value>Modifer</value>
     </data>
-    <data name="Cancel" xml:space="preserve">
+    <data name="Action_Cancel" xml:space="preserve">
         <value>Annuler</value>
     </data>
-    <data name="Save" xml:space="preserve">
+    <data name="Action_Save" xml:space="preserve">
         <value>Sauvegarder</value>
     </data>
 </root>

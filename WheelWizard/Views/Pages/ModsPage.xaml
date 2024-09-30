@@ -23,17 +23,17 @@
         <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="12"
                     Orientation="Horizontal" x:Name="TopBarButtons">
             <components:Button IconPack="FontAwesome" x:Name="EnableDisableButton"
-                               Text="{x:Static lang:Common.EnableAll}" Click="EnableClick" Margin="0,0,10,0">
+                               Text="{x:Static lang:Common.Action_EnableAll}" Click="EnableClick" Margin="0,0,10,0">
                 <components:Button.Style>
                     <Style TargetType="components:Button" BasedOn="{StaticResource DefaultButtonStyle}">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}"
-                                         Value="{x:Static lang:Common.EnableAll}">
+                                         Value="{x:Static lang:Common.Action_EnableAll}">
                                 <Setter Property="IconKind"
                                         Value="{x:Static icon:PackIconFontAwesomeKind.ToggleOnSolid}" />
                             </DataTrigger>
                             <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}"
-                                         Value="{x:Static lang:Common.DisableAll}">
+                                         Value="{x:Static lang:Common.Action_DisableAll}">
                                 <Setter Property="IconKind"
                                         Value="{x:Static icon:PackIconFontAwesomeKind.ToggleOffSolid}" />
                             </DataTrigger>
@@ -41,7 +41,7 @@
                     </Style>
                 </components:Button.Style>
             </components:Button>
-            <components:Button Variant="Primary" Text="{x:Static lang:Common.Import}"
+            <components:Button Variant="Primary" Text="{x:Static lang:Common.Action_Import}"
                                IconPack="Material"
                                IconKind="{x:Static icon:PackIconMaterialKind.Import}"
                                Click="ImportMod_Click" />
@@ -51,7 +51,7 @@
             <components:EmptyPageInfo HorizontalAlignment="Center" Title="{x:Static lang:Phrases.EmptyText_NoMods_Title}"
                                       Body="{x:Static lang:Phrases.EmptyText_NoMods}" />
             <components:Button Variant="Primary" Margin="12"
-                               IconPack="Material" Text="{x:Static lang:Common.Import}"
+                               IconPack="Material" Text="{x:Static lang:Common.Action_Import}"
                                IconKind="{x:Static icon:PackIconMaterialKind.Import}"
                                Click="ImportMod_Click" HorizontalAlignment="Center" />
         </StackPanel>
@@ -65,16 +65,16 @@
                                           ItemsSource="{Binding Mods}">
                 <components:DraggableListView.ItemContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="{x:Static lang:Common.Rename}" Click="RenameMod_Click" />
-                        <MenuItem Header="{x:Static lang:Common.Delete}" Click="DeleteMod_Click" />
+                        <MenuItem Header="{x:Static lang:Common.Action_Rename}" Click="RenameMod_Click" />
+                        <MenuItem Header="{x:Static lang:Common.Action_Delete}" Click="DeleteMod_Click" />
                         <Separator Style="{StaticResource ContextMenuLine}" />
-                        <MenuItem Header="{x:Static lang:Common.OpenFolder}" Click="OpenFolder_Click" />
+                        <MenuItem Header="{x:Static lang:Common.Action_OpenFolder}" Click="OpenFolder_Click" />
                     </ContextMenu>
                 </components:DraggableListView.ItemContextMenu>
 
                 <ListView.View>
                     <GridView AllowsColumnReorder="False">
-                        <GridViewColumn Header="{x:Static lang:Common.Enabled}" Width="75">
+                        <GridViewColumn Header="{x:Static lang:Common.Attribute_Enabled}" Width="75">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <CheckBox IsChecked="{Binding IsEnabled, Mode=TwoWay}"
@@ -84,7 +84,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="{x:Static lang:Common.Name}" Width="100000" DisplayMemberBinding="{Binding Title}" />
+                        <GridViewColumn Header="{x:Static lang:Common.Attribute_Name}" Width="100000" DisplayMemberBinding="{Binding Title}" />
                     </GridView>
                 </ListView.View>
             </components:DraggableListView>
@@ -104,6 +104,6 @@
                    Height="20"
                    VerticalAlignment="Bottom"
                    Margin="10,0,0,30"
-                   Text="{x:Static lang:Common.Loading_State}" Foreground="{StaticResource TitleTextColor}" />
+                   Text="{x:Static lang:Common.State_Loading}" Foreground="{StaticResource TitleTextColor}" />
     </Grid>
 </Page>

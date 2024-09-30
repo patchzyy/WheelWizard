@@ -118,7 +118,7 @@ namespace CT_MKWII_WPF.Views.Components
             Mii = user?.MiiData?.Mii;
             IsOnline = user!.IsOnline;
             ViewRoomButton.Visibility = IsOnline ? Visibility.Visible : Visibility.Hidden;
-            OnlineText = IsOnline ? Common.Online : Common.Offline;
+            OnlineText = IsOnline ? Common.Term_Online : Common.Term_Offline;
             RegionName = user.RegionName;
         }
 
@@ -137,7 +137,7 @@ namespace CT_MKWII_WPF.Views.Components
             TopExtraStat = $"{Online.Stat_Losses}: {friend.Losses}";
             Mii = friend?.MiiData?.Mii;
             IsOnline = friend!.IsOnline;
-            OnlineText = IsOnline ? Common.Online : Common.Offline;
+            OnlineText = IsOnline ? Common.Term_Online : Common.Term_Offline;
             ViewRoomButton.Visibility = IsOnline ? Visibility.Visible : Visibility.Hidden;
             RegionName = friend.CountryName;
         }

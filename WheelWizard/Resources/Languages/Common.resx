@@ -36,85 +36,85 @@
     <data name="PageTitle_Friends" xml:space="preserve">
         <value>Friends</value>
     </data>
-    <data name="General" xml:space="preserve">
+    <data name="Term_General" xml:space="preserve">
         <value>General</value>
     </data>
-    <data name="Other" xml:space="preserve">
+    <data name="Term_Other" xml:space="preserve">
         <value>Other</value>
     </data>
-    <data name="Online" xml:space="preserve">
+    <data name="Term_Online" xml:space="preserve">
         <value>Online</value>
     </data>
-    <data name="Loading_State" xml:space="preserve">
+    <data name="State_Loading" xml:space="preserve">
         <value>Loading...</value>
     </data>
-    <data name="Installing_State" xml:space="preserve">
+    <data name="State_Installing" xml:space="preserve">
         <value>Installing...</value>
     </data>
-    <data name="Updating_State" xml:space="preserve">
+    <data name="State_Updating" xml:space="preserve">
         <value>Updating...</value>
     </data>
-    <data name="Play" xml:space="preserve">
+    <data name="Action_Play" xml:space="preserve">
         <value>Play</value>
     </data>
-    <data name="PlayOffline" xml:space="preserve">
+    <data name="Action_PlayOffline" xml:space="preserve">
         <value>Play Offline</value>
     </data>
-    <data name="Install" xml:space="preserve">
+    <data name="Action_Install" xml:space="preserve">
         <value>Install</value>
     </data>
-    <data name="Update" xml:space="preserve">
+    <data name="Action_Update" xml:space="preserve">
         <value>Update</value>
     </data>
-    <data name="ConfigNotFinished" xml:space="preserve">
+    <data name="State_ConfigNotFinished" xml:space="preserve">
         <value>Config Not Finished</value>
     </data>
-    <data name="NoServer" xml:space="preserve">
+    <data name="State_NoServer" xml:space="preserve">
         <value>No Server</value>
     </data>
-    <data name="Unknown" xml:space="preserve">
+    <data name="Term_Unknown" xml:space="preserve">
         <value>Unknown</value>
     </data>
-    <data name="Enabled" xml:space="preserve">
+    <data name="Attribute_Enabled" xml:space="preserve">
         <value>Enabled</value>
     </data>
-    <data name="Title" xml:space="preserve">
+    <data name="Attribute_Title" xml:space="preserve">
         <value>Title</value>
     </data>
-    <data name="Import" xml:space="preserve">
+    <data name="Action_Import" xml:space="preserve">
         <value>Import</value>
     </data>
-    <data name="EnableAll" xml:space="preserve">
+    <data name="Action_EnableAll" xml:space="preserve">
         <value>Enable All</value>
     </data>
-    <data name="DisableAll" xml:space="preserve">
+    <data name="Action_DisableAll" xml:space="preserve">
         <value>Disable All</value>
     </data>
-    <data name="Rename" xml:space="preserve">
+    <data name="Action_Rename" xml:space="preserve">
         <value>Rename</value>
     </data>
-    <data name="Delete" xml:space="preserve">
+    <data name="Action_Delete" xml:space="preserve">
         <value>Delete</value>
     </data>
-    <data name="OpenFolder" xml:space="preserve">
+    <data name="Action_OpenFolder" xml:space="preserve">
         <value>Open Folder</value>
     </data>
-    <data name="Offline" xml:space="preserve">
+    <data name="Term_Offline" xml:space="preserve">
         <value>Offline</value>
     </data>
-    <data name="Name" xml:space="preserve">
+    <data name="Attribute_Name" xml:space="preserve">
         <value>Name</value>
     </data>
-    <data name="Edit" xml:space="preserve">
+    <data name="Action_Edit" xml:space="preserve">
         <value>Edit</value>
     </data>
-    <data name="Cancel" xml:space="preserve">
+    <data name="Action_Cancel" xml:space="preserve">
         <value>Cancel</value>
     </data>
-    <data name="Save" xml:space="preserve">
+    <data name="Action_Save" xml:space="preserve">
         <value>Save</value>
     </data>
-    <data name="Error" xml:space="preserve">
+    <data name="Term_Error" xml:space="preserve">
         <value>Error</value>
     </data>
 </root>

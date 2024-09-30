@@ -184,7 +184,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
 
             <!--Side bar -->
 
-            <TextBlock Grid.Row="2" Text="{x:Static lang:Common.General}" Style="{StaticResource SidebarSectionText}"
+            <TextBlock Grid.Row="2" Text="{x:Static lang:Common.Term_General}" Style="{StaticResource SidebarSectionText}"
                        VerticalAlignment="Bottom" />
             <Border Grid.Column="0" Grid.Row="3" VerticalAlignment="Top">
                 <StackPanel x:Name="SidePanelButtons">
@@ -198,7 +198,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                                                    IconPack="FontAwesome" Text="{x:Static lang:Common.PageTitle_Mods}"
                                                    PageType="{x:Type local:ModsPage}" />
                     
-                    <TextBlock Text="{x:Static lang:Common.Online}" Style="{StaticResource SidebarSectionText}" />
+                    <TextBlock Text="{x:Static lang:Common.Term_Online}" Style="{StaticResource SidebarSectionText}" />
                     <components:SidebarRadioButton
                         IconKind="{x:Static icon:PackIconFontAwesomeKind.UsersRectangleSolid}"
                         IconPack="FontAwesome" Text="{x:Static lang:Common.PageTitle_Rooms}" x:Name="RoomsButton"
@@ -209,7 +209,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                         PageType="{x:Type local:FriendsPage}"
                         BoxText="0/0"/>
                     
-                    <TextBlock Text="{x:Static lang:Common.Other}" Style="{StaticResource SidebarSectionText}" />
+                    <TextBlock Text="{x:Static lang:Common.Term_Other}" Style="{StaticResource SidebarSectionText}" />
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.WrenchSolid}"
                                                    IconPack="FontAwesome" Text="{x:Static lang:Common.PageTitle_Settings}" x:Name="SettingsButton"
                                                    PageType="{x:Type settings:SettingsPage}" />

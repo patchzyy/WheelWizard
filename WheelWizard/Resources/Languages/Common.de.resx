@@ -18,22 +18,22 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="ConfigNotFinished" xml:space="preserve">
+    <data name="State_ConfigNotFinished" xml:space="preserve">
         <value>Installation nicht abgeschlossen</value>
     </data>
-    <data name="Install" xml:space="preserve">
+    <data name="Action_Install" xml:space="preserve">
         <value>Installieren</value>
     </data>
-    <data name="NoServer" xml:space="preserve">
+    <data name="State_NoServer" xml:space="preserve">
         <value>Kein Server</value>
     </data>
-    <data name="Play" xml:space="preserve">
+    <data name="Action_Play" xml:space="preserve">
         <value>Spielen</value>
     </data>
-    <data name="PlayOffline" xml:space="preserve">
+    <data name="Action_PlayOffline" xml:space="preserve">
         <value>Spiele Offline</value>
     </data>
-    <data name="Update" xml:space="preserve">
+    <data name="Action_Update" xml:space="preserve">
         <value>Aktualisierung</value>
     </data>
     <data name="PageTitle_Friends" xml:space="preserve">
@@ -54,31 +54,31 @@
     <data name="PageTitle_Settings" xml:space="preserve">
         <value>Einstellungen</value>
     </data>
-    <data name="General" xml:space="preserve">
+    <data name="Term_General" xml:space="preserve">
         <value>Allgemein</value>
     </data>
-    <data name="Online" xml:space="preserve">
+    <data name="Term_Online" xml:space="preserve">
         <value>Online</value>
     </data>
-    <data name="Other" xml:space="preserve">
+    <data name="Term_Other" xml:space="preserve">
         <value>Sonstiges</value>
     </data>
-    <data name="Installing_State" xml:space="preserve">
+    <data name="State_Installing" xml:space="preserve">
         <value>Installiert...</value>
     </data>
-    <data name="Loading_State" xml:space="preserve">
+    <data name="State_Loading" xml:space="preserve">
         <value>Lädt...</value>
     </data>
-    <data name="Updating_State" xml:space="preserve">
+    <data name="State_Updating" xml:space="preserve">
         <value>Aktualisieren...</value>
     </data>
-    <data name="Edit" xml:space="preserve">
+    <data name="Action_Edit" xml:space="preserve">
         <value>Bearbeiten</value>
     </data>
-    <data name="Cancel" xml:space="preserve">
+    <data name="Action_Cancel" xml:space="preserve">
         <value>Beenden</value>
     </data>
-    <data name="Save" xml:space="preserve">
+    <data name="Action_Save" xml:space="preserve">
         <value>Speichern</value>
     </data>
 </root>

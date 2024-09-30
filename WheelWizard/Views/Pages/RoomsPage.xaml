@@ -136,7 +136,7 @@ To join a specific room, you'll need to either join through a friend, or hope to
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="{x:Static lang:Common.Name}" DisplayMemberBinding="{Binding Name}" Width="105"
+                        <GridViewColumn Header="{x:Static lang:Common.Attribute_Name}" DisplayMemberBinding="{Binding Name}" Width="105"
                                         components:StaticListView.IsSortable="True" />
                         <GridViewColumn Header="{x:Static lang:Online.Stat_FriendCode}" DisplayMemberBinding="{Binding Fc}" Width="135"
                                         components:StaticListView.IsSortable="True" />

@@ -62,171 +62,144 @@ namespace CT_MKWII_WPF.Resources.Languages {
         /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
-        public static string Cancel {
+        public static string Action_Cancel {
             get {
-                return ResourceManager.GetString("Cancel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Config Not Finished.
-        /// </summary>
-        public static string ConfigNotFinished {
-            get {
-                return ResourceManager.GetString("ConfigNotFinished", resourceCulture);
+                return ResourceManager.GetString("Action_Cancel", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
-        public static string Delete {
+        public static string Action_Delete {
             get {
-                return ResourceManager.GetString("Delete", resourceCulture);
+                return ResourceManager.GetString("Action_Delete", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Disable All.
         /// </summary>
-        public static string DisableAll {
+        public static string Action_DisableAll {
             get {
-                return ResourceManager.GetString("DisableAll", resourceCulture);
+                return ResourceManager.GetString("Action_DisableAll", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
-        public static string Edit {
+        public static string Action_Edit {
             get {
-                return ResourceManager.GetString("Edit", resourceCulture);
+                return ResourceManager.GetString("Action_Edit", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Enable All.
         /// </summary>
-        public static string EnableAll {
+        public static string Action_EnableAll {
             get {
-                return ResourceManager.GetString("EnableAll", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enabled.
-        /// </summary>
-        public static string Enabled {
-            get {
-                return ResourceManager.GetString("Enabled", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Error.
-        /// </summary>
-        public static string Error {
-            get {
-                return ResourceManager.GetString("Error", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to General.
-        /// </summary>
-        public static string General {
-            get {
-                return ResourceManager.GetString("General", resourceCulture);
+                return ResourceManager.GetString("Action_EnableAll", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Import.
         /// </summary>
-        public static string Import {
+        public static string Action_Import {
             get {
-                return ResourceManager.GetString("Import", resourceCulture);
+                return ResourceManager.GetString("Action_Import", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Install.
         /// </summary>
-        public static string Install {
+        public static string Action_Install {
             get {
-                return ResourceManager.GetString("Install", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Installing....
-        /// </summary>
-        public static string Installing_State {
-            get {
-                return ResourceManager.GetString("Installing_State", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Loading....
-        /// </summary>
-        public static string Loading_State {
-            get {
-                return ResourceManager.GetString("Loading_State", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Name.
-        /// </summary>
-        public static string Name {
-            get {
-                return ResourceManager.GetString("Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No Server.
-        /// </summary>
-        public static string NoServer {
-            get {
-                return ResourceManager.GetString("NoServer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Offline.
-        /// </summary>
-        public static string Offline {
-            get {
-                return ResourceManager.GetString("Offline", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Online.
-        /// </summary>
-        public static string Online {
-            get {
-                return ResourceManager.GetString("Online", resourceCulture);
+                return ResourceManager.GetString("Action_Install", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Open Folder.
         /// </summary>
-        public static string OpenFolder {
+        public static string Action_OpenFolder {
             get {
-                return ResourceManager.GetString("OpenFolder", resourceCulture);
+                return ResourceManager.GetString("Action_OpenFolder", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Other.
+        ///   Looks up a localized string similar to Play.
         /// </summary>
-        public static string Other {
+        public static string Action_Play {
             get {
-                return ResourceManager.GetString("Other", resourceCulture);
+                return ResourceManager.GetString("Action_Play", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Play Offline.
+        /// </summary>
+        public static string Action_PlayOffline {
+            get {
+                return ResourceManager.GetString("Action_PlayOffline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename.
+        /// </summary>
+        public static string Action_Rename {
+            get {
+                return ResourceManager.GetString("Action_Rename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string Action_Save {
+            get {
+                return ResourceManager.GetString("Action_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        public static string Action_Update {
+            get {
+                return ResourceManager.GetString("Action_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabled.
+        /// </summary>
+        public static string Attribute_Enabled {
+            get {
+                return ResourceManager.GetString("Attribute_Enabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Attribute_Name {
+            get {
+                return ResourceManager.GetString("Attribute_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string Attribute_Title {
+            get {
+                return ResourceManager.GetString("Attribute_Title", resourceCulture);
             }
         }
         
@@ -285,74 +258,101 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Play.
+        ///   Looks up a localized string similar to Config Not Finished.
         /// </summary>
-        public static string Play {
+        public static string State_ConfigNotFinished {
             get {
-                return ResourceManager.GetString("Play", resourceCulture);
+                return ResourceManager.GetString("State_ConfigNotFinished", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Play Offline.
+        ///   Looks up a localized string similar to Installing....
         /// </summary>
-        public static string PlayOffline {
+        public static string State_Installing {
             get {
-                return ResourceManager.GetString("PlayOffline", resourceCulture);
+                return ResourceManager.GetString("State_Installing", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rename.
+        ///   Looks up a localized string similar to Loading....
         /// </summary>
-        public static string Rename {
+        public static string State_Loading {
             get {
-                return ResourceManager.GetString("Rename", resourceCulture);
+                return ResourceManager.GetString("State_Loading", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save.
+        ///   Looks up a localized string similar to No Server.
         /// </summary>
-        public static string Save {
+        public static string State_NoServer {
             get {
-                return ResourceManager.GetString("Save", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Title.
-        /// </summary>
-        public static string Title {
-            get {
-                return ResourceManager.GetString("Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unknown.
-        /// </summary>
-        public static string Unknown {
-            get {
-                return ResourceManager.GetString("Unknown", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Update.
-        /// </summary>
-        public static string Update {
-            get {
-                return ResourceManager.GetString("Update", resourceCulture);
+                return ResourceManager.GetString("State_NoServer", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Updating....
         /// </summary>
-        public static string Updating_State {
+        public static string State_Updating {
             get {
-                return ResourceManager.GetString("Updating_State", resourceCulture);
+                return ResourceManager.GetString("State_Updating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string Term_Error {
+            get {
+                return ResourceManager.GetString("Term_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General.
+        /// </summary>
+        public static string Term_General {
+            get {
+                return ResourceManager.GetString("Term_General", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Offline.
+        /// </summary>
+        public static string Term_Offline {
+            get {
+                return ResourceManager.GetString("Term_Offline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Online.
+        /// </summary>
+        public static string Term_Online {
+            get {
+                return ResourceManager.GetString("Term_Online", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other.
+        /// </summary>
+        public static string Term_Other {
+            get {
+                return ResourceManager.GetString("Term_Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown.
+        /// </summary>
+        public static string Term_Unknown {
+            get {
+                return ResourceManager.GetString("Term_Unknown", resourceCulture);
             }
         }
     }
