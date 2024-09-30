@@ -60,4 +60,7 @@
     <data name="Text_ThanksTranslators" xml:space="preserve">
         <value>Merci à tous les traducteurs:</value>
     </data>
+    <data name="Placeholder_EnterPath" xml:space="preserve">
+        <value>Choisissez le chemin désiré ici...</value>
+    </data>
 </root>

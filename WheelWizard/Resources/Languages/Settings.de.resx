@@ -150,10 +150,10 @@
     <data name="Value_Language_Turkish" xml:space="preserve">
         <value>Türkisch</value>
     </data>
-    <data name="Value_Placeholder_EnterPath" xml:space="preserve">
-        <value>Gewünschten Pfad hier eingeben...</value>
-    </data>
     <data name="CompletePercentage" xml:space="preserve">
         <value>69</value>
+    </data>
+    <data name="Option_MakePrimary" xml:space="preserve">
+        <value>Hauptprofil</value>
     </data>
 </root>

@@ -60,4 +60,16 @@
     <data name="Text_ThanksTranslators" xml:space="preserve">
         <value>Vielen Dank an alle Übersetzer:</value>
     </data>
+    <data name="EmptyText_NoFriends" xml:space="preserve">
+        <value>Du kannst Freunde im Spiel hinzufügen</value>
+    </data>
+    <data name="EmptyText_NoFriends_Title" xml:space="preserve">
+        <value>Noch keine Freunde!</value>
+    </data>
+    <data name="EmptyText_NoProfiles" xml:space="preserve">
+        <value>Du musst das Spiel mindestens ein Mal gespielt haben, um deine Profile hier aufgelistet zu sehen</value>
+    </data>
+    <data name="Placeholder_EnterPath" xml:space="preserve">
+        <value>Gewünschten Pfad hier eingeben...</value>
+    </data>
 </root>

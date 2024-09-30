@@ -56,7 +56,7 @@
                                        SelectionChanged="FriendListView_SelectionChanged">
                 <components:StaticListView.ItemContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="{x:Static lang:Online.ContextMenu_CopyFriendCode}" 
+                        <MenuItem Header="{x:Static lang:Common.Action_CopyFriendCode}" 
                                   Click="CopyFriendCode_OnClick" />
                     </ContextMenu>
                 </components:StaticListView.ItemContextMenu>

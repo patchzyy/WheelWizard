@@ -69,15 +69,6 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copy friend code.
-        /// </summary>
-        public static string ContextMenu_CopyFriendCode {
-            get {
-                return ResourceManager.GetString("ContextMenu_CopyFriendCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Friends.
         /// </summary>
         public static string ListTitle_Friends {
@@ -92,6 +83,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         public static string ListTitle_Players {
             get {
                 return ResourceManager.GetString("ListTitle_Players", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rooms.
+        /// </summary>
+        public static string ListTitle_Rooms {
+            get {
+                return ResourceManager.GetString("ListTitle_Rooms", resourceCulture);
             }
         }
         
@@ -218,6 +218,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         public static string Stat_RacesPlayed {
             get {
                 return ResourceManager.GetString("Stat_RacesPlayed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Room ID.
+        /// </summary>
+        public static string Stat_RoomID {
+            get {
+                return ResourceManager.GetString("Stat_RoomID", resourceCulture);
             }
         }
         

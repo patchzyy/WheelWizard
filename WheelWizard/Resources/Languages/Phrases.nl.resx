@@ -71,4 +71,44 @@
     <data name="EmptyText_NoMods" xml:space="preserve">
         <value>Mods kunnen de  game aanpassen. Start met importeren van je eerste mod door op de Import knop te drukken.</value>
     </data>
+    <data name="Time_Days_1" xml:space="preserve">
+        <value>1 dag</value>
+    </data>
+    <data name="Time_Days_x" xml:space="preserve">
+        <value>{$1} dagen</value>
+    </data>
+    <data name="Time_Hours_1" xml:space="preserve">
+        <value>1 uur</value>
+    </data>
+    <data name="Time_Hours_x" xml:space="preserve">
+        <value>{$1} uur</value>
+    </data>
+    <data name="Time_Minutes_1" xml:space="preserve">
+        <value>1 minuut</value>
+    </data>
+    <data name="Time_Minutes_x" xml:space="preserve">
+        <value>{$1} minuten</value>
+    </data>
+    <data name="Time_Seconds_1" xml:space="preserve">
+        <value>1 seconde</value>
+    </data>
+    <data name="Time_Seconds_x" xml:space="preserve">
+        <value>{$1} secondes</value>
+    </data>
+    <data name="Placeholder_SearchForPlayers" xml:space="preserve">
+        <value>Zoek voor spelers...</value>
+    </data>
+    <data name="Placeholder_EnterPath" xml:space="preserve">
+        <value>Vul hier uw bestands locatie in</value>
+    </data>
+    <data name="Hover_RoomsPageDisclaimer" xml:space="preserve">
+        <value>Let op dat deze pagina geen functionaliteit biedt om direct deel te nemen aan een lobbies. 
+Om aan een specifieke lobby, moet je deelnemen via een vriend, of hopen deel te nemen door deel te nemen aan de online servers.</value>
+    </data>
+    <data name="EmptyText_NoRooms_Title" xml:space="preserve">
+        <value>Momenteel geen lobbies</value>
+    </data>
+    <data name="EmptyText_NoRooms" xml:space="preserve">
+        <value>Het kan zijn dat je momenteel geen internet hebt. Of er is momenteel niemand aan het spelen.</value>
+    </data>
 </root>

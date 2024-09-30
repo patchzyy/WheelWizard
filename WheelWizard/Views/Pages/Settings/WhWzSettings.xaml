@@ -44,7 +44,7 @@
 
                                 <components:InputField Grid.Row="1" Grid.Column="0"
                                                        Height="40"
-                                                       Placeholder="{x:Static lang:Settings.Value_Placeholder_EnterPath}"
+                                                       Placeholder="{x:Static lang:Phrases.Placeholder_EnterPath}"
                                                        HorizontalAlignment="Stretch" Variant="Dark"
                                                        x:Name="DolphinExeInput" />
                                 <components:Button Grid.Row="1" Grid.Column="1"
@@ -67,7 +67,7 @@
                                                            TipText="Path can end with: .wbfs/.iso/.rvz" 
                                                            Margin="0,6,0,0"/>
                                 <components:InputField Grid.Row="1" Grid.Column="0" Height="40"
-                                                       Placeholder="{x:Static lang:Settings.Value_Placeholder_EnterPath}"
+                                                       Placeholder="{x:Static lang:Phrases.Placeholder_EnterPath}"
                                                        HorizontalAlignment="Stretch" Variant="Dark"
                                                        x:Name="MarioKartInput" />
                                 <components:Button Grid.Row="1" Grid.Column="1"
@@ -92,7 +92,7 @@
                                 <components:InputField Grid.Row="1" Grid.Column="0"
                                                        HorizontalAlignment="Stretch"
                                                        Variant="Dark" Height="40" 
-                                                       Placeholder="{x:Static lang:Settings.Value_Placeholder_EnterPath}"
+                                                       Placeholder="{x:Static lang:Phrases.Placeholder_EnterPath}"
                                                        x:Name="DolphinUserPathInput" />
                                 <components:Button Grid.Row="1" Grid.Column="1"
                                                    Text="" FontSize="16" Height="40"

@@ -114,4 +114,7 @@
     <data name="Action_Save" xml:space="preserve">
         <value>セーブ</value>
     </data>
+    <data name="Action_CopyFriendCode" xml:space="preserve">
+        <value>フレンドコードをコピー</value>
+    </data>
 </root>

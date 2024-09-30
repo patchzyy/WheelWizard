@@ -18,14 +18,44 @@ public static class Humanizer
     
     public static string HumanizeTimeSpan(TimeSpan timeSpan)
     {
+        // we use langauge to do the words like Phrases.Time_Days_1 or Phrases.Time_Days_x
+        // howver, the one with x has to be put in the method: ReplaceDynamic(Phrases.Time_Days_x, 10);
+        
+        // now e need to replace all the old with the new language versions
+      
         if (Math.Abs(timeSpan.TotalDays) >= 1)
-            return $"{timeSpan.Days} day{P(timeSpan.Days)} {Math.Abs(timeSpan.Hours)} hour{P(timeSpan.Hours)}";
-        if (Math.Abs(timeSpan.TotalHours) >= 1)
-            return $"{timeSpan.Hours} hour{P(timeSpan.Hours)} {Math.Abs(timeSpan.Minutes)} minute{P(timeSpan.Minutes)}";
-        if (Math.Abs(timeSpan.TotalMinutes) >= 1)
-            return $"{timeSpan.Minutes} minute{P(timeSpan.Minutes)} {Math.Abs(timeSpan.Seconds)} second{P(timeSpan.Seconds)}";
+        {
+            var days = timeSpan.Days;
+            var hours = timeSpan.Hours;
+            var dayText = days == 1 ? Phrases.Time_Days_1 : ReplaceDynamic(Phrases.Time_Days_x, days);
+            if (hours == 0)
+                return dayText!;
+            var hourText = hours == 1 ? Phrases.Time_Hours_1 : ReplaceDynamic(Phrases.Time_Hours_x, hours);
+            return $"{dayText} {hourText}";
+        }
 
-        return $"{timeSpan.Seconds} second{P(timeSpan.Seconds)}";
+        if (Math.Abs(timeSpan.TotalHours) >= 1)
+        {
+            var hours = timeSpan.Hours;
+            var minutes = timeSpan.Minutes;
+            var hourText = hours == 1 ? Phrases.Time_Hours_1 : ReplaceDynamic(Phrases.Time_Hours_x, hours);
+            if (minutes == 0)
+                return hourText!;
+            var minuteText = minutes == 1 ? Phrases.Time_Minutes_1 : ReplaceDynamic(Phrases.Time_Minutes_x, minutes);
+            return $"{hourText} {minuteText}";
+        }
+        if (Math.Abs(timeSpan.TotalMinutes) >= 1) 
+        {
+            var minutes = timeSpan.Minutes;
+            var seconds = timeSpan.Seconds;
+            var minuteText = minutes == 1 ? Phrases.Time_Minutes_1 : ReplaceDynamic(Phrases.Time_Minutes_x, minutes);
+            if (seconds == 0)
+                return minuteText!;
+            var secondText = seconds == 1 ? Phrases.Time_Seconds_1 : ReplaceDynamic(Phrases.Time_Seconds_x, seconds);
+            return $"{minuteText} {secondText}";
+        }
+
+        return ReplaceDynamic(Phrases.Time_Seconds_x, timeSpan.Seconds)!;
 
         // internal method to simplify the pluralization of words
         string P(int count) => Math.Abs(count) != 1 ? "s" : "";

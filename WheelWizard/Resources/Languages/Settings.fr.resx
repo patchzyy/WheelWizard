@@ -150,9 +150,6 @@
     <data name="Value_Language_Turkish" xml:space="preserve">
         <value>Turc</value>
     </data>
-    <data name="Value_Placeholder_EnterPath" xml:space="preserve">
-        <value>Choisissez le chemin désiré ici...</value>
-    </data>
     <data name="CompletePercentage" xml:space="preserve">
         <value>69</value>
     </data>

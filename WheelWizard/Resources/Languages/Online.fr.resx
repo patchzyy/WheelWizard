@@ -21,4 +21,7 @@
     <data name="NoName" xml:space="preserve">
         <value>Aucun nom </value>
     </data>
+    <data name="ListTitle_Rooms" xml:space="preserve">
+        <value>Salles</value>
+    </data>
 </root>

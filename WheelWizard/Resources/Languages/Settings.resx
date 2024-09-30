@@ -99,9 +99,6 @@
     <data name="Option_DolphinEmulatorExe" xml:space="preserve">
         <value>Dolphin Emulator executable</value>
     </data>
-    <data name="Value_Placeholder_EnterPath" xml:space="preserve">
-        <value>Enter desired path here...</value>
-    </data>
     <data name="InfoText_EndWithExe" xml:space="preserve">
         <value>Path must end with .exe</value>
     </data>

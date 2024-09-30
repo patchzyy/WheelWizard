@@ -472,14 +472,5 @@ namespace CT_MKWII_WPF.Resources.Languages {
                 return ResourceManager.GetString("Value_Language_TurkishOg", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter desired path here....
-        /// </summary>
-        public static string Value_Placeholder_EnterPath {
-            get {
-                return ResourceManager.GetString("Value_Placeholder_EnterPath", resourceCulture);
-            }
-        }
     }
 }

@@ -72,10 +72,13 @@
     <data name="Stat_PlayerCount" xml:space="preserve">
         <value>Spelers</value>
     </data>
-    <data name="ContextMenu_CopyFriendCode" xml:space="preserve">
-        <value>Vriendcode kopiëren</value>
-    </data>
     <data name="Stat_TimeOnline" xml:space="preserve">
         <value>Tijd online</value>
+    </data>
+    <data name="ListTitle_Rooms" xml:space="preserve">
+        <value>Lobbies</value>
+    </data>
+    <data name="Stat_RoomID" xml:space="preserve">
+        <value>Lobby ID</value>
     </data>
 </root>

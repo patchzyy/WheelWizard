@@ -105,6 +105,24 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You might not have internet connection, or no-one might be playing..
+        /// </summary>
+        public static string EmptyText_NoRooms {
+            get {
+                return ResourceManager.GetString("EmptyText_NoRooms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No rooms found.
+        /// </summary>
+        public static string EmptyText_NoRooms_Title {
+            get {
+                return ResourceManager.GetString("EmptyText_NoRooms_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There are currently no friends online.
         /// </summary>
         public static string Hover_FriendsOnline_0 {
@@ -186,6 +204,34 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please note that this page does not offer any functionality to join a room directly.
+        ///To join a specific room, you&apos;ll need to either join through a friend, or hope to join it by joining the online servers..
+        /// </summary>
+        public static string Hover_RoomsPageDisclaimer {
+            get {
+                return ResourceManager.GetString("Hover_RoomsPageDisclaimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter desired path here....
+        /// </summary>
+        public static string Placeholder_EnterPath {
+            get {
+                return ResourceManager.GetString("Placeholder_EnterPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search For Players....
+        /// </summary>
+        public static string Placeholder_SearchForPlayers {
+            get {
+                return ResourceManager.GetString("Placeholder_SearchForPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Talk to us!.
         /// </summary>
         public static string Sidebar_Link_Discord {
@@ -236,6 +282,78 @@ namespace CT_MKWII_WPF.Resources.Languages {
         public static string Text_WhWzTranslationPercentage {
             get {
                 return ResourceManager.GetString("Text_WhWzTranslationPercentage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 day.
+        /// </summary>
+        public static string Time_Days_1 {
+            get {
+                return ResourceManager.GetString("Time_Days_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {$1} days.
+        /// </summary>
+        public static string Time_Days_x {
+            get {
+                return ResourceManager.GetString("Time_Days_x", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 hour.
+        /// </summary>
+        public static string Time_Hours_1 {
+            get {
+                return ResourceManager.GetString("Time_Hours_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {$1}  hours.
+        /// </summary>
+        public static string Time_Hours_x {
+            get {
+                return ResourceManager.GetString("Time_Hours_x", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 minute.
+        /// </summary>
+        public static string Time_Minutes_1 {
+            get {
+                return ResourceManager.GetString("Time_Minutes_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {$1} minutes.
+        /// </summary>
+        public static string Time_Minutes_x {
+            get {
+                return ResourceManager.GetString("Time_Minutes_x", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 second.
+        /// </summary>
+        public static string Time_Seconds_1 {
+            get {
+                return ResourceManager.GetString("Time_Seconds_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {$1} seconds.
+        /// </summary>
+        public static string Time_Seconds_x {
+            get {
+                return ResourceManager.GetString("Time_Seconds_x", resourceCulture);
             }
         }
     }

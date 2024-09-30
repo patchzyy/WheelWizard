@@ -69,6 +69,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy Friend Code.
+        /// </summary>
+        public static string Action_CopyFriendCode {
+            get {
+                return ResourceManager.GetString("Action_CopyFriendCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string Action_Delete {
@@ -186,6 +195,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ID.
+        /// </summary>
+        public static string Attribute_Id {
+            get {
+                return ResourceManager.GetString("Attribute_Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string Attribute_Name {
@@ -200,6 +218,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         public static string Attribute_Title {
             get {
                 return ResourceManager.GetString("Attribute_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        public static string Attribute_Type {
+            get {
+                return ResourceManager.GetString("Attribute_Type", resourceCulture);
             }
         }
         
@@ -236,6 +263,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         public static string PageTitle_MyProfiles {
             get {
                 return ResourceManager.GetString("PageTitle_MyProfiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Room Details.
+        /// </summary>
+        public static string PageTitle_RoomDetails {
+            get {
+                return ResourceManager.GetString("PageTitle_RoomDetails", resourceCulture);
             }
         }
         

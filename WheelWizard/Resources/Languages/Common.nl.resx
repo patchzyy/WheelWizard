@@ -117,4 +117,16 @@
     <data name="Term_Error" xml:space="preserve">
         <value>Error</value>
     </data>
+    <data name="Attribute_Id" xml:space="preserve">
+        <value>ID</value>
+    </data>
+    <data name="Attribute_Type" xml:space="preserve">
+        <value>Type</value>
+    </data>
+    <data name="Action_CopyFriendCode" xml:space="preserve">
+        <value>Vriendcode kopiëren</value>
+    </data>
+    <data name="PageTitle_RoomDetails" xml:space="preserve">
+        <value>Lobby Info</value>
+    </data>
 </root>

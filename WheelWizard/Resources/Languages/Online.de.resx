@@ -21,4 +21,61 @@
     <data name="NoName" xml:space="preserve">
         <value>Kein name</value>
     </data>
+    <data name="Button_ViewRoom" xml:space="preserve">
+        <value>Raum Anzeigen</value>
+    </data>
+    <data name="ListTitle_Friends" xml:space="preserve">
+        <value>Freunde</value>
+    </data>
+    <data name="ListTitle_Players" xml:space="preserve">
+        <value>Spieler</value>
+    </data>
+    <data name="NoLicense" xml:space="preserve">
+        <value>Keine Lizenz</value>
+    </data>
+    <data name="NoProfiles" xml:space="preserve">
+        <value>Keine Profile</value>
+    </data>
+    <data name="Region_America" xml:space="preserve">
+        <value>Amerika</value>
+    </data>
+    <data name="Region_Australia" xml:space="preserve">
+        <value>Australien</value>
+    </data>
+    <data name="Region_China" xml:space="preserve">
+        <value>China</value>
+    </data>
+    <data name="Region_Europe" xml:space="preserve">
+        <value>Europa</value>
+    </data>
+    <data name="Region_Japan" xml:space="preserve">
+        <value>Japan</value>
+    </data>
+    <data name="Region_SouthKorea" xml:space="preserve">
+        <value>Süd Korea</value>
+    </data>
+    <data name="Region_Taiwan" xml:space="preserve">
+        <value>Taiwan</value>
+    </data>
+    <data name="Stat_FriendCode" xml:space="preserve">
+        <value>Freundescode</value>
+    </data>
+    <data name="Stat_Losses" xml:space="preserve">
+        <value>Verloren</value>
+    </data>
+    <data name="Stat_PlayerCount" xml:space="preserve">
+        <value>Spieler</value>
+    </data>
+    <data name="Stat_Wins" xml:space="preserve">
+        <value>Gewinne</value>
+    </data>
+    <data name="Stat_TimeOnline" xml:space="preserve">
+        <value>Zeit Online</value>
+    </data>
+    <data name="Stat_RacesPlayed" xml:space="preserve">
+        <value>Gespielte Rennen</value>
+    </data>
+    <data name="ListTitle_Rooms" xml:space="preserve">
+        <value>Räume</value>
+    </data>
 </root>

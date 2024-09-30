@@ -84,9 +84,6 @@
     <data name="Option_DolphinEmulatorExe" xml:space="preserve">
         <value>Dolphin emulator executable locatie</value>
     </data>
-    <data name="Value_Placeholder_EnterPath" xml:space="preserve">
-        <value>Vul hier uw bestands locatie in</value>
-    </data>
     <data name="InfoText_EndWithExe" xml:space="preserve">
         <value>Locatie moet eindigen met .exe</value>
     </data>

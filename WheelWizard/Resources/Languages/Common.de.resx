@@ -81,4 +81,40 @@
     <data name="Action_Save" xml:space="preserve">
         <value>Speichern</value>
     </data>
+    <data name="Action_Delete" xml:space="preserve">
+        <value>Löschen</value>
+    </data>
+    <data name="Action_DisableAll" xml:space="preserve">
+        <value>Alles Deaktiverien</value>
+    </data>
+    <data name="Action_EnableAll" xml:space="preserve">
+        <value>Alle aktivieren</value>
+    </data>
+    <data name="Action_Import" xml:space="preserve">
+        <value>Importieren</value>
+    </data>
+    <data name="Action_OpenFolder" xml:space="preserve">
+        <value>Ordner öffnen</value>
+    </data>
+    <data name="Action_Rename" xml:space="preserve">
+        <value>Umbenennen</value>
+    </data>
+    <data name="Attribute_Enabled" xml:space="preserve">
+        <value>Aktiviert</value>
+    </data>
+    <data name="Attribute_Name" xml:space="preserve">
+        <value>Name</value>
+    </data>
+    <data name="Attribute_Title" xml:space="preserve">
+        <value>Titel</value>
+    </data>
+    <data name="Term_Offline" xml:space="preserve">
+        <value>Offline</value>
+    </data>
+    <data name="Term_Unknown" xml:space="preserve">
+        <value>Unbekannt</value>
+    </data>
+    <data name="Action_CopyFriendCode" xml:space="preserve">
+        <value>Raum Anzeigen</value>
+    </data>
 </root>

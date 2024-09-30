@@ -21,9 +21,6 @@
     <data name="Button_ViewRoom" xml:space="preserve">
         <value>ルームをみる</value>
     </data>
-    <data name="ContextMenu_CopyFriendCode" xml:space="preserve">
-        <value>フレンドコードをコピー</value>
-    </data>
     <data name="ListTitle_Friends" xml:space="preserve">
         <value>フレンド</value>
     </data>

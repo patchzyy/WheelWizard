@@ -78,4 +78,44 @@
     <data name="EmptyText_NoMods_Title" xml:space="preserve">
         <value>No mods found</value>
     </data>
+    <data name="Time_Days_1" xml:space="preserve">
+        <value>1 day</value>
+    </data>
+    <data name="Time_Days_x" xml:space="preserve">
+        <value>{$1} days</value>
+    </data>
+    <data name="Time_Hours_1" xml:space="preserve">
+        <value>1 hour</value>
+    </data>
+    <data name="Time_Hours_x" xml:space="preserve">
+        <value>{$1}  hours</value>
+    </data>
+    <data name="Time_Minutes_1" xml:space="preserve">
+        <value>1 minute</value>
+    </data>
+    <data name="Time_Minutes_x" xml:space="preserve">
+        <value>{$1} minutes</value>
+    </data>
+    <data name="Time_Seconds_1" xml:space="preserve">
+        <value>1 second</value>
+    </data>
+    <data name="Time_Seconds_x" xml:space="preserve">
+        <value>{$1} seconds</value>
+    </data>
+    <data name="Placeholder_SearchForPlayers" xml:space="preserve">
+        <value>Search For Players...</value>
+    </data>
+    <data name="Placeholder_EnterPath" xml:space="preserve">
+        <value>Enter desired path here...</value>
+    </data>
+    <data name="Hover_RoomsPageDisclaimer" xml:space="preserve">
+        <value>Please note that this page does not offer any functionality to join a room directly.
+To join a specific room, you'll need to either join through a friend, or hope to join it by joining the online servers.</value>
+    </data>
+    <data name="EmptyText_NoRooms" xml:space="preserve">
+        <value>You might not have internet connection, or no-one might be playing.</value>
+    </data>
+    <data name="EmptyText_NoRooms_Title" xml:space="preserve">
+        <value>No rooms found</value>
+    </data>
 </root>
