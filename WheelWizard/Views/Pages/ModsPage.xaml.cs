@@ -51,7 +51,7 @@ namespace CT_MKWII_WPF.Views.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to load mods: {ex.Message}", "Error", MessageBoxButton.OK,
+                MessageBox.Show($"Failed to load mods: {ex.Message}", Common.Error, MessageBoxButton.OK,
                     MessageBoxImage.Error);
                 Mods = new ObservableCollection<Mod>();
             }
@@ -91,7 +91,7 @@ namespace CT_MKWII_WPF.Views.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to save mods: {ex.Message}", "Error",
+                MessageBox.Show($"Failed to save mods: {ex.Message}", Common.Error,
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -135,7 +135,7 @@ namespace CT_MKWII_WPF.Views.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to process mod files: {ex.Message}", "Error",
+                MessageBox.Show($"Failed to process mod files: {ex.Message}", Common.Error,
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
@@ -155,7 +155,7 @@ namespace CT_MKWII_WPF.Views.Pages
 
                 if (ModExists(modName))
                 {
-                    MessageBox.Show($"A mod with the name '{modName}' already exists.", "Error",
+                    MessageBox.Show($"A mod with the name '{modName}' already exists.", Common.Error,
                         MessageBoxButton.OK, MessageBoxImage.Error);
                     continue;
                 }
@@ -214,7 +214,7 @@ namespace CT_MKWII_WPF.Views.Pages
                     //now we check if there isn't already a folder with the same name as the zip file, if so... cancel
                     if (Directory.Exists(Path.Combine(destinationDirectory, zipFileName)))
                     {
-                        MessageBox.Show($"You already have a mod with this name", "Error", MessageBoxButton.OK,
+                        MessageBox.Show($"You already have a mod with this name", Common.Error, MessageBoxButton.OK,
                             MessageBoxImage.Error);
                         return;
                     }
@@ -224,7 +224,7 @@ namespace CT_MKWII_WPF.Views.Pages
                 catch (IOException)
                 {
                     //if file already exists, we catch the exception and show a message
-                    MessageBox.Show($"You already have a mod with this name", "Error",
+                    MessageBox.Show($"You already have a mod with this name", Common.Error,
                         MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 catch (Exception ex)
@@ -246,7 +246,7 @@ namespace CT_MKWII_WPF.Views.Pages
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Failed to copy file: {ex.Message}", "Error",
+                    MessageBox.Show($"Failed to copy file: {ex.Message}", Common.Error,
                         MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
@@ -297,14 +297,14 @@ namespace CT_MKWII_WPF.Views.Pages
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                MessageBox.Show($"Mod name can't be empty", "Error",
+                MessageBox.Show($"Mod name can't be empty", Common.Error,
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
             if (!Mods.Any(mod => mod.Title.Equals(name, StringComparison.OrdinalIgnoreCase))) return true;
 
-            MessageBox.Show($"A mod with the name '{name}' already exists.", "Error",
+            MessageBox.Show($"A mod with the name '{name}' already exists.", Common.Error,
                             MessageBoxButton.OK, MessageBoxImage.Error);
             return false;
 
@@ -330,7 +330,7 @@ namespace CT_MKWII_WPF.Views.Pages
             }
             catch (IOException ex)
             {
-                MessageBox.Show($"Failed to rename mod directory: {ex.Message}", "Error",
+                MessageBox.Show($"Failed to rename mod directory: {ex.Message}", Common.Error,
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -352,7 +352,7 @@ namespace CT_MKWII_WPF.Views.Pages
             }
             catch (IOException)
             {
-                MessageBox.Show($"Failed to delete mod directory. It may be that this file is read only?", "Error",
+                MessageBox.Show($"Failed to delete mod directory. It may be that this file is read only?", Common.Error,
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
@@ -371,7 +371,7 @@ namespace CT_MKWII_WPF.Views.Pages
                 System.Diagnostics.Process.Start("explorer", modDirectory);
             else
             {
-                MessageBox.Show("Mod folder does not exist", "Error",
+                MessageBox.Show("Mod folder does not exist", Common.Error,
                                 MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

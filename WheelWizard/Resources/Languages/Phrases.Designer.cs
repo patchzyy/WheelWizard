@@ -78,6 +78,24 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mods can alter how the game works. Start importing your first mod by clicking the button below..
+        /// </summary>
+        public static string EmptyText_NoMods {
+            get {
+                return ResourceManager.GetString("EmptyText_NoMods", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No mods found.
+        /// </summary>
+        public static string EmptyText_NoMods_Title {
+            get {
+                return ResourceManager.GetString("EmptyText_NoMods_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have to play the game at least once in order to see your profiles listed here.
         /// </summary>
         public static string EmptyText_NoProfiles {

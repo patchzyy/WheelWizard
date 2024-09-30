@@ -114,4 +114,7 @@
     <data name="Save" xml:space="preserve">
         <value>Save</value>
     </data>
+    <data name="Error" xml:space="preserve">
+        <value>Error</value>
+    </data>
 </root>

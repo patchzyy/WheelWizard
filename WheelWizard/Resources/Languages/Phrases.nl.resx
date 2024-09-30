@@ -65,4 +65,10 @@
     <data name="Text_WhWzTranslationPercentage" xml:space="preserve">
         <value>Vertalingen voor deze taal zijn {$1} compleet</value>
     </data>
+    <data name="EmptyText_NoMods_Title" xml:space="preserve">
+        <value>Je hebt nog geen mods</value>
+    </data>
+    <data name="EmptyText_NoMods" xml:space="preserve">
+        <value>Mods kunnen de  game aanpassen. Start met importeren van je eerste mod door op de Import knop te drukken.</value>
+    </data>
 </root>

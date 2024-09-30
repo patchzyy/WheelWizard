@@ -75,4 +75,7 @@
     <data name="ContextMenu_CopyFriendCode" xml:space="preserve">
         <value>Copy friend code</value>
     </data>
+    <data name="Stat_TimeOnline" xml:space="preserve">
+        <value>Time Online</value>
+    </data>
 </root>

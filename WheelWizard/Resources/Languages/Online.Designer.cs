@@ -222,6 +222,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Time Online.
+        /// </summary>
+        public static string Stat_TimeOnline {
+            get {
+                return ResourceManager.GetString("Stat_TimeOnline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wins.
         /// </summary>
         public static string Stat_Wins {

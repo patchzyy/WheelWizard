@@ -48,8 +48,8 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="PageWithoutMods">
-            <components:EmptyPageInfo HorizontalAlignment="Center" Title="No mods found"
-                                      Body="Mods can alter how the game works. Start importing your first mod by clicking the button below." />
+            <components:EmptyPageInfo HorizontalAlignment="Center" Title="{x:Static lang:Phrases.EmptyText_NoMods_Title}"
+                                      Body="{x:Static lang:Phrases.EmptyText_NoMods}" />
             <components:Button Variant="Primary" Margin="12"
                                IconPack="Material" Text="{x:Static lang:Common.Import}"
                                IconKind="{x:Static icon:PackIconMaterialKind.Import}"
@@ -65,10 +65,10 @@
                                           ItemsSource="{Binding Mods}">
                 <components:DraggableListView.ItemContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Rename" Click="RenameMod_Click" />
-                        <MenuItem Header="Delete" Click="DeleteMod_Click" />
+                        <MenuItem Header="{x:Static lang:Common.Rename}" Click="RenameMod_Click" />
+                        <MenuItem Header="{x:Static lang:Common.Delete}" Click="DeleteMod_Click" />
                         <Separator Style="{StaticResource ContextMenuLine}" />
-                        <MenuItem Header="Open Folder" Click="OpenFolder_Click" />
+                        <MenuItem Header="{x:Static lang:Common.OpenFolder}" Click="OpenFolder_Click" />
                     </ContextMenu>
                 </components:DraggableListView.ItemContextMenu>
 
@@ -84,7 +84,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="{x:Static lang:Common.Title}" Width="100000" DisplayMemberBinding="{Binding Title}" />
+                        <GridViewColumn Header="{x:Static lang:Common.Name}" Width="100000" DisplayMemberBinding="{Binding Title}" />
                     </GridView>
                 </ListView.View>
             </components:DraggableListView>

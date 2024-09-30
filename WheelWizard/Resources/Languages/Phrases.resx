@@ -72,4 +72,10 @@
     <data name="Text_WhWzTranslationPercentage" xml:space="preserve">
         <value>Translations for this language are {$1}% complete</value>
     </data>
+    <data name="EmptyText_NoMods" xml:space="preserve">
+        <value>Mods can alter how the game works. Start importing your first mod by clicking the button below.</value>
+    </data>
+    <data name="EmptyText_NoMods_Title" xml:space="preserve">
+        <value>No mods found</value>
+    </data>
 </root>
