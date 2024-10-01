@@ -190,4 +190,19 @@ To join a specific room, you'll need to either join through a friend, or hope to
     <data name="PopupText_DolphinNotFoundText" xml:space="preserve">
         <value>Dolphin Emulator folder not automatically found. Please try and find the folder manually, click 'help' for more information.</value>
     </data>
+    <data name="PopupText_FailedUpdateDelete" xml:space="preserve">
+        <value>Failed to delete files for the update. Aborting.</value>
+    </data>
+    <data name="PopupText_UpdateRR" xml:space="preserve">
+        <value>Update Retro Rewind</value>
+    </data>
+    <data name="PopupText_FailedUpdateApply" xml:space="preserve">
+        <value>Failed to apply an update. Aborting.</value>
+    </data>
+    <data name="PopupText_RRUpToDate" xml:space="preserve">
+        <value>Retro Rewind is up to date.</value>
+    </data>
+    <data name="PopupText_FailCheckUpdates" xml:space="preserve">
+        <value>Failed to check for updates</value>
+    </data>
 </root>

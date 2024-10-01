@@ -1,4 +1,5 @@
 ﻿using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Views.Popups;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ public static class RetroRewindUpdater
         if (response.Succeeded && response.Content != null) 
             return response.Content.Split('\n').Last().Split(' ')[0];
 
-        MessageBox.Show($"Failed to check for updates");
+        MessageBox.Show(Phrases.PopupText_FailCheckUpdates);
         return "Failed to check for updates";
     }
 
@@ -36,7 +37,7 @@ public static class RetroRewindUpdater
             var currentVersion = RetroRewindInstaller.CurrentRRVersion();
             if (await IsRRUpToDate(currentVersion))
             {
-                MessageBox.Show("Retro Rewind is up to date.");
+                MessageBox.Show(Phrases.PopupText_RRUpToDate);
                 return true;
             }
 
@@ -60,7 +61,7 @@ public static class RetroRewindUpdater
         var allVersions = await GetAllVersionData();
         var updatesToApply = GetUpdatesToApply(currentVersion, allVersions);
 
-        var progressWindow = new ProgressWindow("Updating Retro Rewind");
+        var progressWindow = new ProgressWindow(Phrases.PopupText_UpdateRR);
         progressWindow.Show();
 
         // Step 1: Get the version we are updating to
@@ -70,7 +71,7 @@ public static class RetroRewindUpdater
         var deleteSuccess = await ApplyFileDeletionsBetweenVersions(currentVersion, targetVersion);
         if (!deleteSuccess)
         {
-            MessageBox.Show("Failed to delete files for the update. Aborting.");
+            MessageBox.Show(Phrases.PopupText_FailedUpdateDelete);
             progressWindow.Close();
             return false;
         }
@@ -83,7 +84,7 @@ public static class RetroRewindUpdater
             var success = await DownloadAndApplyUpdate(update, updatesToApply.Count, i + 1, progressWindow);
             if (!success)
             {
-                MessageBox.Show("Failed to apply an update. Aborting.");
+                MessageBox.Show(Phrases.PopupText_FailedUpdateApply);
                 progressWindow.Close();
                 return false;
             }
@@ -111,16 +112,19 @@ public static class RetroRewindUpdater
                 var resolvedPath = Path.GetFullPath(new FileInfo(filePath).FullName);
                 if (!resolvedPath.StartsWith(PathManager.RiivolutionWhWzFolderPath, StringComparison.OrdinalIgnoreCase))
                 {
+                    // I rather not translate this message, makes it easier to check where a given error came from
                     MessageBox.Show("Invalid file path detected. Aborting. Please contact the developers.\n Server error: " + resolvedPath);
                     return false;
                 }
                 if (!filePath.StartsWith(PathManager.RiivolutionWhWzFolderPath, StringComparison.OrdinalIgnoreCase))
                 {
+                    // I rather not translate this message, makes it easier to check where a given error came from
                     MessageBox.Show("Invalid file path detected. Aborting. Please contact the developers.\n Server error: " + filePath );
                     return false;
                 }
                 if (filePath.Contains(".."))
                 {
+                    // I rather not translate this message, makes it easier to check where a given error came from
                     MessageBox.Show("Invalid file path detected. Aborting. Please contact the developers.\n Server error: " + filePath );
                     return false;
                 }
@@ -138,6 +142,7 @@ public static class RetroRewindUpdater
         }
         catch (Exception e)
         {
+            // I rather not translate this message, makes it easier to check where a given error came from
             MessageBox.Show($"Failed to delete files: {e.Message}");
             return false;
         }
@@ -240,11 +245,11 @@ public static class RetroRewindUpdater
         var tempZipPath = Path.GetTempFileName();
         try
         {
-            popupWindow.SetExtraText($"Update {currentUpdateIndex}/{totalUpdates}: {update.Description}");
+            popupWindow.SetExtraText($"{Common.Action_Update} {currentUpdateIndex}/{totalUpdates}: {update.Description}");
             await DownloadHelper.DownloadToLocation(update.Url, tempZipPath, popupWindow);
 
             popupWindow.UpdateProgress(100);
-            popupWindow.SetExtraText("Extracting files...");
+            popupWindow.SetExtraText(Common.State_Extracting);
             var extractionPath = PathManager.RiivolutionWhWzFolderPath;
             Directory.CreateDirectory(extractionPath);
             ExtractZipFile(tempZipPath, extractionPath);

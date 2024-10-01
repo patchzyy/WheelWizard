@@ -313,6 +313,33 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to check for updates.
+        /// </summary>
+        public static string PopupText_FailCheckUpdates {
+            get {
+                return ResourceManager.GetString("PopupText_FailCheckUpdates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to apply an update. Aborting..
+        /// </summary>
+        public static string PopupText_FailedUpdateApply {
+            get {
+                return ResourceManager.GetString("PopupText_FailedUpdateApply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to delete files for the update. Aborting..
+        /// </summary>
+        public static string PopupText_FailedUpdateDelete {
+            get {
+                return ResourceManager.GetString("PopupText_FailedUpdateDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Installing mods.
         /// </summary>
         public static string PopupText_InstallingMods {
@@ -421,6 +448,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Retro Rewind is up to date..
+        /// </summary>
+        public static string PopupText_RRUpToDate {
+            get {
+                return ResourceManager.GetString("PopupText_RRUpToDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings saved successfully!.
         /// </summary>
         public static string PopupText_SettingsSaved {
@@ -435,6 +471,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         public static string PopupText_SureDeleteQuestion {
             get {
                 return ResourceManager.GetString("PopupText_SureDeleteQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Retro Rewind.
+        /// </summary>
+        public static string PopupText_UpdateRR {
+            get {
+                return ResourceManager.GetString("PopupText_UpdateRR", resourceCulture);
             }
         }
         

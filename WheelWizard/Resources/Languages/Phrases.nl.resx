@@ -183,4 +183,19 @@ Om aan een specifieke lobby, moet je deelnemen via een vriend, of hopen deel te 
     <data name="PopupText_DolphinFoundText" xml:space="preserve">
         <value>Als je niet weet wat dit allemaal betekend, druk op ja :) \nEr is een Dolphin Emulator folder gevonden, wil je die gebruiken?</value>
     </data>
+    <data name="PopupText_FailedUpdateDelete" xml:space="preserve">
+        <value>Het is niet gelukt om bestanden te verwijderen voor de update. Process word afgebroken.</value>
+    </data>
+    <data name="PopupText_UpdateRR" xml:space="preserve">
+        <value>Retro Rewind updaten</value>
+    </data>
+    <data name="PopupText_FailedUpdateApply" xml:space="preserve">
+        <value>Het is niet gelukt om te updaten, Process word afgebroken.</value>
+    </data>
+    <data name="PopupText_RRUpToDate" xml:space="preserve">
+        <value>Retro Rewind is up-to-date.</value>
+    </data>
+    <data name="PopupText_FailCheckUpdates" xml:space="preserve">
+        <value>Zoeken naar updates mislukt</value>
+    </data>
 </root>

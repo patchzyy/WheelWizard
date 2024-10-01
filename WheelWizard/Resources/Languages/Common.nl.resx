@@ -162,4 +162,7 @@
     <data name="Action_Revert" xml:space="preserve">
         <value>Ongedaan maken</value>
     </data>
+    <data name="State_Extracting" xml:space="preserve">
+        <value>Bestanden uitpakken...</value>
+    </data>
 </root>

@@ -357,6 +357,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Extracting files....
+        /// </summary>
+        public static string State_Extracting {
+            get {
+                return ResourceManager.GetString("State_Extracting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Installing....
         /// </summary>
         public static string State_Installing {
