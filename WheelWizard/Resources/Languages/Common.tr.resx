@@ -18,4 +18,13 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="Action_Apply" xml:space="preserve">
+        <value>Uygula</value>
+    </data>
+    <data name="Action_Cancel" xml:space="preserve">
+        <value>iptal etmek</value>
+    </data>
+    <data name="Action_CopyFriendCode" xml:space="preserve">
+        <value>Arkadaş Kodunu Kopyala</value>
+    </data>
 </root>

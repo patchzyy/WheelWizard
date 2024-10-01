@@ -159,6 +159,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        public static string Action_OK {
+            get {
+                return ResourceManager.GetString("Action_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open Folder.
         /// </summary>
         public static string Action_OpenFolder {
@@ -227,6 +236,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         public static string Attribute_Id {
             get {
                 return ResourceManager.GetString("Attribute_Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mods Name.
+        /// </summary>
+        public static string Attribute_ModName {
+            get {
+                return ResourceManager.GetString("Attribute_ModName", resourceCulture);
             }
         }
         

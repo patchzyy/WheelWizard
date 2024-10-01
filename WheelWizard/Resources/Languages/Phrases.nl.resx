@@ -135,4 +135,31 @@ Om aan een specifieke lobby, moet je deelnemen via een vriend, of hopen deel te 
     <data name="PopupText_NotFindGame" xml:space="preserve">
         <value>Kan hetspel bestand niet vinden,  vul eerst de corectly bestand locatie in in de instellingen</value>
     </data>
+    <data name="PopupText_ModCombineQuestion" xml:space="preserve">
+        <value>Wil je alle bestanden combineren in 1 mod?</value>
+    </data>
+    <data name="PopupText_MultipleFilesSelected" xml:space="preserve">
+        <value>Meerdere bestanden geselecteerd</value>
+    </data>
+    <data name="PopupText_ModNameExists" xml:space="preserve">
+        <value>Er bestaat al een mod met de naam '{$1}' .</value>
+    </data>
+    <data name="PopupText_EnterModName" xml:space="preserve">
+        <value>Voer modnaam in:</value>
+    </data>
+    <data name="PopupText_ModNameEmpty" xml:space="preserve">
+        <value>De naam van de mod mag niet leeg zijn.</value>
+    </data>
+    <data name="PopupText_SureDeleteQuestion" xml:space="preserve">
+        <value>Weet je zeker dat je {$1} wilt verwijderen?</value>
+    </data>
+    <data name="PopupText_NoModFolder" xml:space="preserve">
+        <value>Mods folder bestaat niet</value>
+    </data>
+    <data name="PopupText_EnterTitle" xml:space="preserve">
+        <value>Voer titel in:</value>
+    </data>
+    <data name="PopupText_ProcessingXofY" xml:space="preserve">
+        <value>Verwerken van {$1} van {$2} bestanden...</value>
+    </data>
 </root>

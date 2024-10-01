@@ -70,7 +70,7 @@
         <value>Dolphinエミュレーターを実行可能にする</value>
     </data>
     <data name="Option_DolphinUserPath" xml:space="preserve">
-        <value>Dophinのユーザーフォルダ</value>
+        <value>Dolphinのユーザーフォルダ</value>
     </data>
     <data name="Option_ForceDisableWiimote" xml:space="preserve">
         <value>Wiimoteを強制的に無効にする</value>
@@ -154,6 +154,6 @@
         <value>トルコ語</value>
     </data>
     <data name="CompletePercentage" xml:space="preserve">
-        <value>90</value>
+        <value>73</value>
     </data>
 </root>

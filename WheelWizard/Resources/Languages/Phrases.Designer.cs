@@ -232,6 +232,24 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter Mod Name:.
+        /// </summary>
+        public static string PopupText_EnterModName {
+            get {
+                return ResourceManager.GetString("PopupText_EnterModName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter Title:.
+        /// </summary>
+        public static string PopupText_EnterTitle {
+            get {
+                return ResourceManager.GetString("PopupText_EnterTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Estimated time remaining:.
         /// </summary>
         public static string PopupText_EsimatedTimeRemaining {
@@ -259,6 +277,33 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to combine all files into 1 mod?.
+        /// </summary>
+        public static string PopupText_ModCombineQuestion {
+            get {
+                return ResourceManager.GetString("PopupText_ModCombineQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mod name can&apos;t be empty.
+        /// </summary>
+        public static string PopupText_ModNameEmpty {
+            get {
+                return ResourceManager.GetString("PopupText_ModNameEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A mod with the name &apos;{$1}&apos; already exists..
+        /// </summary>
+        public static string PopupText_ModNameExists {
+            get {
+                return ResourceManager.GetString("PopupText_ModNameExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mods found.
         /// </summary>
         public static string PopupText_ModsFound {
@@ -277,6 +322,24 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Multiple Files Selected.
+        /// </summary>
+        public static string PopupText_MultipleFilesSelected {
+            get {
+                return ResourceManager.GetString("PopupText_MultipleFilesSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mod folder does not exist.
+        /// </summary>
+        public static string PopupText_NoModFolder {
+            get {
+                return ResourceManager.GetString("PopupText_NoModFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not find Dolphin Emulator, please set the path in settings.
         /// </summary>
         public static string PopupText_NotFindDolphin {
@@ -291,6 +354,24 @@ namespace CT_MKWII_WPF.Resources.Languages {
         public static string PopupText_NotFindGame {
             get {
                 return ResourceManager.GetString("PopupText_NotFindGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processing {$1} of {$2} files....
+        /// </summary>
+        public static string PopupText_ProcessingXofY {
+            get {
+                return ResourceManager.GetString("PopupText_ProcessingXofY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete {$1}?.
+        /// </summary>
+        public static string PopupText_SureDeleteQuestion {
+            get {
+                return ResourceManager.GetString("PopupText_SureDeleteQuestion", resourceCulture);
             }
         }
         

@@ -142,4 +142,31 @@ To join a specific room, you'll need to either join through a friend, or hope to
     <data name="PopupText_NotFindGame" xml:space="preserve">
         <value>Could not find the game, please set the path in settings</value>
     </data>
+    <data name="PopupText_ModCombineQuestion" xml:space="preserve">
+        <value>Do you want to combine all files into 1 mod?</value>
+    </data>
+    <data name="PopupText_MultipleFilesSelected" xml:space="preserve">
+        <value>Multiple Files Selected</value>
+    </data>
+    <data name="PopupText_ModNameExists" xml:space="preserve">
+        <value>A mod with the name '{$1}' already exists.</value>
+    </data>
+    <data name="PopupText_EnterModName" xml:space="preserve">
+        <value>Enter Mod Name:</value>
+    </data>
+    <data name="PopupText_ModNameEmpty" xml:space="preserve">
+        <value>Mod name can't be empty</value>
+    </data>
+    <data name="PopupText_SureDeleteQuestion" xml:space="preserve">
+        <value>Are you sure you want to delete {$1}?</value>
+    </data>
+    <data name="PopupText_NoModFolder" xml:space="preserve">
+        <value>Mod folder does not exist</value>
+    </data>
+    <data name="PopupText_EnterTitle" xml:space="preserve">
+        <value>Enter Title:</value>
+    </data>
+    <data name="PopupText_ProcessingXofY" xml:space="preserve">
+        <value>Processing {$1} of {$2} files...</value>
+    </data>
 </root>

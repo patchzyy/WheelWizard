@@ -78,4 +78,7 @@
     <data name="ListTitle_Rooms" xml:space="preserve">
         <value>Räume</value>
     </data>
+    <data name="Stat_RoomID" xml:space="preserve">
+        <value>Raum ID</value>
+    </data>
 </root>

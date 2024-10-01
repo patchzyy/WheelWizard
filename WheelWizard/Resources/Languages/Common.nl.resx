@@ -150,4 +150,10 @@
     <data name="Action_Keep" xml:space="preserve">
         <value>Behouden</value>
     </data>
+    <data name="Action_OK" xml:space="preserve">
+        <value>Oke</value>
+    </data>
+    <data name="Attribute_ModName" xml:space="preserve">
+        <value>Mod naam</value>
+    </data>
 </root>

@@ -117,4 +117,37 @@
     <data name="Action_CopyFriendCode" xml:space="preserve">
         <value>Raum Anzeigen</value>
     </data>
+    <data name="Action_Apply" xml:space="preserve">
+        <value>Anwenden</value>
+    </data>
+    <data name="Action_Export" xml:space="preserve">
+        <value>Exportieren</value>
+    </data>
+    <data name="Action_Keep" xml:space="preserve">
+        <value>Behalten</value>
+    </data>
+    <data name="Attribute_Id" xml:space="preserve">
+        <value>ID</value>
+    </data>
+    <data name="Attribute_Type" xml:space="preserve">
+        <value>Typ</value>
+    </data>
+    <data name="PageTitle_RoomDetails" xml:space="preserve">
+        <value>Raum Details</value>
+    </data>
+    <data name="Term_Error" xml:space="preserve">
+        <value>Fehler</value>
+    </data>
+    <data name="Term_No" xml:space="preserve">
+        <value>Nein</value>
+    </data>
+    <data name="Term_Speed" xml:space="preserve">
+        <value>Geschwindigkeit</value>
+    </data>
+    <data name="Term_Warning" xml:space="preserve">
+        <value>Warnung</value>
+    </data>
+    <data name="Term_Yes" xml:space="preserve">
+        <value>Ja</value>
+    </data>
 </root>

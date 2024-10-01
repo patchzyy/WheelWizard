@@ -72,4 +72,74 @@
     <data name="Placeholder_EnterPath" xml:space="preserve">
         <value>Gewünschten Pfad hier eingeben...</value>
     </data>
+    <data name="EmptyText_NoMods" xml:space="preserve">
+        <value>Mods können die Funktionsweise des Spiels verändern. Beginne mit dem Importerien deines ersten Mods, indem Du auf die Schaltfläche unten klickst.</value>
+    </data>
+    <data name="EmptyText_NoMods_Title" xml:space="preserve">
+        <value>Keine Mods gefunden</value>
+    </data>
+    <data name="EmptyText_NoRooms" xml:space="preserve">
+        <value>Möglicherweise hast Du keine Internetverbindung oder es spielt niemand.</value>
+    </data>
+    <data name="EmptyText_NoRooms_Title" xml:space="preserve">
+        <value>Keine Räume gefunden</value>
+    </data>
+    <data name="Hover_RoomsPageDisclaimer" xml:space="preserve">
+        <value>Bitte beachte, dass diese Seite keine Funktion bietet, um dich mit einem Raum direkt zu verbinden.
+Um einem bestimmten Raum beizutreten, musst Du entweder über einen Freund treffen oder hoffen, ihm beizutreten, indem du in den Online-Servern beitrittst.</value>
+    </data>
+    <data name="Placeholder_SearchForPlayers" xml:space="preserve">
+        <value>Suche nach Spielern</value>
+    </data>
+    <data name="PopupText_EsimatedTimeRemaining" xml:space="preserve">
+        <value>Geschätzte verbleibende Zeit:</value>
+    </data>
+    <data name="PopupText_InstallingMods" xml:space="preserve">
+        <value>Installiere Mods</value>
+    </data>
+    <data name="PopupText_InstallingModsCount" xml:space="preserve">
+        <value>Installiere {$1} Mods</value>
+    </data>
+    <data name="PopupText_ModsFound" xml:space="preserve">
+        <value>Mods gefunden</value>
+    </data>
+    <data name="PopupText_ModsFoundQuestion" xml:space="preserve">
+        <value>Du bist dabei, das Spiel ohne Mods zu starten. Möchtest du deinen my-stuff ordner leeren?</value>
+    </data>
+    <data name="PopupText_NotFindDolphin" xml:space="preserve">
+        <value>Der Dolphin Emulator konnte nicht gefunden werden. Bitte lege den Pfad in den Einstellungen fest.</value>
+    </data>
+    <data name="PopupText_NotFindGame" xml:space="preserve">
+        <value>Das Spiel konnte nicht gefunden werden. Bitte lege den Pfad in den Einstellungen fest.</value>
+    </data>
+    <data name="PupupText_DownloadingMb" xml:space="preserve">
+        <value>Herunterladen mit {$1} MB</value>
+    </data>
+    <data name="Text_WhWzTranslationPercentage" xml:space="preserve">
+        <value>Übersetzungen für diese Sprache sind {$1}% abgeschlossen</value>
+    </data>
+    <data name="Time_Days_1" xml:space="preserve">
+        <value>1 Tag</value>
+    </data>
+    <data name="Time_Days_x" xml:space="preserve">
+        <value>{$1} Tage</value>
+    </data>
+    <data name="Time_Hours_1" xml:space="preserve">
+        <value>1 Stunde</value>
+    </data>
+    <data name="Time_Hours_x" xml:space="preserve">
+        <value>{$1} Stunden</value>
+    </data>
+    <data name="Time_Minutes_1" xml:space="preserve">
+        <value>1 Minute</value>
+    </data>
+    <data name="Time_Minutes_x" xml:space="preserve">
+        <value>{$1} Minuten</value>
+    </data>
+    <data name="Time_Seconds_1" xml:space="preserve">
+        <value>1 Sekunde</value>
+    </data>
+    <data name="Time_Seconds_x" xml:space="preserve">
+        <value>{$1} Sekunden</value>
+    </data>
 </root>

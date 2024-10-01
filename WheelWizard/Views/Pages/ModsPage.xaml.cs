@@ -1,4 +1,5 @@
-﻿using CT_MKWII_WPF.Models;
+﻿using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Models;
 using CT_MKWII_WPF.Models.Settings;
 using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services.Launcher;
@@ -91,6 +92,7 @@ namespace CT_MKWII_WPF.Views.Pages
             }
             catch (Exception ex)
             {
+                // I rather not translate this message, makes it easier to check where a given error came from
                 MessageBox.Show($"Failed to save mods: {ex.Message}", Common.Term_Error,
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -116,8 +118,8 @@ namespace CT_MKWII_WPF.Views.Pages
                 ProcessModFiles(selectedFiles, singleMod: true);
             else
             {
-                var result = MessageBox.Show("Do you want to combine all files into 1 mod?",
-                                             "Multiple Files Selected", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                var result = MessageBox.Show(Phrases.PopupText_ModCombineQuestion,Phrases.PopupText_MultipleFilesSelected,
+                                             MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
 
                 if (result == MessageBoxResult.No) ProcessModFiles(selectedFiles, singleMod: false);
                 else if (result == MessageBoxResult.Yes) ProcessModFiles(selectedFiles, singleMod: true);
@@ -135,6 +137,7 @@ namespace CT_MKWII_WPF.Views.Pages
             }
             catch (Exception ex)
             {
+                // I rather not translate this message, makes it easier to check where a given error came from
                 MessageBox.Show($"Failed to process mod files: {ex.Message}", Common.Term_Error,
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -155,8 +158,8 @@ namespace CT_MKWII_WPF.Views.Pages
 
                 if (ModExists(modName))
                 {
-                    MessageBox.Show($"A mod with the name '{modName}' already exists.", Common.Term_Error,
-                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(Humanizer.ReplaceDynamic(Phrases.PopupText_ModNameExists, modName), 
+                                    Common.Term_Error, MessageBoxButton.OK, MessageBoxImage.Error);
                     continue;
                 }
 
@@ -170,7 +173,7 @@ namespace CT_MKWII_WPF.Views.Pages
         private async Task CombineFilesIntoSingleMod(string[] filePaths)
         {
             var modName = Microsoft.VisualBasic.Interaction
-                .InputBox("Enter mod name:", "Mod Name", "New Mod");
+                .InputBox(Phrases.PopupText_EnterModName, Common.Attribute_ModName, "New Mod");
             if (!IsValidName(modName)) return;
             var modDirectory = GetModDirectoryPath(modName);
             CreateDirectory(modDirectory);
@@ -212,10 +215,11 @@ namespace CT_MKWII_WPF.Views.Pages
                     //get name of the zip file
                     var zipFileName = Path.GetFileNameWithoutExtension(file);
                     //now we check if there isn't already a folder with the same name as the zip file, if so... cancel
-                    if (Directory.Exists(Path.Combine(destinationDirectory, zipFileName)))
+                    var modName = Path.Combine(destinationDirectory, zipFileName);
+                    if (Directory.Exists(modName))
                     {
-                        MessageBox.Show($"You already have a mod with this name", Common.Term_Error, MessageBoxButton.OK,
-                            MessageBoxImage.Error);
+                        MessageBox.Show(Humanizer.ReplaceDynamic(Phrases.PopupText_ModNameExists, modName), 
+                                        Common.Term_Error, MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
 
@@ -257,7 +261,8 @@ namespace CT_MKWII_WPF.Views.Pages
             Dispatcher.Invoke(() =>
             {
                 ProgressBar.Value = (double)current / total * 100;
-                StatusTextBlock.Text = $"Processing {current} of {total} files...";
+                StatusTextBlock.Text = Humanizer.ReplaceDynamic(Phrases.PopupText_ProcessingXofY, 
+                                                                current, total);
             }, DispatcherPriority.Background);
         }
 
@@ -297,15 +302,15 @@ namespace CT_MKWII_WPF.Views.Pages
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                MessageBox.Show($"Mod name can't be empty", Common.Term_Error,
+                MessageBox.Show(Phrases.PopupText_ModNameEmpty, Common.Term_Error,
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
             if (!Mods.Any(mod => mod.Title.Equals(name, StringComparison.OrdinalIgnoreCase))) return true;
 
-            MessageBox.Show($"A mod with the name '{name}' already exists.", Common.Term_Error,
-                            MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(Humanizer.ReplaceDynamic(Phrases.PopupText_ModNameExists, name), 
+                            Common.Term_Error, MessageBoxButton.OK, MessageBoxImage.Error);
             return false;
 
         }
@@ -316,7 +321,7 @@ namespace CT_MKWII_WPF.Views.Pages
             if (selectedMod == null) return;
 
             var newTitle = Microsoft.VisualBasic.Interaction
-                .InputBox("Enter new title:", "Rename Mod", selectedMod.Title);
+                .InputBox(Phrases.PopupText_EnterTitle, "Rename Mod", selectedMod.Title);
             if (!IsValidName(newTitle)) return;
 
             try
@@ -339,7 +344,8 @@ namespace CT_MKWII_WPF.Views.Pages
         {
             var selectedMod = ModsListView.GetCurrentContextItem<Mod>();
             if (selectedMod == null) return;
-            var areTheySure = MessageBox.Show($"Are you sure you want to delete {selectedMod.Title}?",
+            var areTheySure = MessageBox.Show(
+                Humanizer.ReplaceDynamic(Phrases.PopupText_SureDeleteQuestion, selectedMod.Title),
                 "Delete Mod", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes;
             if (!areTheySure) return;
 
@@ -371,7 +377,7 @@ namespace CT_MKWII_WPF.Views.Pages
                 System.Diagnostics.Process.Start("explorer", modDirectory);
             else
             {
-                MessageBox.Show("Mod folder does not exist", Common.Term_Error,
+                MessageBox.Show(Phrases.PopupText_NoModFolder, Common.Term_Error,
                                 MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
