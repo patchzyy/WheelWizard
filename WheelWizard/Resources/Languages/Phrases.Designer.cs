@@ -232,6 +232,60 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to apply the new scale?.
+        /// </summary>
+        public static string PopupText_ApplyScale {
+            get {
+                return ResourceManager.GetString("PopupText_ApplyScale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dolphin Emulator Folder Found.
+        /// </summary>
+        public static string PopupText_DolphinFound {
+            get {
+                return ResourceManager.GetString("PopupText_DolphinFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you dont know what all of this means, just click yes :) \nDolphin Emulator folder found. Would you like to use this folder?.
+        /// </summary>
+        public static string PopupText_DolphinFoundText {
+            get {
+                return ResourceManager.GetString("PopupText_DolphinFoundText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dolphin Emulator Folder Not Found.
+        /// </summary>
+        public static string PopupText_DolphinNotFound {
+            get {
+                return ResourceManager.GetString("PopupText_DolphinNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dolphin Emulator folder not automatically found. Please try and find the folder manually, click &apos;help&apos; for more information..
+        /// </summary>
+        public static string PopupText_DolphinNotFoundText {
+            get {
+                return ResourceManager.GetString("PopupText_DolphinNotFoundText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please ensure all paths are correct and try again..
+        /// </summary>
+        public static string PopupText_EnsurePathsExists {
+            get {
+                return ResourceManager.GetString("PopupText_EnsurePathsExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter Mod Name:.
         /// </summary>
         public static string PopupText_EnterModName {
@@ -363,6 +417,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         public static string PopupText_ProcessingXofY {
             get {
                 return ResourceManager.GetString("PopupText_ProcessingXofY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings saved successfully!.
+        /// </summary>
+        public static string PopupText_SettingsSaved {
+            get {
+                return ResourceManager.GetString("PopupText_SettingsSaved", resourceCulture);
             }
         }
         

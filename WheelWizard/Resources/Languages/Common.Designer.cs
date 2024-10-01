@@ -204,6 +204,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Revert.
+        /// </summary>
+        public static string Action_Revert {
+            get {
+                return ResourceManager.GetString("Action_Revert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string Action_Save {
@@ -443,6 +452,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         public static string Term_Speed {
             get {
                 return ResourceManager.GetString("Term_Speed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Success.
+        /// </summary>
+        public static string Term_Success {
+            get {
+                return ResourceManager.GetString("Term_Success", resourceCulture);
             }
         }
         

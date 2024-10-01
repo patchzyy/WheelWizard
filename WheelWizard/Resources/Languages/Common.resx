@@ -156,4 +156,10 @@
     <data name="Attribute_ModName" xml:space="preserve">
         <value>Mods Name</value>
     </data>
+    <data name="Term_Success" xml:space="preserve">
+        <value>Success</value>
+    </data>
+    <data name="Action_Revert" xml:space="preserve">
+        <value>Revert</value>
+    </data>
 </root>

@@ -169,4 +169,25 @@ To join a specific room, you'll need to either join through a friend, or hope to
     <data name="PopupText_ProcessingXofY" xml:space="preserve">
         <value>Processing {$1} of {$2} files...</value>
     </data>
+    <data name="PopupText_EnsurePathsExists" xml:space="preserve">
+        <value>Please ensure all paths are correct and try again.</value>
+    </data>
+    <data name="PopupText_SettingsSaved" xml:space="preserve">
+        <value>Settings saved successfully!</value>
+    </data>
+    <data name="PopupText_ApplyScale" xml:space="preserve">
+        <value>Do you want to apply the new scale?</value>
+    </data>
+    <data name="PopupText_DolphinFound" xml:space="preserve">
+        <value>Dolphin Emulator Folder Found</value>
+    </data>
+    <data name="PopupText_DolphinNotFound" xml:space="preserve">
+        <value>Dolphin Emulator Folder Not Found</value>
+    </data>
+    <data name="PopupText_DolphinFoundText" xml:space="preserve">
+        <value>If you dont know what all of this means, just click yes :) \nDolphin Emulator folder found. Would you like to use this folder?</value>
+    </data>
+    <data name="PopupText_DolphinNotFoundText" xml:space="preserve">
+        <value>Dolphin Emulator folder not automatically found. Please try and find the folder manually, click 'help' for more information.</value>
+    </data>
 </root>

@@ -162,4 +162,25 @@ Om aan een specifieke lobby, moet je deelnemen via een vriend, of hopen deel te 
     <data name="PopupText_ProcessingXofY" xml:space="preserve">
         <value>Verwerken van {$1} van {$2} bestanden...</value>
     </data>
+    <data name="PopupText_EnsurePathsExists" xml:space="preserve">
+        <value>Controleer of alle paden correct zijn en probeer het opnieuw.</value>
+    </data>
+    <data name="PopupText_SettingsSaved" xml:space="preserve">
+        <value>Instellingen succesvol opgeslagen!</value>
+    </data>
+    <data name="PopupText_ApplyScale" xml:space="preserve">
+        <value>Will je de nieuwe schaal toepassen?</value>
+    </data>
+    <data name="PopupText_DolphinNotFound" xml:space="preserve">
+        <value>Dolphin Emulator folder niet gevonden</value>
+    </data>
+    <data name="PopupText_DolphinFound" xml:space="preserve">
+        <value>Dolphin Emulator folder gevonden</value>
+    </data>
+    <data name="PopupText_DolphinNotFoundText" xml:space="preserve">
+        <value>Dolphin Emulator kan niet automatish gevonden worden. Probeer het handmatig.</value>
+    </data>
+    <data name="PopupText_DolphinFoundText" xml:space="preserve">
+        <value>Als je niet weet wat dit allemaal betekend, druk op ja :) \nEr is een Dolphin Emulator folder gevonden, wil je die gebruiken?</value>
+    </data>
 </root>

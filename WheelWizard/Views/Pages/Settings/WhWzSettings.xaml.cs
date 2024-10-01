@@ -1,5 +1,6 @@
 ﻿using CT_MKWII_WPF.Helpers;
 using CT_MKWII_WPF.Models.Settings;
+using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services;
 using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Views.Popups;
@@ -120,8 +121,8 @@ public partial class WhWzSettings : UserControl
             {
                 // Ask user if they want to use the automatically found folder
                 var result = MessageBox.Show(
-                    "If you dont know what all of this means, just click yes :)\n\nDolphin Emulator folder found. Would you like to use this folder?\n" +
-                    folderPath, "Dolphin Emulator Folder Found", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    $"{Phrases.PopupText_DolphinFoundText}\n{folderPath}", 
+                    Phrases.PopupText_DolphinFound, MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     DolphinUserPathInput.Text = folderPath;
@@ -131,8 +132,8 @@ public partial class WhWzSettings : UserControl
             else
             {
                 MessageBox.Show(
-                    "Dolphin Emulator folder not automatically found. Please try and find the folder manually, click 'help' for more information.",
-                    "Dolphin Emulator Folder Not Found", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Phrases.PopupText_DolphinNotFoundText,
+                    Phrases.PopupText_DolphinNotFound, MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
         
@@ -153,13 +154,13 @@ public partial class WhWzSettings : UserControl
         TogglePathSettings(false);
         if (!(SettingsHelper.PathsSetupCorrectly() && path1 && path2 && path3))
         {
-            MessageBox.Show("Please ensure all paths are correct and try again.", 
-                "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(Phrases.PopupText_EnsurePathsExists, 
+                Common.Term_Error, MessageBoxButton.OK, MessageBoxImage.Error);
         }
         else
         {
-            MessageBox.Show("Settings saved successfully!", 
-                "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(Phrases.PopupText_SettingsSaved, 
+                Common.Term_Success, MessageBoxButton.OK, MessageBoxImage.Information);
             
             // This is not really the best approach, but it works for now
             if (oldPath1 + oldPath2 + oldPath3 != DolphinExeInput.Text + MarioKartInput.Text + DolphinUserPathInput.Text)
@@ -218,8 +219,8 @@ public partial class WhWzSettings : UserControl
                               + $"unless you decide to keep the change.";
         
         var yesNoWindow = new YesNoWindow()
-                          .SetButtonText("Keep", "Revert")
-                          .SetMainText("Do you want to apply the new scale?")
+                          .SetButtonText(Common.Action_Apply, Common.Action_Revert)
+                          .SetMainText(Phrases.PopupText_ApplyScale)
                           .SetExtraText(ExtraText());
         // we want to now set up a timer every second to update the text, and at the last second close the window
         var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
