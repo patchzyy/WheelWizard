@@ -24,4 +24,61 @@
     <data name="ListTitle_Rooms" xml:space="preserve">
         <value>Salles</value>
     </data>
+    <data name="Button_ViewRoom" xml:space="preserve">
+        <value>Voir la salle</value>
+    </data>
+    <data name="ListTitle_Friends" xml:space="preserve">
+        <value>Amis</value>
+    </data>
+    <data name="ListTitle_Players" xml:space="preserve">
+        <value>Joueurs</value>
+    </data>
+    <data name="NoLicense" xml:space="preserve">
+        <value>Aucun Permis</value>
+    </data>
+    <data name="NoProfiles" xml:space="preserve">
+        <value>Aucun Profil</value>
+    </data>
+    <data name="Region_America" xml:space="preserve">
+        <value>Amérique</value>
+    </data>
+    <data name="Region_Australia" xml:space="preserve">
+        <value>Australie</value>
+    </data>
+    <data name="Region_China" xml:space="preserve">
+        <value>Chine</value>
+    </data>
+    <data name="Region_Europe" xml:space="preserve">
+        <value>Europe</value>
+    </data>
+    <data name="Region_Japan" xml:space="preserve">
+        <value>Japon</value>
+    </data>
+    <data name="Region_SouthKorea" xml:space="preserve">
+        <value>Corée Du Sud</value>
+    </data>
+    <data name="Region_Taiwan" xml:space="preserve">
+        <value>Taiwan</value>
+    </data>
+    <data name="Stat_FriendCode" xml:space="preserve">
+        <value>Code Ami</value>
+    </data>
+    <data name="Stat_Losses" xml:space="preserve">
+        <value>Défaites</value>
+    </data>
+    <data name="Stat_PlayerCount" xml:space="preserve">
+        <value>Joueurs</value>
+    </data>
+    <data name="Stat_RacesPlayed" xml:space="preserve">
+        <value>Course Jouées</value>
+    </data>
+    <data name="Stat_RoomID" xml:space="preserve">
+        <value>ID de la salle</value>
+    </data>
+    <data name="Stat_TimeOnline" xml:space="preserve">
+        <value>Temps en ligne</value>
+    </data>
+    <data name="Stat_Wins" xml:space="preserve">
+        <value>Victoire</value>
+    </data>
 </root>

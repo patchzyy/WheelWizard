@@ -63,4 +63,84 @@
     <data name="Placeholder_EnterPath" xml:space="preserve">
         <value>Choisissez le chemin désiré ici...</value>
     </data>
+    <data name="EmptyText_NoFriends" xml:space="preserve">
+        <value>Vous pouvez ajouter vos amis in-game</value>
+    </data>
+    <data name="EmptyText_NoFriends_Title" xml:space="preserve">
+        <value>Pas d'amis pour le moment !</value>
+    </data>
+    <data name="EmptyText_NoMods" xml:space="preserve">
+        <value>Les mods permettent de modifer comment le jeu va se comporter. Commencez à importer votre premier mod en cliquant sur le bouton en dessous.</value>
+    </data>
+    <data name="EmptyText_NoMods_Title" xml:space="preserve">
+        <value>Pas de mods trouvés</value>
+    </data>
+    <data name="EmptyText_NoProfiles" xml:space="preserve">
+        <value>Vous devez avoir lancé le jeu au moins une fois pour voir votre profil listé ici </value>
+    </data>
+    <data name="EmptyText_NoRooms" xml:space="preserve">
+        <value>Vous n'avez pas de connexion internet ou personne n'est en train de jouer.</value>
+    </data>
+    <data name="EmptyText_NoRooms_Title" xml:space="preserve">
+        <value>Aucune salles trouvées</value>
+    </data>
+    <data name="Hover_RoomsPageDisclaimer" xml:space="preserve">
+        <value>Attention, cete page ne propose pas la possibilité de rejoindre la salle directement.
+Pour rejoindre une salle spécifique, vous devez soit la rejoindre via un ami ou espérer de la rejoindre via les serveur en ligne.</value>
+    </data>
+    <data name="Placeholder_SearchForPlayers" xml:space="preserve">
+        <value>Recherche de joueurs...</value>
+    </data>
+    <data name="PopupText_EsimatedTimeRemaining" xml:space="preserve">
+        <value>Temps restant estimé: </value>
+    </data>
+    <data name="PopupText_InstallingMods" xml:space="preserve">
+        <value>Installation de mods</value>
+    </data>
+    <data name="PopupText_InstallingModsCount" xml:space="preserve">
+        <value>Installation de {$1} mods</value>
+    </data>
+    <data name="PopupText_ModsFound" xml:space="preserve">
+        <value>Mods trouvés </value>
+    </data>
+    <data name="PopupText_ModsFoundQuestion" xml:space="preserve">
+        <value>Vous êtes sur le point de lancer le jeu sans aucun mods.
+Voulez vous supprimer votre dossier My-Stuff ? </value>
+    </data>
+    <data name="PopupText_NotFindDolphin" xml:space="preserve">
+        <value>N'a pas pu trouver Dolphin Emulator, veuillez choisir le chemin dans les paramètres</value>
+    </data>
+    <data name="PopupText_NotFindGame" xml:space="preserve">
+        <value>N'a pas pu trouver le jeu, veuillez chosir le chemin dans les paramètres</value>
+    </data>
+    <data name="PupupText_DownloadingMb" xml:space="preserve">
+        <value>Téléchargement de {$1} MB</value>
+    </data>
+    <data name="Text_WhWzTranslationPercentage" xml:space="preserve">
+        <value>La traduction pour cette langue est fini à {$1}%</value>
+    </data>
+    <data name="Time_Days_1" xml:space="preserve">
+        <value>1 Jour </value>
+    </data>
+    <data name="Time_Days_x" xml:space="preserve">
+        <value>{$1} Jours</value>
+    </data>
+    <data name="Time_Hours_1" xml:space="preserve">
+        <value>1 heure</value>
+    </data>
+    <data name="Time_Hours_x" xml:space="preserve">
+        <value>{$1} heures</value>
+    </data>
+    <data name="Time_Minutes_1" xml:space="preserve">
+        <value>1 minute</value>
+    </data>
+    <data name="Time_Minutes_x" xml:space="preserve">
+        <value>{$1} minutes</value>
+    </data>
+    <data name="Time_Seconds_1" xml:space="preserve">
+        <value>1 seconde</value>
+    </data>
+    <data name="Time_Seconds_x" xml:space="preserve">
+        <value>{$1} secondes</value>
+    </data>
 </root>

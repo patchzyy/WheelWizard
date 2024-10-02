@@ -159,6 +159,24 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maybe Later.
+        /// </summary>
+        public static string Action_MaybeLater {
+            get {
+                return ResourceManager.GetString("Action_MaybeLater", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string Action_No {
+            get {
+                return ResourceManager.GetString("Action_No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
         public static string Action_OK {
@@ -227,6 +245,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         public static string Action_Update {
             get {
                 return ResourceManager.GetString("Action_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string Action_Yes {
+            get {
+                return ResourceManager.GetString("Action_Yes", resourceCulture);
             }
         }
         

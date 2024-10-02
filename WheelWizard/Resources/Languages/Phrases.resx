@@ -205,4 +205,67 @@ To join a specific room, you'll need to either join through a friend, or hope to
     <data name="PopupText_FailCheckUpdates" xml:space="preserve">
         <value>Failed to check for updates</value>
     </data>
+    <data name="PopupText_WhWzUpdateAvailable" xml:space="preserve">
+        <value>Wheel Wizard Update Available</value>
+    </data>
+    <data name="PopupText_UpdateAdmin" xml:space="preserve">
+        <value>Update using admin</value>
+    </data>
+    <data name="PopupText_UpdateAdminExplained" xml:space="preserve">
+        <value>Sometimes an update requires admin rights, do you want to active them for this update?</value>
+    </data>
+    <data name="PopupText_UnableUpdateWhWz_ReasonNetwork" xml:space="preserve">
+        <value>Unable to check if WheelWizard is up to date. \nYou might be experiencing network issues.</value>
+    </data>
+    <data name="PopupText_RestartAdminFail" xml:space="preserve">
+        <value>Failed to restart with administrator rights.</value>
+    </data>
+    <data name="PopupText_NewVersionWhWz" xml:space="preserve">
+        <value>Version {$1} of WheelWizard is available (currently on {$2}). Do you want to update now?</value>
+    </data>
+    <data name="PopupText_LatestWhWzGithub" xml:space="preserve">
+        <value>Getting the latest WheelWizard from github releases</value>
+    </data>
+    <data name="PopupText_UpdateWhWz" xml:space="preserve">
+        <value>Updating WheelWizard</value>
+    </data>
+    <data name="PopupText_UnableUpdateWhWz_ReasonLocation" xml:space="preserve">
+        <value>Unable to update WheelWizard. Please ensure the application is located in a folder that can be written to.\n Could not find current folder.</value>
+    </data>
+    <data name="PopupText_ReinstallRR" xml:space="preserve">
+        <value>Reinstall Retro Rewind</value>
+    </data>
+    <data name="PopupText_InstallingRR" xml:space="preserve">
+        <value>Installing Retro Rewind</value>
+    </data>
+    <data name="PopupText_InstallingRRFirstTime" xml:space="preserve">
+        <value>Installing Retro Rewind for the first time</value>
+    </data>
+    <data name="PopupText_AlreadyFilesRR" xml:space="preserve">
+        <value>There are already files in your RetroRewind Folder. Would you like to install?</value>
+    </data>
+    <data name="PopupText_CouldNotConnectServer" xml:space="preserve">
+        <value>Could not connect to the server. Please try again later.</value>
+    </data>
+    <data name="PopupText_OldRRFound" xml:space="preserve">
+        <value>Old Retro Rewind found</value>
+    </data>
+    <data name="PopupText_OldRRFoundExplained" xml:space="preserve">
+        <value>Old Retro Rewind files were found. Would you like to move them to the new location?</value>
+    </data>
+    <data name="PopupText_OldRksysFound" xml:space="preserve">
+        <value>Old rksys.dat found</value>
+    </data>
+    <data name="PopupText_OldRksysFoundExplained" xml:space="preserve">
+        <value>Old save data was found. Would you like to use it? (recommended</value>
+    </data>
+    <data name="PopupText_RRToOld" xml:space="preserve">
+        <value>Your version of Retro Rewind is too old to update. Would you like to reinstall Retro Rewind?</value>
+    </data>
+    <data name="PopupText_DownloadRR" xml:space="preserve">
+        <value>Download Retro Rewind</value>
+    </data>
+    <data name="PopupText_RRNotDeterment" xml:space="preserve">
+        <value>Your version of Retro Rewind could not be determined. Would you like to download Retro Rewind?</value>
+    </data>
 </root>

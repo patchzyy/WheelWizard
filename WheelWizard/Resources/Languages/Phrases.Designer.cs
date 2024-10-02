@@ -232,11 +232,29 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are already files in your RetroRewind Folder. Would you like to install?.
+        /// </summary>
+        public static string PopupText_AlreadyFilesRR {
+            get {
+                return ResourceManager.GetString("PopupText_AlreadyFilesRR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to apply the new scale?.
         /// </summary>
         public static string PopupText_ApplyScale {
             get {
                 return ResourceManager.GetString("PopupText_ApplyScale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not connect to the server. Please try again later..
+        /// </summary>
+        public static string PopupText_CouldNotConnectServer {
+            get {
+                return ResourceManager.GetString("PopupText_CouldNotConnectServer", resourceCulture);
             }
         }
         
@@ -273,6 +291,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         public static string PopupText_DolphinNotFoundText {
             get {
                 return ResourceManager.GetString("PopupText_DolphinNotFoundText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download Retro Rewind.
+        /// </summary>
+        public static string PopupText_DownloadRR {
+            get {
+                return ResourceManager.GetString("PopupText_DownloadRR", resourceCulture);
             }
         }
         
@@ -358,6 +385,33 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Installing Retro Rewind.
+        /// </summary>
+        public static string PopupText_InstallingRR {
+            get {
+                return ResourceManager.GetString("PopupText_InstallingRR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installing Retro Rewind for the first time.
+        /// </summary>
+        public static string PopupText_InstallingRRFirstTime {
+            get {
+                return ResourceManager.GetString("PopupText_InstallingRRFirstTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Getting the latest WheelWizard from github releases.
+        /// </summary>
+        public static string PopupText_LatestWhWzGithub {
+            get {
+                return ResourceManager.GetString("PopupText_LatestWhWzGithub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to combine all files into 1 mod?.
         /// </summary>
         public static string PopupText_ModCombineQuestion {
@@ -412,6 +466,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Version {$1} of WheelWizard is available (currently on {$2}). Do you want to update now?.
+        /// </summary>
+        public static string PopupText_NewVersionWhWz {
+            get {
+                return ResourceManager.GetString("PopupText_NewVersionWhWz", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mod folder does not exist.
         /// </summary>
         public static string PopupText_NoModFolder {
@@ -439,11 +502,83 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Old rksys.dat found.
+        /// </summary>
+        public static string PopupText_OldRksysFound {
+            get {
+                return ResourceManager.GetString("PopupText_OldRksysFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Old save data was found. Would you like to use it? (recommended.
+        /// </summary>
+        public static string PopupText_OldRksysFoundExplained {
+            get {
+                return ResourceManager.GetString("PopupText_OldRksysFoundExplained", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Old Retro Rewind found.
+        /// </summary>
+        public static string PopupText_OldRRFound {
+            get {
+                return ResourceManager.GetString("PopupText_OldRRFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Old Retro Rewind files were found. Would you like to move them to the new location?.
+        /// </summary>
+        public static string PopupText_OldRRFoundExplained {
+            get {
+                return ResourceManager.GetString("PopupText_OldRRFoundExplained", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Processing {$1} of {$2} files....
         /// </summary>
         public static string PopupText_ProcessingXofY {
             get {
                 return ResourceManager.GetString("PopupText_ProcessingXofY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reinstall Retro Rewind.
+        /// </summary>
+        public static string PopupText_ReinstallRR {
+            get {
+                return ResourceManager.GetString("PopupText_ReinstallRR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to restart with administrator rights..
+        /// </summary>
+        public static string PopupText_RestartAdminFail {
+            get {
+                return ResourceManager.GetString("PopupText_RestartAdminFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your version of Retro Rewind could not be determined. Would you like to download Retro Rewind?.
+        /// </summary>
+        public static string PopupText_RRNotDeterment {
+            get {
+                return ResourceManager.GetString("PopupText_RRNotDeterment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your version of Retro Rewind is too old to update. Would you like to reinstall Retro Rewind?.
+        /// </summary>
+        public static string PopupText_RRToOld {
+            get {
+                return ResourceManager.GetString("PopupText_RRToOld", resourceCulture);
             }
         }
         
@@ -475,11 +610,65 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to update WheelWizard. Please ensure the application is located in a folder that can be written to.\n Could not find current folder..
+        /// </summary>
+        public static string PopupText_UnableUpdateWhWz_ReasonLocation {
+            get {
+                return ResourceManager.GetString("PopupText_UnableUpdateWhWz_ReasonLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to check if WheelWizard is up to date. \nYou might be experiencing network issues..
+        /// </summary>
+        public static string PopupText_UnableUpdateWhWz_ReasonNetwork {
+            get {
+                return ResourceManager.GetString("PopupText_UnableUpdateWhWz_ReasonNetwork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update using admin.
+        /// </summary>
+        public static string PopupText_UpdateAdmin {
+            get {
+                return ResourceManager.GetString("PopupText_UpdateAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sometimes an update requires admin rights, do you want to active them for this update?.
+        /// </summary>
+        public static string PopupText_UpdateAdminExplained {
+            get {
+                return ResourceManager.GetString("PopupText_UpdateAdminExplained", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update Retro Rewind.
         /// </summary>
         public static string PopupText_UpdateRR {
             get {
                 return ResourceManager.GetString("PopupText_UpdateRR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updating WheelWizard.
+        /// </summary>
+        public static string PopupText_UpdateWhWz {
+            get {
+                return ResourceManager.GetString("PopupText_UpdateWhWz", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wheel Wizard Update Available.
+        /// </summary>
+        public static string PopupText_WhWzUpdateAvailable {
+            get {
+                return ResourceManager.GetString("PopupText_WhWzUpdateAvailable", resourceCulture);
             }
         }
         

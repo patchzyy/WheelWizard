@@ -1,4 +1,5 @@
 ﻿using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Views.Popups;
 using System;
@@ -24,8 +25,8 @@ public static class RetroRewindInstaller
     public static async Task<bool> HandleNotInstalled()
     {
         var result = MessageBox.Show(
-            "Your version of Retro Rewind could not be determined. Would you like to download Retro Rewind?",
-            "Download Retro Rewind", MessageBoxButton.YesNo);
+            Phrases.PopupText_RRNotDeterment,
+            Phrases.PopupText_DownloadRR, MessageBoxButton.YesNo);
 
         if (result == MessageBoxResult.No) return false;
 
@@ -36,8 +37,8 @@ public static class RetroRewindInstaller
     public static async Task<bool> HandleOldVersion()
     {
         var result = MessageBox.Show(
-            "Your version of Retro Rewind is too old to update. Would you like to reinstall Retro Rewind?",
-            "Reinstall Retro Rewind", MessageBoxButton.YesNo);
+            Phrases.PopupText_RRToOld,
+            Phrases.PopupText_ReinstallRR, MessageBoxButton.YesNo);
 
         if (result == MessageBoxResult.No) return false;
 
@@ -53,9 +54,8 @@ public static class RetroRewindInstaller
         if (hasOldrksys())
         {
             var rksysQuestion = new YesNoWindow()
-                                    .SetButtonText("Use", "Don't use")
-                                    .SetMainText("Old rksys.dat found")
-                                    .SetExtraText("Old save data was found. Would you like to use it? (recommended)");
+                                .SetMainText(Phrases.PopupText_OldRksysFound)
+                                .SetExtraText(Phrases.PopupText_OldRksysFoundExplained);
             if (rksysQuestion.AwaitAnswer()) 
                 await backupOldrksys();
 
@@ -63,9 +63,8 @@ public static class RetroRewindInstaller
         if (HasOldRR())
         {
             var retroRewindFound = new YesNoWindow()
-                                .SetButtonText("Use", "Don't use")
-                                .SetMainText("Old Retro Rewind found")
-                                .SetExtraText(  "Old Retro Rewind files were found. Would you like to move them to the new location?");
+                                .SetMainText(Phrases.PopupText_OldRRFound)
+                                .SetExtraText(Phrases.PopupText_OldRRFoundExplained);
             if (retroRewindFound.AwaitAnswer()) 
             {
                 HandleMovingOldRR();
@@ -75,8 +74,8 @@ public static class RetroRewindInstaller
         var serverResponse = await HttpClientHelper.GetAsync<string>(Endpoints.RRUrl);
         if (!serverResponse.Succeeded)
         {
-            MessageBox.Show("Could not connect to the server. Please try again later.", 
-                            "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(Phrases.PopupText_CouldNotConnectServer, 
+                            Common.Term_Error, MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
         var tempZipPath = Path.Combine(PathManager.LoadFolderPath, "Temp", "RetroRewind.zip");
@@ -85,8 +84,8 @@ public static class RetroRewindInstaller
 
     private static async Task HandleReinstall()
     {
-        var result = MessageBox.Show("There are already files in your RetroRewind Folder. Would you like to install?",
-            "Reinstall Retro Rewind", MessageBoxButton.YesNo);
+        var result = MessageBox.Show(Phrases.PopupText_AlreadyFilesRR,
+            Phrases.PopupText_ReinstallRR, MessageBoxButton.YesNo);
 
         if (result == MessageBoxResult.No) 
             return;
@@ -121,14 +120,14 @@ public static class RetroRewindInstaller
 
     private static async Task DownloadAndExtractRetroRewind(string tempZipPath)
     {
-        var progressWindow = new ProgressWindow("Installing Retro Rewind");
-        progressWindow.SetExtraText("Downloading Retro Rewind for the first time");
+        var progressWindow = new ProgressWindow(Phrases.PopupText_InstallingRR);
+        progressWindow.SetExtraText(Phrases.PopupText_InstallingRRFirstTime);
         progressWindow.Show();
 
         try
         {
             await DownloadHelper.DownloadToLocation(Endpoints.RRZipUrl, tempZipPath, progressWindow);
-            progressWindow.SetExtraText("Extracting files...");
+            progressWindow.SetExtraText(Common.State_Extracting);
             var extractionPath = PathManager.RiivolutionWhWzFolderPath;
             ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
         }

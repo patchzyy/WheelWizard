@@ -1,6 +1,7 @@
 ﻿using CT_MKWII_WPF.Helpers;
 using CT_MKWII_WPF.Models;
 using CT_MKWII_WPF.Models.Github;
+using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Views.Popups;
 using Semver;
 using System;
@@ -38,17 +39,18 @@ public static class AutoUpdater
             await UpdateAsync(latestRelease.Assets[0].BrowserDownloadUrl);
             return;
         }
+
         var updateQuestion = new YesNoWindow()
-                            .SetButtonText("Update now", "Maybe Later")
-                            .SetMainText("WheelWizard update available")
-                            .SetExtraText($"Version {latestVersion} of WheelWizard is available " +
-                                          $"(currently on {currentVersion}). Do you want to update now?");
+                             .SetButtonText(Common.Action_Update, Common.Action_MaybeLater)
+                             .SetMainText(Phrases.PopupText_WhWzUpdateAvailable)
+                             .SetExtraText(Humanizer.ReplaceDynamic(Phrases.PopupText_NewVersionWhWz,
+                                                                    latestVersion, currentVersion));
         if (!updateQuestion.AwaitAnswer()) 
             return;
         
         var adminQuestion = new YesNoWindow()
-                            .SetMainText("Update using admin")  
-                            .SetExtraText("Sometimes an update requires admin rights, do you want to active them for this update?");
+                            .SetMainText(Phrases.PopupText_UpdateAdmin)  
+                            .SetExtraText(Phrases.PopupText_UpdateAdminExplained);
         if (adminQuestion.AwaitAnswer())
             RestartAsAdmin();
         else
@@ -71,7 +73,7 @@ public static class AutoUpdater
         }
         catch (System.ComponentModel.Win32Exception)
         {
-            MessageBox.Show("Failed to restart with administrator rights.");
+            MessageBox.Show(Phrases.PopupText_RestartAdminFail);
         }
     }
     
@@ -100,15 +102,15 @@ public static class AutoUpdater
         var currentFolder = Path.GetDirectoryName(currentExecutablePath);
         if (currentFolder is null)
         {
-            MessageBox.Show("Unable to update WheelWizard. " +
-                            "Please ensure the application is located in a folder that can be written to.");
+            MessageBox.Show(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation);
             return;
         }
         var newFilePath = Path.Combine(currentFolder, currentExecutableName+"_new.exe");
         if (File.Exists(newFilePath))
             File.Delete(newFilePath);
         
-        await DownloadHelper.DownloadToLocation(downloadUrl, newFilePath, "Updating WheelWizard", "getting the latest WheelWizard from github releases");
+        await DownloadHelper.DownloadToLocation(downloadUrl, newFilePath, Phrases.PopupText_UpdateWhWz,
+                                                Phrases.PopupText_LatestWhWzGithub);
 
         // we need to wait a bit before running the batch file to ensure the file is saved on disk
         await Task.Delay(200);
@@ -122,8 +124,7 @@ public static class AutoUpdater
         var currentFolder = Path.GetDirectoryName(currentFilePath);
         if (currentFolder is null)
         {
-            MessageBox.Show("Unable to update WheelWizard. " +
-                            "Please ensure the application is located in a folder that can be written to.\n Could not find current folder.");
+            MessageBox.Show(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation);
             return;
         }
         var batchFilePath = Path.Combine(currentFolder, "update.bat");
@@ -149,10 +150,7 @@ public static class AutoUpdater
     private static void HandleUpdateCheckError(HttpClientResult<string> response)
     {
         if (response.StatusCodeGroup == 4 || response.StatusCode is 503 or 504)
-        {
-            MessageBox.Show("Unable to check if WheelWizard is up to date. " +
-                            "\nYou might be experiencing network issues.");
-        }
+            MessageBox.Show(Phrases.PopupText_UnableUpdateWhWz_ReasonNetwork);
         else
         {
             MessageBox.Show("An error occurred while checking for updates. Please try again later. " +

@@ -11,8 +11,8 @@ public partial class YesNoWindow : PopupContent
     public YesNoWindow() : base(true, false, "Wheel Wizard")
     {
         InitializeComponent();
-        YesButton.Text = Common.Term_Yes;
-        NoButton.Text = Common.Term_No;
+        YesButton.Text = Common.Action_Yes;
+        NoButton.Text = Common.Action_No;
     }
     
     public YesNoWindow SetMainText(string mainText)

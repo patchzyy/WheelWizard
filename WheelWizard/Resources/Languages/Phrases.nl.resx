@@ -198,4 +198,67 @@ Om aan een specifieke lobby, moet je deelnemen via een vriend, of hopen deel te 
     <data name="PopupText_FailCheckUpdates" xml:space="preserve">
         <value>Zoeken naar updates mislukt</value>
     </data>
+    <data name="PopupText_WhWzUpdateAvailable" xml:space="preserve">
+        <value>Wheel Wizard Update Beschikbaar</value>
+    </data>
+    <data name="PopupText_UpdateAdmin" xml:space="preserve">
+        <value>Update met behulp van admin</value>
+    </data>
+    <data name="PopupText_UpdateAdminExplained" xml:space="preserve">
+        <value>Soms is er voor een update admin rechten nodig, wilt je deze voor deze update activeren?</value>
+    </data>
+    <data name="PopupText_UnableUpdateWhWz_ReasonNetwork" xml:space="preserve">
+        <value>Kan niet controleren of WheelWizard up-to-date is. \nEr zijn mogelijk netwerkproblemen.</value>
+    </data>
+    <data name="PopupText_RestartAdminFail" xml:space="preserve">
+        <value>Het is niet gelukt om opnieuw op te starten met admin rechten.</value>
+    </data>
+    <data name="PopupText_NewVersionWhWz" xml:space="preserve">
+        <value>Versie {$1} van WheelWizard is beschikbaar (momenteel op {$2}). Wilt je nu updaten?</value>
+    </data>
+    <data name="PopupText_LatestWhWzGithub" xml:space="preserve">
+        <value>De nieuwste WheelWizard ophalen van github-releases</value>
+    </data>
+    <data name="PopupText_UpdateWhWz" xml:space="preserve">
+        <value>Updating WheelWizard</value>
+    </data>
+    <data name="PopupText_UnableUpdateWhWz_ReasonLocation" xml:space="preserve">
+        <value>WheelWizard kan niet worden ge-update. Zorg ervoor dat de applicatie zich in een folder bevindt waarnaar kan worden geschreven.\n Kan de huidige folder niet vinden.</value>
+    </data>
+    <data name="PopupText_ReinstallRR" xml:space="preserve">
+        <value>Retro Rewind Her-installeren</value>
+    </data>
+    <data name="PopupText_InstallingRR" xml:space="preserve">
+        <value>Retro Rewind Installeren</value>
+    </data>
+    <data name="PopupText_InstallingRRFirstTime" xml:space="preserve">
+        <value>Retro Rewind voor de eerste keer aan het installeren</value>
+    </data>
+    <data name="PopupText_AlreadyFilesRR" xml:space="preserve">
+        <value>Er staan ​​al bestanden in je RetroRewind folder. Wilt u deze her-installeren?</value>
+    </data>
+    <data name="PopupText_CouldNotConnectServer" xml:space="preserve">
+        <value>Kon geen verbinding maken met de server. Probeer het later opnieuw.</value>
+    </data>
+    <data name="PopupText_OldRRFound" xml:space="preserve">
+        <value>Oude Retro Rewind gevonden</value>
+    </data>
+    <data name="PopupText_OldRRFoundExplained" xml:space="preserve">
+        <value>Er zijn oude Retro Rewind-bestanden gevonden. Wilt u deze verplaatsen naar de nieuwe locatie?</value>
+    </data>
+    <data name="PopupText_OldRksysFoundExplained" xml:space="preserve">
+        <value>Oude 'save data' zijn gevonden. Wilt je deze gebruiken? (aanbevolen)</value>
+    </data>
+    <data name="PopupText_OldRksysFound" xml:space="preserve">
+        <value>Oude rksys.dat gevonden</value>
+    </data>
+    <data name="PopupText_RRToOld" xml:space="preserve">
+        <value>Je versie van Retro Rewind is te oud om te updaten. Wil je Retro Rewind opnieuw installeren?</value>
+    </data>
+    <data name="PopupText_DownloadRR" xml:space="preserve">
+        <value>Retro Rewind downloaden</value>
+    </data>
+    <data name="PopupText_RRNotDeterment" xml:space="preserve">
+        <value>Je versie van Retro Rewind kon niet worden bepaald. Wil je Retro Rewind downloaden?</value>
+    </data>
 </root>

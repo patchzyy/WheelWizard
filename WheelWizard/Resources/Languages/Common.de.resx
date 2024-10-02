@@ -138,7 +138,7 @@
     <data name="Term_Error" xml:space="preserve">
         <value>Fehler</value>
     </data>
-    <data name="Term_No" xml:space="preserve">
+    <data name="Action_No" xml:space="preserve">
         <value>Nein</value>
     </data>
     <data name="Term_Speed" xml:space="preserve">
@@ -146,6 +146,12 @@
     </data>
     <data name="Term_Warning" xml:space="preserve">
         <value>Warnung</value>
+    </data>
+    <data name="Action_Yes" xml:space="preserve">
+        <value>Ja</value>
+    </data>
+    <data name="Term_No" xml:space="preserve">
+        <value>Nein</value>
     </data>
     <data name="Term_Yes" xml:space="preserve">
         <value>Ja</value>

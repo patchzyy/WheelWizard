@@ -151,6 +151,9 @@
         <value>Turc</value>
     </data>
     <data name="CompletePercentage" xml:space="preserve">
-        <value>51</value>
+        <value>100</value>
+    </data>
+    <data name="Option_MakePrimary" xml:space="preserve">
+        <value>Défini par défaut</value>
     </data>
 </root>
