@@ -19,7 +19,7 @@ public partial class ProgressWindow : PopupContent
     private int _progress = 0;
     private double? _totalMb = null;
     
-    public ProgressWindow(string windowTitle) : base(false, false, windowTitle, new(400,230))
+    public ProgressWindow(string windowTitle) : base(false, false,true , windowTitle, new(400,230))
     {
         InitializeComponent();
     }

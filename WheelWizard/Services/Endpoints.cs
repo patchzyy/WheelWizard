@@ -20,4 +20,7 @@ public static class Endpoints
     public const string MiiStudioUrl = "https://qrcode.rc24.xyz/cgi-bin/studio.cgi";
     public const string MiiImageUrl = "https://studio.mii.nintendo.com/miis/image.png";
     public const string MiiChannelWAD = "-";
+    
+    //GameBanana
+    public const string GameBananaBaseUrl = "https://gamebanana.com/apiv11";
 }

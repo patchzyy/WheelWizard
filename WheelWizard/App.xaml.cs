@@ -1,5 +1,6 @@
 ﻿using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Settings;
+using CT_MKWII_WPF.Services.UrlProtocol;
 using System.Windows;
 
 namespace CT_MKWII_WPF;
@@ -10,5 +11,6 @@ public partial class App : Application
     {
         SettingsManager.Instance.LoadSettings();
         AutoUpdater.CheckForUpdatesAsync();
+        UrlProtocolManager.SetWhWzSchemeAsync();
     }
 }

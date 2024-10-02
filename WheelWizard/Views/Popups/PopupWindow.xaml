@@ -6,7 +6,7 @@
         xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         WindowStyle="None" WindowStartupLocation="CenterOwner"
-        ResizeMode="NoResize" Topmost="True"
+        ResizeMode="NoResize" Topmost="{Binding IsTopMost}"
         AllowsTransparency="True" Background="Transparent"
         Title="{Binding WindowTitle}" Width="400" Height="200">
     <Grid>

@@ -3,6 +3,7 @@ using CT_MKWII_WPF.Models;
 using CT_MKWII_WPF.Models.Settings;
 using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services.Launcher;
+using CT_MKWII_WPF.Services.UrlProtocol;
 using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
@@ -391,6 +392,30 @@ namespace CT_MKWII_WPF.Views.Pages
             Mods.Insert(newIndex, mySelectedMod);
 
             SaveMods();
+        }
+
+        private void SetupURLSceme(object sender, RoutedEventArgs e)
+        {
+            UrlProtocolManager.RegisterCustomScheme(UrlProtocolManager.ProtocolName);
+        }
+
+        private void CheckIfSet(object sender, RoutedEventArgs e)
+        {
+            bool isRegistered = UrlProtocolManager.IsCustomSchemeRegistered(UrlProtocolManager.ProtocolName);
+            MessageBox.Show(isRegistered ? "The URL scheme is registered" : "The URL scheme is not registered",
+                "URL Scheme", MessageBoxButton.OK, isRegistered ? MessageBoxImage.Information : MessageBoxImage.Warning);
+        }
+
+        private void RemoveUrlScheme(object sender, RoutedEventArgs e)
+        {
+            UrlProtocolManager.RemoveCustomScheme(UrlProtocolManager.ProtocolName);
+        }
+
+        private void openPopUp(object sender, RoutedEventArgs e)
+        {
+            var modPopup = new Views.Popups.ModPopupWindow();
+
+            modPopup.ShowDialog();
         }
     }
 }

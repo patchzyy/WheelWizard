@@ -8,6 +8,19 @@ namespace CT_MKWII_WPF.Views.Popups;
 
 public partial class PopupWindow : Window, INotifyPropertyChanged
 {
+    private bool _isTopMost = true;
+    
+    public bool IsTopMost
+    {
+        get => _isTopMost;
+        set
+        {
+            _isTopMost = value;
+            Topmost = value;
+            OnPropertyChanged(nameof(IsTopMost));
+        }
+    }
+    
     private bool _canClose = false;
     public bool CanClose
     {
@@ -36,10 +49,10 @@ public partial class PopupWindow : Window, INotifyPropertyChanged
     private readonly bool _allowLayoutInteraction;
     
     // Most (if not all) of these parameters should be set in the popup you create, and not kept as a parameter for that popup
-    public PopupWindow(bool allowClose, bool allowLayoutInteraction, string title = "", Vector? size = null)
+    public PopupWindow(bool allowClose, bool allowLayoutInteraction,bool isTopMost, string title = "", Vector? size = null)
     {
         size ??= new(400, 200);
-        
+        IsTopMost = isTopMost;
         CanClose = allowClose;
         WindowTitle = title;
         _allowLayoutInteraction = allowLayoutInteraction;

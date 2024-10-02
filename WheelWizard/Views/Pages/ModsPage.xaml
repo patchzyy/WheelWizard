@@ -20,6 +20,36 @@
                 VerticalAlignment="Bottom" />
         <TextBlock Grid.Row="0" Text="{x:Static lang:Common.PageTitle_Mods}" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                    Style="{StaticResource PageTitleText}" />
+        
+        <components:IconLabelButton IconSize="0"
+                                    VerticalAlignment="Top"
+                                    Text="Setup URL Scheme"
+                                    Color="{StaticResource TitleTextColor}"
+                                    FontSize="13"
+                                    HoverColor="{StaticResource ErrorTitleTextColor}"/>
+        <components:IconLabelButton IconSize="0"
+                                    VerticalAlignment="Top"
+                                    Text="Open Pop Up"
+                                    Color="{StaticResource TitleTextColor}"
+                                    FontSize="13"
+                                    HoverColor="{StaticResource ErrorTitleTextColor}"
+                                    Click="openPopUp" Margin="180,10,0,0" />
+        <components:IconLabelButton IconSize="0"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Right"
+                                    Text="RemoveUrlSceme"
+                                    Color="{StaticResource TitleTextColor}"
+                                    FontSize="13"
+                                    HoverColor="{StaticResource ErrorTitleTextColor}"
+                                    Click="RemoveUrlScheme" Margin="5,10,40,0" />
+        <components:IconLabelButton IconSize="0"
+                                    VerticalAlignment="Top"
+                                    Text="Check If URL Scheme Is Set"
+                                    Color="{StaticResource TitleTextColor}"
+                                    FontSize="13"
+                                    HoverColor="{StaticResource ErrorTitleTextColor}"
+                                    Click="CheckIfSet" Margin="5,30,0,0" />
+        
         <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="12"
                     Orientation="Horizontal" x:Name="TopBarButtons">
             <components:Button IconPack="FontAwesome" x:Name="EnableDisableButton"

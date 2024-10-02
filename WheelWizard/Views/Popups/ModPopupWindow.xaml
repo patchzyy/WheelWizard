@@ -1,0 +1,79 @@
+﻿<popups:PopupContent x:Class="CT_MKWII_WPF.Views.Popups.ModPopupWindow"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Popups"
+                    xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+                    xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                    xmlns:popups="clr-namespace:CT_MKWII_WPF.Views.Popups"
+                    Height="600" Width="800"
+                    mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Search Bar -->
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <TextBox x:Name="SearchTextBox" Width="300" Margin="0,0,10,0" VerticalContentAlignment="Center"/>
+            <Button Content="Search" Width="80" Click="Search_Click"/>
+        </StackPanel>
+
+        <!-- Mod List and Details -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Mod List -->
+            <ListView Name="ModListView" SelectionChanged="ModListView_SelectionChanged">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Width="50" Height="50" Source="{Binding _aPreviewMedia._aImages[0]._sBaseUrl}" Margin="0,0,10,0"/>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="{Binding _sName}" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding _aSubmitter._sName}" Foreground="Gray"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding _nLikeCount}" Foreground="Green" Margin="0,0,5,0"/>
+                                    <TextBlock Text="likes" Foreground="Gray" Margin="0,0,10,0"/>
+                                    <TextBlock Text="{Binding _nViewCount}" Foreground="Blue" Margin="0,0,5,0"/>
+                                    <TextBlock Text="views" Foreground="Gray"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!-- Mod Details -->
+            <Border Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" Margin="10,0,0,0" Padding="10">
+                <ScrollViewer>
+                    <StackPanel x:Name="ModDetailsPanel">
+                        <Image x:Name="ModImage" Height="200" Stretch="Uniform" Margin="0,0,0,10"/>
+                        <TextBlock x:Name="ModName" FontSize="18" FontWeight="Bold" TextWrapping="Wrap"/>
+                        <TextBlock x:Name="ModSubmitter" Foreground="Gray"/>
+                        <TextBlock x:Name="ModStats" Margin="0,10,0,0"/>
+                        <TextBlock x:Name="ModDescription" TextWrapping="Wrap" Margin="0,10,0,0"/>
+                        <Button Content="Download" Margin="0,10,0,0" Click="Download_Click"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+
+        <!-- Navigation Buttons -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+            <Button Content="Previous" Width="100" Margin="10,0" Click="PreviousPage_Click"/>
+            <TextBlock Text="{Binding CurrentPage}" FontSize="16" VerticalAlignment="Center"/>
+            <Button Content="Next" Width="100" Margin="10,0" Click="NextPage_Click"/>
+        </StackPanel>
+    </Grid>
+</popups:PopupContent>
