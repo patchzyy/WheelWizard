@@ -14,7 +14,7 @@ public static class RetroRewindLaunchHelper
     
     public static void GenerateLaunchJson()
     {
-        var fps30 = (bool)SettingsManager.FORCE_30FPS.Get();
+        //var fps30 = (bool)SettingsManager.FORCE_30FPS.Get();
         var language = (int)SettingsManager.RR_LANGUAGE.Get();
         var launchConfig = new LaunchConfig
         {
@@ -30,8 +30,8 @@ public static class RetroRewindLaunchHelper
                         {
                             new OptionConfig { Choice = 1, OptionName = "Pack", SectionName = "Retro Rewind" },
                             new OptionConfig { Choice = 2, OptionName = "My Stuff", SectionName = "Retro Rewind" },
-                            new OptionConfig { Choice = language, OptionName = "Language", SectionName = "Retro Rewind" },
-                            new OptionConfig { Choice = fps30 ? 1 : 0, OptionName = "Force 30 FPS", SectionName = "Retro Rewind" }
+                            new OptionConfig { Choice = language, OptionName = "Language", SectionName = "Retro Rewind" }
+                            //new OptionConfig { Choice = fps30 ? 1 : 0, OptionName = "Force 30 FPS", SectionName = "Retro Rewind" }
                         },
                         Root = PathManager.RiivolutionWhWzFolderPath,
                         Xml = XmlFilePath

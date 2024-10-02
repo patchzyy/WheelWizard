@@ -85,12 +85,6 @@
                                                        TipText="{x:Static lang:Settings.InfoText_Recommended}"/>
                         </CheckBox>
                         <CheckBox Margin="0,2" IsChecked="False"
-                                  Style="{StaticResource DarkSwitch}" Click="_30FPS_OnClick"
-                                  x:Name="Button30FPS">
-                            <components:FormFieldLabel Text="30 FPS"
-                                                       TipText="{x:Static lang:Settings.InfoText_30FPS}"/>
-                        </CheckBox>
-                        <CheckBox Margin="0,2" IsChecked="False"
                                   Style="{StaticResource DarkSwitch}" Click="ShowFPS_OnClick"
                                   x:Name="ShowFPSButton">
                             <components:FormFieldLabel Text="{x:Static lang:Settings.Option_ShowFPS}" />

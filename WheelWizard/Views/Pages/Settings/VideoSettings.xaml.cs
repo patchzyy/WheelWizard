@@ -30,7 +30,7 @@ public partial class VideoSettings : UserControl
         // Note that all the settings in this method only load when editing settings is enabled.
         VSyncButton.IsChecked = (bool)SettingsManager.VSYNC.Get();
         RecommendedButton.IsChecked = (bool)SettingsManager.RECOMMENDED_SETTINGS.Get();
-        Button30FPS.IsChecked = (bool)SettingsManager.FORCE_30FPS.Get();
+      
         ShowFPSButton.IsChecked = (bool)SettingsManager.SHOW_FPS.Get();
         var finalResolution = (int)SettingsManager.INTERNAL_RESOLUTION.Get();
         if (finalResolution < 0 || finalResolution > ResolutionStackPanel.Children.Count)
@@ -77,7 +77,6 @@ public partial class VideoSettings : UserControl
 
     private void VSync_OnClick(object sender, RoutedEventArgs e) => SettingsManager.VSYNC.Set(VSyncButton.IsChecked == true);
     private void Recommended_OnClick(object sender, RoutedEventArgs e) => SettingsManager.RECOMMENDED_SETTINGS.Set(RecommendedButton.IsChecked == true);
-    private void _30FPS_OnClick(object sender, RoutedEventArgs e) => SettingsManager.FORCE_30FPS.Set(Button30FPS.IsChecked == true);
     private void ShowFPS_OnClick(object sender, RoutedEventArgs e) => SettingsManager.SHOW_FPS.Set(ShowFPSButton.IsChecked == true);
 
     private void RendererDropdown_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

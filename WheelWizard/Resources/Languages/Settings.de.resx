@@ -79,7 +79,7 @@
         <value>Wiimote ausschalten erzwingen</value>
     </data>
     <data name="Option_LaunchWithDolphin" xml:space="preserve">
-        <value>Starte das Spiel mit einem Dolphin Fenster zusammen</value>
+        <value>Starte das Spiel mit dem Dolphin Fenster zusammen</value>
     </data>
     <data name="Option_MarioKartGame" xml:space="preserve">
         <value>Mario Kart Wii Spiel Datei</value>
