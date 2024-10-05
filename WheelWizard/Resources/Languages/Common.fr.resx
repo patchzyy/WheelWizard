@@ -156,4 +156,22 @@
     <data name="Action_No" xml:space="preserve">
         <value>Non</value>
     </data>
+    <data name="Action_MaybeLater" xml:space="preserve">
+        <value>Peut être plus tard </value>
+    </data>
+    <data name="Action_OK" xml:space="preserve">
+        <value>Ok</value>
+    </data>
+    <data name="Action_Revert" xml:space="preserve">
+        <value>Revenir en arrière </value>
+    </data>
+    <data name="Attribute_ModName" xml:space="preserve">
+        <value>Nom du Mod</value>
+    </data>
+    <data name="State_Extracting" xml:space="preserve">
+        <value>Extraction des fichers...</value>
+    </data>
+    <data name="Term_Success" xml:space="preserve">
+        <value>Succès </value>
+    </data>
 </root>

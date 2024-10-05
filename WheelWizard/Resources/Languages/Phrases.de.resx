@@ -142,4 +142,131 @@ Um einem bestimmten Raum beizutreten, musst Du entweder über einen Freund treff
     <data name="Time_Seconds_x" xml:space="preserve">
         <value>{$1} Sekunden</value>
     </data>
+    <data name="PopupText_AlreadyFilesRR" xml:space="preserve">
+        <value>In Deinem RetroRewind-Ordner befinden sich bereits Dateien. willst du sie dir installieren?</value>
+    </data>
+    <data name="PopupText_ApplyScale" xml:space="preserve">
+        <value>Möchtest du die neue Skala anwenden?</value>
+    </data>
+    <data name="PopupText_CouldNotConnectServer" xml:space="preserve">
+        <value>Es konnte keine Verbindung zum Server hergestellt werden. Bitte versuchen Sie es später noch einmal.</value>
+    </data>
+    <data name="PopupText_DolphinFound" xml:space="preserve">
+        <value>Dolphin Emulator Order gefunden</value>
+    </data>
+    <data name="PopupText_DolphinFoundText" xml:space="preserve">
+        <value>Wenn du nicht weißt, was das alles bedeutet, klick einfach auf „Ja“ :) \nDolphin Emulator-Ordner gefunden. Möchtest du diesen Ordner verwenden?</value>
+    </data>
+    <data name="PopupText_DolphinNotFound" xml:space="preserve">
+        <value>Dolphin Emulator Order nicht gefunden</value>
+    </data>
+    <data name="PopupText_DolphinNotFoundText" xml:space="preserve">
+        <value>Der Ordner „Dolphin Emulator“ wurde nicht automatisch gefunden. Versuche bitte, den Ordner manuell zu finden. Für weitere Informationen einfach auf „Hilfe“ klicken.</value>
+    </data>
+    <data name="PopupText_DownloadRR" xml:space="preserve">
+        <value>Installiere Retro Rewind</value>
+    </data>
+    <data name="PopupText_EnsurePathsExists" xml:space="preserve">
+        <value>Bitte stell es sicher, dass alle Pfade korrekt sind, und versuche es erneut
+</value>
+    </data>
+    <data name="PopupText_EnterModName" xml:space="preserve">
+        <value>Gib den Mod-Namen ein:</value>
+    </data>
+    <data name="PopupText_EnterTitle" xml:space="preserve">
+        <value>Titel eingeben:</value>
+    </data>
+    <data name="PopupText_FailCheckUpdates" xml:space="preserve">
+        <value>Die Suche nach Updates ist fehlgeschlagen</value>
+    </data>
+    <data name="PopupText_FailedUpdateApply" xml:space="preserve">
+        <value>Das Update konnte nicht angewendet werden.Abbruch.</value>
+    </data>
+    <data name="PopupText_FailedUpdateDelete" xml:space="preserve">
+        <value>Dateien für das Update konnten nicht gelöscht werden. Abbruch.</value>
+    </data>
+    <data name="PopupText_InstallingRR" xml:space="preserve">
+        <value>Installiere Retro Rewind</value>
+    </data>
+    <data name="PopupText_InstallingRRFirstTime" xml:space="preserve">
+        <value>Installiere Retro Rewind zum ersten mal</value>
+    </data>
+    <data name="PopupText_LatestWhWzGithub" xml:space="preserve">
+        <value>Beziehe die neueste WheelWizard-Version vom Github</value>
+    </data>
+    <data name="PopupText_ModCombineQuestion" xml:space="preserve">
+        <value>Möchtest du alle Dateien in einem Mod zusammenfassen?</value>
+    </data>
+    <data name="PopupText_ModNameEmpty" xml:space="preserve">
+        <value>Mod Name darf nicht leer sein</value>
+    </data>
+    <data name="PopupText_ModNameExists" xml:space="preserve">
+        <value>Eine Mod mit dem Namen '{$1}' existiert schon</value>
+    </data>
+    <data name="PopupText_MultipleFilesSelected" xml:space="preserve">
+        <value>Mehrere Datein ausgewählt</value>
+    </data>
+    <data name="PopupText_NewVersionWhWz" xml:space="preserve">
+        <value>Version {$1} von WheelWizard ist verfügbar (derzeit für {$2}). Möchtest Du jetzt updaten?</value>
+    </data>
+    <data name="PopupText_NoModFolder" xml:space="preserve">
+        <value>Mod Ordner existiert nicht</value>
+    </data>
+    <data name="PopupText_OldRksysFound" xml:space="preserve">
+        <value>Alte rksys.dat gefunden</value>
+    </data>
+    <data name="PopupText_OldRksysFoundExplained" xml:space="preserve">
+        <value>Alte Save Dateien wurden gefunden. Möchtest du sie benutzen? (Empfohlen)</value>
+    </data>
+    <data name="PopupText_OldRRFound" xml:space="preserve">
+        <value>Alte Retro Rewind Version gefunden</value>
+    </data>
+    <data name="PopupText_OldRRFoundExplained" xml:space="preserve">
+        <value>Es wurden alte Retro Rewind-Dateien gefunden. Möchtest Du sie an einem neuen Ort speichern?</value>
+    </data>
+    <data name="PopupText_ProcessingXofY" xml:space="preserve">
+        <value>{$1} von {$2} Dateien werden verarbeitet...</value>
+    </data>
+    <data name="PopupText_ReinstallRR" xml:space="preserve">
+        <value>Installiere Retro Rewind neu</value>
+    </data>
+    <data name="PopupText_RestartAdminFail" xml:space="preserve">
+        <value>Neustart mit Admin-Rechten fehlgeschlagen.</value>
+    </data>
+    <data name="PopupText_RRNotDeterment" xml:space="preserve">
+        <value>Deine Version von Retro Rewind konnte nicht ermittelt werden. Möchtest Du Retro Rewind herunterladen?</value>
+    </data>
+    <data name="PopupText_RRToOld" xml:space="preserve">
+        <value>Deine Version von Retro Rewind ist zu alt zum Aktualisieren. Möchtest Du Retro Rewind neu installieren?</value>
+    </data>
+    <data name="PopupText_RRUpToDate" xml:space="preserve">
+        <value>Retro Rewind ist auf dem neuesten Stand.</value>
+    </data>
+    <data name="PopupText_SettingsSaved" xml:space="preserve">
+        <value>Einstellungen erfolgreich gespeichert!</value>
+    </data>
+    <data name="PopupText_SureDeleteQuestion" xml:space="preserve">
+        <value>Bist du sicher, dass du {$1} löschen möchtest?</value>
+    </data>
+    <data name="PopupText_UnableUpdateWhWz_ReasonLocation" xml:space="preserve">
+        <value>WheelWizard kann nicht aktualisiert werden. Bitte stell es sicher, dass sich die Anwendung in einem Ordner befindet, in den geschrieben werden kann.\n Der aktuelle Ordner konnte nicht gefunden werden.</value>
+    </data>
+    <data name="PopupText_UnableUpdateWhWz_ReasonNetwork" xml:space="preserve">
+        <value>Es kann nicht überprüft werden, ob WheelWizard auf dem neuesten Stand ist. \nMöglicherweise treten derzeit Netzwerkprobleme auf.</value>
+    </data>
+    <data name="PopupText_UpdateAdmin" xml:space="preserve">
+        <value>Update mit Admin</value>
+    </data>
+    <data name="PopupText_UpdateAdminExplained" xml:space="preserve">
+        <value>Manchmal erfordert ein Update Admin rechte. Möchtest Du sie für diesen Update aktivieren?</value>
+    </data>
+    <data name="PopupText_UpdateRR" xml:space="preserve">
+        <value>Aktualisiere Retro Rewind</value>
+    </data>
+    <data name="PopupText_UpdateWhWz" xml:space="preserve">
+        <value>WheelWizard wird aktualisiert</value>
+    </data>
+    <data name="PopupText_WhWzUpdateAvailable" xml:space="preserve">
+        <value>Wheel Wizard Update verfügbar</value>
+    </data>
 </root>

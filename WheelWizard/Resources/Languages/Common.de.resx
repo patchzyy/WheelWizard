@@ -156,4 +156,22 @@
     <data name="Term_Yes" xml:space="preserve">
         <value>Ja</value>
     </data>
+    <data name="Action_MaybeLater" xml:space="preserve">
+        <value>Vielleicht Später</value>
+    </data>
+    <data name="Action_OK" xml:space="preserve">
+        <value>Ok</value>
+    </data>
+    <data name="Action_Revert" xml:space="preserve">
+        <value>Rückgängig machen</value>
+    </data>
+    <data name="Attribute_ModName" xml:space="preserve">
+        <value>Mod Name</value>
+    </data>
+    <data name="State_Extracting" xml:space="preserve">
+        <value>Extrahiere Datein</value>
+    </data>
+    <data name="Term_Success" xml:space="preserve">
+        <value>Erfolgreich</value>
+    </data>
 </root>

@@ -76,7 +76,7 @@
         <value>Wiimoteを強制的に無効にする</value>
     </data>
     <data name="Option_LaunchWithDolphin" xml:space="preserve">
-        <value>Doplhinウィンドウでゲームを起動する</value>
+        <value>Dolphinウィンドウでゲームを起動する</value>
     </data>
     <data name="Option_MakePrimary" xml:space="preserve">
         <value>このライセンスに切り替える</value>
@@ -154,6 +154,6 @@
         <value>トルコ語</value>
     </data>
     <data name="CompletePercentage" xml:space="preserve">
-        <value>73</value>
+        <value>55</value>
     </data>
 </root>

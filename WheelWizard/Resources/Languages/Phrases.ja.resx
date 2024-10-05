@@ -69,4 +69,7 @@
     <data name="Text_ThanksTranslators" xml:space="preserve">
         <value>すべての翻訳者さんに感謝します:</value>
     </data>
+    <data name="PopupText_InstallingRRFirstTime" xml:space="preserve">
+        <value> </value>
+    </data>
 </root>

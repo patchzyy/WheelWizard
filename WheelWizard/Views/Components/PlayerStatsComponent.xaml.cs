@@ -170,5 +170,12 @@ namespace CT_MKWII_WPF.Views.Components
                 return;
             }
         }
+
+        private void CopyFriendCode_OnClick(object sender, RoutedEventArgs e)
+        {
+            IDataObject dataObject = new DataObject();
+            dataObject.SetData(DataFormats.Text, FriendCode);
+            Clipboard.SetDataObject(dataObject);
+        }
     }
 }
