@@ -18,4 +18,253 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="EmptyText_NoFriends" xml:space="preserve">
+        <value>Puedes añadir amigos dentro del juego</value>
+    </data>
+    <data name="EmptyText_NoFriends_Title" xml:space="preserve">
+        <value>Aun no has agregado amigos</value>
+    </data>
+    <data name="EmptyText_NoMods" xml:space="preserve">
+        <value>Los mods pueden alterar el funcionamiento del juego. Importa tus mods apretando en el botón de abajo</value>
+    </data>
+    <data name="EmptyText_NoMods_Title" xml:space="preserve">
+        <value>No se encontraron mods.</value>
+    </data>
+    <data name="EmptyText_NoProfiles" xml:space="preserve">
+        <value>Tienes que jugar el juego mínimo una vez para poder ver tus perfiles listados aca.</value>
+    </data>
+    <data name="EmptyText_NoRooms" xml:space="preserve">
+        <value>Puedes no tener conexión a internet, o que nadie esté jugando actualmente.</value>
+    </data>
+    <data name="EmptyText_NoRooms_Title" xml:space="preserve">
+        <value>No se encontraron salas.</value>
+    </data>
+    <data name="Hover_FriendsOnline_0" xml:space="preserve">
+        <value>No hay amigos en línea</value>
+    </data>
+    <data name="Hover_FriendsOnline_1" xml:space="preserve">
+        <value>Hay 1 amigo en línea</value>
+    </data>
+    <data name="Hover_FriendsOnline_x" xml:space="preserve">
+        <value>Hay {$1} amigos en línea</value>
+    </data>
+    <data name="Hover_PlayersOnline_0" xml:space="preserve">
+        <value>No hay jugadores en línea</value>
+    </data>
+    <data name="Hover_PlayersOnline_1" xml:space="preserve">
+        <value>Hay 1 jugador en línea</value>
+    </data>
+    <data name="Hover_PlayersOnline_x" xml:space="preserve">
+        <value>Hay {$1} jugadores en línea</value>
+    </data>
+    <data name="Hover_RoomsOnline_0" xml:space="preserve">
+        <value>No hay salas activas</value>
+    </data>
+    <data name="Hover_RoomsOnline_1" xml:space="preserve">
+        <value>Hay una sala activa</value>
+    </data>
+    <data name="Hover_RoomsOnline_x" xml:space="preserve">
+        <value>Hay {$1} salas activas</value>
+    </data>
+    <data name="Hover_RoomsPageDisclaimer" xml:space="preserve">
+        <value>Atención. Esta pagina no tiene la funcionalidad de unirte a una sala directamente. Para unirte a una sala en especifico, necesitará unirse mediante un amigo, o con suerte, encontrando la sala en VS Mundial.</value>
+    </data>
+    <data name="Placeholder_EnterPath" xml:space="preserve">
+        <value>Ingrese la ruta deseada...</value>
+    </data>
+    <data name="Placeholder_SearchForPlayers" xml:space="preserve">
+        <value>Buscando jugadores...</value>
+    </data>
+    <data name="PopupText_AlreadyFilesRR" xml:space="preserve">
+        <value>Ya hay archivos en tu carpeta de Retro Rewind. ¿Desea instalar?</value>
+    </data>
+    <data name="PopupText_ApplyScale" xml:space="preserve">
+        <value>¿Desea aplicar la nueva escala?</value>
+    </data>
+    <data name="PopupText_CouldNotConnectServer" xml:space="preserve">
+        <value>No se pudo conectar al servidor. Intente de nuevo más tarde</value>
+    </data>
+    <data name="PopupText_DolphinFound" xml:space="preserve">
+        <value>Carpeta del Emulador Dolphin encontrado</value>
+    </data>
+    <data name="PopupText_DolphinFoundText" xml:space="preserve">
+        <value>Ante la duda, solo marque si\n. Carpeta del emulador Dolphin encontrado. ¿Desea usar esta carpeta?</value>
+    </data>
+    <data name="PopupText_DolphinNotFound" xml:space="preserve">
+        <value>Carpeta del Emulador Dolphin no encontrada</value>
+    </data>
+    <data name="PopupText_DolphinNotFoundText" xml:space="preserve">
+        <value>La carpeta del Emulador Dolphin no se encontró automaticamente. Intentelo manualmente. Aprete 'Ayuda' para más información.</value>
+    </data>
+    <data name="PopupText_DownloadRR" xml:space="preserve">
+        <value>Instalar Retro Rewind</value>
+    </data>
+    <data name="PopupText_EnsurePathsExists" xml:space="preserve">
+        <value>Asegurese de que todas las rutas sean correctas y vuelvalo a intentar.</value>
+    </data>
+    <data name="PopupText_EnterModName" xml:space="preserve">
+        <value>Ingrese nombre del mod:</value>
+    </data>
+    <data name="PopupText_EnterTitle" xml:space="preserve">
+        <value>Ingrese título:</value>
+    </data>
+    <data name="PopupText_EsimatedTimeRemaining" xml:space="preserve">
+        <value>Tiempo restante estimado:</value>
+    </data>
+    <data name="PopupText_FailCheckUpdates" xml:space="preserve">
+        <value>Error al buscar actualizaciones</value>
+    </data>
+    <data name="PopupText_FailedUpdateApply" xml:space="preserve">
+        <value>Error al aplicar una actualización. Cancelando.</value>
+    </data>
+    <data name="PopupText_FailedUpdateDelete" xml:space="preserve">
+        <value>Error al borrar archivos para la actualización. Cancelando</value>
+    </data>
+    <data name="PopupText_InstallingMods" xml:space="preserve">
+        <value>Instalando mods</value>
+    </data>
+    <data name="PopupText_InstallingModsCount" xml:space="preserve">
+        <value>Instalando {$1} mods</value>
+    </data>
+    <data name="PopupText_InstallingRR" xml:space="preserve">
+        <value>Instalando Retro Rewind</value>
+    </data>
+    <data name="PopupText_InstallingRRFirstTime" xml:space="preserve">
+        <value>Instalando Retro Rewind por primera vez</value>
+    </data>
+    <data name="PopupText_LatestWhWzGithub" xml:space="preserve">
+        <value>Obteniendo la ultima versión de WheelWizard desde Github</value>
+    </data>
+    <data name="PopupText_ModCombineQuestion" xml:space="preserve">
+        <value>¿Quiere combinar todos los archivos en un mod?</value>
+    </data>
+    <data name="PopupText_ModNameEmpty" xml:space="preserve">
+        <value>No puede dejar el nombre del mod en blanco.</value>
+    </data>
+    <data name="PopupText_ModNameExists" xml:space="preserve">
+        <value>Un mod con el nombre '{$1}' ya existe.</value>
+    </data>
+    <data name="PopupText_ModsFound" xml:space="preserve">
+        <value>Se encontraron mods</value>
+    </data>
+    <data name="PopupText_ModsFoundQuestion" xml:space="preserve">
+        <value>Estas a punto de lanzar el juego sin ningún mod. ¿Quieres vaciar tu carpeta My-Stuff?</value>
+    </data>
+    <data name="PopupText_MultipleFilesSelected" xml:space="preserve">
+        <value>Múltiples archivos seleccionados</value>
+    </data>
+    <data name="PopupText_NewVersionWhWz" xml:space="preserve">
+        <value>La version {$1} de WheelWizzard está disponible (Actualmente en {$2}). ¿Desea actualizar ahora?</value>
+    </data>
+    <data name="PopupText_NoModFolder" xml:space="preserve">
+        <value>No existe una carpeta de mods</value>
+    </data>
+    <data name="PopupText_NotFindDolphin" xml:space="preserve">
+        <value>No se encontró el Emulador Dolphin. Seleccione la ruta en ajustes.</value>
+    </data>
+    <data name="PopupText_NotFindGame" xml:space="preserve">
+        <value>No se encontró el juego. Seleccione la ruta en ajustes.</value>
+    </data>
+    <data name="PopupText_OldRksysFound" xml:space="preserve">
+        <value>Antiguo rksys.dat encontrado</value>
+    </data>
+    <data name="PopupText_OldRksysFoundExplained" xml:space="preserve">
+        <value>Se encontró data guardada antigua. ¿Desea usarla?</value>
+    </data>
+    <data name="PopupText_OldRRFound" xml:space="preserve">
+        <value>Version antigua de Retro Rewind encontrada.</value>
+    </data>
+    <data name="PopupText_OldRRFoundExplained" xml:space="preserve">
+        <value>Archivos antiguos de Retro Rewind fueron encontrados. ¿Desea moverlos a la nueva ubicación?</value>
+    </data>
+    <data name="PopupText_ProcessingXofY" xml:space="preserve">
+        <value>Procesando {$1} de {$2} archivos...</value>
+    </data>
+    <data name="PopupText_ReinstallRR" xml:space="preserve">
+        <value>Reinstalar Retro Rewind</value>
+    </data>
+    <data name="PopupText_RestartAdminFail" xml:space="preserve">
+        <value>Error al reinstalar con derechos de administrador.</value>
+    </data>
+    <data name="PopupText_RRNotDeterment" xml:space="preserve">
+        <value>No se pudo determinar tu versión de Retro Rewind. ¿Desea instalar Retro Rewind?</value>
+    </data>
+    <data name="PopupText_RRToOld" xml:space="preserve">
+        <value>Tu versión de Retro Rewind es muy antigua para actualizar. ¿Desea reinstalar Retro Rewind?</value>
+    </data>
+    <data name="PopupText_RRUpToDate" xml:space="preserve">
+        <value>Su versión de Retro Rewind es la última lanzada.</value>
+    </data>
+    <data name="PopupText_SettingsSaved" xml:space="preserve">
+        <value>Se guardaron correctamente los ajustes.</value>
+    </data>
+    <data name="PopupText_SureDeleteQuestion" xml:space="preserve">
+        <value>¿Estas seguro que deseas borrar {$1}?</value>
+    </data>
+    <data name="PopupText_UnableUpdateWhWz_ReasonLocation" xml:space="preserve">
+        <value>Incapaz de actualizar WheelWizard. Asegurate que la aplicación esta ubicada en una carpeta que se puede editar.\n No se encontró la carpeta actual.</value>
+    </data>
+    <data name="PopupText_UnableUpdateWhWz_ReasonNetwork" xml:space="preserve">
+        <value>Incapaz de confirmar la actualidad de su versión de WheelWizard.\n Podrías estar experimentando problemas de conexión.</value>
+    </data>
+    <data name="PopupText_UpdateAdmin" xml:space="preserve">
+        <value>Actualizando usando administrador</value>
+    </data>
+    <data name="PopupText_UpdateAdminExplained" xml:space="preserve">
+        <value>A veces una actualización requiere derechos de administrador. ¿Desea activarlo para esta actualización?</value>
+    </data>
+    <data name="PopupText_UpdateRR" xml:space="preserve">
+        <value>Actualizar Retro Rewind</value>
+    </data>
+    <data name="PopupText_UpdateWhWz" xml:space="preserve">
+        <value>Actualizando WheelWizard</value>
+    </data>
+    <data name="PopupText_WhWzUpdateAvailable" xml:space="preserve">
+        <value>Actualización de WheelWizard disponible</value>
+    </data>
+    <data name="PupupText_DownloadingMb" xml:space="preserve">
+        <value>Descargando {$1} MB</value>
+    </data>
+    <data name="Sidebar_Link_Discord" xml:space="preserve">
+        <value>¡Habla con nosotros!</value>
+    </data>
+    <data name="Sidebar_Link_Github" xml:space="preserve">
+        <value>Codigo Fuente</value>
+    </data>
+    <data name="Sidebar_Link_Support" xml:space="preserve">
+        <value>¡Apoyanos!</value>
+    </data>
+    <data name="Text_MadeByString" xml:space="preserve">
+        <value>Hecho por: {$1} y {$2}</value>
+    </data>
+    <data name="Text_ThanksTranslators" xml:space="preserve">
+        <value>Muchas gracias a todos los traductores:</value>
+    </data>
+    <data name="Text_WhWzTranslationPercentage" xml:space="preserve">
+        <value>La traducción de este idioma está a un {$1}%.</value>
+    </data>
+    <data name="Time_Days_1" xml:space="preserve">
+        <value>1 día</value>
+    </data>
+    <data name="Time_Days_x" xml:space="preserve">
+        <value>{$1} días</value>
+    </data>
+    <data name="Time_Hours_1" xml:space="preserve">
+        <value>1 hora</value>
+    </data>
+    <data name="Time_Hours_x" xml:space="preserve">
+        <value>{$1} horas</value>
+    </data>
+    <data name="Time_Minutes_1" xml:space="preserve">
+        <value>1 minuto</value>
+    </data>
+    <data name="Time_Minutes_x" xml:space="preserve">
+        <value>{$1} minutos</value>
+    </data>
+    <data name="Time_Seconds_1" xml:space="preserve">
+        <value>1 segundo</value>
+    </data>
+    <data name="Time_Seconds_x" xml:space="preserve">
+        <value>{$1} segundos</value>
+    </data>
 </root>

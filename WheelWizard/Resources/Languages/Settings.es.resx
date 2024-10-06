@@ -22,7 +22,7 @@
         <value>Español</value>
     </data>
     <data name="Value_Language_Spanish" xml:space="preserve">
-        <value>español</value>
+        <value>Español</value>
     </data>
     <data name="Value_Language_GermanOg" xml:space="preserve">
         <value>Deutsch</value>
@@ -46,6 +46,111 @@
         <value>-</value>
     </data>
     <data name="CompletePercentage" xml:space="preserve">
-        <value>0</value>
+        <value>100</value>
+    </data>
+    <data name="Category_Video" xml:space="preserve">
+        <value>Video</value>
+    </data>
+    <data name="InfoText_30FPS" xml:space="preserve">
+        <value>Este ajuste forzará al juego a correr en 30 FPS (Lo normal es 60)</value>
+    </data>
+    <data name="InfoText_EndWithExe" xml:space="preserve">
+        <value>La ruta debe terminar en un .exe</value>
+    </data>
+    <data name="InfoText_ForceDisableWiimote" xml:space="preserve">
+        <value>Este ajuste desactiva el Wiimote en juego, pero lo activa para el Canal Wii</value>
+    </data>
+    <data name="InfoText_LaunchWithDolphin" xml:space="preserve">
+        <value>Se lanzará la ventana principal de Dolphin junto con el juego</value>
+    </data>
+    <data name="InfoText_Recommended" xml:space="preserve">
+        <value>Este ajuste cambiará ciertas configuraciones de Dolphin para reducir problemas de lag</value>
+    </data>
+    <data name="InfoText_ResolutionScale" xml:space="preserve">
+        <value>1x es la resolución nativa</value>
+    </data>
+    <data name="InfoText_Topbar_LocationWarning" xml:space="preserve">
+        <value>Ajustes desactivados, complete la ubicación de los ajustes primero</value>
+    </data>
+    <data name="Option_DolphinEmulatorExe" xml:space="preserve">
+        <value>Emulador Dolphin Ejecutable</value>
+    </data>
+    <data name="Option_DolphinUserPath" xml:space="preserve">
+        <value>Carpeta de Usuario de Dolphin</value>
+    </data>
+    <data name="Option_ForceDisableWiimote" xml:space="preserve">
+        <value>Forzar a desactivar Wiimote</value>
+    </data>
+    <data name="Option_LaunchWithDolphin" xml:space="preserve">
+        <value>Lanzar juego con la ventana de Dolphin</value>
+    </data>
+    <data name="Option_MakePrimary" xml:space="preserve">
+        <value>Hacer primaria</value>
+    </data>
+    <data name="Option_MarioKartGame" xml:space="preserve">
+        <value>Archivo del juego Mario Kart Wii</value>
+    </data>
+    <data name="Option_OpenConfig" xml:space="preserve">
+        <value>Abrir carpeta de configuraciones</value>
+    </data>
+    <data name="Option_Recommended" xml:space="preserve">
+        <value>Ajustes recomendados</value>
+    </data>
+    <data name="Option_Renderer" xml:space="preserve">
+        <value>Renderizar</value>
+    </data>
+    <data name="Option_RRLanguage" xml:space="preserve">
+        <value>Idioma de Retro Rewind</value>
+    </data>
+    <data name="Option_ShowFPS" xml:space="preserve">
+        <value>Mostrar FPS</value>
+    </data>
+    <data name="Option_VSync" xml:space="preserve">
+        <value>VSync</value>
+    </data>
+    <data name="Option_WhWzLanguage" xml:space="preserve">
+        <value>Idioma de WheelWizard</value>
+    </data>
+    <data name="Option_WindowScale" xml:space="preserve">
+        <value>Escala de la ventana</value>
+    </data>
+    <data name="Section_Language" xml:space="preserve">
+        <value>Idioma</value>
+    </data>
+    <data name="Section_LocationPaths" xml:space="preserve">
+        <value>Ubicación de ajustes</value>
+    </data>
+    <data name="Section_Performance" xml:space="preserve">
+        <value>Ajustes de performance</value>
+    </data>
+    <data name="Section_Renderer" xml:space="preserve">
+        <value>Ajustes de renderizado</value>
+    </data>
+    <data name="Section_Resolution" xml:space="preserve">
+        <value>Resolución</value>
+    </data>
+    <data name="Section_WhWzAppearance" xml:space="preserve">
+        <value>Apariencia de WheelWizard</value>
+    </data>
+    <data name="Section_Wii" xml:space="preserve">
+        <value>Ajustes de Wii</value>
+    </data>
+    <data name="Value_Language_Dutch" xml:space="preserve">
+        <value>Neerlandés</value>
+    </data>
+    <data name="Value_Language_English" xml:space="preserve">
+        <value>Inglés</value>
+    </data>
+    <data name="Value_Language_France" xml:space="preserve">
+        <value>Francés</value>
+    </data>
+    <data name="Value_Language_German" xml:space="preserve">
+        <value>Alemán</value>
+    </data>
+    <data name="Value_Language_Italian" xml:space="preserve">
+        <value>Italiano</value>
+    </data>
+    <data name="Value_Language_Japanese" xml:space="preserve">
+        <value>Japonés</value>
     </data>
 </root>

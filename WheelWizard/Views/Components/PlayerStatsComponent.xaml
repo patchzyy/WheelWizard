@@ -108,7 +108,6 @@
         </StackPanel>
         <TextBlock Text="{Binding OnlineText}" HorizontalAlignment="Right" VerticalAlignment="Top"
                    Style="{StaticResource TitleText}"
-                   FontSize="25"
-                   Margin="0,20,20,0"/>
+                   FontSize="18" Margin="0,27"/>
     </Grid>
 </UserControl>
