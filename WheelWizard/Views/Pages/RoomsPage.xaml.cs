@@ -1,4 +1,5 @@
 ﻿using CT_MKWII_WPF.Models.RRInfo;
+using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services.LiveData;
 using CT_MKWII_WPF.Utilities.RepeatedTasks;
 using System;
@@ -79,7 +80,7 @@ public sealed partial class RoomsPage : Page, INotifyPropertyChanged, IRepeatedT
         Players = new ObservableCollection<Player>();
         RRLiveRooms.Instance.Subscribe(this);
 
-        RoomsView.SortingFunctions.Add("Players", PlayerCountComparable);
+        RoomsView.SortingFunctions.Add(Online.Stat_PlayerCount, PlayerCountComparable);
         RoomsView.SortingFunctions.Add("TimeOnline", TimeOnlineComparable);
 
         PlayersListView.SortingFunctions.Add("Ev", VrComparable);

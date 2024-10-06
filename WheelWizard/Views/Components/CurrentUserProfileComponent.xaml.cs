@@ -1,13 +1,12 @@
 ﻿using CT_MKWII_WPF.Models.RRInfo;
-using CT_MKWII_WPF.Services.WiiManagement;
+using CT_MKWII_WPF.Models.Settings;
+using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services.WiiManagement.SaveData;
 using CT_MKWII_WPF.Views.Pages;
 using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace CT_MKWII_WPF.Views.Components
@@ -22,7 +21,7 @@ namespace CT_MKWII_WPF.Views.Components
             get => _playerName;
             set
             {
-                _playerName = value;
+                _playerName = value == SettingValues.NoName ? Online.NoName : value;
                 OnPropertyChanged(nameof(PlayerName));
             }
         }
@@ -92,6 +91,12 @@ namespace CT_MKWII_WPF.Views.Components
             GameDataLoader.Instance.RefreshOnlineStatus();
             var currentUser = GameDataLoader.Instance.GetCurrentUser;
             PlayerName = currentUser.MiiName;
+            
+            if (PlayerName == SettingValues.NoName)
+                PlayerName = Online.NoName;
+            if (PlayerName == SettingValues.NoLicense)
+                PlayerName = Online.NoLicense;
+            
             FriendCode = currentUser.FriendCode;
             VrAndBr = "VR: " + currentUser.Vr;
             Mii = currentUser.Mii;

@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Pages"
       xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
       xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      xmlns:lang="clr-namespace:CT_MKWII_WPF.Resources.Languages"
       mc:Ignorable="d"
       d:DesignHeight="831" d:DesignWidth="444"
       Title="FriendsPage" Background="Transparent">
@@ -16,7 +17,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-            <TextBlock Text="Friends" Style="{StaticResource PageTitleText}" />
+            <TextBlock Text="{x:Static lang:Common.PageTitle_Friends}" Style="{StaticResource PageTitleText}" />
             <Border ToolTipService.InitialShowDelay="50" VerticalAlignment="Center"
                     ToolTipService.ShowDuration="50000" HorizontalAlignment="Center"
                     ToolTipService.BetweenShowDelay="0">
@@ -39,8 +40,8 @@
                 VerticalAlignment="Bottom" />
         
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="VisibleWithoutFriends">
-            <components:EmptyPageInfo HorizontalAlignment="Center" Title="No Friends found"
-                                      Body="You can add friends in-game" />
+            <components:EmptyPageInfo HorizontalAlignment="Center" Title="{x:Static lang:Phrases.EmptyText_NoFriends_Title}"
+                                      Body="{x:Static lang:Phrases.EmptyText_NoFriends}"/>
         </StackPanel>
         
         <Grid Grid.Row="1" VerticalAlignment="Stretch" x:Name="VisibleWithFriends">
@@ -50,11 +51,13 @@
             </Grid.RowDefinitions>
             
             <components:StaticListView Grid.Row="0" x:Name="FriendsListView"
-                                       ItemsSource="{Binding FriendsList}" ListTitle="Friends"
+                                       ItemsSource="{Binding FriendsList}" 
+                                       ListTitle="{x:Static lang:Online.ListTitle_Friends}"
                                        SelectionChanged="FriendListView_SelectionChanged">
                 <components:StaticListView.ItemContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Copy friend code" Click="CopyFriendCode_OnClick" />
+                        <MenuItem Header="{x:Static lang:Common.Action_CopyFriendCode}" 
+                                  Click="CopyFriendCode_OnClick" />
                     </ContextMenu>
                 </components:StaticListView.ItemContextMenu>
                 
@@ -78,15 +81,15 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding MiiName}" Width="100"
+                        <GridViewColumn Header="{x:Static lang:Common.Attribute_Name}" DisplayMemberBinding="{Binding MiiName}" Width="100"
                                         components:StaticListView.IsSortable="True" />
-                        <GridViewColumn Header="Friend Code" DisplayMemberBinding="{Binding FriendCode}" Width="150"
+                        <GridViewColumn Header="{x:Static lang:Online.Stat_FriendCode}" DisplayMemberBinding="{Binding FriendCode}" Width="140"
                                         components:StaticListView.IsSortable="True" />
                         <!-- <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Vr}" Width="60" -->
                         <!--                 components:StaticListView.IsSortable="True" /> -->
-                        <GridViewColumn Header="Wins" DisplayMemberBinding="{Binding Wins}" Width="60"
+                        <GridViewColumn Header="{x:Static lang:Online.Stat_Wins}" DisplayMemberBinding="{Binding Wins}" Width="70"
                                         components:StaticListView.IsSortable="True" />
-                        <GridViewColumn Header="Losses" DisplayMemberBinding="{Binding Losses}" Width="80"
+                        <GridViewColumn Header="{x:Static lang:Online.Stat_Losses}" DisplayMemberBinding="{Binding Losses}" Width="80"
                                         components:StaticListView.IsSortable="True" />
                     </GridView>
                 </ListView.View>

@@ -1,4 +1,5 @@
 ﻿using CT_MKWII_WPF.Models.Settings;
+using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services.Settings;
 using System;
 using System.Linq;
@@ -29,7 +30,7 @@ public partial class VideoSettings : UserControl
         // Note that all the settings in this method only load when editing settings is enabled.
         VSyncButton.IsChecked = (bool)SettingsManager.VSYNC.Get();
         RecommendedButton.IsChecked = (bool)SettingsManager.RECOMMENDED_SETTINGS.Get();
-        Button30FPS.IsChecked = (bool)SettingsManager.FORCE_30FPS.Get();
+      
         ShowFPSButton.IsChecked = (bool)SettingsManager.SHOW_FPS.Get();
         var finalResolution = (int)SettingsManager.INTERNAL_RESOLUTION.Get();
         if (finalResolution < 0 || finalResolution > ResolutionStackPanel.Children.Count)
@@ -54,31 +55,16 @@ public partial class VideoSettings : UserControl
         // -----------------
         // Render Dropdown
         // -----------------
-        foreach (var renderer in SettingValues.GFXRenderers.AllKeys)
+        foreach (var renderer in SettingValues.GFXRenderers.Keys)
         {
             RendererDropdown.Items.Add(renderer);
         }
         
         var currentRenderer = (string)SettingsManager.GFX_BACKEND.Get();
-        var renderDisplayName = SettingValues.GFXRenderers.Mapping
+        var renderDisplayName = SettingValues.GFXRenderers
                                        .FirstOrDefault(x => x.Value == currentRenderer).Key;
         if (renderDisplayName != null)
             RendererDropdown.SelectedItem = renderDisplayName;
-        
-        // -----------------
-        // Language Dropdown
-        // -----------------
-        foreach (var language in SettingValues.Languages.AllKeys)
-        {
-            LanguageDropdown.Items.Add(language);
-        }
-        
-        var currentLanguage = (int)SettingsManager.RR_LANGUAGE.Get();
-        var languageDisplayName = SettingValues.Languages.Mapping
-                                       .FirstOrDefault(x => x.Value == currentLanguage).Key;
-
-        if (languageDisplayName != null)
-            LanguageDropdown.SelectedItem = languageDisplayName;
     }
 
     private void UpdateResolution(object sender, RoutedEventArgs e)
@@ -91,26 +77,14 @@ public partial class VideoSettings : UserControl
 
     private void VSync_OnClick(object sender, RoutedEventArgs e) => SettingsManager.VSYNC.Set(VSyncButton.IsChecked == true);
     private void Recommended_OnClick(object sender, RoutedEventArgs e) => SettingsManager.RECOMMENDED_SETTINGS.Set(RecommendedButton.IsChecked == true);
-    private void _30FPS_OnClick(object sender, RoutedEventArgs e) => SettingsManager.FORCE_30FPS.Set(Button30FPS.IsChecked == true);
     private void ShowFPS_OnClick(object sender, RoutedEventArgs e) => SettingsManager.SHOW_FPS.Set(ShowFPSButton.IsChecked == true);
 
     private void RendererDropdown_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var selectedDisplayName = RendererDropdown.SelectedItem.ToString();
-        if (SettingValues.GFXRenderers.Mapping.TryGetValue(selectedDisplayName, out var actualValue))
+        if (SettingValues.GFXRenderers.TryGetValue(selectedDisplayName, out var actualValue))
             SettingsManager.GFX_BACKEND.Set(actualValue);
         else
-            MessageBox.Show($"Warning: Unknown renderer selected: {selectedDisplayName}");
-    }
-    
-    private void LanguageDropdown_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        var selectedLanguage = LanguageDropdown.SelectedItem.ToString();
-        if (SettingValues.Languages.Mapping.TryGetValue(selectedLanguage, out var actualValue))
-            SettingsManager.RR_LANGUAGE.Set(actualValue);
-        else
-        {
-            Console.WriteLine($"Warning: Unknown language selected: {selectedLanguage}");
-        }
+            MessageBox.Show($"{Common.Term_Warning}: Unknown renderer selected: {selectedDisplayName}");
     }
 }

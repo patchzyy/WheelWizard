@@ -1,3 +1,6 @@
+using CT_MKWII_WPF.Services.LiveData;
+using CT_MKWII_WPF.Services.WiiManagement.SaveData;
+using CT_MKWII_WPF.Utilities.RepeatedTasks;
 using System.Windows.Controls;
 
 namespace CT_MKWII_WPF.Views;
@@ -31,4 +34,29 @@ public static class ViewUtils
 
     public static Layout GetLayout() => (Layout)Application.Current.MainWindow!;
     public static void NavigateToPage(Page page) => GetLayout().NavigateToPage(page);
+
+    public static void RefreshWindow(Page? destinationPage = null)
+    {
+        Layout newWindow = destinationPage == null ? new() : new(destinationPage);
+        
+        var oldWindow = Application.Current.MainWindow;
+        Application.Current.MainWindow = newWindow;
+        // Set position of new window to the position of the old window
+        newWindow.Left = oldWindow!.Left;
+        newWindow.Top = oldWindow.Top;
+        if (oldWindow is IRepeatedTaskListener oldListener)
+        {
+            // Unsubscribing is not really necessary. But i guess it prevents memory leaks when someone is 
+            // someone is refreshing the window a lot (happens when changing the language e.g.
+            // So they would have to change the language like 1000 of times in a row)
+            LiveAlertsManager.Instance.Unsubscribe(oldListener);
+            RRLiveRooms.Instance.Unsubscribe(oldListener);
+            GameDataLoader.Instance.Unsubscribe(oldListener);
+        }
+
+        newWindow.Show();
+        oldWindow.Close();
+
+        newWindow.UpdatePlayerAndRoomCount(RRLiveRooms.Instance);
+    }
 }

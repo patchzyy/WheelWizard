@@ -14,6 +14,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
         xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
         xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Pages"
         xmlns:sink="clr-namespace:CT_MKWII_WPF.Views.Pages.KitchenSink"
+        xmlns:lang="clr-namespace:CT_MKWII_WPF.Resources.Languages"
         xmlns:settings="clr-namespace:CT_MKWII_WPF.Views.Pages.Settings"
         mc:Ignorable="d"
         d:DesignHeight="876" d:DesignWidth="656"
@@ -105,12 +106,12 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                 <components:StateBox x:Name="PlayerCountBox" IsDark="True" Text="0"
                                      IconPack="FontAwesome" TipAlignment="TopLeft"
                                      IconKind="{x:Static icon:PackIconFontAwesomeKind.UserGroupSolid}"
-                                     TipText="There are currently no players online"
+                                     TipText="{x:Static lang:Phrases.Hover_PlayersOnline_0}"
                                      Margin="10,0,0,0" />
                 <components:StateBox x:Name="RoomCountBox" IsDark="True" Text="0"
                                      IconPack="FontAwesome" TipAlignment="TopLeft"
                                      IconKind="{x:Static icon:PackIconFontAwesomeKind.UsersRectangleSolid}"
-                                     TipText="There are currently no rooms active"
+                                     TipText="{x:Static lang:Phrases.Hover_RoomsOnline_0}"
                                      Margin="10,0,0,0" />
             </StackPanel>
 
@@ -121,8 +122,8 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                     ToolTipService.ShowDuration="10000"
                     ToolTipService.BetweenShowDelay="0" Margin="10">
                 <StackPanel>
-                    <TextBlock Style="{StaticResource TinyText}" Text="Made by: Patchzy" HorizontalAlignment="Right"></TextBlock>
-                    <TextBlock Style="{StaticResource TinyText}" Text="And WantToBeeMe" HorizontalAlignment="Right"></TextBlock>
+                    <TextBlock Style="{StaticResource TinyText}" x:Name="MadeBy_Part1" Text="Made by: Patchzy" HorizontalAlignment="Right"/>
+                    <TextBlock Style="{StaticResource TinyText}" x:Name="MadeBy_Part2" Text="And WantToBeeMe" HorizontalAlignment="Right"/>
                 </StackPanel>
             </Border>
 
@@ -152,7 +153,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                 <StackPanel VerticalAlignment="Center">
                     <components:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.DiscordBrands}"
                                                 IconPack="FontAwesome"
-                                                Text="Talk to us!"
+                                                Text="{x:Static lang:Phrases.Sidebar_Link_Discord}"
                                                 Color="{StaticResource TitleTextColor}"
                                                 FontSize="13"
                                                 HoverColor="{StaticResource SuccessTitleTextColor}"
@@ -162,7 +163,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                     <Rectangle Height="5" Fill="Transparent" />
                     <components:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.GithubBrands}"
                                                 IconPack="FontAwesome"
-                                                Text="Source code"
+                                                Text="{x:Static lang:Phrases.Sidebar_Link_Github}"
                                                 Color="{StaticResource TitleTextColor}"
                                                 FontSize="13"
                                                 HoverColor="{StaticResource SuccessTitleTextColor}"
@@ -171,7 +172,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                                                 IconSize="20" />
                     <components:IconLabelButton IconKind="{x:Static icon:PackIconGameIconsKind.CoffeeCup}"
                                                 IconPack="GameIcons"
-                                                Text="Support us!"
+                                                Text="{x:Static lang:Phrases.Sidebar_Link_Support}"
                                                 Color="{StaticResource TitleTextColor}"
                                                 FontSize="13"
                                                 HoverColor="{StaticResource SuccessTitleTextColor}"
@@ -183,34 +184,34 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
 
             <!--Side bar -->
 
-            <TextBlock Grid.Row="2" Text="General" Style="{StaticResource SidebarSectionText}"
+            <TextBlock Grid.Row="2" Text="{x:Static lang:Common.Term_General}" Style="{StaticResource SidebarSectionText}"
                        VerticalAlignment="Bottom" />
             <Border Grid.Column="0" Grid.Row="3" VerticalAlignment="Top">
                 <StackPanel x:Name="SidePanelButtons">
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.HouseChimneySolid}"
-                                                   IconPack="FontAwesome" Text="Home" IsChecked="True"
+                                                   IconPack="FontAwesome" Text="{x:Static lang:Common.PageTitle_Home}" IsChecked="True"
                                                    PageType="{x:Type local:Dashboard}" />
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.CircleUserSolid}"
-                                                   IconPack="FontAwesome" Text="My Profiles" x:Name="MyProfilesButton"
+                                                   IconPack="FontAwesome" Text="{x:Static lang:Common.PageTitle_MyProfiles}" x:Name="MyProfilesButton"
                                                    PageType="{x:Type local:UserProfilePage}"/>
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.CubesStackedSolid}"
-                                                   IconPack="FontAwesome" Text="My Stuff"
+                                                   IconPack="FontAwesome" Text="{x:Static lang:Common.PageTitle_Mods}"
                                                    PageType="{x:Type local:ModsPage}" />
                     
-                    <TextBlock Text="Online" Style="{StaticResource SidebarSectionText}" />
+                    <TextBlock Text="{x:Static lang:Common.Term_Online}" Style="{StaticResource SidebarSectionText}" />
                     <components:SidebarRadioButton
                         IconKind="{x:Static icon:PackIconFontAwesomeKind.UsersRectangleSolid}"
-                        IconPack="FontAwesome" Text="Rooms" x:Name="RoomsButton"
+                        IconPack="FontAwesome" Text="{x:Static lang:Common.PageTitle_Rooms}" x:Name="RoomsButton"
                         PageType="{x:Type local:RoomsPage}" />
                     <components:SidebarRadioButton
                         IconKind="{x:Static icon:PackIconFontAwesomeKind.UserPlusSolid}"
-                        IconPack="FontAwesome" Text="Friends" x:Name="FriendsButton"
+                        IconPack="FontAwesome" Text="{x:Static lang:Common.PageTitle_Friends}" x:Name="FriendsButton"
                         PageType="{x:Type local:FriendsPage}"
-                        BoxText="0/0" />
+                        BoxText="0/0"/>
                     
-                    <TextBlock Text="Other" Style="{StaticResource SidebarSectionText}" />
+                    <TextBlock Text="{x:Static lang:Common.Term_Other}" Style="{StaticResource SidebarSectionText}" />
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.WrenchSolid}"
-                                                   IconPack="FontAwesome" Text="Settings" x:Name="SettingsButton"
+                                                   IconPack="FontAwesome" Text="{x:Static lang:Common.PageTitle_Settings}" x:Name="SettingsButton"
                                                    PageType="{x:Type settings:SettingsPage}" />
                     
                     <!-- <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.SinkSolid}" -->

@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
       xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      xmlns:lang="clr-namespace:CT_MKWII_WPF.Resources.Languages"
       mc:Ignorable="d"
       d:DesignHeight="831" d:DesignWidth="444"
       Title="RoomsPage" Background="Transparent">
@@ -19,24 +20,19 @@
         <Border Grid.Row="2" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
                 VerticalAlignment="Bottom" />
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-            <TextBlock Text="Rooms" Style="{StaticResource PageTitleText}" />
+            <TextBlock Text="{x:Static lang:Common.PageTitle_Rooms}" Style="{StaticResource PageTitleText}" />
             <Border ToolTipService.InitialShowDelay="50" VerticalAlignment="Center"
                     ToolTipService.ShowDuration="50000" HorizontalAlignment="Center"
                     ToolTipService.BetweenShowDelay="0">
                 <icon:PackIconMaterial Kind="Information" Width="18" Height="18" Margin="5,2,5,0"
                                        Foreground="{StaticResource TitleIconColor}" />
                 <Border.ToolTip>
-                    <components:ToolTipMessage Alignment="TopCenter"
-                                               Content="
-Please note that this page does not offer any functionality to join a room directly. &#10;
-To join a specific room, you'll need to either join through a friend, or hope to join it by joining the online servers." />
+                    <components:ToolTipMessage Alignment="TopCenter" Content="{x:Static lang:Phrases.Hover_RoomsPageDisclaimer}" />
                 </Border.ToolTip>
             </Border>
         </StackPanel>
-        <components:InputField
-            Grid.Row="0"
-            Width="200"
-            Placeholder="Search For Player..."
+        <components:InputField Grid.Row="0" Width="200"
+            Placeholder="{x:Static lang:Phrases.Placeholder_SearchForPlayers}"
             Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
             VerticalAlignment="Bottom"
             HorizontalAlignment="Right"
@@ -46,11 +42,12 @@ To join a specific room, you'll need to either join through a friend, or hope to
         <components:EmptyPageInfo Grid.Row="2" x:Name="EmptyRoomsView"
                                                         HorizontalAlignment="Center"
                                                         VerticalContentAlignment="Center"
-                                                        Title="No rooms found"
-                                                        Body="You might not have internet connection, or no-one might be playing." />
+                                                        Title="{x:Static lang:Phrases.EmptyText_NoRooms_Title}"
+                                                        Body="{x:Static lang:Phrases.EmptyText_NoRooms}" />
 
         <StackPanel Grid.Row="2" x:Name="ListContainer">
-            <components:StaticListView ItemsSource="{Binding Rooms}" x:Name="RoomsView" ListTitle="Rooms"
+            <components:StaticListView ItemsSource="{Binding Rooms}" x:Name="RoomsView"
+                                       ListTitle="{x:Static lang:Online.ListTitle_Rooms}"
                                        OnItemClick="Room_MouseClick"
                                        MaxHeight="{Binding ElementName=ListContainer, Path=ActualHeight}"
                                        Visibility="{Binding RoomsListVisibility}">
@@ -84,11 +81,11 @@ To join a specific room, you'll need to either join through a friend, or hope to
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="ID" Width="110"
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="{x:Static lang:Common.Attribute_Id}" Width="100"
                                         components:StaticListView.IsSortable="True" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=TimeOnline}" Header="Time Online" Width="150"
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=TimeOnline}" Header="{x:Static lang:Online.Stat_TimeOnline}" Width="150"
                                         components:StaticListView.IsSortable="True" />
-                        <GridViewColumn Header="Players" Width="80" components:StaticListView.IsSortable="True">
+                        <GridViewColumn Header="{x:Static lang:Online.Stat_PlayerCount}" Width="80" components:StaticListView.IsSortable="True">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <components:StateBox Text="{Binding PlayerCount}"
@@ -110,19 +107,20 @@ To join a specific room, you'll need to either join through a friend, or hope to
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=GameMode}" Header="Type" Width="110"
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=GameMode}" Header="{x:Static lang:Common.Attribute_Type}" Width="110"
                                         components:StaticListView.IsSortable="True" />
                     </GridView>
                 </ListView.View>
             </components:StaticListView>
 
-            <components:StaticListView ItemsSource="{Binding Players}" x:Name="PlayersListView" ListTitle="Players"
+            <components:StaticListView ItemsSource="{Binding Players}" x:Name="PlayersListView" 
+                                       ListTitle="{x:Static lang:Online.ListTitle_Players}"
                                        OnItemClick="Player_MouseClick"
                                        MaxHeight="{Binding ElementName=ListContainer, Path=ActualHeight}"
                                        Visibility="{Binding PlayersListVisibility}">
                 <components:StaticListView.ItemContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Copy friend code" Click="CopyFriendCode_OnClick" />
+                        <MenuItem Header="{x:Static lang:Common.Action_CopyFriendCode}" Click="CopyFriendCode_OnClick" />
                     </ContextMenu>
                 </components:StaticListView.ItemContextMenu>
                 <ListView.View>
@@ -134,9 +132,9 @@ To join a specific room, you'll need to either join through a friend, or hope to
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="105"
+                        <GridViewColumn Header="{x:Static lang:Common.Attribute_Name}" DisplayMemberBinding="{Binding Name}" Width="105"
                                         components:StaticListView.IsSortable="True" />
-                        <GridViewColumn Header="Friend code" DisplayMemberBinding="{Binding Fc}" Width="135"
+                        <GridViewColumn Header="{x:Static lang:Online.Stat_FriendCode}" DisplayMemberBinding="{Binding Fc}" Width="135"
                                         components:StaticListView.IsSortable="True" />
                         <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Ev}" Width="80"
                                         components:StaticListView.IsSortable="True" />

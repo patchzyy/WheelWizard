@@ -1,5 +1,6 @@
 ﻿using CT_MKWII_WPF.Models.GameData;
 using CT_MKWII_WPF.Models.RRInfo;
+using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services.LiveData;
 using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Utilities.Generators;
@@ -35,6 +36,7 @@ public class GameDataLoader : RepeatedTaskManager
             }
             catch (Exception ex)
             {
+                // I rather not translate this message, makes it easier to check where a given error came from
                 MessageBox.Show($"Error creating save directory: {ex.Message}", 
                                 "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -108,7 +110,9 @@ public class GameDataLoader : RepeatedTaskManager
         }
         catch (Exception e)
         {
-            MessageBox.Show($"An error occurred while loading the game data: {e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            // I rather not translate this message, makes it easier to check where a given error came from
+            MessageBox.Show($"An error occurred while loading the game data: {e.Message}", 
+                            Common.Term_Error, MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
     
@@ -121,7 +125,7 @@ public class GameDataLoader : RepeatedTaskManager
             {
                 Mii = new Mii
                 {
-                    Name = "No License",
+                    Name = "no license",
                     Data = Convert.ToBase64String(new byte[MiiSize])
                 },
                 AvatarId = 0,

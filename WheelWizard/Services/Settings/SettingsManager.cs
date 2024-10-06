@@ -2,6 +2,7 @@ using CT_MKWII_WPF.Helpers;
 using CT_MKWII_WPF.Models.Enums;
 using CT_MKWII_WPF.Models.Settings;
 using System;
+using System.Linq;
 
 namespace CT_MKWII_WPF.Services.Settings;
 
@@ -14,17 +15,18 @@ public class SettingsManager
     public static Setting FORCE_WIIMOTE = new WhWzSetting(typeof(bool),"ForceWiimote", false);
     public static Setting LAUNCH_WITH_DOLPHIN = new WhWzSetting(typeof(bool),"LaunchWithDolphin", false);
     public static Setting FOCUSSED_USER = new WhWzSetting(typeof(int), "FavoriteUser", 0).SetValidation(value => (int)(value ?? -1) >= 0 && (int)(value ?? -1) <= 4);
-    public static Setting FORCE_30FPS = new WhWzSetting(typeof(bool), "Force30FPS", false);
-    public static Setting SAVED_WINDOW_SCALE = new WhWzSetting(typeof(double), "WindowScale", 1.0).SetValidation(value => (double)(value ?? -1) >= 0.5 && (double)(value ?? -1) <= 2.0);
-    public static Setting RR_LANGUAGE = new WhWzSetting(typeof(int), "RR_Language", SettingValues.Languages.DefaultValue);
 
+    public static Setting SAVED_WINDOW_SCALE = new WhWzSetting(typeof(double), "WindowScale", 1.0).SetValidation(value => (double)(value ?? -1) >= 0.5 && (double)(value ?? -1) <= 2.0);
+    public static Setting RR_LANGUAGE = new WhWzSetting(typeof(int), "RR_Language", 0).SetValidation(value => SettingValues.RrLanguages.ContainsKey((int)(value ?? -1)));
+    public static Setting WW_LANGUAGE = new WhWzSetting(typeof(string), "WW_Language", "en").SetValidation(value => SettingValues.WhWzLanguages.ContainsKey((string)value!));
+    
     // Dolphin Settings
     public static Setting VSYNC = new DolphinSetting(typeof(bool), ("GFX.ini", "Hardware", "VSync"), false);
 
     public static Setting INTERNAL_RESOLUTION = new DolphinSetting(typeof(int), ("GFX.ini", "Settings", "InternalResolution"), 1)
         .SetValidation(value => (int)(value ?? -1) >= 0);
     public static Setting SHOW_FPS = new DolphinSetting(typeof(bool), ("GFX.ini", "Settings", "ShowFPS"), false);
-    public static Setting GFX_BACKEND = new DolphinSetting(typeof(string), ("Dolphin.ini", "Core", "GFXBackend"), SettingValues.GFXRenderers.DefaultValue);
+    public static Setting GFX_BACKEND = new DolphinSetting(typeof(string), ("Dolphin.ini", "Core", "GFXBackend"), SettingValues.GFXRenderers.Values.First());
     
     //recommended settings
     private static Setting DOLPHIN_COMPILATION_MODE = new DolphinSetting(typeof(DolphinShaderCompilationMode), ("GFX.ini", "Settings", "ShaderCompilationMode"),
@@ -60,10 +62,11 @@ public class SettingsManager
     // dont ever make this a static class, it is required to be an instance class to ensure all settings are loaded
     public static SettingsManager Instance { get; } = new();
     private SettingsManager() { }
-    
+    // dont make this a static method
     public void LoadSettings()
     {
         WhWzSettingManager.Instance.LoadSettings();
         DolphinSettingManager.Instance.LoadSettings();
+        SettingsHelper.LoadExtraStuff();
     }
 }

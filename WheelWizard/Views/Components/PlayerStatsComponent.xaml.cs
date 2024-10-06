@@ -1,7 +1,8 @@
 ﻿using CT_MKWII_WPF.Models.GameData;
 using CT_MKWII_WPF.Models.RRInfo;
+using CT_MKWII_WPF.Models.Settings;
+using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services.LiveData;
-using CT_MKWII_WPF.Services.WiiManagement;
 using CT_MKWII_WPF.Views.Pages;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 
 namespace CT_MKWII_WPF.Views.Components
 {
@@ -29,7 +29,15 @@ namespace CT_MKWII_WPF.Views.Components
         public string PlayerName
         {
             get => _playerName;
-            set => SetProperty(ref _playerName, value);
+            set
+            {
+                if(value == SettingValues.NoName)
+                    SetProperty(ref _playerName, Online.NoName);
+                if(value == SettingValues.NoLicense)
+                    SetProperty(ref _playerName, Online.NoLicense);
+                else 
+                    SetProperty(ref _playerName, value);
+            }
         }
 
         private string _friendCode;
@@ -73,7 +81,7 @@ namespace CT_MKWII_WPF.Views.Components
             get => _regionName;
             set => SetProperty(ref _regionName, value);
         }
-        
+
         private string _onlineText;
         public string OnlineText
         {
@@ -97,29 +105,39 @@ namespace CT_MKWII_WPF.Views.Components
         public void UpdateStats(User user)
         {
             PlayerName = user.MiiName;
+            if (PlayerName == SettingValues.NoName)
+                PlayerName = Online.NoName;
+            if (PlayerName == SettingValues.NoLicense)
+                PlayerName = Online.NoLicense;
+            
             FriendCode = user.FriendCode;
             VR = "VR: " + user.Vr;
             BR = "BR: " + user.Br;
-            BottomExtraStat = "Races Played: " + user.TotalRaceCount;
-            TopExtraStat = "Wins: " + user.TotalWinCount;
+            BottomExtraStat = $"{Online.Stat_RacesPlayed}: {user.TotalRaceCount}";
+            TopExtraStat = $"{Online.Stat_Wins}: {user.TotalWinCount}";
             Mii = user?.MiiData?.Mii;
             IsOnline = user!.IsOnline;
             ViewRoomButton.Visibility = IsOnline ? Visibility.Visible : Visibility.Hidden;
-            OnlineText = IsOnline ? "Online" : "Offline";
+            OnlineText = IsOnline ? Common.Term_Online : Common.Term_Offline;
             RegionName = user.RegionName;
         }
 
         public void UpdateStats(Friend friend)
         {
             PlayerName = friend.MiiName;
+            if (PlayerName == SettingValues.NoName)
+                PlayerName = Online.NoName;
+            if (PlayerName == SettingValues.NoLicense)
+                PlayerName = Online.NoLicense;
+            
             FriendCode = friend.FriendCode;
             VR = "VR: " + friend.Vr;
             BR = "BR: " + friend.Br;
-            BottomExtraStat = "Wins: " + friend.Wins;
-            TopExtraStat = "Losses: " + friend.Losses;
+            BottomExtraStat = $"{Online.Stat_Wins}: {friend.Wins}";
+            TopExtraStat = $"{Online.Stat_Losses}: {friend.Losses}";
             Mii = friend?.MiiData?.Mii;
             IsOnline = friend!.IsOnline;
-            OnlineText = IsOnline ? "Online" : "Offline";
+            OnlineText = IsOnline ? Common.Term_Online : Common.Term_Offline;
             ViewRoomButton.Visibility = IsOnline ? Visibility.Visible : Visibility.Hidden;
             RegionName = friend.CountryName;
         }
@@ -151,6 +169,13 @@ namespace CT_MKWII_WPF.Views.Components
                 currentPage?.NavigateToPage(new RoomDetailPage(room));
                 return;
             }
+        }
+
+        private void CopyFriendCode_OnClick(object sender, RoutedEventArgs e)
+        {
+            IDataObject dataObject = new DataObject();
+            dataObject.SetData(DataFormats.Text, FriendCode);
+            Clipboard.SetDataObject(dataObject);
         }
     }
 }

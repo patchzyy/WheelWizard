@@ -1,3 +1,4 @@
+using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services.WiiManagement;
 using System;
 using System.ComponentModel;

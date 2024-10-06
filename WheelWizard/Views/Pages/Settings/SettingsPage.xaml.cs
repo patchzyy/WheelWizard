@@ -7,6 +7,7 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -17,14 +18,23 @@ namespace CT_MKWII_WPF.Views.Pages.Settings;
 
 public partial class SettingsPage : Page
 {
-    public SettingsPage()
+    public SettingsPage() : this(new WhWzSettings()) { }
+    public SettingsPage(UserControl initialSettingsPage)
     {
         InitializeComponent();
         
         WhWzVersionText.Text = "WhWz: v" + AutoUpdater.CurrentVersion;
         RrVersionText.Text = "RR: " + RetroRewindInstaller.CurrentRRVersion();
-        SettingsContent.Content = new WhWzSettings();
+        SettingsContent.Content = initialSettingsPage;
         
+        // we also make sure that the correct radio button is selected
+        var initialSettingsPageType = initialSettingsPage.GetType();
+        var initialSettingsPageName = initialSettingsPageType.Name;
+        var initialSettingsPageRadioButton = SettingPages
+                                             .Children.OfType<RadioButton>()
+                                             .FirstOrDefault(radioButton => radioButton.Tag.ToString() == initialSettingsPageName);
+        if (initialSettingsPageRadioButton != null)
+            initialSettingsPageRadioButton.IsChecked = true;
     }
 
     private void TopBarRadio_OnClick(object sender, RoutedEventArgs e)

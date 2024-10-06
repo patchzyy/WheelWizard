@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="PageTitle_Mods" xml:space="preserve">
+        <value>My Stuff</value>
+    </data>
+    <data name="PageTitle_MyProfiles" xml:space="preserve">
+        <value>Mijn profielen</value>
+    </data>
+    <data name="PageTitle_Settings" xml:space="preserve">
+        <value>Instellingen</value>
+    </data>
+    <data name="PageTitle_Home" xml:space="preserve">
+        <value>Startpagina</value>
+    </data>
+    <data name="PageTitle_Rooms" xml:space="preserve">
+        <value>Lobbies</value>
+    </data>
+    <data name="PageTitle_Friends" xml:space="preserve">
+        <value>Vrienden</value>
+    </data>
+    <data name="Term_General" xml:space="preserve">
+        <value>Algemeen</value>
+    </data>
+    <data name="Term_Other" xml:space="preserve">
+        <value>Overig</value>
+    </data>
+    <data name="Term_Online" xml:space="preserve">
+        <value>Online</value>
+    </data>
+    <data name="State_Loading" xml:space="preserve">
+        <value>Laden...</value>
+    </data>
+    <data name="State_Installing" xml:space="preserve">
+        <value>Installeren...</value>
+    </data>
+    <data name="State_Updating" xml:space="preserve">
+        <value>Updaten...</value>
+    </data>
+    <data name="Action_Install" xml:space="preserve">
+        <value>Installeer</value>
+    </data>
+    <data name="Action_Play" xml:space="preserve">
+        <value>Speel</value>
+    </data>
+    <data name="Action_PlayOffline" xml:space="preserve">
+        <value>Speel offline</value>
+    </data>
+    <data name="Action_Update" xml:space="preserve">
+        <value>Update</value>
+    </data>
+    <data name="State_ConfigNotFinished" xml:space="preserve">
+        <value>Instellingen niet compleet</value>
+    </data>
+    <data name="State_NoServer" xml:space="preserve">
+        <value>Geen server</value>
+    </data>
+    <data name="Term_Unknown" xml:space="preserve">
+        <value>Onbekend</value>
+    </data>
+    <data name="Attribute_Enabled" xml:space="preserve">
+        <value>Aan/Uit</value>
+    </data>
+    <data name="Attribute_Title" xml:space="preserve">
+        <value>Titel</value>
+    </data>
+    <data name="Action_DisableAll" xml:space="preserve">
+        <value>Alles uit zetten</value>
+    </data>
+    <data name="Action_EnableAll" xml:space="preserve">
+        <value>Alles aan zetten</value>
+    </data>
+    <data name="Action_Import" xml:space="preserve">
+        <value>Importeren</value>
+    </data>
+    <data name="Action_Delete" xml:space="preserve">
+        <value>Verwijderen</value>
+    </data>
+    <data name="Action_OpenFolder" xml:space="preserve">
+        <value>Open Map</value>
+    </data>
+    <data name="Action_Rename" xml:space="preserve">
+        <value>Hernoem</value>
+    </data>
+    <data name="Term_Offline" xml:space="preserve">
+        <value>Offline</value>
+    </data>
+    <data name="Attribute_Name" xml:space="preserve">
+        <value>Naam</value>
+    </data>
+    <data name="Action_Edit" xml:space="preserve">
+        <value>Bewerk</value>
+    </data>
+    <data name="Action_Cancel" xml:space="preserve">
+        <value>Annuleer</value>
+    </data>
+    <data name="Action_Save" xml:space="preserve">
+        <value>Opslaan</value>
+    </data>
+    <data name="Term_Error" xml:space="preserve">
+        <value>Error</value>
+    </data>
+    <data name="Attribute_Id" xml:space="preserve">
+        <value>ID</value>
+    </data>
+    <data name="Attribute_Type" xml:space="preserve">
+        <value>Type</value>
+    </data>
+    <data name="Action_CopyFriendCode" xml:space="preserve">
+        <value>Vriendcode kopiëren</value>
+    </data>
+    <data name="PageTitle_RoomDetails" xml:space="preserve">
+        <value>Lobby Info</value>
+    </data>
+    <data name="Action_Export" xml:space="preserve">
+        <value>Exporteren</value>
+    </data>
+    <data name="Term_Warning" xml:space="preserve">
+        <value>Waarschuwing</value>
+    </data>
+    <data name="Action_Apply" xml:space="preserve">
+        <value>Toepassen</value>
+    </data>
+    <data name="Action_Yes" xml:space="preserve">
+        <value>Ja</value>
+    </data>
+    <data name="Action_No" xml:space="preserve">
+        <value>Nee</value>
+    </data>
+    <data name="Term_Speed" xml:space="preserve">
+        <value>Snelheid</value>
+    </data>
+    <data name="Action_Keep" xml:space="preserve">
+        <value>Behouden</value>
+    </data>
+    <data name="Action_OK" xml:space="preserve">
+        <value>Oke</value>
+    </data>
+    <data name="Attribute_ModName" xml:space="preserve">
+        <value>Mod naam</value>
+    </data>
+    <data name="Term_Success" xml:space="preserve">
+        <value>Success</value>
+    </data>
+    <data name="Action_Revert" xml:space="preserve">
+        <value>Ongedaan maken</value>
+    </data>
+    <data name="State_Extracting" xml:space="preserve">
+        <value>Bestanden uitpakken...</value>
+    </data>
+    <data name="Action_MaybeLater" xml:space="preserve">
+        <value>Misschien later</value>
+    </data>
+    <data name="Term_No" xml:space="preserve">
+        <value>Nee</value>
+    </data>
+    <data name="Term_Yes" xml:space="preserve">
+        <value>Ja</value>
+    </data>
+</root>

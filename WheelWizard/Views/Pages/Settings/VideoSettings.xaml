@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Pages.Settings"
              xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
              xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:lang="clr-namespace:CT_MKWII_WPF.Resources.Languages"
              mc:Ignorable="d" d:DesignHeight="716" d:DesignWidth="444">
     <Grid x:Name="VideoBorder">
         <StackPanel Margin="0,15,0,0">
@@ -15,13 +16,13 @@
                     HorizontalAlignment="Stretch" VerticalAlignment="Top" 
                     Background="{StaticResource WarningColor}">
                 <TextBlock HorizontalAlignment="Center"
-                           FontWeight="SemiBold" Text="Settings are disabled, complete the location settings first"
+                           FontWeight="SemiBold" Text="{x:Static lang:Settings.InfoText_Topbar_LocationWarning}"
                            Foreground="{StaticResource BackgroundColor}" >
                 </TextBlock>
             </Border>
             
             <!-- Resolution Section -->
-            <components:FormFieldLabel Text="Resolution" />
+            <components:FormFieldLabel Text="{x:Static lang:Settings.Section_Resolution}" />
             <Border Style="{StaticResource SettingsBlockStyle}" x:Name="ResolutionBorder">
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
@@ -30,7 +31,7 @@
                     <UniformGrid Columns="2" x:Name="ResolutionStackPanel" Rows="4">
                         <RadioButton Margin="0,2" GroupName="ResolutionGroup1"
                                      IsChecked="True" Click="UpdateResolution" Tag="1">
-                            <components:FormFieldLabel Text="1x (640x528)" TipText="1x is the native resolution" />
+                            <components:FormFieldLabel Text="1x (640x528)" TipText="{x:Static lang:Settings.InfoText_ResolutionScale}"/>
                         </RadioButton>
                         <RadioButton Margin="0,2" GroupName="ResolutionGroup1"
                                      Click="UpdateResolution" Tag="5">
@@ -65,7 +66,7 @@
             </Border>
 
             <!-- Performance Settings Section -->
-            <components:FormFieldLabel Text="Performance Settings" />
+            <components:FormFieldLabel Text="{x:Static lang:Settings.Section_Performance}"/>
             <Border Style="{StaticResource SettingsBlockStyle}" x:Name="PerformanceBorder">
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
@@ -73,49 +74,31 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel>
-                        <CheckBox Margin="0,2" IsChecked="False"
+                        <CheckBox Margin="0,2" IsChecked="False" 
                                   Style="{StaticResource DarkSwitch}" Click="VSync_OnClick" x:Name="VSyncButton">
-                            VSync
+                            <components:FormFieldLabel Text="{x:Static lang:Settings.Option_VSync}" />
                         </CheckBox>
                         <CheckBox Margin="0,2" IsChecked="False"
                                   Style="{StaticResource DarkSwitch}" Click="Recommended_OnClick"
                                   x:Name="RecommendedButton">
-                            <components:FormFieldLabel Text="Recommended Settings"
-                                                       TipText="This setting will change certain dolphin settings to reduce stuttering and lag spikes" />
-                        </CheckBox>
-                        <CheckBox Margin="0,2" IsChecked="False"
-                                  Style="{StaticResource DarkSwitch}" Click="_30FPS_OnClick"
-                                  x:Name="Button30FPS">
-                            <components:FormFieldLabel Text="30 FPS"
-                                                       TipText="This setting will force the game to run in 30 FPS (default is 60)" />
+                            <components:FormFieldLabel Text="{x:Static lang:Settings.Option_Recommended}"
+                                                       TipText="{x:Static lang:Settings.InfoText_Recommended}"/>
                         </CheckBox>
                         <CheckBox Margin="0,2" IsChecked="False"
                                   Style="{StaticResource DarkSwitch}" Click="ShowFPS_OnClick"
                                   x:Name="ShowFPSButton">
-                            <components:FormFieldLabel Text="Show FPS" />
+                            <components:FormFieldLabel Text="{x:Static lang:Settings.Option_ShowFPS}" />
                         </CheckBox>
                     </StackPanel>
                 </Grid>
             </Border>
             
-            <components:FormFieldLabel Text="In-Game" />
-            <Border Style="{StaticResource SettingsBlockStyle}" 
-                    x:Name="InGame">
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                    <components:Dropdown
-                        Label="Language"
-                        x:Name="LanguageDropdown"
-                        SelectionChanged="LanguageDropdown_OnSelectionChanged"
-                        ></components:Dropdown>
-                </Grid>
-            </Border>
-            
-            <components:FormFieldLabel Text="Renderer Settings" />
+            <components:FormFieldLabel Text="{x:Static lang:Settings.Section_Renderer}" />
             <Border Style="{StaticResource SettingsBlockStyle}" 
                     x:Name="RendererBorder">
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
                     <components:Dropdown
-                        Label="Renderer"
+                        Label="{x:Static lang:Settings.Option_Renderer}"
                         x:Name="RendererDropdown"
                         SelectionChanged="RendererDropdown_OnSelectionChanged"
                         ></components:Dropdown>

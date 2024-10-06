@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
       xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      xmlns:lang="clr-namespace:CT_MKWII_WPF.Resources.Languages"
       mc:Ignorable="d"
       d:DesignHeight="831" d:DesignWidth="444"
       Title="RoomDetailPage" Background="Transparent">
@@ -20,11 +21,12 @@
                 VerticalAlignment="Bottom" />
         <Border Grid.Row="2" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
                 VerticalAlignment="Bottom" />
-        <TextBlock Grid.Row="0" Text="Room Details" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+        <TextBlock Grid.Row="0" Text="{x:Static lang:Common.PageTitle_RoomDetails}" 
+                   HorizontalAlignment="Left" VerticalAlignment="Bottom"
                    Style="{StaticResource PageTitleText}" />
 
         <components:IconLabelButton Grid.Row="0" IconKind="{x:Static icon:PackIconFontAwesomeKind.ArrowLeftSolid}"
-                                    IconPack="FontAwesome" Text="Rooms"
+                                    IconPack="FontAwesome" Text="{x:Static lang:Common.PageTitle_Rooms}"
                                     Color="{StaticResource TitleTextColor}"
                                     HoverColor="{StaticResource SuccessTitleTextColor}"
                                     VerticalAlignment="Top" HorizontalAlignment="Left"
@@ -39,19 +41,19 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0">
-                <components:FormFieldLabel Text="Room ID" Margin="0,0,2,0" />
+                <components:FormFieldLabel Text="{x:Static lang:Online.Stat_RoomID}" Margin="0,0,2,0" />
                 <TextBlock Text="{Binding Room.Id}"
                            Style="{StaticResource BodyText}" />
             </StackPanel>
 
             <StackPanel Grid.Column="1">
-                <components:FormFieldLabel Text="Time Online" Margin="0,0,2,0" />
+                <components:FormFieldLabel Text="{x:Static lang:Online.Stat_TimeOnline}" Margin="0,0,2,0" />
                 <TextBlock Text="{Binding Room.TimeOnline}"
                            Style="{StaticResource BodyText}" />
             </StackPanel>
 
             <StackPanel Grid.Column="2">
-                <components:FormFieldLabel Text="Type" Margin="0,0,2,0" />
+                <components:FormFieldLabel Text="{x:Static lang:Common.Attribute_Type}" Margin="0,0,2,0" />
                 <TextBlock Text="{Binding Room.GameMode}"
                            Style="{StaticResource BodyText}" />
             </StackPanel>
@@ -78,10 +80,10 @@
         <StackPanel Grid.Row="2" x:Name="ModsListContainer" VerticalAlignment="Stretch">
             <components:StaticListView x:Name="PlayersListView" IsClickable="False"
                                        MaxHeight="{Binding ElementName=ModsListContainer, Path=ActualHeight}"
-                                       ItemsSource="{Binding PlayersList}" ListTitle="Players">
+                                       ItemsSource="{Binding PlayersList}" ListTitle="{x:Static lang:Online.ListTitle_Players}">
                 <components:StaticListView.ItemContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Copy friend code" Click="CopyFriendCode_OnClick" />
+                        <MenuItem Header="{x:Static lang:Common.Action_CopyFriendCode}" Click="CopyFriendCode_OnClick" />
                         <!-- <MenuItem Header="View Mii" Click="..."/> -->
                     </ContextMenu>
                 </components:StaticListView.ItemContextMenu>
@@ -95,9 +97,9 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="105"
+                        <GridViewColumn Header="{x:Static lang:Common.Attribute_Name}" DisplayMemberBinding="{Binding Name}" Width="105"
                                         components:StaticListView.IsSortable="True" />
-                        <GridViewColumn Header="Friend code" DisplayMemberBinding="{Binding Fc}" Width="135"
+                        <GridViewColumn Header="{x:Static lang:Online.Stat_FriendCode}" DisplayMemberBinding="{Binding Fc}" Width="135"
                                         components:StaticListView.IsSortable="True" />
                         <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Ev}" Width="80"
                                         components:StaticListView.IsSortable="True" />

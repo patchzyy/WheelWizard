@@ -1,4 +1,6 @@
-﻿using CT_MKWII_WPF.Models.Settings;
+﻿using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Models.Settings;
+using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services;
 using CT_MKWII_WPF.Services.LiveData;
 using CT_MKWII_WPF.Services.Settings;
@@ -20,20 +22,29 @@ namespace CT_MKWII_WPF.Views;
 
 public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
 {
-    public readonly double WindowHeight = 876;
-    public readonly double WindowWidth = 656;
+    public const double WindowHeight = 876;
+    public const double WindowWidth = 656;
     
-    public Layout()
+    public Layout() : this(new Dashboard()) { }
+    public Layout(Page initialPage)
     {
         InitializeComponent();
         DataContext = this;
 
         OnSettingChanged(SettingsManager.SAVED_WINDOW_SCALE);
         SettingsManager.WINDOW_SCALE.Subscribe(this);
+       
+        var completeString = Humanizer.ReplaceDynamic(Phrases.Text_MadeByString, "Patchzy", "WantToBeeMe" );
+        if (completeString != null && completeString.Contains("\\n"))
+        {
+            var split = completeString.Split("\\n");
+            MadeBy_Part1.Text = split[0];
+            MadeBy_Part2.Text = split[1];
+        }
         
         try
         {
-            NavigateToPage(new Dashboard());
+            NavigateToPage(initialPage);
             InitializeManagers();
         }
         catch (Exception e)
@@ -89,31 +100,34 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
         }
     }
 
-    private void UpdatePlayerAndRoomCount(RRLiveRooms sender)
+    public void UpdatePlayerAndRoomCount(RRLiveRooms sender)
     {
         var playerCount = sender.PlayerCount;
         var roomCount = sender.RoomCount;
         PlayerCountBox.Text = playerCount.ToString();
         PlayerCountBox.TipText = playerCount switch
         {
-            1 => "There is currently 1 player online",
-            0 => "There are currently no players online",
-            _ => $"There are currently {playerCount} players online"
+            1 => Phrases.Hover_PlayersOnline_1,
+            0 => Phrases.Hover_PlayersOnline_0,
+            _ => Humanizer.ReplaceDynamic(Phrases.Hover_PlayersOnline_x, playerCount) ?? 
+                 $"There are currently {playerCount} players online"
         };
         RoomCountBox.Text = roomCount.ToString();
         RoomCountBox.TipText = roomCount switch
         {
-            1 => "There is currently 1 room active",
-            0 => "There are currently no rooms active",
-            _ => $"There are currently {roomCount} rooms active"
+            1 => Phrases.Hover_RoomsOnline_1,
+            0 => Phrases.Hover_RoomsOnline_0,
+            _ => Humanizer.ReplaceDynamic(Phrases.Hover_RoomsOnline_x, roomCount) ?? 
+                 $"There are currently {roomCount} rooms active"
         };
         var friends = GameDataLoader.Instance.GetCurrentFriends;
         FriendsButton.BoxText =$"{friends.Count(friend => friend.IsOnline)}/{friends.Count}";
         FriendsButton.BoxTip = friends.Count(friend => friend.IsOnline) switch
         {
-            1 => "There is currently 1 friend online",
-            0 => "There are currently no friends online",
-            _ => $"There are currently {friends.Count(friend => friend.IsOnline)} friends online"
+            1 => Phrases.Hover_FriendsOnline_1,
+            0 => Phrases.Hover_FriendsOnline_0,
+            _ => Humanizer.ReplaceDynamic(Phrases.Hover_FriendsOnline_x, friends.Count(friend => friend.IsOnline)) ?? 
+                 $"There are currently {friends.Count(friend => friend.IsOnline)} friends online"
         };
     }
 

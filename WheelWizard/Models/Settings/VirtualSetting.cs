@@ -45,6 +45,7 @@ public class VirtualSetting : Setting, ISettingListener
     
     public VirtualSetting SetDependencies(params Setting[] dependencies)
     {
+        // I rather not translate this message, makes it easier to check where a given error came from
         if (_dependencies.Length != 0)
             throw new ArgumentException("Dependencies have already been set once");
         

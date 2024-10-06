@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
       xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      xmlns:lang="clr-namespace:CT_MKWII_WPF.Resources.Languages"
       mc:Ignorable="d"
       d:DesignHeight="831" d:DesignWidth="444"
       Title="Dashboard" Background="Transparent">
@@ -18,7 +19,7 @@
                 VerticalAlignment="Bottom" />
         <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
                 VerticalAlignment="Bottom" />
-        <TextBlock Grid.Row="0" Text="Home" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+        <TextBlock Grid.Row="0" Text="{x:Static lang:Common.PageTitle_Home}" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                    Style="{StaticResource PageTitleText}" />
         <components:CurrentUserProfileComponent x:Name="CurrentUserProfile"
                                                 Grid.Row="0"
@@ -35,7 +36,7 @@
                                IsEnabled="False"
                                IconPack="FontAwesome"
                                IconKind="{x:Static icon:PackIconFontAwesomeKind.PlaySolid}"
-                               Text="Loading..."
+                               Text="{x:Static lang:Common.State_Loading}"
                                FontSize="16"
                                Click="PlayButton_Click"
                                Width="210" Height="50"

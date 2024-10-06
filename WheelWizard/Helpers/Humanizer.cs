@@ -1,19 +1,61 @@
+using CT_MKWII_WPF.Resources.Languages;
 using System;
 
 namespace CT_MKWII_WPF.Helpers;
 
 public static class Humanizer
 {
+    public static string? ReplaceDynamic(string? langString,params object[] replacements)
+    {
+        // any dynamic part should be as follows: {$1}, {$2}, etc.
+        for (var i = 0; i < replacements.Length; i++)
+        {
+            langString = langString?.Replace("{$" + (i + 1) + "}", replacements[i]?.ToString() ?? "");
+        }
+
+        return langString;
+    }
+    
     public static string HumanizeTimeSpan(TimeSpan timeSpan)
     {
+        // we use langauge to do the words like Phrases.Time_Days_1 or Phrases.Time_Days_x
+        // howver, the one with x has to be put in the method: ReplaceDynamic(Phrases.Time_Days_x, 10);
+        
+        // now e need to replace all the old with the new language versions
+      
         if (Math.Abs(timeSpan.TotalDays) >= 1)
-            return $"{timeSpan.Days} day{P(timeSpan.Days)} {Math.Abs(timeSpan.Hours)} hour{P(timeSpan.Hours)}";
-        if (Math.Abs(timeSpan.TotalHours) >= 1)
-            return $"{timeSpan.Hours} hour{P(timeSpan.Hours)} {Math.Abs(timeSpan.Minutes)} minute{P(timeSpan.Minutes)}";
-        if (Math.Abs(timeSpan.TotalMinutes) >= 1)
-            return $"{timeSpan.Minutes} minute{P(timeSpan.Minutes)} {Math.Abs(timeSpan.Seconds)} second{P(timeSpan.Seconds)}";
+        {
+            var days = timeSpan.Days;
+            var hours = timeSpan.Hours;
+            var dayText = days == 1 ? Phrases.Time_Days_1 : ReplaceDynamic(Phrases.Time_Days_x, days);
+            if (hours == 0)
+                return dayText!;
+            var hourText = hours == 1 ? Phrases.Time_Hours_1 : ReplaceDynamic(Phrases.Time_Hours_x, hours);
+            return $"{dayText} {hourText}";
+        }
 
-        return $"{timeSpan.Seconds} second{P(timeSpan.Seconds)}";
+        if (Math.Abs(timeSpan.TotalHours) >= 1)
+        {
+            var hours = timeSpan.Hours;
+            var minutes = timeSpan.Minutes;
+            var hourText = hours == 1 ? Phrases.Time_Hours_1 : ReplaceDynamic(Phrases.Time_Hours_x, hours);
+            if (minutes == 0)
+                return hourText!;
+            var minuteText = minutes == 1 ? Phrases.Time_Minutes_1 : ReplaceDynamic(Phrases.Time_Minutes_x, minutes);
+            return $"{hourText} {minuteText}";
+        }
+        if (Math.Abs(timeSpan.TotalMinutes) >= 1) 
+        {
+            var minutes = timeSpan.Minutes;
+            var seconds = timeSpan.Seconds;
+            var minuteText = minutes == 1 ? Phrases.Time_Minutes_1 : ReplaceDynamic(Phrases.Time_Minutes_x, minutes);
+            if (seconds == 0)
+                return minuteText!;
+            var secondText = seconds == 1 ? Phrases.Time_Seconds_1 : ReplaceDynamic(Phrases.Time_Seconds_x, seconds);
+            return $"{minuteText} {secondText}";
+        }
+
+        return ReplaceDynamic(Phrases.Time_Seconds_x, timeSpan.Seconds)!;
 
         // internal method to simplify the pluralization of words
         string P(int count) => Math.Abs(count) != 1 ? "s" : "";
@@ -25,14 +67,14 @@ public static class Humanizer
     {
         return regionID switch
         {
-            0 => "Japan",
-            1 => "America",
-            2 => "Europe",
-            3 => "Australia",
-            4 => "Taiwan",
-            5 => "South Korea",
-            6 => "China",
-            _ => "Unknown"
+            0 => Online.Region_Japan,
+            1 => Online.Region_America,
+            2 => Online.Region_Europe,
+            3 => Online.Region_Australia,
+            4 => Online.Region_Taiwan,
+            5 => Online.Region_SouthKorea,
+            6 => Online.Region_China,
+            _ => Common.Term_Unknown
         };
     }
     

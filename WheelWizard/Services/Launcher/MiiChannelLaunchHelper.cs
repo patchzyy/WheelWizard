@@ -16,6 +16,7 @@ public static class MiiChannelLaunchHelper
         
         if (!miiChannelExists)
         {
+            // TODO: If we do enable this again, we should also add translations support for the text here
             var downloadQuestion = new YesNoWindow()
                                 .SetMainText("Install MiiChannel?")
                                 .SetExtraText("Do you want to install the MiiChannel to launch it?");

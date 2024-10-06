@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Value_Language_DutchOg" xml:space="preserve">
+        <value>Nederlands</value>
+    </data>
+    <data name="Value_Language_EnglishOg" xml:space="preserve">
+        <value>English</value>
+    </data>
+    <data name="Value_Language_German" xml:space="preserve">
+        <value>Deutsch</value>
+    </data>
+    <data name="Value_Language_GermanOg" xml:space="preserve">
+        <value>Deutsch</value>
+    </data>
+    <data name="Value_Language_FranceOg" xml:space="preserve">
+        <value>Français</value>
+    </data>
+    <data name="Value_Language_ItalianOg" xml:space="preserve">
+        <value>-</value>
+    </data>
+    <data name="Value_Language_JapaneseOg" xml:space="preserve">
+        <value>-</value>
+    </data>
+    <data name="Value_Language_SpanishOg" xml:space="preserve">
+        <value>Español</value>
+    </data>
+    <data name="Value_Language_TurkishOg" xml:space="preserve">
+        <value>-</value>
+    </data>
+    <data name="Category_Video" xml:space="preserve">
+        <value>Video</value>
+    </data>
+    <data name="InfoText_30FPS" xml:space="preserve">
+        <value>Diese Einstellung erzwingt, dass das Spiel mit 30 FPS läuft (Standard ist 60).</value>
+    </data>
+    <data name="InfoText_EndWithExe" xml:space="preserve">
+        <value>Dateipfad muss mit .exe ende</value>
+    </data>
+    <data name="InfoText_ForceDisableWiimote" xml:space="preserve">
+        <value>Diese Einstellung deaktiviert die Wiimote im Spiel, aber nutzt sie für den Wii-Kanal</value>
+    </data>
+    <data name="InfoText_LaunchWithDolphin" xml:space="preserve">
+        <value>Wird Dolphins Hauptfenster mit dem Spiel starten</value>
+    </data>
+    <data name="InfoText_Recommended" xml:space="preserve">
+        <value>Diese Einstellung wird bestimmte Dolphin Einstellungen verändern, um Ruckeln und Lagspikes zu vermindern</value>
+    </data>
+    <data name="InfoText_ResolutionScale" xml:space="preserve">
+        <value>1x ist die native Auflösung</value>
+    </data>
+    <data name="InfoText_Topbar_LocationWarning" xml:space="preserve">
+        <value>Einstellungen sind deaktiviert, komplettiere erst den Dateispeicherort</value>
+    </data>
+    <data name="Option_DolphinEmulatorExe" xml:space="preserve">
+        <value>Dolphin Emulator executeable</value>
+    </data>
+    <data name="Option_DolphinUserPath" xml:space="preserve">
+        <value>Dolphin Benutzer Ordner</value>
+    </data>
+    <data name="Option_ForceDisableWiimote" xml:space="preserve">
+        <value>Wiimote ausschalten erzwingen</value>
+    </data>
+    <data name="Option_LaunchWithDolphin" xml:space="preserve">
+        <value>Starte das Spiel mit dem Dolphin Fenster zusammen</value>
+    </data>
+    <data name="Option_MarioKartGame" xml:space="preserve">
+        <value>Mario Kart Wii Spiel Datei</value>
+    </data>
+    <data name="Option_OpenConfig" xml:space="preserve">
+        <value>Konfigurationsordner öffnen</value>
+    </data>
+    <data name="Option_Recommended" xml:space="preserve">
+        <value>Empfohlene Einstellungen</value>
+    </data>
+    <data name="Option_Renderer" xml:space="preserve">
+        <value>Renderer</value>
+    </data>
+    <data name="Option_RRLanguage" xml:space="preserve">
+        <value>Retro Rewind Sprache</value>
+    </data>
+    <data name="Option_ShowFPS" xml:space="preserve">
+        <value>Zeige FPS an</value>
+    </data>
+    <data name="Option_VSync" xml:space="preserve">
+        <value>VSync</value>
+    </data>
+    <data name="Option_WhWzLanguage" xml:space="preserve">
+        <value>Wheel Wizard Sprache</value>
+    </data>
+    <data name="Option_WindowScale" xml:space="preserve">
+        <value>Fenstergröße</value>
+    </data>
+    <data name="Section_Language" xml:space="preserve">
+        <value>Sprache</value>
+    </data>
+    <data name="Section_LocationPaths" xml:space="preserve">
+        <value>Dateispeicherort Einstellungen</value>
+    </data>
+    <data name="Section_Performance" xml:space="preserve">
+        <value>Leistungseinstellungen</value>
+    </data>
+    <data name="Section_Renderer" xml:space="preserve">
+        <value>Renderer Einstellungen</value>
+    </data>
+    <data name="Section_Resolution" xml:space="preserve">
+        <value>Auflösung</value>
+    </data>
+    <data name="Section_WhWzAppearance" xml:space="preserve">
+        <value>Wheel Wizard Aussehen</value>
+    </data>
+    <data name="Section_Wii" xml:space="preserve">
+        <value>Wii Einstellung</value>
+    </data>
+    <data name="Value_Language_Dutch" xml:space="preserve">
+        <value>Niederländisch</value>
+    </data>
+    <data name="Value_Language_English" xml:space="preserve">
+        <value>Englisch</value>
+    </data>
+    <data name="Value_Language_France" xml:space="preserve">
+        <value>Französisch</value>
+    </data>
+    <data name="Value_Language_Italian" xml:space="preserve">
+        <value>Italienisch</value>
+    </data>
+    <data name="Value_Language_Japanese" xml:space="preserve">
+        <value>Japanisch</value>
+    </data>
+    <data name="Value_Language_Spanish" xml:space="preserve">
+        <value>Spanisch</value>
+    </data>
+    <data name="Value_Language_Turkish" xml:space="preserve">
+        <value>Türkisch</value>
+    </data>
+    <data name="CompletePercentage" xml:space="preserve">
+        <value>100</value>
+    </data>
+    <data name="Option_MakePrimary" xml:space="preserve">
+        <value>Hauptprofil</value>
+    </data>
+</root>

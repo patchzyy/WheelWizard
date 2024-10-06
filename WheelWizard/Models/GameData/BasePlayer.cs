@@ -1,5 +1,6 @@
 ﻿using CT_MKWII_WPF.Helpers;
 using CT_MKWII_WPF.Models.RRInfo;
+using CT_MKWII_WPF.Models.Settings;
 using CT_MKWII_WPF.Services.LiveData;
 using System.ComponentModel;
 using System.Linq;
@@ -39,7 +40,7 @@ public abstract class BasePlayer : INotifyPropertyChanged
     
     public string MiiName
     {
-        get => MiiData?.Mii?.Name ?? "";
+        get => MiiData?.Mii?.Name ?? SettingValues.NoName;
         set
         {
             if (MiiData == null)

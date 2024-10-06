@@ -1,0 +1,264 @@
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Sidebar_Link_Discord" xml:space="preserve">
+        <value>Kom gezellig praten!</value>
+    </data>
+    <data name="Sidebar_Link_Github" xml:space="preserve">
+        <value>Source code</value>
+    </data>
+    <data name="Sidebar_Link_Support" xml:space="preserve">
+        <value>Steun ons</value>
+    </data>
+    <data name="Text_MadeByString" xml:space="preserve">
+        <value>Gemaakt door: {$1} \n en {$2}</value>
+    </data>
+    <data name="Text_ThanksTranslators" xml:space="preserve">
+        <value>Hartelijk dank aan alle vertalers:</value>
+    </data>
+    <data name="Hover_PlayersOnline_0" xml:space="preserve">
+        <value>Er zijn momenteel geen spelers online</value>
+    </data>
+    <data name="Hover_PlayersOnline_1" xml:space="preserve">
+        <value>Er is momenteel 1 speler online</value>
+    </data>
+    <data name="Hover_PlayersOnline_x" xml:space="preserve">
+        <value>Er zijn momenteeel {$1} spelers online</value>
+    </data>
+    <data name="Hover_RoomsOnline_0" xml:space="preserve">
+        <value>Er is momenteel geen lobby actief</value>
+    </data>
+    <data name="Hover_RoomsOnline_1" xml:space="preserve">
+        <value>Er is momenteel 1 lobby actief</value>
+    </data>
+    <data name="Hover_RoomsOnline_x" xml:space="preserve">
+        <value>Er zijn momenteel {$1} lobbies actief</value>
+    </data>
+    <data name="Hover_FriendsOnline_x" xml:space="preserve">
+        <value>Er zijn momenteel {$1} vrienden online</value>
+    </data>
+    <data name="Hover_FriendsOnline_1" xml:space="preserve">
+        <value>Er is momenteel 1 vriend online</value>
+    </data>
+    <data name="Hover_FriendsOnline_0" xml:space="preserve">
+        <value>Er zijn momenteel geen vrienden online</value>
+    </data>
+    <data name="EmptyText_NoProfiles" xml:space="preserve">
+        <value>Je moet het spel minimaal 1 keer hebben gespeeld om hier je profielen te kunnen bekijken</value>
+    </data>
+    <data name="EmptyText_NoFriends_Title" xml:space="preserve">
+        <value>Je hebt nog geen vrienden</value>
+    </data>
+    <data name="EmptyText_NoFriends" xml:space="preserve">
+        <value>Je kunt vrienden toevoegen door het spel op te starten</value>
+    </data>
+    <data name="Text_WhWzTranslationPercentage" xml:space="preserve">
+        <value>Vertalingen voor deze taal zijn {$1} compleet</value>
+    </data>
+    <data name="EmptyText_NoMods_Title" xml:space="preserve">
+        <value>Je hebt nog geen mods</value>
+    </data>
+    <data name="EmptyText_NoMods" xml:space="preserve">
+        <value>Mods kunnen de  game aanpassen. Start met importeren van je eerste mod door op de Import knop te drukken.</value>
+    </data>
+    <data name="Time_Days_1" xml:space="preserve">
+        <value>1 dag</value>
+    </data>
+    <data name="Time_Days_x" xml:space="preserve">
+        <value>{$1} dagen</value>
+    </data>
+    <data name="Time_Hours_1" xml:space="preserve">
+        <value>1 uur</value>
+    </data>
+    <data name="Time_Hours_x" xml:space="preserve">
+        <value>{$1} uur</value>
+    </data>
+    <data name="Time_Minutes_1" xml:space="preserve">
+        <value>1 minuut</value>
+    </data>
+    <data name="Time_Minutes_x" xml:space="preserve">
+        <value>{$1} minuten</value>
+    </data>
+    <data name="Time_Seconds_1" xml:space="preserve">
+        <value>1 seconde</value>
+    </data>
+    <data name="Time_Seconds_x" xml:space="preserve">
+        <value>{$1} secondes</value>
+    </data>
+    <data name="Placeholder_SearchForPlayers" xml:space="preserve">
+        <value>Zoek voor spelers...</value>
+    </data>
+    <data name="Placeholder_EnterPath" xml:space="preserve">
+        <value>Vul hier uw bestands locatie in</value>
+    </data>
+    <data name="Hover_RoomsPageDisclaimer" xml:space="preserve">
+        <value>Let op dat deze pagina geen functionaliteit biedt om direct deel te nemen aan een lobbies. 
+Om aan een specifieke lobby, moet je deelnemen via een vriend, of hopen deel te nemen door deel te nemen aan de online servers.</value>
+    </data>
+    <data name="EmptyText_NoRooms_Title" xml:space="preserve">
+        <value>Momenteel geen lobbies</value>
+    </data>
+    <data name="EmptyText_NoRooms" xml:space="preserve">
+        <value>Het kan zijn dat je momenteel geen internet hebt. Of er is momenteel niemand aan het spelen.</value>
+    </data>
+    <data name="PopupText_EsimatedTimeRemaining" xml:space="preserve">
+        <value>Geschatte resterende tijd:</value>
+    </data>
+    <data name="PupupText_DownloadingMb" xml:space="preserve">
+        <value>downloading {$1} MB</value>
+    </data>
+    <data name="PopupText_ModsFound" xml:space="preserve">
+        <value>Mods gevonden</value>
+    </data>
+    <data name="PopupText_ModsFoundQuestion" xml:space="preserve">
+        <value>Je staat op het punt om het spel te starten zonder mods. Wil je de my-stuff folder leegmaken?</value>
+    </data>
+    <data name="PopupText_InstallingMods" xml:space="preserve">
+        <value>Mods installeren</value>
+    </data>
+    <data name="PopupText_InstallingModsCount" xml:space="preserve">
+        <value>{$1} mods installeren</value>
+    </data>
+    <data name="PopupText_NotFindDolphin" xml:space="preserve">
+        <value>Kan Dolphin Emulator niet vinden, vul eerst de corectly bestand locatie in in de instellingen</value>
+    </data>
+    <data name="PopupText_NotFindGame" xml:space="preserve">
+        <value>Kan hetspel bestand niet vinden,  vul eerst de corectly bestand locatie in in de instellingen</value>
+    </data>
+    <data name="PopupText_ModCombineQuestion" xml:space="preserve">
+        <value>Wil je alle bestanden combineren in 1 mod?</value>
+    </data>
+    <data name="PopupText_MultipleFilesSelected" xml:space="preserve">
+        <value>Meerdere bestanden geselecteerd</value>
+    </data>
+    <data name="PopupText_ModNameExists" xml:space="preserve">
+        <value>Er bestaat al een mod met de naam '{$1}' .</value>
+    </data>
+    <data name="PopupText_EnterModName" xml:space="preserve">
+        <value>Voer modnaam in:</value>
+    </data>
+    <data name="PopupText_ModNameEmpty" xml:space="preserve">
+        <value>De naam van de mod mag niet leeg zijn.</value>
+    </data>
+    <data name="PopupText_SureDeleteQuestion" xml:space="preserve">
+        <value>Weet je zeker dat je {$1} wilt verwijderen?</value>
+    </data>
+    <data name="PopupText_NoModFolder" xml:space="preserve">
+        <value>Mods folder bestaat niet</value>
+    </data>
+    <data name="PopupText_EnterTitle" xml:space="preserve">
+        <value>Voer titel in:</value>
+    </data>
+    <data name="PopupText_ProcessingXofY" xml:space="preserve">
+        <value>Verwerken van {$1} van {$2} bestanden...</value>
+    </data>
+    <data name="PopupText_EnsurePathsExists" xml:space="preserve">
+        <value>Controleer of alle paden correct zijn en probeer het opnieuw.</value>
+    </data>
+    <data name="PopupText_SettingsSaved" xml:space="preserve">
+        <value>Instellingen succesvol opgeslagen!</value>
+    </data>
+    <data name="PopupText_ApplyScale" xml:space="preserve">
+        <value>Will je de nieuwe schaal toepassen?</value>
+    </data>
+    <data name="PopupText_DolphinNotFound" xml:space="preserve">
+        <value>Dolphin Emulator folder niet gevonden</value>
+    </data>
+    <data name="PopupText_DolphinFound" xml:space="preserve">
+        <value>Dolphin Emulator folder gevonden</value>
+    </data>
+    <data name="PopupText_DolphinNotFoundText" xml:space="preserve">
+        <value>Dolphin Emulator kan niet automatish gevonden worden. Probeer het handmatig.</value>
+    </data>
+    <data name="PopupText_DolphinFoundText" xml:space="preserve">
+        <value>Als je niet weet wat dit allemaal betekend, druk op ja :) \nEr is een Dolphin Emulator folder gevonden, wil je die gebruiken?</value>
+    </data>
+    <data name="PopupText_FailedUpdateDelete" xml:space="preserve">
+        <value>Het is niet gelukt om bestanden te verwijderen voor de update. Process word afgebroken.</value>
+    </data>
+    <data name="PopupText_UpdateRR" xml:space="preserve">
+        <value>Retro Rewind updaten</value>
+    </data>
+    <data name="PopupText_FailedUpdateApply" xml:space="preserve">
+        <value>Het is niet gelukt om te updaten, Process word afgebroken.</value>
+    </data>
+    <data name="PopupText_RRUpToDate" xml:space="preserve">
+        <value>Retro Rewind is up-to-date.</value>
+    </data>
+    <data name="PopupText_FailCheckUpdates" xml:space="preserve">
+        <value>Zoeken naar updates mislukt</value>
+    </data>
+    <data name="PopupText_WhWzUpdateAvailable" xml:space="preserve">
+        <value>Wheel Wizard Update Beschikbaar</value>
+    </data>
+    <data name="PopupText_UpdateAdmin" xml:space="preserve">
+        <value>Update met behulp van admin</value>
+    </data>
+    <data name="PopupText_UpdateAdminExplained" xml:space="preserve">
+        <value>Soms is er voor een update admin rechten nodig, wilt je deze voor deze update activeren?</value>
+    </data>
+    <data name="PopupText_UnableUpdateWhWz_ReasonNetwork" xml:space="preserve">
+        <value>Kan niet controleren of WheelWizard up-to-date is. \nEr zijn mogelijk netwerkproblemen.</value>
+    </data>
+    <data name="PopupText_RestartAdminFail" xml:space="preserve">
+        <value>Het is niet gelukt om opnieuw op te starten met admin rechten.</value>
+    </data>
+    <data name="PopupText_NewVersionWhWz" xml:space="preserve">
+        <value>Versie {$1} van WheelWizard is beschikbaar (momenteel op {$2}). Wilt je nu updaten?</value>
+    </data>
+    <data name="PopupText_LatestWhWzGithub" xml:space="preserve">
+        <value>De nieuwste WheelWizard ophalen van github-releases</value>
+    </data>
+    <data name="PopupText_UpdateWhWz" xml:space="preserve">
+        <value>Updating WheelWizard</value>
+    </data>
+    <data name="PopupText_UnableUpdateWhWz_ReasonLocation" xml:space="preserve">
+        <value>WheelWizard kan niet worden ge-update. Zorg ervoor dat de applicatie zich in een folder bevindt waarnaar kan worden geschreven.\n Kan de huidige folder niet vinden.</value>
+    </data>
+    <data name="PopupText_ReinstallRR" xml:space="preserve">
+        <value>Retro Rewind Her-installeren</value>
+    </data>
+    <data name="PopupText_InstallingRR" xml:space="preserve">
+        <value>Retro Rewind Installeren</value>
+    </data>
+    <data name="PopupText_InstallingRRFirstTime" xml:space="preserve">
+        <value>Retro Rewind voor de eerste keer aan het installeren</value>
+    </data>
+    <data name="PopupText_AlreadyFilesRR" xml:space="preserve">
+        <value>Er staan ​​al bestanden in je RetroRewind folder. Wilt u deze her-installeren?</value>
+    </data>
+    <data name="PopupText_CouldNotConnectServer" xml:space="preserve">
+        <value>Kon geen verbinding maken met de server. Probeer het later opnieuw.</value>
+    </data>
+    <data name="PopupText_OldRRFound" xml:space="preserve">
+        <value>Oude Retro Rewind gevonden</value>
+    </data>
+    <data name="PopupText_OldRRFoundExplained" xml:space="preserve">
+        <value>Er zijn oude Retro Rewind-bestanden gevonden. Wilt u deze verplaatsen naar de nieuwe locatie?</value>
+    </data>
+    <data name="PopupText_OldRksysFoundExplained" xml:space="preserve">
+        <value>Oude 'save data' zijn gevonden. Wilt je deze gebruiken? (aanbevolen)</value>
+    </data>
+    <data name="PopupText_OldRksysFound" xml:space="preserve">
+        <value>Oude rksys.dat gevonden</value>
+    </data>
+    <data name="PopupText_RRToOld" xml:space="preserve">
+        <value>Je versie van Retro Rewind is te oud om te updaten. Wil je Retro Rewind opnieuw installeren?</value>
+    </data>
+    <data name="PopupText_DownloadRR" xml:space="preserve">
+        <value>Retro Rewind downloaden</value>
+    </data>
+    <data name="PopupText_RRNotDeterment" xml:space="preserve">
+        <value>Je versie van Retro Rewind kon niet worden bepaald. Wil je Retro Rewind downloaden?</value>
+    </data>
+</root>
