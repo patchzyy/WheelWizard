@@ -212,8 +212,6 @@ namespace CT_MKWII_WPF.Views.Pages
                     Directory.CreateDirectory(destinationDirectory);
                 try
                 {
-                    // Extract the zip file to the destination directory
-                    //get name of the zip file
                     var zipFileName = Path.GetFileNameWithoutExtension(file);
                     //now we check if there isn't already a folder with the same name as the zip file, if so... cancel
                     var modName = Path.Combine(destinationDirectory, zipFileName);

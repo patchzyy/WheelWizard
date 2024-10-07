@@ -147,7 +147,6 @@ namespace CT_MKWII_WPF.Views.Popups
                                 progressWindow.Close();
 
                                 // Install Mods
-                                //todo this is broken fix it
                                 await ModsLaunchHelper.PrepareModsForLaunch();
 
                                 MessageBox.Show("Mod downloaded and installed successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -193,7 +192,7 @@ namespace CT_MKWII_WPF.Views.Popups
                     var contentDisposition = response.Content.Headers.ContentDisposition;
                     var fileName = contentDisposition?.FileName?.Trim('"') ?? GetFileNameFromUrl(finalUrl);
 
-                    var modsFolder = ModsLaunchHelper.ModsFolderPath;
+                    var modsFolder = ModsLaunchHelper.TempModsFolderPath;
                     Directory.CreateDirectory(modsFolder);
                     var filePath = Path.Combine(modsFolder, fileName);
 
