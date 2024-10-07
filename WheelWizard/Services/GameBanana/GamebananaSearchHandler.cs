@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CT_MKWII_WPF.Models.GameBanana;
+using System;
 using System.Net;
 
 namespace CT_MKWII_WPF.Services.GameBanana;
@@ -24,6 +25,20 @@ public class GamebananaSearchHandler
         if (!result.Succeeded)
         {
             Console.WriteLine($"Error: {result.StatusMessage} (HTTP {result.StatusCode})");
+        }
+
+        return result;
+    }
+    
+    public static async Task<HttpClientResult<ModDetailResponse>> GetModDetailsAsync(int modId)
+    {
+        var modDetailUrl = $"{BaseUrl}/Mod/{modId}/ProfilePage";
+        Console.WriteLine("Mod Detail URL: " + modDetailUrl);
+        var result = await HttpClientHelper.GetAsync<ModDetailResponse>(modDetailUrl);
+
+        if (!result.Succeeded)
+        {
+            Console.WriteLine($"Error fetching mod details: {result.StatusMessage} (HTTP {result.StatusCode})");
         }
 
         return result;

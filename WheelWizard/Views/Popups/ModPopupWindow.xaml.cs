@@ -1,11 +1,17 @@
-﻿using System;
+﻿// ModPopupWindow.xaml.cs
+using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using CT_MKWII_WPF.Helpers;
 using CT_MKWII_WPF.Models;
 using CT_MKWII_WPF.Services.GameBanana;
+using CT_MKWII_WPF.Services.Launcher;
+using System.IO;
 
 namespace CT_MKWII_WPF.Views.Popups
 {
@@ -16,7 +22,7 @@ namespace CT_MKWII_WPF.Views.Popups
         private const int ModsPerPage = 20;
         private string CurrentSearchTerm = "";
 
-        public ModPopupWindow() : base(true, false,false, "Mod Browser", new Vector(800, 800))
+        public ModPopupWindow() : base(true, false, false, "Mod Browser", new Vector(800, 800))
         {
             InitializeComponent();
             ModListView.ItemsSource = Mods;
@@ -28,7 +34,7 @@ namespace CT_MKWII_WPF.Views.Popups
             try
             {
                 var result = await GamebananaSearchHandler.SearchModsAsync(searchTerm, page, ModsPerPage);
-                
+
                 if (result.Succeeded && result.Content != null)
                 {
                     Mods.Clear();
@@ -65,7 +71,7 @@ namespace CT_MKWII_WPF.Views.Popups
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            CurrentSearchTerm = SearchTextBox.Text;
+            CurrentSearchTerm = SearchTextBox.Text.Trim();
             CurrentPage = 1;
             LoadMods(CurrentPage, CurrentSearchTerm);
         }
@@ -80,27 +86,145 @@ namespace CT_MKWII_WPF.Views.Popups
 
         private void UpdateModDetails(ModRecord mod)
         {
-            if (mod._aPreviewMedia?._aImages?.Count > 0)
+            // Load Images
+            ImageCarousel.Items.Clear();
+            if (mod._aPreviewMedia?._aImages != null && mod._aPreviewMedia._aImages.Any())
             {
-                ModImage.Source = new BitmapImage(new Uri(mod._aPreviewMedia._aImages[0]._sBaseUrl));
-            }
-            else
-            {
-                ModImage.Source = null;
+                foreach (var image in mod._aPreviewMedia._aImages)
+                {
+                    // Assuming there's a property to get the full image URL
+                    var fullImageUrl = $"{image._sBaseUrl}/{image._sFile}";
+                    ImageCarousel.Items.Add(new { FullImageUrl = fullImageUrl });
+                }
             }
 
+            // Mod Name and Submitter
             ModName.Text = mod._sName;
             ModSubmitter.Text = $"By {mod._aSubmitter._sName}";
+
+            // Mod Stats
             ModStats.Text = $"Likes: {mod._nLikeCount} | Views: {mod._nViewCount}";
-            ModDescription.Text = $"Development State: {mod._sDevelopmentState}\nCompletion: {mod._iCompletionPercentage}%";
+
+            // Description
+            ModDescription.Text = "temp";
+
+            // Development State and Completion
+            ModDevelopmentState.Text = mod._sDevelopmentState;
+            CompletionProgressBar.Value = mod._iCompletionPercentage;
         }
 
-        private void Download_Click(object sender, RoutedEventArgs e)
+        private async void Download_Click(object sender, RoutedEventArgs e)
         {
             if (ModListView.SelectedItem is ModRecord selectedMod)
             {
-                MessageBox.Show($"Downloading mod: {selectedMod._sName}\nThis feature is not yet implemented.", "Download", MessageBoxButton.OK, MessageBoxImage.Information);
+                var confirmation = MessageBox.Show($"Do you want to download and install the mod: {selectedMod._sName}?",
+                                                   "Confirm Download",
+                                                   MessageBoxButton.YesNo,
+                                                   MessageBoxImage.Question);
+
+                if (confirmation == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        // Fetch mod details to get download URLs
+                        var modDetailResult = await GamebananaSearchHandler.GetModDetailsAsync(selectedMod._idRow);
+                        if (modDetailResult.Succeeded && modDetailResult.Content != null)
+                        {
+                            var downloadUrls = modDetailResult.Content._aFiles.Select(f => f._sDownloadUrl).ToList();
+                            if (downloadUrls.Any())
+                            {
+                                // Show download progress window
+                                var progressWindow = new ProgressWindow($"Downloading {selectedMod._sName}", Application.Current.MainWindow);
+                                progressWindow.Show();
+
+                                // Download all files
+                                foreach (var url in downloadUrls)
+                                {
+                                    await DownloadFileAsync(url, progressWindow);
+                                }
+
+                                // Close progress window
+                                progressWindow.Close();
+
+                                // Install Mods
+                                //todo this is broken fix it
+                                await ModsLaunchHelper.PrepareModsForLaunch();
+
+                                MessageBox.Show("Mod downloaded and installed successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }
+                            else
+                            {
+                                MessageBox.Show("No downloadable files found for this mod.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to retrieve mod details.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("An error occurred during download: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
             }
+            else
+            {
+                MessageBox.Show("Please select a mod to download.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private async Task DownloadFileAsync(string url, ProgressWindow progressWindow)
+        {
+            using (HttpClient client = new HttpClient(new HttpClientHandler { AllowAutoRedirect = true }))
+            {
+                try
+                {
+                    var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+                    response.EnsureSuccessStatusCode();
+
+                    // Ensure we are following the final redirect to get the actual file.
+                    var finalUrl = response.RequestMessage.RequestUri.ToString();
+
+                    var totalBytes = response.Content.Headers.ContentLength ?? -1L;
+                    var canReportProgress = totalBytes != -1;
+
+                    // Check if the content disposition is available for the file name
+                    var contentDisposition = response.Content.Headers.ContentDisposition;
+                    var fileName = contentDisposition?.FileName?.Trim('"') ?? GetFileNameFromUrl(finalUrl);
+
+                    var modsFolder = ModsLaunchHelper.ModsFolderPath;
+                    Directory.CreateDirectory(modsFolder);
+                    var filePath = Path.Combine(modsFolder, fileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+                    using (var httpStream = await response.Content.ReadAsStreamAsync())
+                    {
+                        var buffer = new byte[8192];
+                        long totalRead = 0;
+                        int bytesRead;
+                        while ((bytesRead = await httpStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                        {
+                            await fileStream.WriteAsync(buffer, 0, bytesRead);
+                            totalRead += bytesRead;
+                            if (canReportProgress)
+                            {
+                                double progress = (double)totalRead / totalBytes * 100;
+                                progressWindow.UpdateProgress((int)progress);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"Failed to download file from {url}: {ex.Message}");
+                }
+            }
+        }
+
+        private string GetFileNameFromUrl(string url)
+        {
+            return Path.GetFileName(new Uri(url).AbsolutePath);
         }
     }
 }
