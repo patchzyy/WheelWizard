@@ -1,17 +1,17 @@
 ﻿using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Models;
 using CT_MKWII_WPF.Models.Settings;
 using CT_MKWII_WPF.Resources.Languages;
+using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Launcher;
 using CT_MKWII_WPF.Services.UrlProtocol;
 using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
-using System.Text.Json;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,14 +20,9 @@ using System.Windows.Threading;
 
 namespace CT_MKWII_WPF.Views.Pages
 {
-    public partial class ModsPage : Page
+    public partial class ModsPage : Page, INotifyPropertyChanged
     {
-        private readonly string _configFilePath = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "CT-MKWII", "Mods", "modconfig.json");
-
         public ObservableCollection<Mod> Mods { get; set; }
-
         private bool _toggleAll = true;
         private Point _startPoint;
 
@@ -35,21 +30,18 @@ namespace CT_MKWII_WPF.Views.Pages
         {
             InitializeComponent();
             LoadMods();
-
             ModsListView.DataContext = this;
         }
 
-        private void LoadMods()
+        private async void LoadMods()
         {
             try
             {
-                if (File.Exists(_configFilePath))
+                Mods = await ModInstallation.LoadModsAsync();
+                foreach (var mod in Mods)
                 {
-                    var json = File.ReadAllText(_configFilePath);
-                    Mods = JsonSerializer.Deserialize<ObservableCollection<Mod>>(json) ??
-                           new ObservableCollection<Mod>();
+                    mod.PropertyChanged += Mod_PropertyChanged;
                 }
-                else Mods = new ObservableCollection<Mod>();
             }
             catch (Exception ex)
             {
@@ -57,12 +49,6 @@ namespace CT_MKWII_WPF.Views.Pages
                     MessageBoxImage.Error);
                 Mods = new ObservableCollection<Mod>();
             }
-
-            foreach (var mod in Mods)
-            {
-                mod.PropertyChanged += Mod_PropertyChanged;
-            }
-
             UpdateEmptyListMessageVisibility();
         }
 
@@ -76,20 +62,15 @@ namespace CT_MKWII_WPF.Views.Pages
         private void Mod_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(Mod.IsEnabled))
-                SaveMods();
+                SaveModsAsync();
             UpdateEmptyListMessageVisibility();
         }
 
-        private void SaveMods()
+        private async void SaveModsAsync()
         {
             try
             {
-                var json = JsonSerializer.Serialize(Mods);
-                var directory = Path.GetDirectoryName(_configFilePath);
-
-                if (!Directory.Exists(directory))
-                    Directory.CreateDirectory(directory);
-                File.WriteAllText(_configFilePath, json);
+                await ModInstallation.SaveModsAsync(Mods);
             }
             catch (Exception ex)
             {
@@ -103,7 +84,6 @@ namespace CT_MKWII_WPF.Views.Pages
         {
             var joinedExtensions = string.Join(";",ModsLaunchHelper.AcceptedModExtensions);
             joinedExtensions += ";*.zip";
-            
             var openFileDialog = new OpenFileDialog
             {
                 Filter = $"Mod files ({joinedExtensions})|{joinedExtensions}|All files (*.*)|*.*",
@@ -146,10 +126,6 @@ namespace CT_MKWII_WPF.Views.Pages
             ShowLoading(false);
         }
 
-
-        private bool ModExists(string modName) =>
-            Mods.Any(mod => mod.Title.Equals(modName, StringComparison.OrdinalIgnoreCase));
-
         private async Task InstallEachFileAsMod(string[] filePaths)
         {
             for (var i = 0; i < filePaths.Length; i++)
@@ -157,16 +133,15 @@ namespace CT_MKWII_WPF.Views.Pages
                 UpdateProgress(i + 1, filePaths.Length);
                 var modName = Path.GetFileNameWithoutExtension(filePaths[i]);
 
-                if (ModExists(modName))
+                if (ModInstallation.ModExists(Mods,modName))
                 {
                     MessageBox.Show(Humanizer.ReplaceDynamic(Phrases.PopupText_ModNameExists, modName), 
                                     Common.Term_Error, MessageBoxButton.OK, MessageBoxImage.Error);
                     continue;
                 }
-
-                var modDirectory = GetModDirectoryPath(modName);
+                var modDirectory = ModInstallation.GetModDirectoryPath(modName);
                 CreateDirectory(modDirectory);
-                await Task.Run(() => ProcessFile(filePaths[i], modDirectory));
+                await Task.Run(() => ModInstallation.ProcessFile(filePaths[i], modDirectory));
                 AddMod(modName);
             }
         }
@@ -176,12 +151,12 @@ namespace CT_MKWII_WPF.Views.Pages
             var modName = Microsoft.VisualBasic.Interaction
                 .InputBox(Phrases.PopupText_EnterModName, Common.Attribute_ModName, "New Mod");
             if (!IsValidName(modName)) return;
-            var modDirectory = GetModDirectoryPath(modName);
+            var modDirectory = ModInstallation.GetModDirectoryPath(modName);
             CreateDirectory(modDirectory);
             for (var i = 0; i < filePaths.Length; i++)
             {
                 UpdateProgress(i + 1, filePaths.Length);
-                await Task.Run(() => ProcessFile(filePaths[i], modDirectory));
+                await Task.Run(() => ModInstallation.ProcessFile(filePaths[i], modDirectory));
             }
 
             AddMod(modName);
@@ -198,61 +173,9 @@ namespace CT_MKWII_WPF.Views.Pages
                 };
                 mod.PropertyChanged += Mod_PropertyChanged;
                 Mods.Add(mod);
-                SaveMods();
+                SaveModsAsync();
             }
-
             UpdateEmptyListMessageVisibility();
-        }
-
-        private void ProcessFile(string file, string destinationDirectory)
-        {
-            if (Path.GetExtension(file).Equals(".zip", StringComparison.OrdinalIgnoreCase))
-            {
-                if (!Directory.Exists(destinationDirectory))
-                    Directory.CreateDirectory(destinationDirectory);
-                try
-                {
-                    var zipFileName = Path.GetFileNameWithoutExtension(file);
-                    //now we check if there isn't already a folder with the same name as the zip file, if so... cancel
-                    var modName = Path.Combine(destinationDirectory, zipFileName);
-                    if (Directory.Exists(modName))
-                    {
-                        MessageBox.Show(Humanizer.ReplaceDynamic(Phrases.PopupText_ModNameExists, modName), 
-                                        Common.Term_Error, MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-
-                    ZipFile.ExtractToDirectory(file, destinationDirectory);
-                }
-                catch (IOException)
-                {
-                    //if file already exists, we catch the exception and show a message
-                    MessageBox.Show($"You already have a mod with this name", Common.Term_Error,
-                        MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Failed to extract zip file.\nThis is most likely because there is " +
-                                    $"an invalid folder name. Or the ZIP might be password protected\n {ex.Message}",
-                        "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            else
-            {
-                try
-                {
-                    if (!Directory.Exists(destinationDirectory))
-                        Directory.CreateDirectory(destinationDirectory);
-
-                    var destFile = Path.Combine(destinationDirectory, Path.GetFileName(file));
-                    File.Copy(file, destFile, overwrite: true);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Failed to copy file: {ex.Message}", Common.Term_Error,
-                        MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
         }
 
         private void UpdateProgress(int current, int total)
@@ -270,11 +193,6 @@ namespace CT_MKWII_WPF.Views.Pages
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
         }
-
-        private static string GetModDirectoryPath(string modName) =>
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "CT-MKWII", "Mods", modName);
-
 
         private void ShowLoading(bool isLoading)
         {
@@ -325,12 +243,12 @@ namespace CT_MKWII_WPF.Views.Pages
 
             try
             {
-                var oldDirectoryName = GetModDirectoryPath(selectedMod.Title);
-                var newDirectoryName = GetModDirectoryPath(newTitle);
+                var oldDirectoryName = ModInstallation.GetModDirectoryPath(selectedMod.Title);
+                var newDirectoryName = ModInstallation.GetModDirectoryPath(newTitle);
                 Directory.Move(oldDirectoryName, newDirectoryName);
                 selectedMod.Title = newTitle; // rename only after the directory, just in case that fails, then 
                 // this renaming also does not run anymore
-                SaveMods();
+                SaveModsAsync();
             }
             catch (IOException ex)
             {
@@ -351,7 +269,7 @@ namespace CT_MKWII_WPF.Views.Pages
             Mods.Remove(selectedMod);
             try
             {
-                var modDirectory = GetModDirectoryPath(selectedMod.Title);
+                var modDirectory = ModInstallation.GetModDirectoryPath(selectedMod.Title);
                 if (Directory.Exists(modDirectory))
                     Directory.Delete(modDirectory, true);
             }
@@ -360,9 +278,7 @@ namespace CT_MKWII_WPF.Views.Pages
                 MessageBox.Show($"Failed to delete mod directory. It may be that this file is read only?", Common.Term_Error,
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-            SaveMods();
-
+            SaveModsAsync();
             UpdateEmptyListMessageVisibility();
         }
 
@@ -371,7 +287,7 @@ namespace CT_MKWII_WPF.Views.Pages
             var selectedMod = ModsListView.GetCurrentContextItem<Mod>();
             if (selectedMod == null) return;
 
-            var modDirectory = GetModDirectoryPath(selectedMod!.Title);
+            var modDirectory = ModInstallation.GetModDirectoryPath(selectedMod!.Title);
             if (Directory.Exists(modDirectory))
                 System.Diagnostics.Process.Start("explorer", modDirectory);
             else
@@ -388,13 +304,7 @@ namespace CT_MKWII_WPF.Views.Pages
             // for now SaveMods uses the Mods property, so therefore we also have to update it here
             Mods.Remove(mySelectedMod);
             Mods.Insert(newIndex, mySelectedMod);
-
-            SaveMods();
-        }
-
-        private void SetupURLSceme(object sender, RoutedEventArgs e)
-        {
-            UrlProtocolManager.RegisterCustomScheme(UrlProtocolManager.ProtocolName);
+            SaveModsAsync();
         }
 
         private void CheckIfSet(object sender, RoutedEventArgs e)
@@ -414,6 +324,21 @@ namespace CT_MKWII_WPF.Views.Pages
             var modPopup = new Views.Popups.ModPopupWindow();
 
             modPopup.ShowDialog();
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
         }
     }
 }

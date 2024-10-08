@@ -137,9 +137,10 @@ namespace CT_MKWII_WPF.Views.Popups
                                 var progressWindow = new ProgressWindow($"Downloading {selectedMod._sName}", Application.Current.MainWindow);
                                 progressWindow.Show();
 
-                                // Download all files
+                                // Download the files
                                 foreach (var url in downloadUrls)
                                 {
+                                    await PrepareToDownloadFile();
                                     await DownloadFileAsync(url, progressWindow);
                                 }
 
@@ -170,6 +171,15 @@ namespace CT_MKWII_WPF.Views.Popups
             else
             {
                 MessageBox.Show("Please select a mod to download.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private async Task PrepareToDownloadFile()
+        {
+            var tempFolder = ModsLaunchHelper.TempModsFolderPath;
+            if (Directory.Exists(tempFolder))
+            {
+                Directory.Delete(tempFolder, true);
             }
         }
 
