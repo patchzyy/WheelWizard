@@ -56,8 +56,4 @@ public class GamebananaSearchHandler
         var latestModsUrl = $"{BaseUrl}/Game/{GAME_ID}/Subfeed?_nPage={page}";
         return await HttpClientHelper.GetAsync<GameBananaResponse>(latestModsUrl);
     }
-    public static HttpClientResult<GameBananaResponse> MockSearchResult(GameBananaResponse mockResponse)
-    {
-        return HttpClientHelper.MockResult(mockResponse);
-    }
 }

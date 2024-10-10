@@ -1,14 +1,10 @@
-﻿// ModPopupWindow.xaml.cs
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Models;
 using CT_MKWII_WPF.Services.GameBanana;
 using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Launcher;
@@ -41,7 +37,8 @@ namespace CT_MKWII_WPF.Views.Popups
                     Mods.Clear();
                     foreach (var mod in result.Content._aRecords)
                     {
-                        Mods.Add(mod);
+                        if (mod._sModelName == "Mod")
+                            Mods.Add(mod);
                     }
                 }
                 else
@@ -111,12 +108,8 @@ namespace CT_MKWII_WPF.Views.Popups
                 ModStats.Text = $"Likes: {modDetails._nLikeCount} | Views: {modDetails._nViewCount} | Downloads: {modDetails._nDownloadCount}";
 
                 // Description
-                ModDescription.Text = modDetails._sText;
-                
-
-                // Additional details, if any
-                // Example: Files, License, etc.
-                // You can add more UI elements to show the additional mod details if needed
+                string htmlContent = modDetails._sText;
+                ModDescriptionHtmlPanel.Text = htmlContent;
             }
             catch (Exception ex)
             {
@@ -130,36 +123,6 @@ namespace CT_MKWII_WPF.Views.Popups
             {
                 await UpdateModDetailsAsync(selectedMod);
             }
-        }
-
-        private void UpdateModDetails(ModRecord mod)
-        {
-            // Load Images
-            ImageCarousel.Items.Clear();
-            if (mod._aPreviewMedia?._aImages != null && mod._aPreviewMedia._aImages.Any())
-            {
-                foreach (var image in mod._aPreviewMedia._aImages)
-                {
-                    var fullImageUrl = $"{image._sBaseUrl}/{image._sFile}";
-                    ImageCarousel.Items.Add(new { FullImageUrl = fullImageUrl });
-                }
-            }
-
-            // Mod Name and Submitter
-            ModName.Text = mod._sName;
-            ModSubmitter.Text = $"By {mod._aSubmitter._sName}";
-
-            // Mod Stats
-            ModStats.Text = $"Likes: {mod._nLikeCount} | Views: {mod._nViewCount}";
-
-            // Description
-            ModDescription.Text = mod._sText;
-            MessageBox.Show("Mod Description: " + mod._sText);
-            
-
-            // Development State and Completion
-            ModDevelopmentState.Text = mod._sDevelopmentState;
-            // CompletionProgressBar.Value = mod._iCompletionPercentage;
         }
 
         private async void Download_Click(object sender, RoutedEventArgs e)

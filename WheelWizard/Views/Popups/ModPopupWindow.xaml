@@ -8,6 +8,7 @@
                     xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
                     xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
                     xmlns:popups="clr-namespace:CT_MKWII_WPF.Views.Popups"
+                    xmlns:html="clr-namespace:TheArtOfDev.HtmlRenderer.WPF;assembly=HtmlRenderer.WPF"
                     mc:Ignorable="d" 
                     d:DesignHeight="600" d:DesignWidth="800">
     <Grid Margin="10">
@@ -51,7 +52,7 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Image Width="90" Height="90" 
-                                       Source="{Binding _aPreviewMedia._aImages[0].FullImageUrl}" 
+                                       Source="{Binding FirstImageUrl}" 
                                        Stretch="UniformToFill" 
                                        Margin="0,0,10,0"/>
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
@@ -99,7 +100,7 @@
                         <TextBlock x:Name="ModStats" FontWeight="Bold" Margin="0,0,0,10"/>
 
                         <TextBlock Text="Description:" FontWeight="Bold" />
-                        <TextBlock x:Name="ModDescription" TextWrapping="Wrap" Margin="0,5,0,10"/>
+                        <html:HtmlPanel x:Name="ModDescriptionHtmlPanel" Margin="0,5,0,10" />
 
                         <TextBlock Text="Development State:" FontWeight="Bold" />
                         <TextBlock x:Name="ModDevelopmentState" Margin="0,5,0,10"/>
