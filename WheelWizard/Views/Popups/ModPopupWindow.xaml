@@ -19,10 +19,17 @@
 
         <!-- Search Bar -->
         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-            <TextBox x:Name="SearchTextBox" Width="300" Margin="0,0,10,0" 
-                     VerticalContentAlignment="Center" 
-                     Text="Search for mods..."/>
-            <Button Content="Search" Width="80" Click="Search_Click"/>
+            <components:InputField
+                Width="300"
+                Placeholder="Search for mods..."
+                Height="40"
+                HorizontalAlignment="Left"
+                x:Name="SearchTextBox" />
+            <components:Button Text="Search" FontSize="16"
+                               IconKind="{x:Static icon:PackIconFontAwesomeKind.SearchenginBrands}"
+                               IconPack="FontAwesome"
+                               Height="40"
+                               Click="Search_Click" Margin="10,0,0,0" />
         </StackPanel>
 
         <!-- Content Area -->
@@ -97,13 +104,12 @@
                         <TextBlock Text="Development State:" FontWeight="Bold" />
                         <TextBlock x:Name="ModDevelopmentState" Margin="0,5,0,10"/>
 
-                        <TextBlock Text="Completion Percentage:" FontWeight="Bold" />
-                        <ProgressBar x:Name="CompletionProgressBar" Height="20" Margin="0,5,0,10" 
-                                     Minimum="0" Maximum="100"/>
-
                         <!-- Download Button -->
-                        <Button Content="Download and Install" Width="150" Height="40" 
-                                HorizontalAlignment="Left" Click="Download_Click"/>
+                        <components:Button Text="Download And Install" FontSize="16"
+                                           IconKind="{x:Static icon:PackIconFontAwesomeKind.DownloadSolid}"
+                                           IconPack="FontAwesome"
+                                           Height="40"
+                                           Click="Download_Click" Margin="10,0,0,0" />
                     </StackPanel>
                 </ScrollViewer>
             </Border>

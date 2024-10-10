@@ -61,7 +61,7 @@ public class ModRecord
     public Game _aGame { get; set; }
 
     // Category information for the mod (e.g., "Characters", "Maps")
-    public RootCategory _aRootCategory { get; set; }
+    public RootCategory _aCategory { get; set; }
 
     // Development state of the mod (e.g., "In Development", "Final/Stable")
     public string _sDevelopmentState { get; set; }
@@ -74,7 +74,8 @@ public class ModRecord
 
     // Number of views the mod page has received
     public int _nViewCount { get; set; }
-    
+
+    // URL of the first image
     public string FirstImageUrl
     {
         get
@@ -86,6 +87,24 @@ public class ModRecord
             return string.Empty;
         }
     }
+
+    // License details for the mod
+    public License _aLicense { get; set; }
+
+    // Trash info if the mod is trashed
+    public TrashInfo _aTrashInfo { get; set; }
+
+    // Files associated with the mod
+    public List<ModFile> _aFiles { get; set; }
+
+    // Embedded media like YouTube videos
+    public List<string> _aEmbeddedMedia { get; set; }
+
+    // Mod description or text (from _sText or _sDescription)
+    public string _sText { get; set; }
+    
+    // Some mods may also use _sDescription, so you can handle both
+    public string _sDescription { get; set; }
 }
 
 public class PreviewMedia
@@ -150,4 +169,58 @@ public class RootCategory
 
     // URL to the category's icon image
     public string _sIconUrl { get; set; }
+}
+
+public class License
+{
+    // URL to the Creative Commons license details
+    public string _sLicenseUrl { get; set; }
+
+    // Details on what users can or cannot do with the mod
+    public LicenseChecklist _aLicenseChecklist { get; set; }
+}
+
+public class LicenseChecklist
+{
+    // Actions allowed without asking for permission
+    public List<string> yes { get; set; }
+
+    // Actions requiring permission from the mod author
+    public List<string> ask { get; set; }
+
+    // Actions that are not allowed at all
+    public List<string> no { get; set; }
+}
+
+public class TrashInfo
+{
+    // Reason why the mod was trashed
+    public string _sReason { get; set; }
+
+    // Date when the mod was trashed (timestamp)
+    public long _tsTrashDate { get; set; }
+}
+
+public class ModFile
+{
+    // Unique ID for the file
+    public int _idRow { get; set; }
+
+    // Name of the file
+    public string _sFile { get; set; }
+
+    // Size of the file in bytes
+    public int _nFilesize { get; set; }
+
+    // URL to download the file
+    public string _sDownloadUrl { get; set; }
+
+    // Analysis result of the file (e.g., "clean", "contains_exe")
+    public string _sAnalysisResult { get; set; }
+
+    // Indicates whether the file contains an executable
+    public bool _bContainsExe { get; set; }
+
+    // MD5 checksum of the file
+    public string _sMd5Checksum { get; set; }
 }

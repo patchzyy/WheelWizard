@@ -22,8 +22,8 @@ public class ModDetailResponse
     public int _nAllTodosCount { get; set; }
     public bool _bHasTodos { get; set; }
     public int _nPostCount { get; set; }
-    public List<object> _aAttributes { get; set; }
-    public List<object> _aTags { get; set; }
+    public Dictionary<string, string> _aAttributes { get; set; }
+    public List<string> _aTags { get; set; }
     public bool _bCreatedBySubmitter { get; set; }
     public bool _bIsPorted { get; set; }
     public int _nThanksCount { get; set; }

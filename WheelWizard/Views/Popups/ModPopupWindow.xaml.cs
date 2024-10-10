@@ -10,6 +10,7 @@ using System.Windows.Media.Imaging;
 using CT_MKWII_WPF.Helpers;
 using CT_MKWII_WPF.Models;
 using CT_MKWII_WPF.Services.GameBanana;
+using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Launcher;
 using System.IO;
 
@@ -92,7 +93,6 @@ namespace CT_MKWII_WPF.Views.Popups
             {
                 foreach (var image in mod._aPreviewMedia._aImages)
                 {
-                    // Assuming there's a property to get the full image URL
                     var fullImageUrl = $"{image._sBaseUrl}/{image._sFile}";
                     ImageCarousel.Items.Add(new { FullImageUrl = fullImageUrl });
                 }
@@ -106,11 +106,12 @@ namespace CT_MKWII_WPF.Views.Popups
             ModStats.Text = $"Likes: {mod._nLikeCount} | Views: {mod._nViewCount}";
 
             // Description
-            ModDescription.Text = "temp";
+            ModDescription.Text = mod._sText;
+            
 
             // Development State and Completion
             ModDevelopmentState.Text = mod._sDevelopmentState;
-            CompletionProgressBar.Value = mod._iCompletionPercentage;
+            // CompletionProgressBar.Value = mod._iCompletionPercentage;
         }
 
         private async void Download_Click(object sender, RoutedEventArgs e)
@@ -133,23 +134,17 @@ namespace CT_MKWII_WPF.Views.Popups
                             var downloadUrls = modDetailResult.Content._aFiles.Select(f => f._sDownloadUrl).ToList();
                             if (downloadUrls.Any())
                             {
-                                // Show download progress window
                                 var progressWindow = new ProgressWindow($"Downloading {selectedMod._sName}", Application.Current.MainWindow);
                                 progressWindow.Show();
-
-                                // Download the files
                                 foreach (var url in downloadUrls)
                                 {
                                     await PrepareToDownloadFile();
                                     await DownloadFileAsync(url, progressWindow);
                                 }
-
-                                // Close progress window
                                 progressWindow.Close();
-
-                                // Install Mods
-                                await ModsLaunchHelper.PrepareModsForLaunch();
-
+                                var file = Directory.GetFiles(ModsLaunchHelper.TempModsFolderPath).FirstOrDefault();
+                                await ModInstallation.InstallModFromFileAsync(file);
+                                Directory.Delete(ModsLaunchHelper.TempModsFolderPath, true);
                                 MessageBox.Show("Mod downloaded and installed successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                             }
                             else

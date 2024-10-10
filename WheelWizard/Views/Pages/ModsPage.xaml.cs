@@ -1,12 +1,12 @@
 ﻿using CT_MKWII_WPF.Helpers;
 using CT_MKWII_WPF.Models.Settings;
 using CT_MKWII_WPF.Resources.Languages;
+using CT_MKWII_WPF.Services;
 using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Launcher;
 using CT_MKWII_WPF.Services.UrlProtocol;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
@@ -15,29 +15,31 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Threading;
-
 
 namespace CT_MKWII_WPF.Views.Pages
 {
     public partial class ModsPage : Page, INotifyPropertyChanged
     {
-        public ObservableCollection<Mod> Mods { get; set; }
+        public ModManager ModManager => ModManager.Instance;
+        public ObservableCollection<Mod> Mods => ModManager.Mods;
+
         private bool _toggleAll = true;
         private Point _startPoint;
 
         public ModsPage()
         {
             InitializeComponent();
-            LoadMods();
-            ModsListView.DataContext = this;
+            DataContext = this;
+            InitializeAsync();
         }
 
-        private async void LoadMods()
+        private async void InitializeAsync()
         {
             try
             {
-                Mods = await ModInstallation.LoadModsAsync();
+                await ModManager.LoadModsAsync();
                 foreach (var mod in Mods)
                 {
                     mod.PropertyChanged += Mod_PropertyChanged;
@@ -47,7 +49,6 @@ namespace CT_MKWII_WPF.Views.Pages
             {
                 MessageBox.Show($"Failed to load mods: {ex.Message}", Common.Term_Error, MessageBoxButton.OK,
                     MessageBoxImage.Error);
-                Mods = new ObservableCollection<Mod>();
             }
             UpdateEmptyListMessageVisibility();
         }
@@ -62,27 +63,13 @@ namespace CT_MKWII_WPF.Views.Pages
         private void Mod_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(Mod.IsEnabled))
-                SaveModsAsync();
+                ModManager.SaveModsAsync();
             UpdateEmptyListMessageVisibility();
-        }
-
-        private async void SaveModsAsync()
-        {
-            try
-            {
-                await ModInstallation.SaveModsAsync(Mods);
-            }
-            catch (Exception ex)
-            {
-                // I rather not translate this message, makes it easier to check where a given error came from
-                MessageBox.Show($"Failed to save mods: {ex.Message}", Common.Term_Error,
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-            }
         }
 
         private void ImportMod_Click(object sender, RoutedEventArgs e)
         {
-            var joinedExtensions = string.Join(";",ModsLaunchHelper.AcceptedModExtensions);
+            var joinedExtensions = string.Join(";", ModsLaunchHelper.AcceptedModExtensions);
             joinedExtensions += ";*.zip";
             var openFileDialog = new OpenFileDialog
             {
@@ -99,7 +86,7 @@ namespace CT_MKWII_WPF.Views.Pages
                 ProcessModFiles(selectedFiles, singleMod: true);
             else
             {
-                var result = MessageBox.Show(Phrases.PopupText_ModCombineQuestion,Phrases.PopupText_MultipleFilesSelected,
+                var result = MessageBox.Show(Phrases.PopupText_ModCombineQuestion, Phrases.PopupText_MultipleFilesSelected,
                                              MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
 
                 if (result == MessageBoxResult.No) ProcessModFiles(selectedFiles, singleMod: false);
@@ -118,7 +105,6 @@ namespace CT_MKWII_WPF.Views.Pages
             }
             catch (Exception ex)
             {
-                // I rather not translate this message, makes it easier to check where a given error came from
                 MessageBox.Show($"Failed to process mod files: {ex.Message}", Common.Term_Error,
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -133,16 +119,21 @@ namespace CT_MKWII_WPF.Views.Pages
                 UpdateProgress(i + 1, filePaths.Length);
                 var modName = Path.GetFileNameWithoutExtension(filePaths[i]);
 
-                if (ModInstallation.ModExists(Mods,modName))
+                if (ModInstallation.ModExists(Mods, modName))
                 {
-                    MessageBox.Show(Humanizer.ReplaceDynamic(Phrases.PopupText_ModNameExists, modName), 
+                    MessageBox.Show(Humanizer.ReplaceDynamic(Phrases.PopupText_ModNameExists, modName),
                                     Common.Term_Error, MessageBoxButton.OK, MessageBoxImage.Error);
                     continue;
                 }
                 var modDirectory = ModInstallation.GetModDirectoryPath(modName);
                 CreateDirectory(modDirectory);
                 await Task.Run(() => ModInstallation.ProcessFile(filePaths[i], modDirectory));
-                AddMod(modName);
+                var mod = new Mod
+                {
+                    IsEnabled = false,
+                    Title = modName,
+                };
+                ModManager.AddMod(mod);
             }
         }
 
@@ -159,23 +150,12 @@ namespace CT_MKWII_WPF.Views.Pages
                 await Task.Run(() => ModInstallation.ProcessFile(filePaths[i], modDirectory));
             }
 
-            AddMod(modName);
-        }
-
-        private void AddMod(string modName)
-        {
-            if (!Mods.Any(mod => mod.Title.Equals(modName, StringComparison.OrdinalIgnoreCase)))
+            var newMod = new Mod
             {
-                var mod = new Mod
-                {
-                    IsEnabled = false,
-                    Title = modName,
-                };
-                mod.PropertyChanged += Mod_PropertyChanged;
-                Mods.Add(mod);
-                SaveModsAsync();
-            }
-            UpdateEmptyListMessageVisibility();
+                IsEnabled = false,
+                Title = modName,
+            };
+            ModManager.AddMod(newMod);
         }
 
         private void UpdateProgress(int current, int total)
@@ -183,7 +163,7 @@ namespace CT_MKWII_WPF.Views.Pages
             Dispatcher.Invoke(() =>
             {
                 ProgressBar.Value = (double)current / total * 100;
-                StatusTextBlock.Text = Humanizer.ReplaceDynamic(Phrases.PopupText_ProcessingXofY, 
+                StatusTextBlock.Text = Humanizer.ReplaceDynamic(Phrases.PopupText_ProcessingXofY,
                                                                 current, total);
             }, DispatcherPriority.Background);
         }
@@ -205,7 +185,6 @@ namespace CT_MKWII_WPF.Views.Pages
 
         private void EnableClick(object sender, RoutedEventArgs e)
         {
-            //bool selectAll = Mods.Any(mod => !mod.IsEnabled);
             foreach (var mod in Mods)
             {
                 mod.IsEnabled = _toggleAll;
@@ -224,12 +203,11 @@ namespace CT_MKWII_WPF.Views.Pages
                 return false;
             }
 
-            if (!Mods.Any(mod => mod.Title.Equals(name, StringComparison.OrdinalIgnoreCase))) return true;
+            if (!ModInstallation.ModExists(Mods, name)) return true;
 
-            MessageBox.Show(Humanizer.ReplaceDynamic(Phrases.PopupText_ModNameExists, name), 
+            MessageBox.Show(Humanizer.ReplaceDynamic(Phrases.PopupText_ModNameExists, name),
                             Common.Term_Error, MessageBoxButton.OK, MessageBoxImage.Error);
             return false;
-
         }
 
         private void RenameMod_Click(object sender, RoutedEventArgs e)
@@ -246,9 +224,8 @@ namespace CT_MKWII_WPF.Views.Pages
                 var oldDirectoryName = ModInstallation.GetModDirectoryPath(selectedMod.Title);
                 var newDirectoryName = ModInstallation.GetModDirectoryPath(newTitle);
                 Directory.Move(oldDirectoryName, newDirectoryName);
-                selectedMod.Title = newTitle; // rename only after the directory, just in case that fails, then 
-                // this renaming also does not run anymore
-                SaveModsAsync();
+                selectedMod.Title = newTitle; // Trigger property changed
+                ModManager.SaveModsAsync();
             }
             catch (IOException ex)
             {
@@ -266,7 +243,7 @@ namespace CT_MKWII_WPF.Views.Pages
                 "Delete Mod", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes;
             if (!areTheySure) return;
 
-            Mods.Remove(selectedMod);
+            ModManager.RemoveMod(selectedMod);
             try
             {
                 var modDirectory = ModInstallation.GetModDirectoryPath(selectedMod.Title);
@@ -278,7 +255,7 @@ namespace CT_MKWII_WPF.Views.Pages
                 MessageBox.Show($"Failed to delete mod directory. It may be that this file is read only?", Common.Term_Error,
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            SaveModsAsync();
+            ModManager.SaveModsAsync();
             UpdateEmptyListMessageVisibility();
         }
 
@@ -287,9 +264,14 @@ namespace CT_MKWII_WPF.Views.Pages
             var selectedMod = ModsListView.GetCurrentContextItem<Mod>();
             if (selectedMod == null) return;
 
-            var modDirectory = ModInstallation.GetModDirectoryPath(selectedMod!.Title);
+            var modDirectory = ModInstallation.GetModDirectoryPath(selectedMod.Title);
             if (Directory.Exists(modDirectory))
-                System.Diagnostics.Process.Start("explorer", modDirectory);
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = modDirectory,
+                    UseShellExecute = true,
+                    Verb = "open"
+                });
             else
             {
                 MessageBox.Show(Phrases.PopupText_NoModFolder, Common.Term_Error,
@@ -300,11 +282,8 @@ namespace CT_MKWII_WPF.Views.Pages
         private void ModsListView_OnOnItemsReorder(ListViewItem movedItem, int newIndex)
         {
             var mySelectedMod = (Mod)movedItem.DataContext;
-            // This is also done inside the component, but that does not translate outside of the component
-            // for now SaveMods uses the Mods property, so therefore we also have to update it here
-            Mods.Remove(mySelectedMod);
-            Mods.Insert(newIndex, mySelectedMod);
-            SaveModsAsync();
+            Mods.Move(Mods.IndexOf(mySelectedMod), newIndex);
+            ModManager.SaveModsAsync();
         }
 
         private void CheckIfSet(object sender, RoutedEventArgs e)
@@ -322,7 +301,6 @@ namespace CT_MKWII_WPF.Views.Pages
         private void openPopUp(object sender, RoutedEventArgs e)
         {
             var modPopup = new Views.Popups.ModPopupWindow();
-
             modPopup.ShowDialog();
         }
 
@@ -331,14 +309,6 @@ namespace CT_MKWII_WPF.Views.Pages
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
-            OnPropertyChanged(propertyName);
-            return true;
         }
     }
 }
