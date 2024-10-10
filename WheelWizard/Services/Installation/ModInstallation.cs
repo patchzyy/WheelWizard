@@ -1,6 +1,10 @@
 ﻿using CT_MKWII_WPF.Helpers;
 using CT_MKWII_WPF.Models.Settings;
 using CT_MKWII_WPF.Resources.Languages;
+using SharpCompress.Archives;
+using SharpCompress.Archives.Rar;
+using SharpCompress.Archives.SevenZip;
+using SharpCompress.Common;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -62,55 +66,63 @@ namespace CT_MKWII_WPF.Services.Installation
 
         public static void ProcessFile(string file, string destinationDirectory)
         {
-            if (Path.GetExtension(file).Equals(".zip", StringComparison.OrdinalIgnoreCase))
-            {
-                if (!Directory.Exists(destinationDirectory))
-                    Directory.CreateDirectory(destinationDirectory);
-                try
-                {
-                    var zipFileName = Path.GetFileNameWithoutExtension(file);
-                    var modName = Path.Combine(destinationDirectory, zipFileName);
-                    if (Directory.Exists(modName))
-                        throw new IOException("Mod with the same name already exists.");
+            var extension = Path.GetExtension(file).ToLowerInvariant();
 
-                    ZipFile.ExtractToDirectory(file, destinationDirectory);
-                }
-                catch (IOException exp)
+            if (!Directory.Exists(destinationDirectory))
+                Directory.CreateDirectory(destinationDirectory);
+
+            try
+            {
+                // Determine the archive type and extract accordingly
+                using (var archive = OpenArchive(file, extension))
                 {
-                    throw new IOException("You already have a mod with this name." + exp.Message);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception($"Failed to extract zip file: {ex.Message}");
+                    if (archive == null)
+                        throw new Exception($"Unsupported archive format: {extension}");
+
+                    foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
+                    {
+                        entry.WriteToDirectory(destinationDirectory, new ExtractionOptions
+                        {
+                            ExtractFullPath = true,
+                            Overwrite = true
+                        });
+                    }
                 }
             }
-            else
+            catch (IOException exp)
             {
-                try
-                {
-                    if (!Directory.Exists(destinationDirectory))
-                        Directory.CreateDirectory(destinationDirectory);
-
-                    var destFile = Path.Combine(destinationDirectory, Path.GetFileName(file));
-                    File.Copy(file, destFile, overwrite: true);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception($"Failed to copy file: {ex.Message}");
-                }
+                throw new IOException("You already have a mod with this name. " + exp.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Failed to extract archive file: {ex.Message}");
             }
         }
         
+        private static IArchive OpenArchive(string filePath, string extension)
+        {
+            switch (extension)
+            {
+                case ".zip":
+                case ".7z":
+                case ".rar":
+                    return ArchiveFactory.Open(filePath);
+                default:
+                    return null;
+            }
+        }
         public static async Task InstallModFromFileAsync(string filePath)
         {
             try
             {
-                if (!Path.GetExtension(filePath).Equals(".zip", StringComparison.OrdinalIgnoreCase))
+                if (!File.Exists(filePath))
+                    throw new FileNotFoundException("File not found.", filePath);
+                var extension = Path.GetExtension(filePath).ToLowerInvariant();
+                if (extension != ".zip" && extension != ".7z" && extension != ".rar")
                 {
-                    throw new InvalidOperationException("Only .zip files are supported for mod installation.");
+                    throw new InvalidOperationException($"Unsupported file type: {extension}. Only .zip, .7z, and .rar files are supported.");
                 }
-
-                // Get the mod name from the .zip file name
+                
                 var modName = Microsoft.VisualBasic.Interaction
                     .InputBox(Phrases.PopupText_EnterModName, Common.Attribute_ModName, "New Mod");
 

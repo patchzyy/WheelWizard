@@ -22,8 +22,8 @@ public class ModDetailResponse
     public int _nAllTodosCount { get; set; }
     public bool _bHasTodos { get; set; }
     public int _nPostCount { get; set; }
-    public Dictionary<string, string> _aAttributes { get; set; }
-    public List<string> _aTags { get; set; }
+    // public Dictionary<string, string> _aAttributes { get; set; }
+    // public List<string> _aTags { get; set; }
     public bool _bCreatedBySubmitter { get; set; }
     public bool _bIsPorted { get; set; }
     public int _nThanksCount { get; set; }
@@ -36,7 +36,7 @@ public class ModDetailResponse
     public string _sLicense { get; set; }
     public LicenseChecklist _aLicenseChecklist { get; set; }
     public bool _bGenerateTableOfContents { get; set; }
-    public string _sText { get; set; }
+    public string _sText { get; set; } 
     public bool _bIsObsolete { get; set; }
     public int _nLikeCount { get; set; }
     public int _nViewCount { get; set; }

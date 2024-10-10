@@ -76,12 +76,59 @@ namespace CT_MKWII_WPF.Views.Popups
             CurrentPage = 1;
             LoadMods(CurrentPage, CurrentSearchTerm);
         }
+        
+        private async Task UpdateModDetailsAsync(ModRecord mod)
+        {
+            try
+            {
+                // Fetch the mod details using its ID
+                var modDetailsResult = await GamebananaSearchHandler.GetModDetailsAsync(mod._idRow);
 
-        private void ModListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+                if (!modDetailsResult.Succeeded || modDetailsResult.Content == null)
+                {
+                    MessageBox.Show($"Failed to retrieve mod details: {modDetailsResult.StatusMessage}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                var modDetails = modDetailsResult.Content;
+
+                // Load Images
+                ImageCarousel.Items.Clear();
+                if (modDetails._aPreviewMedia?._aImages != null && modDetails._aPreviewMedia._aImages.Any())
+                {
+                    foreach (var image in modDetails._aPreviewMedia._aImages)
+                    {
+                        var fullImageUrl = $"{image._sBaseUrl}/{image._sFile}";
+                        ImageCarousel.Items.Add(new { FullImageUrl = fullImageUrl });
+                    }
+                }
+
+                // Mod Name and Submitter
+                ModName.Text = modDetails._sName;
+                ModSubmitter.Text = $"By {modDetails._aSubmitter._sName}";
+
+                // Mod Stats
+                ModStats.Text = $"Likes: {modDetails._nLikeCount} | Views: {modDetails._nViewCount} | Downloads: {modDetails._nDownloadCount}";
+
+                // Description
+                ModDescription.Text = modDetails._sText;
+                
+
+                // Additional details, if any
+                // Example: Files, License, etc.
+                // You can add more UI elements to show the additional mod details if needed
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while fetching mod details: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private async void ModListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ModListView.SelectedItem is ModRecord selectedMod)
             {
-                UpdateModDetails(selectedMod);
+                await UpdateModDetailsAsync(selectedMod);
             }
         }
 
@@ -107,6 +154,7 @@ namespace CT_MKWII_WPF.Views.Popups
 
             // Description
             ModDescription.Text = mod._sText;
+            MessageBox.Show("Mod Description: " + mod._sText);
             
 
             // Development State and Completion
@@ -127,6 +175,8 @@ namespace CT_MKWII_WPF.Views.Popups
                 {
                     try
                     {
+                        //clear temp folder
+                        await PrepareToDownloadFile();
                         // Fetch mod details to get download URLs
                         var modDetailResult = await GamebananaSearchHandler.GetModDetailsAsync(selectedMod._idRow);
                         if (modDetailResult.Succeeded && modDetailResult.Content != null)
@@ -145,7 +195,6 @@ namespace CT_MKWII_WPF.Views.Popups
                                 var file = Directory.GetFiles(ModsLaunchHelper.TempModsFolderPath).FirstOrDefault();
                                 await ModInstallation.InstallModFromFileAsync(file);
                                 Directory.Delete(ModsLaunchHelper.TempModsFolderPath, true);
-                                MessageBox.Show("Mod downloaded and installed successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                             }
                             else
                             {
