@@ -118,10 +118,18 @@
 
         <!-- Navigation Buttons -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
-            <Button Content="Previous" Width="100" Margin="10,0" Click="PreviousPage_Click"/>
+            <components:Button Text="Previous Page" FontSize="16"
+                               IconKind="{x:Static icon:PackIconFontAwesomeKind.ArrowLeftSolid}"
+                               IconPack="FontAwesome"
+                               Height="40"
+                               Click="PreviousPage_Click" Margin="10,0,0,0" />
             <TextBlock Text="{Binding CurrentPage}" FontSize="16" VerticalAlignment="Center" 
                        Margin="10,0"/>
-            <Button Content="Next" Width="100" Margin="10,0" Click="NextPage_Click"/>
+            <components:Button Text="Next Page" FontSize="16"
+                               IconKind="{x:Static icon:PackIconFontAwesomeKind.ArrowRightSolid}"
+                               IconPack="FontAwesome"
+                               Height="40"
+                               Click="NextPage_Click" Margin="10,0,0,0" />
         </StackPanel>
     </Grid>
 </popups:PopupContent>
