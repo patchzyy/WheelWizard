@@ -100,10 +100,10 @@
                         <TextBlock x:Name="ModStats" FontWeight="Bold" Margin="0,0,0,10"/>
 
                         <TextBlock Text="Description:" FontWeight="Bold" />
-                        <html:HtmlPanel x:Name="ModDescriptionHtmlPanel" Margin="0,5,0,10" />
-
-                        <TextBlock Text="Development State:" FontWeight="Bold" />
-                        <TextBlock x:Name="ModDevelopmentState" Margin="0,5,0,10"/>
+                        <html:HtmlPanel
+                            x:Name="ModDescriptionHtmlPanel"
+                            Background="{StaticResource BackgroundColor}"
+                            Margin="0,5,0,10" />
 
                         <!-- Download Button -->
                         <components:Button Text="Download And Install" FontSize="16"

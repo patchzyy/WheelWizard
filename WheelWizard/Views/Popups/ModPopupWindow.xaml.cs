@@ -108,8 +108,8 @@ namespace CT_MKWII_WPF.Views.Popups
                 ModStats.Text = $"Likes: {modDetails._nLikeCount} | Views: {modDetails._nViewCount} | Downloads: {modDetails._nDownloadCount}";
 
                 // Description
-                string htmlContent = modDetails._sText;
-                ModDescriptionHtmlPanel.Text = htmlContent;
+                ModDescriptionHtmlPanel.Text = modDetails._sText;
+
             }
             catch (Exception ex)
             {
