@@ -5,6 +5,7 @@ using CT_MKWII_WPF.Services;
 using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Launcher;
 using CT_MKWII_WPF.Services.UrlProtocol;
+using CT_MKWII_WPF.Views.Popups;
 using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
@@ -65,6 +66,22 @@ namespace CT_MKWII_WPF.Views.Pages
             if (e.PropertyName == nameof(Mod.IsEnabled))
                 ModManager.SaveModsAsync();
             UpdateEmptyListMessageVisibility();
+        }
+
+        public void AskModImportType(object sender, RoutedEventArgs routedEventArgs)
+        {
+            var yesNoWindow = new YesNoWindow()
+                .SetMainText("Would you like to open the Mod Browser or import mods manually?")
+                .SetButtonText("Open Mod Browser", "Import Manually");
+
+            var openModManager = yesNoWindow.AwaitAnswer();
+
+            if (openModManager)
+                openPopUp(null, null); // Open the Mod Manager window
+            
+            else
+                ImportMod_Click(null, null); // Start the mod import process
+            
         }
 
         private void ImportMod_Click(object sender, RoutedEventArgs e)

@@ -81,6 +81,15 @@ namespace CT_MKWII_WPF.Services.Installation
 
                     foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
                     {
+                        // Construct the full path for the entry's destination
+                        var entryDestinationPath = Path.Combine(destinationDirectory, entry.Key);
+                
+                        // Ensure the entry destination path is within the destination directory
+                        if (!entryDestinationPath.StartsWith(destinationDirectory, StringComparison.OrdinalIgnoreCase))
+                        {
+                            throw new UnauthorizedAccessException("Entry is attempting to extract outside of the destination directory.");
+                        }
+
                         entry.WriteToDirectory(destinationDirectory, new ExtractionOptions
                         {
                             ExtractFullPath = true,

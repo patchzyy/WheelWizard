@@ -24,6 +24,8 @@ namespace CT_MKWII_WPF.Views.Popups
             InitializeComponent();
             ModListView.ItemsSource = Mods;
             LoadMods(CurrentPage);
+            DetailsPanel.Visibility = Visibility.Collapsed;
+            EmptyDetailsView.Visibility = Visibility.Visible;
         }
 
         private async void LoadMods(int page, string searchTerm = "")
@@ -122,6 +124,13 @@ namespace CT_MKWII_WPF.Views.Popups
             if (ModListView.SelectedItem is ModRecord selectedMod)
             {
                 await UpdateModDetailsAsync(selectedMod);
+                DetailsPanel.Visibility = Visibility.Visible;
+                EmptyDetailsView.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                DetailsPanel.Visibility = Visibility.Collapsed;
+                EmptyDetailsView.Visibility = Visibility.Visible;
             }
         }
 
