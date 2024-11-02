@@ -44,12 +44,11 @@ namespace CT_MKWII_WPF.Views.Popups
             ModDetailViewer.Visibility = Visibility.Collapsed;
             EmptyDetailsView.Visibility = Visibility.Visible;
 
-            ModDetailViewer.DownloadRequested += ModDetailViewer_DownloadRequested;
+            // Removed event subscription since ModDetailViewer handles download internally
             
             // Attach to Loaded event
             this.Loaded += ModPopupWindow_Loaded;
         }
-
 
         /// <summary>
         /// Finds the ScrollViewer within the ListView.
@@ -63,7 +62,6 @@ namespace CT_MKWII_WPF.Views.Popups
             }
         }
 
-        
         private void ModListView_Loaded(object sender, RoutedEventArgs e)
         {
             if (_listViewScrollViewer == null)
@@ -107,82 +105,80 @@ namespace CT_MKWII_WPF.Views.Popups
         /// Loads mods for the specified page and search term.
         /// </summary>
         private async Task LoadMods(int page, string searchTerm = "")
-{
-
-    if (_isLoading)
-    {
-        return;
-    }
-
-    if (!_hasMoreMods)
-    {
-        return;
-    }
-
-    _isLoading = true;
-
-    try
-    {
-        var result = await GamebananaSearchHandler.SearchModsAsync(searchTerm, page, ModsPerPage);
-
-        if (result.Succeeded && result.Content != null)
         {
-            // Log metadata information
-            var metadata = result.Content._aMetadata;
+            if (_isLoading)
+            {
+                return;
+            }
 
-            var newMods = result.Content._aRecords
-                .Where(mod => mod._sModelName == "Mod")
-                .ToList();
-            
-            if (newMods.Count > 0)
+            if (!_hasMoreMods)
+            {
+                return;
+            }
+
+            _isLoading = true;
+
+            try
+            {
+                var result = await GamebananaSearchHandler.SearchModsAsync(searchTerm, page, ModsPerPage);
+
+                if (result.Succeeded && result.Content != null)
+                {
+                    // Log metadata information
+                    var metadata = result.Content._aMetadata;
+
+                    var newMods = result.Content._aRecords
+                        .Where(mod => mod._sModelName == "Mod")
+                        .ToList();
+                    
+                    if (newMods.Count > 0)
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            foreach (var mod in newMods)
+                            {
+                                Mods.Add(mod);
+                            }
+                        });
+
+                        // Use metadata to determine if more mods are available
+                        _hasMoreMods = !metadata._bIsComplete;
+
+                        // Update current page only if mods were successfully loaded
+                        _currentPage = page;
+                    }
+                    else
+                    {
+                        // If no new mods were fetched, rely on metadata
+                        _hasMoreMods = !result.Content._aMetadata._bIsComplete;
+                    }
+                }
+                else
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        MessageBox.Show("Failed to load mods: " + result.StatusMessage,
+                            "Error",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                    });
+                }
+            }
+            catch (Exception ex)
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    foreach (var mod in newMods)
-                    {
-                        Mods.Add(mod);
-                    }
+                    MessageBox.Show("An error occurred: " + ex.Message,
+                        "Error",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
                 });
-
-                // Use metadata to determine if more mods are available
-                _hasMoreMods = !metadata._bIsComplete;
-
-                // Update current page only if mods were successfully loaded
-                _currentPage = page;
             }
-            else
+            finally
             {
-                // If no new mods were fetched, rely on metadata
-                _hasMoreMods = !result.Content._aMetadata._bIsComplete;
+                _isLoading = false;
             }
         }
-        else
-        {
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                MessageBox.Show("Failed to load mods: " + result.StatusMessage,
-                    "Error",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-            });
-        }
-    }
-    catch (Exception ex)
-    {
-        Application.Current.Dispatcher.Invoke(() =>
-        {
-            MessageBox.Show("An error occurred: " + ex.Message,
-                "Error",
-                MessageBoxButton.OK,
-                MessageBoxImage.Error);
-        });
-    }
-    finally
-    {
-        _isLoading = false;
-    }
-}
-
 
         /// <summary>
         /// Handles the ScrollChanged event to implement infinite scrolling.
@@ -248,8 +244,7 @@ namespace CT_MKWII_WPF.Views.Popups
             else
             {
                 // Show the empty view and hide the detail viewer
-                ModDetailViewer.ClearDetails();
-                ModDetailViewer.Visibility = Visibility.Collapsed;
+                ModDetailViewer.HideViewer();
                 EmptyDetailsView.Visibility = Visibility.Visible;
             }
         }
@@ -269,173 +264,6 @@ namespace CT_MKWII_WPF.Views.Popups
 
             // Load the mod details
             await ModDetailViewer.LoadModDetailsAsync(mod);
-        }
-
-        /// <summary>
-        /// Event handler for download requests from the ModDetailViewer.
-        /// </summary>
-        private async void ModDetailViewer_DownloadRequested(object sender, DownloadRequestedEventArgs e)
-        {
-            await DownloadModAsync(e.Mod);
-        }
-
-        /// <summary>
-        /// Handles the mod download and installation process.
-        /// </summary>
-        public async Task DownloadModAsync(ModRecord mod)
-        {
-            if (mod == null)
-            {
-                MessageBox.Show("No mod selected to download.", 
-                                "Information", 
-                                MessageBoxButton.OK, 
-                                MessageBoxImage.Information);
-                return;
-            }
-
-            var confirmation = MessageBox.Show($"Do you want to download and install the mod: {mod._sName}?",
-                                               "Confirm Download",
-                                               MessageBoxButton.YesNo,
-                                               MessageBoxImage.Question);
-
-            if (confirmation != MessageBoxResult.Yes)
-                return;
-
-            try
-            {
-                // Clear temp folder
-                await PrepareToDownloadFile();
-
-                // Fetch mod details to get download URLs
-                var modDetailResult = await GamebananaSearchHandler.GetModDetailsAsync(mod._idRow);
-                if (modDetailResult.Succeeded && modDetailResult.Content != null)
-                {
-                    var downloadUrls = modDetailResult.Content._aFiles
-                                       .Select(f => f._sDownloadUrl)
-                                       .ToList();
-                    if (downloadUrls.Any())
-                    {
-                        var progressWindow = new ProgressWindow($"Downloading {mod._sName}", Application.Current.MainWindow);
-                        progressWindow.Show();
-                        foreach (var url in downloadUrls)
-                        {
-                            await PrepareToDownloadFile();
-                            await DownloadFileAsync(url, progressWindow);
-                        }
-                        progressWindow.Close();
-                        var file = Directory.GetFiles(ModsLaunchHelper.TempModsFolderPath).FirstOrDefault();
-                        if (file != null)
-                        {
-                            await ModInstallation.InstallModFromFileAsync(file);
-                            Directory.Delete(ModsLaunchHelper.TempModsFolderPath, true);
-                            MessageBox.Show("Mod downloaded and installed successfully!", 
-                                            "Success", 
-                                            MessageBoxButton.OK, 
-                                            MessageBoxImage.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Downloaded file not found.", 
-                                            "Error", 
-                                            MessageBoxButton.OK, 
-                                            MessageBoxImage.Error);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("No downloadable files found for this mod.", 
-                                        "Info", 
-                                        MessageBoxButton.OK, 
-                                        MessageBoxImage.Information);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Failed to retrieve mod details.", 
-                                    "Error", 
-                                    MessageBoxButton.OK, 
-                                    MessageBoxImage.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred during download: " + ex.Message, 
-                                "Error", 
-                                MessageBoxButton.OK, 
-                                MessageBoxImage.Error);
-            }
-        }
-
-        /// <summary>
-        /// Prepares the temporary folder for downloading files.
-        /// </summary>
-        private async Task PrepareToDownloadFile()
-        {
-            var tempFolder = ModsLaunchHelper.TempModsFolderPath;
-            if (Directory.Exists(tempFolder))
-            {
-                Directory.Delete(tempFolder, true);
-            }
-            Directory.CreateDirectory(tempFolder);
-        }
-
-        /// <summary>
-        /// Downloads a file from the specified URL and updates the progress window.
-        /// </summary>
-        private async Task DownloadFileAsync(string url, ProgressWindow progressWindow)
-        {
-            using (HttpClient client = new HttpClient(new HttpClientHandler { AllowAutoRedirect = true }))
-            {
-                try
-                {
-                    var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
-                    response.EnsureSuccessStatusCode();
-
-                    // Follow redirects to get the final URL
-                    var finalUrl = response.RequestMessage.RequestUri.ToString();
-
-                    var totalBytes = response.Content.Headers.ContentLength ?? -1L;
-                    var canReportProgress = totalBytes != -1;
-
-                    // Determine the file name
-                    var contentDisposition = response.Content.Headers.ContentDisposition;
-                    var fileName = contentDisposition?.FileName?.Trim('"') ?? GetFileNameFromUrl(finalUrl);
-
-                    var modsFolder = ModsLaunchHelper.TempModsFolderPath;
-                    Directory.CreateDirectory(modsFolder);
-                    var filePath = Path.Combine(modsFolder, fileName);
-
-                    using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
-                    using (var httpStream = await response.Content.ReadAsStreamAsync())
-                    {
-                        var buffer = new byte[8192];
-                        long totalRead = 0;
-                        int bytesRead;
-                        while ((bytesRead = await httpStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
-                        {
-                            await fileStream.WriteAsync(buffer, 0, bytesRead);
-                            totalRead += bytesRead;
-                            if (canReportProgress)
-                            {
-                                double progress = (double)totalRead / totalBytes * 100;
-                                progressWindow.UpdateProgress((int)progress);
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception($"Failed to download file from {url}: {ex.Message}");
-                }
-            }
-        }
-
-        /// <summary>
-        /// Extracts the file name from a URL.
-        /// </summary>
-        private string GetFileNameFromUrl(string url)
-        {
-            return Path.GetFileName(new Uri(url).AbsolutePath);
         }
 
         // Implement INotifyPropertyChanged
