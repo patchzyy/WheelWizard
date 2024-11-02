@@ -8,6 +8,7 @@ using CT_MKWII_WPF.Services.GameBanana;
 using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Launcher;
 using CT_MKWII_WPF.Views.Popups;
+using CT_MKWII_WPF.Helpers; // Ensure this namespace is included
 using System.IO;
 using System.Diagnostics;
 using System.Windows.Media;
@@ -108,9 +109,13 @@ namespace CT_MKWII_WPF.Views.Components
                 MessageBoxImage.Question);
             if (confirmation != MessageBoxResult.Yes)
                 return;
+
             try
             {
+                // Prepare the temporary folder
                 await PrepareToDownloadFile();
+
+                // Fetch mod details again to get download URLs
                 var modDetailResult = await GamebananaSearchHandler.GetModDetailsAsync(CurrentMod._idRow);
                 if (!modDetailResult.Succeeded || modDetailResult.Content == null)
                 {
@@ -118,39 +123,57 @@ namespace CT_MKWII_WPF.Views.Components
                         MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
+
                 var downloadUrls = modDetailResult.Content._aFiles
                         .Select(f => f._sDownloadUrl)
                         .ToList();
+
                 if (!downloadUrls.Any())
                 {
                     MessageBox.Show("No download URLs found for the mod.", "Error", MessageBoxButton.OK,
                         MessageBoxImage.Error);
                     return;
                 }
-                    var progressWindow = new ProgressWindow($"Downloading {CurrentMod._sName}",
-                        Application.Current.MainWindow);
-                    progressWindow.Show();
-                    foreach (var url in downloadUrls)
-                    {
-                        await PrepareToDownloadFile();
-                        await DownloadFileAsync(url, progressWindow);
-                    }
 
-                    progressWindow.Close();
-                    var file = Directory.GetFiles(ModsLaunchHelper.TempModsFolderPath).FirstOrDefault();
-                    if (file == null)
-                    {
-                            MessageBox.Show("Downloaded file not found.",
-                                "Error",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Error);
-                    }
-                    await ModInstallation.InstallModFromFileAsync(file);
-                    Directory.Delete(ModsLaunchHelper.TempModsFolderPath, true);
-                    MessageBox.Show("Mod downloaded and installed successfully!",
-                            "Success",
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Information);
+                // Show a single ProgressWindow for all downloads
+                var progressWindow = new ProgressWindow($"Downloading {CurrentMod._sName}",
+                    Application.Current.MainWindow);
+                progressWindow.Show();
+
+                // Download each file using DownloadHelper
+                foreach (var url in downloadUrls)
+                {
+                    // Determine the file name from URL
+                    var fileName = GetFileNameFromUrl(url);
+                    var filePath = Path.Combine(ModsLaunchHelper.TempModsFolderPath, fileName);
+
+                    // Use DownloadHelper to download the file
+                    await DownloadHelper.DownloadToLocation(url, filePath, progressWindow);
+                }
+
+                progressWindow.Close();
+
+                // After downloading, find the downloaded file
+                var file = Directory.GetFiles(ModsLaunchHelper.TempModsFolderPath).FirstOrDefault();
+                if (file == null)
+                {
+                    MessageBox.Show("Downloaded file not found.",
+                        "Error",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                    return;
+                }
+
+                // Install the mod
+                await ModInstallation.InstallModFromFileAsync(file);
+
+                // Clean up the temporary folder
+                Directory.Delete(ModsLaunchHelper.TempModsFolderPath, true);
+
+                MessageBox.Show("Mod downloaded and installed successfully!",
+                        "Success",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -161,7 +184,7 @@ namespace CT_MKWII_WPF.Views.Components
             }
         }
 
-/// <summary>
+        /// <summary>
         /// Prepares the temporary folder for downloading files.
         /// </summary>
         private async Task PrepareToDownloadFile()
@@ -172,57 +195,7 @@ namespace CT_MKWII_WPF.Views.Components
                 Directory.Delete(tempFolder, true);
             }
             Directory.CreateDirectory(tempFolder);
-        }
-
-        /// <summary>
-        /// Downloads a file from the specified URL and updates the progress window.
-        /// </summary>
-        private async Task DownloadFileAsync(string url, ProgressWindow progressWindow)
-        {
-            using (HttpClient client = new HttpClient(new HttpClientHandler { AllowAutoRedirect = true }))
-            {
-                try
-                {
-                    var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
-                    response.EnsureSuccessStatusCode();
-
-                    // Follow redirects to get the final URL
-                    var finalUrl = response.RequestMessage.RequestUri.ToString();
-
-                    var totalBytes = response.Content.Headers.ContentLength ?? -1L;
-                    var canReportProgress = totalBytes != -1;
-
-                    // Determine the file name
-                    var contentDisposition = response.Content.Headers.ContentDisposition;
-                    var fileName = contentDisposition?.FileName?.Trim('"') ?? GetFileNameFromUrl(finalUrl);
-
-                    var modsFolder = ModsLaunchHelper.TempModsFolderPath;
-                    Directory.CreateDirectory(modsFolder);
-                    var filePath = Path.Combine(modsFolder, fileName);
-
-                    using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
-                    using (var httpStream = await response.Content.ReadAsStreamAsync())
-                    {
-                        var buffer = new byte[8192];
-                        long totalRead = 0;
-                        int bytesRead;
-                        while ((bytesRead = await httpStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
-                        {
-                            await fileStream.WriteAsync(buffer, 0, bytesRead);
-                            totalRead += bytesRead;
-                            if (canReportProgress)
-                            {
-                                double progress = (double)totalRead / totalBytes * 100;
-                                progressWindow.UpdateProgress((int)progress);
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception($"Failed to download file from {url}: {ex.Message}");
-                }
-            }
+            await Task.CompletedTask; // To adhere to async method signature
         }
 
         /// <summary>
