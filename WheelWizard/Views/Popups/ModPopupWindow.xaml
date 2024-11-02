@@ -43,10 +43,15 @@
 
             <!-- Mod List -->
             <ListView Name="ModListView" SelectionChanged="ModListView_SelectionChanged" 
-                      Margin="0,0,10,0">
+                      Margin="0,0,10,0"
+                      Background="{StaticResource BackgroundColor}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="LightGray" BorderThickness="1" Padding="5" Margin="0,0,0,5">
+                        <Border 
+                            BorderBrush="{StaticResource BackgroundColor}" 
+                            BorderThickness="1" 
+                            Background="{StaticResource BackgroundColor}"
+                            Padding="5" Margin="0,0,0,5">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="100"/>
