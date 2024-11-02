@@ -15,7 +15,8 @@ namespace CT_MKWII_WPF.Helpers
         private const int TimeoutInSeconds = 30; // Adjust as needed
 
         // Not providing a progress window will just use a default one
-        public static async Task DownloadToLocation(string url, string filePath, string windowTitle, string extraText = "")
+        public static async Task DownloadToLocation(string url, string filePath, string windowTitle,
+            string extraText = "")
         {
             var progressWindow = new ProgressWindow(windowTitle).SetExtraText(extraText);
             progressWindow.Show();
@@ -36,19 +37,35 @@ namespace CT_MKWII_WPF.Helpers
             {
                 try
                 {
-                    using var client = new HttpClient
-                    {
-                        Timeout = TimeSpan.FromSeconds(TimeoutInSeconds)
-                    };
+                    using var client = new HttpClient { Timeout = TimeSpan.FromSeconds(TimeoutInSeconds) };
 
                     using var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
                     response.EnsureSuccessStatusCode();
+
+                    // Extract file name from Content-Disposition or URL
+                    var fileName = Path.GetFileName(filePath);
+                    if (response.Content.Headers.ContentDisposition?.FileName != null)
+                    {
+                        fileName = response.Content.Headers.ContentDisposition.FileName.Trim('"');
+                    }
+                    else if (!Path.HasExtension(fileName))
+                    {
+                        // Add extension from URL if missing in file path
+                        var urlExtension = Path.GetExtension(new Uri(url).AbsolutePath);
+                        if (!string.IsNullOrEmpty(urlExtension))
+                        {
+                            fileName += urlExtension;
+                        }
+                    }
+
+                    filePath = Path.Combine(directory, fileName); // Update filePath with extension if added
 
                     var totalBytes = response.Content.Headers.ContentLength ?? -1;
                     progressPopupWindow.SetGoal(totalBytes / (1024.0 * 1024.0));
 
                     await using var downloadStream = await response.Content.ReadAsStreamAsync();
-                    await using var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None,
+                    await using var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write,
+                        FileShare.None,
                         bufferSize: 8192, useAsync: true);
                     var downloadedBytes = 0L;
                     const int bufferSize = 8192;
@@ -68,7 +85,6 @@ namespace CT_MKWII_WPF.Helpers
                 }
                 catch (TaskCanceledException ex) when (!ex.CancellationToken.IsCancellationRequested)
                 {
-                    // Handle timeout
                     attempt++;
                     if (attempt >= MaxRetries)
                     {
@@ -77,15 +93,14 @@ namespace CT_MKWII_WPF.Helpers
                     }
                     else
                     {
-                        // Optional: Implement exponential backoff
-                        int delay = (int)Math.Pow(2, attempt) * 1000; // e.g., 2^1 * 1000 = 2000ms
+                        int delay = (int)Math.Pow(2, attempt) * 1000;
                         await Task.Delay(delay);
-                        progressPopupWindow.Dispatcher.Invoke(() => progressPopupWindow.SetExtraText($"Retrying... Attempt {attempt + 1} of {MaxRetries}"));
+                        progressPopupWindow.Dispatcher.Invoke(() =>
+                            progressPopupWindow.SetExtraText($"Retrying... Attempt {attempt + 1} of {MaxRetries}"));
                     }
                 }
                 catch (HttpRequestException ex)
                 {
-                    // Handle other HTTP-related exceptions
                     attempt++;
                     if (attempt >= MaxRetries)
                     {
@@ -94,15 +109,14 @@ namespace CT_MKWII_WPF.Helpers
                     }
                     else
                     {
-                        // Optional: Implement exponential backoff
                         int delay = (int)Math.Pow(2, attempt) * 1000;
                         await Task.Delay(delay);
-                        progressPopupWindow.Dispatcher.Invoke(() => progressPopupWindow.SetExtraText($"Retrying... Attempt {attempt + 1} of {MaxRetries}"));
+                        progressPopupWindow.Dispatcher.Invoke(() =>
+                            progressPopupWindow.SetExtraText($"Retrying... Attempt {attempt + 1} of {MaxRetries}"));
                     }
                 }
                 catch (Exception ex)
                 {
-                    // Handle non-HTTP exceptions
                     MessageBox.Show($"An error occurred while downloading the file: {ex.Message}");
                     break;
                 }
