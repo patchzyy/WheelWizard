@@ -12,6 +12,7 @@ using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Launcher;
 using System.IO;
 using CT_MKWII_WPF.Views.Components;
+using System.Diagnostics;
 using System.Windows.Media;
 
 namespace CT_MKWII_WPF.Views.Popups
@@ -57,10 +58,11 @@ namespace CT_MKWII_WPF.Views.Popups
         {
             if (_isInitialLoad)
             {
-                LoadMods(_currentPage);
+                LoadMods(_currentPage).ConfigureAwait(false);
                 _isInitialLoad = false;
             }
         }
+
         
         private void ModListView_Loaded(object sender, RoutedEventArgs e)
         {
@@ -79,19 +81,25 @@ namespace CT_MKWII_WPF.Views.Popups
         /// </summary>
         private ScrollViewer FindScrollViewer(DependencyObject d)
         {
-            if (d == null) return null;
-            
+            if (d == null)
+            {
+                return null;
+            }
+
             if (d is ScrollViewer scrollViewer)
+            {
                 return scrollViewer;
+            }
 
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(d); i++)
             {
                 var child = VisualTreeHelper.GetChild(d, i);
                 var result = FindScrollViewer(child);
                 if (result != null)
+                {
                     return result;
+                }
             }
-
             return null;
         }
 
@@ -99,73 +107,102 @@ namespace CT_MKWII_WPF.Views.Popups
         /// Loads mods for the specified page and search term.
         /// </summary>
         private async Task LoadMods(int page, string searchTerm = "")
+{
+
+    if (_isLoading)
+    {
+        return;
+    }
+
+    if (!_hasMoreMods)
+    {
+        return;
+    }
+
+    _isLoading = true;
+
+    try
+    {
+        var result = await GamebananaSearchHandler.SearchModsAsync(searchTerm, page, ModsPerPage);
+
+        if (result.Succeeded && result.Content != null)
         {
-            if (_isLoading || !_hasMoreMods)
-                return;
+            // Log metadata information
+            var metadata = result.Content._aMetadata;
 
-            _isLoading = true;
-            try
-            {
-                var result = await GamebananaSearchHandler.SearchModsAsync(searchTerm, page, ModsPerPage);
-
-                if (result.Succeeded && result.Content != null)
-                {
-                    var newMods = result.Content._aRecords
-                        .Where(mod => mod._sModelName == "Mod")
-                        .ToList();
-
-                    if (newMods.Count > 0)
-                    {
-                        Application.Current.Dispatcher.Invoke(() =>
-                        {
-                            foreach (var mod in newMods)
-                            {
-                                Mods.Add(mod);
-                            }
-                        });
-
-                        _hasMoreMods = newMods.Count >= ModsPerPage;
-                        _currentPage = page;
-                    }
-                    else
-                    {
-                        _hasMoreMods = false;
-                    }
-                }
-                else
-                {
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        MessageBox.Show("Failed to load mods: " + result.StatusMessage,
-                            "Error",
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Error);
-                    });
-                }
-            }
-            catch (Exception ex)
+            var newMods = result.Content._aRecords
+                .Where(mod => mod._sModelName == "Mod")
+                .ToList();
+            
+            if (newMods.Count > 0)
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    MessageBox.Show("An error occurred: " + ex.Message,
-                        "Error",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Error);
+                    foreach (var mod in newMods)
+                    {
+                        Mods.Add(mod);
+                    }
                 });
+
+                // Use metadata to determine if more mods are available
+                _hasMoreMods = !metadata._bIsComplete;
+
+                // Update current page only if mods were successfully loaded
+                _currentPage = page;
             }
-            finally
+            else
             {
-                _isLoading = false;
+                // If no new mods were fetched, rely on metadata
+                _hasMoreMods = !result.Content._aMetadata._bIsComplete;
             }
         }
+        else
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                MessageBox.Show("Failed to load mods: " + result.StatusMessage,
+                    "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            });
+        }
+    }
+    catch (Exception ex)
+    {
+        Application.Current.Dispatcher.Invoke(() =>
+        {
+            MessageBox.Show("An error occurred: " + ex.Message,
+                "Error",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+        });
+    }
+    finally
+    {
+        _isLoading = false;
+    }
+}
+
 
         /// <summary>
         /// Handles the ScrollChanged event to implement infinite scrolling.
         /// </summary>
         private async void ModListView_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            if (_listViewScrollViewer == null || _isLoading || !_hasMoreMods)
+            if (_listViewScrollViewer == null)
+            {
                 return;
+            }
+
+            if (_isLoading)
+            {
+                return;
+            }
+
+            if (!_hasMoreMods)
+            {
+                return;
+            }
 
             // Calculate remaining scroll distance
             var remainingScroll = _listViewScrollViewer.ScrollableHeight - _listViewScrollViewer.VerticalOffset;
@@ -185,12 +222,12 @@ namespace CT_MKWII_WPF.Views.Popups
             CurrentSearchTerm = SearchTextBox.Text?.Trim() ?? "";
             _currentPage = 1;
             _hasMoreMods = true;
-            
+
             Application.Current.Dispatcher.Invoke(() =>
             {
                 Mods.Clear();
             });
-            
+
             await LoadMods(_currentPage, CurrentSearchTerm);
         }
 
