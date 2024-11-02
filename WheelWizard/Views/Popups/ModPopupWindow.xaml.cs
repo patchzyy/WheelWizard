@@ -1,8 +1,9 @@
-﻿// ModPopupWindow.xaml.cs
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,77 +12,191 @@ using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Launcher;
 using System.IO;
 using CT_MKWII_WPF.Views.Components;
+using System.Windows.Media;
 
 namespace CT_MKWII_WPF.Views.Popups
 {
-    public partial class ModPopupWindow : PopupContent
+    public partial class ModPopupWindow : PopupContent, INotifyPropertyChanged
     {
+        // Collection to hold the mods
         private ObservableCollection<ModRecord> Mods { get; set; } = new ObservableCollection<ModRecord>();
-        private int CurrentPage { get; set; } = 1;
-        private const int ModsPerPage = 20;
+
+        // Pagination variables
+        private int _currentPage = 1;
+        private bool _isLoading = false;
+        private bool _hasMoreMods = true;
+        private bool _isInitialLoad = true;
+
+        private const int ModsPerPage = 15;
+        private const double ScrollThreshold = 50; // Adjusted threshold for earlier loading
+
         private string CurrentSearchTerm = "";
+        private ScrollViewer _listViewScrollViewer;
 
         public ModPopupWindow() : base(true, false, false, "Mod Browser", new Vector(800, 800))
         {
             InitializeComponent();
+            DataContext = this;
             ModListView.ItemsSource = Mods;
-            LoadMods(CurrentPage);
+            
             // Initially, no mod is selected
             ModDetailViewer.Visibility = Visibility.Collapsed;
             EmptyDetailsView.Visibility = Visibility.Visible;
 
-            // Subscribe to the DownloadRequested event
             ModDetailViewer.DownloadRequested += ModDetailViewer_DownloadRequested;
+            
+            // Attach to Loaded event
+            this.Loaded += ModPopupWindow_Loaded;
         }
 
-        private async void LoadMods(int page, string searchTerm = "")
+
+        /// <summary>
+        /// Finds the ScrollViewer within the ListView.
+        /// </summary>
+        private void ModPopupWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            if (_isInitialLoad)
+            {
+                LoadMods(_currentPage);
+                _isInitialLoad = false;
+            }
+        }
+        
+        private void ModListView_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (_listViewScrollViewer == null)
+            {
+                _listViewScrollViewer = FindScrollViewer(ModListView);
+                if (_listViewScrollViewer != null)
+                {
+                    _listViewScrollViewer.ScrollChanged += ModListView_ScrollChanged;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Recursively searches for a ScrollViewer within a DependencyObject.
+        /// </summary>
+        private ScrollViewer FindScrollViewer(DependencyObject d)
+        {
+            if (d == null) return null;
+            
+            if (d is ScrollViewer scrollViewer)
+                return scrollViewer;
+
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(d); i++)
+            {
+                var child = VisualTreeHelper.GetChild(d, i);
+                var result = FindScrollViewer(child);
+                if (result != null)
+                    return result;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Loads mods for the specified page and search term.
+        /// </summary>
+        private async Task LoadMods(int page, string searchTerm = "")
+        {
+            if (_isLoading || !_hasMoreMods)
+                return;
+
+            _isLoading = true;
             try
             {
                 var result = await GamebananaSearchHandler.SearchModsAsync(searchTerm, page, ModsPerPage);
 
                 if (result.Succeeded && result.Content != null)
                 {
-                    Mods.Clear();
-                    foreach (var mod in result.Content._aRecords)
+                    var newMods = result.Content._aRecords
+                        .Where(mod => mod._sModelName == "Mod")
+                        .ToList();
+
+                    if (newMods.Count > 0)
                     {
-                        if (mod._sModelName == "Mod")
-                            Mods.Add(mod);
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            foreach (var mod in newMods)
+                            {
+                                Mods.Add(mod);
+                            }
+                        });
+
+                        _hasMoreMods = newMods.Count >= ModsPerPage;
+                        _currentPage = page;
+                    }
+                    else
+                    {
+                        _hasMoreMods = false;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Failed to load mods: " + result.StatusMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        MessageBox.Show("Failed to load mods: " + result.StatusMessage,
+                            "Error",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                    });
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    MessageBox.Show("An error occurred: " + ex.Message,
+                        "Error",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                });
             }
-        }
-
-        private void PreviousPage_Click(object sender, RoutedEventArgs e)
-        {
-            if (CurrentPage > 1)
+            finally
             {
-                CurrentPage--;
-                LoadMods(CurrentPage, CurrentSearchTerm);
+                _isLoading = false;
             }
         }
 
-        private void NextPage_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Handles the ScrollChanged event to implement infinite scrolling.
+        /// </summary>
+        private async void ModListView_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            CurrentPage++;
-            LoadMods(CurrentPage, CurrentSearchTerm);
+            if (_listViewScrollViewer == null || _isLoading || !_hasMoreMods)
+                return;
+
+            // Calculate remaining scroll distance
+            var remainingScroll = _listViewScrollViewer.ScrollableHeight - _listViewScrollViewer.VerticalOffset;
+
+            // Load more when we're within the threshold of the bottom
+            if (remainingScroll <= ScrollThreshold)
+            {
+                await LoadMods(_currentPage + 1, CurrentSearchTerm);
+            }
         }
 
-        private void Search_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Handles the Search button click event.
+        /// </summary>
+        private async void Search_Click(object sender, RoutedEventArgs e)
         {
-            CurrentSearchTerm = SearchTextBox.Text.Trim();
-            CurrentPage = 1;
-            LoadMods(CurrentPage, CurrentSearchTerm);
+            CurrentSearchTerm = SearchTextBox.Text?.Trim() ?? "";
+            _currentPage = 1;
+            _hasMoreMods = true;
+            
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                Mods.Clear();
+            });
+            
+            await LoadMods(_currentPage, CurrentSearchTerm);
         }
-        
+
+        /// <summary>
+        /// Handles the selection change in the ListView to display mod details.
+        /// </summary>
         private async void ModListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ModListView.SelectedItem is ModRecord selectedMod)
@@ -105,7 +220,6 @@ namespace CT_MKWII_WPF.Views.Popups
         /// <summary>
         /// Public method to load mod details independently from the list.
         /// </summary>
-        /// <param name="mod">The mod to display.</param>
         public async Task LoadModDetailsExternallyAsync(ModRecord mod)
         {
             if (mod == null)
@@ -131,12 +245,14 @@ namespace CT_MKWII_WPF.Views.Popups
         /// <summary>
         /// Handles the mod download and installation process.
         /// </summary>
-        /// <param name="mod">The mod to download and install.</param>
         public async Task DownloadModAsync(ModRecord mod)
         {
             if (mod == null)
             {
-                MessageBox.Show("No mod selected to download.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("No mod selected to download.", 
+                                "Information", 
+                                MessageBoxButton.OK, 
+                                MessageBoxImage.Information);
                 return;
             }
 
@@ -157,7 +273,9 @@ namespace CT_MKWII_WPF.Views.Popups
                 var modDetailResult = await GamebananaSearchHandler.GetModDetailsAsync(mod._idRow);
                 if (modDetailResult.Succeeded && modDetailResult.Content != null)
                 {
-                    var downloadUrls = modDetailResult.Content._aFiles.Select(f => f._sDownloadUrl).ToList();
+                    var downloadUrls = modDetailResult.Content._aFiles
+                                       .Select(f => f._sDownloadUrl)
+                                       .ToList();
                     if (downloadUrls.Any())
                     {
                         var progressWindow = new ProgressWindow($"Downloading {mod._sName}", Application.Current.MainWindow);
@@ -173,29 +291,47 @@ namespace CT_MKWII_WPF.Views.Popups
                         {
                             await ModInstallation.InstallModFromFileAsync(file);
                             Directory.Delete(ModsLaunchHelper.TempModsFolderPath, true);
-                            MessageBox.Show("Mod downloaded and installed successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                            MessageBox.Show("Mod downloaded and installed successfully!", 
+                                            "Success", 
+                                            MessageBoxButton.OK, 
+                                            MessageBoxImage.Information);
                         }
                         else
                         {
-                            MessageBox.Show("Downloaded file not found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("Downloaded file not found.", 
+                                            "Error", 
+                                            MessageBoxButton.OK, 
+                                            MessageBoxImage.Error);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("No downloadable files found for this mod.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show("No downloadable files found for this mod.", 
+                                        "Info", 
+                                        MessageBoxButton.OK, 
+                                        MessageBoxImage.Information);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Failed to retrieve mod details.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Failed to retrieve mod details.", 
+                                    "Error", 
+                                    MessageBoxButton.OK, 
+                                    MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred during download: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("An error occurred during download: " + ex.Message, 
+                                "Error", 
+                                MessageBoxButton.OK, 
+                                MessageBoxImage.Error);
             }
         }
 
+        /// <summary>
+        /// Prepares the temporary folder for downloading files.
+        /// </summary>
         private async Task PrepareToDownloadFile()
         {
             var tempFolder = ModsLaunchHelper.TempModsFolderPath;
@@ -206,6 +342,9 @@ namespace CT_MKWII_WPF.Views.Popups
             Directory.CreateDirectory(tempFolder);
         }
 
+        /// <summary>
+        /// Downloads a file from the specified URL and updates the progress window.
+        /// </summary>
         private async Task DownloadFileAsync(string url, ProgressWindow progressWindow)
         {
             using (HttpClient client = new HttpClient(new HttpClientHandler { AllowAutoRedirect = true }))
@@ -215,13 +354,13 @@ namespace CT_MKWII_WPF.Views.Popups
                     var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
                     response.EnsureSuccessStatusCode();
 
-                    // Ensure we are following the final redirect to get the actual file.
+                    // Follow redirects to get the final URL
                     var finalUrl = response.RequestMessage.RequestUri.ToString();
 
                     var totalBytes = response.Content.Headers.ContentLength ?? -1L;
                     var canReportProgress = totalBytes != -1;
 
-                    // Check if the content disposition is available for the file name
+                    // Determine the file name
                     var contentDisposition = response.Content.Headers.ContentDisposition;
                     var fileName = contentDisposition?.FileName?.Trim('"') ?? GetFileNameFromUrl(finalUrl);
 
@@ -254,9 +393,23 @@ namespace CT_MKWII_WPF.Views.Popups
             }
         }
 
+        /// <summary>
+        /// Extracts the file name from a URL.
+        /// </summary>
         private string GetFileNameFromUrl(string url)
         {
             return Path.GetFileName(new Uri(url).AbsolutePath);
+        }
+
+        // Implement INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Raises the PropertyChanged event.
+        /// </summary>
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

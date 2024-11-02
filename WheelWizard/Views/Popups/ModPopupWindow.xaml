@@ -1,5 +1,4 @@
-﻿<!-- ModPopupWindow.xaml -->
-<popups:PopupContent x:Class="CT_MKWII_WPF.Views.Popups.ModPopupWindow"
+﻿<popups:PopupContent x:Class="CT_MKWII_WPF.Views.Popups.ModPopupWindow"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -13,45 +12,58 @@
                     d:DesignHeight="600" d:DesignWidth="800">
     <Grid Margin="10">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- Title -->
             <RowDefinition Height="Auto"/> <!-- Search Bar -->
             <RowDefinition Height="*"/>    <!-- Content -->
-            <RowDefinition Height="Auto"/> <!-- Navigation Buttons -->
         </Grid.RowDefinitions>
 
+        <!-- Title -->
+        <TextBlock Style="{StaticResource TitleText}" 
+                   FontSize="16" 
+                   Text="Powered By Gamebanana" 
+                   HorizontalAlignment="Right" 
+                   Grid.Row="0"/>
+
         <!-- Search Bar -->
-        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,10,0,10">
             <components:InputField
                 Width="300"
                 Placeholder="Search for mods..."
                 Height="40"
                 HorizontalAlignment="Left"
                 x:Name="SearchTextBox" />
-            <components:Button Text="Search" FontSize="16"
+            <components:Button Text="Search" 
+                               FontSize="16"
                                IconKind="{x:Static icon:PackIconFontAwesomeKind.SearchenginBrands}"
                                IconPack="FontAwesome"
                                Height="40"
-                               Click="Search_Click" Margin="10,0,0,0" />
+                               Click="Search_Click" 
+                               Margin="10,0,0,0" />
         </StackPanel>
-        <TextBlock Style="{StaticResource TitleText}" FontSize="16" Text="Powered By Gamebanana" HorizontalAlignment="Right"></TextBlock>
 
         <!-- Content Area -->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/> <!-- Mod List -->
                 <ColumnDefinition Width="3*"/> <!-- Mod Details -->
             </Grid.ColumnDefinitions>
 
             <!-- Mod List -->
-            <ListView Name="ModListView" SelectionChanged="ModListView_SelectionChanged" 
+            <ListView Name="ModListView" 
+                      SelectionChanged="ModListView_SelectionChanged" 
                       Margin="0,0,10,0"
-                      Background="{StaticResource BackgroundColor}">
+                      Background="{StaticResource BackgroundColor}"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      Loaded="ModListView_Loaded">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Border 
                             BorderBrush="{StaticResource BackgroundColor}" 
                             BorderThickness="1" 
                             Background="{StaticResource BackgroundColor}"
-                            Padding="5" Margin="0,0,0,5">
+                            Padding="5" 
+                            Margin="0,0,0,5">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="100"/>
@@ -62,16 +74,24 @@
                                        Stretch="UniformToFill" 
                                        Margin="0,0,10,0"/>
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding _sName}" FontWeight="Bold" FontSize="14"/>
-                                    <TextBlock Text="{Binding _aSubmitter._sName}" Foreground="Gray" FontSize="12"/>
+                                    <TextBlock Text="{Binding _sName}" 
+                                               FontWeight="Bold" 
+                                               FontSize="14"/>
+                                    <TextBlock Text="{Binding _aSubmitter._sName}" 
+                                               Foreground="Gray" 
+                                               FontSize="12"/>
                                     <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                         <StackPanel Orientation="Horizontal" Margin="0,0,15,0">
-                                            <Image Source="pack://application:,,,/Resources/like.png" Width="16" Height="16"/>
-                                            <TextBlock Text="{Binding _nLikeCount}" Margin="5,0,0,0"/>
+                                            <Image Source="pack://application:,,,/Resources/like.png" 
+                                                   Width="16" Height="16"/>
+                                            <TextBlock Text="{Binding _nLikeCount}" 
+                                                       Margin="5,0,0,0"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
-                                            <Image Source="pack://application:,,,/Resources/view.png" Width="16" Height="16"/>
-                                            <TextBlock Text="{Binding _nViewCount}" Margin="5,0,0,0"/>
+                                            <Image Source="pack://application:,,,/Resources/view.png" 
+                                                   Width="16" Height="16"/>
+                                            <TextBlock Text="{Binding _nViewCount}" 
+                                                       Margin="5,0,0,0"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
@@ -85,26 +105,21 @@
             <components:ModDetailViewer x:Name="ModDetailViewer" Grid.Column="1" />
             
             <!-- Empty Details View -->
-            <StackPanel x:Name="EmptyDetailsView" Visibility="Visible" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="No mod selected" FontSize="20" FontWeight="Bold" Foreground="Gray" Margin="0,10,0,5"/>
-                <TextBlock Text="Select a mod to view its details" FontSize="14" Foreground="DarkGray" TextAlignment="Center"/>
+            <StackPanel x:Name="EmptyDetailsView" 
+                        Visibility="Visible" 
+                        Grid.Column="1" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center">
+                <TextBlock Text="No mod selected" 
+                           FontSize="20" 
+                           FontWeight="Bold" 
+                           Foreground="Gray" 
+                           Margin="0,10,0,5"/>
+                <TextBlock Text="Select a mod to view its details" 
+                           FontSize="14" 
+                           Foreground="DarkGray" 
+                           TextAlignment="Center"/>
             </StackPanel>
         </Grid>
-
-        <!-- Navigation Buttons -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
-            <components:Button Text="Previous Page" FontSize="16"
-                               IconKind="{x:Static icon:PackIconFontAwesomeKind.ArrowLeftSolid}"
-                               IconPack="FontAwesome"
-                               Height="40"
-                               Click="PreviousPage_Click" Margin="10,0,0,0" />
-            <TextBlock Text="{Binding CurrentPage}" FontSize="16" VerticalAlignment="Center" 
-                       Margin="10,0"/>
-            <components:Button Text="Next Page" FontSize="16"
-                               IconKind="{x:Static icon:PackIconFontAwesomeKind.ArrowRightSolid}"
-                               IconPack="FontAwesome"
-                               Height="40"
-                               Click="NextPage_Click" Margin="10,0,0,0" />
-        </StackPanel>
     </Grid>
 </popups:PopupContent>
