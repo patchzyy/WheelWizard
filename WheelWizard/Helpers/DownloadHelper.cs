@@ -38,10 +38,13 @@ namespace CT_MKWII_WPF.Helpers
             using var client = new HttpClient { Timeout = TimeSpan.FromSeconds(TimeoutInSeconds) };
             using var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
             response.EnsureSuccessStatusCode();
+            
+            var finalUrl = response.RequestMessage.RequestUri.ToString();
 
             // Check for filename in Content-Disposition or fallback to URL
             var contentDisposition = response.Content.Headers.ContentDisposition;
             var fileName = contentDisposition?.FileName?.Trim('"') ?? Path.GetFileName(new Uri(url).AbsolutePath);
+            fileName = Path.ChangeExtension(fileName, Path.GetExtension(finalUrl));
 
             // Add extension if missing in file path
             if (!Path.HasExtension(fileName))
