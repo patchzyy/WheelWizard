@@ -138,7 +138,6 @@ public partial class ModDetailViewer : UserControl
                 // Use DownloadHelper to download the file
                 await DownloadHelper.DownloadToLocation(url, filePath, progressWindow);
             }
-        
             progressWindow.Close();
         
             // Assuming you install from the first downloaded file
@@ -151,7 +150,6 @@ public partial class ModDetailViewer : UserControl
                                 MessageBoxImage.Error);
                 return;
             }
-        
             await ModInstallation.InstallModFromFileAsync(file);
             Directory.Delete(ModsLaunchHelper.TempModsFolderPath, true);
             MessageBox.Show("Mod downloaded and installed successfully!",
