@@ -48,8 +48,7 @@ namespace CT_MKWII_WPF.Views.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to load mods: {ex.Message}", Common.Term_Error, MessageBoxButton.OK,
-                    MessageBoxImage.Error);
+                new YesNoWindow().SetMainText("Failed to load mods: " + ex.Message);
             }
             UpdateEmptyListMessageVisibility();
         }
@@ -63,7 +62,7 @@ namespace CT_MKWII_WPF.Views.Pages
 
         private void Mod_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Mod.IsEnabled))
+            if (e.PropertyName == nameof(Mod.IsEnabled) || e.PropertyName == nameof(Mod.Title) || e.PropertyName == nameof(Mod.Author) || e.PropertyName == nameof(Mod.ModID) || e.PropertyName == nameof(Mod.Priority))
                 ModManager.SaveModsAsync();
             UpdateEmptyListMessageVisibility();
         }
@@ -103,11 +102,10 @@ namespace CT_MKWII_WPF.Views.Pages
                 ProcessModFiles(selectedFiles, singleMod: true);
             else
             {
-                var result = MessageBox.Show(Phrases.PopupText_ModCombineQuestion, Phrases.PopupText_MultipleFilesSelected,
-                                             MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
-
-                if (result == MessageBoxResult.No) ProcessModFiles(selectedFiles, singleMod: false);
-                else if (result == MessageBoxResult.Yes) ProcessModFiles(selectedFiles, singleMod: true);
+                var result = new YesNoWindow().SetMainText(Phrases.PopupText_ModCombineQuestion)
+                    .SetExtraText(Phrases.PopupText_MultipleFilesSelected).AwaitAnswer();
+                if (result!) ProcessModFiles(selectedFiles, singleMod: false);
+                else if (result) ProcessModFiles(selectedFiles, singleMod: true);
             }
         }
 
@@ -122,8 +120,7 @@ namespace CT_MKWII_WPF.Views.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to process mod files: {ex.Message}", Common.Term_Error,
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                ErrorMessageWindow.Show($"Failed to process mod files: {ex.Message}");
             }
 
             ShowLoading(false);
@@ -138,39 +135,39 @@ namespace CT_MKWII_WPF.Views.Pages
 
                 if (ModInstallation.ModExists(Mods, modName))
                 {
-                    MessageBox.Show(Humanizer.ReplaceDynamic(Phrases.PopupText_ModNameExists, modName),
-                                    Common.Term_Error, MessageBoxButton.OK, MessageBoxImage.Error);
+                    ErrorMessageWindow.Show(Humanizer.ReplaceDynamic(Phrases.PopupText_ModNameExists, modName));
                     continue;
                 }
                 var modDirectory = ModInstallation.GetModDirectoryPath(modName);
                 CreateDirectory(modDirectory);
-                await Task.Run(() => ModInstallation.ProcessFile(filePaths[i], modDirectory));
-                var mod = new Mod
-                {
-                    IsEnabled = false,
-                    Title = modName,
-                };
-                ModManager.AddMod(mod);
+
+                // Pass default author and ModID
+                await ModInstallation.InstallModFromFileAsync(filePaths[i], author: "-1", modID: -1);
             }
         }
 
         private async Task CombineFilesIntoSingleMod(string[] filePaths)
         {
-            var modName = Microsoft.VisualBasic.Interaction
-                .InputBox(Phrases.PopupText_EnterModName, Common.Attribute_ModName, "New Mod");
+            var modName = new TextInputPopup("Enter Mod Name").ShowDialog();
             if (!IsValidName(modName)) return;
+
             var modDirectory = ModInstallation.GetModDirectoryPath(modName);
             CreateDirectory(modDirectory);
+
             for (var i = 0; i < filePaths.Length; i++)
             {
                 UpdateProgress(i + 1, filePaths.Length);
-                await Task.Run(() => ModInstallation.ProcessFile(filePaths[i], modDirectory));
+                // Pass default author and ModID
+                await ModInstallation.InstallModFromFileAsync(filePaths[i], author: "-1", modID: -1);
             }
 
             var newMod = new Mod
             {
-                IsEnabled = false,
+                IsEnabled = true, // Default to enabled
                 Title = modName,
+                Author = "-1",
+                ModID = -1,
+                Priority = 0 // Default priority; can be adjusted as needed
             };
             ModManager.AddMod(newMod);
         }
@@ -215,15 +212,13 @@ namespace CT_MKWII_WPF.Views.Pages
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                MessageBox.Show(Phrases.PopupText_ModNameEmpty, Common.Term_Error,
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                ErrorMessageWindow.Show(Phrases.PopupText_ModNameEmpty);
                 return false;
             }
 
             if (!ModInstallation.ModExists(Mods, name)) return true;
 
-            MessageBox.Show(Humanizer.ReplaceDynamic(Phrases.PopupText_ModNameExists, name),
-                            Common.Term_Error, MessageBoxButton.OK, MessageBoxImage.Error);
+            ErrorMessageWindow.Show(Humanizer.ReplaceDynamic(Phrases.PopupText_ModNameExists, name));
             return false;
         }
 
@@ -232,8 +227,7 @@ namespace CT_MKWII_WPF.Views.Pages
             var selectedMod = ModsListView.GetCurrentContextItem<Mod>();
             if (selectedMod == null) return;
 
-            var newTitle = Microsoft.VisualBasic.Interaction
-                .InputBox(Phrases.PopupText_EnterTitle, "Rename Mod", selectedMod.Title);
+            var newTitle = new TextInputPopup("Enter Mod Title").ShowDialog();
             if (!IsValidName(newTitle)) return;
 
             try
@@ -242,12 +236,20 @@ namespace CT_MKWII_WPF.Views.Pages
                 var newDirectoryName = ModInstallation.GetModDirectoryPath(newTitle);
                 Directory.Move(oldDirectoryName, newDirectoryName);
                 selectedMod.Title = newTitle; // Trigger property changed
+
+                // Rename INI file
+                var oldIniPath = Path.Combine(oldDirectoryName, $"{selectedMod.Title}.ini");
+                var newIniPath = Path.Combine(newDirectoryName, $"{newTitle}.ini");
+                if (File.Exists(oldIniPath))
+                {
+                    File.Move(oldIniPath, newIniPath);
+                }
+
                 ModManager.SaveModsAsync();
             }
             catch (IOException ex)
             {
-                MessageBox.Show($"Failed to rename mod directory: {ex.Message}", Common.Term_Error,
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                ErrorMessageWindow.Show($"Failed to rename mod directory: {ex.Message}");
             }
         }
 
@@ -255,9 +257,7 @@ namespace CT_MKWII_WPF.Views.Pages
         {
             var selectedMod = ModsListView.GetCurrentContextItem<Mod>();
             if (selectedMod == null) return;
-            var areTheySure = MessageBox.Show(
-                Humanizer.ReplaceDynamic(Phrases.PopupText_SureDeleteQuestion, selectedMod.Title),
-                "Delete Mod", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes;
+            var areTheySure = new YesNoWindow().SetMainText(Humanizer.ReplaceDynamic(Phrases.PopupText_SureDeleteQuestion, selectedMod.Title)).AwaitAnswer();
             if (!areTheySure) return;
 
             ModManager.RemoveMod(selectedMod);
@@ -269,8 +269,7 @@ namespace CT_MKWII_WPF.Views.Pages
             }
             catch (IOException)
             {
-                MessageBox.Show($"Failed to delete mod directory. It may be that this file is read only?", Common.Term_Error,
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                ErrorMessageWindow.Show($"Failed to delete mod directory. It may be that this file is read only?");
             }
             ModManager.SaveModsAsync();
             UpdateEmptyListMessageVisibility();
@@ -291,8 +290,7 @@ namespace CT_MKWII_WPF.Views.Pages
                 });
             else
             {
-                MessageBox.Show(Phrases.PopupText_NoModFolder, Common.Term_Error,
-                                MessageBoxButton.OK, MessageBoxImage.Error);
+                ErrorMessageWindow.Show(Phrases.PopupText_NoModFolder);
             }
         }
 
@@ -300,14 +298,18 @@ namespace CT_MKWII_WPF.Views.Pages
         {
             var mySelectedMod = (Mod)movedItem.DataContext;
             Mods.Move(Mods.IndexOf(mySelectedMod), newIndex);
+            // Update priority based on new order
+            for (int i = 0; i < Mods.Count; i++)
+            {
+                Mods[i].Priority = i;
+            }
             ModManager.SaveModsAsync();
         }
 
         private void CheckIfSet(object sender, RoutedEventArgs e)
         {
             bool isRegistered = UrlProtocolManager.IsCustomSchemeRegistered(UrlProtocolManager.ProtocolName);
-            MessageBox.Show(isRegistered ? "The URL scheme is registered" : "The URL scheme is not registered",
-                "URL Scheme", MessageBoxButton.OK, isRegistered ? MessageBoxImage.Information : MessageBoxImage.Warning);
+            ErrorMessageWindow.Show(isRegistered ? "The URL scheme is registered" : "The URL scheme is not registered");
         }
 
         private void RemoveUrlScheme(object sender, RoutedEventArgs e)

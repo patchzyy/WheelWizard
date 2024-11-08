@@ -24,6 +24,8 @@ public class Metadata
 
 public class ModRecord
 {
+    
+    public string? OverrideDownloadUrl { get; set; }
     // Unique ID for the mod or content item
     public int _idRow { get; set; }
 

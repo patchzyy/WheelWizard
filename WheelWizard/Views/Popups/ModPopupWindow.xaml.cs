@@ -12,8 +12,10 @@ using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Launcher;
 using System.IO;
 using CT_MKWII_WPF.Views.Components;
+using MahApps.Metro.IconPacks;
 using System.Diagnostics;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace CT_MKWII_WPF.Views.Popups
 {
@@ -157,10 +159,8 @@ namespace CT_MKWII_WPF.Views.Popups
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        MessageBox.Show("Failed to load mods: " + result.StatusMessage,
-                            "Error",
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Error);
+                        new YesNoWindow().SetMainText("Failed to load mods")
+                            .SetExtraText("An error occurred while loading mods.");
                     });
                 }
             }
@@ -168,10 +168,8 @@ namespace CT_MKWII_WPF.Views.Popups
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    MessageBox.Show("An error occurred: " + ex.Message,
-                        "Error",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Error);
+                    new YesNoWindow().SetMainText("Failed to load mods")
+                        .SetExtraText("An error occurred while loading mods." + ex.Message);
                 });
             }
             finally

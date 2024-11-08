@@ -5,6 +5,7 @@ using CT_MKWII_WPF.Services.LiveData;
 using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Utilities.Generators;
 using CT_MKWII_WPF.Utilities.RepeatedTasks;
+using CT_MKWII_WPF.Views.Popups;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -37,8 +38,7 @@ public class GameDataLoader : RepeatedTaskManager
             catch (Exception ex)
             {
                 // I rather not translate this message, makes it easier to check where a given error came from
-                MessageBox.Show($"Error creating save directory: {ex.Message}", 
-                                "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                ErrorMessageWindow.Show($"Error creating save directory: {ex.Message}");
             }
             return path;
         }
@@ -111,8 +111,7 @@ public class GameDataLoader : RepeatedTaskManager
         catch (Exception e)
         {
             // I rather not translate this message, makes it easier to check where a given error came from
-            MessageBox.Show($"An error occurred while loading the game data: {e.Message}", 
-                            Common.Term_Error, MessageBoxButton.OK, MessageBoxImage.Error);
+            ErrorMessageWindow.Show($"An error occurred while loading the game data: {e.Message}");
         }
     }
     
@@ -275,7 +274,6 @@ public class GameDataLoader : RepeatedTaskManager
         }
         catch (Exception ex)
         {
-            //MessageBox.Show($"Error loading save data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return null;
         }
     }

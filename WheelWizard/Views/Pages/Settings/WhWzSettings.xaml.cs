@@ -120,10 +120,10 @@ public partial class WhWzSettings : UserControl
             if (!string.IsNullOrEmpty(folderPath))
             {
                 // Ask user if they want to use the automatically found folder
-                var result = MessageBox.Show(
-                    $"{Phrases.PopupText_DolphinFoundText}\n{folderPath}", 
-                    Phrases.PopupText_DolphinFound, MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
+                var result = new YesNoWindow()
+                    .SetMainText($"{Phrases.PopupText_DolphinFoundText}\n{folderPath}")
+                    .SetExtraText(Phrases.PopupText_DolphinFound).AwaitAnswer();
+                if (result)
                 {
                     DolphinUserPathInput.Text = folderPath;
                     return;
@@ -131,9 +131,7 @@ public partial class WhWzSettings : UserControl
             }
             else
             {
-                MessageBox.Show(
-                    Phrases.PopupText_DolphinNotFoundText,
-                    Phrases.PopupText_DolphinNotFound, MessageBoxButton.OK, MessageBoxImage.Information);
+                new YesNoWindow().SetMainText(Phrases.PopupText_DolphinNotFoundText);
             }
         }
         
@@ -154,13 +152,11 @@ public partial class WhWzSettings : UserControl
         TogglePathSettings(false);
         if (!(SettingsHelper.PathsSetupCorrectly() && path1 && path2 && path3))
         {
-            MessageBox.Show(Phrases.PopupText_EnsurePathsExists, 
-                Common.Term_Error, MessageBoxButton.OK, MessageBoxImage.Error);
+            ErrorMessageWindow.Show(Phrases.PopupText_EnsurePathsExists);
         }
         else
         {
-            MessageBox.Show(Phrases.PopupText_SettingsSaved, 
-                Common.Term_Success, MessageBoxButton.OK, MessageBoxImage.Information);
+            ErrorMessageWindow.Show(Phrases.PopupText_SettingsSaved);
             
             // This is not really the best approach, but it works for now
             if (oldPath1 + oldPath2 + oldPath3 != DolphinExeInput.Text + MarioKartInput.Text + DolphinUserPathInput.Text)

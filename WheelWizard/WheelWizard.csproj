@@ -21,6 +21,7 @@
 
     <ItemGroup>
         <PackageReference Include="HtmlRenderer.WPF" Version="1.5.1-beta1" />
+        <PackageReference Include="ini-parser" Version="2.5.2" />
         <PackageReference Include="MahApps.Metro.IconPacks" Version="5.0.0" />
         <PackageReference Include="MaterialDesignColors" Version="3.1.0-ci630" />
         <PackageReference Include="MaterialDesignThemes" Version="5.0.1-ci630" />

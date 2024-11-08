@@ -1,3 +1,4 @@
+using CT_MKWII_WPF.Views.Popups;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,11 +10,11 @@ public partial class KsGeneric : UserControl
     {
         InitializeComponent();
     }
-    
+
     private void Button_OnClick(object _, RoutedEventArgs e) =>
-        MessageBox.Show("Button Clicked");
+        new YesNoWindow().SetMainText("ButtonClicked");
 
     private void InputButton_OnClick(object _, RoutedEventArgs e) =>
-        MessageBox.Show($"Input field contains: {MyInputField.Text}");
+        new YesNoWindow().SetMainText("InputFieldContains " +MyInputField.Text);
 }
 

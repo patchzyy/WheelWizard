@@ -71,13 +71,6 @@ public class DolphinSettingManager
     {
         var filePath = ConfigFolderPath(fileName);
         var lines =  FileHelper.ReadAllLinesSafe(filePath);
-            
-        // if (lines == null){
-        //     MessageBox.Show(
-        //         "Something went wrong, INI file could not be read, Plzz report this as a bug: " +
-        //         filePath, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        // }
-        
         return lines;
     }
     

@@ -4,15 +4,11 @@ using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Launcher;
 using CT_MKWII_WPF.Services.Other;
 using CT_MKWII_WPF.Services.Settings;
-using CT_MKWII_WPF.Services.WiiManagement;
 using MahApps.Metro.IconPacks;
-using System;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 using static CT_MKWII_WPF.Views.ViewUtils;
 using Button = CT_MKWII_WPF.Views.Components.Button;
-using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace CT_MKWII_WPF.Views.Pages;
 

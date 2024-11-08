@@ -49,7 +49,7 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
         }
         catch (Exception e)
         {
-            MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            new YesNoWindow().SetMainText(e.Message).AwaitAnswer();
             Environment.Exit(1);
         }
     }

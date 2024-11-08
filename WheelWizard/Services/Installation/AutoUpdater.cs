@@ -72,7 +72,7 @@ public static class AutoUpdater
         }
         catch (System.ComponentModel.Win32Exception)
         {
-            MessageBox.Show(Phrases.PopupText_RestartAdminFail);
+            new YesNoWindow().SetMainText(Phrases.PopupText_RestartAdminFail);
         }
     }
     
@@ -101,7 +101,7 @@ public static class AutoUpdater
         var currentFolder = Path.GetDirectoryName(currentExecutablePath);
         if (currentFolder is null)
         {
-            MessageBox.Show(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation);
+            ErrorMessageWindow.Show(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation);
             return;
         }
         var newFilePath = Path.Combine(currentFolder, currentExecutableName+"_new.exe");
@@ -123,7 +123,7 @@ public static class AutoUpdater
         var currentFolder = Path.GetDirectoryName(currentFilePath);
         if (currentFolder is null)
         {
-            MessageBox.Show(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation);
+            ErrorMessageWindow.Show(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation);
             return;
         }
         var batchFilePath = Path.Combine(currentFolder, "update.bat");
@@ -149,11 +149,11 @@ public static class AutoUpdater
     private static void HandleUpdateCheckError(HttpClientResult<string> response)
     {
         if (response.StatusCodeGroup == 4 || response.StatusCode is 503 or 504)
-            MessageBox.Show(Phrases.PopupText_UnableUpdateWhWz_ReasonNetwork);
+            ErrorMessageWindow.Show(Phrases.PopupText_UnableUpdateWhWz_ReasonNetwork);
         else
         {
-            MessageBox.Show("An error occurred while checking for updates. Please try again later. " +
-                            "\nError: " + response.StatusMessage);
+            ErrorMessageWindow.Show("An error occurred while checking for updates. Please try again later. " +
+                                    "\nError: " + response.StatusMessage);
         }
     }
 }
