@@ -152,11 +152,11 @@ public partial class WhWzSettings : UserControl
         TogglePathSettings(false);
         if (!(SettingsHelper.PathsSetupCorrectly() && path1 && path2 && path3))
         {
-            ErrorMessageWindow.Show(Phrases.PopupText_EnsurePathsExists);
+            MessageBoxWindow.Show(Phrases.PopupText_EnsurePathsExists);
         }
         else
         {
-            ErrorMessageWindow.Show(Phrases.PopupText_SettingsSaved);
+            MessageBoxWindow.Show(Phrases.PopupText_SettingsSaved);
             
             // This is not really the best approach, but it works for now
             if (oldPath1 + oldPath2 + oldPath3 != DolphinExeInput.Text + MarioKartInput.Text + DolphinUserPathInput.Text)

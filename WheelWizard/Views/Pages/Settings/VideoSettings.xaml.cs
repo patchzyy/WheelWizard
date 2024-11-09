@@ -86,6 +86,6 @@ public partial class VideoSettings : UserControl
         if (SettingValues.GFXRenderers.TryGetValue(selectedDisplayName, out var actualValue))
             SettingsManager.GFX_BACKEND.Set(actualValue);
         else
-            ErrorMessageWindow.Show($"{Common.Term_Warning}: Unknown renderer selected: {selectedDisplayName}");
+            MessageBoxWindow.Show($"{Common.Term_Warning}: Unknown renderer selected: {selectedDisplayName}");
     }
 }
