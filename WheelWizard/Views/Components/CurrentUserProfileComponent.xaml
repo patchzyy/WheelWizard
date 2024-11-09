@@ -37,10 +37,10 @@
                         <components:MiiBall Size="40" x:Name="MiiBall" Mii="{Binding Mii}">
                             <components:MiiBall.Style>
                                 <Style TargetType="components:MiiBall">
-                                    <Setter Property="Color" Value="Default"/>
+                                    <Setter Property="Variant" Value="Default"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsOnline}" Value="True">
-                                            <Setter Property="Color" Value="Online"/>
+                                            <Setter Property="PlayerState" Value="Online"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -51,7 +51,7 @@
 
                 <ControlTemplate.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Color" TargetName="MiiBall" Value="Light"/>
+                        <Setter Property="Variant" TargetName="MiiBall" Value="Light"/>
                         <Setter Property="Foreground" Value="{StaticResource TitleTextHover}" TargetName="FriendCodeBlock"/>
                         <Setter Property="Foreground" Value="{StaticResource TitleTextHover}" TargetName="PlayerNameBlock"/>
                     </Trigger>

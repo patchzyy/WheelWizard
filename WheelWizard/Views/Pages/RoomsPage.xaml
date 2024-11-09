@@ -124,11 +124,11 @@
                     </ContextMenu>
                 </components:StaticListView.ItemContextMenu>
                 <ListView.View>
-                    <GridView AllowsColumnReorder="False">
-                        <GridViewColumn Header="">
+                    <GridView AllowsColumnReorder="False" >
+                        <GridViewColumn Header="" Width="63">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <components:MiiBall Mii="{Binding FirstMii}" Size="40"/>
+                                    <components:MiiBall Mii="{Binding FirstMii}" Size="50" PlayerState="Online" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

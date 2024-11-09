@@ -118,12 +118,22 @@
 
     <SolidColorBrush x:Key="MiiIconDefault-Background" Color="{StaticResource Gray800}" />
     <SolidColorBrush x:Key="MiiIconDefault-Foreground" Color="{StaticResource Gray500}" />
+    <SolidColorBrush x:Key="MiiIconDefault-Border" Color="{StaticResource Gray950}" />
     <SolidColorBrush x:Key="MiiIconLight-Background" Color="{StaticResource Gray600}" />
     <SolidColorBrush x:Key="MiiIconLight-Foreground" Color="{StaticResource Gray400}" />
-    <SolidColorBrush x:Key="MiiIconCyan-Background" Color="{StaticResource Cyan500}" />
-    <SolidColorBrush x:Key="MiiIconCyan-Foreground" Color="{StaticResource Cyan300}" />
-    <SolidColorBrush x:Key="MiiIconRed-Background" Color="{StaticResource Red700}" />
-    <SolidColorBrush x:Key="MiiIconRed-Foreground" Color="{StaticResource Red400}" />
+    <SolidColorBrush x:Key="MiiStateCyan" Color="{StaticResource Cyan500}" />
+    <SolidColorBrush x:Key="MiiStateRed" Color="{StaticResource Red700}" />
+    
+    <SolidColorBrush x:Key="MiiFirstPlace-Border" Color="{StaticResource Yellow200}" />
+    <SolidColorBrush x:Key="MiiFirstPlace-BadgeOuter" Color="{StaticResource Yellow600}" />
+    <SolidColorBrush x:Key="MiiFirstPlace-BadgeInner" Color="{StaticResource Yellow100}" />
+    <SolidColorBrush x:Key="MiiSecondPlace-Border" Color="{StaticResource Gray200}" />
+    <SolidColorBrush x:Key="MiiSecondPlace-BadgeOuter" Color="{StaticResource Gray400}" />
+    <SolidColorBrush x:Key="MiiSecondPlace-BadgeInner" Color="{StaticResource Gray50}" />
+    <SolidColorBrush x:Key="MiiThirdPlace-Border" Color="#FFB59A" />
+    <SolidColorBrush x:Key="MiiThirdPlace-BadgeOuter" Color="#EC5616" />
+    <SolidColorBrush x:Key="MiiThirdPlace-BadgeInner" Color="#FFD19D" />
+
     <!-- Font size constants are:
     Title: 20
     body: 16

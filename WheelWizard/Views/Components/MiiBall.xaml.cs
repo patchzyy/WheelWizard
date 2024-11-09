@@ -13,12 +13,25 @@ namespace CT_MKWII_WPF.Views.Components;
 //       That would be worth creating, would require a bit less code
 public partial class MiiBall : UserControl
 {
-    public enum BallColor
+    public enum BallVariantType
     {
         Default,
-        Light,
+        Light
+    }
+    
+    public enum BallPlayerState
+    {
+        Default,
         Online,
         Red
+    }
+    
+    public enum PlayerWinPosition
+    {
+        None,
+        First,
+        Second,
+        Third
     }
     
     public MiiBall()
@@ -69,27 +82,64 @@ public partial class MiiBall : UserControl
         set => SetValue(SizeProperty, value);
     }
     
-    public static readonly DependencyProperty ColorProperty =
-        DependencyProperty.Register(nameof(Color), typeof(BallColor), typeof(MiiBall),
-                                    new PropertyMetadata(BallColor.Default));
 
-    public BallColor Color
+    public static readonly DependencyProperty VariantProperty =
+        DependencyProperty.Register(nameof(Variant), typeof(BallVariantType), typeof(MiiBall),
+                                    new PropertyMetadata(BallVariantType.Default));
+
+    public BallVariantType Variant
     {
-        get => (BallColor)GetValue(ColorProperty);
-        set => SetValue(ColorProperty, value);
+        get => (BallVariantType)GetValue(VariantProperty);
+        set => SetValue(VariantProperty, value);
+    }
+    
+    public static readonly DependencyProperty PlayerStateProperty =
+        DependencyProperty.Register(nameof(PlayerState), typeof(BallPlayerState), typeof(MiiBall),
+                                    new PropertyMetadata(BallPlayerState.Default));
+
+    public BallPlayerState PlayerState
+    {
+        get => (BallPlayerState)GetValue(PlayerStateProperty);
+        set => SetValue(PlayerStateProperty, value);
+    }
+    
+    public static readonly DependencyProperty PlayerWinPositionProperty =
+        DependencyProperty.Register(nameof(WinPosition), typeof(PlayerWinPosition), typeof(MiiBall),
+                                    new PropertyMetadata(PlayerWinPosition.None));
+
+    public PlayerWinPosition WinPosition
+    {
+        get => (PlayerWinPosition)GetValue(PlayerWinPositionProperty);
+        set => SetValue(PlayerWinPositionProperty, value);
     }
     
     private static void OnBallSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
+        // I AM SORRY IN ADVANCE. This method is full of magic numbers. And they are really magic (っ °Д °;)っ
         if (d is not MiiBall control) return;
+        // Note that the figma page design is based around a 40x40 size. So we need to calculate the border width
+        // based around a size of 40.0
+        var borderWidth = 3.0;
+        var realBorderSize = (double)e.NewValue * (borderWidth / 40.0);
+        var newInnerSize = (double)e.NewValue - realBorderSize*2;
+        control.InnerCircle.Width = newInnerSize;
+        control.InnerCircle.Height = newInnerSize;
         
-        var newSize = (double)e.NewValue;
-        control.Border.Width = newSize;
-        control.Border.Height = newSize;
+        control.EllipseGeometry.Center = new Point(newInnerSize / 2, newInnerSize / 2);
+        control.EllipseGeometry.RadiusX = newInnerSize / 2;
+        control.EllipseGeometry.RadiusY = newInnerSize / 2;
         
-        control.EllipseGeometry.Center = new Point(newSize / 2, newSize / 2);
-        control.EllipseGeometry.RadiusX = newSize / 2;
-        control.EllipseGeometry.RadiusY = newSize / 2;
+        control.StateIcon.BorderThickness = new Thickness(realBorderSize);
+        control.StateIcon.Width = newInnerSize/2.5; //State icon is the ball that indicates if the player is online/offline
+        control.StateIcon.Height = newInnerSize/2.5; // devided by 2.5 since that felt a good size
+        
+        control.BadgeIconOuter.Width = newInnerSize/1.8; // BadeIconOuter is the font awsome icon called "award"
+        control.BadgeIconOuter.Height = newInnerSize/1.8; // 1.8 felt like a good size
+        
+        control.BadgeIconInner.Width = newInnerSize/3.2; // BadeIconInner is trying to fill the inside of that font awsome icon
+        control.BadgeIconInner.Height = newInnerSize/3.2; // 3.2 felt like a good size
+        control.BadgeIconInner.Margin = new Thickness(-newInnerSize/50.0, newInnerSize/6.0, 0,0);
+        // Note that his margin is also based on literally nothing. I just put a random value, looked at the result, and adjusted it again. This like 8 times
     }
     
     private static void OnMiiChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -132,10 +182,10 @@ public partial class MiiBall : UserControl
             ImageLoadingSuccess = mii.LoadedImageSuccessfully;
         }
     }
-    
+
     private void MiiBall_Unloaded(object sender, RoutedEventArgs e)
     {
-        if (Mii != null) 
+        if (Mii != null)
             Mii.PropertyChanged -= OnMiiPropertyChanged;
         Unloaded -= MiiBall_Unloaded;
     }

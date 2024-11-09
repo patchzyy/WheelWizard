@@ -93,7 +93,7 @@
                         <GridViewColumn Header="" Width="60">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <components:MiiBall Mii="{Binding FirstMii}" Size="40" />
+                                    <components:MiiBall Mii="{Binding FirstMii}" Size="50" PlayerState="Online" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

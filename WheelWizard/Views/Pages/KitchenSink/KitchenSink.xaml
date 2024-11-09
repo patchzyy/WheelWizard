@@ -25,6 +25,8 @@
                              Click="TopBarRadio_OnClick" Content="Generic" IsChecked="True" />
                 <RadioButton Style="{StaticResource TopBar}" Tag="KsLists" 
                              Click="TopBarRadio_OnClick" Content="List" />
+                <RadioButton Style="{StaticResource TopBar}" Tag="KsOnline" 
+                             Click="TopBarRadio_OnClick" Content="Online" />
             </StackPanel>
         </ScrollViewer>
         
