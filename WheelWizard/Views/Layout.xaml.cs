@@ -30,7 +30,11 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
     {
         InitializeComponent();
         DataContext = this;
-
+       
+    #if RELEASE_BUILD
+         KitchenSinkButton.Visibility = Visibility.Collapsed;
+    #endif
+    
         OnSettingChanged(SettingsManager.SAVED_WINDOW_SCALE);
         SettingsManager.WINDOW_SCALE.Subscribe(this);
        

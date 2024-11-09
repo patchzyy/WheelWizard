@@ -8,6 +8,8 @@ namespace CT_MKWII_WPF.Views.Popups;
 
 public partial class PopupWindow : Window, INotifyPropertyChanged
 {
+    private static int _disableCount = 0; // This is used to keep track of how many popups are open that disable the layout
+    // We only want to re-enable the layout when all popups that are disabling it are closed
     private bool _isTopMost = true;
     
     public bool IsTopMost
@@ -79,13 +81,21 @@ public partial class PopupWindow : Window, INotifyPropertyChanged
     {
         BeforeOpen();
         if (!_allowLayoutInteraction)
+        {
             ViewUtils.GetLayout().DisableEverything();
+            _disableCount++;
+        }
     }
     
     protected override void OnClosed(EventArgs e)
     {
         BeforeClose();
-        ViewUtils.GetLayout().EnableEverything();
+        if (!_allowLayoutInteraction)
+        {
+            _disableCount--;
+            if (_disableCount <= 0)
+                ViewUtils.GetLayout().EnableEverything();
+        }
         base.OnClosed(e);
     }
     

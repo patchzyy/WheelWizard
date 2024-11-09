@@ -9,6 +9,9 @@ namespace CT_MKWII_WPF.Helpers;
 
 public static class HttpClientHelper
 {
+    // This is bool here is just for testing purposes and should never be used in the production code.
+    // It allows us to test the application asif there is no internet connection.
+    public static bool FakeConnectionToInternet { get; set; } = true;
     
     private static readonly Lazy<HttpClient> LazyHttpClient = new Lazy<HttpClient>(() =>
     {
@@ -21,6 +24,11 @@ public static class HttpClientHelper
 
     public static async Task<HttpClientResult<T>> PostAsync<T>(string url, HttpContent? body)
     {
+    #if !RELEASE_BUILD
+        if (!FakeConnectionToInternet)
+            return GetErrorResult<T>(new ("No internet connection"));
+    #endif
+        
         HttpClientResult<T> result;
         try
         {
@@ -52,6 +60,11 @@ public static class HttpClientHelper
 
     public static async Task<HttpClientResult<T>> GetAsync<T>(string url)
     {
+    #if !RELEASE_BUILD
+        if (!FakeConnectionToInternet)
+            return GetErrorResult<T>(new ("No internet connection"));
+    #endif
+
         HttpClientResult<T> result;
         try
         {

@@ -2,12 +2,14 @@
 using CT_MKWII_WPF.Services.Installation;
 using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Services.WiiManagement;
+using CT_MKWII_WPF.Views.Popups;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -25,6 +27,12 @@ public partial class SettingsPage : Page
         
         WhWzVersionText.Text = "WhWz: v" + AutoUpdater.CurrentVersion;
         RrVersionText.Text = "RR: " + RetroRewindInstaller.CurrentRRVersion();
+        
+    #if RELEASE_BUILD
+        ReleaseText.Visibility = Visibility.Collapsed;
+        DevButton.Visibility = Visibility.Collapsed;
+    #endif
+        
         SettingsContent.Content = initialSettingsPage;
         
         // we also make sure that the correct radio button is selected
@@ -53,5 +61,11 @@ public partial class SettingsPage : Page
             return;
         
         SettingsContent.Content = instance;
+    }
+
+    private void DevButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        DevToolWindow devToolWindow = new();
+        devToolWindow.Show();
     }
 }

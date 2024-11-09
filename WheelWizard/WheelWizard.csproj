@@ -1,5 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+        <DefineConstants>RELEASE_BUILD</DefineConstants>
+    </PropertyGroup>
+    
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
         <TargetFramework>net7.0-windows</TargetFramework>
@@ -57,6 +61,11 @@
           <SubType>Designer</SubType>
         </Page>
         <Page Update="Views\Pages\KitchenSink\KsOnline.xaml">
+          <Generator>MSBuild:Compile</Generator>
+          <XamlRuntime>Wpf</XamlRuntime>
+          <SubType>Designer</SubType>
+        </Page>
+        <Page Update="Views\Popups\DevToolWindow.xaml">
           <Generator>MSBuild:Compile</Generator>
           <XamlRuntime>Wpf</XamlRuntime>
           <SubType>Designer</SubType>

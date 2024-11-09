@@ -8,16 +8,20 @@ namespace CT_MKWII_WPF.Utilities.RepeatedTasks;
 
 public abstract class RepeatedTaskManager
 {
-    private readonly int _intervalSeconds;
+    protected int SubscriberCount => _subscribers.Count;
+    public readonly double IntervalSeconds;
     private readonly List<IRepeatedTaskListener> _subscribers = new();
     private DispatcherTimer? _timer;
-
+    private DateTime _nextTick;
+    
+    public TimeSpan TimeUntilNextTick => _nextTick - DateTime.Now;
+    
     // Since we are using DispatcherTimer, we cant use CancellationTokenSource, so we just do it with a bool ¯\(°_o)/¯
     private static bool _globalCancellation;
 
-    protected RepeatedTaskManager(int intervalSeconds)
+    protected RepeatedTaskManager(double intervalSeconds)
     {
-        _intervalSeconds = intervalSeconds;
+        IntervalSeconds = intervalSeconds;
     }
 
     protected void NotifySubscribers()
@@ -32,9 +36,17 @@ public abstract class RepeatedTaskManager
 
         _timer = new DispatcherTimer
         {
-            Interval = TimeSpan.FromSeconds(_intervalSeconds)
+            Interval = TimeSpan.FromSeconds(IntervalSeconds)
         };
-        _timer.Tick += async (_, _) => await ExecuteAndNotifyAsync();
+        
+        _nextTick = DateTime.Now.AddSeconds(IntervalSeconds);
+        
+        _timer.Tick += async (_, _) =>
+        {
+            await ExecuteAndNotifyAsync();
+            _nextTick = DateTime.Now.AddSeconds(IntervalSeconds);
+        };
+
         _timer.Start();
 
         // Run the initial execution
@@ -47,8 +59,8 @@ public abstract class RepeatedTaskManager
         _timer = null;
     }
 
-    public bool Unsubscribe(IRepeatedTaskListener subscriber) => _subscribers.Remove(subscriber);
-    public void Subscribe(IRepeatedTaskListener subscriber)
+    public virtual bool Unsubscribe(IRepeatedTaskListener subscriber) => _subscribers.Remove(subscriber);
+    public virtual void Subscribe(IRepeatedTaskListener subscriber)
     {
         if (!_subscribers.Contains(subscriber))
             _subscribers.Add(subscriber);
