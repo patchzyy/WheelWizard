@@ -15,9 +15,7 @@ namespace CT_MKWII_WPF.Views.Popups
         // (bool allowClose, bool allowLayoutInteraction,bool isTopMost, string title = "", Vector? size = null)
         public ModIndependentPopup(Window owner = null) : base(allowClose: true, allowLayoutInteraction: false, isTopMost: true, title: "Mod Details", owner: owner)
         {
-            MessageBox.Show("This is a test message box", "Test", MessageBoxButton.OK, MessageBoxImage.Information);
             InitializeComponent();
-            MessageBox.Show("This is a test message box2", "Test", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         /// <summary>
         /// Loads the specified mod details into the ModDetailViewer.
