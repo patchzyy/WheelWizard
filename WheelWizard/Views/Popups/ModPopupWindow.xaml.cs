@@ -237,7 +237,7 @@ namespace CT_MKWII_WPF.Views.Popups
                 ModDetailViewer.Visibility = Visibility.Visible;
 
                 // Load the selected mod details into the ModDetailViewer
-                await ModDetailViewer.LoadModDetailsAsync(selectedMod);
+                await ModDetailViewer.LoadModDetailsAsync(selectedMod._idRow);
             }
             else
             {
@@ -261,7 +261,7 @@ namespace CT_MKWII_WPF.Views.Popups
             ModDetailViewer.Visibility = Visibility.Visible;
 
             // Load the mod details
-            await ModDetailViewer.LoadModDetailsAsync(mod);
+            await ModDetailViewer.LoadModDetailsAsync(mod._idRow);
         }
 
         // Implement INotifyPropertyChanged

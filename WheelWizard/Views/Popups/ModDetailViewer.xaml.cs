@@ -27,12 +27,12 @@ public partial class ModDetailViewer : UserControl
     /// Loads the details of the specified mod.
     /// </summary>
     /// <param name="mod">The mod to display.</param>
-    public async Task LoadModDetailsAsync(ModRecord mod, string? newDownloadUrl = null)
+    public async Task LoadModDetailsAsync(int ModId, string? newDownloadUrl = null)
     {
         try
         {
             // Fetch the mod details using its ID
-            var modDetailsResult = await GamebananaSearchHandler.GetModDetailsAsync(mod._idRow);
+            var modDetailsResult = await GamebananaSearchHandler.GetModDetailsAsync(ModId);
             if (!modDetailsResult.Succeeded || modDetailsResult.Content == null)
             {
                 MessageBoxWindow.Show($"Failed to retrieve mod details: {modDetailsResult.StatusMessage}");
@@ -67,7 +67,7 @@ public partial class ModDetailViewer : UserControl
 
 
             // Update the Download button based on installation status
-            UpdateDownloadButtonState(mod._idRow);
+            UpdateDownloadButtonState(ModId);
 
             // Make the viewer visible
             this.Visibility = Visibility.Visible;

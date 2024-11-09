@@ -104,7 +104,7 @@ namespace CT_MKWII_WPF.Views.Pages
             {
                 var result = new YesNoWindow().SetMainText(Phrases.PopupText_ModCombineQuestion)
                     .SetExtraText(Phrases.PopupText_MultipleFilesSelected).AwaitAnswer();
-                if (result!) ProcessModFiles(selectedFiles, singleMod: false);
+                if (!result) ProcessModFiles(selectedFiles, singleMod: false);
                 else if (result) ProcessModFiles(selectedFiles, singleMod: true);
             }
         }

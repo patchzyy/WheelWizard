@@ -29,7 +29,7 @@ public static class RetroRewindInstaller
             .SetExtraText(Phrases.PopupText_DownloadRR)
             .AwaitAnswer();
 
-        if (result!) return false;
+        if (!result) return false;
 
         await InstallRetroRewind();
         return true;
@@ -42,7 +42,7 @@ public static class RetroRewindInstaller
             .SetExtraText(Phrases.PopupText_ReinstallRR)
             .AwaitAnswer();
 
-        if (result!) return false;
+        if (!result) return false;
 
         await InstallRetroRewind();
         return true;
@@ -91,7 +91,7 @@ public static class RetroRewindInstaller
             .AwaitAnswer();
         
 
-        if (result!) 
+        if (!result) 
             return;
         
         DeleteExistingRetroRewind();
