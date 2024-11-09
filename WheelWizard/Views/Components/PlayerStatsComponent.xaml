@@ -63,7 +63,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             
-            <components:MiiBall Size="100" Mii="{Binding Mii}"
+            <components:MiiBall Size="100" Mii="{Binding Mii}" WinPosition="{Binding WinPosition}"
                                 HorizontalAlignment="Left" VerticalAlignment="Top"
                                 Margin="20,0,10,0">
                 <components:MiiBall.Style>

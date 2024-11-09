@@ -1,3 +1,5 @@
+using CT_MKWII_WPF.Models.Enums;
+using CT_MKWII_WPF.Utilities;
 using System.Collections.Generic;
 
 namespace CT_MKWII_WPF.Models.RRInfo;
@@ -27,4 +29,6 @@ public class Player
             return int.TryParse(Ev, out evValue) ? evValue : -1;
         }
     }
+    
+    public PlayerWinPosition WinPosition => FriendCodeManager.GetWinPosition(Fc);
 }

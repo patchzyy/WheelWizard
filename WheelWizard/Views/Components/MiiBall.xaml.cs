@@ -1,3 +1,4 @@
+using CT_MKWII_WPF.Models.Enums;
 using CT_MKWII_WPF.Models.RRInfo;
 using System;
 using System.ComponentModel;
@@ -24,14 +25,6 @@ public partial class MiiBall : UserControl
         Default,
         Online,
         Red
-    }
-    
-    public enum PlayerWinPosition
-    {
-        None,
-        First,
-        Second,
-        Third
     }
     
     public MiiBall()

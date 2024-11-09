@@ -34,7 +34,7 @@
                                        Margin="0,0,10,0"/>
                         </StackPanel>
                         
-                        <components:MiiBall Size="40" x:Name="MiiBall" Mii="{Binding Mii}">
+                        <components:MiiBall Size="40" x:Name="MiiBall" Mii="{Binding Mii}" WinPosition="{Binding WinPosition}">
                             <components:MiiBall.Style>
                                 <Style TargetType="components:MiiBall">
                                     <Setter Property="Variant" Value="Default"/>

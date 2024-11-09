@@ -1,7 +1,9 @@
 ﻿using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Models.Enums;
 using CT_MKWII_WPF.Models.RRInfo;
 using CT_MKWII_WPF.Models.Settings;
 using CT_MKWII_WPF.Services.LiveData;
+using CT_MKWII_WPF.Utilities;
 using System.ComponentModel;
 using System.Linq;
 
@@ -37,6 +39,8 @@ public abstract class BasePlayer : INotifyPropertyChanged
             OnPropertyChanged(nameof(IsOnline));
         }
     }
+
+    public PlayerWinPosition WinPosition => FriendCodeManager.GetWinPosition(FriendCode);
     
     public string MiiName
     {
