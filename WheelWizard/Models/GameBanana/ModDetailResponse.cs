@@ -4,6 +4,7 @@ namespace CT_MKWII_WPF.Models.GameBanana;
 
 public class ModDetailResponse
 {
+    public string? OverrideDownloadUrl { get; set; }
     public int _idRow { get; set; }
     public string _nStatus { get; set; }
     public bool _bIsPrivate { get; set; }

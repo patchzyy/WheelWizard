@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using CT_MKWII_WPF.Helpers;
+using CT_MKWII_WPF.Models.GameBanana;
 using CT_MKWII_WPF.Services;
 using CT_MKWII_WPF.Services.GameBanana;
 using CT_MKWII_WPF.Services.Installation;
@@ -26,15 +27,15 @@ public partial class ModDetailViewer : UserControl
     /// Loads the details of the specified mod.
     /// </summary>
     /// <param name="mod">The mod to display.</param>
-    public async Task LoadModDetailsAsync(ModRecord mod, string? newDownloadUrl = null)
+    public async Task LoadModDetailsAsync(int ModId, string? newDownloadUrl = null)
     {
         try
         {
             // Fetch the mod details using its ID
-            var modDetailsResult = await GamebananaSearchHandler.GetModDetailsAsync(mod._idRow);
+            var modDetailsResult = await GamebananaSearchHandler.GetModDetailsAsync(ModId);
             if (!modDetailsResult.Succeeded || modDetailsResult.Content == null)
             {
-                ErrorMessageWindow.Show($"Failed to retrieve mod details: {modDetailsResult.StatusMessage}");
+                MessageBoxWindow.Show($"Failed to retrieve mod details: {modDetailsResult.StatusMessage}");
                 return;
             }
 
@@ -61,19 +62,19 @@ public partial class ModDetailViewer : UserControl
             ModDescriptionHtmlPanel.Text = modDetails._sText;
 
             // Store the current mod for download
-            CurrentMod = mod;
+            CurrentMod = modDetails;
             CurrentMod.OverrideDownloadUrl = newDownloadUrl;
 
 
             // Update the Download button based on installation status
-            UpdateDownloadButtonState(mod._idRow);
+            UpdateDownloadButtonState(ModId);
 
             // Make the viewer visible
             this.Visibility = Visibility.Visible;
         }
         catch (Exception ex)
         {
-            ErrorMessageWindow.Show("An error occurred while fetching mod details: " + ex.Message);
+            MessageBoxWindow.Show("An error occurred while fetching mod details: " + ex.Message);
         }
     }
     
@@ -106,15 +107,15 @@ public partial class ModDetailViewer : UserControl
     }
 
     // Property to hold the current mod
-    private ModRecord CurrentMod { get; set; }
-
+    private ModDetailResponse CurrentMod { get; set; }
+    
     private async void Download_Click(object sender, RoutedEventArgs e)
 {
     var confirmation = new YesNoWindow().SetMainText($"Do you want to download and install the mod: {CurrentMod._sName}?").AwaitAnswer();
 
     if (!confirmation)
     {
-        ErrorMessageWindow.Show("Download cancelled.");
+        MessageBoxWindow.Show("Download cancelled.");
         return;
     }
 
@@ -123,21 +124,13 @@ public partial class ModDetailViewer : UserControl
         // Clear temp folder
         await PrepareToDownloadFile();
 
-        // Fetch mod details to get download URLs
-        var modDetailResult = await GamebananaSearchHandler.GetModDetailsAsync(CurrentMod._idRow);
-        if (!modDetailResult.Succeeded || modDetailResult.Content == null)
-        {
-            ErrorMessageWindow.Show("Failed to retrieve mod details.");
-            return;
-        }
-
         var downloadUrls = CurrentMod.OverrideDownloadUrl != null 
             ? new List<string> { CurrentMod.OverrideDownloadUrl }
-            : modDetailResult.Content._aFiles.Select(f => f._sDownloadUrl).ToList();
+            : CurrentMod._aFiles.Select(f => f._sDownloadUrl).ToList();
 
         if (!downloadUrls.Any())
         {
-            ErrorMessageWindow.Show("No downloadable files found for this mod.");
+            MessageBoxWindow.Show("No downloadable files found for this mod.");
             return;
         }
 
@@ -159,16 +152,16 @@ public partial class ModDetailViewer : UserControl
         var file = Directory.GetFiles(ModsLaunchHelper.TempModsFolderPath).FirstOrDefault();
         if (file == null)
         {
-            ErrorMessageWindow.Show("Downloaded file not found.");
+            MessageBoxWindow.Show("Downloaded file not found.");
             return;
         }
 
         // Extract Author and ModID if available
         string author = "-1";
         int modID = -1;
-        if (modDetailResult.Content._aSubmitter?._sName != null)
+        if (CurrentMod._aSubmitter?._sName != null)
         {
-            author = modDetailResult.Content._aSubmitter._sName;
+            author = CurrentMod._aSubmitter._sName;
         }
 
         modID = CurrentMod._idRow;
@@ -178,7 +171,7 @@ public partial class ModDetailViewer : UserControl
     }
     catch (Exception ex)
     {
-        ErrorMessageWindow.Show("An error occurred during download: " + ex.Message);
+        MessageBoxWindow.Show("An error occurred during download: " + ex.Message);
     }
 }
 

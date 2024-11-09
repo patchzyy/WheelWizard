@@ -1,6 +1,10 @@
-﻿using Microsoft.Win32;
+﻿using CT_MKWII_WPF.Views.Popups;
+using Microsoft.Win32;
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace CT_MKWII_WPF.Services.UrlProtocol;
 
@@ -66,4 +70,65 @@ public class UrlProtocolManager
         var protocolKey = $@"SOFTWARE\Classes\{schemeName}";
         Registry.CurrentUser.DeleteSubKeyTree(protocolKey);
     }
+
+    public static void ShowPopupForLaunchUrl(string url)
+    {
+        try
+        {
+            // Remove the protocol prefix
+            string content = url.Replace("wheelwizard://", "").Trim();
+            // Remove any trailing slash
+            content = content.TrimEnd('/');
+
+            // Parse ModID and DownloadURL
+            string[] parts = content.Split(',');
+
+            if (!int.TryParse(parts[0], out int modID))
+            {
+                throw new FormatException($"Invalid ModID: {parts[0]}");
+            }
+            string downloadURL = parts.Length > 1 ? parts[1] : null;
+            var modPopup = new ModIndependentPopup();
+            modPopup.LoadModAsync(1234);
+            modPopup.ShowDialog();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error handling URL: {ex.Message}", "WheelWizard Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    public static async Task ShowPopupForLaunchUrlAsync(string url)
+    {
+        try
+        {
+            // Remove the protocol prefix
+            string content = url.Replace("wheelwizard://", "").Trim();
+
+            // Remove any trailing slash
+            content = content.TrimEnd('/');
+
+            // Parse ModID and DownloadURL
+            string[] parts = content.Split(',');
+
+            if (!int.TryParse(parts[0], out int modID))
+            {
+                throw new FormatException($"Invalid ModID: {parts[0]}");
+            }
+
+            string downloadURL = parts.Length > 1 ? parts[1] : null;
+            MessageBox.Show($"ModID: {modID}, DownloadURL: {downloadURL}", "WheelWizard URL", MessageBoxButton.OK, MessageBoxImage.Information);
+    
+            //sleep for 2 seconds
+            var modPopup = new ModIndependentPopup();
+            await modPopup.LoadModAsync(modID, downloadURL);
+            modPopup.ShowDialog();
+
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error handling URL: {ex.Message}", "WheelWizard Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
 }
+

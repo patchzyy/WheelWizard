@@ -12,19 +12,18 @@ namespace CT_MKWII_WPF.Views.Popups
 {
     public partial class ModIndependentPopup : PopupContent
     {
-        public ModIndependentPopup(Window owner = null) 
-            : base(true, true, true, "Mod Details", new Vector(400, 600), owner)
+        // (bool allowClose, bool allowLayoutInteraction,bool isTopMost, string title = "", Vector? size = null)
+        public ModIndependentPopup(Window owner = null) : base(allowClose: true, allowLayoutInteraction: false, isTopMost: true, title: "Mod Details", owner: owner)
         {
             InitializeComponent();
         }
-
         /// <summary>
         /// Loads the specified mod details into the ModDetailViewer.
         /// </summary>
         /// <param name="mod">The mod to display.</param>
-        public async Task LoadModAsync(ModRecord mod, string NewDownloadURL)
+        public async Task LoadModAsync(int modID, string NewDownloadURL = null)
         {
-            await ModDetailViewer.LoadModDetailsAsync(mod);
+            await ModDetailViewer.LoadModDetailsAsync(modID, NewDownloadURL);
         }
     }
 }

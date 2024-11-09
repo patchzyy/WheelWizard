@@ -29,7 +29,7 @@ public static class RetroRewindInstaller
             .SetExtraText(Phrases.PopupText_DownloadRR)
             .AwaitAnswer();
 
-        if (result!) return false;
+        if (!result) return false;
 
         await InstallRetroRewind();
         return true;
@@ -42,7 +42,7 @@ public static class RetroRewindInstaller
             .SetExtraText(Phrases.PopupText_ReinstallRR)
             .AwaitAnswer();
 
-        if (result!) return false;
+        if (!result) return false;
 
         await InstallRetroRewind();
         return true;
@@ -76,7 +76,7 @@ public static class RetroRewindInstaller
         var serverResponse = await HttpClientHelper.GetAsync<string>(Endpoints.RRUrl);
         if (!serverResponse.Succeeded)
         {
-            ErrorMessageWindow.Show(Phrases.PopupText_CouldNotConnectServer);
+            MessageBoxWindow.Show(Phrases.PopupText_CouldNotConnectServer);
             return;
         }
         var tempZipPath = Path.Combine(PathManager.LoadFolderPath, "Temp", "RetroRewind.zip");
@@ -91,7 +91,7 @@ public static class RetroRewindInstaller
             .AwaitAnswer();
         
 
-        if (result!) 
+        if (!result) 
             return;
         
         DeleteExistingRetroRewind();

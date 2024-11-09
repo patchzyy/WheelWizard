@@ -2,6 +2,7 @@
 using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services.LiveData;
 using CT_MKWII_WPF.Utilities.RepeatedTasks;
+using CT_MKWII_WPF.Views.Popups;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -186,4 +187,5 @@ public sealed partial class RoomsPage : Page, INotifyPropertyChanged, IRepeatedT
         dataObject.SetData(DataFormats.Text, selectedPlayer.Fc);
         Clipboard.SetDataObject(dataObject);
     }
+    
 }

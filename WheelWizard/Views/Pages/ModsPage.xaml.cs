@@ -104,7 +104,7 @@ namespace CT_MKWII_WPF.Views.Pages
             {
                 var result = new YesNoWindow().SetMainText(Phrases.PopupText_ModCombineQuestion)
                     .SetExtraText(Phrases.PopupText_MultipleFilesSelected).AwaitAnswer();
-                if (result!) ProcessModFiles(selectedFiles, singleMod: false);
+                if (!result) ProcessModFiles(selectedFiles, singleMod: false);
                 else if (result) ProcessModFiles(selectedFiles, singleMod: true);
             }
         }
@@ -120,7 +120,7 @@ namespace CT_MKWII_WPF.Views.Pages
             }
             catch (Exception ex)
             {
-                ErrorMessageWindow.Show($"Failed to process mod files: {ex.Message}");
+                MessageBoxWindow.Show($"Failed to process mod files: {ex.Message}");
             }
 
             ShowLoading(false);
@@ -135,7 +135,7 @@ namespace CT_MKWII_WPF.Views.Pages
 
                 if (ModInstallation.ModExists(Mods, modName))
                 {
-                    ErrorMessageWindow.Show(Humanizer.ReplaceDynamic(Phrases.PopupText_ModNameExists, modName));
+                    MessageBoxWindow.Show(Humanizer.ReplaceDynamic(Phrases.PopupText_ModNameExists, modName));
                     continue;
                 }
                 var modDirectory = ModInstallation.GetModDirectoryPath(modName);
@@ -212,13 +212,13 @@ namespace CT_MKWII_WPF.Views.Pages
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                ErrorMessageWindow.Show(Phrases.PopupText_ModNameEmpty);
+                MessageBoxWindow.Show(Phrases.PopupText_ModNameEmpty);
                 return false;
             }
 
             if (!ModInstallation.ModExists(Mods, name)) return true;
 
-            ErrorMessageWindow.Show(Humanizer.ReplaceDynamic(Phrases.PopupText_ModNameExists, name));
+            MessageBoxWindow.Show(Humanizer.ReplaceDynamic(Phrases.PopupText_ModNameExists, name));
             return false;
         }
 
@@ -249,7 +249,7 @@ namespace CT_MKWII_WPF.Views.Pages
             }
             catch (IOException ex)
             {
-                ErrorMessageWindow.Show($"Failed to rename mod directory: {ex.Message}");
+                MessageBoxWindow.Show($"Failed to rename mod directory: {ex.Message}");
             }
         }
 
@@ -269,7 +269,7 @@ namespace CT_MKWII_WPF.Views.Pages
             }
             catch (IOException)
             {
-                ErrorMessageWindow.Show($"Failed to delete mod directory. It may be that this file is read only?");
+                MessageBoxWindow.Show($"Failed to delete mod directory. It may be that this file is read only?");
             }
             ModManager.SaveModsAsync();
             UpdateEmptyListMessageVisibility();
@@ -290,7 +290,7 @@ namespace CT_MKWII_WPF.Views.Pages
                 });
             else
             {
-                ErrorMessageWindow.Show(Phrases.PopupText_NoModFolder);
+                MessageBoxWindow.Show(Phrases.PopupText_NoModFolder);
             }
         }
 
@@ -309,7 +309,7 @@ namespace CT_MKWII_WPF.Views.Pages
         private void CheckIfSet(object sender, RoutedEventArgs e)
         {
             bool isRegistered = UrlProtocolManager.IsCustomSchemeRegistered(UrlProtocolManager.ProtocolName);
-            ErrorMessageWindow.Show(isRegistered ? "The URL scheme is registered" : "The URL scheme is not registered");
+            MessageBoxWindow.Show(isRegistered ? "The URL scheme is registered" : "The URL scheme is not registered");
         }
 
         private void RemoveUrlScheme(object sender, RoutedEventArgs e)
