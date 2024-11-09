@@ -1,12 +1,6 @@
 ﻿// ModIndependentPopup.xaml.cs
-
-using CT_MKWII_WPF.Models.GameBanana;
 using System.Threading.Tasks;
 using System.Windows;
-using CT_MKWII_WPF.Services.GameBanana;
-using CT_MKWII_WPF.Views.Components;
-using System.Linq;
-using static CT_MKWII_WPF.Models.GameBanana.ModDetailResponse;
 
 namespace CT_MKWII_WPF.Views.Popups;
 public partial class ModIndependentPopup : PopupContent

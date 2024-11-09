@@ -25,8 +25,11 @@ public partial class App : Application
         {
             Dispatcher.InvokeAsync(async () =>
             {
-                await Task.Delay(1);
-                UrlProtocolManager.ShowPopupForLaunchUrlAsync(protocolArgument);
+                while (Application.Current.MainWindow == null || !Application.Current.MainWindow.IsLoaded)
+                {
+                    await Task.Delay(50); // Check every 50ms
+                }
+                await UrlProtocolManager.ShowPopupForLaunchUrlAsync(protocolArgument);
             });
         }
     }

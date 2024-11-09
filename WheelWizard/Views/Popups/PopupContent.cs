@@ -10,9 +10,9 @@ public abstract class PopupContent : UserControl
     // Add an optional 'owner' parameter to the constructor
     
     
-    protected PopupContent(bool allowClose, bool allowLayoutInteraction, bool isTopMost, string title = "", Vector? size = null, Window owner = null)
+    protected PopupContent(bool allowClose, bool allowLayoutInteraction, bool isTopMost, string title = "", Vector? size = null, Window? owner = null)
     {
-        Window = new(allowClose, allowLayoutInteraction, isTopMost, title, size)
+        Window = new PopupWindow(allowClose, allowLayoutInteraction, isTopMost, title, size)
         {
             PopupContent = { Content = this },
             BeforeClose = BeforeClose,

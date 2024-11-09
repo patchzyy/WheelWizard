@@ -2,20 +2,12 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using CT_MKWII_WPF.Services.GameBanana;
-using CT_MKWII_WPF.Services.Installation;
-using CT_MKWII_WPF.Services.Launcher;
-using System.IO;
-using CT_MKWII_WPF.Views.Components;
-using MahApps.Metro.IconPacks;
-using System.Diagnostics;
 using System.Windows.Media;
-using System.Windows.Threading;
 
 namespace CT_MKWII_WPF.Views.Popups
 {
@@ -33,7 +25,7 @@ namespace CT_MKWII_WPF.Views.Popups
         private const int ModsPerPage = 15;
         private const double ScrollThreshold = 50; // Adjusted threshold for earlier loading
 
-        private string CurrentSearchTerm = "";
+        private string _currentSearchTerm = "";
         private ScrollViewer _listViewScrollViewer;
 
         public ModPopupWindow() : base(true, false, false, "Mod Browser", new Vector(800, 800))
@@ -57,23 +49,17 @@ namespace CT_MKWII_WPF.Views.Popups
         /// </summary>
         private void ModPopupWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            if (_isInitialLoad)
-            {
-                LoadMods(_currentPage).ConfigureAwait(false);
-                _isInitialLoad = false;
-            }
+            if (!_isInitialLoad) return;
+            LoadMods(_currentPage).ConfigureAwait(false);
+            _isInitialLoad = false;
         }
 
         private void ModListView_Loaded(object sender, RoutedEventArgs e)
         {
-            if (_listViewScrollViewer == null)
-            {
-                _listViewScrollViewer = FindScrollViewer(ModListView);
-                if (_listViewScrollViewer != null)
-                {
-                    _listViewScrollViewer.ScrollChanged += ModListView_ScrollChanged;
-                }
-            }
+            if (_listViewScrollViewer != null) return;
+            _listViewScrollViewer = FindScrollViewer(ModListView);
+            _listViewScrollViewer.ScrollChanged += ModListView_ScrollChanged;
+            
         }
 
         /// <summary>
@@ -204,7 +190,7 @@ namespace CT_MKWII_WPF.Views.Popups
             // Load more when we're within the threshold of the bottom
             if (remainingScroll <= ScrollThreshold)
             {
-                await LoadMods(_currentPage + 1, CurrentSearchTerm);
+                await LoadMods(_currentPage + 1, _currentSearchTerm);
             }
         }
 
@@ -213,7 +199,7 @@ namespace CT_MKWII_WPF.Views.Popups
         /// </summary>
         private async void Search_Click(object sender, RoutedEventArgs e)
         {
-            CurrentSearchTerm = SearchTextBox.Text?.Trim() ?? "";
+            _currentSearchTerm = SearchTextBox.Text?.Trim() ?? "";
             _currentPage = 1;
             _hasMoreMods = true;
 
@@ -222,7 +208,7 @@ namespace CT_MKWII_WPF.Views.Popups
                 Mods.Clear();
             });
 
-            await LoadMods(_currentPage, CurrentSearchTerm);
+            await LoadMods(_currentPage, _currentSearchTerm);
         }
 
         /// <summary>
