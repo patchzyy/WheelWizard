@@ -320,7 +320,7 @@ namespace CT_MKWII_WPF.Views.Pages
         private void openPopUp(object sender, RoutedEventArgs e)
         {
             var modPopup = new Views.Popups.ModPopupWindow();
-            modPopup.ShowDialog();
+            modPopup.Show();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
