@@ -1,29 +1,21 @@
 ﻿// ModIndependentPopup.xaml.cs
-
-using CT_MKWII_WPF.Models.GameBanana;
 using System.Threading.Tasks;
 using System.Windows;
-using CT_MKWII_WPF.Services.GameBanana;
-using CT_MKWII_WPF.Views.Components;
-using System.Linq;
-using static CT_MKWII_WPF.Models.GameBanana.ModDetailResponse;
 
-namespace CT_MKWII_WPF.Views.Popups
+namespace CT_MKWII_WPF.Views.Popups;
+public partial class ModIndependentPopup : PopupContent
 {
-    public partial class ModIndependentPopup : PopupContent
+    public ModIndependentPopup(Window owner = null) : base(allowClose: true, allowLayoutInteraction: false, isTopMost: true, title: "Mod Details", owner: owner, size: new Vector(500, 700))
     {
-        // (bool allowClose, bool allowLayoutInteraction,bool isTopMost, string title = "", Vector? size = null)
-        public ModIndependentPopup(Window owner = null) : base(allowClose: true, allowLayoutInteraction: false, isTopMost: true, title: "Mod Details", owner: owner)
-        {
-            InitializeComponent();
-        }
-        /// <summary>
-        /// Loads the specified mod details into the ModDetailViewer.
-        /// </summary>
-        /// <param name="mod">The mod to display.</param>
-        public async Task LoadModAsync(int modID, string NewDownloadURL = null)
-        {
-            await ModDetailViewer.LoadModDetailsAsync(modID, NewDownloadURL);
-        }
+        InitializeComponent();
+    }
+    /// <summary>
+    /// Loads the specified mod details into the ModDetailViewer.
+    /// </summary>
+    /// <param name="mod">The mod to display.</param>
+    public async Task LoadModAsync(int modID, string NewDownloadURL = null)
+    {
+        await ModDetailViewer.LoadModDetailsAsync(modID, NewDownloadURL);
     }
 }
+

@@ -115,11 +115,7 @@ public class UrlProtocolManager
             {
                 throw new FormatException($"Invalid ModID: {parts[0]}");
             }
-
             string downloadURL = parts.Length > 1 ? parts[1] : null;
-            MessageBox.Show($"ModID: {modID}, DownloadURL: {downloadURL}", "WheelWizard URL", MessageBoxButton.OK, MessageBoxImage.Information);
-    
-            //sleep for 2 seconds
             var modPopup = new ModIndependentPopup();
             await modPopup.LoadModAsync(modID, downloadURL);
             modPopup.ShowDialog();

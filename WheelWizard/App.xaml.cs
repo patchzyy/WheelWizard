@@ -16,20 +16,21 @@ public partial class App : Application
         SettingsManager.Instance.LoadSettings();
         AutoUpdater.CheckForUpdatesAsync();
         UrlProtocolManager.SetWhWzSchemeAsync();
-        // Parse command-line arguments
-        string[] args = Environment.GetCommandLineArgs();
 
-        if (args.Length > 1) // The first argument is always the executable path
+        var args = Environment.GetCommandLineArgs();
+
+        if (args.Length <= 1) return; 
+        var protocolArgument = args[1];
+        if (protocolArgument.StartsWith("wheelwizard://", StringComparison.OrdinalIgnoreCase))
         {
-            string protocolArgument = args[1];
-            if (protocolArgument.StartsWith("wheelwizard://", StringComparison.OrdinalIgnoreCase))
+            Dispatcher.InvokeAsync(async () =>
             {
-                Dispatcher.InvokeAsync(async () =>
+                while (Application.Current.MainWindow == null || !Application.Current.MainWindow.IsLoaded)
                 {
-                    await Task.Delay(1);
-                    UrlProtocolManager.ShowPopupForLaunchUrlAsync(protocolArgument);
-                });
-            }
+                    await Task.Delay(50); // Check every 50ms
+                }
+                await UrlProtocolManager.ShowPopupForLaunchUrlAsync(protocolArgument);
+            });
         }
     }
     
