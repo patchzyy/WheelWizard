@@ -10,65 +10,50 @@
                     xmlns:html="clr-namespace:TheArtOfDev.HtmlRenderer.WPF;assembly=HtmlRenderer.WPF"
                     mc:Ignorable="d" 
                     d:DesignHeight="600" d:DesignWidth="800">
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/> <!-- Title -->
-            <RowDefinition Height="Auto"/> <!-- Search Bar -->
-            <RowDefinition Height="*"/>    <!-- Content -->
-        </Grid.RowDefinitions>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/> <!-- Mod List -->
+            <ColumnDefinition Width="3*"/> <!-- Mod Details -->
+        </Grid.ColumnDefinitions>
 
-        <!-- Title -->
-        <TextBlock Style="{StaticResource TitleText}" 
-                   FontSize="16" 
-                   Text="Powered By Gamebanana" 
-                   HorizontalAlignment="Right" 
-                   Grid.Row="0"/>
-        <TextBlock Style="{StaticResource TitleText}" 
-                   FontSize="16" 
-                   Text="Beta" 
-                   HorizontalAlignment="Left" 
-                   Grid.Row="0"/>
-
-        <!-- Search Bar -->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,10,0,10">
-            <components:InputField
-                Width="300"
-                Placeholder="Search for mods..."
-                Height="40"
-                HorizontalAlignment="Left"
-                x:Name="SearchTextBox" />
-            <components:Button Text="Search" 
-                               FontSize="16"
-                               IconKind="{x:Static icon:PackIconFontAwesomeKind.SearchenginBrands}"
-                               IconPack="FontAwesome"
-                               Height="40"
-                               Click="Search_Click" 
-                               Margin="10,0,0,0" />
-        </StackPanel>
-
-        <!-- Content Area -->
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/> <!-- Mod List -->
-                <ColumnDefinition Width="3*"/> <!-- Mod Details -->
-            </Grid.ColumnDefinitions>
+           <!-- Mod List -->
+           <Grid Grid.Column="0" Margin="10">
+               <Grid.RowDefinitions>
+                   <RowDefinition Height="Auto"/> <!-- Gamebana text -->
+                   <RowDefinition Height="Auto"/> <!-- Search Bar -->
+                   <RowDefinition Height="*"/>    <!-- Content -->
+               </Grid.RowDefinitions>
+              
+               <TextBlock Style="{StaticResource TinyText}"  Text="Powered By Gamebanana" 
+                          HorizontalAlignment="Left"  Grid.Row="0"/>
+   
+               <!-- Search Bar -->
+               <Grid Grid.Row="1" Margin="0,10,0,10" HorizontalAlignment="Stretch">
+                   <components:InputField
+                       Width="220" Height="40" x:Name="SearchTextBox"
+                       VerticalAlignment="Center" HorizontalAlignment="Left"
+                       Placeholder="Search for mods..."/>
+                    
+                   <components:Button Text="" FontSize="16" Height="40" IconPack="FontAwesome"
+                                      HorizontalAlignment="Right" VerticalAlignment="Center"
+                                      IconKind="{x:Static icon:PackIconFontAwesomeKind.MagnifyingGlassSolid}"
+                                      Click="Search_Click" Margin="10,0" />
+               </Grid>
 
             <!-- Mod List -->
-            <ListView Name="ModListView" 
+               
+            <ListView Grid.Row="2" Name="ModListView" 
                       SelectionChanged="ModListView_SelectionChanged" 
                       Margin="0,0,10,0"
-                      Background="{StaticResource BackgroundColor}"
+                      Background="Transparent"
+                      BorderThickness="0"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       ScrollViewer.VerticalScrollBarVisibility="Auto"
                       Loaded="ModListView_Loaded">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border 
-                            BorderBrush="{StaticResource BackgroundColor}" 
-                            BorderThickness="1" 
-                            Background="{StaticResource BackgroundColor}"
-                            Padding="5" 
-                            Margin="0,0,0,5">
+                        <Border BorderThickness="0"  Padding="5" 
+                                Background="{StaticResource BackgroundColor}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="100"/>
@@ -79,25 +64,18 @@
                                        Stretch="UniformToFill" 
                                        Margin="0,0,10,0"/>
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding _sName}" 
-                                               FontWeight="Bold" 
-                                               FontSize="14"/>
-                                    <TextBlock Text="{Binding _aSubmitter._sName}" 
-                                               Foreground="Gray" 
-                                               FontSize="12"/>
+                                    <components:FormFieldLabel Text="{Binding _sName}" />
+                                    <TextBlock Style="{StaticResource TinyText}"  Text="{Binding _aSubmitter._sName}" />
+                                    
                                     <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                        <StackPanel Orientation="Horizontal" Margin="0,0,15,0">
-                                            <Image Source="pack://application:,,,/Resources/like.png" 
-                                                   Width="16" Height="16"/>
-                                            <TextBlock Text="{Binding _nLikeCount}" 
-                                                       Margin="5,0,0,0"/>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image Source="pack://application:,,,/Resources/view.png" 
-                                                   Width="16" Height="16"/>
-                                            <TextBlock Text="{Binding _nViewCount}" 
-                                                       Margin="5,0,0,0"/>
-                                        </StackPanel>
+                                        <components:StateBox x:Name="LikesCountBox" IsDark="False" TipText="Likes" 
+                                                             IconKind="{x:Static icon:PackIconFontAwesomeKind.HeartSolid}"
+                                                             Text="{Binding _nLikeCount}" 
+                                                             IconPack="FontAwesome" TipAlignment="TopLeft" Margin="3"/>
+                                        <components:StateBox x:Name="ViewsCountBox" IsDark="False" TipText="Views" 
+                                                             IconKind="{x:Static icon:PackIconFontAwesomeKind.EyeSolid}"
+                                                             Text="{Binding _nViewCount}" 
+                                                             IconPack="FontAwesome" TipAlignment="TopLeft" Margin="3"/>
                                     </StackPanel>
                                 </StackPanel>
                             </Grid>
@@ -105,26 +83,32 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
-            <!-- Mod Detail Viewer -->
-            <components:ModDetailViewer x:Name="ModDetailViewer" Grid.Column="1" />
-            
-            <!-- Empty Details View -->
-            <StackPanel x:Name="EmptyDetailsView" 
-                        Visibility="Visible" 
-                        Grid.Column="1" 
-                        HorizontalAlignment="Center" 
-                        VerticalAlignment="Center">
-                <TextBlock Text="No mod selected" 
-                           FontSize="20" 
-                           FontWeight="Bold" 
-                           Foreground="Gray" 
-                           Margin="0,10,0,5"/>
-                <TextBlock Text="Select a mod to view its details" 
-                           FontSize="14" 
-                           Foreground="DarkGray" 
-                           TextAlignment="Center"/>
-            </StackPanel>
         </Grid>
+            
+                <!-- Mod Details -->
+        <!-- Mod Detail Viewer -->
+           <Grid Grid.Column="1" Margin="10,0,0,0">
+               <components:ModDetailViewer x:Name="ModDetailViewer"  />
+            
+               <!-- Empty Details View -->
+               <StackPanel x:Name="EmptyDetailsView" 
+                           Visibility="Visible" 
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Center">
+                   <TextBlock Text="No mod selected" 
+                              FontSize="20" 
+                              FontWeight="Bold" 
+                              Foreground="Gray" 
+                              Margin="0,10,0,5"/>
+                   <TextBlock Text="Select a mod to view its details" 
+                              FontSize="14" 
+                              Foreground="DarkGray" 
+                              TextAlignment="Center"/>
+               </StackPanel>
+           
+              
+           </Grid>
+           <Border Grid.Column="1" Background="{StaticResource BackgroundLine}" Width="1" 
+                   Margin="0, -10" HorizontalAlignment="Left" VerticalAlignment="Stretch" />
     </Grid>
 </popups:PopupContent>

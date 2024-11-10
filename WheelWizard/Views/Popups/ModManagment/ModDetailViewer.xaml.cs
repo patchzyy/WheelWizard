@@ -66,7 +66,7 @@ public partial class ModDetailViewer : UserControl
            
             // IMPORTANT: the text has to be in a div tag. Since otherwise we cant apply any style to the text that has not tags around it
             ModDescriptionHtmlPanel.Text = $"<body>{modDetails._sText}</body>";
-            Console.WriteLine(modDetails._sText);
+
             CurrentMod = modDetails;
             CurrentMod.OverrideDownloadUrl = newDownloadUrl;
             UpdateDownloadButtonState(ModId);
