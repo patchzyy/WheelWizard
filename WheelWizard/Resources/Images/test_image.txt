@@ -1,0 +1,3 @@
+﻿This image is not added to the csproj file.
+This is absolutely perfect since the image is not being used in the final .exe anyways.
+This image is only here for the xaml inspector in the editor. It makes it a bit easier to see what the xaml would look like.

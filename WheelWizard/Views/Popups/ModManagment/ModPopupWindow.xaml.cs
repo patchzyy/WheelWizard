@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using CT_MKWII_WPF.Services.GameBanana;
+using CT_MKWII_WPF.Views.Pages;
 using System.Windows.Media;
 
 namespace CT_MKWII_WPF.Views.Popups;
@@ -219,6 +220,13 @@ public partial class ModPopupWindow : PopupContent, INotifyPropertyChanged
     protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    protected override void BeforeClose()
+    {
+        // a bit dirty, but it's the easiest way to refresh the mod list in the ModsPage
+        ViewUtils.NavigateToPage(new ModsPage());
+        base.BeforeClose();
     }
 }
 

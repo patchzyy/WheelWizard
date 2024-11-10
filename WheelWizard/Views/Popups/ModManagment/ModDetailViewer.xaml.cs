@@ -12,6 +12,7 @@ using CT_MKWII_WPF.Services.Launcher;
 using CT_MKWII_WPF.Views.Popups;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace CT_MKWII_WPF.Views.Components;
 
@@ -41,16 +42,27 @@ public partial class ModDetailViewer : UserControl
             }
             var modDetails = modDetailsResult.Content;
             ImageCarousel.Items.Clear();
+            var firstImage = true;
             if (modDetails._aPreviewMedia?._aImages != null && modDetails._aPreviewMedia._aImages.Any())
             {
                 foreach (var fullImageUrl in modDetails._aPreviewMedia._aImages.Select(image => $"{image._sBaseUrl}/{image._sFile}"))
                 {
                     ImageCarousel.Items.Add(new { FullImageUrl = fullImageUrl });
+                    if (firstImage)
+                    {
+                        firstImage = false;
+                        BannerImage.Source = new BitmapImage(new Uri(fullImageUrl));
+                    }
                 }
             }
-            ModName.Text = modDetails._sName;
-            ModSubmitter.Text = $"By {modDetails._aSubmitter._sName}";
-            ModStats.Text = $"Likes: {modDetails._nLikeCount} | Views: {modDetails._nViewCount} | Downloads: {modDetails._nDownloadCount}";
+            
+            ModTitle.Text = modDetails._sName;
+            AuthorButton.Text = modDetails._aSubmitter._sName;
+            
+            LikesCountBox.Text = modDetails._nLikeCount.ToString();
+            ViewsCountBox.Text = modDetails._nViewCount.ToString();
+            DownloadsCountBox.Text = modDetails._nDownloadCount.ToString();
+           
             ModDescriptionHtmlPanel.Text = modDetails._sText;
             CurrentMod = modDetails;
             CurrentMod.OverrideDownloadUrl = newDownloadUrl;
@@ -70,12 +82,12 @@ public partial class ModDetailViewer : UserControl
     {
         if (ModManager.Instance.IsModInstalled(modId))
         {
-            DownloadButton.Content = "Installed";
-            DownloadButton.IsEnabled = false;
+            InstallButton.Content = "Installed";
+            InstallButton.IsEnabled = false;
             return;
         }
-        DownloadButton.Content = "Download and Install";
-        DownloadButton.IsEnabled = true; // Enable button if not installed
+        InstallButton.Content = "Download and Install";
+        InstallButton.IsEnabled = true; // Enable button if not installed
     }
 
     /// <summary>
@@ -84,14 +96,14 @@ public partial class ModDetailViewer : UserControl
     private void ClearDetails()
     {
         ImageCarousel.Items.Clear();
-        ModName.Text = string.Empty;
-        ModSubmitter.Text = string.Empty;
-        ModStats.Text = string.Empty;
+        ModTitle.Text = string.Empty;
+        AuthorButton.Text = "Unknown";
+        LikesCountBox.Text = ViewsCountBox.Text = DownloadsCountBox.Text = "0";
         ModDescriptionHtmlPanel.Text = string.Empty;
-        this.Visibility = Visibility.Collapsed;
+        Visibility = Visibility.Collapsed; 
     }
     
-    private async void Download_Click(object sender, RoutedEventArgs e)
+    private async void Install_Click(object sender, RoutedEventArgs e)
     {
         var confirmation = new YesNoWindow().SetMainText($"Do you want to download and install the mod: {CurrentMod._sName}?").AwaitAnswer();
         if (!confirmation)
@@ -176,6 +188,37 @@ public partial class ModDetailViewer : UserControl
     {
         ClearDetails();
         Visibility = Visibility.Collapsed;
+    }
+
+    private void AuthorLink_Click(object sender, RoutedEventArgs e)
+    {
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+        {
+            FileName ="https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            UseShellExecute = true
+        });
+    }
+
+    private void GamebananaLink_Click(object sender, RoutedEventArgs e)
+    {
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+        {
+            FileName = "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            UseShellExecute = true
+        });
+    }
+    private void ReportLink_Click(object sender, RoutedEventArgs e)
+    {
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+        {
+            FileName = "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            UseShellExecute = true
+        });
+    }
+    
+    private void UnInstall_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBoxWindow.ShowDialog("This feature is not yet implemented.");
     }
 }
 

@@ -52,6 +52,16 @@ namespace CT_MKWII_WPF.Views.Components
             get => (double)GetValue(IconSizeProperty);
             set => SetValue(IconSizeProperty, value);
         }
+        
+        public static readonly DependencyProperty IconOnLeftProperty = DependencyProperty.Register(
+            nameof(IconOnLeft), typeof(bool), typeof(IconLabelButton),
+            new PropertyMetadata(true));
+
+        public bool IconOnLeft
+        {
+            get => (bool)GetValue(IconOnLeftProperty);
+            set => SetValue(IconOnLeftProperty, value);
+        }
 
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
             nameof(Text), typeof(string), typeof(IconLabelButton),

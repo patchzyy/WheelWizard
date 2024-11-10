@@ -47,7 +47,8 @@
                     </Grid>
                 </Border>
                 
-                <ContentPresenter x:Name="PopupContent" Grid.Row="1" Margin="10"/>
+                <ContentPresenter x:Name="PopupContent" Grid.Row="1" 
+                                  Margin="{StaticResource EdgeGap}"/>
             </Grid>
         </Border>
     </Grid>

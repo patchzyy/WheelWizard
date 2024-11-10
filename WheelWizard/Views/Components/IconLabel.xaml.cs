@@ -21,6 +21,16 @@ namespace CT_MKWII_WPF.Views.Components
             set => SetValue(ColorProperty, value);
         }
 
+        public static readonly DependencyProperty IconOnLeftProperty = DependencyProperty.Register(
+            nameof(IconOnLeft), typeof(bool), typeof(IconLabel),
+            new PropertyMetadata(true));
+
+        public bool IconOnLeft
+        {
+            get => (bool)GetValue(IconOnLeftProperty);
+            set => SetValue(IconOnLeftProperty, value);
+        }
+        
         public static readonly DependencyProperty IconColorProperty = DependencyProperty.Register(
             nameof(IconColor), typeof(Brush), typeof(IconLabel),
             new PropertyMetadata(Brushes.Black));
@@ -31,6 +41,16 @@ namespace CT_MKWII_WPF.Views.Components
             set => SetValue(IconColorProperty, value);
         }
 
+        public static readonly DependencyProperty UnderlinedProperty = DependencyProperty.Register(
+            nameof(Underlined), typeof(bool), typeof(IconLabel),
+            new PropertyMetadata(false));
+
+        public bool Underlined
+        {
+            get => (bool)GetValue(UnderlinedProperty);
+            set => SetValue(UnderlinedProperty, value);
+        }
+        
         public static readonly DependencyProperty TextColorProperty = DependencyProperty.Register(
             nameof(TextColor), typeof(Brush), typeof(IconLabel),
             new PropertyMetadata(Brushes.Black));

@@ -1,4 +1,6 @@
 ﻿// ModIndependentPopup.xaml.cs
+
+using CT_MKWII_WPF.Views.Pages;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -17,6 +19,13 @@ public partial class ModIndependentWindow : PopupContent
     public async Task LoadModAsync(int modId, string newDownloadUrl = null)
     {
         await ModDetailViewer.LoadModDetailsAsync(modId, newDownloadUrl);
+    }
+    
+    protected override void BeforeClose()
+    {
+        // a bit dirty, but it's the easiest way to refresh the mod list in the ModsPage
+        ViewUtils.NavigateToPage(new ModsPage());
+        base.BeforeClose();
     }
 }
 

@@ -14,7 +14,18 @@
         <local:DynamicIcon IconPack="{Binding IconPack, ElementName=Root}"
                            IconKind="{Binding IconKind, ElementName=Root}"
                            IconSize="{Binding IconSize, ElementName=Root}"
-                           ForegroundColor="{Binding IconColor, ElementName=Root}" />
+                           ForegroundColor="{Binding IconColor, ElementName=Root}" >
+            <local:DynamicIcon.Style>
+                <Style TargetType="local:DynamicIcon">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IconOnLeft, ElementName=Root}" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </local:DynamicIcon.Style>
+        </local:DynamicIcon>
+
 
         <TextBlock Text="{Binding Text, ElementName=Root}"
                    FontSize="{Binding FontSize, ElementName=Root}"
@@ -30,10 +41,29 @@
                         <DataTrigger Binding="{Binding Text, ElementName=Root}" Value="">
                             <Setter Property="Margin" Value="0" />
                         </DataTrigger>
+                        <DataTrigger Binding="{Binding Underlined, ElementName=Root}" Value="True">
+                            <Setter Property="TextDecorations" Value="Underline" />
+                        </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </TextBlock.Style>
         </TextBlock>
 
+        <local:DynamicIcon IconPack="{Binding IconPack, ElementName=Root}"
+                           Margin="10,0,0,0"
+                           IconKind="{Binding IconKind, ElementName=Root}"
+                           IconSize="{Binding IconSize, ElementName=Root}"
+                           ForegroundColor="{Binding IconColor, ElementName=Root}" >
+            <local:DynamicIcon.Style>
+                <Style TargetType="local:DynamicIcon">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IconOnLeft, ElementName=Root}" Value="True">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </local:DynamicIcon.Style>
+        </local:DynamicIcon>
+        
     </StackPanel>
 </UserControl>
