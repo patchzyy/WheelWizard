@@ -30,7 +30,7 @@ public static class Launcher
         var dolphinLocation = PathManager.DolphinFilePath;
         if (dolphinLocation == "" || !File.Exists(dolphinLocation))
         {
-            MessageBoxWindow.Show(Phrases.PopupText_NotFindDolphin);
+            MessageBoxWindow.ShowDialog(Phrases.PopupText_NotFindDolphin);
             return;
         }
 
@@ -52,7 +52,7 @@ public static class Launcher
             await ModsLaunchHelper.PrepareModsForLaunch();
             if (!File.Exists(PathManager.GameFilePath))
             {
-                MessageBoxWindow.Show(Phrases.PopupText_NotFindGame);
+                MessageBoxWindow.ShowDialog(Phrases.PopupText_NotFindGame);
                 return;
             }
 
@@ -64,7 +64,7 @@ public static class Launcher
         catch (Exception e)
         {
             // I rather not translate this message, makes it easier to check where a given error came from
-            MessageBoxWindow.Show($"Failed to launch Retro Rewind: {e.Message}");
+            MessageBoxWindow.ShowDialog($"Failed to launch Retro Rewind: {e.Message}");
         }
     }
 

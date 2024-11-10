@@ -215,7 +215,7 @@ namespace CT_MKWII_WPF.Services.Installation
                 // Check if a mod with the same name already exists
                 if (ModExists(ModManager.Instance.Mods, modName))
                 {
-                    MessageBoxWindow.Show($"Mod with name '{modName}' already exists.");
+                    MessageBoxWindow.ShowDialog($"Mod with name '{modName}' already exists.");
                     return;
                 }
                 
@@ -243,11 +243,11 @@ namespace CT_MKWII_WPF.Services.Installation
                 // Add to ModManager
                 ModManager.Instance.AddMod(newMod);
 
-                MessageBoxWindow.Show($"Mod '{modName}' installed successfully.", MessageBoxWindow.MessageType.Message);
+                MessageBoxWindow.ShowDialog($"Mod '{modName}' installed successfully.", MessageBoxWindow.MessageType.Message);
             }
             catch (Exception ex)
             {
-                MessageBoxWindow.Show($"Failed to install mod: {ex.Message}");
+                MessageBoxWindow.ShowDialog($"Failed to install mod: {ex.Message}");
             }
         }
     }

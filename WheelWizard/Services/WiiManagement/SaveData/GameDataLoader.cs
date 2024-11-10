@@ -38,7 +38,7 @@ public class GameDataLoader : RepeatedTaskManager
             catch (Exception ex)
             {
                 // I rather not translate this message, makes it easier to check where a given error came from
-                MessageBoxWindow.Show($"Error creating save directory: {ex.Message}");
+                MessageBoxWindow.ShowDialog($"Error creating save directory: {ex.Message}");
             }
             return path;
         }
@@ -111,7 +111,7 @@ public class GameDataLoader : RepeatedTaskManager
         catch (Exception e)
         {
             // I rather not translate this message, makes it easier to check where a given error came from
-            MessageBoxWindow.Show($"An error occurred while loading the game data: {e.Message}");
+            MessageBoxWindow.ShowDialog($"An error occurred while loading the game data: {e.Message}");
         }
     }
     

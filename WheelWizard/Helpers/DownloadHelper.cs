@@ -38,7 +38,7 @@ namespace CT_MKWII_WPF.Helpers;
             response.EnsureSuccessStatusCode();
             if (response.RequestMessage == null || response.RequestMessage.RequestUri == null)
             {
-                MessageBoxWindow.Show("Failed to resolve final URL.");
+                MessageBoxWindow.ShowDialog("Failed to resolve final URL.");
                 return;
             }
             var finalUrl = response.RequestMessage.RequestUri.ToString();
@@ -103,7 +103,7 @@ namespace CT_MKWII_WPF.Helpers;
             attempt++;
             if (attempt >= MaxRetries)
             {
-                MessageBoxWindow.Show($"An HTTP error occurred after {MaxRetries} attempts: {ex.Message}");
+                MessageBoxWindow.ShowDialog($"An HTTP error occurred after {MaxRetries} attempts: {ex.Message}");
                 break;
             }
             var delay = (int)Math.Pow(2, attempt) * 1000;
@@ -114,7 +114,7 @@ namespace CT_MKWII_WPF.Helpers;
         }
         catch (Exception ex)
         {
-            MessageBoxWindow.Show($"An error occurred while downloading the file: {ex.Message}");
+            MessageBoxWindow.ShowDialog($"An error occurred while downloading the file: {ex.Message}");
             break;
         }
     }

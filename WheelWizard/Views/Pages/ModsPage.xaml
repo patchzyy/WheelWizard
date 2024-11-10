@@ -52,6 +52,7 @@
         
         <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="12"
                     Orientation="Horizontal" x:Name="TopBarButtons">
+            <!-- 
             <components:Button IconPack="FontAwesome" x:Name="EnableDisableButton"
                                Text="{x:Static lang:Common.Action_EnableAll}" Click="EnableClick" Margin="0,0,10,0">
                 <components:Button.Style>
@@ -71,23 +72,33 @@
                     </Style>
                 </components:Button.Style>
             </components:Button>
-            <!-- <components:Button Variant="Primary" Text="{x:Static lang:Common.Action_Import}" -->
-            <!--                    IconPack="Material" -->
-            <!--                    IconKind="{x:Static icon:PackIconMaterialKind.Import}" -->
-            <!--                    Click="ImportMod_Click" /> -->
-            <components:Button Variant="Primary" Text="Add Mod"
-                               IconPack="Material"
-                               IconKind="{x:Static icon:PackIconMaterialKind.Import}"
-                               Click="AskModImportType" />
+            -->
+            
+            <UniformGrid Columns="2" Rows="1">
+                <components:Button Variant="Primary" Margin="3,0"
+                                   IconPack="FontAwesome" Text="{x:Static lang:Common.Action_Browse}"
+                                   IconKind="{x:Static icon:PackIconFontAwesomeKind.MagnifyingGlassSolid}"
+                                   Click="BrowseMod_Click" HorizontalAlignment="Center" />
+                <components:Button Variant="Default" Margin="3,0"
+                                   IconPack="FontAwesome" Text="{x:Static lang:Common.Action_Import}"
+                                   IconKind="{x:Static icon:PackIconFontAwesomeKind.FileImportSolid}"
+                                   Click="ImportMod_Click" HorizontalAlignment="Center" />
+            </UniformGrid>
         </StackPanel>
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="PageWithoutMods">
             <components:EmptyPageInfo HorizontalAlignment="Center" Title="{x:Static lang:Phrases.EmptyText_NoMods_Title}"
                                       Body="{x:Static lang:Phrases.EmptyText_NoMods}" />
-            <components:Button Variant="Primary" Margin="12"
-                               IconPack="Material" Text="{x:Static lang:Common.Action_Import}"
-                               IconKind="{x:Static icon:PackIconMaterialKind.Import}"
-                               Click="ImportMod_Click" HorizontalAlignment="Center" />
+            <UniformGrid Margin="0,12" Columns="2" Rows="1">
+                <components:Button Variant="Primary" Margin="3,0"
+                                   IconPack="FontAwesome" Text="{x:Static lang:Common.Action_Browse}"
+                                   IconKind="{x:Static icon:PackIconFontAwesomeKind.MagnifyingGlassSolid}"
+                                   Click="BrowseMod_Click" HorizontalAlignment="Center" />
+                <components:Button Variant="Default" Margin="3,0"
+                                   IconPack="FontAwesome" Text="{x:Static lang:Common.Action_Import}"
+                                   IconKind="{x:Static icon:PackIconFontAwesomeKind.FileImportSolid}"
+                                   Click="ImportMod_Click" HorizontalAlignment="Center" />
+            </UniformGrid>
         </StackPanel>
 
 

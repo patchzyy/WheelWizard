@@ -36,7 +36,7 @@ public partial class ModDetailViewer : UserControl
             var modDetailsResult = await GamebananaSearchHandler.GetModDetailsAsync(ModId);
             if (!modDetailsResult.Succeeded || modDetailsResult.Content == null)
             {
-                MessageBoxWindow.Show($"Failed to retrieve mod details: {modDetailsResult.StatusMessage}");
+                MessageBoxWindow.ShowDialog($"Failed to retrieve mod details: {modDetailsResult.StatusMessage}");
                 return false;
             }
             var modDetails = modDetailsResult.Content;
@@ -59,7 +59,7 @@ public partial class ModDetailViewer : UserControl
         }
         catch (Exception ex)
         {
-            MessageBoxWindow.Show("An error occurred while fetching mod details: " + ex.Message);
+            MessageBoxWindow.ShowDialog("An error occurred while fetching mod details: " + ex.Message);
             return false;
         }
 
@@ -96,7 +96,7 @@ public partial class ModDetailViewer : UserControl
         var confirmation = new YesNoWindow().SetMainText($"Do you want to download and install the mod: {CurrentMod._sName}?").AwaitAnswer();
         if (!confirmation)
         {
-            MessageBoxWindow.Show("Download cancelled.");
+            MessageBoxWindow.ShowDialog("Download cancelled.");
             return;
         }
     
@@ -110,7 +110,7 @@ public partial class ModDetailViewer : UserControl
     
             if (!downloadUrls.Any())
             {
-                MessageBoxWindow.Show("No downloadable files found for this mod.");
+                MessageBoxWindow.ShowDialog("No downloadable files found for this mod.");
                 return;
             }
     
@@ -127,7 +127,7 @@ public partial class ModDetailViewer : UserControl
             var file = Directory.GetFiles(ModsLaunchHelper.TempModsFolderPath).FirstOrDefault();
             if (file == null)
             {
-                MessageBoxWindow.Show("Downloaded file not found.");
+                MessageBoxWindow.ShowDialog("Downloaded file not found.");
                 return;
             }
             var author = "-1";
@@ -142,7 +142,7 @@ public partial class ModDetailViewer : UserControl
         }
         catch (Exception ex)
         {
-            MessageBoxWindow.Show("An error occurred during download: " + ex.Message);
+            MessageBoxWindow.ShowDialog("An error occurred during download: " + ex.Message);
         }
     }
 

@@ -21,11 +21,18 @@ public partial class MessageBoxWindow : PopupContent
         PlaySound(messageType);
     }
 
-    public static void Show(string message, MessageType messageType = MessageType.Message)
+    public static void ShowDialog(string message, MessageType messageType = MessageType.Message)
     {
         var messageBoxWindow = new MessageBoxWindow(message, messageType);
         messageBoxWindow.ShowDialog();
     }
+    
+    public static void Show(string message, MessageType messageType = MessageType.Message)
+    {
+        var messageBoxWindow = new MessageBoxWindow(message, messageType);
+        messageBoxWindow.Show();
+    }
+    
 
     private static string GetTitle(MessageType messageType)
     {
