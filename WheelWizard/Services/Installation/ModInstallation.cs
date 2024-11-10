@@ -82,10 +82,6 @@ namespace CT_MKWII_WPF.Services.Installation
                     // Delete the JSON config after conversion
                     File.Delete(_configFilePath);
                 }
-                else
-                {
-                    // No mods found; optionally, you can initialize an empty collection
-                }
             }
             catch (Exception ex)
             {

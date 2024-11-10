@@ -12,10 +12,11 @@ public partial class ModIndependentPopup : PopupContent
     /// <summary>
     /// Loads the specified mod details into the ModDetailViewer.
     /// </summary>
-    /// <param name="mod">The mod to display.</param>
-    public async Task LoadModAsync(int modID, string NewDownloadURL = null)
+    /// <param name="modId">The ID of the mod to load.</param>
+    /// <param name="newDownloadUrl">The download URL to use instead of the one from the mod details.</param>
+    public async Task LoadModAsync(int modId, string newDownloadUrl = null)
     {
-        await ModDetailViewer.LoadModDetailsAsync(modID, NewDownloadURL);
+        await ModDetailViewer.LoadModDetailsAsync(modId, newDownloadUrl);
     }
 }
 
