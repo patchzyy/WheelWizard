@@ -12,6 +12,7 @@ using CT_MKWII_WPF.Services.Launcher;
 using CT_MKWII_WPF.Views.Popups;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace CT_MKWII_WPF.Views.Components;
@@ -63,7 +64,9 @@ public partial class ModDetailViewer : UserControl
             ViewsCountBox.Text = modDetails._nViewCount.ToString();
             DownloadsCountBox.Text = modDetails._nDownloadCount.ToString();
            
-            ModDescriptionHtmlPanel.Text = modDetails._sText;
+            // IMPORTANT: the text has to be in a div tag. Since otherwise we cant apply any style to the text that has not tags around it
+            ModDescriptionHtmlPanel.Text = $"<body>{modDetails._sText}</body>";
+            Console.WriteLine(modDetails._sText);
             CurrentMod = modDetails;
             CurrentMod.OverrideDownloadUrl = newDownloadUrl;
             UpdateDownloadButtonState(ModId);
@@ -219,6 +222,18 @@ public partial class ModDetailViewer : UserControl
     private void UnInstall_Click(object sender, RoutedEventArgs e)
     {
         MessageBoxWindow.ShowDialog("This feature is not yet implemented.");
+    }
+    
+    private void ImageScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+    {
+        // This method is for either 1 of these reasons:
+        // 1. WPF sucks and there is no real good horizontal scroll view thing
+        // OR
+        // 2. I am stupid and don't know how to use WPF properly
+        if (ImageScrollViewer.ComputedHorizontalScrollBarVisibility != Visibility.Visible) return;
+
+        ImageScrollViewer.ScrollToHorizontalOffset(ImageScrollViewer.HorizontalOffset - e.Delta);
+        e.Handled = true;
     }
 }
 

@@ -12,8 +12,8 @@
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="140"/> <!-- BANNER -->
-            <RowDefinition Height="100"/> <!-- Header stuff -->
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/> <!-- Header stuff -->
+            <RowDefinition Height="*"/> <!-- The rest, aka the Html -->
         </Grid.RowDefinitions>
         
         <!-- BANNER START -->
@@ -75,7 +75,7 @@
                                             IconSize="16" FontSize="13" Click="GamebananaLink_Click"/>
             </StackPanel>
             
-            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center"
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom"
                         Orientation="Horizontal">
                 <components:Button 
                     x:Name="InstallButton" Text="Install" 
@@ -97,30 +97,55 @@
         </Grid>
         <!-- OTHER HEADER STUFF END -->
         
-        <Border Grid.Row="2" BorderThickness="0">
+        <Border Grid.Row="2" CornerRadius="6" Background="{StaticResource LightBackgroundColor}" Margin="0,10,0,0" Padding="6">
             <ScrollViewer>
                 <StackPanel>
                     <!-- Image Carousel -->
-                    <ItemsControl x:Name="ImageCarousel" Margin="0,0,0,10">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Image Source="{Binding FullImageUrl}" Width="150" Height="150" 
-                                       Margin="5" Stretch="UniformToFill"/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                    <components:FormFieldLabel Text="Images:"/>
+                    
+                    <!-- TODO: This scroll view is ugly as fuck --> 
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Margin="0,0,0,10"
+                                  PreviewMouseWheel="ImageScrollViewer_PreviewMouseWheel" x:Name="ImageScrollViewer">
+                        <ItemsControl x:Name="ImageCarousel" Margin="0,0,0,10">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding FullImageUrl}" Height="150" Width="Auto"
+                                           Margin="5" Stretch="UniformToFill"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <ScrollViewer.Resources>
+                            <Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollBarLight}"/>
+                        </ScrollViewer.Resources>
+                    </ScrollViewer>
 
-             
-                    <TextBlock Text="Description:" FontWeight="Bold" />
-                    <html:HtmlPanel
-                        x:Name="ModDescriptionHtmlPanel"
-                        Background="{StaticResource BackgroundColor}"
-                        Margin="0,5,0,10" />
+                    <components:FormFieldLabel Text="Description:"/>
+
+                    <html:HtmlPanel x:Name="ModDescriptionHtmlPanel" Margin="0,5,0,10" Background="Transparent">
+                        <html:HtmlPanel.BaseStylesheet>
+                            body { 
+                                color: #B4B8C5;
+                            }
+                            a {
+                                color: #34EAC5;
+                            }
+                            a:hover {
+                                color: #C7FFF0;
+                            }
+                            
+                            .BlueColor { color: #3489AA }
+                            .GreenColor { color: #34EA3A }
+                            .OrangeColor { color: #EA9834 }
+                            .GreyColor { color: #6C7389 }
+                            .RedColor { color: #F7524D }
+                            .PurpleColor { color: #9A4DF7 }
+                        </html:HtmlPanel.BaseStylesheet>
+                    </html:HtmlPanel>
 
                 </StackPanel>
             </ScrollViewer>
