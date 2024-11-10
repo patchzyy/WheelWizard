@@ -78,6 +78,21 @@
                  
                 </StackPanel>
             </Border>
+            <components:FormFieldLabel Text="Controller" />
+            <Border Style="{StaticResource SettingsBlockStyle}">
+                <StackPanel>
+                    <components:Button 
+                        Text="Open Controller Settings"
+                        Click="OpenControllerSettings"
+                        IconPack="FontAwesome"
+                        IconKind="{x:Static icon:PackIconFontAwesomeKind.GamepadSolid}"
+                        Variant="Primary"
+                        Width="250"
+                        Height="50"
+                        HorizontalAlignment="Center"
+                        ></components:Button>
+                </StackPanel>
+            </Border>
         </StackPanel>
     </Grid>
 </UserControl>

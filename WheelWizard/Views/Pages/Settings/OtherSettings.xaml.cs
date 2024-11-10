@@ -103,4 +103,10 @@ public partial class OtherSettings : UserControl
         SettingsManager.WW_LANGUAGE.Set(key);
         ViewUtils.RefreshWindow( new SettingsPage(new OtherSettings()) );
     }
+
+    private void OpenControllerSettings(object sender, RoutedEventArgs e)
+    {
+        var controllerSetup = new ControllerSetup();
+        controllerSetup.Show();
+    }
 }

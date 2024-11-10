@@ -21,6 +21,7 @@
         <None Remove="Pages\RR.json" />
         <None Remove="background_cover.png" />
         <None Remove="wii.png" />
+        <None Remove="Views\Pages\UserProfile\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -34,6 +35,7 @@
         <PackageReference Include="NLog.Windows.Forms" Version="5.2.3" />
         <PackageReference Include="Semver" Version="3.0.0-beta.1" />
         <PackageReference Include="SharpCompress" Version="0.38.0" />
+        <PackageReference Include="SharpDX.XInput" Version="4.2.0" />
         <PackageReference Include="SharpVectors" Version="1.8.4" />
         <PackageReference Include="System.Management" Version="9.0.0-preview.3.24172.9" />
     </ItemGroup>
@@ -70,10 +72,7 @@
           <XamlRuntime>Wpf</XamlRuntime>
           <SubType>Designer</SubType>
         </Page>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Views\Pages\UserProfile\" />
+        <Page Remove="Views\Pages\UserProfile\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -211,6 +210,7 @@
         <LastGenOutput>Settings.ja.Designer.cs</LastGenOutput>
         <DependentUpon>Settings.resx</DependentUpon>
       </EmbeddedResource>
+      <EmbeddedResource Remove="Views\Pages\UserProfile\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -234,6 +234,7 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>Online.resx</DependentUpon>
       </Compile>
+      <Compile Remove="Views\Pages\UserProfile\**" />
     </ItemGroup>
     <PropertyGroup>
         <ApplicationIcon>car-wheel.ico</ApplicationIcon>

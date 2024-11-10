@@ -213,6 +213,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.WrenchSolid}"
                                                    IconPack="FontAwesome" Text="{x:Static lang:Common.PageTitle_Settings}" x:Name="SettingsButton"
                                                    PageType="{x:Type settings:SettingsPage}" />
+                    
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.SinkSolid}" 
                                                    IconPack="FontAwesome" Text="Kitchen Sink" x:Name="KitchenSinkButton"
                                                    PageType="{x:Type sink:KitchenSink}"/> 
