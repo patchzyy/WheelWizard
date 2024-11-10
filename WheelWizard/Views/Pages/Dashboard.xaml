@@ -25,57 +25,51 @@
                                                 Grid.Row="0"
                                                 HorizontalAlignment="Right"
                                                 VerticalAlignment="Top"/>
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+        
+        <Border Grid.Row="1" Height="630" Width="250" CornerRadius="125, 125, 0,0" VerticalAlignment="Bottom"
+                Background="{StaticResource MainWheel-Stripe}" Margin="{StaticResource NegativeEdgeGap}">
+            <!-- Make sure the corner radius is exactly half the width -->
+            <icon:PackIconGameIcons Kind="CarWheel" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                                    x:Name="WheelIcon"
+                                    Foreground="{StaticResource MainWheel-Icon}"
+                                    Width="200" Height="200" Margin="0,25">
+                <!-- 
+                Note that this icon should have the same margin on each side. Decide a padding/border, enter that number in the margin at tb.
+                Then, double this number, take the width of the parent container, and subtract the doubled margin. 
+                This will give you the width & height of the icon.
+            -->
+                <icon:PackIconGameIcons.RenderTransform>
+                    <RotateTransform x:Name="WheelRotation" CenterX="100" CenterY="100"/>
+                </icon:PackIconGameIcons.RenderTransform>
+            </icon:PackIconGameIcons>
+        </Border>
+        
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="180" Margin="0, 220">
+           
             <TextBlock HorizontalAlignment="Center"
                        Style="{StaticResource TitleText}"
-                       Text="Retro Rewind"
-                       FontSize="30" />
+                       Text="Retro Rewind"/>
 
-            <components:Button Variant="Primary"
-                               x:Name="PlayButton"
-                               IsEnabled="False"
-                               IconPack="FontAwesome"
+            <components:Button Variant="Primary" x:Name="PlayButton"
+                               IsEnabled="False" IconPack="FontAwesome"
                                IconKind="{x:Static icon:PackIconFontAwesomeKind.PlaySolid}"
                                Text="{x:Static lang:Common.State_Loading}"
-                               FontSize="16"
                                Click="PlayButton_Click"
-                               Width="210" Height="50"
                                Margin="0,20,0,0" />
-            <Grid Margin="0,10,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-
-                <!-- <components:Button Grid.Column="0" -->
-                <!--                    x:Name="MiiButton" -->
-                <!--                    IsEnabled="False" -->
-                <!--                    IconPack="GameIcons" Text="" -->
-                <!--                    IconKind="{x:Static icon:PackIconGameIconsKind.Mustache}" -->
-                <!--                    Click="MiiButton_OnClick" -->
-                <!-- -->
-                <!--                    ToolTipService.InitialShowDelay="50" -->
-                <!--                    ToolTipService.ShowDuration="5000" -->
-                <!--                    ToolTipService.BetweenShowDelay="0"> -->
-                <!--     <components:Button.ToolTip> -->
-                <!--         <components:ToolTipMessage Content="Launch the Mii creator" Alignment="BottomCenter" /> -->
-                <!--     </components:Button.ToolTip> -->
-                <!-- </components:Button> -->
-
-                <components:Button Grid.Column="2"
-                                   x:Name="DolphinButton"
-                                   IsEnabled="False"
-                                   IconPack="GameIcons" Text=""
-                                   IconKind="{x:Static icon:PackIconGameIconsKind.Dolphin}"
-                                   Click="DolphinButton_OnClick"
-                                   Width="100"
-                                   ToolTipService.InitialShowDelay="50"
-                                   ToolTipService.ShowDuration="5000"
-                                   ToolTipService.BetweenShowDelay="0">
-                    <components:Button.ToolTip>
-                        <components:ToolTipMessage Content="Launch dolphin" Alignment="BottomCenter" />
-                    </components:Button.ToolTip>
-                </components:Button>
-            </Grid>
+            
+            <components:Button x:Name="DolphinButton"
+                               IsEnabled="False" IconPack="GameIcons" Text=""
+                               IconKind="{x:Static icon:PackIconGameIconsKind.Dolphin}"
+                               Click="DolphinButton_OnClick"
+                               Width="100" Margin="0,6,0,0"
+                               ToolTipService.InitialShowDelay="50"
+                               ToolTipService.ShowDuration="5000"
+                               ToolTipService.BetweenShowDelay="0">
+                <components:Button.ToolTip>
+                    <components:ToolTipMessage Content="Launch dolphin" Alignment="BottomCenter" />
+                </components:Button.ToolTip>
+            </components:Button>
+            
         </StackPanel>
     </Grid>
 </Page>

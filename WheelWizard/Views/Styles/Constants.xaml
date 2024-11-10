@@ -63,6 +63,16 @@
     <SolidColorBrush x:Key="BackgroundContactColor" Color="{StaticResource Gray800}" />
     <SolidColorBrush x:Key="BackgroundLine" Color="{StaticResource Gray700}" />
 
+    <!-- HomeScreen / Dashboard colors -->
+    <SolidColorBrush x:Key="MainWheel-Icon" Color="{StaticResource Gray600}" />
+    <SolidColorBrush x:Key="MainWheel-Stripe" Color="{StaticResource Gray900}" />
+    <SolidColorBrush x:Key="Wheel1-Icon" Color="{StaticResource Cyan400}" />
+    <SolidColorBrush x:Key="Wheel1-Stripe" Color="{StaticResource Cyan700}" />
+    <SolidColorBrush x:Key="Wheel2-Icon" Color="{StaticResource Cyan600}" />
+    <SolidColorBrush x:Key="Wheel2-Stripe" Color="{StaticResource Cyan900}" />
+    <SolidColorBrush x:Key="Wheel3-Icon" Color="{StaticResource Cyan200}" />
+    <SolidColorBrush x:Key="Wheel3-Stripe" Color="{StaticResource Cyan600}" />
+    
     <!-- Generic text stuff -->
     <SolidColorBrush x:Key="BodyTextColor" Color="{StaticResource Gray400}" />
     <SolidColorBrush x:Key="TitleTextColor" Color="{StaticResource Gray400}" />
@@ -152,6 +162,7 @@
 
 
     <Thickness x:Key="EdgeGap">10</Thickness>
+    <Thickness x:Key="NegativeEdgeGap">-10</Thickness>
     <Thickness x:Key="LeftEdgeGap">10,0,0,0</Thickness>
     <Thickness x:Key="RightEdgeGap">0,0,10,0</Thickness>
     <Thickness x:Key="LeftTopEdgeGap">10,10,0,0</Thickness>

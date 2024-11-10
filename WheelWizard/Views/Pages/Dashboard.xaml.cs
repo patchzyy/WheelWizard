@@ -5,8 +5,11 @@ using CT_MKWII_WPF.Services.Launcher;
 using CT_MKWII_WPF.Services.Other;
 using CT_MKWII_WPF.Services.Settings;
 using MahApps.Metro.IconPacks;
+using System;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 using static CT_MKWII_WPF.Views.ViewUtils;
 using Button = CT_MKWII_WPF.Views.Components.Button;
 
@@ -14,10 +17,30 @@ namespace CT_MKWII_WPF.Views.Pages;
 
 public partial class Dashboard
 {
+    private readonly DoubleAnimation _fastRotationAnimation;
+    private readonly DoubleAnimation _defaultRotationAnimation;
+    private bool _isSpeedBoostActive;
+    
     public Dashboard()
     {
         InitializeComponent();
         UpdateActionButton();
+        
+        _fastRotationAnimation = new DoubleAnimation
+        {
+            From = 0, To = 360,
+            Duration = TimeSpan.FromSeconds(1),
+            RepeatBehavior = RepeatBehavior.Forever
+        };
+        
+        _defaultRotationAnimation = new DoubleAnimation
+        {
+            From = 0, To = 360,
+            Duration = TimeSpan.FromSeconds(15), 
+            RepeatBehavior = RepeatBehavior.Forever
+        };
+        
+        WheelIcon.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, _defaultRotationAnimation);
     }
     
     private WheelWizardStatus _status;
@@ -58,6 +81,7 @@ public partial class Dashboard
                 EnableSidebarButtons();
                 break;
             case WheelWizardStatus.UpToDate:
+                SpeedBoostWheel();
                 await Launcher.LaunchRetroRewind();
                 break;
         }
@@ -153,5 +177,28 @@ public partial class Dashboard
         CompleteGrid.IsEnabled = false;
         //wait 5 seconds before re-enabling the buttons
         Task.Delay(5000).ContinueWith(_ => { Dispatcher.Invoke(() => CompleteGrid.IsEnabled = true); });
+    }
+
+    private async void SpeedBoostWheel()
+    {
+        if (_isSpeedBoostActive) return;
+        _isSpeedBoostActive = true;
+
+        try
+        {
+            _fastRotationAnimation.From = (WheelIcon.RenderTransform as RotateTransform)?.Angle ?? 0;
+            _fastRotationAnimation.To = _fastRotationAnimation.From + 360;
+            WheelIcon.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, _fastRotationAnimation);
+
+            await Task.Delay(3000);
+            
+            _defaultRotationAnimation.From = (WheelIcon.RenderTransform as RotateTransform)?.Angle ?? 0;
+            _defaultRotationAnimation.To = _defaultRotationAnimation.From + 360;
+            WheelIcon.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, _defaultRotationAnimation);
+        }
+        finally
+        {
+            _isSpeedBoostActive = false;
+        }
     }
 }

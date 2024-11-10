@@ -7,19 +7,16 @@ public class FriendCodeManager
 {
     private static readonly string[] _firstPlaces = new[]
     {
-        "3221-2257-0007",
         "1111-1111-1111",
     };
 
     private static readonly string[] _secondPlaces = new[]
     {
-        "1116-6916-3276",
         "1111-1111-1111",
     };
 
     private static readonly string[] _thirdPlaces = new[]
     {
-        "0257-6983-1259",
         "1111-1111-1111",
     };
 
