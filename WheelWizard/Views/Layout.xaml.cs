@@ -25,7 +25,7 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
     public const double WindowHeight = 876;
     public const double WindowWidth = 656;
     
-    public Layout() : this(new Dashboard()) { }
+    public Layout() : this(new HomePage()) { }
     public Layout(Page initialPage)
     {
         InitializeComponent();

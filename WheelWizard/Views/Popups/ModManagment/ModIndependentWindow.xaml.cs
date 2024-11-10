@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using System.Windows;
 
 namespace CT_MKWII_WPF.Views.Popups;
-public partial class ModIndependentPopup : PopupContent
+public partial class ModIndependentWindow : PopupContent
 {
-    public ModIndependentPopup(Window owner = null) : base(allowClose: true, allowLayoutInteraction: false, isTopMost: true, title: "Mod Details", owner: owner, size: new Vector(500, 700))
+    public ModIndependentWindow(Window owner = null) : base(allowClose: true, allowLayoutInteraction: false, isTopMost: true, title: "Mod Details", owner: owner, size: new Vector(500, 700))
     {
         InitializeComponent();
     }

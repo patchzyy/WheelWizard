@@ -88,7 +88,7 @@ public class UrlProtocolManager
                 throw new FormatException($"Invalid ModID: {parts[0]}");
             }
             string downloadURL = parts.Length > 1 ? parts[1] : null;
-            var modPopup = new ModIndependentPopup();
+            var modPopup = new ModIndependentWindow();
             modPopup.LoadModAsync(1234);
             modPopup.ShowDialog();
         }
@@ -116,7 +116,7 @@ public class UrlProtocolManager
                 throw new FormatException($"Invalid ModID: {parts[0]}");
             }
             string downloadURL = parts.Length > 1 ? parts[1] : null;
-            var modPopup = new ModIndependentPopup();
+            var modPopup = new ModIndependentWindow();
             await modPopup.LoadModAsync(modID, downloadURL);
             modPopup.ShowDialog();
 

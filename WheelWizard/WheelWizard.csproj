@@ -44,7 +44,7 @@
             <XamlRuntime>Wpf</XamlRuntime>
             <SubType>Designer</SubType>
         </Page>
-        <Page Update="Views\Pages\KitchenSink\KitchenSink.xaml">
+        <Page Update="Views\Pages\KitchenSink\KitchenSinkPage.xaml">
           <Generator>MSBuild:Compile</Generator>
           <XamlRuntime>Wpf</XamlRuntime>
           <SubType>Designer</SubType>
@@ -70,10 +70,41 @@
           <XamlRuntime>Wpf</XamlRuntime>
           <SubType>Designer</SubType>
         </Page>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Views\Pages\UserProfile\" />
+        <Page Update="Views\Popups\ModPopups\ModDetailViewer.xaml">
+          <Generator>MSBuild:Compile</Generator>
+          <XamlRuntime>Wpf</XamlRuntime>
+          <SubType>Designer</SubType>
+        </Page>
+        <Page Update="Views\Popups\ModPopups\ModIndependentWindow.xaml">
+          <Generator>MSBuild:Compile</Generator>
+          <XamlRuntime>Wpf</XamlRuntime>
+          <SubType>Designer</SubType>
+        </Page>
+        <Page Update="Views\Popups\ModPopups\ModPopupWindow.xaml">
+          <Generator>MSBuild:Compile</Generator>
+          <XamlRuntime>Wpf</XamlRuntime>
+          <SubType>Designer</SubType>
+        </Page>
+        <Page Update="Views\Popups\Generic\ProgressWindow.xaml">
+          <Generator>MSBuild:Compile</Generator>
+          <XamlRuntime>Wpf</XamlRuntime>
+          <SubType>Designer</SubType>
+        </Page>
+        <Page Update="Views\Popups\Generic\YesNoWindow.xaml">
+          <Generator>MSBuild:Compile</Generator>
+          <XamlRuntime>Wpf</XamlRuntime>
+          <SubType>Designer</SubType>
+        </Page>
+        <Page Update="Views\Popups\Generic\MessageBoxWindow.xaml">
+          <Generator>MSBuild:Compile</Generator>
+          <XamlRuntime>Wpf</XamlRuntime>
+          <SubType>Designer</SubType>
+        </Page>
+        <Page Update="Views\Popups\Generic\InputWindow.xaml">
+          <Generator>MSBuild:Compile</Generator>
+          <XamlRuntime>Wpf</XamlRuntime>
+          <SubType>Designer</SubType>
+        </Page>
     </ItemGroup>
 
     <ItemGroup>

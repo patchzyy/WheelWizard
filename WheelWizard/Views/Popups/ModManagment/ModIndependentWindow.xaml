@@ -1,5 +1,5 @@
 ﻿<!-- ModIndependentPopup.xaml -->
-<local:PopupContent x:Class="CT_MKWII_WPF.Views.Popups.ModIndependentPopup"
+<local:PopupContent x:Class="CT_MKWII_WPF.Views.Popups.ModIndependentWindow"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"

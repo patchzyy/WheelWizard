@@ -15,13 +15,13 @@ using Button = CT_MKWII_WPF.Views.Components.Button;
 
 namespace CT_MKWII_WPF.Views.Pages;
 
-public partial class Dashboard
+public partial class HomePage
 {
     private readonly DoubleAnimation _fastRotationAnimation;
     private readonly DoubleAnimation _defaultRotationAnimation;
     private bool _isSpeedBoostActive;
     
-    public Dashboard()
+    public HomePage()
     {
         InitializeComponent();
         UpdateActionButton();
