@@ -1,4 +1,5 @@
-﻿using CT_MKWII_WPF.Models.RRInfo;
+﻿using CT_MKWII_WPF.Models.Enums;
+using CT_MKWII_WPF.Models.RRInfo;
 using CT_MKWII_WPF.Models.Settings;
 using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services.WiiManagement.SaveData;
@@ -67,6 +68,18 @@ namespace CT_MKWII_WPF.Views.Components
             {
                 _isOnline = value;
                 OnPropertyChanged(nameof(IsOnline));
+            }
+        }
+        
+        
+        private PlayerWinPosition? _winPosition;
+        public PlayerWinPosition? WinPosition
+        {
+            get => _winPosition;
+            set
+            {
+                _winPosition = value;
+                OnPropertyChanged(nameof(WinPosition));
             }
         }
         

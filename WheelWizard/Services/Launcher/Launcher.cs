@@ -1,11 +1,11 @@
 using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Services.WiiManagement;
+using CT_MKWII_WPF.Views.Popups;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace CT_MKWII_WPF.Services.Launcher;
 
@@ -28,10 +28,9 @@ public static class Launcher
     public static void LaunchDolphin(string arguments = "", bool shellExecute = false)
     {
         var dolphinLocation = PathManager.DolphinFilePath;
-        if (dolphinLocation == "")
+        if (dolphinLocation == "" || !File.Exists(dolphinLocation))
         {
-            MessageBox.Show(Phrases.PopupText_NotFindDolphin, Common.Term_Error,
-                            MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBoxWindow.ShowDialog(Phrases.PopupText_NotFindDolphin);
             return;
         }
 
@@ -53,8 +52,7 @@ public static class Launcher
             await ModsLaunchHelper.PrepareModsForLaunch();
             if (!File.Exists(PathManager.GameFilePath))
             {
-                MessageBox.Show(Phrases.PopupText_NotFindGame, Common.Term_Error, 
-                                MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBoxWindow.ShowDialog(Phrases.PopupText_NotFindGame);
                 return;
             }
 
@@ -66,7 +64,7 @@ public static class Launcher
         catch (Exception e)
         {
             // I rather not translate this message, makes it easier to check where a given error came from
-            MessageBox.Show($"Failed to launch Retro Rewind: {e.Message}");
+            MessageBoxWindow.ShowDialog($"Failed to launch Retro Rewind: {e.Message}");
         }
     }
 

@@ -18,6 +18,7 @@ public static class MiiImageManager
     // If it wasn't, it means that that image is just empty, yet it still should not be requested again since it failed
     private static readonly Dictionary<string, (BitmapImage, bool)> Images = new();
     private static readonly Queue<string> ImageOrder = new();
+    public static int ImageCount { get; private set; } = 0;
 
     public static (BitmapImage, bool)? GetCachedMiiImage(string miiData) => Images.TryGetValue(miiData, out var image) ? image : null;
 
@@ -27,9 +28,11 @@ public static class MiiImageManager
             ImageOrder.Enqueue(miiData);
         Images[miiData] = image;
 
-        if (Images.Count < MaxCachedImages) return;
+        ImageCount = Images.Count;
+        if (Images.Count <= MaxCachedImages) return;
         var oldestMiiData = ImageOrder.Dequeue();
         Images.Remove(oldestMiiData);
+        ImageCount = MaxCachedImages;
     }
     
     // Returns the image related to this data, if it is not cached, it will request it

@@ -4,6 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:lang="clr-namespace:CT_MKWII_WPF.Resources.Languages"
+      xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+      xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d"
       d:DesignHeight="831" d:DesignWidth="444"
       Title="Settings" Background="Transparent">
@@ -33,6 +35,9 @@
         <ContentControl Grid.Row="1" x:Name="SettingsContent" />
         <StackPanel Grid.Row="1" HorizontalAlignment="Right"
                     VerticalAlignment="Bottom">
+            <TextBlock x:Name="ReleaseText" HorizontalAlignment="Right"
+                       Style="{StaticResource TinyText}"
+                       Text="DEV BUILD"/>
             <TextBlock x:Name="WhWzVersionText" HorizontalAlignment="Right"
                        Style="{StaticResource TinyText}"
                        Text="Example WhWz version 1.0.0" />
@@ -40,5 +45,11 @@
                        Style="{StaticResource TinyText}"
                        Text="Example RR version 1.0.0" />
         </StackPanel>
+        
+        <components:Button Grid.Row="0" x:Name="DevButton"
+                           Variant="Secondary" Text="Dev Tool" Margin="3,12"
+                           IconPack="FontAwesome" HorizontalAlignment="Right" VerticalAlignment="Top"
+                           IconKind="{x:Static icon:PackIconFontAwesomeKind.CodeSolid}"
+                           Click="DevButton_OnClick" />
     </Grid>
 </Page>

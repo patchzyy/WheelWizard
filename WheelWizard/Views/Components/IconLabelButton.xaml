@@ -38,14 +38,15 @@
                      IconKind="{Binding IconKind, ElementName=Root}"
                      IconSize="{Binding IconSize, ElementName=Root}"
                      Text="{Binding Text, ElementName=Root}"
+                     IconOnLeft="{Binding IconOnLeft, ElementName=Root}"
                      FontSize="{Binding FontSize, ElementName=Root}">
         <local:IconLabel.Style>
             <Style TargetType="local:IconLabel">
                 <Setter Property="Color" Value="{Binding Color, ElementName=Root}" />
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Button}}"
-                                 Value="True">
+                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Button}}" Value="True">
                         <Setter Property="Color" Value="{Binding HoverColor, ElementName=Root}" />
+                        <Setter Property="Underlined" Value="True" />
                     </DataTrigger>
                 </Style.Triggers>
             </Style>

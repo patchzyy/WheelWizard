@@ -25,12 +25,16 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
     public const double WindowHeight = 876;
     public const double WindowWidth = 656;
     
-    public Layout() : this(new Dashboard()) { }
+    public Layout() : this(new HomePage()) { }
     public Layout(Page initialPage)
     {
         InitializeComponent();
         DataContext = this;
-
+       
+    #if RELEASE_BUILD
+         KitchenSinkButton.Visibility = Visibility.Collapsed;
+    #endif
+    
         OnSettingChanged(SettingsManager.SAVED_WINDOW_SCALE);
         SettingsManager.WINDOW_SCALE.Subscribe(this);
        
@@ -49,7 +53,7 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
         }
         catch (Exception e)
         {
-            MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            new YesNoWindow().SetMainText(e.Message).AwaitAnswer();
             Environment.Exit(1);
         }
     }

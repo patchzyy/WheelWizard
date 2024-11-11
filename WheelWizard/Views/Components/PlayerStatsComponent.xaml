@@ -63,15 +63,15 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             
-            <components:MiiBall Size="100" Mii="{Binding Mii}"
+            <components:MiiBall Size="100" Mii="{Binding Mii}" WinPosition="{Binding WinPosition}"
                                 HorizontalAlignment="Left" VerticalAlignment="Top"
                                 Margin="20,0,10,0">
                 <components:MiiBall.Style>
                     <Style TargetType="components:MiiBall">
-                        <Setter Property="Color" Value="Light"/>
+                        <Setter Property="Variant" Value="Light"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsOnline}" Value="True">
-                                <Setter Property="Color" Value="Online"/>
+                                <Setter Property="PlayerState" Value="Online"/>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>

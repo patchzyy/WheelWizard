@@ -66,13 +66,14 @@
                         <GridViewColumn Header="">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <components:MiiBall Size="40" Mii="{Binding Mii}">
+                                    <components:MiiBall Size="40" Mii="{Binding Mii}"
+                                                        WinPosition="{Binding WinPosition}" >
                                         <components:MiiBall.Style>
                                             <Style TargetType="components:MiiBall">
-                                                <Setter Property="Color" Value="Default"/>
+                                                <Setter Property="Variant" Value="Default" />
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding IsOnline}" Value="True">
-                                                        <Setter Property="Color" Value="Online"/>
+                                                        <Setter Property="PlayerState" Value="Online"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>

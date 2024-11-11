@@ -46,7 +46,7 @@ public static class ViewUtils
         newWindow.Top = oldWindow.Top;
         if (oldWindow is IRepeatedTaskListener oldListener)
         {
-            // Unsubscribing is not really necessary. But i guess it prevents memory leaks when someone is 
+            // Unsubscribing is not really necessary. But i guess it prevents memory leaks when
             // someone is refreshing the window a lot (happens when changing the language e.g.
             // So they would have to change the language like 1000 of times in a row)
             LiveAlertsManager.Instance.Unsubscribe(oldListener);

@@ -24,11 +24,12 @@ public static class RetroRewindInstaller
 
     public static async Task<bool> HandleNotInstalled()
     {
-        var result = MessageBox.Show(
-            Phrases.PopupText_RRNotDeterment,
-            Phrases.PopupText_DownloadRR, MessageBoxButton.YesNo);
+        var result = new YesNoWindow()
+            .SetMainText(Phrases.PopupText_RRNotDeterment)
+            .SetExtraText(Phrases.PopupText_DownloadRR)
+            .AwaitAnswer();
 
-        if (result == MessageBoxResult.No) return false;
+        if (!result) return false;
 
         await InstallRetroRewind();
         return true;
@@ -36,11 +37,12 @@ public static class RetroRewindInstaller
 
     public static async Task<bool> HandleOldVersion()
     {
-        var result = MessageBox.Show(
-            Phrases.PopupText_RRToOld,
-            Phrases.PopupText_ReinstallRR, MessageBoxButton.YesNo);
+        var result = new YesNoWindow()
+            .SetMainText(Phrases.PopupText_RRToOld)
+            .SetExtraText(Phrases.PopupText_ReinstallRR)
+            .AwaitAnswer();
 
-        if (result == MessageBoxResult.No) return false;
+        if (!result) return false;
 
         await InstallRetroRewind();
         return true;
@@ -74,8 +76,7 @@ public static class RetroRewindInstaller
         var serverResponse = await HttpClientHelper.GetAsync<string>(Endpoints.RRUrl);
         if (!serverResponse.Succeeded)
         {
-            MessageBox.Show(Phrases.PopupText_CouldNotConnectServer, 
-                            Common.Term_Error, MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBoxWindow.ShowDialog(Phrases.PopupText_CouldNotConnectServer);
             return;
         }
         var tempZipPath = Path.Combine(PathManager.LoadFolderPath, "Temp", "RetroRewind.zip");
@@ -84,10 +85,13 @@ public static class RetroRewindInstaller
 
     private static async Task HandleReinstall()
     {
-        var result = MessageBox.Show(Phrases.PopupText_AlreadyFilesRR,
-            Phrases.PopupText_ReinstallRR, MessageBoxButton.YesNo);
+        var result = new YesNoWindow()
+            .SetMainText(Phrases.PopupText_AlreadyFilesRR)
+            .SetExtraText(Phrases.PopupText_ReinstallRR)
+            .AwaitAnswer();
+        
 
-        if (result == MessageBoxResult.No) 
+        if (!result) 
             return;
         
         DeleteExistingRetroRewind();
@@ -126,7 +130,7 @@ public static class RetroRewindInstaller
 
         try
         {
-            await DownloadHelper.DownloadToLocation(Endpoints.RRZipUrl, tempZipPath, progressWindow);
+            await DownloadHelper.DownloadToLocationAsync(Endpoints.RRZipUrl, tempZipPath, progressWindow);
             progressWindow.SetExtraText(Common.State_Extracting);
             var extractionPath = PathManager.RiivolutionWhWzFolderPath;
             ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);

@@ -61,7 +61,7 @@ public partial class SidebarRadioButton : UserControl
 
     public static readonly DependencyProperty PageTypeProperty =
         DependencyProperty.Register(nameof(PageType), typeof(Type), typeof(SidebarRadioButton),
-            new PropertyMetadata(typeof(Dashboard)));
+            new PropertyMetadata(typeof(HomePage)));
 
     public Type PageType
     {

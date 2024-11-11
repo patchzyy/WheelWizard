@@ -4,9 +4,9 @@ using System.Windows.Controls;
 
 namespace CT_MKWII_WPF.Views.Pages.KitchenSink;
 
-public partial class KitchenSink : Page
+public partial class KitchenSinkPage : Page
 {
-    public KitchenSink()
+    public KitchenSinkPage()
     {
         InitializeComponent();
         KitchenSinkContent.Content = new KsGeneric();

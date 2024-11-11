@@ -17,127 +17,246 @@
         </Storyboard>
     </UserControl.Resources>
     
-    <Border x:Name="Border" 
+    <Border x:Name="OuterCircle"
             CornerRadius="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl}, 
              Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.5}"
             Width="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl}}" 
             Height="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl}}">
         
-        <Border.Clip>
-            <EllipseGeometry x:Name="EllipseGeometry"/>
-        </Border.Clip>
-        
         <Grid>
-            <icon:PackIconFontAwesome Kind="SpinnerSolid" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                      Width="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl},
-                              Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.5}" 
-                                      Height="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl},
-                              Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.5}">
-                <icon:PackIconFontAwesome.RenderTransform>
-                    <!-- the center of this should be half the size of the icon itself (current 0.5, so that's why 0.25)-->
-                    <RotateTransform CenterX="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl},
-                              Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.25}" 
-                                     CenterY="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl},
-                              Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.25}"/>
-                </icon:PackIconFontAwesome.RenderTransform>
-                <icon:PackIconFontAwesome.Style>
-                    <Style TargetType="icon:PackIconFontAwesome">
-                        <Setter Property="Foreground" Value="{StaticResource MiiIconDefault-Foreground}"/>
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding MiiImage, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="{x:Null}">
-                                <Setter Property="Visibility" Value="Visible"/>
-                                <DataTrigger.EnterActions>
-                                    <BeginStoryboard Name="SpinnerStoryboard" Storyboard="{StaticResource SpinnerAnimation}"/>
-                                </DataTrigger.EnterActions>
-                                <DataTrigger.ExitActions>
-                                    <StopStoryboard BeginStoryboardName="SpinnerStoryboard"/>
-                                </DataTrigger.ExitActions>
-                            </DataTrigger>
+            <!-- 
+             IMPORTNANT: anything inside the InnerCircle will be clipped to a circle
+            If you want to have something outside of this circle, dont put it in this border
+            -->
+            <Border x:Name="InnerCircle" 
+                    CornerRadius="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl}, 
+                 Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.5}">
                 
-                            <DataTrigger Binding="{Binding Color,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Light">
-                                <Setter Property="Foreground" Value="{StaticResource MiiIconLight-Foreground}"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Color, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Online">
-                                <Setter Property="Foreground" Value="{StaticResource MiiIconCyan-Foreground}"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Color, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Red">
-                                <Setter Property="Foreground" Value="{StaticResource MiiIconRed-Foreground}"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </icon:PackIconFontAwesome.Style>
-            </icon:PackIconFontAwesome>
-            
-            <icon:PackIconFontAwesome Kind="UserSolid" HorizontalAlignment="Center" VerticalAlignment="Bottom"
-                                      Width="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl},
-                 Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.8}" 
-                                      Height="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl}, 
-                 Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.8}">
-                <icon:PackIconFontAwesome.Style>
-                    <Style TargetType="icon:PackIconFontAwesome">
-                        <Setter Property="Foreground" Value="{StaticResource MiiIconDefault-Foreground}"/>
-                   
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding MiiImage,
-                             RelativeSource={RelativeSource AncestorType=UserControl}}" Value="{x:Null}">
+                <Border.Clip>
+                    <EllipseGeometry x:Name="EllipseGeometry"/>
+                </Border.Clip>
+                
+                <Grid>
+                    <!-- 
+                        THE SPINNER ICON
+                    -->
+                    <icon:PackIconFontAwesome Kind="SpinnerSolid" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                              Width="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl},
+                                      Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.5}" 
+                                              Height="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl},
+                                      Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.5}">
+                        <icon:PackIconFontAwesome.RenderTransform>
+                            <!-- the center of this should be half the size of the icon itself (current 0.5, so that's why 0.25)-->
+                            <RotateTransform CenterX="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl},
+                                      Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.25}" 
+                                             CenterY="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl},
+                                      Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.25}"/>
+                        </icon:PackIconFontAwesome.RenderTransform>
+                        <icon:PackIconFontAwesome.Style>
+                            <Style TargetType="icon:PackIconFontAwesome">
+                                <Setter Property="Foreground" Value="{StaticResource MiiIconDefault-Foreground}"/>
                                 <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                            
-                            <!-- If the image loaded successfully, we also dont want this user icon to show, since 
-                                the image will show in this case-->
-                            <DataTrigger Binding="{Binding ImageLoadingSuccess,
-                             RelativeSource={RelativeSource AncestorType=UserControl}}" Value="True">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                            
-                            <DataTrigger Binding="{Binding Color,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Light">
-                                <Setter Property="Foreground" Value="{StaticResource MiiIconLight-Foreground}"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Color, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Online">
-                                <Setter Property="Foreground" Value="{StaticResource MiiIconCyan-Foreground}"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Color, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Red">
-                                <Setter Property="Foreground" Value="{StaticResource MiiIconRed-Foreground}"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </icon:PackIconFontAwesome.Style>
-            </icon:PackIconFontAwesome>
-            
-            <Image Source="{Binding MiiImage,
-             RelativeSource={RelativeSource AncestorType=UserControl}}" Stretch="Uniform">
-                <Image.Style>
-                    <Style TargetType="Image">
-                        <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding MiiImage, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                        <DataTrigger.EnterActions>
+                                            <BeginStoryboard Name="SpinnerStoryboard" Storyboard="{StaticResource SpinnerAnimation}"/>
+                                        </DataTrigger.EnterActions>
+                                        <DataTrigger.ExitActions>
+                                            <StopStoryboard BeginStoryboardName="SpinnerStoryboard"/>
+                                        </DataTrigger.ExitActions>
+                                    </DataTrigger>
+                        
+                                    <DataTrigger Binding="{Binding Variant,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Light">
+                                        <Setter Property="Foreground" Value="{StaticResource MiiIconLight-Foreground}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </icon:PackIconFontAwesome.Style>
+                    </icon:PackIconFontAwesome>
+                    
+                    <!-- 
+                        THE USER ICON WHEN THERE IS NO IMAGE
+                    -->
+                    <icon:PackIconFontAwesome Kind="UserSolid" HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                                              Width="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl},
+                         Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.7}" 
+                                              Height="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl}, 
+                         Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.7}">
+                        <icon:PackIconFontAwesome.Style>
+                            <Style TargetType="icon:PackIconFontAwesome">
+                                <Setter Property="Foreground" Value="{StaticResource MiiIconDefault-Foreground}"/>
+                           
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding MiiImage,
+                                     RelativeSource={RelativeSource AncestorType=UserControl}}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                    
+                                    <!-- If the image loaded successfully, we also dont want this user icon to show, since 
+                                        the image will show in this case-->
+                                    <DataTrigger Binding="{Binding ImageLoadingSuccess,
+                                     RelativeSource={RelativeSource AncestorType=UserControl}}" Value="True">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                    
+                                    <DataTrigger Binding="{Binding Variant,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Light">
+                                        <Setter Property="Foreground" Value="{StaticResource MiiIconLight-Foreground}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </icon:PackIconFontAwesome.Style>
+                    </icon:PackIconFontAwesome>
+                    
+                     
+                    <!-- 
+                        THE USER's MII IMAGE WHEN THERE IS AN IMAGE
+                    -->
+                    <Image Source="{Binding MiiImage,
+                     RelativeSource={RelativeSource AncestorType=UserControl}}" Stretch="Uniform">
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ImageLoadingSuccess,
+                                     RelativeSource={RelativeSource AncestorType=UserControl}}" Value="False">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                </Grid>
+             
+                 
+                    <!-- 
+                        THE BACKGROUND COLOR OF THE BALL
+                    -->
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Background" Value="{StaticResource MiiIconDefault-Background}"/> 
                         
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding ImageLoadingSuccess,
-                             RelativeSource={RelativeSource AncestorType=UserControl}}" Value="False">
-                                <Setter Property="Visibility" Value="Collapsed"/>
+                            <DataTrigger Binding="{Binding Variant,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Light">
+                                <Setter Property="Background" Value="{StaticResource MiiIconLight-Background}"/>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </Image.Style>
-            </Image>
+                   
+                </Border.Style>
+            </Border>
+            <!-- END OF INNER CIRCLE
+            
+            BEGINNING OF EVERYTHING OUTSIDE OF THAT -->
+            <Border x:Name="StateIcon" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                    CornerRadius="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl}, 
+                    Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.5}">
+                    <!-- I know, 0.5 for the corner radius is way to much, but to much is not a problem -->
+                    
+               <Border.Style>
+                   <Style TargetType="Border">
+                       <Setter Property="BorderBrush" Value="{StaticResource MiiIconDefault-Border}"/>
+                       <Style.Triggers>
+                           <DataTrigger Binding="{Binding WinPosition,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="First">
+                               <Setter Property="BorderBrush" Value="{StaticResource MiiFirstPlace-Border}"/>
+                           </DataTrigger>
+                           <DataTrigger Binding="{Binding WinPosition,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Second">
+                               <Setter Property="BorderBrush" Value="{StaticResource MiiSecondPlace-Border}"/>
+                           </DataTrigger>
+                           <DataTrigger Binding="{Binding WinPosition,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Third">
+                               <Setter Property="BorderBrush" Value="{StaticResource MiiThirdPlace-Border}"/>
+                           </DataTrigger>
+                           
+                           <DataTrigger Binding="{Binding PlayerState,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Default">
+                               <Setter Property="Visibility" Value="Collapsed"/>
+                           </DataTrigger>
+                           
+                           <DataTrigger Binding="{Binding PlayerState,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Red">
+                               <Setter Property="Background" Value="{StaticResource MiiStateRed}"/> 
+                           </DataTrigger>
+                           <DataTrigger Binding="{Binding PlayerState,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Online">
+                               <Setter Property="Background" Value="{StaticResource MiiStateCyan}"/> 
+                           </DataTrigger>
+                           
+                       </Style.Triggers>
+                   </Style>
+               
+               </Border.Style>
+            </Border>
+            
+            <Border x:Name="BadgeIconInner" HorizontalAlignment="Left" VerticalAlignment="Top"
+                    CornerRadius="{Binding Size, RelativeSource={RelativeSource AncestorType=UserControl}, 
+                    Converter={StaticResource MultiplierValueConverter}, ConverterParameter=0.5}">
+                <!-- I know, 0.5 for the corner radius is way to much, but to much is not a problem -->
+                
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding WinPosition,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="None">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding WinPosition,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="First">
+                                <Setter Property="Background" Value="{StaticResource MiiFirstPlace-BadgeInner}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding WinPosition,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Second">
+                                <Setter Property="Background" Value="{StaticResource MiiSecondPlace-BadgeInner}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding WinPosition,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Third">
+                                <Setter Property="Background" Value="{StaticResource MiiThirdPlace-BadgeInner}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                
+            </Border>
+            
+            <!-- THE BADGE ICON IF THE MII WON -->
+           <icon:PackIconFontAwesome Kind="AwardSolid" x:Name="BadgeIconOuter" HorizontalAlignment="Left" VerticalAlignment="Top">
+               <icon:PackIconFontAwesome.RenderTransform>
+                   <TransformGroup>
+                       <RotateTransform Angle="30" /> 
+                   </TransformGroup>
+               </icon:PackIconFontAwesome.RenderTransform>
+               <icon:PackIconFontAwesome.Style>
+                   <Style TargetType="icon:PackIconFontAwesome">
+                       <Setter Property="Foreground" Value="{StaticResource MiiSecondPlace-BadgeOuter}" />
+                       <Style.Triggers>
+                           <DataTrigger Binding="{Binding WinPosition,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="None">
+                               <Setter Property="Visibility" Value="Collapsed" />
+                           </DataTrigger>
+                           <DataTrigger Binding="{Binding WinPosition,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="First">
+                              <Setter Property="Foreground" Value="{StaticResource MiiFirstPlace-BadgeOuter}" />
+                          </DataTrigger>
+                          <DataTrigger Binding="{Binding WinPosition,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Second">
+                              <Setter Property="Foreground" Value="{StaticResource MiiSecondPlace-BadgeOuter}" />
+                          </DataTrigger>
+                          <DataTrigger Binding="{Binding WinPosition,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Third">
+                              <Setter Property="Foreground" Value="{StaticResource MiiThirdPlace-BadgeOuter}"/>
+                          </DataTrigger>
+                      </Style.Triggers>
+                   </Style>
+               </icon:PackIconFontAwesome.Style>
+           </icon:PackIconFontAwesome>
+            
         </Grid>
-     
+        
         <Border.Style>
             <Style TargetType="Border">
-                <Setter Property="Background" Value="{StaticResource MiiIconDefault-Background}"/> 
+                <Setter Property="Background" Value="{StaticResource MiiIconDefault-Border}"/>
+                
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding Color,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Light">
-                        <Setter Property="Background" Value="{StaticResource MiiIconLight-Background}"/>
+                    <DataTrigger Binding="{Binding WinPosition,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="First">
+                        <Setter Property="Background" Value="{StaticResource MiiFirstPlace-Border}"/>
                     </DataTrigger>
-                    <DataTrigger Binding="{Binding Color, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Online">
-                        <Setter Property="Background" Value="{StaticResource MiiIconCyan-Background}"/>
+                    <DataTrigger Binding="{Binding WinPosition,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Second">
+                        <Setter Property="Background" Value="{StaticResource MiiSecondPlace-Border}"/>
                     </DataTrigger>
-                    <DataTrigger Binding="{Binding Color, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Red">
-                        <Setter Property="Background" Value="{StaticResource MiiIconRed-Background}"/>
+                    <DataTrigger Binding="{Binding WinPosition,RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Third">
+                        <Setter Property="Background" Value="{StaticResource MiiThirdPlace-Border}"/>
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
-           
         </Border.Style>
     </Border>
 </UserControl>

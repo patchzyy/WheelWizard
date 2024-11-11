@@ -16,8 +16,7 @@ namespace CT_MKWII_WPF.Services.Installation;
 
 public static class AutoUpdater
 {
-    public const string CurrentVersion = "1.7.1";
-    
+    public const string CurrentVersion = "1.8.0";
     public static async Task CheckForUpdatesAsync()
     {
         var response = await HttpClientHelper.GetAsync<string>(Endpoints.WhWzLatestReleasesUrl);
@@ -73,7 +72,7 @@ public static class AutoUpdater
         }
         catch (System.ComponentModel.Win32Exception)
         {
-            MessageBox.Show(Phrases.PopupText_RestartAdminFail);
+            new YesNoWindow().SetMainText(Phrases.PopupText_RestartAdminFail);
         }
     }
     
@@ -102,14 +101,14 @@ public static class AutoUpdater
         var currentFolder = Path.GetDirectoryName(currentExecutablePath);
         if (currentFolder is null)
         {
-            MessageBox.Show(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation);
+            MessageBoxWindow.ShowDialog(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation);
             return;
         }
         var newFilePath = Path.Combine(currentFolder, currentExecutableName+"_new.exe");
         if (File.Exists(newFilePath))
             File.Delete(newFilePath);
         
-        await DownloadHelper.DownloadToLocation(downloadUrl, newFilePath, Phrases.PopupText_UpdateWhWz,
+        await DownloadHelper.DownloadToLocationAsync(downloadUrl, newFilePath, Phrases.PopupText_UpdateWhWz,
                                                 Phrases.PopupText_LatestWhWzGithub);
 
         // we need to wait a bit before running the batch file to ensure the file is saved on disk
@@ -124,7 +123,7 @@ public static class AutoUpdater
         var currentFolder = Path.GetDirectoryName(currentFilePath);
         if (currentFolder is null)
         {
-            MessageBox.Show(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation);
+            MessageBoxWindow.ShowDialog(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation);
             return;
         }
         var batchFilePath = Path.Combine(currentFolder, "update.bat");
@@ -150,11 +149,11 @@ public static class AutoUpdater
     private static void HandleUpdateCheckError(HttpClientResult<string> response)
     {
         if (response.StatusCodeGroup == 4 || response.StatusCode is 503 or 504)
-            MessageBox.Show(Phrases.PopupText_UnableUpdateWhWz_ReasonNetwork);
+            MessageBoxWindow.ShowDialog(Phrases.PopupText_UnableUpdateWhWz_ReasonNetwork);
         else
         {
-            MessageBox.Show("An error occurred while checking for updates. Please try again later. " +
-                            "\nError: " + response.StatusMessage);
+            MessageBoxWindow.ShowDialog("An error occurred while checking for updates. Please try again later. " +
+                                    "\nError: " + response.StatusMessage);
         }
     }
 }

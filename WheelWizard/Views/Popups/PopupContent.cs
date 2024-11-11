@@ -6,15 +6,24 @@ namespace CT_MKWII_WPF.Views.Popups;
 public abstract class PopupContent : UserControl
 {
     public PopupWindow Window { get; private set; }
+
+    // Add an optional 'owner' parameter to the constructor
     
-    protected PopupContent( bool allowClose, bool allowLayoutInteraction, string title = "", Vector? size = null)
+    
+    protected PopupContent(bool allowClose, bool allowLayoutInteraction, bool isTopMost, string title = "", Vector? size = null, Window? owner = null)
     {
-        Window = new(allowClose, allowLayoutInteraction, title, size)
+        Window = new PopupWindow(allowClose, allowLayoutInteraction, isTopMost, title, size)
         {
             PopupContent = { Content = this },
             BeforeClose = BeforeClose,
             BeforeOpen = BeforeOpen
         };
+
+        if (owner != null)
+        {
+            // Set the owner if provided
+            Window.Owner = owner;
+        }
     }
 
     protected virtual void BeforeClose() { } // Meant to be overwritten if needed

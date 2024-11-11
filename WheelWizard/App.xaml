@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="Views/Styles/InputFieldStyles.xaml" />
                 <ResourceDictionary Source="Views/Styles/SettingsBlockStyle.xaml" />
                 <ResourceDictionary Source="Views/Styles/Dropdown.xaml" />
+                <ResourceDictionary Source="Views/Styles/ModpageStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
             
             <converters:MultiplierValueConverter x:Key="MultiplierValueConverter"/>

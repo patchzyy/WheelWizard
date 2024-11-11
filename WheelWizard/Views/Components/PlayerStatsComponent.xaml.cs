@@ -1,8 +1,10 @@
-﻿using CT_MKWII_WPF.Models.GameData;
+﻿using CT_MKWII_WPF.Models.Enums;
+using CT_MKWII_WPF.Models.GameData;
 using CT_MKWII_WPF.Models.RRInfo;
 using CT_MKWII_WPF.Models.Settings;
 using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services.LiveData;
+using CT_MKWII_WPF.Utilities;
 using CT_MKWII_WPF.Views.Pages;
 using System;
 using System.Collections.Generic;
@@ -96,6 +98,13 @@ namespace CT_MKWII_WPF.Views.Components
             set => SetProperty(ref _mii, value);
         }
         
+        private PlayerWinPosition? _winPosition;
+        public PlayerWinPosition? WinPosition
+        {
+            get => _winPosition;
+            set => SetProperty(ref _winPosition, value);
+        }
+        
         public PlayerStatsComponent() 
         { 
             InitializeComponent();
@@ -115,6 +124,7 @@ namespace CT_MKWII_WPF.Views.Components
             BR = "BR: " + user.Br;
             BottomExtraStat = $"{Online.Stat_RacesPlayed}: {user.TotalRaceCount}";
             TopExtraStat = $"{Online.Stat_Wins}: {user.TotalWinCount}";
+            WinPosition = FriendCodeManager.GetWinPosition(FriendCode);
             Mii = user?.MiiData?.Mii;
             IsOnline = user!.IsOnline;
             ViewRoomButton.Visibility = IsOnline ? Visibility.Visible : Visibility.Hidden;
