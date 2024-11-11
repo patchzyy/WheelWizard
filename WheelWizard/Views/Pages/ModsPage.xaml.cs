@@ -22,7 +22,7 @@ public partial class ModsPage : Page, INotifyPropertyChanged
     public ModsPage()
     {
         InitializeComponent();
-        DataContext = this;
+        DataContext = ModManager.Instance;
         SubscribeToModManagerEvents();
         ModManager.InitializeAsync();
     }
