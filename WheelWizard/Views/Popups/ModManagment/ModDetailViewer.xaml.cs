@@ -134,13 +134,18 @@ public partial class ModDetailViewer : UserControl
     
             var progressWindow = new ProgressWindow($"Downloading {CurrentMod._sName}");
             progressWindow.Show();
-    
-            foreach (var url in downloadUrls)
-            {
-                var fileName = GetFileNameFromUrl(url);
-                var filePath = Path.Combine(ModsLaunchHelper.TempModsFolderPath, fileName);
-                await DownloadHelper.DownloadToLocationAsync(url, filePath, progressWindow);
-            }
+            progressWindow.SetExtraText("Loading...");
+
+            var url = downloadUrls.First();
+            var fileName = GetFileNameFromUrl(url);
+            var filePath = Path.Combine(ModsLaunchHelper.TempModsFolderPath, fileName);
+            await DownloadHelper.DownloadToLocationAsync(url, filePath, progressWindow);
+            // foreach (var url in downloadUrls)
+            // {
+            //     var fileName = GetFileNameFromUrl(url);
+            //     var filePath = Path.Combine(ModsLaunchHelper.TempModsFolderPath, fileName);
+            //     await DownloadHelper.DownloadToLocationAsync(url, filePath, progressWindow);
+            // }
             progressWindow.Close();
             var file = Directory.GetFiles(ModsLaunchHelper.TempModsFolderPath).FirstOrDefault();
             if (file == null)
