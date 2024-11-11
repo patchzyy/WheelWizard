@@ -76,7 +76,7 @@
             
             <UniformGrid Columns="2" Rows="1">
                 <components:Button Variant="Primary" Margin="3,0"
-                                   IconPack="FontAwesome" Text="{x:Static lang:Common.Action_Browse}"
+                                   IconPack="FontAwesome" Text="Browse"
                                    IconKind="{x:Static icon:PackIconFontAwesomeKind.MagnifyingGlassSolid}"
                                    Click="BrowseMod_Click" HorizontalAlignment="Center" />
                 <components:Button Variant="Default" Margin="3,0"
@@ -91,7 +91,7 @@
                                       Body="{x:Static lang:Phrases.EmptyText_NoMods}" />
             <UniformGrid Margin="0,12" Columns="2" Rows="1">
                 <components:Button Variant="Primary" Margin="3,0"
-                                   IconPack="FontAwesome" Text="{x:Static lang:Common.Action_Browse}"
+                                   IconPack="FontAwesome" Text="Browse"
                                    IconKind="{x:Static icon:PackIconFontAwesomeKind.MagnifyingGlassSolid}"
                                    Click="BrowseMod_Click" HorizontalAlignment="Center" />
                 <components:Button Variant="Default" Margin="3,0"

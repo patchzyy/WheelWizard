@@ -22,8 +22,8 @@ public static class ModsLaunchHelper
     
     public static async Task PrepareModsForLaunch()
     {
-        var mods = ModConfigManager.GetMods();
-        if (mods.Length == 0 || !mods.Any(mod => mod.IsEnabled))
+        var mods = ModManager.Instance.Mods.Where(mod => mod.IsEnabled).ToArray();
+        if (mods.Length == 0)
         {
             if (Directory.Exists(MyStuffFolderPath) && Directory.EnumerateFiles(MyStuffFolderPath).Any())
             {
@@ -37,16 +37,19 @@ public static class ModsLaunchHelper
                 return;
             }
         }
+        var reversedMods = ModManager.Instance.Mods.Reverse().ToArray();
         
-        Array.Reverse(mods);
         if (Directory.Exists(MyStuffFolderPath))
             Directory.Delete(MyStuffFolderPath, true);
+        
+        
         var progressWindow = new ProgressWindow(Phrases.PopupText_InstallingMods)
             .SetGoal(Humanizer.ReplaceDynamic(Phrases.PopupText_InstallingModsCount, mods.Length)!);
         progressWindow.Show();
+        
         await Task.Run(() =>
         {
-            foreach (var mod in mods)
+            foreach (var mod in reversedMods)
             {
                 if (mod.IsEnabled) 
                     InstallMod(mod, progressWindow);
@@ -55,7 +58,7 @@ public static class ModsLaunchHelper
         progressWindow.Close();
     }
     
-    private static void InstallMod(ModData mod, ProgressWindow progressPopupWindow)
+    private static void InstallMod(Mod mod, ProgressWindow progressPopupWindow)
     {
               
         var modFolder = Path.Combine(ModsFolderPath, mod.Title);
