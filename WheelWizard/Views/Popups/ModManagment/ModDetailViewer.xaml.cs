@@ -87,10 +87,13 @@ public partial class ModDetailViewer : UserControl
         {
             InstallButton.Content = "Installed";
             InstallButton.IsEnabled = false;
+            UnInstallButton.Visibility = Visibility.Visible;
             return;
         }
+        
         InstallButton.Content = "Download and Install";
         InstallButton.IsEnabled = true; // Enable button if not installed
+        UnInstallButton.Visibility = Visibility.Collapsed;
     }
 
     /// <summary>
@@ -152,13 +155,14 @@ public partial class ModDetailViewer : UserControl
                 author = CurrentMod._aSubmitter._sName;
             }
             modId = CurrentMod._idRow;
-            await ModInstallation.InstallModFromFileAsync(file, author, modId);
+            await ModInstallation.InstallModFromFileAsync(file, author, modId, CurrentMod._sName);
             Directory.Delete(ModsLaunchHelper.TempModsFolderPath, true);
         }
         catch (Exception ex)
         {
             MessageBoxWindow.ShowDialog("An error occurred during download: " + ex.Message);
         }
+        LoadModDetailsAsync(CurrentMod._idRow);
     }
 
 
@@ -223,7 +227,8 @@ public partial class ModDetailViewer : UserControl
     
     private void UnInstall_Click(object sender, RoutedEventArgs e)
     {
-        MessageBoxWindow.ShowDialog("This feature is not yet implemented.");
+        ModManager.Instance.DeleteModById(CurrentMod._idRow);
+        UpdateDownloadButtonState(CurrentMod._idRow);
     }
     
     private void ImageScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)

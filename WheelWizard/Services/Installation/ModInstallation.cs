@@ -193,7 +193,7 @@ public static class ModInstallation
     /// <summary>
     /// Installs a mod from a file. Sets Author and ModID based on parameters.
     /// </summary>
-    public static async Task InstallModFromFileAsync(string filePath, string author = "-1", int modID = -1)
+    public static async Task InstallModFromFileAsync(string filePath, string author = "-1", int modID = -1, string givenModName = "")
     {
         try
         {
@@ -207,6 +207,7 @@ public static class ModInstallation
             
             // Prompt for mod name if not provided
             var inputPopup = new TextInputPopup("Enter Mod Name");
+            inputPopup.PopulateText(givenModName);
             var modName = inputPopup.ShowDialog();
             if (string.IsNullOrWhiteSpace(modName))
             {

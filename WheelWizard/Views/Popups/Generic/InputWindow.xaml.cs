@@ -55,5 +55,10 @@ namespace CT_MKWII_WPF.Views.Popups
             _result = null;
             Close();
         }
+        
+        public void PopulateText(string text)
+        {
+            InputField.Text = text;
+        }
     }
 }

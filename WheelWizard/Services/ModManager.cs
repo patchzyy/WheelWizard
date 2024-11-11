@@ -305,6 +305,19 @@ public class ModManager : INotifyPropertyChanged
             ErrorOccurred?.Invoke(Phrases.PopupText_NoModFolder);
         }
     }
+    
+    public void DeleteModById(int modId)
+    {
+        var modToDelete = Mods.FirstOrDefault(mod => mod.ModID == modId);
+    
+        if (modToDelete == null)
+        {
+            ErrorOccurred?.Invoke($"No mod found with ID: {modId}");
+            return;
+        }
+        DeleteMod(modToDelete);
+    }
+
 
     public void ReorderMod(Mod movedMod, int newIndex)
     {
