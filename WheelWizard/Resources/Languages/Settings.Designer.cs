@@ -366,6 +366,24 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Finnish.
+        /// </summary>
+        public static string Value_Language_Finnish {
+            get {
+                return ResourceManager.GetString("Value_Language_Finnish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finnish.
+        /// </summary>
+        public static string Value_Language_FinnishOg {
+            get {
+                return ResourceManager.GetString("Value_Language_FinnishOg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to French.
         /// </summary>
         public static string Value_Language_France {

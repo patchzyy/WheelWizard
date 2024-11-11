@@ -156,4 +156,7 @@
     <data name="CompletePercentage" xml:space="preserve">
         <value>100</value>
     </data>
+    <data name="Value_Language_FinnishOg" xml:space="preserve">
+        <value>Finnish</value>
+    </data>
 </root>

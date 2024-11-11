@@ -153,4 +153,7 @@
     <data name="Value_Language_Japanese" xml:space="preserve">
         <value>Japonés</value>
     </data>
+    <data name="Value_Language_FinnishOg" xml:space="preserve">
+        <value>Finnish</value>
+    </data>
 </root>

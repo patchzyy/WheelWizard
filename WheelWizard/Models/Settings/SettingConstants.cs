@@ -35,7 +35,8 @@ public static class SettingValues
         { 2, () => CreateLanguageString("France") },
         { 3, () => CreateLanguageString("German") },
         { 4, () => CreateLanguageString("Dutch") },
-        { 5, () => CreateLanguageString("Spanish") }
+        { 5, () => CreateLanguageString("Spanish") },
+        { 6, () => CreateLanguageString("Finnish") }
     };
 
     public static readonly Dictionary<string, Func<string>> WhWzLanguages = new()
