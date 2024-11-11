@@ -195,9 +195,10 @@ public partial class ModDetailViewer : UserControl
 
     private void AuthorLink_Click(object sender, RoutedEventArgs e)
     {
+        var profileURL = CurrentMod._aSubmitter._sProfileUrl;
         System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
         {
-            FileName ="https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            FileName = profileURL,
             UseShellExecute = true
         });
     }
@@ -206,15 +207,16 @@ public partial class ModDetailViewer : UserControl
     {
         System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
         {
-            FileName = "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            FileName = CurrentMod._sProfileUrl,
             UseShellExecute = true
         });
     }
     private void ReportLink_Click(object sender, RoutedEventArgs e)
     {
+        var url = $"https://gamebanana.com/support/add?s=Mod.{CurrentMod._idRow}";
         System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
         {
-            FileName = "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            FileName = url,
             UseShellExecute = true
         });
     }

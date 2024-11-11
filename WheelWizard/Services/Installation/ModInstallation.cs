@@ -1,23 +1,14 @@
-﻿using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Models.Settings;
-using CT_MKWII_WPF.Resources.Languages;
+﻿using CT_MKWII_WPF.Models.Settings;
 using CT_MKWII_WPF.Views.Popups;
 using SharpCompress.Archives;
-using SharpCompress.Archives.Rar;
-using SharpCompress.Archives.SevenZip;
-using SharpCompress.Common;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using System.Windows;
-using IniParser;
-using IniParser.Model;
 
 namespace CT_MKWII_WPF.Services.Installation;
-
 public static class ModInstallation
 {
     private static readonly string _configFilePath = Path.Combine(
@@ -135,40 +126,36 @@ public static class ModInstallation
         try
         {
             // Determine the archive type and extract accordingly
-            using (var archive = OpenArchive(file, extension))
+            using var archive = OpenArchive(file, extension);
+            if (archive == null)
+                throw new Exception($"Unsupported archive format: {extension}");
+    
+            foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
             {
-                if (archive == null)
-                    throw new Exception($"Unsupported archive format: {extension}");
+                // Normalize entry path by removing empty folder segments
+                var sanitizedKey = string.Join(Path.DirectorySeparatorChar.ToString(),
+                    entry.Key.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
+                        .Where(segment => !string.IsNullOrWhiteSpace(segment)));
     
-                foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
+                var entryDestinationPath = Path.Combine(destinationDirectory, sanitizedKey);
+    
+                // Ensure the entry destination path is within the destination directory
+                if (!Path.GetFullPath(entryDestinationPath).StartsWith(Path.GetFullPath(destinationDirectory), StringComparison.OrdinalIgnoreCase))
                 {
-                    // Normalize entry path by removing empty folder segments
-                    var sanitizedKey = string.Join(Path.DirectorySeparatorChar.ToString(),
-                        entry.Key.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
-                                 .Where(segment => !string.IsNullOrWhiteSpace(segment)));
-    
-                    var entryDestinationPath = Path.Combine(destinationDirectory, sanitizedKey);
-    
-                    // Ensure the entry destination path is within the destination directory
-                    if (!Path.GetFullPath(entryDestinationPath).StartsWith(Path.GetFullPath(destinationDirectory), StringComparison.OrdinalIgnoreCase))
-                    {
-                        throw new UnauthorizedAccessException("Entry is attempting to extract outside of the destination directory.");
-                    }
-    
-                    // Create directory structure for the file
-                    var directoryPath = Path.GetDirectoryName(entryDestinationPath);
-                    if (!string.IsNullOrEmpty(directoryPath) && !Directory.Exists(directoryPath))
-                    {
-                        Directory.CreateDirectory(directoryPath);
-                    }
-    
-                    // Extract the file
-                    using (var stream = entry.OpenEntryStream())
-                    using (var fileStream = File.Create(entryDestinationPath))
-                    {
-                        stream.CopyTo(fileStream);
-                    }
+                    throw new UnauthorizedAccessException("Entry is attempting to extract outside of the destination directory.");
                 }
+    
+                // Create directory structure for the file
+                var directoryPath = Path.GetDirectoryName(entryDestinationPath);
+                if (!string.IsNullOrEmpty(directoryPath) && !Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+    
+                // Extract the file
+                using var stream = entry.OpenEntryStream();
+                using var fileStream = File.Create(entryDestinationPath);
+                stream.CopyTo(fileStream);
             }
         }
         catch (IOException exp)
