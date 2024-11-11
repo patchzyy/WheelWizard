@@ -11,16 +11,16 @@ namespace CT_MKWII_WPF.Helpers;
     private const int MaxRetries = 5;
     private const int TimeoutInSeconds = 30; // Adjust as needed
 
-    public static async Task<string> DownloadToLocationAsync(string url, string filePath, string windowTitle, string extraText = "")
+    public static async Task<string> DownloadToLocationAsync(string url, string filePath, string windowTitle, string extraText = "", bool ForceGivenFilePath = false)
     {
         var progressWindow = new ProgressWindow(windowTitle).SetExtraText(extraText);
         progressWindow.Show();
-        var toLocationAsync = await DownloadToLocationAsync(url, filePath, progressWindow);
+        var toLocationAsync = await DownloadToLocationAsync(url, filePath, progressWindow, ForceGivenFilePath);
         progressWindow.Close();
         return toLocationAsync;
     }
 
-    public static async Task<string> DownloadToLocationAsync(string url, string tempFile, ProgressWindow progressPopupWindow)
+    public static async Task<string> DownloadToLocationAsync(string url, string tempFile, ProgressWindow progressPopupWindow, bool ForceGivenFilePath = false)
 {
     var directory = Path.GetDirectoryName(tempFile)!;
     if (!Directory.Exists(directory))
@@ -43,31 +43,35 @@ namespace CT_MKWII_WPF.Helpers;
                 MessageBoxWindow.ShowDialog("Failed to resolve final URL.");
                 return null;
             }
-            var finalUrl = response.RequestMessage.RequestUri.ToString();
 
-            // Check for filename in Content-Disposition or fallback to URL
-            var contentDisposition = response.Content.Headers.ContentDisposition;
-            var fileName = contentDisposition?.FileName?.Trim('"') ?? Path.GetFileName(new Uri(url).AbsolutePath);
-            fileName = Path.ChangeExtension(fileName, Path.GetExtension(finalUrl));
-
-            // Add extension if missing in file path
-            if (!Path.HasExtension(fileName))
+            if (!ForceGivenFilePath)
             {
-                var urlExtension = Path.GetExtension(new Uri(url).AbsolutePath);
-                if (!string.IsNullOrEmpty(urlExtension))
-                {
-                    fileName += urlExtension;
-                }
-            }
+                var finalUrl = response.RequestMessage.RequestUri.ToString();
 
-            // Update filePath with resolved fileName
-            resolvedFilePath  = Path.Combine(directory, fileName);
+                // Check for filename in Content-Disposition or fallback to URL
+                var contentDisposition = response.Content.Headers.ContentDisposition;
+                var fileName = contentDisposition?.FileName?.Trim('"') ?? Path.GetFileName(new Uri(url).AbsolutePath);
+                fileName = Path.ChangeExtension(fileName, Path.GetExtension(finalUrl));
+
+                // Add extension if missing in file path
+                if (!Path.HasExtension(fileName))
+                {
+                    var urlExtension = Path.GetExtension(new Uri(url).AbsolutePath);
+                    if (!string.IsNullOrEmpty(urlExtension))
+                    {
+                        fileName += urlExtension;
+                    }
+                }
+
+                // Update resolvedFilePath with resolved fileName
+                resolvedFilePath = Path.Combine(directory, fileName);
+            }
 
             var totalBytes = response.Content.Headers.ContentLength ?? -1;
             progressPopupWindow.SetGoal(totalBytes / (1024.0 * 1024.0));
 
             await using var downloadStream = await response.Content.ReadAsStreamAsync();
-            await using var fileStream = new FileStream(resolvedFilePath , FileMode.Create, FileAccess.Write, FileShare.None, bufferSize: 8192, useAsync: true);
+            await using var fileStream = new FileStream(resolvedFilePath, FileMode.Create, FileAccess.Write, FileShare.None, bufferSize: 8192, useAsync: true);
             var downloadedBytes = 0L;
             const int bufferSize = 8192;
             var buffer = new byte[bufferSize];
@@ -93,12 +97,11 @@ namespace CT_MKWII_WPF.Helpers;
                     .SetExtraText($"The download timed out after {MaxRetries} attempts.");
                 break;
             }
-            
+
             var delay = (int)Math.Pow(2, attempt) * 1000;
             await Task.Delay(delay);
             progressPopupWindow.Dispatcher.Invoke(() =>
                 progressPopupWindow.SetExtraText($"Retrying... Attempt {attempt + 1} of {MaxRetries}"));
-            
         }
         catch (HttpRequestException ex)
         {
@@ -112,7 +115,6 @@ namespace CT_MKWII_WPF.Helpers;
             await Task.Delay(delay);
             progressPopupWindow.Dispatcher.Invoke(() =>
                 progressPopupWindow.SetExtraText($"Retrying... Attempt {attempt + 1} of {MaxRetries}"));
-            
         }
         catch (Exception ex)
         {
@@ -123,5 +125,6 @@ namespace CT_MKWII_WPF.Helpers;
 
     return resolvedFilePath;
 }
+
 }
 

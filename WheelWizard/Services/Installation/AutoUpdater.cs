@@ -109,16 +109,18 @@ public static class AutoUpdater
             File.Delete(newFilePath);
         
         await DownloadHelper.DownloadToLocationAsync(downloadUrl, newFilePath, Phrases.PopupText_UpdateWhWz,
-                                                Phrases.PopupText_LatestWhWzGithub);
+                                                Phrases.PopupText_LatestWhWzGithub, ForceGivenFilePath: true);
+        //very important we set this to true
+
 
         // we need to wait a bit before running the batch file to ensure the file is saved on disk
         await Task.Delay(200);
-        CreateAndRunBatchFile(currentExecutablePath, newFilePath);
+        CreateAndRunPowerShellScript(currentExecutablePath, newFilePath);
 
         Environment.Exit(0);
     }
 
-    private static void CreateAndRunBatchFile(string currentFilePath, string newFilePath)
+    private static void CreateAndRunPowerShellScript(string currentFilePath, string newFilePath)
     {
         var currentFolder = Path.GetDirectoryName(currentFilePath);
         if (currentFolder is null)
@@ -126,25 +128,82 @@ public static class AutoUpdater
             MessageBoxWindow.ShowDialog(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation);
             return;
         }
-        var batchFilePath = Path.Combine(currentFolder, "update.bat");
+        var scriptFilePath = Path.Combine(currentFolder, "update.ps1");
         var originalFileName = Path.GetFileName(currentFilePath);
         var newFileName = Path.GetFileName(newFilePath);
-
-        var batchContent = $"""
-
-                            @echo off
-                            cd /d "{currentFolder}"
-                            timeout /t 2 /nobreak
-                            del "{originalFileName}"
-                            rename "{newFileName}" "{originalFileName}"
-                            start "" "{originalFileName}"
-                            del "%~f0"
-                            """;
-
-        File.WriteAllText(batchFilePath, batchContent);
-
-        Process.Start(new ProcessStartInfo(batchFilePath) { CreateNoWindow = false, WorkingDirectory = currentFolder });
+    
+        var scriptContent = $@"
+    Write-Output 'Starting update process...'
+    
+    # Wait for the original application to exit
+    while (Get-Process -Name '{Path.GetFileNameWithoutExtension(originalFileName)}' -ErrorAction SilentlyContinue) {{
+        Write-Output 'Waiting for {originalFileName} to exit...'
+        Start-Sleep -Seconds 1
+    }}
+    
+    Write-Output 'Deleting old executable...'
+    $maxRetries = 5
+    $retryCount = 0
+    $deleted = $false
+    
+    while (-not $deleted -and $retryCount -lt $maxRetries) {{
+        try {{
+            Remove-Item -Path '{Path.Combine(currentFolder, originalFileName)}' -Force -ErrorAction Stop
+            $deleted = $true
+        }}
+        catch {{
+            Write-Output 'Failed to delete {originalFileName}. Retrying in 2 seconds...'
+            Start-Sleep -Seconds 2
+            $retryCount++
+        }}
+    }}
+    
+    if (-not $deleted) {{
+        Write-Output 'Could not delete {originalFileName}. Update aborted.'
+        pause
+        exit 1
+    }}
+    
+    Write-Output 'Renaming new executable...'
+    try {{
+        Rename-Item -Path '{Path.Combine(currentFolder, newFileName)}' -NewName '{originalFileName}' -ErrorAction Stop
+    }}
+    catch {{
+        Write-Output 'Failed to rename {newFileName} to {originalFileName}. Update aborted.'
+        pause
+        exit 1
+    }}
+    
+    Write-Output 'Starting the updated application...'
+    Start-Process -FilePath '{Path.Combine(currentFolder, originalFileName)}'
+    
+    Write-Output 'Cleaning up...'
+    Remove-Item -Path '{scriptFilePath}' -Force
+    
+    Write-Output 'Update completed successfully.'
+    ";
+    
+        File.WriteAllText(scriptFilePath, scriptContent);
+    
+        var processStartInfo = new ProcessStartInfo
+        {
+            FileName = "powershell.exe",
+            Arguments = $"-NoProfile -ExecutionPolicy Bypass -File \"{scriptFilePath}\"",
+            CreateNoWindow = false,
+            UseShellExecute = false,
+            WorkingDirectory = currentFolder
+        };
+    
+        try
+        {
+            Process.Start(processStartInfo);
+        }
+        catch (Exception ex)
+        {
+            MessageBoxWindow.ShowDialog($"Failed to execute the update script. {ex.Message}");
+        }
     }
+
     
     private static void HandleUpdateCheckError(HttpClientResult<string> response)
     {
