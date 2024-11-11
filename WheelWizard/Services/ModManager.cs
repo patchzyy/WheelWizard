@@ -9,6 +9,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -193,7 +194,7 @@ public class ModManager : INotifyPropertyChanged
             var modDirectory = ModInstallation.GetModDirectoryPath(modName);
             CreateDirectory(modDirectory);
 
-            await ModInstallation.InstallModFromFileAsync(filePaths[i], author: "-1", modID: -1);
+            await ModInstallation.InstallModFromFileAsync(filePaths[i], modName,author: "-1", modID: -1);
 
             ModProcessingProgress?.Invoke(i + 1, total, Humanizer.ReplaceDynamic(Phrases.PopupText_ProcessingXofY, i + 1, total));
         }
@@ -205,28 +206,26 @@ public class ModManager : INotifyPropertyChanged
     {
         var modName = new TextInputPopup("Enter Mod Name").ShowDialog();
         if (!IsValidName(modName)) return;
-
-        var modDirectory = ModInstallation.GetModDirectoryPath(modName);
-        CreateDirectory(modDirectory);
-
-        var total = filePaths.Length;
-        ModProcessingStarted?.Invoke();
-        for (var i = 0; i < filePaths.Length; i++)
+        var tempZipPath = Path.Combine(Path.GetTempPath(), $"{modName}.zip");
+        try
         {
-            await ModInstallation.InstallModFromFileAsync(filePaths[i], author: "-1", modID: -1);
-            ModProcessingProgress?.Invoke(i + 1, total, Humanizer.ReplaceDynamic(Phrases.PopupText_ProcessingXofY, i + 1, total));
+            using (var zipArchive = ZipFile.Open(tempZipPath, ZipArchiveMode.Create))
+            {
+                foreach (var filePath in filePaths)
+                {
+                    var entryName = Path.GetFileName(filePath);
+                    zipArchive.CreateEntryFromFile(filePath, entryName, CompressionLevel.Optimal);
+                }
+            }
+            await ModInstallation.InstallModFromFileAsync(tempZipPath, modName, author: "-1", modID: -1);
+            if (File.Exists(tempZipPath))
+                File.Delete(tempZipPath);
+            ModProcessingCompleted?.Invoke();
         }
-
-        var newMod = new Mod
+        catch (Exception ex)
         {
-            IsEnabled = true, // Default to enabled
-            Title = modName,
-            Author = "-1",
-            ModID = -1,
-            Priority = Mods.Count
-        };
-        AddMod(newMod);
-        ModProcessingCompleted?.Invoke();
+            ErrorOccurred?.Invoke($"Failed to combine and install mod: {ex.Message}");
+        }
     }
 
     public void ToggleAllMods(bool enable)

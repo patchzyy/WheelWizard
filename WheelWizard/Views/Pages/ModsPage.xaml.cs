@@ -96,23 +96,23 @@ public partial class ModsPage : Page, INotifyPropertyChanged
     {
         ModManager.ToggleAllMods(_toggleAll);
         _toggleAll = !_toggleAll;
-        // EnableDisableButton.Text = !_toggleAll ? Common.Action_DisableAll : Common.Action_EnableAll;
     }
 
     private void RenameMod_Click(object sender, RoutedEventArgs e)
     {
         var selectedMod = ModsListView.GetCurrentContextItem<Mod>();
         if (selectedMod == null) return;
-
         ModManager.RenameMod(selectedMod);
+        OnModsChanged();
     }
 
     private void DeleteMod_Click(object sender, RoutedEventArgs e)
     {
         var selectedMod = ModsListView.GetCurrentContextItem<Mod>();
         if (selectedMod == null) return;
-
         ModManager.DeleteMod(selectedMod);
+        OnModsChanged();
+        ModManager.LoadModsAsync();
     }
 
     private void OpenFolder_Click(object sender, RoutedEventArgs e)
@@ -128,18 +128,6 @@ public partial class ModsPage : Page, INotifyPropertyChanged
         var movedMod = (Mod)movedItem.DataContext;
         ModManager.ReorderMod(movedMod, newIndex);
     }
-
-    private void CheckIfSet(object sender, RoutedEventArgs e)
-    {
-        bool isRegistered = UrlProtocolManager.IsCustomSchemeRegistered(UrlProtocolManager.ProtocolName);
-        MessageBoxWindow.ShowDialog(isRegistered ? "The URL scheme is registered" : "The URL scheme is not registered");
-    }
-
-    private void RemoveUrlScheme(object sender, RoutedEventArgs e)
-    {
-        UrlProtocolManager.RemoveCustomScheme(UrlProtocolManager.ProtocolName);
-    }
-
     private void ShowLoading(bool isLoading)
     {
         Dispatcher.Invoke(() =>

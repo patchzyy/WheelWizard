@@ -1,4 +1,5 @@
-﻿using System.Media;
+﻿using CT_MKWII_WPF.Views.Components;
+using System.Media;
 using System.Windows;
 
 namespace CT_MKWII_WPF.Views.Popups;
@@ -16,9 +17,12 @@ public partial class MessageBoxWindow : PopupContent
     {
         InitializeComponent();
         ErrorTextBlock.Text = message;
-
-        // Play corresponding sound
         PlaySound(messageType);
+        if (messageType == MessageType.Message)
+        {
+            CancelButton.Variant = Button.ButtonsVariantType.Primary;
+        }
+            
     }
 
     public static void ShowDialog(string message, MessageType messageType = MessageType.Message)
@@ -56,7 +60,7 @@ public partial class MessageBoxWindow : PopupContent
                 SystemSounds.Exclamation.Play();
                 break;
             case MessageType.Message:
-                SystemSounds.Asterisk.Play();
+                SystemSounds.Hand.Play();
                 break;
         }
     }

@@ -193,7 +193,7 @@ public static class ModInstallation
     /// <summary>
     /// Installs a mod from a file. Sets Author and ModID based on parameters.
     /// </summary>
-    public static async Task InstallModFromFileAsync(string filePath, string author = "-1", int modID = -1, string givenModName = "")
+    public static async Task InstallModFromFileAsync(string filePath, string givenModName, string author = "-1", int modID = -1)
     {
         try
         {
@@ -206,22 +206,19 @@ public static class ModInstallation
             }
             
             // Prompt for mod name if not provided
-            var inputPopup = new TextInputPopup("Enter Mod Name");
-            inputPopup.PopulateText(givenModName);
-            var modName = inputPopup.ShowDialog();
-            if (string.IsNullOrWhiteSpace(modName))
+            if (string.IsNullOrWhiteSpace(givenModName))
             {
                 return;
             }
 
             // Check if a mod with the same name already exists
-            if (ModExists(ModManager.Instance.Mods, modName))
+            if (ModExists(ModManager.Instance.Mods, givenModName))
             {
-                MessageBoxWindow.ShowDialog($"Mod with name '{modName}' already exists.");
+                MessageBoxWindow.ShowDialog($"Mod with name '{givenModName}' already exists.");
                 return;
             }
             
-            var modDirectory = GetModDirectoryPath(modName);
+            var modDirectory = GetModDirectoryPath(givenModName);
             if (!Directory.Exists(modDirectory))
             {
                 Directory.CreateDirectory(modDirectory);
@@ -232,20 +229,20 @@ public static class ModInstallation
             var newMod = new Mod
             {
                 IsEnabled = true, // Default to enabled
-                Title = modName,
+                Title = givenModName,
                 Author = author,
                 ModID = modID,
                 Priority = 0 // Default priority; can be adjusted as needed
             };
 
             // Save INI file
-            var iniFilePath = Path.Combine(modDirectory, $"{modName}.ini");
+            var iniFilePath = Path.Combine(modDirectory, $"{givenModName}.ini");
             await newMod.SaveToIniAsync(iniFilePath);
 
             // Add to ModManager
             ModManager.Instance.AddMod(newMod);
 
-            MessageBoxWindow.ShowDialog($"Mod '{modName}' installed successfully.", MessageBoxWindow.MessageType.Message);
+            MessageBoxWindow.ShowDialog($"Mod '{givenModName}' installed successfully.", MessageBoxWindow.MessageType.Message);
         }
         catch (Exception ex)
         {

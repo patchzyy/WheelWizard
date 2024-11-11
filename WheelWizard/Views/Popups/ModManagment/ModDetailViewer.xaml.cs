@@ -121,17 +121,14 @@ public partial class ModDetailViewer : UserControl
         try
         {
             await PrepareToDownloadFile();
-    
             var downloadUrls = CurrentMod.OverrideDownloadUrl != null 
                 ? new List<string> { CurrentMod.OverrideDownloadUrl }
                 : CurrentMod._aFiles.Select(f => f._sDownloadUrl).ToList();
-    
             if (!downloadUrls.Any())
             {
                 MessageBoxWindow.ShowDialog("No downloadable files found for this mod.");
                 return;
             }
-    
             var progressWindow = new ProgressWindow($"Downloading {CurrentMod._sName}");
             progressWindow.Show();
             progressWindow.SetExtraText("Loading...");
@@ -140,12 +137,6 @@ public partial class ModDetailViewer : UserControl
             var fileName = GetFileNameFromUrl(url);
             var filePath = Path.Combine(ModsLaunchHelper.TempModsFolderPath, fileName);
             await DownloadHelper.DownloadToLocationAsync(url, filePath, progressWindow);
-            // foreach (var url in downloadUrls)
-            // {
-            //     var fileName = GetFileNameFromUrl(url);
-            //     var filePath = Path.Combine(ModsLaunchHelper.TempModsFolderPath, fileName);
-            //     await DownloadHelper.DownloadToLocationAsync(url, filePath, progressWindow);
-            // }
             progressWindow.Close();
             var file = Directory.GetFiles(ModsLaunchHelper.TempModsFolderPath).FirstOrDefault();
             if (file == null)
@@ -160,7 +151,15 @@ public partial class ModDetailViewer : UserControl
                 author = CurrentMod._aSubmitter._sName;
             }
             modId = CurrentMod._idRow;
-            await ModInstallation.InstallModFromFileAsync(file, author, modId, CurrentMod._sName);
+            var popup = new TextInputPopup("Enter Mod Name");
+            popup.PopulateText(CurrentMod._sName);
+            var modName = popup.ShowDialog();
+            if (string.IsNullOrEmpty(modName))
+            {
+                MessageBoxWindow.ShowDialog("Mod name not provided.");
+                return;
+            }
+            await ModInstallation.InstallModFromFileAsync(file, modName ,author, modId);
             Directory.Delete(ModsLaunchHelper.TempModsFolderPath, true);
         }
         catch (Exception ex)
