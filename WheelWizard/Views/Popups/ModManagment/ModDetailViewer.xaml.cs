@@ -136,7 +136,7 @@ public partial class ModDetailViewer : UserControl
             {
                 var fileName = GetFileNameFromUrl(url);
                 var filePath = Path.Combine(ModsLaunchHelper.TempModsFolderPath, fileName);
-                await DownloadHelper.DownloadToLocation(url, filePath, progressWindow);
+                await DownloadHelper.DownloadToLocationAsync(url, filePath, progressWindow);
             }
             progressWindow.Close();
             var file = Directory.GetFiles(ModsLaunchHelper.TempModsFolderPath).FirstOrDefault();

@@ -245,13 +245,15 @@ public static class RetroRewindUpdater
         try
         {
             popupWindow.SetExtraText($"{Common.Action_Update} {currentUpdateIndex}/{totalUpdates}: {update.Description}");
-            await DownloadHelper.DownloadToLocation(update.Url, tempZipPath, popupWindow);
+            var finalFile = await DownloadHelper.DownloadToLocationAsync(update.Url, tempZipPath, popupWindow);
 
             popupWindow.UpdateProgress(100);
             popupWindow.SetExtraText(Common.State_Extracting);
             var extractionPath = PathManager.RiivolutionWhWzFolderPath;
             Directory.CreateDirectory(extractionPath);
-            ExtractZipFile(tempZipPath, extractionPath);
+            ExtractZipFile(finalFile, extractionPath);
+            if (File.Exists(finalFile))
+                File.Delete(finalFile);
         }
         finally
         {

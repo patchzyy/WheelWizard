@@ -130,7 +130,7 @@ public static class RetroRewindInstaller
 
         try
         {
-            await DownloadHelper.DownloadToLocation(Endpoints.RRZipUrl, tempZipPath, progressWindow);
+            await DownloadHelper.DownloadToLocationAsync(Endpoints.RRZipUrl, tempZipPath, progressWindow);
             progressWindow.SetExtraText(Common.State_Extracting);
             var extractionPath = PathManager.RiivolutionWhWzFolderPath;
             ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);

@@ -108,7 +108,7 @@ public static class AutoUpdater
         if (File.Exists(newFilePath))
             File.Delete(newFilePath);
         
-        await DownloadHelper.DownloadToLocation(downloadUrl, newFilePath, Phrases.PopupText_UpdateWhWz,
+        await DownloadHelper.DownloadToLocationAsync(downloadUrl, newFilePath, Phrases.PopupText_UpdateWhWz,
                                                 Phrases.PopupText_LatestWhWzGithub);
 
         // we need to wait a bit before running the batch file to ensure the file is saved on disk

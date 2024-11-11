@@ -24,7 +24,7 @@ public static class MiiChannelLaunchHelper
             if (downloadQuestion.AwaitAnswer())
             {
                 miiChannelExists = true;
-                await DownloadHelper.DownloadToLocation(Endpoints.MiiChannelWAD, MiiChannelPath, "Downloading MiiChannel");
+                await DownloadHelper.DownloadToLocationAsync(Endpoints.MiiChannelWAD, MiiChannelPath, "Downloading MiiChannel");
                 //we wait to make sure the file is written to disk
                 await Task.Delay(200);
             }

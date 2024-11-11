@@ -11,22 +11,24 @@ namespace CT_MKWII_WPF.Helpers;
     private const int MaxRetries = 5;
     private const int TimeoutInSeconds = 30; // Adjust as needed
 
-    public static async Task DownloadToLocation(string url, string filePath, string windowTitle, string extraText = "")
+    public static async Task<string> DownloadToLocationAsync(string url, string filePath, string windowTitle, string extraText = "")
     {
         var progressWindow = new ProgressWindow(windowTitle).SetExtraText(extraText);
         progressWindow.Show();
-        await DownloadToLocation(url, filePath, progressWindow);
+        var toLocationAsync = await DownloadToLocationAsync(url, filePath, progressWindow);
         progressWindow.Close();
+        return toLocationAsync;
     }
 
-    public static async Task DownloadToLocation(string url, string filePath, ProgressWindow progressPopupWindow)
+    public static async Task<string> DownloadToLocationAsync(string url, string tempFile, ProgressWindow progressPopupWindow)
 {
-    var directory = Path.GetDirectoryName(filePath)!;
+    var directory = Path.GetDirectoryName(tempFile)!;
     if (!Directory.Exists(directory))
         Directory.CreateDirectory(directory);
 
     var attempt = 0;
     var success = false;
+    string resolvedFilePath = tempFile;
 
     while (attempt < MaxRetries && !success)
     {
@@ -39,7 +41,7 @@ namespace CT_MKWII_WPF.Helpers;
             if (response.RequestMessage == null || response.RequestMessage.RequestUri == null)
             {
                 MessageBoxWindow.ShowDialog("Failed to resolve final URL.");
-                return;
+                return null;
             }
             var finalUrl = response.RequestMessage.RequestUri.ToString();
 
@@ -59,13 +61,13 @@ namespace CT_MKWII_WPF.Helpers;
             }
 
             // Update filePath with resolved fileName
-            filePath = Path.Combine(directory, fileName);
+            resolvedFilePath  = Path.Combine(directory, fileName);
 
             var totalBytes = response.Content.Headers.ContentLength ?? -1;
             progressPopupWindow.SetGoal(totalBytes / (1024.0 * 1024.0));
 
             await using var downloadStream = await response.Content.ReadAsStreamAsync();
-            await using var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None, bufferSize: 8192, useAsync: true);
+            await using var fileStream = new FileStream(resolvedFilePath , FileMode.Create, FileAccess.Write, FileShare.None, bufferSize: 8192, useAsync: true);
             var downloadedBytes = 0L;
             const int bufferSize = 8192;
             var buffer = new byte[bufferSize];
@@ -118,6 +120,8 @@ namespace CT_MKWII_WPF.Helpers;
             break;
         }
     }
+
+    return resolvedFilePath;
 }
 }
 
