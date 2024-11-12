@@ -16,7 +16,7 @@ namespace CT_MKWII_WPF.Services.Installation;
 
 public static class AutoUpdater
 {
-    public const string CurrentVersion = "1.8.3";
+    public const string CurrentVersion = "1.8.4";
     public static async Task CheckForUpdatesAsync()
     {
         var response = await HttpClientHelper.GetAsync<string>(Endpoints.WhWzLatestReleasesUrl);

@@ -38,6 +38,7 @@ public class ModManager : INotifyPropertyChanged
     private ModManager()
     {
         _mods = new ObservableCollection<Mod>();
+        LoadModsAsync();
     }
 
     // Events to communicate with the frontend
