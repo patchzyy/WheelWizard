@@ -7,6 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace CT_MKWII_WPF.Services.Installation;
 public static class ModInstallation
@@ -116,22 +118,31 @@ public static class ModInstallation
     public static bool ModExists(ObservableCollection<Mod> mods, string modName) =>
         mods.Any(mod => mod.Title.Equals(modName, StringComparison.OrdinalIgnoreCase));
 
-    public static void ProcessFile(string file, string destinationDirectory)
+    public static void ProcessFile(string file, string destinationDirectory, ProgressWindow progressWindow)
     {
         var extension = Path.GetExtension(file).ToLowerInvariant();
-    
+        
         if (!Directory.Exists(destinationDirectory))
             Directory.CreateDirectory(destinationDirectory);
-    
+        
         try
         {
             // Determine the archive type and extract accordingly
             using var archive = OpenArchive(file, extension);
             if (archive == null)
                 throw new Exception($"Unsupported archive format: {extension}");
+            
+            var totalEntries = archive.Entries.Count(entry => !entry.IsDirectory);
+            var processedEntries = 0;
     
             foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
             {
+                processedEntries++;
+                
+                // Update the progress window
+                var progress = (int)((processedEntries / (double)totalEntries) * 100);
+                progressWindow.Dispatcher.Invoke(() => progressWindow.UpdateProgress(progress));
+                
                 // Normalize entry path by removing empty folder segments
                 var sanitizedKey = string.Join(Path.DirectorySeparatorChar.ToString(),
                     entry.Key.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
@@ -169,6 +180,7 @@ public static class ModInstallation
     }
 
 
+
     
     private static IArchive OpenArchive(string filePath, string extension)
     {
@@ -195,6 +207,7 @@ public static class ModInstallation
     /// </summary>
     public static async Task InstallModFromFileAsync(string filePath, string givenModName, string author = "-1", int modID = -1)
     {
+        ProgressWindow progressWindow = null;
         try
         {
             if (!File.Exists(filePath))
@@ -202,9 +215,10 @@ public static class ModInstallation
             var extension = Path.GetExtension(filePath).ToLowerInvariant();
             if (extension != ".zip" && extension != ".7z" && extension != ".rar")
             {
-                throw new InvalidOperationException($"Unsupported file type: {extension}. Only .zip, .7z, and .rar files are supported.");
+                throw new InvalidOperationException(
+                    $"Unsupported file type: {extension}. Only .zip, .7z, and .rar files are supported.");
             }
-            
+
             // Prompt for mod name if not provided
             if (string.IsNullOrWhiteSpace(givenModName))
             {
@@ -217,13 +231,18 @@ public static class ModInstallation
                 MessageBoxWindow.ShowDialog($"Mod with name '{givenModName}' already exists.");
                 return;
             }
-            
+
+            // Initialize progress window
+            progressWindow = new ProgressWindow("Installing Mod", Application.Current.MainWindow);
+            progressWindow.SetGoal("Extracting files...");
+            progressWindow.Show();
+
             var modDirectory = GetModDirectoryPath(givenModName);
             if (!Directory.Exists(modDirectory))
             {
                 Directory.CreateDirectory(modDirectory);
             }
-            await Task.Run(() => ProcessFile(filePath, modDirectory));
+            await Task.Run(() => ProcessFile(filePath, modDirectory, progressWindow));
 
             // Create Mod instance
             var newMod = new Mod
@@ -242,11 +261,16 @@ public static class ModInstallation
             // Add to ModManager
             ModManager.Instance.AddMod(newMod);
 
-            MessageBoxWindow.ShowDialog($"Mod '{givenModName}' installed successfully.", MessageBoxWindow.MessageType.Message);
+            MessageBoxWindow.ShowDialog($"Mod '{givenModName}' installed successfully.",
+                MessageBoxWindow.MessageType.Message);
         }
         catch (Exception ex)
         {
             MessageBoxWindow.ShowDialog($"Failed to install mod: {ex.Message}");
+        }
+        finally
+        {
+            progressWindow?.Close();
         }
     }
 }
