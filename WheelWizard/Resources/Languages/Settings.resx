@@ -162,4 +162,7 @@
     <data name="Value_Language_FinnishOg" xml:space="preserve">
         <value>Finnish</value>
     </data>
+    <data name="Option_RemoveBlur" xml:space="preserve">
+        <value>Remove Blur</value>
+    </data>
 </root>

@@ -18,6 +18,7 @@ public class SettingsManager
 
     public static Setting SAVED_WINDOW_SCALE = new WhWzSetting(typeof(double), "WindowScale", 1.0).SetValidation(value => (double)(value ?? -1) >= 0.5 && (double)(value ?? -1) <= 2.0);
     public static Setting RR_LANGUAGE = new WhWzSetting(typeof(int), "RR_Language", 0).SetValidation(value => SettingValues.RrLanguages.ContainsKey((int)(value ?? -1)));
+    public static Setting REMOVE_BLUR = new WhWzSetting(typeof(bool), "REMOVE_BLUR", true);
     public static Setting WW_LANGUAGE = new WhWzSetting(typeof(string), "WW_Language", "en").SetValidation(value => SettingValues.WhWzLanguages.ContainsKey((string)value!));
     
     // Dolphin Settings

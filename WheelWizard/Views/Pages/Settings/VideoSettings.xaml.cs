@@ -33,6 +33,7 @@ public partial class VideoSettings : UserControl
         RecommendedButton.IsChecked = (bool)SettingsManager.RECOMMENDED_SETTINGS.Get();
       
         ShowFPSButton.IsChecked = (bool)SettingsManager.SHOW_FPS.Get();
+        RemoveBlurButton.IsChecked = (bool)SettingsManager.REMOVE_BLUR.Get();
         var finalResolution = (int)SettingsManager.INTERNAL_RESOLUTION.Get();
         if (finalResolution < 0 || finalResolution > ResolutionStackPanel.Children.Count)
             return;
@@ -79,6 +80,7 @@ public partial class VideoSettings : UserControl
     private void VSync_OnClick(object sender, RoutedEventArgs e) => SettingsManager.VSYNC.Set(VSyncButton.IsChecked == true);
     private void Recommended_OnClick(object sender, RoutedEventArgs e) => SettingsManager.RECOMMENDED_SETTINGS.Set(RecommendedButton.IsChecked == true);
     private void ShowFPS_OnClick(object sender, RoutedEventArgs e) => SettingsManager.SHOW_FPS.Set(ShowFPSButton.IsChecked == true);
+    private void RemoveBlur_OnClick(object sender, RoutedEventArgs e) => SettingsManager.REMOVE_BLUR.Set(RemoveBlurButton.IsChecked == true);
 
     private void RendererDropdown_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {

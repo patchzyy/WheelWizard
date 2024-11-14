@@ -213,6 +213,15 @@ namespace CT_MKWII_WPF.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove Blur.
+        /// </summary>
+        public static string Option_RemoveBlur {
+            get {
+                return ResourceManager.GetString("Option_RemoveBlur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Renderer.
         /// </summary>
         public static string Option_Renderer {
