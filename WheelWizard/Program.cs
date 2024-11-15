@@ -1,7 +1,7 @@
 using Avalonia;
 using System;
 
-namespace CT_MKWII_WPF;
+namespace WheelWizard;
 
 public class Program
 {
@@ -18,7 +18,7 @@ public class Program
     }
     
     public static AppBuilder BuildAvaloniaApp()
-        => AppBuilder.Configure<CT_MKWII_WPF.AvaloniaViews.App>()
+        => AppBuilder.Configure<WheelWizard.Views.App>()
                      .UsePlatformDetect()
                      .WithInterFont()
                      .LogToTrace();

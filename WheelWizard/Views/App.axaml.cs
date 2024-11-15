@@ -2,7 +2,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 
-namespace CT_MKWII_WPF.AvaloniaViews;
+namespace WheelWizard.Views;
 
 public partial class App : Application
 {
