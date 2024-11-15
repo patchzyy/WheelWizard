@@ -6,7 +6,6 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Views/Styles/Dropdown.xaml" />
                 <ResourceDictionary Source="WPFViews/Styles/Constants.xaml" />
                 <ResourceDictionary Source="WPFViews/Styles/ButtonStyles.xaml" />
                 <ResourceDictionary Source="WPFViews/Styles/TextStyles.xaml" />
