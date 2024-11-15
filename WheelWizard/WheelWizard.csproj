@@ -3,6 +3,10 @@
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
         <DefineConstants>RELEASE_BUILD</DefineConstants>
     </PropertyGroup>
+
+    <PropertyGroup>
+        <StartupObject>CT_MKWII_WPF.Program</StartupObject>
+    </PropertyGroup>
     
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
@@ -14,6 +18,8 @@
         <Description>This program will manage RetroRewind and mods :)</Description>
         <Copyright>yes,no... maybe</Copyright>
         <RepositoryUrl>https://github.com/patchzyy/WheelWizard</RepositoryUrl>
+
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
     </PropertyGroup>
 
     <ItemGroup>
@@ -36,6 +42,14 @@
         <PackageReference Include="SharpCompress" Version="0.38.0" />
         <PackageReference Include="SharpVectors" Version="1.8.4" />
         <PackageReference Include="System.Management" Version="9.0.0-preview.3.24172.9" />
+
+
+        <PackageReference Include="Avalonia" Version="11.0.10"/>
+        <PackageReference Include="Avalonia.Desktop" Version="11.0.10"/>
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.10"/>
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.10"/>
+        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.10"/>
     </ItemGroup>
 
     <ItemGroup>
