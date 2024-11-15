@@ -1,10 +1,10 @@
-using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Models.Enums;
-using CT_MKWII_WPF.Models.Settings;
+using WheelWizard.Models.Enums;
 using System;
 using System.Linq;
+using WheelWizard.Helpers;
+using WheelWizard.Models.Settings;
 
-namespace CT_MKWII_WPF.Services.Settings;
+namespace WheelWizard.Services.Settings;
 
 public class SettingsManager
 {

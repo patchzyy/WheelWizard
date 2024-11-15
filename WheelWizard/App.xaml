@@ -1,22 +1,23 @@
-﻿<Application x:Class="CT_MKWII_WPF.App"
+﻿<Application x:Class="WheelWizard.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:converters="clr-namespace:CT_MKWII_WPF.Views.Converters"
-             StartupUri="Views/Layout.xaml">
+             xmlns:converters="clr-namespace:WheelWizard.Views.Converters"
+             StartupUri="WPFViews/Layout.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Views/Styles/Constants.xaml" />
-                <ResourceDictionary Source="Views/Styles/ButtonStyles.xaml" />
-                <ResourceDictionary Source="Views/Styles/TextStyles.xaml" />
-                <ResourceDictionary Source="Views/Styles/CheckboxStyles.xaml" />
-                <ResourceDictionary Source="Views/Styles/Converters.xaml" />
-                <ResourceDictionary Source="Views/Styles/ContextMenuStyles.xaml" />
-                <ResourceDictionary Source="Views/Styles/ScrollBarStyle.xaml" />
-                <ResourceDictionary Source="Views/Styles/InputFieldStyles.xaml" />
-                <ResourceDictionary Source="Views/Styles/SettingsBlockStyle.xaml" />
                 <ResourceDictionary Source="Views/Styles/Dropdown.xaml" />
-                <ResourceDictionary Source="Views/Styles/ModpageStyles.xaml" />
+                <ResourceDictionary Source="WPFViews/Styles/Constants.xaml" />
+                <ResourceDictionary Source="WPFViews/Styles/ButtonStyles.xaml" />
+                <ResourceDictionary Source="WPFViews/Styles/TextStyles.xaml" />
+                <ResourceDictionary Source="WPFViews/Styles/CheckboxStyles.xaml" />
+                <ResourceDictionary Source="WPFViews/Styles/Converters.xaml" />
+                <ResourceDictionary Source="WPFViews/Styles/ContextMenuStyles.xaml" />
+                <ResourceDictionary Source="WPFViews/Styles/ScrollBarStyle.xaml" />
+                <ResourceDictionary Source="WPFViews/Styles/InputFieldStyles.xaml" />
+                <ResourceDictionary Source="WPFViews/Styles/SettingsBlockStyle.xaml" />
+                <ResourceDictionary Source="WPFViews/Styles/Dropdown.xaml" />
+                <ResourceDictionary Source="WPFViews/Styles/ModpageStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
             
             <converters:MultiplierValueConverter x:Key="MultiplierValueConverter"/>

@@ -1,4 +1,4 @@
-namespace CT_MKWII_WPF.Models.Enums;
+namespace WheelWizard.Models.Enums;
 
 public enum PlayerWinPosition
 {

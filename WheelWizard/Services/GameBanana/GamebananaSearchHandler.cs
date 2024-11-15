@@ -1,8 +1,8 @@
-﻿using CT_MKWII_WPF.Models.GameBanana;
-using System;
+﻿using System;
 using System.Net;
+using WheelWizard.Models.GameBanana;
 
-namespace CT_MKWII_WPF.Services.GameBanana;
+namespace WheelWizard.Services.GameBanana;
 
 using System.Threading.Tasks;
 using Helpers;

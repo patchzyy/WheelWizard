@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-namespace CT_MKWII_WPF.Models.Settings;
+namespace WheelWizard.Models.Settings;
 
 public class Mod : INotifyPropertyChanged
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CT_MKWII_WPF.Models.GameBanana;
+namespace WheelWizard.Models.GameBanana;
 
 public class ModDetailResponse
 {

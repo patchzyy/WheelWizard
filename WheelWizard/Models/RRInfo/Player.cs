@@ -1,8 +1,8 @@
-using CT_MKWII_WPF.Models.Enums;
-using CT_MKWII_WPF.Utilities;
 using System.Collections.Generic;
+using WheelWizard.Models.Enums;
+using WheelWizard.Utilities;
 
-namespace CT_MKWII_WPF.Models.RRInfo;
+namespace WheelWizard.Models.RRInfo;
 
 public class Player 
 {

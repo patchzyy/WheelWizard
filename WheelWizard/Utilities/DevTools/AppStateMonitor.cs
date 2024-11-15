@@ -1,7 +1,7 @@
-using CT_MKWII_WPF.Utilities.RepeatedTasks;
 using System.Threading.Tasks;
+using WheelWizard.Utilities.RepeatedTasks;
 
-namespace CT_MKWII_WPF.Utilities.DevTools;
+namespace WheelWizard.Utilities.DevTools;
 
 public class AppStateMonitor : RepeatedTaskManager
 {

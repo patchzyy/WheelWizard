@@ -1,16 +1,16 @@
-﻿using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Models.Settings;
-using CT_MKWII_WPF.Resources.Languages;
-using CT_MKWII_WPF.Services.Settings;
-using CT_MKWII_WPF.Views.Popups;
+﻿using WheelWizard.Services.Settings;
 using System;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using WheelWizard.Helpers;
+using WheelWizard.Models.Settings;
+using WheelWizard.Resources.Languages;
+using WheelWizard.Views.Popups;
 
-namespace CT_MKWII_WPF.Services.Launcher;
+namespace WheelWizard.Services.Launcher;
 
 public static class ModsLaunchHelper
 {

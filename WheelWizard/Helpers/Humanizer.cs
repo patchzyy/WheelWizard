@@ -1,7 +1,7 @@
-using CT_MKWII_WPF.Resources.Languages;
 using System;
+using WheelWizard.Resources.Languages;
 
-namespace CT_MKWII_WPF.Helpers;
+namespace WheelWizard.Helpers;
 
 public static class Humanizer
 {

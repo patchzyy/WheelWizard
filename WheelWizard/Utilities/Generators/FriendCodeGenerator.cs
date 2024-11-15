@@ -1,9 +1,9 @@
-﻿using CT_MKWII_WPF.Services.WiiManagement.SaveData;
-using System;
+﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using WheelWizard.Services.WiiManagement.SaveData;
 
-namespace CT_MKWII_WPF.Utilities.Generators;
+namespace WheelWizard.Utilities.Generators;
 
 public class FriendCodeGenerator
 {

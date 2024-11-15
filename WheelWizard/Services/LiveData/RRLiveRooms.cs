@@ -1,12 +1,12 @@
-using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Models.RRInfo;
-using CT_MKWII_WPF.Utilities;
-using CT_MKWII_WPF.Utilities.RepeatedTasks;
+using WheelWizard.Utilities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WheelWizard.Helpers;
+using WheelWizard.Models.RRInfo;
+using WheelWizard.Utilities.RepeatedTasks;
 
-namespace CT_MKWII_WPF.Services.LiveData;
+namespace WheelWizard.Services.LiveData;
 
 public class RRLiveRooms : RepeatedTaskManager
 {

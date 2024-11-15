@@ -1,12 +1,12 @@
-using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Models.Settings;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using WheelWizard.Helpers;
+using WheelWizard.Models.Settings;
 using JsonElement = System.Text.Json.JsonElement;
 using JsonSerializerOptions = System.Text.Json.JsonSerializerOptions;
 
-namespace CT_MKWII_WPF.Services.Settings;
+namespace WheelWizard.Services.Settings;
 
 public class WhWzSettingManager
 {

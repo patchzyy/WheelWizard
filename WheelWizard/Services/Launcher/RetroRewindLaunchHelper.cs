@@ -1,10 +1,10 @@
-﻿using CT_MKWII_WPF.Models.RRLaunchModels;
-using CT_MKWII_WPF.Services.Settings;
-using System.IO;
+﻿using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using WheelWizard.Models.RRLaunchModels;
+using WheelWizard.Services.Settings;
 
-namespace CT_MKWII_WPF.Services.Launcher;
+namespace WheelWizard.Services.Launcher;
 
 public static class RetroRewindLaunchHelper
 {

@@ -1,11 +1,4 @@
-﻿using CT_MKWII_WPF.Models.GameData;
-using CT_MKWII_WPF.Models.RRInfo;
-using CT_MKWII_WPF.Resources.Languages;
-using CT_MKWII_WPF.Services.LiveData;
-using CT_MKWII_WPF.Services.Settings;
-using CT_MKWII_WPF.Utilities.Generators;
-using CT_MKWII_WPF.Utilities.RepeatedTasks;
-using CT_MKWII_WPF.Views.Popups;
+﻿using WheelWizard.Resources.Languages;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,12 +6,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using WheelWizard.Models.GameData;
+using WheelWizard.Models.RRInfo;
+using WheelWizard.Services.LiveData;
+using WheelWizard.Services.Settings;
+using WheelWizard.Utilities.Generators;
+using WheelWizard.Utilities.RepeatedTasks;
+using WheelWizard.Views.Popups;
 
 //big big thanks to https://kazuki-4ys.github.io/web_apps/FaceThief/ for the JS implementation of reading the rksys file
 //reminder, big endian!!!!
 
 
-namespace CT_MKWII_WPF.Services.WiiManagement.SaveData;
+namespace WheelWizard.Services.WiiManagement.SaveData;
 
 public class GameDataLoader : RepeatedTaskManager
 {

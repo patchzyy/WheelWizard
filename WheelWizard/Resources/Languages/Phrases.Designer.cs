@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CT_MKWII_WPF.Resources.Languages {
+namespace WheelWizard.Resources.Languages {
     using System;
     
     
@@ -38,7 +38,7 @@ namespace CT_MKWII_WPF.Resources.Languages {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CT_MKWII_WPF.Resources.Languages.Phrases", typeof(Phrases).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WheelWizard.Resources.Languages.Phrases", typeof(Phrases).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

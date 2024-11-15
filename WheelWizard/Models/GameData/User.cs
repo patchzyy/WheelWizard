@@ -1,7 +1,7 @@
-﻿using CT_MKWII_WPF.Models.RRInfo;
+﻿using WheelWizard.Models.RRInfo;
 using System.Collections.Generic;
 
-namespace CT_MKWII_WPF.Models.GameData;
+namespace WheelWizard.Models.GameData;
 
 public class User : BasePlayer
 {

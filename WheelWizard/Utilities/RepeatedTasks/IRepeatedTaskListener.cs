@@ -1,4 +1,4 @@
-namespace CT_MKWII_WPF.Utilities.RepeatedTasks;
+namespace WheelWizard.Utilities.RepeatedTasks;
 
 // NOTE: if you subscribe a page, NEVER forget to unsubscribe this page on unload
 public interface IRepeatedTaskListener

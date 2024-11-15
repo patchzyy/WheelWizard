@@ -1,9 +1,4 @@
-﻿using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Models;
-using CT_MKWII_WPF.Models.Github;
-using CT_MKWII_WPF.Resources.Languages;
-using CT_MKWII_WPF.Views.Popups;
-using Semver;
+﻿using Semver;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -11,8 +6,13 @@ using System.Security.Principal;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WheelWizard.Helpers;
+using WheelWizard.Models;
+using WheelWizard.Models.Github;
+using WheelWizard.Resources.Languages;
+using WheelWizard.Views.Popups;
 
-namespace CT_MKWII_WPF.Services.Installation;
+namespace WheelWizard.Services.Installation;
 
 public static class AutoUpdater
 {

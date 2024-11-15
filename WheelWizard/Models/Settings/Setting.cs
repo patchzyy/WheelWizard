@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace CT_MKWII_WPF.Models.Settings;
+namespace WheelWizard.Models.Settings;
 
 public abstract class Setting
 {

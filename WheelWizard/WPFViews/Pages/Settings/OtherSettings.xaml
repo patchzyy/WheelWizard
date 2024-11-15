@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="WheelWizard.Views.Pages.Settings.OtherSettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:WheelWizard.Views.Pages"
+             xmlns:components="clr-namespace:WheelWizard.Views.Components"
+             xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
+             mc:Ignorable="d"
+             d:DesignHeight="831" d:DesignWidth="444">
+    <Grid  x:Name="DolphinBorder">
+        <StackPanel Margin="0,15,0,0">
+            
+            <Border Padding="4" Margin="0,-10,0,10"  x:Name="DisabledWarningText"
+                    CornerRadius="{StaticResource GlobalCornerRadius}" 
+                    HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                    Background="{StaticResource WarningColor}">
+                <TextBlock HorizontalAlignment="Center"
+                           FontWeight="SemiBold" Text="{x:Static lang:Settings.InfoText_Topbar_LocationWarning}"
+                           Foreground="{StaticResource BackgroundColor}" >
+                </TextBlock>
+            </Border>
+            
+            <components:FormFieldLabel Text="{x:Static lang:Settings.Section_Wii}" />
+            <Border Style="{StaticResource SettingsBlockStyle}">
+                <StackPanel>
+                    <CheckBox Margin="0,2" IsChecked="False"
+                              Style="{StaticResource DarkSwitch}"
+                              x:Name="DisableForce"
+                              Click="ClickForceWiimote">
+                        <components:FormFieldLabel Text="{x:Static lang:Settings.Option_ForceDisableWiimote}"
+                                                   TipText="{x:Static lang:Settings.InfoText_ForceDisableWiimote}" />
+                    </CheckBox>
+                    <CheckBox Margin="0,2" IsChecked="False"
+                              Style="{StaticResource DarkSwitch}"
+                              x:Name="LaunchWithDolphin"
+                              Click="ClickLaunchWithDolphinWindow">
+                        <components:FormFieldLabel Text="{x:Static lang:Settings.Option_LaunchWithDolphin}"
+                                                   TipText="{x:Static lang:Settings.InfoText_LaunchWithDolphin}"/>
+                    </CheckBox>
+                </StackPanel>
+            </Border>
+            
+                       
+            <components:FormFieldLabel Text="{x:Static lang:Settings.Section_Language}" />
+            <Border Style="{StaticResource SettingsBlockStyle}">
+                <StackPanel>
+                    <components:Dropdown
+                        Label="{x:Static lang:Settings.Option_RRLanguage}"
+                        SelectionChanged="RrLanguageDropdown_OnSelectionChanged"
+                        x:Name="InGameLanguageDropdown"/>
+                    
+                    <components:Dropdown Margin="0,6,0,0"
+                                         Label="{x:Static lang:Settings.Option_WhWzLanguage}"
+                                         SelectionChanged="WhWzLanguageDropdown_OnSelectionChanged"
+                                         x:Name="WhWzLanguageDropdown"/>
+                    <TextBlock Style="{StaticResource TinyText}" Visibility="Collapsed" x:Name="TranslationsPercentageText"/>
+                    
+                    <Grid Margin="0,10,0,0">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource TinyText}" Text="{x:Static lang:Phrases.Text_ThanksTranslators}"/>
+                            <TextBlock Style="{StaticResource TinyText}" Text="Eppe, GreenWeebo38/Weebo, kytronix, Noël, Haru00007, JGavidia"/>
+                        </StackPanel>
+                        
+                        <Border ToolTipService.InitialShowDelay="50"
+                                ToolTipService.ShowDuration="10000"
+                                ToolTipService.BetweenShowDelay="0" VerticalAlignment="Top" HorizontalAlignment="Right">
+                            <icon:PackIconMaterial Kind="Information" Width="14" Height="14"
+                                                   Foreground="{StaticResource FormFieldLabelColor}"/>
+                            <Border.ToolTip>
+                                <components:ToolTipMessage Alignment="TopCenter" Content="If you are willing to translate for RetroRewind and WheelWizard. Be sure to reach out to Eppe or WantToBeeMe :)" />
+                            </Border.ToolTip>
+                        </Border>
+                       
+                     
+                    </Grid>
+                 
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Grid>
+</UserControl>

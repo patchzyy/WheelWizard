@@ -1,10 +1,10 @@
-using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Services.Settings;
-using CT_MKWII_WPF.Views.Popups;
+using WheelWizard.Services.Settings;
 using System.IO;
 using System.Threading.Tasks;
+using WheelWizard.Helpers;
+using WheelWizard.Views.Popups;
 
-namespace CT_MKWII_WPF.Services.Launcher;
+namespace WheelWizard.Services.Launcher;
 
 public static class MiiChannelLaunchHelper
 {

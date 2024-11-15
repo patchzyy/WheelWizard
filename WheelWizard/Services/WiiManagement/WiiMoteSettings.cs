@@ -1,11 +1,11 @@
-﻿using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Resources.Languages;
-using CT_MKWII_WPF.Services.Settings;
+﻿using WheelWizard.Resources.Languages;
 using System;
 using System.IO;
 using System.Windows;
+using WheelWizard.Helpers;
+using WheelWizard.Services.Settings;
 
-namespace CT_MKWII_WPF.Services.WiiManagement;
+namespace WheelWizard.Services.WiiManagement;
 
 public static class WiiMoteSettings
 {

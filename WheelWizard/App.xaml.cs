@@ -1,12 +1,12 @@
-﻿using CT_MKWII_WPF.Services.Installation;
-using CT_MKWII_WPF.Services.Settings;
-using CT_MKWII_WPF.Services.UrlProtocol;
-using CT_MKWII_WPF.Views.Popups;
+﻿using WheelWizard.Views.Popups;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
+using WheelWizard.Services.Installation;
+using WheelWizard.Services.Settings;
+using WheelWizard.Services.UrlProtocol;
 
-namespace CT_MKWII_WPF;
+namespace WheelWizard;
 
 public partial class App : Application
 {

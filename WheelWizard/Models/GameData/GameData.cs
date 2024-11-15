@@ -1,7 +1,7 @@
-﻿using CT_MKWII_WPF.Services.Settings;
+﻿using WheelWizard.Services.Settings;
 using System.Collections.Generic;
 
-namespace CT_MKWII_WPF.Models.GameData;
+namespace WheelWizard.Models.GameData;
 
 public class GameData
 {

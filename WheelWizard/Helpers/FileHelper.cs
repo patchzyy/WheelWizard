@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace CT_MKWII_WPF.Helpers;
+namespace WheelWizard.Helpers;
 
 // From now on we to have this FileHelper as a middle man whenever we do anything file related. This makes
 // it easier to create helper methods, mock data, and most importantly, easy to make it multi-platform later on

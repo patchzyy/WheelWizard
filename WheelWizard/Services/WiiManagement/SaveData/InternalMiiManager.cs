@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace CT_MKWII_WPF.Services.WiiManagement.SaveData;
+namespace WheelWizard.Services.WiiManagement.SaveData;
 
 public static class InternalMiiManager
 {

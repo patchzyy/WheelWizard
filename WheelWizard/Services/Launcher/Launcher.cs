@@ -1,13 +1,13 @@
-using CT_MKWII_WPF.Resources.Languages;
-using CT_MKWII_WPF.Services.Settings;
-using CT_MKWII_WPF.Services.WiiManagement;
-using CT_MKWII_WPF.Views.Popups;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+using WheelWizard.Resources.Languages;
+using WheelWizard.Services.Settings;
+using WheelWizard.Services.WiiManagement;
+using WheelWizard.Views.Popups;
 
-namespace CT_MKWII_WPF.Services.Launcher;
+namespace WheelWizard.Services.Launcher;
 
 public static class Launcher
 {

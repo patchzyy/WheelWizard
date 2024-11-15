@@ -7,7 +7,7 @@
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
         <TargetFramework>net7.0-windows</TargetFramework>
-        <RootNamespace>CT_MKWII_WPF</RootNamespace>
+        <RootNamespace>WheelWizard</RootNamespace>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
         <Version>1.2.0</Version>

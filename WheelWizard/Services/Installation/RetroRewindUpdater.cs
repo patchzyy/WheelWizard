@@ -1,7 +1,4 @@
-﻿using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Resources.Languages;
-using CT_MKWII_WPF.Views.Popups;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -9,8 +6,11 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WheelWizard.Helpers;
+using WheelWizard.Resources.Languages;
+using WheelWizard.Views.Popups;
 
-namespace CT_MKWII_WPF.Services.Installation;
+namespace WheelWizard.Services.Installation;
 
 public static class RetroRewindUpdater
 {

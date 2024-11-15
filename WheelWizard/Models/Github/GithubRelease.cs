@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace CT_MKWII_WPF.Models.Github;
+namespace WheelWizard.Models.Github;
 
 public class GithubRelease
 {

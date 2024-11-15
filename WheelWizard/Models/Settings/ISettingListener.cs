@@ -1,4 +1,4 @@
-namespace CT_MKWII_WPF.Models.Settings;
+namespace WheelWizard.Models.Settings;
 
 public interface ISettingListener
 {

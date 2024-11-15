@@ -1,7 +1,7 @@
-using CT_MKWII_WPF.Models.Enums;
 using System.Linq;
+using WheelWizard.Models.Enums;
 
-namespace CT_MKWII_WPF.Utilities;
+namespace WheelWizard.Utilities;
 
 public class FriendCodeManager
 {
