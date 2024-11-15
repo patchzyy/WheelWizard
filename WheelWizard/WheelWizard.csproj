@@ -30,6 +30,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <!-- Everyhitng from the OG Wheel wizard project -->
         <PackageReference Include="HtmlRenderer.WPF" Version="1.5.1-beta1" />
         <PackageReference Include="ini-parser" Version="2.5.2" />
         <PackageReference Include="MahApps.Metro.IconPacks" Version="5.0.0" />
@@ -43,12 +44,11 @@
         <PackageReference Include="SharpVectors" Version="1.8.4" />
         <PackageReference Include="System.Management" Version="9.0.0-preview.3.24172.9" />
 
-
+        <!-- Everyhitng specifically for Avalonia -->
         <PackageReference Include="Avalonia" Version="11.0.10"/>
         <PackageReference Include="Avalonia.Desktop" Version="11.0.10"/>
         <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.10"/>
         <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.10"/>
-        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.10"/>
     </ItemGroup>
 
