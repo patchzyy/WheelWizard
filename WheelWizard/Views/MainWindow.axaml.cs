@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace CT_MKWII_WPF.AvaloniaViews;
+namespace WheelWizard.Views;
 
 public partial class MainWindow : Window
 {
