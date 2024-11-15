@@ -4,8 +4,10 @@ using CT_MKWII_WPF.Resources.Languages;
 using CT_MKWII_WPF.Services.Settings;
 using CT_MKWII_WPF.Views.Popups;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,10 +22,11 @@ public static class ModsLaunchHelper
     public static string ModsFolderPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII", "Mods");
     public static string TempModsFolderPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII", "Mods", "Temp");
     
-    public static async Task PrepareModsForLaunch()
+    
+public static async Task PrepareModsForLaunch()
     {
-        var mods = ModManager.Instance.Mods.Where(mod => mod.IsEnabled).ToArray();
-        if (mods.Length == 0)
+        var enabledMods = ModManager.Instance.Mods.Where(mod => mod.IsEnabled).ToArray();
+        if (enabledMods.Length == 0)
         {
             if (Directory.Exists(MyStuffFolderPath) && Directory.EnumerateFiles(MyStuffFolderPath).Any())
             {
@@ -31,56 +34,96 @@ public static class ModsLaunchHelper
                                         .SetButtonText(Common.Action_Delete, Common.Action_Keep)
                                         .SetMainText(Phrases.PopupText_ModsFound)
                                         .SetExtraText(Phrases.PopupText_ModsFoundQuestion);
-                if (modsFoundQuestion.AwaitAnswer())
+                if (modsFoundQuestion.AwaitAnswer()) // Assuming AwaitAnswer is async
                     Directory.Delete(MyStuffFolderPath, true);
-                
+
                 return;
             }
         }
-        var reversedMods = ModManager.Instance.Mods.Reverse().ToArray();
+        
+        var allModFiles = enabledMods
+            .SelectMany(mod => GetModFiles(mod))
+            .ToDictionary(file => Path.GetRelativePath(ModsFolderPath, file), file => file);
         
         if (Directory.Exists(MyStuffFolderPath))
-            Directory.Delete(MyStuffFolderPath, true);
+        {
+            var existingFiles = Directory.GetFiles(MyStuffFolderPath, "*.*", SearchOption.AllDirectories);
+            foreach (var existingFile in existingFiles)
+            {
+                var relativePath = Path.GetRelativePath(MyStuffFolderPath, existingFile);
+                if (!allModFiles.ContainsKey(relativePath))
+                {
+                    File.Delete(existingFile);
+                    // Optionally, remove empty directories
+                    var directory = Path.GetDirectoryName(existingFile);
+                    if (directory != null && !Directory.EnumerateFileSystemEntries(directory).Any())
+                    {
+                        Directory.Delete(directory, true);
+                    }
+                }
+            }
+        }
+        else
+        {
+            Directory.CreateDirectory(MyStuffFolderPath);
+        }
         
-        
+        // Step 3: Show progress window
+        var totalFilesToProcess = allModFiles.Count;
         var progressWindow = new ProgressWindow(Phrases.PopupText_InstallingMods)
-            .SetGoal(Humanizer.ReplaceDynamic(Phrases.PopupText_InstallingModsCount, mods.Length)!);
+            .SetGoal(Humanizer.ReplaceDynamic(Phrases.PopupText_InstallingModsCount, totalFilesToProcess));
         progressWindow.Show();
-        
+
+        var processedFiles = 0;
+
         await Task.Run(() =>
         {
-            foreach (var mod in reversedMods)
+            Parallel.ForEach(allModFiles, kvp =>
             {
-                if (mod.IsEnabled) 
-                    InstallMod(mod, progressWindow);
-            }
+                var relativePath = kvp.Key;
+                var sourceFile = kvp.Value;
+                var destinationFile = Path.Combine(MyStuffFolderPath, relativePath);
+
+                Directory.CreateDirectory(Path.GetDirectoryName(destinationFile)!);
+
+                var sourceInfo = new FileInfo(sourceFile);
+                var destInfo = File.Exists(destinationFile) ? new FileInfo(destinationFile) : null;
+
+                var shouldCopy = destInfo == null || sourceInfo.Length != destInfo.Length ||
+                                  sourceInfo.LastWriteTimeUtc != destInfo.LastWriteTimeUtc;
+
+                if (shouldCopy)
+                {
+                    File.Copy(sourceFile, destinationFile, true);
+                }
+
+                // Update progress
+                processedFiles++;
+                var progress = (int)((processedFiles / (double)totalFilesToProcess) * 100);
+                Application.Current.Dispatcher.Invoke(() => progressWindow.UpdateProgress(progress));
+                Application.Current.Dispatcher.Invoke(() =>
+                    progressWindow.SetExtraText($"{Common.State_Installing} {relativePath}"));
+            });
         });
+
         progressWindow.Close();
     }
-    
-    private static void InstallMod(Mod mod, ProgressWindow progressPopupWindow)
+    private static IEnumerable<string> GetModFiles(Mod mod)
     {
-              
         var modFolder = Path.Combine(ModsFolderPath, mod.Title);
-        var allFiles = Array.Empty<string>();
-        //important to use Dispatcher otherwise program has thread issues or smth
-        Application.Current.Dispatcher.Invoke(() =>
-            progressPopupWindow.SetExtraText($"{Common.State_Installing} {mod.Title} ({allFiles.Length} files)")); 
+        var allFiles = new List<string>();
+
         foreach (var extension in AcceptedModExtensions)
         {
-            var files = Directory.GetFiles(modFolder, extension, SearchOption.AllDirectories);
-            allFiles = allFiles.Concat(files).ToArray();
+            if (Directory.Exists(modFolder))
+            {
+                allFiles.AddRange(Directory.GetFiles(modFolder, "*" + extension, SearchOption.AllDirectories));
+            }
         }
 
-        for (var i = 0; i < allFiles.Length; i++)
-        {
-            var file = allFiles[i];
-            var progress = (int)((i + 1) / (double)allFiles.Length * 100);
-            Application.Current.Dispatcher.Invoke(() => progressPopupWindow.UpdateProgress(progress));
-            var relativePath = Path.GetFileName(file);
-            var destinationFile = Path.Combine(MyStuffFolderPath, relativePath);
-            Directory.CreateDirectory(Path.GetDirectoryName(destinationFile)!);
-            File.Copy(file, destinationFile, true);
-        }
+        return allFiles;
     }
+
+
+
 }
