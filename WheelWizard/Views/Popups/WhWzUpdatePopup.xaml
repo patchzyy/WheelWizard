@@ -1,0 +1,106 @@
+﻿<local:PopupContent x:Class="CT_MKWII_WPF.Views.Popups.WhWzUpdatePopup"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Popups"
+                    xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+                    xmlns:html="clr-namespace:TheArtOfDev.HtmlRenderer.WPF;assembly=HtmlRenderer.WPF"
+                    xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                    mc:Ignorable="d"
+                    d:DesignHeight="600" d:DesignWidth="400">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/> <!-- BANNER -->
+            <RowDefinition Height="20"/> <!-- Header stuff -->
+            <RowDefinition Height="*"/> <!-- The rest, aka the Html -->
+        </Grid.RowDefinitions>
+        
+        <!-- BANNER START -->
+        <Image Grid.Row="0" x:Name="BannerImage" Margin="{StaticResource NegativeEdgeGap}"
+               Source="/Resources/Images/test_image.jpg" Stretch="UniformToFill"
+               HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+        <Border Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                Background="{StaticResource BackgroundColor}"
+                Margin="{StaticResource NegativeEdgeGap}">
+            <Border.RenderTransform>
+                <TranslateTransform Y="1" /> 
+                <!-- 
+                    Moves the Border down by 1 pixel 
+                    This because negative margin is not so well suported, and so it leaves a 1px gap
+                -->
+            </Border.RenderTransform>
+
+            
+            <Border.OpacityMask>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="Transparent" Offset="0.0" /> 
+                    <GradientStop Color="#FFFFFFDF" Offset="0.8" />
+                    <GradientStop Color="White" Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.OpacityMask>
+        </Border>
+        <Grid Grid.Row="0">
+            <TextBlock Text="Wheel Wizard Update" x:Name="ModTitle" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                       Style="{StaticResource PageTitleText}"  Margin="3"/>
+            
+        </Grid>
+        <!-- BANNER END -->
+        
+        <!-- OTHER HEADER STUFF START -->
+        <Grid Grid.Row="1">
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Top" HorizontalAlignment="Left">
+                <components:IconLabelButton Color="{StaticResource ModPage-LinkColorCyan}" 
+                                            HoverColor="{StaticResource ModPage-LinkColorCyan-Hover}"
+                                            Text="somebody" IconPack="FontAwesome" x:Name="AuthorButton"
+                                            IconKind="{x:Static icon:PackIconFontAwesomeKind.UserSolid}"
+                                            IconSize="16" FontSize="13" Click="AuthorLink_Click"/>
+            </StackPanel>
+        </Grid>
+        
+        <Border Grid.Row="2" CornerRadius="6" Background="{StaticResource LightBackgroundColor}" Margin="0,10,0,0" Padding="6">
+            <ScrollViewer>
+                <StackPanel>
+                    <components:FormFieldLabel Text="Description:"/>
+                    <html:HtmlPanel x:Name="ModDescriptionHtmlPanel" Margin="0,5,0,10" Background="Transparent">
+                        <html:HtmlPanel.BaseStylesheet>
+                            body { 
+                                color: #B4B8C5;
+                            }
+                            a {
+                                color: #34EAC5;
+                            }
+                            a:hover {
+                                color: #C7FFF0;
+                            }
+                            
+                            .BlueColor { color: #3489AA }
+                            .GreenColor { color: #34EA3A }
+                            .OrangeColor { color: #EA9834 }
+                            .GreyColor { color: #6C7389 }
+                            .RedColor { color: #F7524D }
+                            .PurpleColor { color: #9A4DF7 }
+                        </html:HtmlPanel.BaseStylesheet>
+                    </html:HtmlPanel>
+
+                </StackPanel>
+                
+            </ScrollViewer>
+        </Border>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                    Grid.Row="2"
+                    Orientation="Horizontal">
+            <components:Button 
+                x:Name="InstallButton" Text="Update" 
+                Variant="Primary"
+                IconSize="0" Margin="3,0"
+                Click="Update_Click" />                   
+            <components:Button 
+                Variant="Danger"
+                x:Name="UnInstallButton" Text="Cancel"      
+                IconSize="0" Margin="3,0"                 
+                Click="Cancel_Click" />                 
+        </StackPanel>
+    </Grid>
+</local:PopupContent>

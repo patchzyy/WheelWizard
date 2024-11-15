@@ -16,7 +16,7 @@ namespace CT_MKWII_WPF.Services.Installation;
 
 public static class AutoUpdater
 {
-    public const string CurrentVersion = "1.8.4";
+    public const string CurrentVersion = "1.8.0";
     public static async Task CheckForUpdatesAsync()
     {
         var response = await HttpClientHelper.GetAsync<string>(Endpoints.WhWzLatestReleasesUrl);
@@ -39,11 +39,12 @@ public static class AutoUpdater
             return;
         }
 
-        var updateQuestion = new YesNoWindow()
-                             .SetButtonText(Common.Action_Update, Common.Action_MaybeLater)
-                             .SetMainText(Phrases.PopupText_WhWzUpdateAvailable)
-                             .SetExtraText(Humanizer.ReplaceDynamic(Phrases.PopupText_NewVersionWhWz,
-                                                                    latestVersion, currentVersion));
+        // var updateQuestion = new YesNoWindow()
+        //                      .SetButtonText(Common.Action_Update, Common.Action_MaybeLater)
+        //                      .SetMainText(Phrases.PopupText_WhWzUpdateAvailable)
+        //                      .SetExtraText(Humanizer.ReplaceDynamic(Phrases.PopupText_NewVersionWhWz,
+        //                                                             latestVersion, currentVersion));
+        var updateQuestion = new WhWzUpdatePopup(latestRelease);
         if (!updateQuestion.AwaitAnswer()) 
             return;
         
