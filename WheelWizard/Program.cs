@@ -10,7 +10,7 @@ public class Program
     {
         Console.WriteLine("Application start");
         
-        var app = new App();
+        var app = new WheelWizard.App();
         app.InitializeComponent();
         app.Run();
         
