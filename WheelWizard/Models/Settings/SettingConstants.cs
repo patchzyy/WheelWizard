@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 
-namespace CT_MKWII_WPF.Models.Settings;
+namespace WheelWizard.Models.Settings;
 
 public enum DolphinShaderCompilationMode {
     Default = 0,

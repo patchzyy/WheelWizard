@@ -1,0 +1,75 @@
+﻿<Page x:Class="WheelWizard.Views.Pages.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:components="clr-namespace:WheelWizard.Views.Components"
+      xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
+      mc:Ignorable="d"
+      d:DesignHeight="831" d:DesignWidth="444"
+      Title="Dashboard" Background="Transparent">
+    <Grid x:Name="CompleteGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource TopRowSize}" />
+            <!-- This is the total height as the (Title + infoSection) - (padding) -->
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
+        <Border Grid.Row="1" Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
+        <TextBlock Grid.Row="0" Text="{x:Static lang:Common.PageTitle_Home}" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                   Style="{StaticResource PageTitleText}" />
+        <components:CurrentUserProfileComponent x:Name="CurrentUserProfile"
+                                                Grid.Row="0"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Top"/>
+        
+        <Border Grid.Row="1" Height="630" Width="250" CornerRadius="125, 125, 0,0" VerticalAlignment="Bottom"
+                Background="{StaticResource MainWheel-Stripe}" Margin="{StaticResource NegativeEdgeGap}">
+            <!-- Make sure the corner radius is exactly half the width -->
+            <icon:PackIconGameIcons Kind="CarWheel" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                                    x:Name="WheelIcon"
+                                    Foreground="{StaticResource MainWheel-Icon}"
+                                    Width="200" Height="200" Margin="0,25">
+                <!-- 
+                Note that this icon should have the same margin on each side. Decide a padding/border, enter that number in the margin at tb.
+                Then, double this number, take the width of the parent container, and subtract the doubled margin. 
+                This will give you the width & height of the icon.
+            -->
+                <icon:PackIconGameIcons.RenderTransform>
+                    <RotateTransform x:Name="WheelRotation" CenterX="100" CenterY="100"/>
+                </icon:PackIconGameIcons.RenderTransform>
+            </icon:PackIconGameIcons>
+        </Border>
+        
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="180" Margin="0, 220">
+           
+            <TextBlock HorizontalAlignment="Center"
+                       Style="{StaticResource TitleText}"
+                       Text="Retro Rewind"/>
+
+            <components:Button Variant="Primary" x:Name="PlayButton"
+                               IsEnabled="False" IconPack="FontAwesome"
+                               IconKind="{x:Static icon:PackIconFontAwesomeKind.PlaySolid}"
+                               Text="{x:Static lang:Common.State_Loading}"
+                               Click="PlayButton_Click"
+                               Margin="0,20,0,0" />
+            
+            <components:Button x:Name="DolphinButton"
+                               IsEnabled="False" IconPack="GameIcons" Text=""
+                               IconKind="{x:Static icon:PackIconGameIconsKind.Dolphin}"
+                               Click="DolphinButton_OnClick"
+                               Width="100" Margin="0,6,0,0"
+                               ToolTipService.InitialShowDelay="50"
+                               ToolTipService.ShowDuration="5000"
+                               ToolTipService.BetweenShowDelay="0">
+                <components:Button.ToolTip>
+                    <components:ToolTipMessage Content="Launch dolphin" Alignment="BottomCenter" />
+                </components:Button.ToolTip>
+            </components:Button>
+            
+        </StackPanel>
+    </Grid>
+</Page>

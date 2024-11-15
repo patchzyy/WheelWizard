@@ -1,4 +1,4 @@
-namespace CT_MKWII_WPF.Utilities.DevTools;
+namespace WheelWizard.Utilities.DevTools;
 
 public class Mocker
 {

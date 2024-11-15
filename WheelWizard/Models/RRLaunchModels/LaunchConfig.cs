@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace CT_MKWII_WPF.Models.RRLaunchModels;
+namespace WheelWizard.Models.RRLaunchModels;
 
 public class LaunchConfig
 {

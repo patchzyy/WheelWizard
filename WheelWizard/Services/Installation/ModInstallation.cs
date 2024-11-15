@@ -1,6 +1,4 @@
-﻿using CT_MKWII_WPF.Models.Settings;
-using CT_MKWII_WPF.Views.Popups;
-using SharpCompress.Archives;
+﻿using SharpCompress.Archives;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -9,8 +7,10 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using WheelWizard.Models.Settings;
+using WheelWizard.Views.Popups;
 
-namespace CT_MKWII_WPF.Services.Installation;
+namespace WheelWizard.Services.Installation;
 public static class ModInstallation
 {
     private static readonly string _configFilePath = Path.Combine(

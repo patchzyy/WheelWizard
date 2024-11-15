@@ -1,10 +1,4 @@
-﻿using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Models.Settings;
-using CT_MKWII_WPF.Resources.Languages;
-using CT_MKWII_WPF.Services.Installation;
-using CT_MKWII_WPF.Services.Launcher;
-using CT_MKWII_WPF.Views.Popups;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -14,8 +8,14 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
+using WheelWizard.Helpers;
+using WheelWizard.Models.Settings;
+using WheelWizard.Resources.Languages;
+using WheelWizard.Services.Installation;
+using WheelWizard.Services.Launcher;
+using WheelWizard.Views.Popups;
 
-namespace CT_MKWII_WPF.Services;
+namespace WheelWizard.Services;
 
 public class ModManager : INotifyPropertyChanged
 {

@@ -1,4 +1,4 @@
-namespace CT_MKWII_WPF.Models;
+namespace WheelWizard.Models;
 
 public class HttpClientResult<T>
 {

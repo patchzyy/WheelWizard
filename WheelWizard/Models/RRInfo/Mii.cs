@@ -1,10 +1,10 @@
-using CT_MKWII_WPF.Resources.Languages;
-using CT_MKWII_WPF.Services.WiiManagement;
+using WheelWizard.Resources.Languages;
 using System;
 using System.ComponentModel;
 using System.Windows.Media.Imaging;
+using WheelWizard.Services.WiiManagement;
 
-namespace CT_MKWII_WPF.Models.RRInfo;
+namespace WheelWizard.Models.RRInfo;
 
 public class Mii : INotifyPropertyChanged
 {

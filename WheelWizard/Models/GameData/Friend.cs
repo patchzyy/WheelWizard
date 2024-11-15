@@ -1,6 +1,6 @@
-﻿using CT_MKWII_WPF.Helpers;
+﻿using WheelWizard.Helpers;
 
-namespace CT_MKWII_WPF.Models.GameData;
+namespace WheelWizard.Models.GameData;
 
 public class Friend : BasePlayer
 {

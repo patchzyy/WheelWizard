@@ -1,7 +1,7 @@
-using CT_MKWII_WPF.Services.Settings;
+using WheelWizard.Services.Settings;
 using System;
 
-namespace CT_MKWII_WPF.Models.Settings;
+namespace WheelWizard.Models.Settings;
 
 public class VirtualSetting : Setting, ISettingListener
 {

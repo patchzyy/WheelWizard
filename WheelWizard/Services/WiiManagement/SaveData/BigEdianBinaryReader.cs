@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace CT_MKWII_WPF.Services.WiiManagement.SaveData;
+namespace WheelWizard.Services.WiiManagement.SaveData;
 
 public static class BigEdianBinaryReader
 {

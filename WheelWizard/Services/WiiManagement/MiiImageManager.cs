@@ -1,6 +1,4 @@
-﻿using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Models.RRInfo;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,8 +6,10 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using WheelWizard.Helpers;
+using WheelWizard.Models.RRInfo;
 
-namespace CT_MKWII_WPF.Services.WiiManagement;
+namespace WheelWizard.Services.WiiManagement;
 
 public static class MiiImageManager
 {

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace CT_MKWII_WPF.Utilities.RepeatedTasks;
+namespace WheelWizard.Utilities.RepeatedTasks;
 
 public abstract class RepeatedTaskManager
 {

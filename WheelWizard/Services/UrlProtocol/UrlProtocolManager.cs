@@ -1,12 +1,12 @@
-﻿using CT_MKWII_WPF.Views.Popups;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using WheelWizard.Views.Popups;
 
-namespace CT_MKWII_WPF.Services.UrlProtocol;
+namespace WheelWizard.Services.UrlProtocol;
 
 public class UrlProtocolManager
 {

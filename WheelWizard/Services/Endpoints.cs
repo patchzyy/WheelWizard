@@ -1,4 +1,4 @@
-namespace CT_MKWII_WPF.Services;
+namespace WheelWizard.Services;
 
 public static class Endpoints
 {

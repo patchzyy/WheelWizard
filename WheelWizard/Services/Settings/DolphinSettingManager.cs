@@ -1,12 +1,12 @@
-using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Models.Settings;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using WheelWizard.Helpers;
+using WheelWizard.Models.Settings;
 
-namespace CT_MKWII_WPF.Services.Settings;
+namespace WheelWizard.Services.Settings;
 
 public class DolphinSettingManager
 {

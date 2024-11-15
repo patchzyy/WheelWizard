@@ -1,7 +1,7 @@
-﻿using CT_MKWII_WPF.Models.Settings;
-using System.Globalization;
+﻿using System.Globalization;
+using WheelWizard.Models.Settings;
 
-namespace CT_MKWII_WPF.Services.Settings;
+namespace WheelWizard.Services.Settings;
 
 // This class is meant for all the loose little helper methods regarding settings.
 public class SettingsHelper : ISettingListener

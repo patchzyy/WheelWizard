@@ -1,11 +1,11 @@
-using CT_MKWII_WPF.Models;
 using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WheelWizard.Models;
 
-namespace CT_MKWII_WPF.Helpers;
+namespace WheelWizard.Helpers;
 
 public static class HttpClientHelper
 {

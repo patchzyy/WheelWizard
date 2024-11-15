@@ -1,10 +1,10 @@
-﻿using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Utilities.RepeatedTasks;
-using System.Linq;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using WheelWizard.Helpers;
+using WheelWizard.Utilities.RepeatedTasks;
 
-namespace CT_MKWII_WPF.Services.LiveData;
+namespace WheelWizard.Services.LiveData;
 
 public class LiveAlertsManager : RepeatedTaskManager
 {

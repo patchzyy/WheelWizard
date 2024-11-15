@@ -1,7 +1,7 @@
-using CT_MKWII_WPF.Services.Settings;
 using System;
+using WheelWizard.Services.Settings;
 
-namespace CT_MKWII_WPF.Models.Settings;
+namespace WheelWizard.Models.Settings;
 
 public class DolphinSetting : Setting
 {

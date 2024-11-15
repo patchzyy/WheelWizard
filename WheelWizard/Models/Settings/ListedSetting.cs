@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace CT_MKWII_WPF.Models.Settings;
+namespace WheelWizard.Models.Settings;
 
 public class ListedSetting<T>
 {

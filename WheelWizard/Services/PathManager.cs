@@ -1,9 +1,9 @@
-﻿using CT_MKWII_WPF.Helpers;
-using CT_MKWII_WPF.Services.Settings;
-using System;
+﻿using System;
 using System.IO;
+using WheelWizard.Helpers;
+using WheelWizard.Services.Settings;
 
-namespace CT_MKWII_WPF.Services;
+namespace WheelWizard.Services;
 
 public static class PathManager
 {
