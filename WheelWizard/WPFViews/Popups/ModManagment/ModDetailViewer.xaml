@@ -5,8 +5,8 @@
              xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:components="clr-namespace:WheelWizard.Views.Components"
              xmlns:html="clr-namespace:TheArtOfDev.HtmlRenderer.WPF;assembly=HtmlRenderer.WPF"
+             xmlns:components1="clr-namespace:WheelWizard.WPFViews.Components"
              mc:Ignorable="d" d:DesignHeight="670" d:DesignWidth="550"
              Height="Auto" Width="Auto" Background="{StaticResource BackgroundColor}">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -45,13 +45,13 @@
                        Style="{StaticResource PageTitleText}"  Margin="3"/>
             
             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
-                <components:StateBox x:Name="LikesCountBox" IsDark="False" Text="0" TipText="Likes" 
+                <components1:StateBox x:Name="LikesCountBox" IsDark="False" Text="0" TipText="Likes" 
                                      IconKind="{x:Static icon:PackIconFontAwesomeKind.HeartSolid}"
                                      IconPack="FontAwesome" TipAlignment="TopLeft" Margin="3"/>
-                <components:StateBox x:Name="ViewsCountBox" IsDark="False" Text="0" TipText="Views" 
+                <components1:StateBox x:Name="ViewsCountBox" IsDark="False" Text="0" TipText="Views" 
                                      IconKind="{x:Static icon:PackIconFontAwesomeKind.EyeSolid}"
                                      IconPack="FontAwesome" TipAlignment="TopLeft" Margin="3"/>
-                <components:StateBox x:Name="DownloadsCountBox" IsDark="False" Text="0" TipText="downloads" 
+                <components1:StateBox x:Name="DownloadsCountBox" IsDark="False" Text="0" TipText="downloads" 
                                      IconKind="{x:Static icon:PackIconFontAwesomeKind.DownloadSolid}"
                                      IconPack="FontAwesome" TipAlignment="TopLeft" Margin="3"/>
             </StackPanel>
@@ -63,12 +63,12 @@
         <Grid Grid.Row="1">
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Top" HorizontalAlignment="Left">
-                <components:IconLabelButton Color="{StaticResource ModPage-LinkColorCyan}" 
+                <components1:IconLabelButton Color="{StaticResource ModPage-LinkColorCyan}" 
                                             HoverColor="{StaticResource ModPage-LinkColorCyan-Hover}"
                                             Text="somebody" IconPack="FontAwesome" x:Name="AuthorButton"
                                             IconKind="{x:Static icon:PackIconFontAwesomeKind.UserSolid}"
                                             IconSize="16" FontSize="13" Click="AuthorLink_Click"/>
-                <components:IconLabelButton Margin="10,0,0,0" Color="{StaticResource ModPage-LinkColorCyan}" 
+                <components1:IconLabelButton Margin="10,0,0,0" Color="{StaticResource ModPage-LinkColorCyan}" 
                                             HoverColor="{StaticResource ModPage-LinkColorCyan-Hover}" 
                                             IconPack="FontAwesome" IconOnLeft="False" Text="Gamebanana Page"
                                             IconKind="{x:Static icon:PackIconFontAwesomeKind.ArrowUpRightFromSquareSolid}"
@@ -77,18 +77,18 @@
             
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom"
                         Orientation="Horizontal">
-                <components:Button 
+                <components1:Button 
                     x:Name="InstallButton" Text="Install" 
                     IconSize="0" Margin="3,0"
                     Click="Install_Click" />                   
-                <components:Button 
+                <components1:Button 
                     Variant="Secondary"
                     x:Name="UnInstallButton" Text="Uninstall"      
                     IconSize="0" Margin="3,0"                 
                     Click="UnInstall_Click" />                 
             </StackPanel>
             
-            <components:IconLabelButton Color="{StaticResource ModPage-LinkColorRed}"                        
+            <components1:IconLabelButton Color="{StaticResource ModPage-LinkColorRed}"                        
                                         HoverColor="{StaticResource ModPage-LinkColorRed-Hover}"             
                                         Text="Report" IconPack="FontAwesome" x:Name="ReportButton"    
                                         HorizontalAlignment="Right" VerticalAlignment="Top" IconOnLeft="False"
@@ -101,7 +101,7 @@
             <ScrollViewer>
                 <StackPanel>
                     <!-- Image Carousel -->
-                    <components:FormFieldLabel Text="Images:"/>
+                    <components1:FormFieldLabel Text="Images:"/>
                     
                     <!-- TODO: This scroll view is ugly as fuck --> 
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Margin="0,0,0,10"
@@ -124,7 +124,7 @@
                         </ScrollViewer.Resources>
                     </ScrollViewer>
 
-                    <components:FormFieldLabel Text="Description:"/>
+                    <components1:FormFieldLabel Text="Description:"/>
 
                     <html:HtmlPanel x:Name="ModDescriptionHtmlPanel" Margin="0,5,0,10" Background="Transparent">
                         <html:HtmlPanel.BaseStylesheet>

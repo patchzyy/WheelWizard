@@ -12,8 +12,8 @@ using WheelWizard.Services.Other;
 using WheelWizard.Services.Settings;
 using WheelWizard.WPFViews.Pages.Settings;
 using static WheelWizard.WPFViews.ViewUtils;
-using Button = WheelWizard.Views.Components.Button;
-using Components_Button = WheelWizard.Views.Components.Button;
+using Button = WheelWizard.WPFViews.Components.Button;
+using Components_Button = WheelWizard.WPFViews.Components.Button;
 
 namespace WheelWizard.WPFViews.Pages;
 

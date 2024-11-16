@@ -3,9 +3,9 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:components="clr-namespace:WheelWizard.Views.Components"
       xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
+      xmlns:components1="clr-namespace:WheelWizard.WPFViews.Components"
       mc:Ignorable="d"
       d:DesignHeight="831" d:DesignWidth="444"
       Title="RoomsPage" Background="Transparent">
@@ -27,11 +27,11 @@
                 <icon:PackIconMaterial Kind="Information" Width="18" Height="18" Margin="5,2,5,0"
                                        Foreground="{StaticResource TitleIconColor}" />
                 <Border.ToolTip>
-                    <components:ToolTipMessage Alignment="TopCenter" Content="{x:Static lang:Phrases.Hover_RoomsPageDisclaimer}" />
+                    <components1:ToolTipMessage Alignment="TopCenter" Content="{x:Static lang:Phrases.Hover_RoomsPageDisclaimer}" />
                 </Border.ToolTip>
             </Border>
         </StackPanel>
-        <components:InputField Grid.Row="0" Width="200"
+        <components1:InputField Grid.Row="0" Width="200"
             Placeholder="{x:Static lang:Phrases.Placeholder_SearchForPlayers}"
             Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
             VerticalAlignment="Bottom"
@@ -39,14 +39,14 @@
             Margin="10,0,10,10"
             x:Name="MyInputField" />
 
-        <components:EmptyPageInfo Grid.Row="2" x:Name="EmptyRoomsView"
+        <components1:EmptyPageInfo Grid.Row="2" x:Name="EmptyRoomsView"
                                                         HorizontalAlignment="Center"
                                                         VerticalContentAlignment="Center"
                                                         Title="{x:Static lang:Phrases.EmptyText_NoRooms_Title}"
                                                         Body="{x:Static lang:Phrases.EmptyText_NoRooms}" />
 
         <StackPanel Grid.Row="2" x:Name="ListContainer">
-            <components:StaticListView ItemsSource="{Binding Rooms}" x:Name="RoomsView"
+            <components1:StaticListView ItemsSource="{Binding Rooms}" x:Name="RoomsView"
                                        ListTitle="{x:Static lang:Online.ListTitle_Rooms}"
                                        OnItemClick="Room_MouseClick"
                                        MaxHeight="{Binding ElementName=ListContainer, Path=ActualHeight}"
@@ -82,17 +82,17 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="{x:Static lang:Common.Attribute_Id}" Width="100"
-                                        components:StaticListView.IsSortable="True" />
+                                        components1:StaticListView.IsSortable="True" />
                         <GridViewColumn DisplayMemberBinding="{Binding Path=TimeOnline}" Header="{x:Static lang:Online.Stat_TimeOnline}" Width="150"
-                                        components:StaticListView.IsSortable="True" />
-                        <GridViewColumn Header="{x:Static lang:Online.Stat_PlayerCount}" Width="80" components:StaticListView.IsSortable="True">
+                                        components1:StaticListView.IsSortable="True" />
+                        <GridViewColumn Header="{x:Static lang:Online.Stat_PlayerCount}" Width="80" components1:StaticListView.IsSortable="True">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <components:StateBox Text="{Binding PlayerCount}"
+                                    <components1:StateBox Text="{Binding PlayerCount}"
                                                          IconPack="FontAwesome"
                                                          IconKind="{x:Static icon:PackIconFontAwesomeKind.UserGroupSolid}">
-                                        <components:StateBox.Style>
-                                            <Style TargetType="components:StateBox">
+                                        <components1:StateBox.Style>
+                                            <Style TargetType="components1:StateBox">
                                                 <Setter Property="IsDark" Value="True"></Setter>
                                                 <Style.Triggers>
                                                     <DataTrigger
@@ -102,43 +102,43 @@
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
-                                        </components:StateBox.Style>
-                                    </components:StateBox>
+                                        </components1:StateBox.Style>
+                                    </components1:StateBox>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=GameMode}" Header="{x:Static lang:Common.Attribute_Type}" Width="110"
-                                        components:StaticListView.IsSortable="True" />
+                                        components1:StaticListView.IsSortable="True" />
                     </GridView>
                 </ListView.View>
-            </components:StaticListView>
+            </components1:StaticListView>
 
-            <components:StaticListView ItemsSource="{Binding Players}" x:Name="PlayersListView" 
+            <components1:StaticListView ItemsSource="{Binding Players}" x:Name="PlayersListView" 
                                        ListTitle="{x:Static lang:Online.ListTitle_Players}"
                                        OnItemClick="Player_MouseClick"
                                        MaxHeight="{Binding ElementName=ListContainer, Path=ActualHeight}"
                                        Visibility="{Binding PlayersListVisibility}">
-                <components:StaticListView.ItemContextMenu>
+                <components1:StaticListView.ItemContextMenu>
                     <ContextMenu>
                         <MenuItem Header="{x:Static lang:Common.Action_CopyFriendCode}" Click="CopyFriendCode_OnClick" />
                     </ContextMenu>
-                </components:StaticListView.ItemContextMenu>
+                </components1:StaticListView.ItemContextMenu>
                 <ListView.View>
                     <GridView AllowsColumnReorder="False" >
                         <GridViewColumn Header="" Width="63">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <components:MiiBall Mii="{Binding FirstMii}" Size="50" PlayerState="Online" 
+                                    <components1:MiiBall Mii="{Binding FirstMii}" Size="50" PlayerState="Online" 
                                                         WinPosition="{Binding WinPosition}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="{x:Static lang:Common.Attribute_Name}" DisplayMemberBinding="{Binding Name}" Width="105"
-                                        components:StaticListView.IsSortable="True" />
+                                        components1:StaticListView.IsSortable="True" />
                         <GridViewColumn Header="{x:Static lang:Online.Stat_FriendCode}" DisplayMemberBinding="{Binding Fc}" Width="135"
-                                        components:StaticListView.IsSortable="True" />
+                                        components1:StaticListView.IsSortable="True" />
                         <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Ev}" Width="80"
-                                        components:StaticListView.IsSortable="True" />
+                                        components1:StaticListView.IsSortable="True" />
                         
                          
                         <GridViewColumn Header="" Width="35">
@@ -165,7 +165,7 @@
                                             </icon:PackIconFontAwesome.Style>
                                         </icon:PackIconFontAwesome>
                                         <Border.ToolTip>
-                                            <components:ToolTipMessage Alignment="TopCenter"
+                                            <components1:ToolTipMessage Alignment="TopCenter"
                                                                        Content="This is a hover text thing" />
                                         </Border.ToolTip>
                                         
@@ -185,7 +185,7 @@
                         </GridViewColumn>
                     </GridView>
                 </ListView.View>
-            </components:StaticListView>
+            </components1:StaticListView>
         </StackPanel>
     </Grid>
 </Page>

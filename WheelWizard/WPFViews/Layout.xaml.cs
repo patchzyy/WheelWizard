@@ -13,7 +13,6 @@ using WheelWizard.Services.LiveData;
 using WheelWizard.Services.Settings;
 using WheelWizard.Services.WiiManagement.SaveData;
 using WheelWizard.Utilities.RepeatedTasks;
-using WheelWizard.Views.Components;
 using WheelWizard.WPFViews.Components;
 using WheelWizard.WPFViews.Pages;
 using WheelWizard.WPFViews.Popups.Generic;

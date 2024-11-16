@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:components="clr-namespace:WheelWizard.Views.Components"
       xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
       xmlns:components1="clr-namespace:WheelWizard.WPFViews.Components"
@@ -51,14 +50,14 @@
                        Style="{StaticResource TitleText}"
                        Text="Retro Rewind"/>
 
-            <components:Button Variant="Primary" x:Name="PlayButton"
+            <components1:Button Variant="Primary" x:Name="PlayButton"
                                IsEnabled="False" IconPack="FontAwesome"
                                IconKind="{x:Static icon:PackIconFontAwesomeKind.PlaySolid}"
                                Text="{x:Static lang:Common.State_Loading}"
                                Click="PlayButton_Click"
                                Margin="0,20,0,0" />
             
-            <components:Button x:Name="DolphinButton"
+            <components1:Button x:Name="DolphinButton"
                                IsEnabled="False" IconPack="GameIcons" Text=""
                                IconKind="{x:Static icon:PackIconGameIconsKind.Dolphin}"
                                Click="DolphinButton_OnClick"
@@ -66,10 +65,10 @@
                                ToolTipService.InitialShowDelay="50"
                                ToolTipService.ShowDuration="5000"
                                ToolTipService.BetweenShowDelay="0">
-                <components:Button.ToolTip>
-                    <components:ToolTipMessage Content="Launch dolphin" Alignment="BottomCenter" />
-                </components:Button.ToolTip>
-            </components:Button>
+                <components1:Button.ToolTip>
+                    <components1:ToolTipMessage Content="Launch dolphin" Alignment="BottomCenter" />
+                </components1:Button.ToolTip>
+            </components1:Button>
             
         </StackPanel>
     </Grid>

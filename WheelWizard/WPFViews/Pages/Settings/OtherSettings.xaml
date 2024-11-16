@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:components="clr-namespace:WheelWizard.Views.Components"
              xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
+             xmlns:components1="clr-namespace:WheelWizard.WPFViews.Components"
              mc:Ignorable="d"
              d:DesignHeight="831" d:DesignWidth="444">
     <Grid  x:Name="DolphinBorder">
@@ -21,36 +21,36 @@
                 </TextBlock>
             </Border>
             
-            <components:FormFieldLabel Text="{x:Static lang:Settings.Section_Wii}" />
+            <components1:FormFieldLabel Text="{x:Static lang:Settings.Section_Wii}" />
             <Border Style="{StaticResource SettingsBlockStyle}">
                 <StackPanel>
                     <CheckBox Margin="0,2" IsChecked="False"
                               Style="{StaticResource DarkSwitch}"
                               x:Name="DisableForce"
                               Click="ClickForceWiimote">
-                        <components:FormFieldLabel Text="{x:Static lang:Settings.Option_ForceDisableWiimote}"
+                        <components1:FormFieldLabel Text="{x:Static lang:Settings.Option_ForceDisableWiimote}"
                                                    TipText="{x:Static lang:Settings.InfoText_ForceDisableWiimote}" />
                     </CheckBox>
                     <CheckBox Margin="0,2" IsChecked="False"
                               Style="{StaticResource DarkSwitch}"
                               x:Name="LaunchWithDolphin"
                               Click="ClickLaunchWithDolphinWindow">
-                        <components:FormFieldLabel Text="{x:Static lang:Settings.Option_LaunchWithDolphin}"
+                        <components1:FormFieldLabel Text="{x:Static lang:Settings.Option_LaunchWithDolphin}"
                                                    TipText="{x:Static lang:Settings.InfoText_LaunchWithDolphin}"/>
                     </CheckBox>
                 </StackPanel>
             </Border>
             
                        
-            <components:FormFieldLabel Text="{x:Static lang:Settings.Section_Language}" />
+            <components1:FormFieldLabel Text="{x:Static lang:Settings.Section_Language}" />
             <Border Style="{StaticResource SettingsBlockStyle}">
                 <StackPanel>
-                    <components:Dropdown
+                    <components1:Dropdown
                         Label="{x:Static lang:Settings.Option_RRLanguage}"
                         SelectionChanged="RrLanguageDropdown_OnSelectionChanged"
                         x:Name="InGameLanguageDropdown"/>
                     
-                    <components:Dropdown Margin="0,6,0,0"
+                    <components1:Dropdown Margin="0,6,0,0"
                                          Label="{x:Static lang:Settings.Option_WhWzLanguage}"
                                          SelectionChanged="WhWzLanguageDropdown_OnSelectionChanged"
                                          x:Name="WhWzLanguageDropdown"/>
@@ -68,7 +68,7 @@
                             <icon:PackIconMaterial Kind="Information" Width="14" Height="14"
                                                    Foreground="{StaticResource FormFieldLabelColor}"/>
                             <Border.ToolTip>
-                                <components:ToolTipMessage Alignment="TopCenter" Content="If you are willing to translate for RetroRewind and WheelWizard. Be sure to reach out to Eppe or WantToBeeMe :)" />
+                                <components1:ToolTipMessage Alignment="TopCenter" Content="If you are willing to translate for RetroRewind and WheelWizard. Be sure to reach out to Eppe or WantToBeeMe :)" />
                             </Border.ToolTip>
                         </Border>
                        

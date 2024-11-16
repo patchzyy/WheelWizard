@@ -3,9 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:components="clr-namespace:WheelWizard.Views.Components"
              xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             xmlns:local="clr-namespace:WheelWizard.Views.Components"
+             xmlns:components1="clr-namespace:WheelWizard.WPFViews.Components"
              mc:Ignorable="d"
              x:Name="Root"
              d:DesignHeight="50" d:DesignWidth="200">
@@ -25,7 +24,7 @@
                         <Border Background="{TemplateBinding Background}"
                                 BorderThickness="0">
                             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <local:IconLabel IconPack="{Binding IconPack, ElementName=Root}"
+                                <components1:IconLabel IconPack="{Binding IconPack, ElementName=Root}"
                                                  IconKind="{Binding IconKind, ElementName=Root}"
                                                  IconSize="25" FontSize="20" x:Name="RadioIcon"
                                                  Text="{Binding Text, ElementName=Root}"
@@ -35,7 +34,7 @@
                                                  Margin="{StaticResource LeftEdgeGap}" />
                                 <StackPanel VerticalAlignment="Center"
                                             HorizontalAlignment="Right" Margin="{StaticResource RightEdgeGap}">
-                                    <components:StateBox IsDark="True" Text="{Binding BoxText, ElementName=Root}"
+                                    <components1:StateBox IsDark="True" Text="{Binding BoxText, ElementName=Root}"
                                                          x:Name="StateBox"
                                                          IconPack="FontAwesome" TipAlignment="TopLeft"
                                                          IconKind="{Binding BoxIconKind, ElementName=Root}"

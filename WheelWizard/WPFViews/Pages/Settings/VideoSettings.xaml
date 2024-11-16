@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:components="clr-namespace:WheelWizard.Views.Components"
              xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
+             xmlns:components1="clr-namespace:WheelWizard.WPFViews.Components"
              mc:Ignorable="d" d:DesignHeight="716" d:DesignWidth="444">
     <Grid x:Name="VideoBorder">
         <StackPanel Margin="0,15,0,0">
@@ -21,7 +21,7 @@
             </Border>
             
             <!-- Resolution Section -->
-            <components:FormFieldLabel Text="{x:Static lang:Settings.Section_Resolution}" />
+            <components1:FormFieldLabel Text="{x:Static lang:Settings.Section_Resolution}" />
             <Border Style="{StaticResource SettingsBlockStyle}" x:Name="ResolutionBorder">
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
@@ -30,11 +30,11 @@
                     <UniformGrid Columns="2" x:Name="ResolutionStackPanel" Rows="4">
                         <RadioButton Margin="0,2" GroupName="ResolutionGroup1"
                                      IsChecked="True" Click="UpdateResolution" Tag="1">
-                            <components:FormFieldLabel Text="1x (640x528)" TipText="{x:Static lang:Settings.InfoText_ResolutionScale}"/>
+                            <components1:FormFieldLabel Text="1x (640x528)" TipText="{x:Static lang:Settings.InfoText_ResolutionScale}"/>
                         </RadioButton>
                         <RadioButton Margin="0,2" GroupName="ResolutionGroup1"
                                      Click="UpdateResolution" Tag="5">
-                            <components:FormFieldLabel Text="5x (3200x2640)"/>
+                            <components1:FormFieldLabel Text="5x (3200x2640)"/>
                         </RadioButton>
                         <RadioButton Margin="0,2" GroupName="ResolutionGroup1"
                                      IsChecked="False" Click="UpdateResolution" Tag="2">
@@ -65,7 +65,7 @@
             </Border>
 
             <!-- Performance Settings Section -->
-            <components:FormFieldLabel Text="{x:Static lang:Settings.Section_Performance}"/>
+            <components1:FormFieldLabel Text="{x:Static lang:Settings.Section_Performance}"/>
             <Border Style="{StaticResource SettingsBlockStyle}" x:Name="PerformanceBorder">
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
@@ -75,37 +75,37 @@
                     <StackPanel>
                         <CheckBox Margin="0,2" IsChecked="False" 
                                   Style="{StaticResource DarkSwitch}" Click="VSync_OnClick" x:Name="VSyncButton">
-                            <components:FormFieldLabel Text="{x:Static lang:Settings.Option_VSync}" />
+                            <components1:FormFieldLabel Text="{x:Static lang:Settings.Option_VSync}" />
                         </CheckBox>
                         <CheckBox Margin="0,2" IsChecked="False"
                                   Style="{StaticResource DarkSwitch}" Click="Recommended_OnClick"
                                   x:Name="RecommendedButton">
-                            <components:FormFieldLabel Text="{x:Static lang:Settings.Option_Recommended}"
+                            <components1:FormFieldLabel Text="{x:Static lang:Settings.Option_Recommended}"
                                                        TipText="{x:Static lang:Settings.InfoText_Recommended}"/>
                         </CheckBox>
                         <CheckBox Margin="0,2" IsChecked="False"
                                   Style="{StaticResource DarkSwitch}" Click="ShowFPS_OnClick"
                                   x:Name="ShowFPSButton">
-                            <components:FormFieldLabel Text="{x:Static lang:Settings.Option_ShowFPS}" />
+                            <components1:FormFieldLabel Text="{x:Static lang:Settings.Option_ShowFPS}" />
                         </CheckBox>
                         <CheckBox Margin="0,2" IsChecked="False"
                                   Style="{StaticResource DarkSwitch}" Click="RemoveBlur_OnClick"
                                   x:Name="RemoveBlurButton">
-                            <components:FormFieldLabel Text="{x:Static lang:Settings.Option_RemoveBlur}" />
+                            <components1:FormFieldLabel Text="{x:Static lang:Settings.Option_RemoveBlur}" />
                         </CheckBox>
                     </StackPanel>
                 </Grid>
             </Border>
             
-            <components:FormFieldLabel Text="{x:Static lang:Settings.Section_Renderer}" />
+            <components1:FormFieldLabel Text="{x:Static lang:Settings.Section_Renderer}" />
             <Border Style="{StaticResource SettingsBlockStyle}" 
                     x:Name="RendererBorder">
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                    <components:Dropdown
+                    <components1:Dropdown
                         Label="{x:Static lang:Settings.Option_Renderer}"
                         x:Name="RendererDropdown"
                         SelectionChanged="RendererDropdown_OnSelectionChanged"
-                        ></components:Dropdown>
+                        ></components1:Dropdown>
                 </Grid>
             </Border>
         </StackPanel>

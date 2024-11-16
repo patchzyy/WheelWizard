@@ -11,7 +11,6 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-        xmlns:components="clr-namespace:WheelWizard.Views.Components"
         xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
         xmlns:pages="clr-namespace:WheelWizard.WPFViews.Pages"
         xmlns:settings1="clr-namespace:WheelWizard.WPFViews.Pages.Settings"
@@ -93,7 +92,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                    JournalOwnership="OwnsJournal" NavigationUIVisibility="Hidden" />
 
             <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Bottom">
-                <components:IconLabel IconKind="{x:Static icon:PackIconGameIconsKind.CarWheel}"
+                <components1:IconLabel IconKind="{x:Static icon:PackIconGameIconsKind.CarWheel}"
                                       IconPack="GameIcons"
                                       Text="Wheel Wizard"
                                       Color="{StaticResource TitleTextColor}"
@@ -104,12 +103,12 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
 
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
-                <components:StateBox x:Name="PlayerCountBox" IsDark="True" Text="0"
+                <components1:StateBox x:Name="PlayerCountBox" IsDark="True" Text="0"
                                      IconPack="FontAwesome" TipAlignment="TopLeft"
                                      IconKind="{x:Static icon:PackIconFontAwesomeKind.UserGroupSolid}"
                                      TipText="{x:Static lang:Phrases.Hover_PlayersOnline_0}"
                                      Margin="10,0,0,0" />
-                <components:StateBox x:Name="RoomCountBox" IsDark="True" Text="0"
+                <components1:StateBox x:Name="RoomCountBox" IsDark="True" Text="0"
                                      IconPack="FontAwesome" TipAlignment="TopLeft"
                                      IconKind="{x:Static icon:PackIconFontAwesomeKind.UsersRectangleSolid}"
                                      TipText="{x:Static lang:Phrases.Hover_RoomsOnline_0}"
@@ -136,14 +135,14 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
 
                 <StackPanel>
                     <!-- Icon is not defined since that is done in the AlertManager -->
-                    <components:DynamicIcon IconPack="FontAwesome" x:Name="LiveAlert"
+                    <components1:DynamicIcon IconPack="FontAwesome" x:Name="LiveAlert"
                                             ForegroundColor="{StaticResource WarningTitleTextColor}"
                                             IconSize="26" />
                 </StackPanel>
 
                 <Border.ToolTip>
-                    <components:ToolTipMessage Alignment="TopLeft" x:Name="LiveAlertToolTip" ToolTip="">
-                    </components:ToolTipMessage>
+                    <components1:ToolTipMessage Alignment="TopLeft" x:Name="LiveAlertToolTip" ToolTip="">
+                    </components1:ToolTipMessage>
                 </Border.ToolTip>
             </Border>
 
@@ -152,7 +151,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                     CornerRadius="{StaticResource WindowCornerRadiusBottomLeft}"
                     Background="{StaticResource BackgroundContactColor}">
                 <StackPanel VerticalAlignment="Center">
-                    <components:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.DiscordBrands}"
+                    <components1:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.DiscordBrands}"
                                                 IconPack="FontAwesome"
                                                 Text="{x:Static lang:Phrases.Sidebar_Link_Discord}"
                                                 Color="{StaticResource TitleTextColor}"
@@ -162,7 +161,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                                                 Click="Discord_Click"
                                                 IconSize="20" />
                     <Rectangle Height="5" Fill="Transparent" />
-                    <components:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.GithubBrands}"
+                    <components1:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.GithubBrands}"
                                                 IconPack="FontAwesome"
                                                 Text="{x:Static lang:Phrases.Sidebar_Link_Github}"
                                                 Color="{StaticResource TitleTextColor}"
@@ -171,7 +170,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                                                 Margin="{StaticResource LeftEdgeGap}"
                                                 Click="Github_Click"
                                                 IconSize="20" />
-                    <components:IconLabelButton IconKind="{x:Static icon:PackIconGameIconsKind.CoffeeCup}"
+                    <components1:IconLabelButton IconKind="{x:Static icon:PackIconGameIconsKind.CoffeeCup}"
                                                 IconPack="GameIcons"
                                                 Text="{x:Static lang:Phrases.Sidebar_Link_Support}"
                                                 Color="{StaticResource TitleTextColor}"

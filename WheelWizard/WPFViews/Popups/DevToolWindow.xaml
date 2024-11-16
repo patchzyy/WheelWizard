@@ -3,9 +3,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                    xmlns:components="clr-namespace:WheelWizard.Views.Components"
                     xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
                     xmlns:popups="clr-namespace:WheelWizard.WPFViews.Popups"
+                    xmlns:components1="clr-namespace:WheelWizard.WPFViews.Components"
                     mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="400">
     <Grid>
         <Grid.RowDefinitions>
@@ -18,12 +18,12 @@
             <TextBlock Text="Monitoring" HorizontalAlignment="Left" VerticalAlignment="Top"
                        Style="{StaticResource PageTitleText}"/>
             <StackPanel Orientation="Horizontal"  Margin="0,0,0,10" >
-                <components:StateBox x:Name="MiiImagesCashed" IsDark="False" Text="0"
+                <components1:StateBox x:Name="MiiImagesCashed" IsDark="False" Text="0"
                                      IconPack="FontAwesome" TipAlignment="TopLeft"
                                      IconKind="{x:Static icon:PackIconFontAwesomeKind.ImageSolid}"
                                      TipText="Amount of Mii-images cashed in memory"
                                      Margin="10,0,0,0" />
-                <components:StateBox x:Name="RrRefreshTimeLeft" IsDark="False" Text="0"
+                <components1:StateBox x:Name="RrRefreshTimeLeft" IsDark="False" Text="0"
                                      IconPack="FontAwesome" TipAlignment="TopLeft"
                                      IconKind="{x:Static icon:PackIconFontAwesomeKind.ClockRotateLeftSolid}"
                                      TipText="Time until the next RR rooms refresh"
@@ -49,11 +49,11 @@
                       Style="{StaticResource Switch}"
                       x:Name="HttpHelperOff" 
                       Click="HttpHelperOff_OnClick">
-                <components:FormFieldLabel Text="Turn off HttpHelper"
+                <components1:FormFieldLabel Text="Turn off HttpHelper"
                                            TipText="Simulating no internet connection for some parts of the application" />
             </CheckBox>
          
-            <components:Button Variant="Default" Text="Force enable layout (does not effect ShowDialog)"
+            <components1:Button Variant="Default" Text="Force enable layout (does not effect ShowDialog)"
                                IconSize="0" HorizontalAlignment="Left" Margin="0,2"
                                Click="ForceEnableLayout_OnClick" />
         </StackPanel>

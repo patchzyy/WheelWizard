@@ -4,9 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:components="clr-namespace:WheelWizard.Views.Components"
     xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
+    xmlns:components1="clr-namespace:WheelWizard.WPFViews.Components"
     mc:Ignorable="d" x:Name="Root"
     Background="Transparent"
     d:DesignHeight="300" 
@@ -22,7 +22,7 @@
             CornerRadius="6,6,0,0"
             Margin="0,0,0,2">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
-                <components:Button Variant="Default"
+                <components1:Button Variant="Default"
                                    x:Name="ViewRoomButton"
                                    IsEnabled="True"
                                    HorizontalAlignment="Right"
@@ -63,11 +63,11 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             
-            <components:MiiBall Size="100" Mii="{Binding Mii}" WinPosition="{Binding WinPosition}"
+            <components1:MiiBall Size="100" Mii="{Binding Mii}" WinPosition="{Binding WinPosition}"
                                 HorizontalAlignment="Left" VerticalAlignment="Top"
                                 Margin="20,0,10,0">
-                <components:MiiBall.Style>
-                    <Style TargetType="components:MiiBall">
+                <components1:MiiBall.Style>
+                    <Style TargetType="components1:MiiBall">
                         <Setter Property="Variant" Value="Light"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsOnline}" Value="True">
@@ -75,8 +75,8 @@
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </components:MiiBall.Style>
-            </components:MiiBall>
+                </components1:MiiBall.Style>
+            </components1:MiiBall>
             
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="{Binding PlayerName}" HorizontalAlignment="Left" VerticalAlignment="Top"
@@ -86,7 +86,7 @@
                     <TextBlock Text="{Binding FriendCode}"
                                Style="{StaticResource BodyText}"
                                Margin="0"/>
-                    <components:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.CopyRegular}"
+                    <components1:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.CopyRegular}"
                                                 IconPack="FontAwesome" Text=""
                                                 Color="{StaticResource TitleTextColor}"
                                                 HoverColor="{StaticResource SuccessTitleTextColor}"
@@ -96,11 +96,11 @@
                                                 ToolTipService.InitialShowDelay="50"
                                                 ToolTipService.ShowDuration="5000"
                                                 ToolTipService.BetweenShowDelay="0">
-                        <components:IconLabelButton.ToolTip>
-                            <components:ToolTipMessage Content="{x:Static lang:Common.Action_CopyFriendCode}"
+                        <components1:IconLabelButton.ToolTip>
+                            <components1:ToolTipMessage Content="{x:Static lang:Common.Action_CopyFriendCode}"
                                                        Alignment="TopCenter" />
-                        </components:IconLabelButton.ToolTip>
-                    </components:IconLabelButton>
+                        </components1:IconLabelButton.ToolTip>
+                    </components1:IconLabelButton>
                 </StackPanel>
               
             </StackPanel>

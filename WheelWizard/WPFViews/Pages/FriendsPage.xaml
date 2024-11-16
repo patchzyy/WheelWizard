@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:components="clr-namespace:WheelWizard.Views.Components"
       xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
       xmlns:components1="clr-namespace:WheelWizard.WPFViews.Components"
@@ -24,7 +23,7 @@
                 <icon:PackIconMaterial Kind="Information" Width="18" Height="18" Margin="5,2,5,0"
                                        Foreground="{StaticResource TitleIconColor}" />
                 <Border.ToolTip>
-                    <components:ToolTipMessage Alignment="TopCenter"
+                    <components1:ToolTipMessage Alignment="TopCenter"
                                                Content="To add friends you need to add them in-game." />
                 </Border.ToolTip>
             </Border>
@@ -40,7 +39,7 @@
                 VerticalAlignment="Bottom" />
         
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="VisibleWithoutFriends">
-            <components:EmptyPageInfo HorizontalAlignment="Center" Title="{x:Static lang:Phrases.EmptyText_NoFriends_Title}"
+            <components1:EmptyPageInfo HorizontalAlignment="Center" Title="{x:Static lang:Phrases.EmptyText_NoFriends_Title}"
                                       Body="{x:Static lang:Phrases.EmptyText_NoFriends}"/>
         </StackPanel>
         
@@ -50,26 +49,26 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             
-            <components:StaticListView Grid.Row="0" x:Name="FriendsListView"
+            <components1:StaticListView Grid.Row="0" x:Name="FriendsListView"
                                        ItemsSource="{Binding FriendsList}" 
                                        ListTitle="{x:Static lang:Online.ListTitle_Friends}"
                                        SelectionChanged="FriendListView_SelectionChanged">
-                <components:StaticListView.ItemContextMenu>
+                <components1:StaticListView.ItemContextMenu>
                     <ContextMenu>
                         <MenuItem Header="{x:Static lang:Common.Action_CopyFriendCode}" 
                                   Click="CopyFriendCode_OnClick" />
                     </ContextMenu>
-                </components:StaticListView.ItemContextMenu>
+                </components1:StaticListView.ItemContextMenu>
                 
                 <ListView.View>
                     <GridView AllowsColumnReorder="False">
                         <GridViewColumn Header="">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <components:MiiBall Size="40" Mii="{Binding Mii}"
+                                    <components1:MiiBall Size="40" Mii="{Binding Mii}"
                                                         WinPosition="{Binding WinPosition}" >
-                                        <components:MiiBall.Style>
-                                            <Style TargetType="components:MiiBall">
+                                        <components1:MiiBall.Style>
+                                            <Style TargetType="components1:MiiBall">
                                                 <Setter Property="Variant" Value="Default" />
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding IsOnline}" Value="True">
@@ -77,24 +76,24 @@
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
-                                        </components:MiiBall.Style>
-                                    </components:MiiBall>
+                                        </components1:MiiBall.Style>
+                                    </components1:MiiBall>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="{x:Static lang:Common.Attribute_Name}" DisplayMemberBinding="{Binding MiiName}" Width="100"
-                                        components:StaticListView.IsSortable="True" />
+                                        components1:StaticListView.IsSortable="True" />
                         <GridViewColumn Header="{x:Static lang:Online.Stat_FriendCode}" DisplayMemberBinding="{Binding FriendCode}" Width="140"
-                                        components:StaticListView.IsSortable="True" />
+                                        components1:StaticListView.IsSortable="True" />
                         <!-- <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Vr}" Width="60" -->
                         <!--                 components:StaticListView.IsSortable="True" /> -->
                         <GridViewColumn Header="{x:Static lang:Online.Stat_Wins}" DisplayMemberBinding="{Binding Wins}" Width="70"
-                                        components:StaticListView.IsSortable="True" />
+                                        components1:StaticListView.IsSortable="True" />
                         <GridViewColumn Header="{x:Static lang:Online.Stat_Losses}" DisplayMemberBinding="{Binding Losses}" Width="80"
-                                        components:StaticListView.IsSortable="True" />
+                                        components1:StaticListView.IsSortable="True" />
                     </GridView>
                 </ListView.View>
-            </components:StaticListView>
+            </components1:StaticListView>
  
             <components1:PlayerStatsComponent  
                 Grid.Row="1" x:Name="PlayerStats"

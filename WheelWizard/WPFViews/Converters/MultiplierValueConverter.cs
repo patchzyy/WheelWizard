@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace WheelWizard.Views.Converters
+namespace WheelWizard.WPFViews.Converters
 {
     public class MultiplierValueConverter : IValueConverter
     {

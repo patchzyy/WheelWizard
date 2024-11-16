@@ -7,7 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using static WheelWizard.WPFViews.ViewUtils;
 
-namespace WheelWizard.Views.Components;
+namespace WheelWizard.WPFViews.Components;
 
 public partial class DraggableListView : BaseListView
 {

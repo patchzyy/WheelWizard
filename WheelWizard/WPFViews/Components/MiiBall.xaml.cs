@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -7,11 +6,8 @@ using System.Windows.Media.Imaging;
 using WheelWizard.Models.Enums;
 using WheelWizard.Models.RRInfo;
 
-namespace WheelWizard.Views.Components;
+namespace WheelWizard.WPFViews.Components;
 
-// TODO: I think it is also possible to directly bind the Mii values
-//       instead of setting the image to an image and binding that
-//       That would be worth creating, would require a bit less code
 public partial class MiiBall : UserControl
 {
     public enum BallVariantType

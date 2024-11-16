@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:components="clr-namespace:WheelWizard.Views.Components"
              xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:components1="clr-namespace:WheelWizard.WPFViews.Components"
              mc:Ignorable="d" d:DesignHeight="716" d:DesignWidth="444">
     <Grid>
         <Grid.RowDefinitions>
@@ -16,7 +16,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <components:IconLabel Grid.Row="0"
+        <components1:IconLabel Grid.Row="0"
                               IconPack="FontAwesome"
                               IconKind="{x:Static icon:PackIconFontAwesomeKind.FaucetDripSolid}"
                               Text="This is a kitchen sink page"
@@ -28,7 +28,7 @@
 
         <UniformGrid Grid.Row="1" Columns="3" Rows="2" HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <!-- Default Button -->
-            <components:Button Variant="Default"
+            <components1:Button Variant="Default"
                                IsEnabled="True"
                                IconPack="Material"
                                IconKind="{x:Static icon:PackIconMaterialKind.Home}"
@@ -36,7 +36,7 @@
                                Click="Button_OnClick"
                                Margin="3" />
             <!-- Primary Button -->
-            <components:Button Variant="Primary"
+            <components1:Button Variant="Primary"
                                IsEnabled="True"
                                IconPack="Material"
                                IconKind="{x:Static icon:PackIconMaterialKind.Check}"
@@ -44,7 +44,7 @@
                                Click="Button_OnClick"
                                Margin="3" />
             <!-- Disabled Button -->
-            <components:Button Variant="Default"
+            <components1:Button Variant="Default"
                                IsEnabled="False"
                                IconPack="Material"
                                IconKind="{x:Static icon:PackIconMaterialKind.Stamper}"
@@ -52,7 +52,7 @@
                                Click="Button_OnClick"
                                Margin="3" />
             <!-- Secondary Button -->
-            <components:Button Variant="Secondary"
+            <components1:Button Variant="Secondary"
                                IsEnabled="True"
                                IconPack="Material"
                                IconKind="{x:Static icon:PackIconMaterialKind.Database}"
@@ -60,7 +60,7 @@
                                Click="Button_OnClick"
                                Margin="3" />
             <!-- Danger Button -->
-            <components:Button Variant="Danger"
+            <components1:Button Variant="Danger"
                                IsEnabled="True"
                                IconPack="Material"
                                IconKind="{x:Static icon:PackIconMaterialKind.Allergy}"
@@ -70,14 +70,14 @@
             <!-- Horizontal StackPanel for the two buttons next to each other -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="3">
                 <!-- Only Icon button -->
-                <components:Button Variant="Default"
+                <components1:Button Variant="Default"
                                    IconPack="Material"
                                    IconKind="{x:Static icon:PackIconMaterialKind.Timer}"
                                    Text=""
                                    Click="Button_OnClick"
                                    Margin="0,0,10,0" />
                 <!-- Only Text button -->
-                <components:Button Variant="Default"
+                <components1:Button Variant="Default"
                                    IconSize="0"
                                    Text="Text"
                                    Click="Button_OnClick" />
@@ -86,7 +86,7 @@
 
         <UniformGrid Grid.Row="2" Columns="3" Rows="1" HorizontalAlignment="Stretch" VerticalAlignment="Top">
 
-            <components:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.IceCreamSolid}"
+            <components1:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.IceCreamSolid}"
                                         IconPack="FontAwesome"
                                         Text="Label and Icon"
                                         Color="{StaticResource TitleTextColor}"
@@ -94,14 +94,14 @@
                                         Click="Button_OnClick"
                                         IconSize="20" Margin="5" />
 
-            <components:IconLabelButton IconSize="0"
+            <components1:IconLabelButton IconSize="0"
                                         Text="Only a label"
                                         Color="{StaticResource TitleTextColor}"
                                         FontSize="13"
                                         HoverColor="{StaticResource ErrorTitleTextColor}"
                                         Click="Button_OnClick" Margin="5" />
 
-            <components:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.SocksSolid}"
+            <components1:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.SocksSolid}"
                                         IconPack="FontAwesome"
                                         Text=""
                                         Color="{StaticResource TitleTextColor}"
@@ -113,29 +113,29 @@
                                         ToolTipService.InitialShowDelay="50"
                                         ToolTipService.ShowDuration="5000"
                                         ToolTipService.BetweenShowDelay="0">
-                <components:IconLabelButton.ToolTip>
-                    <components:ToolTipMessage Content="Hey! I am sure you didnt expect me here :P"
+                <components1:IconLabelButton.ToolTip>
+                    <components1:ToolTipMessage Content="Hey! I am sure you didnt expect me here :P"
                                                Alignment="TopRight" />
-                </components:IconLabelButton.ToolTip>
-            </components:IconLabelButton>
+                </components1:IconLabelButton.ToolTip>
+            </components1:IconLabelButton>
         </UniformGrid>
 
 
         <StackPanel Grid.Row="3" VerticalAlignment="Top" Margin="0,10">
             <StackPanel Orientation="Horizontal">
-                <components:InputField
+                <components1:InputField
                     Width="300"
                     Placeholder="Enter desired path here..."
                     HorizontalAlignment="Left"
                     x:Name="MyInputField" />
 
-                <components:Button Text="" FontSize="16"
+                <components1:Button Text="" FontSize="16"
                                    IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}"
                                    IconPack="FontAwesome"
                                    Click="InputButton_OnClick" Margin="10,0,0,0" />
             </StackPanel>
 
-            <components:InputField
+            <components1:InputField
                 Width="300"
                 Text="Prefilled text"
                 Label="I am a helpful Label"
@@ -169,19 +169,19 @@
 
         <UniformGrid  Grid.Row="5" Columns="2" Rows="1" HorizontalAlignment="Stretch" VerticalAlignment="Top"
                       Margin="0,10">
-            <components:InputField Margin="0,0,5,0"
+            <components1:InputField Margin="0,0,5,0"
                 Placeholder="Enter desired path here..."
                 HorizontalAlignment="Stretch"/>
-            <components:Dropdown x:Name="MyComboBox" Margin="5,0,0,0" HorizontalAlignment="Stretch">
+            <components1:Dropdown x:Name="MyComboBox" Margin="5,0,0,0" HorizontalAlignment="Stretch">
                 <ComboBoxItem Content="Option 1" IsSelected="True"/>
                 <ComboBoxItem Content="Option 2"/>
                 <ComboBoxItem Content="Option 3"/>
                 <ComboBoxItem Content="Option 4"/>
-            </components:Dropdown>
+            </components1:Dropdown>
         </UniformGrid>
     
         <UniformGrid Grid.Row="6" Columns="1" Rows="2" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,10">
-            <components:Dropdown Margin="5,0,0,0" HorizontalAlignment="Stretch" Label="Something" LabelTip="SOMETHING ELSE">
+            <components1:Dropdown Margin="5,0,0,0" HorizontalAlignment="Stretch" Label="Something" LabelTip="SOMETHING ELSE">
                 <ComboBoxItem Content="Option 1"/>
                 <ComboBoxItem Content="Option 2"/>
                 <ComboBoxItem Content="Option 3"/>
@@ -192,12 +192,12 @@
                 <ComboBoxItem Content="Option 8"/>
                 <ComboBoxItem Content="Option 9"/>
                 <ComboBoxItem Content="Option 10"/>
-            </components:Dropdown>
-            <components:Dropdown Margin="5,0,0,0" HorizontalAlignment="Stretch" IsEnabled="False" Label="I am disabled">
+            </components1:Dropdown>
+            <components1:Dropdown Margin="5,0,0,0" HorizontalAlignment="Stretch" IsEnabled="False" Label="I am disabled">
                 <ComboBoxItem Content="Option 1"/>
                 <ComboBoxItem Content="Option 2" IsSelected="True"/>
                 <ComboBoxItem Content="Option 3" />
-            </components:Dropdown>
+            </components1:Dropdown>
        </UniformGrid>
     </Grid>
 </UserControl>

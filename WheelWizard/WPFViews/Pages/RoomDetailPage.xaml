@@ -3,9 +3,9 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:components="clr-namespace:WheelWizard.Views.Components"
       xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
+      xmlns:components1="clr-namespace:WheelWizard.WPFViews.Components"
       mc:Ignorable="d"
       d:DesignHeight="831" d:DesignWidth="444"
       Title="RoomDetailPage" Background="Transparent">
@@ -25,7 +25,7 @@
                    HorizontalAlignment="Left" VerticalAlignment="Bottom"
                    Style="{StaticResource PageTitleText}" />
 
-        <components:IconLabelButton Grid.Row="0" IconKind="{x:Static icon:PackIconFontAwesomeKind.ArrowLeftSolid}"
+        <components1:IconLabelButton Grid.Row="0" IconKind="{x:Static icon:PackIconFontAwesomeKind.ArrowLeftSolid}"
                                     IconPack="FontAwesome" Text="{x:Static lang:Common.PageTitle_Rooms}"
                                     Color="{StaticResource TitleTextColor}"
                                     HoverColor="{StaticResource SuccessTitleTextColor}"
@@ -41,19 +41,19 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0">
-                <components:FormFieldLabel Text="{x:Static lang:Online.Stat_RoomID}" Margin="0,0,2,0" />
+                <components1:FormFieldLabel Text="{x:Static lang:Online.Stat_RoomID}" Margin="0,0,2,0" />
                 <TextBlock Text="{Binding Room.Id}"
                            Style="{StaticResource BodyText}" />
             </StackPanel>
 
             <StackPanel Grid.Column="1">
-                <components:FormFieldLabel Text="{x:Static lang:Online.Stat_TimeOnline}" Margin="0,0,2,0" />
+                <components1:FormFieldLabel Text="{x:Static lang:Online.Stat_TimeOnline}" Margin="0,0,2,0" />
                 <TextBlock Text="{Binding Room.TimeOnline}"
                            Style="{StaticResource BodyText}" />
             </StackPanel>
 
             <StackPanel Grid.Column="2">
-                <components:FormFieldLabel Text="{x:Static lang:Common.Attribute_Type}" Margin="0,0,2,0" />
+                <components1:FormFieldLabel Text="{x:Static lang:Common.Attribute_Type}" Margin="0,0,2,0" />
                 <TextBlock Text="{Binding Room.GameMode}"
                            Style="{StaticResource BodyText}" />
             </StackPanel>
@@ -78,33 +78,33 @@
         <!-- there is no need for an empty list element since it should not be possible to have an empty room -->
         <!-- and even if for some reason it is empty, the list will just be empty, that's all -->
         <StackPanel Grid.Row="2" x:Name="ModsListContainer" VerticalAlignment="Stretch">
-            <components:StaticListView x:Name="PlayersListView" IsClickable="False"
+            <components1:StaticListView x:Name="PlayersListView" IsClickable="False"
                                        MaxHeight="{Binding ElementName=ModsListContainer, Path=ActualHeight}"
                                        ItemsSource="{Binding PlayersList}" ListTitle="{x:Static lang:Online.ListTitle_Players}">
-                <components:StaticListView.ItemContextMenu>
+                <components1:StaticListView.ItemContextMenu>
                     <ContextMenu>
                         <MenuItem Header="{x:Static lang:Common.Action_CopyFriendCode}" Click="CopyFriendCode_OnClick" />
                         <!-- <MenuItem Header="View Mii" Click="..."/> -->
                     </ContextMenu>
-                </components:StaticListView.ItemContextMenu>
+                </components1:StaticListView.ItemContextMenu>
 
                 <ListView.View>
                     <GridView AllowsColumnReorder="False">
                         <GridViewColumn Header="" Width="63">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <components:MiiBall Mii="{Binding FirstMii}" Size="50" PlayerState="Online" 
+                                    <components1:MiiBall Mii="{Binding FirstMii}" Size="50" PlayerState="Online" 
                                                         WinPosition="{Binding WinPosition}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         
                         <GridViewColumn Header="{x:Static lang:Common.Attribute_Name}" DisplayMemberBinding="{Binding Name}" Width="105"
-                                        components:StaticListView.IsSortable="True" />
+                                        components1:StaticListView.IsSortable="True" />
                         <GridViewColumn Header="{x:Static lang:Online.Stat_FriendCode}" DisplayMemberBinding="{Binding Fc}" Width="135"
-                                        components:StaticListView.IsSortable="True" />
+                                        components1:StaticListView.IsSortable="True" />
                         <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Ev}" Width="80"
-                                        components:StaticListView.IsSortable="True" />
+                                        components1:StaticListView.IsSortable="True" />
                         
                         <GridViewColumn Header="" Width="35">
                             <GridViewColumn.CellTemplate>
@@ -130,7 +130,7 @@
                                             </icon:PackIconFontAwesome.Style>
                                         </icon:PackIconFontAwesome>
                                         <Border.ToolTip>
-                                            <components:ToolTipMessage Alignment="TopCenter"
+                                            <components1:ToolTipMessage Alignment="TopCenter"
                                                                        Content="This is a hover text thing" />
                                         </Border.ToolTip>
                                         
@@ -151,7 +151,7 @@
                         
                     </GridView>
                 </ListView.View>
-            </components:StaticListView>
+            </components1:StaticListView>
         </StackPanel>
     </Grid>
 </Page>

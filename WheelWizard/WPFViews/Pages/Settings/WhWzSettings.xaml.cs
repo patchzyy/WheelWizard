@@ -14,6 +14,7 @@ using WheelWizard.Resources.Languages;
 using WheelWizard.Services;
 using WheelWizard.Services.Settings;
 using WheelWizard.WPFViews.Popups.Generic;
+using Button = WheelWizard.WPFViews.Components.Button;
 
 namespace WheelWizard.WPFViews.Pages.Settings;
 
@@ -177,13 +178,13 @@ public partial class WhWzSettings : UserControl
         if (!SettingsHelper.PathsSetupCorrectly() && !enable)
         {
             LocationBorder.BorderBrush = (SolidColorBrush)FindResource("SettingsBlockWarningHighlight");
-            LocationEditButton.Variant = Views.Components.Button.ButtonsVariantType.Secondary;
+            LocationEditButton.Variant = Button.ButtonsVariantType.Secondary;
             LocationWarningIcon.Visibility = Visibility.Visible;
         }
         else
         {
             LocationBorder.BorderBrush = (SolidColorBrush)FindResource("SettingsBlockBackground");
-            LocationEditButton.Variant = Views.Components.Button.ButtonsVariantType.Primary;
+            LocationEditButton.Variant = Button.ButtonsVariantType.Primary;
             LocationWarningIcon.Visibility = Visibility.Collapsed;
         }
     

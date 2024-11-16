@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:components="clr-namespace:WheelWizard.Views.Components"
       xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
       xmlns:components1="clr-namespace:WheelWizard.WPFViews.Components"
       mc:Ignorable="d"
@@ -62,7 +61,7 @@
         
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" 
                     x:Name="VisibleWithoutProfiles">
-            <components:EmptyPageInfo HorizontalAlignment="Center" Title="{x:Static lang:Online.NoProfiles}"
+            <components1:EmptyPageInfo HorizontalAlignment="Center" Title="{x:Static lang:Online.NoProfiles}"
                                       Body="{x:Static lang:Phrases.EmptyText_NoProfiles}" />
         </StackPanel>
     </Grid>

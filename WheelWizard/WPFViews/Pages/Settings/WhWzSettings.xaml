@@ -3,23 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:components="clr-namespace:WheelWizard.Views.Components"
              xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
+             xmlns:components1="clr-namespace:WheelWizard.WPFViews.Components"
              mc:Ignorable="d" d:DesignHeight="716" d:DesignWidth="444">
     <Grid>
         <StackPanel Grid.Row="1">
             <!-- File location settings -->
             <StackPanel Margin="0,10,0,0">
                 <StackPanel Orientation="Horizontal">
-                    <components:FormFieldLabel Text="{x:Static lang:Settings.Section_LocationPaths}" />
+                    <components1:FormFieldLabel Text="{x:Static lang:Settings.Section_LocationPaths}" />
                     <Border ToolTipService.InitialShowDelay="5" x:Name="LocationWarningIcon"
                             ToolTipService.ShowDuration="10000"
                             ToolTipService.BetweenShowDelay="0">
                         <icon:PackIconFontAwesome Kind="TriangleExclamationSolid"
                                                   Foreground="{StaticResource WarningColor}" />
                         <Border.ToolTip>
-                            <components:ToolTipMessage Alignment="TopCenter"
+                            <components1:ToolTipMessage Alignment="TopCenter"
                                                        Content="You must set these 3 values &#10;before you can start playing retro rewind" />
                         </Border.ToolTip>
                     </Border>
@@ -38,15 +38,15 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
-                                <components:FormFieldLabel Text="{x:Static lang:Settings.Option_DolphinEmulatorExe}"
+                                <components1:FormFieldLabel Text="{x:Static lang:Settings.Option_DolphinEmulatorExe}"
                                                            TipText="{x:Static lang:Settings.InfoText_EndWithExe}" />
 
-                                <components:InputField Grid.Row="1" Grid.Column="0"
+                                <components1:InputField Grid.Row="1" Grid.Column="0"
                                                        Height="40"
                                                        Placeholder="{x:Static lang:Phrases.Placeholder_EnterPath}"
                                                        HorizontalAlignment="Stretch" Variant="Dark"
                                                        x:Name="DolphinExeInput" />
-                                <components:Button Grid.Row="1" Grid.Column="1"
+                                <components1:Button Grid.Row="1" Grid.Column="1"
                                                    Text="" FontSize="16" Height="40"
                                                    IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}"
                                                    IconPack="FontAwesome"
@@ -62,14 +62,14 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
-                                <components:FormFieldLabel Text="{x:Static lang:Settings.Option_MarioKartGame}"
+                                <components1:FormFieldLabel Text="{x:Static lang:Settings.Option_MarioKartGame}"
                                                            TipText="Path can end with: .wbfs/.iso/.rvz" 
                                                            Margin="0,6,0,0"/>
-                                <components:InputField Grid.Row="1" Grid.Column="0" Height="40"
+                                <components1:InputField Grid.Row="1" Grid.Column="0" Height="40"
                                                        Placeholder="{x:Static lang:Phrases.Placeholder_EnterPath}"
                                                        HorizontalAlignment="Stretch" Variant="Dark"
                                                        x:Name="MarioKartInput" />
-                                <components:Button Grid.Row="1" Grid.Column="1"
+                                <components1:Button Grid.Row="1" Grid.Column="1"
                                                    Text="" FontSize="16" Height="40"
                                                    IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}"
                                                    IconPack="FontAwesome"
@@ -86,14 +86,14 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
-                                <components:FormFieldLabel Text="{x:Static lang:Settings.Option_DolphinUserPath}"
+                                <components1:FormFieldLabel Text="{x:Static lang:Settings.Option_DolphinUserPath}"
                                                            Margin="0,6,0,0"/>
-                                <components:InputField Grid.Row="1" Grid.Column="0"
+                                <components1:InputField Grid.Row="1" Grid.Column="0"
                                                        HorizontalAlignment="Stretch"
                                                        Variant="Dark" Height="40" 
                                                        Placeholder="{x:Static lang:Phrases.Placeholder_EnterPath}"
                                                        x:Name="DolphinUserPathInput" />
-                                <components:Button Grid.Row="1" Grid.Column="1"
+                                <components1:Button Grid.Row="1" Grid.Column="1"
                                                    Text="" FontSize="16" Height="40"
                                                    IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}"
                                                    IconPack="FontAwesome"
@@ -103,17 +103,17 @@
 
                         </StackPanel>
                         <StackPanel Margin="0,10,0,0" Orientation="Horizontal" FlowDirection="RightToLeft">
-                            <components:Button Variant="Primary"
+                            <components1:Button Variant="Primary"
                                                IconSize="0" Text="{x:Static lang:Common.Action_Save}"
                                                x:Name="LocationSaveButton"
                                                Click="SaveButton_OnClick"
                                                Visibility="Collapsed" Height="40"
                                                Margin="3" />
-                            <components:Button Variant="Secondary" IconSize="0"
+                            <components1:Button Variant="Secondary" IconSize="0"
                                                x:Name="LocationCancelButton" Height="40"
                                                Visibility="Collapsed" Click="CancelButton_OnClick"
                                                Text="{x:Static lang:Common.Action_Cancel}" Margin="3" />
-                            <components:Button Variant="Primary" x:Name="LocationEditButton"
+                            <components1:Button Variant="Primary" x:Name="LocationEditButton"
                                                IconPack="FontAwesome" Text="{x:Static lang:Common.Action_Edit}"
                                                Click="EditButton_OnClick" Height="40"
                                                IconKind="{x:Static icon:PackIconFontAwesomeKind.PenSolid}"
@@ -122,7 +122,7 @@
                     </StackPanel>
                 </Border>
                 <Grid HorizontalAlignment="Stretch">
-                <components:Button Variant="Default"
+                <components1:Button Variant="Default"
                                    IsEnabled="True"
                                    IconPack="Material"
                                    IconKind="{x:Static icon:PackIconMaterialKind.Folder}"
@@ -140,15 +140,15 @@
                 </Grid>
             </StackPanel>
             
-            <components:FormFieldLabel Text="{x:Static lang:Settings.Section_WhWzAppearance}" Margin="0,10,0,0"/>
+            <components1:FormFieldLabel Text="{x:Static lang:Settings.Section_WhWzAppearance}" Margin="0,10,0,0"/>
             <Border Style="{StaticResource SettingsBlockStyle}" 
                     x:Name="WhWzAppearance">
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                    <components:Dropdown
+                    <components1:Dropdown
                         Label="{x:Static lang:Settings.Option_WindowScale}"
                         SelectionChanged="WindowScaleDropdown_OnSelectionChanged"
                         x:Name="WindowScaleDropdown">
-                    </components:Dropdown>
+                    </components1:Dropdown>
                 </Grid>
             </Border>
         </StackPanel>

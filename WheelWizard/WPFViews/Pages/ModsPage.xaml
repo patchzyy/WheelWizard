@@ -3,9 +3,9 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:components="clr-namespace:WheelWizard.Views.Components"
       xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
+      xmlns:components1="clr-namespace:WheelWizard.WPFViews.Components"
       mc:Ignorable="d" d:DesignHeight="831" d:DesignWidth="444"
       Title="My Stuff" Background="Transparent">
     <Grid>
@@ -75,11 +75,11 @@
             -->
             
             <UniformGrid Columns="2" Rows="1">
-                <components:Button Variant="Primary" Margin="3,0"
+                <components1:Button Variant="Primary" Margin="3,0"
                                    IconPack="FontAwesome" Text="Browse"
                                    IconKind="{x:Static icon:PackIconFontAwesomeKind.MagnifyingGlassSolid}"
                                    Click="BrowseMod_Click" HorizontalAlignment="Center" />
-                <components:Button Variant="Default" Margin="3,0"
+                <components1:Button Variant="Default" Margin="3,0"
                                    IconPack="FontAwesome" Text="{x:Static lang:Common.Action_Import}"
                                    IconKind="{x:Static icon:PackIconFontAwesomeKind.FileImportSolid}"
                                    Click="ImportMod_Click" HorizontalAlignment="Center" />
@@ -87,14 +87,14 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="PageWithoutMods">
-            <components:EmptyPageInfo HorizontalAlignment="Center" Title="{x:Static lang:Phrases.EmptyText_NoMods_Title}"
+            <components1:EmptyPageInfo HorizontalAlignment="Center" Title="{x:Static lang:Phrases.EmptyText_NoMods_Title}"
                                       Body="{x:Static lang:Phrases.EmptyText_NoMods}" />
             <UniformGrid Margin="0,12" Columns="2" Rows="1">
-                <components:Button Variant="Primary" Margin="3,0"
+                <components1:Button Variant="Primary" Margin="3,0"
                                    IconPack="FontAwesome" Text="Browse"
                                    IconKind="{x:Static icon:PackIconFontAwesomeKind.MagnifyingGlassSolid}"
                                    Click="BrowseMod_Click" HorizontalAlignment="Center" />
-                <components:Button Variant="Default" Margin="3,0"
+                <components1:Button Variant="Default" Margin="3,0"
                                    IconPack="FontAwesome" Text="{x:Static lang:Common.Action_Import}"
                                    IconKind="{x:Static icon:PackIconFontAwesomeKind.FileImportSolid}"
                                    Click="ImportMod_Click" HorizontalAlignment="Center" />
@@ -105,17 +105,17 @@
         <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" x:Name="PageWithMods" VerticalAlignment="Stretch">
             <!-- if you want to add something to this page, make sure you encapsulate the ListView in a standalone container,
              make that container stretch, and swap the ElementName for maxHeight to that container-->
-            <components:DraggableListView OnItemsReorder="ModsListView_OnOnItemsReorder" x:Name="ModsListView"
+            <components1:DraggableListView OnItemsReorder="ModsListView_OnOnItemsReorder" x:Name="ModsListView"
                                           MaxHeight="{Binding ElementName=PageWithMods, Path=ActualHeight}"
                                           ItemsSource="{Binding Mods}">
-                <components:DraggableListView.ItemContextMenu>
+                <components1:DraggableListView.ItemContextMenu>
                     <ContextMenu>
                         <MenuItem Header="{x:Static lang:Common.Action_Rename}" Click="RenameMod_Click" />
                         <MenuItem Header="{x:Static lang:Common.Action_Delete}" Click="DeleteMod_Click" />
                         <Separator Style="{StaticResource ContextMenuLine}" />
                         <MenuItem Header="{x:Static lang:Common.Action_OpenFolder}" Click="OpenFolder_Click" />
                     </ContextMenu>
-                </components:DraggableListView.ItemContextMenu>
+                </components1:DraggableListView.ItemContextMenu>
 
                 <ListView.View>
                     <GridView AllowsColumnReorder="False">
@@ -132,7 +132,7 @@
                         <GridViewColumn Header="{x:Static lang:Common.Attribute_Name}" Width="100000" DisplayMemberBinding="{Binding Title}" />
                     </GridView>
                 </ListView.View>
-            </components:DraggableListView>
+            </components1:DraggableListView>
         </StackPanel>
 
         <!-- TODO: Rework this, it doesnt even work -->

@@ -1,9 +1,9 @@
-<UserControl x:Class="WheelWizard.Views.Components.StateBox"
+<UserControl x:Class="WheelWizard.WPFViews.Components.StateBox"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:components="clr-namespace:WheelWizard.Views.Components"
+             xmlns:components1="clr-namespace:WheelWizard.WPFViews.Components"
              mc:Ignorable="d" x:Name="Root"
              d:DesignHeight="50" d:DesignWidth="70"
              HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -32,12 +32,12 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <components:DynamicIcon Grid.Column="0"
+            <components1:DynamicIcon Grid.Column="0"
                                     IconPack="{Binding IconPack, ElementName=Root}"
                                     IconKind="{Binding IconKind, ElementName=Root}"
                                     IconSize="{Binding IconSize, ElementName=Root}">
-                <components:DynamicIcon.Style>
-                    <Style TargetType="components:DynamicIcon">
+                <components1:DynamicIcon.Style>
+                    <Style TargetType="components1:DynamicIcon">
                         <Setter Property="ForegroundColor" Value="{StaticResource StateBoxIcon-Default}" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IconSize, ElementName=Root}" Value="0">
@@ -69,8 +69,8 @@
                             </MultiDataTrigger>
                         </Style.Triggers>
                     </Style>
-                </components:DynamicIcon.Style>
-            </components:DynamicIcon>
+                </components1:DynamicIcon.Style>
+            </components1:DynamicIcon>
 
             <Rectangle Grid.Column="1" Width="4">
                 <Rectangle.Style>
@@ -120,7 +120,7 @@
         </Grid>
 
         <Border.ToolTip>
-            <components:ToolTipMessage x:Name="StateBoxToolTip" />
+            <components1:ToolTipMessage x:Name="StateBoxToolTip" />
         </Border.ToolTip>
     </Border>
 </UserControl>

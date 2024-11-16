@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:components="clr-namespace:WheelWizard.Views.Components"
              xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:components1="clr-namespace:WheelWizard.WPFViews.Components"
              mc:Ignorable="d" d:DesignHeight="716" d:DesignWidth="444">
     <Grid>
         <Grid.RowDefinitions>
@@ -26,7 +26,7 @@
         
         <!--  OnItemsReorder="ModsListView_OnOnItemsReorder" -->
         <StackPanel Grid.Row="1" x:Name="Section1">
-            <components:DraggableListView OnItemsReorder="DraggableListView_OnOnItemsReorder"
+            <components1:DraggableListView OnItemsReorder="DraggableListView_OnOnItemsReorder"
                                           OnItemClick="ListView_OnOnItemClick"
                                           OnDoubleItemClick="ListView_OnOnItemDoubleClick"
                                           MaxHeight="{Binding ElementName=Section1, Path=ActualHeight}"
@@ -39,12 +39,12 @@
                                         DisplayMemberBinding="{Binding Age}" />
                     </GridView>
                 </ListView.View>
-            </components:DraggableListView>
+            </components1:DraggableListView>
         </StackPanel>
    
         
         <StackPanel Grid.Row="2" x:Name="Section2">
-            <components:StaticListView MaxHeight="{Binding ElementName=Section2, Path=ActualHeight}"
+            <components1:StaticListView MaxHeight="{Binding ElementName=Section2, Path=ActualHeight}"
                                        ListTitle="With a title" 
                                        ItemsSource="{Binding PersonList}"
                                        OnItemClick="ListView_OnOnItemClick"
@@ -57,21 +57,21 @@
                                         DisplayMemberBinding="{Binding Age}" />
                     </GridView>
                 </ListView.View>
-            </components:StaticListView>
+            </components1:StaticListView>
         </StackPanel>
         
         <StackPanel Grid.Row="3" x:Name="Section3">
-            <components:StaticListView x:Name="BottomList"
+            <components1:StaticListView x:Name="BottomList"
                                        MaxHeight="{Binding ElementName=Section3, Path=ActualHeight}"
                                        ItemsSource="{Binding PersonList}" IsClickable="False">
                 
-                <components:StaticListView.ItemContextMenu>
+                <components1:StaticListView.ItemContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Context option 1" Click="MenuItem_OnClick1" />
                         <Separator Style="{StaticResource ContextMenuLine}" />
                         <MenuItem Header="Context option 2" Click="MenuItem_OnClick2" />
                     </ContextMenu>
-                </components:StaticListView.ItemContextMenu>
+                </components1:StaticListView.ItemContextMenu>
                 
                 <ListView.View>
                     <GridView AllowsColumnReorder="False">
@@ -81,7 +81,7 @@
                                         DisplayMemberBinding="{Binding Age}" />
                     </GridView>
                 </ListView.View>
-            </components:StaticListView>
+            </components1:StaticListView>
         </StackPanel>
         
     </Grid>
