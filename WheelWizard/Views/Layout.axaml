@@ -1,0 +1,31 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignHeight="876" d:DesignWidth="656"
+        x:Class="WheelWizard.Views.Layout"
+        Height="876" Width="656" Title="Wheel Wizard" 
+        WindowStartupLocation="CenterScreen"
+        SystemDecorations="None"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="NoChrome"
+        CanResize='False' Background="Transparent">
+        
+        <Grid ColumnDefinitions="192,*" RowDefinitions="25,17,88,*,80" Background="#363944">
+                
+                <Border Grid.ColumnSpan="2"
+                        CornerRadius="0"
+                        Background="#363944"
+                        PointerPressed="TopBar_PointerPressed">
+                </Border>
+
+                <DockPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top">
+                        <Button Width="30" Height="25" Click="MinimizeButton_Click">-</Button>
+                        <Button Width="30" Height="25" Click="CloseButton_Click">x</Button>
+                </DockPanel>
+                
+                <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="4"
+                        CornerRadius="6,0,0,0" Background="#24252D">
+                </Border>
+        </Grid>
+</Window>
