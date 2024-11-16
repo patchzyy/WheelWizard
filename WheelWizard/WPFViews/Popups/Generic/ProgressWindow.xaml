@@ -1,9 +1,9 @@
-<local:PopupContent x:Class="WheelWizard.Views.Popups.ProgressWindow"
+<popups:PopupContent x:Class="WheelWizard.WPFViews.Popups.Generic.ProgressWindow"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                    xmlns:local="clr-namespace:WheelWizard.Views.Popups"
+                    xmlns:popups="clr-namespace:WheelWizard.WPFViews.Popups"
                     mc:Ignorable="d"
                     d:DesignHeight="170" d:DesignWidth="400">
     <Grid >
@@ -34,4 +34,4 @@
                      Foreground="{StaticResource SuccessColor}" 
                      Background="{StaticResource BackgroundLine}"/>
     </Grid>
-</local:PopupContent>
+</popups:PopupContent>

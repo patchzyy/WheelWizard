@@ -1,7 +1,7 @@
 using System.Windows;
 using WheelWizard.Resources.Languages;
 
-namespace WheelWizard.Views.Popups;
+namespace WheelWizard.WPFViews.Popups.Generic;
 
 public partial class YesNoWindow : PopupContent
 {

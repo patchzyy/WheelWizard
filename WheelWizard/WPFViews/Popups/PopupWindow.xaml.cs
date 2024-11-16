@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using WheelWizard.Services.Settings;
 
-namespace WheelWizard.Views.Popups;
+namespace WheelWizard.WPFViews.Popups;
 
 public partial class PopupWindow : Window, INotifyPropertyChanged
 {

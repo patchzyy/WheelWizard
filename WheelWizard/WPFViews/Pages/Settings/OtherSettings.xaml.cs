@@ -1,15 +1,13 @@
-﻿using System;
-using System.Configuration;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using WheelWizard.Helpers;
 using WheelWizard.Models.Settings;
 using WheelWizard.Resources.Languages;
 using WheelWizard.Services.Settings;
-using WheelWizard.Views.Popups;
+using WheelWizard.WPFViews.Popups.Generic;
 
-namespace WheelWizard.Views.Pages.Settings;
+namespace WheelWizard.WPFViews.Pages.Settings;
 
 public partial class OtherSettings : UserControl
 {

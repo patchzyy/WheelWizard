@@ -1,5 +1,5 @@
 ﻿<!-- ModDetailViewer.xaml -->
-<UserControl x:Class="WheelWizard.Views.Components.ModDetailViewer"
+<UserControl x:Class="WheelWizard.WPFViews.Popups.ModManagment.ModDetailViewer"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"

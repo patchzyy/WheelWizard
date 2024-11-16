@@ -8,9 +8,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using WheelWizard.Services.GameBanana;
-using WheelWizard.Views.Pages;
+using WheelWizard.WPFViews.Pages;
+using WheelWizard.WPFViews.Popups.Generic;
 
-namespace WheelWizard.Views.Popups;
+namespace WheelWizard.WPFViews.Popups.ModManagment;
 
 public partial class ModPopupWindow : PopupContent, INotifyPropertyChanged
 {

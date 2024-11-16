@@ -1,15 +1,13 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using WheelWizard.Models.GameData;
 using WheelWizard.Services.WiiManagement.SaveData;
 using WheelWizard.Utilities.RepeatedTasks;
 
-namespace WheelWizard.Views.Pages;
+namespace WheelWizard.WPFViews.Pages;
 
 public partial class FriendsPage : Page, INotifyPropertyChanged, IRepeatedTaskListener
 {

@@ -1,12 +1,12 @@
-﻿<Page x:Class="WheelWizard.Views.Pages.FriendsPage"
+﻿<Page x:Class="WheelWizard.WPFViews.Pages.FriendsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:WheelWizard.Views.Pages"
       xmlns:components="clr-namespace:WheelWizard.Views.Components"
       xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
+      xmlns:components1="clr-namespace:WheelWizard.WPFViews.Components"
       mc:Ignorable="d"
       d:DesignHeight="831" d:DesignWidth="444"
       Title="FriendsPage" Background="Transparent">
@@ -30,7 +30,7 @@
             </Border>
         </StackPanel>
         
-        <components:CurrentUserProfileComponent x:Name="CurrentUserProfile"
+        <components1:CurrentUserProfileComponent x:Name="CurrentUserProfile"
                                                 Grid.Row="0"
                                                 HorizontalAlignment="Right"
                                                 VerticalAlignment="Top"/>
@@ -96,7 +96,7 @@
                 </ListView.View>
             </components:StaticListView>
  
-            <components:PlayerStatsComponent  
+            <components1:PlayerStatsComponent  
                 Grid.Row="1" x:Name="PlayerStats"
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Bottom"

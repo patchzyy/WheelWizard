@@ -5,7 +5,7 @@ using WheelWizard.Resources.Languages;
 using WheelWizard.Services.Settings;
 using WheelWizard.Services.WiiManagement.SaveData;
 
-namespace WheelWizard.Views.Pages;
+namespace WheelWizard.WPFViews.Pages;
 
 public partial class UserProfilePage : Page
 {

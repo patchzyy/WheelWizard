@@ -1,4 +1,4 @@
-﻿<Page x:Class="WheelWizard.Views.Pages.HomePage"
+﻿<Page x:Class="WheelWizard.WPFViews.Pages.HomePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -6,6 +6,7 @@
       xmlns:components="clr-namespace:WheelWizard.Views.Components"
       xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
+      xmlns:components1="clr-namespace:WheelWizard.WPFViews.Components"
       mc:Ignorable="d"
       d:DesignHeight="831" d:DesignWidth="444"
       Title="Dashboard" Background="Transparent">
@@ -21,7 +22,7 @@
                 VerticalAlignment="Bottom" />
         <TextBlock Grid.Row="0" Text="{x:Static lang:Common.PageTitle_Home}" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                    Style="{StaticResource PageTitleText}" />
-        <components:CurrentUserProfileComponent x:Name="CurrentUserProfile"
+        <components1:CurrentUserProfileComponent x:Name="CurrentUserProfile"
                                                 Grid.Row="0"
                                                 HorizontalAlignment="Right"
                                                 VerticalAlignment="Top"/>

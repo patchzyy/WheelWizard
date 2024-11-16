@@ -10,12 +10,12 @@ using WheelWizard.Services.Installation;
 using WheelWizard.Services.Launcher;
 using WheelWizard.Services.Other;
 using WheelWizard.Services.Settings;
-using WheelWizard.Views.Components;
-using static WheelWizard.Views.ViewUtils;
+using WheelWizard.WPFViews.Pages.Settings;
+using static WheelWizard.WPFViews.ViewUtils;
 using Button = WheelWizard.Views.Components.Button;
 using Components_Button = WheelWizard.Views.Components.Button;
 
-namespace WheelWizard.Views.Pages;
+namespace WheelWizard.WPFViews.Pages;
 
 public partial class HomePage
 {
@@ -58,10 +58,10 @@ public partial class HomePage
                 await Launcher.LaunchRetroRewind();
                 break;
             case WheelWizardStatus.NoDolphin:
-                NavigateToPage(new Settings.SettingsPage());
+                NavigateToPage(new SettingsPage());
                 break;
             case WheelWizardStatus.ConfigNotFinished:
-                NavigateToPage(new Settings.SettingsPage());
+                NavigateToPage(new SettingsPage());
                 break;
             case WheelWizardStatus.NoRR:
                 SetButtonState(Common.State_Installing, Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download,

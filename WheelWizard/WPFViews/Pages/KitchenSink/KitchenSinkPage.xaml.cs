@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace WheelWizard.Views.Pages.KitchenSink;
+namespace WheelWizard.WPFViews.Pages.KitchenSink;
 
 public partial class KitchenSinkPage : Page
 {

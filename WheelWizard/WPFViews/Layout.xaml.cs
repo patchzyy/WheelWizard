@@ -1,6 +1,5 @@
 ﻿using MahApps.Metro.IconPacks;
 using System;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,10 +14,11 @@ using WheelWizard.Services.Settings;
 using WheelWizard.Services.WiiManagement.SaveData;
 using WheelWizard.Utilities.RepeatedTasks;
 using WheelWizard.Views.Components;
-using WheelWizard.Views.Pages;
-using WheelWizard.Views.Popups;
+using WheelWizard.WPFViews.Components;
+using WheelWizard.WPFViews.Pages;
+using WheelWizard.WPFViews.Popups.Generic;
 
-namespace WheelWizard.Views;
+namespace WheelWizard.WPFViews;
 
 public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
 {

@@ -2,7 +2,7 @@ using WheelWizard.Services.Settings;
 using System.IO;
 using System.Threading.Tasks;
 using WheelWizard.Helpers;
-using WheelWizard.Views.Popups;
+using WheelWizard.WPFViews.Popups.Generic;
 
 namespace WheelWizard.Services.Launcher;
 

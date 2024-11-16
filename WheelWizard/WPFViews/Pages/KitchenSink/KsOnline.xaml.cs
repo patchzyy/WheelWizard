@@ -1,12 +1,9 @@
-using WheelWizard.Views.Popups;
-using System;
 using System.ComponentModel;
-using System.Windows;
 using System.Windows.Controls;
 using WheelWizard.Models.RRInfo;
 using WheelWizard.Services.WiiManagement.SaveData;
 
-namespace WheelWizard.Views.Pages.KitchenSink;
+namespace WheelWizard.WPFViews.Pages.KitchenSink;
 
 public partial class KsOnline : UserControl, INotifyPropertyChanged
 {

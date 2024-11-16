@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using WheelWizard.Models.RRInfo;
 using WheelWizard.Services.LiveData;
 using WheelWizard.Utilities.RepeatedTasks;
-using static WheelWizard.Views.ViewUtils;
+using static WheelWizard.WPFViews.ViewUtils;
 
-namespace WheelWizard.Views.Pages;
+namespace WheelWizard.WPFViews.Pages;
 
 public partial class RoomDetailPage : Page, INotifyPropertyChanged, IRepeatedTaskListener
 {

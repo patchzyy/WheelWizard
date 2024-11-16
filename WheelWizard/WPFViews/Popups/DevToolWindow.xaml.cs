@@ -1,15 +1,11 @@
-using WheelWizard.Resources.Languages;
-using WheelWizard.Utilities;
-using System;
 using System.Windows;
-using System.Xml.Linq;
 using WheelWizard.Helpers;
 using WheelWizard.Services.LiveData;
 using WheelWizard.Services.WiiManagement;
 using WheelWizard.Utilities.DevTools;
 using WheelWizard.Utilities.RepeatedTasks;
 
-namespace WheelWizard.Views.Popups;
+namespace WheelWizard.WPFViews.Popups;
 
 public partial class DevToolWindow : PopupContent, IRepeatedTaskListener
 {
