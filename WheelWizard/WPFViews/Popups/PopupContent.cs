@@ -1,7 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace WheelWizard.Views.Popups;
+namespace WheelWizard.WPFViews.Popups;
 
 public abstract class PopupContent : UserControl
 {

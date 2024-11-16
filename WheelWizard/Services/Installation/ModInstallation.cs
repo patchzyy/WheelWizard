@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using WheelWizard.Models.Settings;
-using WheelWizard.Views.Popups;
+using WheelWizard.WPFViews.Popups.Generic;
 
 namespace WheelWizard.Services.Installation;
 public static class ModInstallation

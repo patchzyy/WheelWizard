@@ -1,8 +1,8 @@
 ﻿using System.Media;
 using System.Windows;
-using WheelWizard.Views.Components;
+using WheelWizard.WPFViews.Components;
 
-namespace WheelWizard.Views.Popups;
+namespace WheelWizard.WPFViews.Popups.Generic;
 
 public partial class MessageBoxWindow : PopupContent
 {

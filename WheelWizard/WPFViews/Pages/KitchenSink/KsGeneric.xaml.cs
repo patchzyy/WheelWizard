@@ -1,8 +1,8 @@
 using System.Windows;
 using System.Windows.Controls;
-using WheelWizard.Views.Popups;
+using WheelWizard.WPFViews.Popups.Generic;
 
-namespace WheelWizard.Views.Pages.KitchenSink;
+namespace WheelWizard.WPFViews.Pages.KitchenSink;
 
 public partial class KsGeneric : UserControl
 {

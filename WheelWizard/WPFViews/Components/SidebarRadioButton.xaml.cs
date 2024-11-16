@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using WheelWizard.Views.Pages;
-using static WheelWizard.Views.ViewUtils;
+using WheelWizard.WPFViews.Pages;
+using static WheelWizard.WPFViews.ViewUtils;
 
-namespace WheelWizard.Views.Components;
+namespace WheelWizard.WPFViews.Components;
 
 /*
 EXAMPLES:

@@ -1,13 +1,9 @@
-using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Forms;
 using WheelWizard.Helpers;
 using WheelWizard.Resources.Languages;
 
-
-namespace WheelWizard.Views.Popups;
+namespace WheelWizard.WPFViews.Popups.Generic;
 
 public partial class ProgressWindow : PopupContent
 {

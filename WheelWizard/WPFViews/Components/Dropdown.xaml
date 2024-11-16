@@ -1,10 +1,10 @@
-<ComboBox x:Class="WheelWizard.Views.Components.Dropdown"
+<ComboBox x:Class="WheelWizard.WPFViews.Components.Dropdown"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             xmlns:components="clr-namespace:WheelWizard.Views.Components"
+             xmlns:components1="clr-namespace:WheelWizard.WPFViews.Components"
              mc:Ignorable="d"
              d:DesignHeight="70" d:DesignWidth="300">
 
@@ -87,7 +87,7 @@
     <ComboBox.Template>
          <ControlTemplate TargetType="ComboBox">
              <StackPanel>
-                 <components:FormFieldLabel x:Name="LabelElement"
+                 <components1:FormFieldLabel x:Name="LabelElement"
                                             Text="{Binding Label, RelativeSource={RelativeSource TemplatedParent}}"
                                             TipText="{Binding LabelTip, RelativeSource={RelativeSource TemplatedParent}}"
                                             VerticalAlignment="Bottom" />

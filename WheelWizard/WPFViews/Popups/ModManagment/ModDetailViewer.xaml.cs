@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using WheelWizard.Helpers;
@@ -13,9 +13,9 @@ using WheelWizard.Services;
 using WheelWizard.Services.GameBanana;
 using WheelWizard.Services.Installation;
 using WheelWizard.Services.Launcher;
-using WheelWizard.Views.Popups;
+using WheelWizard.WPFViews.Popups.Generic;
 
-namespace WheelWizard.Views.Components;
+namespace WheelWizard.WPFViews.Popups.ModManagment;
 
 public partial class ModDetailViewer : UserControl
 {

@@ -1,10 +1,9 @@
-﻿// ModIndependentPopup.xaml.cs
-
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows;
-using WheelWizard.Views.Pages;
+using WheelWizard.WPFViews.Pages;
 
-namespace WheelWizard.Views.Popups;
+namespace WheelWizard.WPFViews.Popups.ModManagment;
+
 public partial class ModIndependentWindow : PopupContent
 {
     public ModIndependentWindow(Window owner = null) : base(allowClose: true, allowLayoutInteraction: false, isTopMost: true, title: "Mod Details", owner: owner, size: new Vector(500, 700))

@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace WheelWizard.Views.Converters
+namespace WheelWizard.WPFViews.Converters
 {
     public class CornerRadiusConverter : IMultiValueConverter
     {

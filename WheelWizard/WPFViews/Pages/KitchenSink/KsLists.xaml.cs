@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace WheelWizard.Views.Pages.KitchenSink;
+namespace WheelWizard.WPFViews.Pages.KitchenSink;
 
 public partial class KsLists : UserControl, INotifyPropertyChanged
 {

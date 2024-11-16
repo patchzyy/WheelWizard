@@ -10,7 +10,7 @@ using WheelWizard.Helpers;
 using WheelWizard.Models;
 using WheelWizard.Models.Github;
 using WheelWizard.Resources.Languages;
-using WheelWizard.Views.Popups;
+using WheelWizard.WPFViews.Popups.Generic;
 
 namespace WheelWizard.Services.Installation;
 

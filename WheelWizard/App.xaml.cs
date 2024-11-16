@@ -1,5 +1,4 @@
-﻿using WheelWizard.Views.Popups;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
 using WheelWizard.Services.Installation;

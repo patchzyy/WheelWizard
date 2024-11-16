@@ -1,9 +1,9 @@
-<TextBox x:Class="WheelWizard.Views.Components.InputField"
+<TextBox x:Class="WheelWizard.WPFViews.Components.InputField"
          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-         xmlns:components="clr-namespace:WheelWizard.Views.Components"
+         xmlns:components1="clr-namespace:WheelWizard.WPFViews.Components"
          mc:Ignorable="d" x:Name="Root"
          d:DesignHeight="90" d:DesignWidth="300">
 
@@ -18,7 +18,7 @@
                             <!-- Label TextBlock -->
                             <!-- This will be collapsed if the label is empty, but that is done in the controller
                              since for some reason it just straight up ignores the dataTrigger -->
-                            <components:FormFieldLabel x:Name="LabelElement"
+                            <components1:FormFieldLabel x:Name="LabelElement"
                                                        Text="{Binding Label, ElementName=Root}"
                                                        TipText="{Binding LabelTip, ElementName=Root}"
                                                        VerticalAlignment="Bottom" />
@@ -80,7 +80,7 @@
                             <!-- Label TextBlock -->
                             <!-- This will be collapsed if the label is empty, but that is done in the controller
                              since for some reason it just straight up ignores the dataTrigger -->
-                            <components:FormFieldLabel x:Name="LabelElement"
+                            <components1:FormFieldLabel x:Name="LabelElement"
                                                        Text="{Binding Label, ElementName=Root}"
                                                        TipText="{Binding LabelTip, ElementName=Root}"
                                                        VerticalAlignment="Bottom" />

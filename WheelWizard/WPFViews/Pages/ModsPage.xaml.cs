@@ -1,5 +1,4 @@
-﻿using WheelWizard.Services.UrlProtocol;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -7,9 +6,10 @@ using System.Windows.Controls;
 using System.Windows.Threading;
 using WheelWizard.Models.Settings;
 using WheelWizard.Services;
-using WheelWizard.Views.Popups;
+using WheelWizard.WPFViews.Popups.Generic;
+using WheelWizard.WPFViews.Popups.ModManagment;
 
-namespace WheelWizard.Views.Pages;
+namespace WheelWizard.WPFViews.Pages;
 
 public partial class ModsPage : Page, INotifyPropertyChanged
 {
@@ -83,7 +83,7 @@ public partial class ModsPage : Page, INotifyPropertyChanged
 
     private void BrowseMod_Click(object sender, RoutedEventArgs e)
     {
-        var modPopup = new Views.Popups.ModPopupWindow();
+        var modPopup = new ModPopupWindow();
         modPopup.Show();
     }
 

@@ -1,15 +1,14 @@
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using WheelWizard.Services.LiveData;
 using WheelWizard.Services.WiiManagement.SaveData;
 using WheelWizard.Utilities.RepeatedTasks;
 
-namespace WheelWizard.Views;
-
-using System.Windows;
-using System.Windows.Media;
+namespace WheelWizard.WPFViews;
 
 // when using any of the utils, import using:
-//  using static CT_MKWII_WPF.Views.ViewUtils;
+//  using static WheelWizard.WPFViews.ViewUtils;
 
 public static class ViewUtils
 {

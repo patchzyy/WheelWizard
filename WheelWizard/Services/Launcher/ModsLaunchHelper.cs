@@ -8,7 +8,7 @@ using System.Windows;
 using WheelWizard.Helpers;
 using WheelWizard.Models.Settings;
 using WheelWizard.Resources.Languages;
-using WheelWizard.Views.Popups;
+using WheelWizard.WPFViews.Popups.Generic;
 
 namespace WheelWizard.Services.Launcher;
 

@@ -12,7 +12,7 @@ using WheelWizard.Services.LiveData;
 using WheelWizard.Services.Settings;
 using WheelWizard.Utilities.Generators;
 using WheelWizard.Utilities.RepeatedTasks;
-using WheelWizard.Views.Popups;
+using WheelWizard.WPFViews.Popups.Generic;
 
 //big big thanks to https://kazuki-4ys.github.io/web_apps/FaceThief/ for the JS implementation of reading the rksys file
 //reminder, big endian!!!!

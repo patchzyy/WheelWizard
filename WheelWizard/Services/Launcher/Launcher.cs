@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using WheelWizard.Resources.Languages;
 using WheelWizard.Services.Settings;
 using WheelWizard.Services.WiiManagement;
-using WheelWizard.Views.Popups;
+using WheelWizard.WPFViews.Popups.Generic;
 
 namespace WheelWizard.Services.Launcher;
 

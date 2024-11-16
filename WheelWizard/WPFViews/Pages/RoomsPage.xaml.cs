@@ -1,17 +1,16 @@
-﻿using WheelWizard.Views.Popups;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Linq;
 using WheelWizard.Models.RRInfo;
 using WheelWizard.Resources.Languages;
 using WheelWizard.Services.LiveData;
 using WheelWizard.Utilities.RepeatedTasks;
 
-namespace WheelWizard.Views.Pages;
+namespace WheelWizard.WPFViews.Pages;
 
 public sealed partial class RoomsPage : Page, INotifyPropertyChanged, IRepeatedTaskListener
 {

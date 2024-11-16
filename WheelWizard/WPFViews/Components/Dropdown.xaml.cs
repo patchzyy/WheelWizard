@@ -1,9 +1,8 @@
-using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace WheelWizard.Views.Components;
+namespace WheelWizard.WPFViews.Components;
 
 public partial class Dropdown : ComboBox
 {

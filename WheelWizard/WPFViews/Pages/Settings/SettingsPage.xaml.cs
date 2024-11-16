@@ -1,22 +1,11 @@
-﻿using WheelWizard.Services;
-using WheelWizard.Services.Settings;
-using WheelWizard.Services.WiiManagement;
-using Microsoft.Win32;
-using Microsoft.WindowsAPICodePack.Dialogs;
-using System;
-using System.Drawing;
-using System.IO;
+﻿using System;
 using System.Linq;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using WheelWizard.Services.Installation;
-using WheelWizard.Views.Popups;
-using static WheelWizard.Views.ViewUtils;
-using Button = WheelWizard.Views.Components.Button;
+using WheelWizard.WPFViews.Popups;
 
-namespace WheelWizard.Views.Pages.Settings;
+namespace WheelWizard.WPFViews.Pages.Settings;
 
 public partial class SettingsPage : Page
 {
