@@ -43,4 +43,6 @@ public class Program
     //  - Then remove the `<UseWPF>true</UseWPF>` tag
     //  - Then go int the <ItemGroup> that has the comments about something specific to the OG Wheel wizard wpf application. Filter everything in there what should all be thrown away
     //  - Remove all the page xaml references in this .csproj
+    //  - Check what AssemblyInfo.cs is doing there still without WPF
+    //  - Move the new App.axaml in the place of App.xaml (in the root directory)
 } 
