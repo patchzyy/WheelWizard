@@ -53,6 +53,8 @@ However, also add the 2 letter language code at the end. so e.g. `Settings.it.re
 4. You can remove teh `xx.yy.Desinger.cs` file hanging under it. This is not needed.
 5. Then to stay organized, you can move the file on to its corresponding .resx file so that it is grouped together, so you would get:   
 ![translation_group_file_example.png](Images/translation_group_file_example.png)
+6. Make sure you update the `Value_xxx` and `Value_xxxOg` in the settings group (where `xxx` is the language name)  
+Og should be the name of the language in the language itself, regardless of the column. So each cell in this row should be the same for all languages.
 
 ## How to update the translations with the spreadsheet
 Note that this process is from the perspective of a rider IDE. I hope its the same for other editors, otherwise, you have to figure it out yourself lol.

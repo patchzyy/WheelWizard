@@ -87,6 +87,15 @@ namespace WheelWizard.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This enables the animations in the the wheel wizard app.
+        /// </summary>
+        public static string InfoText_EnableAnimations {
+            get {
+                return ResourceManager.GetString("InfoText_EnableAnimations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Path must end with .exe.
         /// </summary>
         public static string InfoText_EndWithExe {
@@ -155,6 +164,15 @@ namespace WheelWizard.Resources.Languages {
         public static string Option_DolphinUserPath {
             get {
                 return ResourceManager.GetString("Option_DolphinUserPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable Animations.
+        /// </summary>
+        public static string Option_EnableAnimations {
+            get {
+                return ResourceManager.GetString("Option_EnableAnimations", resourceCulture);
             }
         }
         
@@ -465,7 +483,7 @@ namespace WheelWizard.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Korean.
         /// </summary>
         public static string Value_Language_Korean {
             get {

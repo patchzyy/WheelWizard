@@ -166,9 +166,15 @@
         <value>Remove Blur</value>
     </data>
     <data name="Value_Language_Korean" xml:space="preserve">
-        <value />
+        <value>Korean</value>
     </data>
     <data name="Value_Language_KoreanOg" xml:space="preserve">
         <value>-</value>
+    </data>
+    <data name="Option_EnableAnimations" xml:space="preserve">
+        <value>Enable Animations</value>
+    </data>
+    <data name="InfoText_EnableAnimations" xml:space="preserve">
+        <value>This enables the animations in the the wheel wizard app</value>
     </data>
 </root>

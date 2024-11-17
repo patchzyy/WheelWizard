@@ -143,13 +143,20 @@
             <components1:FormFieldLabel Text="{x:Static lang:Settings.Section_WhWzAppearance}" Margin="0,10,0,0"/>
             <Border Style="{StaticResource SettingsBlockStyle}" 
                     x:Name="WhWzAppearance">
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                    <CheckBox Margin="0,2,0,6" IsChecked="True"
+                              Style="{StaticResource DarkSwitch}"
+                              x:Name="EnableAnimations" Click="EnableAnimations_OnClick">
+                        <components1:FormFieldLabel Text="{x:Static lang:Settings.Option_EnableAnimations}"
+                                                    TipText="{x:Static lang:Settings.InfoText_EnableAnimations}" />
+                    </CheckBox>
+                    
                     <components1:Dropdown
                         Label="{x:Static lang:Settings.Option_WindowScale}"
                         SelectionChanged="WindowScaleDropdown_OnSelectionChanged"
                         x:Name="WindowScaleDropdown">
                     </components1:Dropdown>
-                </Grid>
+                </StackPanel>
             </Border>
         </StackPanel>
     </Grid>
