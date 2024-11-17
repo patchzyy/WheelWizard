@@ -19,7 +19,7 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="Button_ViewRoom" xml:space="preserve">
-        <value>ルームをみる</value>
+        <value>ルームを見る</value>
     </data>
     <data name="ListTitle_Friends" xml:space="preserve">
         <value>フレンド</value>
@@ -31,7 +31,7 @@
         <value>ライセンスなし</value>
     </data>
     <data name="NoName" xml:space="preserve">
-        <value>名無し</value>
+        <value>Player</value>
     </data>
     <data name="NoProfiles" xml:space="preserve">
         <value>プロフィールなし</value>
@@ -67,9 +67,18 @@
         <value>プレイヤー</value>
     </data>
     <data name="Stat_RacesPlayed" xml:space="preserve">
-        <value>プレイしたコース数</value>
+        <value>プレイしたレース数</value>
     </data>
     <data name="Stat_Wins" xml:space="preserve">
         <value>勝ち</value>
+    </data>
+    <data name="ListTitle_Rooms" xml:space="preserve">
+        <value>ルーム</value>
+    </data>
+    <data name="Stat_RoomID" xml:space="preserve">
+        <value>ルームID</value>
+    </data>
+    <data name="Stat_TimeOnline" xml:space="preserve">
+        <value>オンライン時間</value>
     </data>
 </root>

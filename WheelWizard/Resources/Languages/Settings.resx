@@ -160,9 +160,15 @@
         <value>Finnish</value>
     </data>
     <data name="Value_Language_FinnishOg" xml:space="preserve">
-        <value>Finnish</value>
+        <value>-</value>
     </data>
     <data name="Option_RemoveBlur" xml:space="preserve">
         <value>Remove Blur</value>
+    </data>
+    <data name="Value_Language_Korean" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Value_Language_KoreanOg" xml:space="preserve">
+        <value>-</value>
     </data>
 </root>

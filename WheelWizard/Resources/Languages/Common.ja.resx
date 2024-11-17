@@ -22,7 +22,7 @@
         <value>削除</value>
     </data>
     <data name="Action_DisableAll" xml:space="preserve">
-        <value>すべて削除</value>
+        <value>すべて無効</value>
     </data>
     <data name="Action_EnableAll" xml:space="preserve">
         <value>すべて有効</value>
@@ -112,9 +112,66 @@
         <value>キャンセル</value>
     </data>
     <data name="Action_Save" xml:space="preserve">
-        <value>セーブ</value>
+        <value>保存</value>
     </data>
     <data name="Action_CopyFriendCode" xml:space="preserve">
         <value>フレンドコードをコピー</value>
+    </data>
+    <data name="Action_Apply" xml:space="preserve">
+        <value>適用</value>
+    </data>
+    <data name="Action_Export" xml:space="preserve">
+        <value>エクスポート</value>
+    </data>
+    <data name="Action_Keep" xml:space="preserve">
+        <value>維持</value>
+    </data>
+    <data name="Action_MaybeLater" xml:space="preserve">
+        <value>また後で</value>
+    </data>
+    <data name="Action_No" xml:space="preserve">
+        <value>いいえ</value>
+    </data>
+    <data name="Action_OK" xml:space="preserve">
+        <value>OK</value>
+    </data>
+    <data name="Action_Revert" xml:space="preserve">
+        <value>元に戻す</value>
+    </data>
+    <data name="Action_Yes" xml:space="preserve">
+        <value>はい</value>
+    </data>
+    <data name="Attribute_Id" xml:space="preserve">
+        <value>ID</value>
+    </data>
+    <data name="Attribute_ModName" xml:space="preserve">
+        <value>Modの名前</value>
+    </data>
+    <data name="Attribute_Type" xml:space="preserve">
+        <value>種類</value>
+    </data>
+    <data name="PageTitle_RoomDetails" xml:space="preserve">
+        <value>ルームの詳細</value>
+    </data>
+    <data name="State_Extracting" xml:space="preserve">
+        <value>ファイル展開中...</value>
+    </data>
+    <data name="Term_Error" xml:space="preserve">
+        <value>エラー</value>
+    </data>
+    <data name="Term_No" xml:space="preserve">
+        <value>いいえ</value>
+    </data>
+    <data name="Term_Speed" xml:space="preserve">
+        <value>速度</value>
+    </data>
+    <data name="Term_Success" xml:space="preserve">
+        <value>成功</value>
+    </data>
+    <data name="Term_Warning" xml:space="preserve">
+        <value>警告</value>
+    </data>
+    <data name="Term_Yes" xml:space="preserve">
+        <value>はい</value>
     </data>
 </root>

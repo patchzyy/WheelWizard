@@ -157,6 +157,9 @@
         <value>Défini par défaut</value>
     </data>
     <data name="Value_Language_FinnishOg" xml:space="preserve">
-        <value>Finnish</value>
+        <value>-</value>
+    </data>
+    <data name="Value_Language_KoreanOg" xml:space="preserve">
+        <value>-</value>
     </data>
 </root>

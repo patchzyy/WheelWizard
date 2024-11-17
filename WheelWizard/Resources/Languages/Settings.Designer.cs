@@ -384,7 +384,7 @@ namespace WheelWizard.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Finnish.
+        ///   Looks up a localized string similar to -.
         /// </summary>
         public static string Value_Language_FinnishOg {
             get {
@@ -461,6 +461,24 @@ namespace WheelWizard.Resources.Languages {
         public static string Value_Language_JapaneseOg {
             get {
                 return ResourceManager.GetString("Value_Language_JapaneseOg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Value_Language_Korean {
+            get {
+                return ResourceManager.GetString("Value_Language_Korean", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -.
+        /// </summary>
+        public static string Value_Language_KoreanOg {
+            get {
+                return ResourceManager.GetString("Value_Language_KoreanOg", resourceCulture);
             }
         }
         
