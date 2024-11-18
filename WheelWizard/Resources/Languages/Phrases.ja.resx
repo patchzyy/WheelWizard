@@ -19,13 +19,13 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="EmptyText_NoFriends" xml:space="preserve">
-        <value>ゲームでフレンドを追加することができます</value>
+        <value>ゲーム内でフレンドを追加できます</value>
     </data>
     <data name="EmptyText_NoFriends_Title" xml:space="preserve">
         <value>まだフレンドがいません！</value>
     </data>
     <data name="EmptyText_NoProfiles" xml:space="preserve">
-        <value>ここにプロフィールをのせるには　一度プレイする必要があります</value>
+        <value>ここにプロフィールを載せるには一度プレイする必要があります</value>
     </data>
     <data name="Hover_FriendsOnline_0" xml:space="preserve">
         <value>現在　オンラインのフレンドがいません</value>
@@ -70,6 +70,206 @@
         <value>すべての翻訳者さんに感謝します:</value>
     </data>
     <data name="PopupText_InstallingRRFirstTime" xml:space="preserve">
-        <value> </value>
+        <value>Retro Rewindをインストール (初回)</value>
+    </data>
+    <data name="EmptyText_NoMods" xml:space="preserve">
+        <value>Modでゲームを改変できます。
+下のボタンを押してModのインポートを開始してください。</value>
+    </data>
+    <data name="EmptyText_NoMods_Title" xml:space="preserve">
+        <value>Modが見つかりませんでした</value>
+    </data>
+    <data name="EmptyText_NoRooms" xml:space="preserve">
+        <value>インターネットに接続されていないか、誰もプレイしていない可能性があります。</value>
+    </data>
+    <data name="EmptyText_NoRooms_Title" xml:space="preserve">
+        <value>ルームが見つかりませんでした</value>
+    </data>
+    <data name="Hover_RoomsPageDisclaimer" xml:space="preserve">
+        <value>ルームに直接合流する機能はないことに注意してください。
+特定のルームに参加するには、フレンドを通して合流するか、オンラインサーバーに参加して合流する必要があります。</value>
+    </data>
+    <data name="Placeholder_EnterPath" xml:space="preserve">
+        <value>希望のパスを入力してください...</value>
+    </data>
+    <data name="Placeholder_SearchForPlayers" xml:space="preserve">
+        <value>プレイヤーを検索します...</value>
+    </data>
+    <data name="PopupText_AlreadyFilesRR" xml:space="preserve">
+        <value>既にRetroRewindフォルダーにファイルがあります。
+インストールしますか？</value>
+    </data>
+    <data name="PopupText_ApplyScale" xml:space="preserve">
+        <value>新しいウィンドウサイズを適用しますか？</value>
+    </data>
+    <data name="PopupText_CouldNotConnectServer" xml:space="preserve">
+        <value>サーバーに接続できませんでした。後でもう一度試してください。</value>
+    </data>
+    <data name="PopupText_DolphinFound" xml:space="preserve">
+        <value>Dolphinエミュレーターのフォルダーが見つかりました</value>
+    </data>
+    <data name="PopupText_DolphinFoundText" xml:space="preserve">
+        <value>意味がよく分からなければ、「はい」をクリックしてください。\nDolphinエミュレーターのフォルダーが見つかりました。このフォルダーを使用しますか？</value>
+    </data>
+    <data name="PopupText_DolphinNotFound" xml:space="preserve">
+        <value>Dolphinエミュレーターのフォルダーが見つかりませんでした</value>
+    </data>
+    <data name="PopupText_DolphinNotFoundText" xml:space="preserve">
+        <value>Dolphinエミュレーターのフォルダーが自動では見つかりませんでした。
+フォルダーを手動で見つけてください。詳細については「help」をクリックしてください。</value>
+    </data>
+    <data name="PopupText_DownloadRR" xml:space="preserve">
+        <value>Retro Rewindをダウンロードする</value>
+    </data>
+    <data name="PopupText_EnsurePathsExists" xml:space="preserve">
+        <value>すべてのパスが正しいことを確認して、もう一度お試しください。</value>
+    </data>
+    <data name="PopupText_EnterModName" xml:space="preserve">
+        <value>Modの名前を入力:</value>
+    </data>
+    <data name="PopupText_EnterTitle" xml:space="preserve">
+        <value>タイトルを入力:</value>
+    </data>
+    <data name="PopupText_EsimatedTimeRemaining" xml:space="preserve">
+        <value>おおよその残り時間:</value>
+    </data>
+    <data name="PopupText_FailCheckUpdates" xml:space="preserve">
+        <value>アップデートの確認に失敗しました</value>
+    </data>
+    <data name="PopupText_FailedUpdateApply" xml:space="preserve">
+        <value>アップデートの適用に失敗しました。中止しています。</value>
+    </data>
+    <data name="PopupText_FailedUpdateDelete" xml:space="preserve">
+        <value>アップデートファイルの削除に失敗しました。中止しています。</value>
+    </data>
+    <data name="PopupText_InstallingMods" xml:space="preserve">
+        <value>Modをインストール</value>
+    </data>
+    <data name="PopupText_InstallingModsCount" xml:space="preserve">
+        <value>{$1}個のModをインストール</value>
+    </data>
+    <data name="PopupText_InstallingRR" xml:space="preserve">
+        <value>Retro Rewindをインストール</value>
+    </data>
+    <data name="PopupText_LatestWhWzGithub" xml:space="preserve">
+        <value>githubから最新のWheelWizardを入手</value>
+    </data>
+    <data name="PopupText_ModCombineQuestion" xml:space="preserve">
+        <value>すべてのファイルを1つのModにまとめますか？</value>
+    </data>
+    <data name="PopupText_ModNameEmpty" xml:space="preserve">
+        <value>Modの名前は空にできません</value>
+    </data>
+    <data name="PopupText_ModNameExists" xml:space="preserve">
+        <value>「{$1}」というModは既に存在しています。</value>
+    </data>
+    <data name="PopupText_ModsFound" xml:space="preserve">
+        <value>Modが見つかりました</value>
+    </data>
+    <data name="PopupText_ModsFoundQuestion" xml:space="preserve">
+        <value>Modなしでゲームを起動しようとしています。
+My Stuffフォルダーをクリアしますか？</value>
+    </data>
+    <data name="PopupText_MultipleFilesSelected" xml:space="preserve">
+        <value>複数のファイルが選択されています</value>
+    </data>
+    <data name="PopupText_NewVersionWhWz" xml:space="preserve">
+        <value>WheelWizardのバージョン{$1} (現在のバージョンは{$2}) が利用できます。すぐにアップデートしますか？</value>
+    </data>
+    <data name="PopupText_NoModFolder" xml:space="preserve">
+        <value>Modフォルダーがありません</value>
+    </data>
+    <data name="PopupText_NotFindDolphin" xml:space="preserve">
+        <value>Dolphinエミュレーターが見つかりませんでした。設定でパスを設定してください。</value>
+    </data>
+    <data name="PopupText_NotFindGame" xml:space="preserve">
+        <value>ゲームファイルが見つかりませんでした。設定でパスを設定してください。</value>
+    </data>
+    <data name="PopupText_OldRksysFound" xml:space="preserve">
+        <value>古いrksys.datが見つかりました</value>
+    </data>
+    <data name="PopupText_OldRksysFoundExplained" xml:space="preserve">
+        <value>古いセーブデータが見つかりました。このセーブデータを使用しますか？(おすすめ)</value>
+    </data>
+    <data name="PopupText_OldRRFound" xml:space="preserve">
+        <value>古いRetro Rewindが見つかりました</value>
+    </data>
+    <data name="PopupText_OldRRFoundExplained" xml:space="preserve">
+        <value>古いRetro Rewindのファイルが見つかりました。新しい場所に移動しますか？</value>
+    </data>
+    <data name="PopupText_ProcessingXofY" xml:space="preserve">
+        <value>{$2}個中{$1 個のファイルを処理しています...</value>
+    </data>
+    <data name="PopupText_ReinstallRR" xml:space="preserve">
+        <value>Retro Rewindの再インストール</value>
+    </data>
+    <data name="PopupText_RestartAdminFail" xml:space="preserve">
+        <value>管理者権限で再起動するのに失敗しました。</value>
+    </data>
+    <data name="PopupText_RRNotDeterment" xml:space="preserve">
+        <value>Retro Rewindのバージョンを判別できませんでした。Retro Rewindを再インストールしますか？</value>
+    </data>
+    <data name="PopupText_RRToOld" xml:space="preserve">
+        <value>Retro Rewindのバージョンが古すぎるため更新できません。Retro Rewindを再インストールしますか？</value>
+    </data>
+    <data name="PopupText_RRUpToDate" xml:space="preserve">
+        <value>Retro Rewindは最新です。</value>
+    </data>
+    <data name="PopupText_SettingsSaved" xml:space="preserve">
+        <value>設定が保存されました！</value>
+    </data>
+    <data name="PopupText_SureDeleteQuestion" xml:space="preserve">
+        <value>{$1}を削除してもよろしいですか？</value>
+    </data>
+    <data name="PopupText_UnableUpdateWhWz_ReasonLocation" xml:space="preserve">
+        <value>WheelWizardが更新できません。アプリが書き込み可能なフォルダーにあることを確認してください。\n現在のフォルダーが見つかりません。</value>
+    </data>
+    <data name="PopupText_UnableUpdateWhWz_ReasonNetwork" xml:space="preserve">
+        <value>WheelWizardが最新かどうか確認できません。\nネットワークの問題が発生している可能性があります。</value>
+    </data>
+    <data name="PopupText_UpdateAdmin" xml:space="preserve">
+        <value>管理者権限で更新する</value>
+    </data>
+    <data name="PopupText_UpdateAdminExplained" xml:space="preserve">
+        <value>アップデートには管理者権限が必要な場合があります。今回のアップデートで管理者権限を有効にしますか?</value>
+    </data>
+    <data name="PopupText_UpdateRR" xml:space="preserve">
+        <value>Retro Rewindをアップデート</value>
+    </data>
+    <data name="PopupText_UpdateWhWz" xml:space="preserve">
+        <value>WheelWizardをアップデート</value>
+    </data>
+    <data name="PopupText_WhWzUpdateAvailable" xml:space="preserve">
+        <value>WheelWizardのアップデートがあります</value>
+    </data>
+    <data name="PupupText_DownloadingMb" xml:space="preserve">
+        <value>{$1}MBをダウンロード中</value>
+    </data>
+    <data name="Text_WhWzTranslationPercentage" xml:space="preserve">
+        <value>この言語の翻訳は{$1}%完了しています</value>
+    </data>
+    <data name="Time_Days_1" xml:space="preserve">
+        <value>1日</value>
+    </data>
+    <data name="Time_Days_x" xml:space="preserve">
+        <value>{$1}日</value>
+    </data>
+    <data name="Time_Hours_1" xml:space="preserve">
+        <value>1時間</value>
+    </data>
+    <data name="Time_Hours_x" xml:space="preserve">
+        <value>{$1}時間</value>
+    </data>
+    <data name="Time_Minutes_1" xml:space="preserve">
+        <value>1分</value>
+    </data>
+    <data name="Time_Minutes_x" xml:space="preserve">
+        <value>{$1}分</value>
+    </data>
+    <data name="Time_Seconds_1" xml:space="preserve">
+        <value>1秒</value>
+    </data>
+    <data name="Time_Seconds_x" xml:space="preserve">
+        <value>{$1}秒</value>
     </data>
 </root>

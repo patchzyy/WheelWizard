@@ -42,7 +42,8 @@ public partial class HomePage
             RepeatBehavior = RepeatBehavior.Forever
         };
         
-        WheelIcon.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, _defaultRotationAnimation);
+        if ((bool)SettingsManager.ENABLE_ANIMATIONS.Get())
+            WheelIcon.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, _defaultRotationAnimation);
     }
     
     private WheelWizardStatus _status;
@@ -183,6 +184,7 @@ public partial class HomePage
 
     private async void SpeedBoostWheel()
     {
+        if (!(bool)SettingsManager.ENABLE_ANIMATIONS.Get()) return;
         if (_isSpeedBoostActive) return;
         _isSpeedBoostActive = true;
 
