@@ -1,0 +1,319 @@
+<ResourceDictionary  xmlns="https://github.com/avaloniaui"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <StackPanel Spacing="20">
+                <!-- Gray Scale -->
+                <StackPanel>
+                    <TextBlock Text="Gray Scale" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <StackPanel Orientation="Horizontal" Spacing="5">
+                        <StackPanel Spacing="2">
+                            <Border Width="60" Height="30" Background="{DynamicResource Gray50}">
+                                <TextBlock Text="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Gray100}">
+                                <TextBlock Text="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Gray200}">
+                                <TextBlock Text="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Gray300}">
+                                <TextBlock Text="300" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Gray400}">
+                                <TextBlock Text="400" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Gray500}">
+                                <TextBlock Text="500" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Gray600}">
+                                <TextBlock Text="600" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Gray700}">
+                                <TextBlock Text="700" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Gray800}">
+                                <TextBlock Text="800" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Gray900}">
+                                <TextBlock Text="900" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Gray950}">
+                                <TextBlock Text="950" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                        </StackPanel>
+
+                        <!-- Red Scale -->
+                        <StackPanel Spacing="2">
+                            <Border Width="60" Height="30" Background="{DynamicResource Red50}">
+                                <TextBlock Text="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Red100}">
+                                <TextBlock Text="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Red200}">
+                                <TextBlock Text="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Red300}">
+                                <TextBlock Text="300" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Red400}">
+                                <TextBlock Text="400" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Red500}">
+                                <TextBlock Text="500" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Red600}">
+                                <TextBlock Text="600" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Red700}">
+                                <TextBlock Text="700" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Red800}">
+                                <TextBlock Text="800" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Red900}">
+                                <TextBlock Text="900" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Red950}">
+                                <TextBlock Text="950" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                        </StackPanel>
+
+                        <!-- Yellow Scale -->
+                        <StackPanel Spacing="2">
+                            <Border Width="60" Height="30" Background="{DynamicResource Yellow50}">
+                                <TextBlock Text="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Yellow100}">
+                                <TextBlock Text="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Yellow200}">
+                                <TextBlock Text="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Yellow300}">
+                                <TextBlock Text="300" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Yellow400}">
+                                <TextBlock Text="400" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Yellow500}">
+                                <TextBlock Text="500" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Yellow600}">
+                                <TextBlock Text="600" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Yellow700}">
+                                <TextBlock Text="700" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Yellow800}">
+                                <TextBlock Text="800" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Yellow900}">
+                                <TextBlock Text="900" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Yellow950}">
+                                <TextBlock Text="950" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                        </StackPanel>
+
+                        <!-- Cyan Scale -->
+                        <StackPanel Spacing="2">
+                            <Border Width="60" Height="30" Background="{DynamicResource Cyan50}">
+                                <TextBlock Text="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Cyan100}">
+                                <TextBlock Text="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Cyan200}">
+                                <TextBlock Text="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Cyan300}">
+                                <TextBlock Text="300" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Cyan400}">
+                                <TextBlock Text="400" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Cyan500}">
+                                <TextBlock Text="500" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Cyan600}">
+                                <TextBlock Text="600" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Cyan700}">
+                                <TextBlock Text="700" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Cyan800}">
+                                <TextBlock Text="800" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Cyan900}">
+                                <TextBlock Text="900" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                            <Border Width="60" Height="30" Background="{DynamicResource Cyan950}">
+                                <TextBlock Text="950" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <!-- Color Resources -->
+    
+        <!-- Gray Scale -->
+        <Color x:Key="Gray50">#F6F7F9</Color>
+        <Color x:Key="Gray100">#EDEDF1</Color>
+        <Color x:Key="Gray200">#D7D9E0</Color>
+        <Color x:Key="Gray300">#B4B8C5</Color>
+        <Color x:Key="Gray400">#8B91A5</Color>
+        <Color x:Key="Gray500">#6C7389</Color>
+        <Color x:Key="Gray600">#575D72</Color>
+        <Color x:Key="Gray700">#474B5D</Color>
+        <Color x:Key="Gray800">#3E424E</Color>
+        <Color x:Key="Gray900">#363944</Color>
+        <Color x:Key="Gray950">#24252D</Color>
+        <Color x:Key="Black">#090A0C</Color>
+
+        <!-- Red Scale -->
+        <Color x:Key="Red50">#FFF1F4</Color>
+        <Color x:Key="Red100">#FFE0E6</Color>
+        <Color x:Key="Red200">#FFC5CF</Color>
+        <Color x:Key="Red300">#FF9DAF</Color>
+        <Color x:Key="Red400">#FF6581</Color>
+        <Color x:Key="Red500">#FE2048</Color>
+        <Color x:Key="Red600">#EC163D</Color>
+        <Color x:Key="Red700">#C70E2F</Color>
+        <Color x:Key="Red800">#A4102B</Color>
+        <Color x:Key="Red900">#881429</Color>
+        <Color x:Key="Red950">#4A0511</Color>
+
+        <!-- Yellow Scale -->
+        <Color x:Key="Yellow50">#FFFEE7</Color>
+        <Color x:Key="Yellow100">#FFFDC1</Color>
+        <Color x:Key="Yellow200">#FFF686</Color>
+        <Color x:Key="Yellow300">#FFE941</Color>
+        <Color x:Key="Yellow400">#FFD80D</Color>
+        <Color x:Key="Yellow500">#FFC800</Color>
+        <Color x:Key="Yellow600">#D19200</Color>
+        <Color x:Key="Yellow700">#A66802</Color>
+        <Color x:Key="Yellow800">#89510A</Color>
+        <Color x:Key="Yellow900">#74420F</Color>
+        <Color x:Key="Yellow950">#442204</Color>
+
+        <!-- Cyan Scale -->
+        <Color x:Key="Cyan50">#EEFFFA</Color>
+        <Color x:Key="Cyan100">#C7FFF0</Color>
+        <Color x:Key="Cyan200">#8EFFE2</Color>
+        <Color x:Key="Cyan300">#34EAC5</Color>
+        <Color x:Key="Cyan400">#01CBA5</Color>
+        <Color x:Key="Cyan500">#00A488</Color>
+        <Color x:Key="Cyan600">#00A488</Color>
+        <Color x:Key="Cyan700">#03826E</Color>
+        <Color x:Key="Cyan800">#08675A</Color>
+        <Color x:Key="Cyan900">#0C554A</Color>
+        <Color x:Key="Cyan950">#00342F</Color>
+
+        <!-- Layout Brushes -->
+        <SolidColorBrush x:Key="BackgroundColor" Color="{StaticResource Gray950}" />
+        <SolidColorBrush x:Key="LightBackgroundColor" Color="{StaticResource Gray900}" />
+        <SolidColorBrush x:Key="BackgroundContactColor" Color="{StaticResource Gray800}" />
+        <SolidColorBrush x:Key="BackgroundLine" Color="{StaticResource Gray700}" />
+
+        <!-- HomeScreen / Dashboard Brushes -->
+        <SolidColorBrush x:Key="MainWheel-Icon" Color="{StaticResource Gray600}" />
+        <SolidColorBrush x:Key="MainWheel-Stripe" Color="{StaticResource Gray900}" />
+        <SolidColorBrush x:Key="Wheel1-Icon" Color="{StaticResource Cyan400}" />
+        <SolidColorBrush x:Key="Wheel1-Stripe" Color="{StaticResource Cyan700}" />
+        <SolidColorBrush x:Key="Wheel2-Icon" Color="{StaticResource Cyan600}" />
+        <SolidColorBrush x:Key="Wheel2-Stripe" Color="{StaticResource Cyan900}" />
+        <SolidColorBrush x:Key="Wheel3-Icon" Color="{StaticResource Cyan200}" />
+        <SolidColorBrush x:Key="Wheel3-Stripe" Color="{StaticResource Cyan600}" />
+
+        <!-- Text Brushes -->
+        <SolidColorBrush x:Key="BodyTextColor" Color="{StaticResource Gray400}" />
+        <SolidColorBrush x:Key="TitleTextColor" Color="{StaticResource Gray400}" />
+        <SolidColorBrush x:Key="TitleIconColor" Color="{StaticResource Gray500}" />
+        <SolidColorBrush x:Key="TitleTextHover" Color="{StaticResource Gray300}" />
+        <SolidColorBrush x:Key="FormFieldLabelColor" Color="{StaticResource Gray300}" />
+        <SolidColorBrush x:Key="WhiteTitle" Color="{StaticResource Gray50}" />
+
+        <!-- List View Brushes -->
+        <SolidColorBrush x:Key="HeaderAttributes" Color="{StaticResource Gray400}" />
+        <SolidColorBrush x:Key="HeaderLine" Color="{StaticResource Gray800}" />
+        <SolidColorBrush x:Key="DragItemAttributes-Default" Color="{StaticResource Gray200}" />
+        <SolidColorBrush x:Key="DragItemAttributes-Hover+" Color="{StaticResource Gray100}" />
+        <SolidColorBrush x:Key="DragItemBackground-Default" Color="{StaticResource Gray800}" />
+        <SolidColorBrush x:Key="DragItemBackground-Hover" Color="{StaticResource Gray700}" />
+        <SolidColorBrush x:Key="DragItemBackground-Focus" Color="{StaticResource Gray600}" />
+        <SolidColorBrush x:Key="DragItemIcon-Default" Color="{StaticResource Gray600}" />
+        <SolidColorBrush x:Key="DragItemIcon-GroupHover+" Color="{StaticResource Gray400}" />
+        <SolidColorBrush x:Key="DragItemIcon-IndividualHover+" Color="{StaticResource Gray300}" />
+        <SolidColorBrush x:Key="DragItem-Target" Color="{StaticResource Cyan400}" />
+
+        <!-- Static Item Brushes -->
+        <SolidColorBrush x:Key="StaticItemForeground-Default" Color="{StaticResource Gray300}" />
+        <SolidColorBrush x:Key="StaticItemForeground-Hover+" Color="{StaticResource Gray50}" />
+
+        <!-- State Box Brushes -->
+        <SolidColorBrush x:Key="StateBoxBackground" Color="{StaticResource Gray900}" />
+        <SolidColorBrush x:Key="StateBoxForeground-Default" Color="{StaticResource Gray100}" />
+        <SolidColorBrush x:Key="StateBoxForeground-Hover" Color="{StaticResource Gray50}" />
+        <SolidColorBrush x:Key="StateBoxIcon-Default" Color="{StaticResource Gray500}" />
+        <SolidColorBrush x:Key="StateBoxIcon-Hover" Color="{StaticResource Gray300}" />
+        <SolidColorBrush x:Key="DarkStateBoxBackground" Color="{StaticResource Gray950}" />
+        <SolidColorBrush x:Key="DarkStateBoxForeground-Default" Color="{StaticResource Gray200}" />
+        <SolidColorBrush x:Key="DarkStateBoxForeground-Hover" Color="{StaticResource Gray50}" />
+        <SolidColorBrush x:Key="DarkStateBoxIcon-Default" Color="{StaticResource Gray600}" />
+        <SolidColorBrush x:Key="DarkStateBoxIcon-Hover" Color="{StaticResource Gray400}" />
+
+        <!-- Status Brushes -->
+        <SolidColorBrush x:Key="SuccessTitleTextColor" Color="{StaticResource Cyan400}" />
+        <SolidColorBrush x:Key="ErrorTitleTextColor" Color="{StaticResource Red400}" />
+        <SolidColorBrush x:Key="WarningTitleTextColor" Color="{StaticResource Yellow400}" />
+        <SolidColorBrush x:Key="InfoTitleTextColor" Color="{StaticResource Gray200}" />
+
+        <SolidColorBrush x:Key="SuccessColor" Color="{StaticResource Cyan400}" />
+        <SolidColorBrush x:Key="ErrorColor" Color="{StaticResource Red500}" />
+        <SolidColorBrush x:Key="WarningColor" Color="{StaticResource Yellow500}" />
+        <SolidColorBrush x:Key="InfoColor" Color="{StaticResource Gray400}" />
+        <SolidColorBrush x:Key="PartyColor" Color="{StaticResource Yellow200}" />
+
+        <!-- Mii Icon Brushes -->
+        <SolidColorBrush x:Key="MiiIconDefault-Background" Color="{StaticResource Gray800}" />
+        <SolidColorBrush x:Key="MiiIconDefault-Foreground" Color="{StaticResource Gray500}" />
+        <SolidColorBrush x:Key="MiiIconDefault-Border" Color="{StaticResource Gray950}" />
+        <SolidColorBrush x:Key="MiiIconLight-Background" Color="{StaticResource Gray600}" />
+        <SolidColorBrush x:Key="MiiIconLight-Foreground" Color="{StaticResource Gray400}" />
+        <SolidColorBrush x:Key="MiiStateCyan" Color="{StaticResource Cyan500}" />
+        <SolidColorBrush x:Key="MiiStateRed" Color="{StaticResource Red700}" />
+
+        <!-- Place Brushes -->
+        <SolidColorBrush x:Key="MiiFirstPlace-Border" Color="{StaticResource Yellow200}" />
+        <SolidColorBrush x:Key="MiiFirstPlace-BadgeOuter" Color="{StaticResource Yellow600}" />
+        <SolidColorBrush x:Key="MiiFirstPlace-BadgeInner" Color="{StaticResource Yellow100}" />
+        <SolidColorBrush x:Key="MiiSecondPlace-Border" Color="{StaticResource Gray200}" />
+        <SolidColorBrush x:Key="MiiSecondPlace-BadgeOuter" Color="{StaticResource Gray400}" />
+        <SolidColorBrush x:Key="MiiSecondPlace-BadgeInner" Color="{StaticResource Gray50}" />
+        <SolidColorBrush x:Key="MiiThirdPlace-Border" Color="#FFB59A" />
+        <SolidColorBrush x:Key="MiiThirdPlace-BadgeOuter" Color="#EC5616" />
+        <SolidColorBrush x:Key="MiiThirdPlace-BadgeInner" Color="#FFD19D" />
+
+        <!-- Layout Constants -->
+        <CornerRadius x:Key="GlobalCornerRadius">6</CornerRadius>
+        <CornerRadius x:Key="WindowCornerRadius">0</CornerRadius>
+        <CornerRadius x:Key="WindowCornerRadiusLeft">0,0,0,0</CornerRadius>
+        <CornerRadius x:Key="WindowCornerRadiusBottomLeft">0,0,0,0</CornerRadius>
+        <CornerRadius x:Key="WindowCornerRadiusLeftRightTwix">6,0,0,0</CornerRadius>
+
+        <!-- Margins and Padding -->
+        <Thickness x:Key="EdgeGap">10</Thickness>
+        <Thickness x:Key="NegativeEdgeGap">-10</Thickness>
+        <Thickness x:Key="LeftEdgeGap">10,0,0,0</Thickness>
+        <Thickness x:Key="RightEdgeGap">0,0,10,0</Thickness>
+        <Thickness x:Key="LeftTopEdgeGap">10,10,0,0</Thickness>
+        <Thickness x:Key="SidebarSectionGap">10,20,10,0</Thickness>
+
+        <!-- Grid Constants -->
+        <x:Double x:Key="TopRowSize">95</x:Double>
+</ResourceDictionary>
