@@ -7,8 +7,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!-- Don't miss this line -->
-                <ResourceInclude Source="Styles/Colors.axaml"/>
+                <ResourceInclude Source="Styles/Constants.axaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
