@@ -364,6 +364,25 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>Online.resx</DependentUpon>
       </Compile>
+      <Compile Update="Styles\Util\IconExampleComponent.axaml.cs">
+        <DependentUpon>IconExampleComponent.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <UpToDateCheckInput Remove="Views\Styles\Constants.axaml" />
+      <UpToDateCheckInput Remove="Views\Styles\IconExampleComponent.axaml" />
+      <UpToDateCheckInput Remove="Views\Styles\Icons.axaml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Styles\Constants.axaml" />
+      <AdditionalFiles Include="Styles\Icons.axaml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Converters\" />
     </ItemGroup>
     <PropertyGroup>
         <ApplicationIcon>car-wheel.ico</ApplicationIcon>
