@@ -1,39 +1,16 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:util="clr-namespace:WheelWizard.Styles.Util">
     <Design.PreviewWith>
         <Border Padding="20" Background="#8B91A5">
             <UniformGrid Columns="5">
-                <StackPanel Spacing="5" Margin="5">
-                    <Border Width="150" Height="150" BorderThickness="1" BorderBrush="#EDEDF1">
-                        <Path Data="{DynamicResource WheelIcon}" Fill="#3E424E" Stretch="Uniform"
-                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                    <TextBlock Text="WheelIcon" HorizontalAlignment="Center" Foreground="#EDEDF1"/>
-                </StackPanel>
                 
-                <StackPanel Spacing="5" Margin="5">
-                    <Border Width="150" Height="150" BorderThickness="1" BorderBrush="#EDEDF1">
-                        <Path Data="{DynamicResource FlatWheel}" Fill="#3E424E" Stretch="Uniform"
-                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                    <TextBlock Text="FlatWheel" HorizontalAlignment="Center" Foreground="#EDEDF1"/>
-                </StackPanel>
+                <util:IconExampleComponent IconData="{DynamicResource WheelIcon}" IconName="WheelIcon"/>
+                <util:IconExampleComponent IconData="{DynamicResource FlatWheel}" IconName="FlatWheel"/>
                 
-                <StackPanel Spacing="5" Margin="5">
-                    <Border Width="150" Height="150" BorderThickness="1" BorderBrush="#EDEDF1">
-                        <Path Data="{DynamicResource User}" Fill="#3E424E" Stretch="Uniform"
-                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                    <TextBlock Text="User" HorizontalAlignment="Center" Foreground="#EDEDF1"/>
-                </StackPanel>
+                <util:IconExampleComponent IconData="{DynamicResource User}" IconName="User"/>
+                <util:IconExampleComponent IconData="{DynamicResource RoomUsers}" IconName="RoomUsers"/>
                 
-                <StackPanel Spacing="5" Margin="5">
-                    <Border Width="150" Height="150" BorderThickness="1" BorderBrush="#EDEDF1">
-                        <Path Data="{DynamicResource RoomUsers}" Fill="#3E424E" Stretch="Uniform"
-                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                    <TextBlock Text="RoomUsers" HorizontalAlignment="Center" Foreground="#EDEDF1"/>
-                </StackPanel>
             </UniformGrid>
         </Border>
     </Design.PreviewWith>
