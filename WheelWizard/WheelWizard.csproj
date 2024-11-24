@@ -383,6 +383,9 @@
 
     <ItemGroup>
       <Folder Include="Converters\" />
+      <Folder Include="Views\Components\" />
+      <Folder Include="Views\Pages\" />
+      <Folder Include="Views\Popups\" />
     </ItemGroup>
     <PropertyGroup>
         <ApplicationIcon>car-wheel.ico</ApplicationIcon>

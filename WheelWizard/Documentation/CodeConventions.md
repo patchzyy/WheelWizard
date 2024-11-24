@@ -26,6 +26,8 @@ This document outlines the conventions for organizing code files within the proj
 - **Guidelines:** Keep this directory organized by grouping related service files.
 
 ### 5. `Views` Directory
+IMPORTANT: THIS BIT IS OUTDATES SINCE WE MOVED TO AVALONIA. I WILL UPDATE IT SOON.   
+BUT ITS BASICALLY THE SAME, ONLY THE STYLES AND CONVERTERS ARE THEIR OWN FOLDER NOW
 - **Purpose:** Holds XAML files and associated components for UI.
 - **Subdirectories:**
     - **`Components`:** Contains reusable UI components (e.g., buttons, list views).
