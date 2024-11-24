@@ -4,61 +4,61 @@
     <Design.PreviewWith>
         <Border Padding="20" Background="#8B91A5">
             <UniformGrid Columns="5">
-                <!-- 0 --->
+                <!-- 0 -->
                 <util:IconExampleComponent IconData="{DynamicResource WheelIcon}" IconName="WheelIcon"/>
                 <util:IconExampleComponent IconData="{DynamicResource FlatWheel}" IconName="FlatWheel"/>
                 <util:IconExampleComponent IconData="{DynamicResource DolphinIcon}" IconName="DolphinIcon"/>
                 <util:IconExampleComponent IconData="{DynamicResource DiscordIcon}" IconName="DiscordIcon"/>
                 <util:IconExampleComponent IconData="{DynamicResource GithubIcon}" IconName="GithubIcon"/>
-                <!-- 5 --->
+                <!-- 5 -->
                 <util:IconExampleComponent IconData="{DynamicResource CoffeeIcon}" IconName="CoffeeIcon"/>
                 <util:IconExampleComponent IconData="{DynamicResource ArrowLeft}" IconName="ArrowLeft"/>
                 <util:IconExampleComponent IconData="{DynamicResource ArrowDown}" IconName="ArrowDown"/>
                 <util:IconExampleComponent IconData="{DynamicResource ArrowUp}" IconName="ArrowUp"/>
                 <util:IconExampleComponent IconData="{DynamicResource ArrowRight}" IconName="ArrowRight"/>
-                <!-- 10 --->
+                <!-- 10 -->
                 <util:IconExampleComponent IconData="{DynamicResource InfoTip}" IconName="InfoTip"/>
                 <util:IconExampleComponent IconData="{DynamicResource QuestionTip}" IconName="QuestionTip"/>
                 <util:IconExampleComponent IconData="{DynamicResource ErrorTip}" IconName="ErrorTip"/>
                 <util:IconExampleComponent IconData="{DynamicResource WarningTip}" IconName="WarningTip"/>
                 <util:IconExampleComponent IconData="{DynamicResource WarningTriangle}" IconName="WarningTriangle"/>
-                <!-- 15 --->
+                <!-- 15 -->
                 <util:IconExampleComponent IconData="{DynamicResource Download}" IconName="Download"/>
                 <util:IconExampleComponent IconData="{DynamicResource Search}" IconName="Search"/>
                 <util:IconExampleComponent IconData="{DynamicResource FileImport}" IconName="FileImport"/>
                 <util:IconExampleComponent IconData="{DynamicResource Folder}" IconName="Folder"/>
                 <util:IconExampleComponent IconData="{DynamicResource Code}" IconName="Code"/>
-                <!-- 20 --->
+                <!-- 20 -->
                 <util:IconExampleComponent IconData="{DynamicResource ExternalLink}" IconName="ExternalLink"/>
                 <util:IconExampleComponent IconData="{DynamicResource Copy}" IconName="Copy"/>
                 <util:IconExampleComponent IconData="{DynamicResource Pen}" IconName="Pen"/>
                 <util:IconExampleComponent IconData="{DynamicResource MinMark}" IconName="MinMark"/>
                 <util:IconExampleComponent IconData="{DynamicResource XMark}" IconName="XMark"/>
-                <!-- 25 --->
+                <!-- 25 -->
                 <util:IconExampleComponent IconData="{DynamicResource Settings}" IconName="Settings"/>
                 <util:IconExampleComponent IconData="{DynamicResource Home}" IconName="Home"/>
                 <util:IconExampleComponent IconData="{DynamicResource CubesStacked}" IconName="CubesStacked"/>
                 <util:IconExampleComponent IconData="{DynamicResource Eye}" IconName="Eye"/>
                 <util:IconExampleComponent IconData="{DynamicResource Heart}" IconName="Heart"/>
-                <!-- 30 --->
+                <!-- 30 -->
                 <util:IconExampleComponent IconData="{DynamicResource User}" IconName="User"/>
                 <util:IconExampleComponent IconData="{DynamicResource RoomUsers}" IconName="RoomUsers"/>
                 <util:IconExampleComponent IconData="{DynamicResource UserCircle}" IconName="UserCircle"/>
                 <util:IconExampleComponent IconData="{DynamicResource UserCouple}" IconName="UserCouple"/>
                 <util:IconExampleComponent IconData="{DynamicResource Friends}" IconName="Friends"/>
-                <!-- 35 --->
+                <!-- 35 -->
                 <util:IconExampleComponent IconData="{DynamicResource Spinner}" IconName="Spinner"/>
                 <util:IconExampleComponent IconData="{DynamicResource ContextDots}" IconName="ContextDots"/>
                 <util:IconExampleComponent IconData="{DynamicResource Grip}" IconName="Grip"/>
                 <util:IconExampleComponent IconData="{DynamicResource Lock}" IconName="Lock"/>
                 <util:IconExampleComponent IconData="{DynamicResource LockOpen}" IconName="LockOpen"/>
-                <!-- 40--->
+                <!-- 40-->
                 <util:IconExampleComponent IconData="{DynamicResource Road}" IconName="Road"/>
                 <util:IconExampleComponent IconData="{DynamicResource RoadLocked}" IconName="RoadLocked"/>
                 <util:IconExampleComponent IconData="{DynamicResource RoadWarning}" IconName="RoadWarning"/>
                 <util:IconExampleComponent IconData="{DynamicResource RoadError}" IconName="RoadError"/>
                 <util:IconExampleComponent IconData="{DynamicResource RoadChecked}" IconName="RoadChecked"/>
-                <!-- 45 --->
+                <!-- 45 -->
             </UniformGrid>
         </Border>
     </Design.PreviewWith>
