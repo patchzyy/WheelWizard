@@ -377,11 +377,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <AdditionalFiles Include="Styles\Constants.axaml" />
-      <AdditionalFiles Include="Styles\Icons.axaml" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Folder Include="Converters\" />
       <Folder Include="Views\Components\" />
       <Folder Include="Views\Pages\" />
