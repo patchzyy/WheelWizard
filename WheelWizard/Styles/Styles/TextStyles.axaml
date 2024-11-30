@@ -1,0 +1,57 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20" Background="{StaticResource Neutral950}">
+            <StackPanel Spacing="20">
+                <TextBlock Classes="TitleText">This is: TitleText</TextBlock>
+                <TextBlock Classes="PageTitleText">This is: PageTitleText</TextBlock>
+                <TextBlock Classes="SidebarSectionText">This is: SidebarSectionText</TextBlock>
+                <TextBlock Classes="BodyText">This is: BodyText</TextBlock>
+                <TextBlock Classes="TinyText">This is: TinyText</TextBlock>
+                <TextBlock Foreground="{StaticResource Neutral400}">This is default text</TextBlock>
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+    
+    <Style Selector="TextBlock.TitleText">
+        <Setter Property="FontSize" Value="23" />
+        <Setter Property="Foreground" Value="{StaticResource Neutral400}" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+
+    <!-- Page Title is just a normal Title, but with extra margin -->
+    <Style Selector="TextBlock.PageTitleText">
+        <Setter Property="Margin" Value="3,12" />
+        <Setter Property="FontSize" Value="23" />
+        <Setter Property="Foreground" Value="{StaticResource Neutral400}" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+
+    <Style Selector="TextBlock.BodyText">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Foreground" Value="{StaticResource Neutral400}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <!-- Sidebar Section text also has a lot of margin to make it fit -->
+    <Style Selector="TextBlock.SidebarSectionText">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Foreground" Value="{StaticResource Neutral400}" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Margin" Value="10,20,10,0" />
+    </Style>
+
+    <Style Selector="TextBlock.TinyText">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Foreground" Value="{StaticResource Neutral400}" />
+    </Style>
+    
+    <Style Selector="TextBlock">
+        <Setter Property="TextElement.FontFamily" Value="Arial, /Resources/Fonts/#ctmkf" />
+    </Style>
+   
+    <!-- I hope this bit makes sure the whole application does this, but i am not sure lol -->
+    <Style Selector="UserControl">
+        <Setter Property="TextElement.FontFamily" Value="Arial, /Resources/Fonts/#ctmkf" />
+    </Style>
+</Styles>

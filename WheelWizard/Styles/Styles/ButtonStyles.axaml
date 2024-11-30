@@ -1,6 +1,5 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:util="clr-namespace:WheelWizard.Styles.Util">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
         <Border Background="{StaticResource Neutral950}" Padding="10" >
             <UniformGrid Columns="2">
@@ -36,6 +35,7 @@
     <Style Selector="Button:pointerover">
         <Setter Property="Cursor" Value="Hand"/>
     </Style>
+
     
     <!-- Set foreground of objects in the style -->
     <!-- Add this to that object:  Foreground="{Binding $parent[Button].Foreground}" -->
