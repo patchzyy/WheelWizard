@@ -33,7 +33,16 @@
                 
         <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" CornerRadius="6,0,0,0" 
                 Background="{StaticResource BackgroundColor}">
-         
+            <UniformGrid Columns="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                 <Button Classes="Default" Margin="5" IsEnabled="False">Error</Button>
+                 <Button Classes="Primary" Margin="5">Error</Button>
+                 <Button Classes="Warning" Margin="5">Error</Button>
+                 <Button Classes="Error" Margin="5">Error</Button>
+                <Button Classes="Default" Margin="5">Error</Button>
+                <Button Classes="Primary" Margin="5">Error</Button>
+                <Button Classes="Warning" Margin="5">Error</Button>
+                <Button Classes="Error" Margin="5">Error</Button>
+            </UniformGrid>
         </Border>
     </Grid>
 </Window>
