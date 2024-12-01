@@ -1,0 +1,51 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:WheelWizard.Views.Components">
+    <Design.PreviewWith>
+        <controls:IconLabel />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|IconLabel">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Orientation="Horizontal">
+                     <Path Data="{TemplateBinding IconData}"
+                           Fill="{TemplateBinding Foreground}" 
+                           Stretch="Uniform" 
+                           Width="{TemplateBinding IconSize}"
+                           Height="{TemplateBinding IconSize}"
+                           IsVisible="{TemplateBinding IsIconLeft}" 
+                           VerticalAlignment="Center"/>
+                     
+                     <TextBlock Text="{TemplateBinding Text}" 
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="{TemplateBinding FontSize}"
+                                Foreground="{TemplateBinding Foreground}">
+                         <TextBlock.Styles>
+                             <Style Selector="controls|IconLabel[IsUnderlined=True] TextBlock">
+                                <Setter Property="TextDecorations">
+                                    <Setter.Value>
+                                        <TextDecorationCollection>
+                                            <TextDecoration Location="Underline" />
+                                        </TextDecorationCollection >
+                                    </Setter.Value>
+                                </Setter>
+                             </Style>
+                         </TextBlock.Styles>
+                     </TextBlock>
+                     
+                     <Path Data="{TemplateBinding IconData}"
+                           Margin="10,0,0,0"
+                           Fill="{TemplateBinding Foreground}" 
+                           Stretch="Uniform" 
+                           Width="{TemplateBinding IconSize}"
+                           Height="{TemplateBinding IconSize}"
+                           VerticalAlignment="Center"
+                           IsVisible="{TemplateBinding IsIconLeft, Converter={StaticResource InverseBooleanConverter}}"/>
+                 </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>
