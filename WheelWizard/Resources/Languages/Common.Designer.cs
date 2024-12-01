@@ -258,6 +258,15 @@ namespace WheelWizard.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View Mod.
+        /// </summary>
+        public static string Action_ViewMod {
+            get {
+                return ResourceManager.GetString("Action_ViewMod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
         public static string Action_Yes {

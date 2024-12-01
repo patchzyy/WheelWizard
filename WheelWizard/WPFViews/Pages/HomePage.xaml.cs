@@ -116,8 +116,6 @@ public partial class HomePage
                 SetButtonState(Common.Action_Install, Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Download);
                 break;
             case WheelWizardStatus.NoRRActive:
-                //this is here for future use,
-                //right now there is no de-activation, but if we want multiple mods this might be handy
                 SetButtonState("Activated", Button.ButtonsVariantType.Secondary, PackIconMaterialKind.Power);
                 break;
             case WheelWizardStatus.RRNotReady:

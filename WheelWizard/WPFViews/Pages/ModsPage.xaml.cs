@@ -143,5 +143,10 @@ public partial class ModsPage : Page, INotifyPropertyChanged
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+
+    private void ViewMod_Click(object sender, RoutedEventArgs e)
+    {
+        var selectedMod = ModsListView.GetCurrentContextItem<Mod>();
+    }
 }
 
