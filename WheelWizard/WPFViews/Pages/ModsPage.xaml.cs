@@ -15,6 +15,8 @@ public partial class ModsPage : Page, INotifyPropertyChanged
 {
     public ModManager ModManager => ModManager.Instance;
     public ObservableCollection<Mod> Mods => ModManager.Mods;
+    
+    
 
     private bool _toggleAll = true;
     private Point _startPoint;
@@ -147,6 +149,16 @@ public partial class ModsPage : Page, INotifyPropertyChanged
     private void ViewMod_Click(object sender, RoutedEventArgs e)
     {
         var selectedMod = ModsListView.GetCurrentContextItem<Mod>();
+        if (selectedMod == null || selectedMod.ModID == -1)
+        {
+            MessageBoxWindow.ShowDialog("Cannot view mod that was not installed through the mod browser");
+            return;
+        }
+        var ModID = selectedMod.ModID;
+        var modPopup = new ModIndependentWindow();
+        modPopup.LoadModAsync(ModID);
+        modPopup.ShowDialog();
+        
     }
 }
 
