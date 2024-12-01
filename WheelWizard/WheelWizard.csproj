@@ -19,7 +19,7 @@
         <Copyright>yes,no... maybe</Copyright>
         <RepositoryUrl>https://github.com/patchzyy/WheelWizard</RepositoryUrl>
 
-        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
     </PropertyGroup>
 
     <ItemGroup>
@@ -377,8 +377,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Converters\" />
-      <Folder Include="Views\Components\" />
       <Folder Include="Views\Pages\" />
       <Folder Include="Views\Popups\" />
     </ItemGroup>

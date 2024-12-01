@@ -4,6 +4,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignHeight="876" d:DesignWidth="656"
         x:Class="WheelWizard.Views.Layout"
+        xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
+        xmlns:comps="clr-namespace:WheelWizard.Views.Components"
         Height="876" Width="656" Title="Wheel Wizard" 
         WindowStartupLocation="CenterScreen"
         SystemDecorations="None"
@@ -18,8 +20,23 @@
                 Background="{StaticResource FrameColor}"
                 PointerPressed="TopBar_PointerPressed">
         </Border>
-        
 
+        <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Bottom">
+            <comps:IconLabel IconData="{StaticResource WheelIcon}"
+                             Text="Wheel Wizard"
+                             Foreground="{StaticResource Neutral400}"
+                             FontSize="20"
+                             Margin="10,10,0,0"
+                             IconSize="31" />
+        </Border>
+        <Border Grid.Row="3"
+                VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10">
+            <StackPanel>
+                <TextBlock Classes="TinyText" x:Name="MadeBy_Part1" Text="Made by: Patchzy" HorizontalAlignment="Right"/>
+                <TextBlock Classes="TinyText" x:Name="MadeBy_Part2" Text="And WantToBeeMe" HorizontalAlignment="Right"/>
+            </StackPanel>
+        </Border>
+        
         <DockPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top">
             <Button Width="30" Height="25" Click="MinimizeButton_Click"  Classes="TopButton">
                 <PathIcon Data="{StaticResource MinMark}" Width="12" Height="12"
@@ -33,16 +50,30 @@
                 
         <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" CornerRadius="6,0,0,0" 
                 Background="{StaticResource BackgroundColor}">
-            <UniformGrid Columns="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                 <Button Classes="Default" Margin="5" IsEnabled="False">Error</Button>
-                 <Button Classes="Primary" Margin="5">Error</Button>
-                 <Button Classes="Warning" Margin="5">Error</Button>
-                 <Button Classes="Error" Margin="5">Error</Button>
-                <Button Classes="Default" Margin="5">Error</Button>
-                <Button Classes="Primary" Margin="5">Error</Button>
-                <Button Classes="Warning" Margin="5">Error</Button>
-                <Button Classes="Error" Margin="5">Error</Button>
-            </UniformGrid>
+            
+        </Border>
+        
+        <Border Grid.Column="0" Grid.Row="4" Background="{StaticResource Neutral800}">
+            <StackPanel VerticalAlignment="Center" Spacing="5">
+                <comps:IconLabel IconData="{StaticResource DiscordIcon}"
+                                 Text="{x:Static lang:Phrases.Sidebar_Link_Discord}"
+                                 Foreground="{StaticResource Neutral400}"
+                                 FontSize="13"
+                                 Margin="10,0,0,0"
+                                 IconSize="20" />
+                <comps:IconLabel IconData="{StaticResource GithubIcon}"
+                                 Text="{x:Static lang:Phrases.Sidebar_Link_Github}"
+                                 Foreground="{StaticResource Neutral400}"
+                                 FontSize="13"
+                                 Margin="10,0,0,0"
+                                 IconSize="20" />
+                <comps:IconLabel IconData="{StaticResource CoffeeIcon}"
+                                 Text="{x:Static lang:Phrases.Sidebar_Link_Support}"
+                                 Foreground="{StaticResource Neutral400}"
+                                 FontSize="13"
+                                 Margin="10,0,0,0"
+                                 IconSize="20" />
+            </StackPanel>
         </Border>
     </Grid>
 </Window>

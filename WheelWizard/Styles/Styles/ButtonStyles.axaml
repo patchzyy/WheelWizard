@@ -11,6 +11,7 @@
             </UniformGrid>
         </Border>
     </Design.PreviewWith>
+    
     <Style Selector="Button.TopButton">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{StaticResource Neutral400}" />
