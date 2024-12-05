@@ -62,7 +62,7 @@
                 
                 <ListView.View>
                     <GridView AllowsColumnReorder="False">
-                        <GridViewColumn Header="">
+                        <GridViewColumn Header="" Width="63">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <components1:MiiBall Size="40" Mii="{Binding Mii}"
