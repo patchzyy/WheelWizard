@@ -1,4 +1,4 @@
--|no message :)
+warning|The servers to render Mii's are down \u000AGameplay servers are still fully functional!
 success|Tell your close ones you love them <3
 warning|Servers are having maintenance, so there might be periods where you cannot play online.
 
