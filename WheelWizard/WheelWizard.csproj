@@ -364,10 +364,6 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>Online.resx</DependentUpon>
       </Compile>
-      <Compile Update="Styles\Util\IconExampleComponent.axaml.cs">
-        <DependentUpon>IconExampleComponent.axaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
     </ItemGroup>
 
     <ItemGroup>
@@ -377,8 +373,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Views\Pages\" />
-      <Folder Include="Views\Popups\" />
+      <AdditionalFiles Include="Views\Styles\Resources\Constants.axaml" />
+      <AdditionalFiles Include="Views\Styles\Resources\Icons.axaml" />
+      <AdditionalFiles Include="Views\Styles\Styles\ButtonStyles.axaml" />
+      <AdditionalFiles Include="Views\Styles\Styles\TextStyles.axaml" />
+      <AdditionalFiles Include="Views\Styles\Util\IconExampleComponent.axaml" />
     </ItemGroup>
     <PropertyGroup>
         <ApplicationIcon>car-wheel.ico</ApplicationIcon>

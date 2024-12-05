@@ -8,8 +8,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceInclude Source="/Styles/Resources/Constants.axaml"/>
-                <ResourceInclude Source="/Styles/Resources/Icons.axaml"/>
+                <ResourceInclude Source="Styles/Resources/Constants.axaml"/>
+                <ResourceInclude Source="Styles/Resources/Icons.axaml"/>
             </ResourceDictionary.MergedDictionaries>
             
             <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
@@ -19,9 +19,9 @@
              
     <Application.Styles>
         <FluentTheme />
-        <StyleInclude Source="/Styles/Styles/ButtonStyles.axaml"/>
-        <StyleInclude Source="/Styles/Styles/TextStyles.axaml"/>
+        <StyleInclude Source="Styles/Styles/ButtonStyles.axaml"/>
+        <StyleInclude Source="Styles/Styles/TextStyles.axaml"/>
         
-        <StyleInclude Source="/Views/Components/IconLabel.axaml"/>
+        <StyleInclude Source="Components/IconLabel.axaml"/>
     </Application.Styles>
 </Application>
