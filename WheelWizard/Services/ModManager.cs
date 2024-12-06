@@ -149,58 +149,25 @@ public class ModManager : INotifyPropertyChanged
         var selectedFiles = openFileDialog.FileNames;
 
         if (selectedFiles.Length == 1)
-            await ProcessModFilesAsync(selectedFiles, singleMod: true);
+            await ProcessModFilesAsync(selectedFiles);
         else
         {
-            var result = new YesNoWindow().SetMainText(Phrases.PopupText_ModCombineQuestion)
-                .SetExtraText(Phrases.PopupText_MultipleFilesSelected).AwaitAnswer();
-            if (!result)
-                await ProcessModFilesAsync(selectedFiles, singleMod: false);
-            else
-                await ProcessModFilesAsync(selectedFiles, singleMod: true);
+            await ProcessModFilesAsync(selectedFiles);
         }
     }
 
-    private async Task ProcessModFilesAsync(string[] filePaths, bool singleMod)
+    private async Task ProcessModFilesAsync(string[] filePaths)
     {
         ShowProcessing(true);
         try
         {
-            if (singleMod)
-                await CombineFilesIntoSingleModAsync(filePaths);
-            else
-                await InstallEachFileAsModAsync(filePaths);
+            await CombineFilesIntoSingleModAsync(filePaths);
         }
         catch (Exception ex)
         {
             ErrorOccurred?.Invoke($"Failed to process mod files: {ex.Message}");
         }
         ShowProcessing(false);
-    }
-
-    private async Task InstallEachFileAsModAsync(string[] filePaths)
-    {
-        ModProcessingStarted?.Invoke();
-        var total = filePaths.Length;
-        for (var i = 0; i < filePaths.Length; i++)
-        {
-            var modName = Path.GetFileNameWithoutExtension(filePaths[i]);
-
-            if (ModInstallation.ModExists(Mods, modName))
-            {
-                ErrorOccurred?.Invoke(Humanizer.ReplaceDynamic(Phrases.PopupText_ModNameExists, modName));
-                continue;
-            }
-
-            var modDirectory = ModInstallation.GetModDirectoryPath(modName);
-            CreateDirectory(modDirectory);
-
-            await ModInstallation.InstallModFromFileAsync(filePaths[i], modName,author: "-1", modID: -1);
-
-            ModProcessingProgress?.Invoke(i + 1, total, Humanizer.ReplaceDynamic(Phrases.PopupText_ProcessingXofY, i + 1, total));
-        }
-        await LoadModsAsync();
-        ModProcessingCompleted?.Invoke();
     }
 
     private async Task CombineFilesIntoSingleModAsync(string[] filePaths)
@@ -347,12 +314,6 @@ public class ModManager : INotifyPropertyChanged
 
         ErrorOccurred?.Invoke(Humanizer.ReplaceDynamic(Phrases.PopupText_ModNameExists, name));
         return false;
-    }
-
-    private static void CreateDirectory(string path)
-    {
-        if (!Directory.Exists(path))
-            Directory.CreateDirectory(path);
     }
 
     private void ShowProcessing(bool isProcessing)
