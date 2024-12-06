@@ -1,0 +1,35 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:WheelWizard.Views.Components">
+    <Design.PreviewWith>
+        <controls:IconLabelButton />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|IconLabelButton">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                  
+                    
+                    <controls:IconLabel Text="{TemplateBinding Text}"
+                                        Foreground="{TemplateBinding Foreground}"
+                                        FontSize="{TemplateBinding FontSize}"
+                                        IconSize="{TemplateBinding IconSize}"
+                                        IconData="{TemplateBinding IconData}"
+                                        IsUnderlined="{TemplateBinding IsUnderlined}"
+                                        IsIconLeft="{TemplateBinding IsIconLeft}">
+                        <controls:IconLabel.Styles>
+                            <Style Selector="controls|IconLabel:pointerover">
+                                <Setter Property="Foreground" Value="{Binding HoverForeground, RelativeSource={RelativeSource AncestorType=controls:IconLabelButton}}"/>
+                                <Setter Property="IsUnderlined" Value="True" />
+                            </Style>
+                        </controls:IconLabel.Styles>
+                    </controls:IconLabel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>
