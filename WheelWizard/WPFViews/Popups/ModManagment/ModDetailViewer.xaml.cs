@@ -159,6 +159,13 @@ public partial class ModDetailViewer : UserControl
                 MessageBoxWindow.ShowDialog("Mod name not provided.");
                 return;
             }
+            var invalidChars = Path.GetInvalidFileNameChars();
+            if (modName.Any(c => invalidChars.Contains(c)))
+            {
+                MessageBoxWindow.ShowDialog("Mod name contains invalid characters.");
+                Directory.Delete(ModsLaunchHelper.TempModsFolderPath, true);
+                return;
+            }
             await ModInstallation.InstallModFromFileAsync(file, modName ,author, modId);
             Directory.Delete(ModsLaunchHelper.TempModsFolderPath, true);
         }
