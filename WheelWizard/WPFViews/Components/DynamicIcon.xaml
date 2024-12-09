@@ -51,8 +51,6 @@
                             </Setter.Value>
                         </Setter>
                     </DataTrigger>
-                    <!-- here there would be any other pack -->
-
                 </Style.Triggers>
             </Style>
         </ContentControl.Style>

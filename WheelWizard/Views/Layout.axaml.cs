@@ -8,6 +8,7 @@ namespace WheelWizard.Views;
 
 public partial class Layout : Window
 {
+    private UserControl _currentPage;
     public Layout()
     {
         InitializeComponent();
