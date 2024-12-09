@@ -53,6 +53,31 @@
             
         </Border>
         
+        <!-- Sidebar -->
+        <StackPanel Grid.Column="0" Grid.Row="3">
+            <TextBlock Text="{x:Static lang:Common.Term_General}" Classes="SidebarSectionText"
+                       VerticalAlignment="Bottom" />
+            <comps:SidebarRadioButton IconData="{StaticResource HouseIcon}"
+                                      Text="{x:Static lang:Common.PageTitle_Home}" IsChecked="True"/>
+            <comps:SidebarRadioButton IconData="{StaticResource UserIcon}"
+                                      Text="{x:Static lang:Common.PageTitle_MyProfiles}" x:Name="MyProfilesButton"/>
+            <comps:SidebarRadioButton IconData="{StaticResource StackIcon}"
+                                      Text="{x:Static lang:Common.PageTitle_Mods}"/>
+
+            <TextBlock Text="{x:Static lang:Common.Term_Online}" Classes="SidebarSectionText" />
+            <comps:SidebarRadioButton IconData="{StaticResource UsersIcon}"
+                                      Text="{x:Static lang:Common.PageTitle_Rooms}" x:Name="RoomsButton"/>
+            <comps:SidebarRadioButton IconData="{StaticResource UserPlusIcon}"
+                                      Text="{x:Static lang:Common.PageTitle_Friends}" x:Name="FriendsButton"
+                                      BoxText="0/0"/>
+
+            <TextBlock Text="{x:Static lang:Common.Term_Other}" Classes="SidebarSectionText" />
+            <comps:SidebarRadioButton IconData="{StaticResource WrenchIcon}"
+                                      Text="{x:Static lang:Common.PageTitle_Settings}" x:Name="SettingsButton"/>
+            <comps:SidebarRadioButton IconData="{StaticResource SinkIcon}"
+                                      Text="Kitchen Sink" x:Name="KitchenSinkButton"/>
+        </StackPanel>
+        
         <Border Grid.Column="0" Grid.Row="4" Background="{StaticResource Neutral800}">
             <StackPanel VerticalAlignment="Center" Spacing="5">
                 <comps:IconLabelButton IconData="{StaticResource DiscordIcon}"

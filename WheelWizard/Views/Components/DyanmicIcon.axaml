@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="WheelWizard.Views.Components.DynamicIcon"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters="using:WheelWizard.Converters"
+             xmlns:views="clr-namespace:WheelWizard.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="100" d:DesignWidth="100"
+             x:Name="Root"
+             Background="Transparent">
+    
+    <UserControl.Resources>
+        <views:IconDataConverter x:Key="IconDataConverter"/>
+    </UserControl.Resources>
+
+    <Path Stretch="Uniform"
+          Data="{Binding #Root.IconData, Converter={StaticResource IconDataConverter}}"
+          Fill="{Binding #Root.ForegroundColor}"
+          Width="{Binding #Root.IconSize}"
+          Height="{Binding #Root.IconSize}"
+          IsVisible="{Binding #Root.IconData, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+</UserControl>
