@@ -2,7 +2,38 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="using:WheelWizard.Views.Components">
     <Design.PreviewWith>
-        <controls:IconLabel />
+        <Border Background="#2E2E2E" Padding="20">
+            <StackPanel Spacing="10">
+                <controls:IconLabel Text="Sample Text" 
+                                    IconData="{StaticResource WheelIcon}"
+                                    Foreground="White" 
+                                    FontSize="16" />
+
+                <controls:IconLabel Text="Right Icon" 
+                                    IconData="{StaticResource WheelIcon}"
+                                    Foreground="LightBlue" 
+                                    FontSize="14"
+                                    IsIconLeft="False" />
+
+                <controls:IconLabel Text="Underlined" 
+                                    IconData="{StaticResource WheelIcon}"
+                                    Foreground="Yellow" 
+                                    FontSize="18"
+                                    IsUnderlined="True" />
+
+                <controls:IconLabel Text="Large Icon" 
+                                    IconData="{StaticResource WheelIcon}"
+                                    Foreground="Orange" 
+                                    FontSize="16"
+                                    IconSize="30" />
+                <TextBlock Foreground="White" Text="Text rendering issues:"/>
+                <controls:IconLabel Text="This is a very very long text, that should cause some text clipping due to TextWrapping being set to NoWrap" 
+                                    IconData="M4 4 H 20 V 20 H 4 Z" 
+                                    Foreground="White" 
+                                    FontSize="16" 
+                                    Width="200"/>
+            </StackPanel>
+        </Border>
     </Design.PreviewWith>
 
     <Style Selector="controls|IconLabel">
