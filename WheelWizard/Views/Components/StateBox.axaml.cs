@@ -22,7 +22,7 @@ public partial class StateBox : UserControl
     }
     
     public static readonly StyledProperty<Geometry> IconDataProperty = 
-        AvaloniaProperty.Register<SidebarRadioButton, Geometry>(nameof(IconData));
+        AvaloniaProperty.Register<SidebarRadioButton, Geometry>(nameof(IconData), new PathGeometry());
 
     public Geometry IconData
     {
