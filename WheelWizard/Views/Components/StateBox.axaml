@@ -78,17 +78,14 @@
             ToolTip.Placement="{Binding #Root.TipPlacement}"
             ToolTip.ShowDelay="20">
         <Grid ColumnDefinitions="Auto,Auto,*">
-            <components:DynamicIcon Grid.Column="0"
-                                    IconData="{Binding #Root.IconData}"
-                                    IconSize="{Binding #Root.IconSize}"
-                                    Margin="0,0,4,0"/>
-
-            <Rectangle Grid.Column="1"/>
-
-            <!-- Bind TextBlock.Text to the UserControl's Text property -->
-            <TextBlock Grid.Column="1"
-                       Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Text}"
-                       FontSize="{Binding #Root.FontSize}" />
+            <components:IconLabel
+                Grid.Column="0"
+                IconData="{Binding #Root.IconData}"
+                IconSize="{Binding #Root.IconSize}"
+                Margin="0,0,4,0"
+                Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Text}"
+                FontSize="{Binding #Root.FontSize}"
+                ></components:IconLabel>
         </Grid>
     </Border>
 </UserControl>
