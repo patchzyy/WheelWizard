@@ -1,5 +1,6 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:components="using:WheelWizard.Views.Components"
         xmlns:controls="using:WheelWizard.Views.Components">
     <Design.PreviewWith>
         <Border Background="{StaticResource Neutral950}" Padding="10" >
@@ -41,13 +42,12 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <StackPanel Orientation="Horizontal">
-                    <Path Data="{TemplateBinding IconData}"
-                          Fill="{TemplateBinding Foreground}" 
-                          Stretch="Uniform" 
-                          Width="{TemplateBinding IconSize}"
-                          Height="{TemplateBinding IconSize}"
-                          IsVisible="{TemplateBinding IsIconLeft}" 
-                          VerticalAlignment="Center"/>
+                    <components:DynamicIcon 
+                        IconData="{TemplateBinding IconData}"
+                        ForegroundColor="{TemplateBinding Foreground}"
+                        IconSize="{TemplateBinding IconSize}"
+                        IsVisible="{TemplateBinding IsIconLeft}" 
+                        VerticalAlignment="Center"/>
                     
                     <TextBlock Text="{TemplateBinding Text}" 
                                Margin="10,0,0,0"
@@ -68,14 +68,13 @@
                         </TextBlock.Styles>
                     </TextBlock>
                     
-                    <Path Data="{TemplateBinding IconData}"
-                          Margin="10,0,0,0"
-                          Fill="{TemplateBinding Foreground}" 
-                          Stretch="Uniform" 
-                          Width="{TemplateBinding IconSize}"
-                          Height="{TemplateBinding IconSize}"
-                          VerticalAlignment="Center"
-                          IsVisible="{TemplateBinding IsIconLeft, Converter={StaticResource InverseBooleanConverter}}"/>
+                    <components:DynamicIcon
+                        IconData="{TemplateBinding IconData}"
+                        Margin="10,0,0,0"
+                        ForegroundColor="{TemplateBinding Foreground}" 
+                        IconSize="{TemplateBinding IconSize}"
+                        VerticalAlignment="Center"
+                        IsVisible="{TemplateBinding IsIconLeft, Converter={StaticResource InverseBooleanConverter}}"/>
                 </StackPanel>
             </ControlTemplate>
         </Setter>

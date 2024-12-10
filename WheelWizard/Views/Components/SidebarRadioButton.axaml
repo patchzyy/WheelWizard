@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:components="using:WheelWizard.Views.Components"
              xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
+             Height="50" Width="200"
              mc:Ignorable="d"
              x:Name="Root"
              d:DesignHeight="50" d:DesignWidth="200">
@@ -16,7 +17,7 @@
             <ControlTemplate>
                 <Border Background="{TemplateBinding Background}"
                         BorderThickness="0">
-                    <Grid ColumnDefinitions="*,Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid ColumnDefinitions="160,Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <components:IconLabel Grid.Column="0"
                                               IconData="{Binding #Root.IconData}"
                                               IconSize="25"
@@ -38,11 +39,12 @@
                         <StackPanel Grid.Column="1"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Right"
-                                    Margin="100,0,10,0">
+                                    Margin="0,0,0,0">
                             <components:StateBox Classes="Dark" IsVisible="{Binding #Root.BoxText, Converter={x:Static ObjectConverters.IsNotNull}}"
                                                  Text="{Binding #Root.BoxText}"
                                                  IconData="{Binding #Root.BoxIconData}"
                                                  TipText="{Binding #Root.BoxTip}"
+                                                 HorizontalAlignment="Right"
                                                  TipPlacement="Left" />
                         </StackPanel>
                     </Grid>

@@ -21,9 +21,9 @@ public partial class StateBox : UserControl
         set => SetValue(TextProperty, value);
     }
     
-    public static readonly StyledProperty<Geometry> IconDataProperty =
-        AvaloniaProperty.Register<StateBox, Geometry>(nameof(IconData));
-   
+    public static readonly StyledProperty<Geometry> IconDataProperty = 
+        AvaloniaProperty.Register<SidebarRadioButton, Geometry>(nameof(IconData));
+
     public Geometry IconData
     {
         get => GetValue(IconDataProperty);
