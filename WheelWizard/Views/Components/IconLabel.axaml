@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="using:WheelWizard.Views.Components">
     <Design.PreviewWith>
-        <Border Background="#2E2E2E" Padding="20">
+        <Border Background="{StaticResource Neutral950}" Padding="10" >
             <StackPanel Spacing="10">
                 <controls:IconLabel Text="Sample Text" 
                                     IconData="{StaticResource WheelIcon}"
@@ -41,21 +41,22 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <StackPanel Orientation="Horizontal">
-                     <Path Data="{TemplateBinding IconData}"
-                           Fill="{TemplateBinding Foreground}" 
-                           Stretch="Uniform" 
-                           Width="{TemplateBinding IconSize}"
-                           Height="{TemplateBinding IconSize}"
-                           IsVisible="{TemplateBinding IsIconLeft}" 
-                           VerticalAlignment="Center"/>
-                     
-                     <TextBlock Text="{TemplateBinding Text}" 
-                                Margin="10,0,0,0"
-                                VerticalAlignment="Center"
-                                FontSize="{TemplateBinding FontSize}"
-                                Foreground="{TemplateBinding Foreground}">
-                         <TextBlock.Styles>
-                             <Style Selector="controls|IconLabel[IsUnderlined=True] TextBlock">
+                    <Path Data="{TemplateBinding IconData}"
+                          Fill="{TemplateBinding Foreground}" 
+                          Stretch="Uniform" 
+                          Width="{TemplateBinding IconSize}"
+                          Height="{TemplateBinding IconSize}"
+                          IsVisible="{TemplateBinding IsIconLeft}" 
+                          VerticalAlignment="Center"/>
+                    
+                    <TextBlock Text="{TemplateBinding Text}" 
+                               Margin="10,0,0,0"
+                               VerticalAlignment="Center"
+                               FontSize="{TemplateBinding FontSize}"
+                               Foreground="{TemplateBinding Foreground}"
+                               TextWrapping="Wrap">
+                        <TextBlock.Styles>
+                            <Style Selector="controls|IconLabel[IsUnderlined=True] TextBlock">
                                 <Setter Property="TextDecorations">
                                     <Setter.Value>
                                         <TextDecorationCollection>
@@ -63,19 +64,19 @@
                                         </TextDecorationCollection >
                                     </Setter.Value>
                                 </Setter>
-                             </Style>
-                         </TextBlock.Styles>
-                     </TextBlock>
-                     
-                     <Path Data="{TemplateBinding IconData}"
-                           Margin="10,0,0,0"
-                           Fill="{TemplateBinding Foreground}" 
-                           Stretch="Uniform" 
-                           Width="{TemplateBinding IconSize}"
-                           Height="{TemplateBinding IconSize}"
-                           VerticalAlignment="Center"
-                           IsVisible="{TemplateBinding IsIconLeft, Converter={StaticResource InverseBooleanConverter}}"/>
-                 </StackPanel>
+                            </Style>
+                        </TextBlock.Styles>
+                    </TextBlock>
+                    
+                    <Path Data="{TemplateBinding IconData}"
+                          Margin="10,0,0,0"
+                          Fill="{TemplateBinding Foreground}" 
+                          Stretch="Uniform" 
+                          Width="{TemplateBinding IconSize}"
+                          Height="{TemplateBinding IconSize}"
+                          VerticalAlignment="Center"
+                          IsVisible="{TemplateBinding IsIconLeft, Converter={StaticResource InverseBooleanConverter}}"/>
+                </StackPanel>
             </ControlTemplate>
         </Setter>
     </Style>
