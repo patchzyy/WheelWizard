@@ -7,19 +7,21 @@ namespace WheelWizard.Views.Components
 {
     public partial class SidebarRadioButton : UserControl
     {
-        public static readonly StyledProperty<IImage?> IconDataProperty = AvaloniaProperty.Register<SidebarRadioButton, IImage?>(nameof(IconData));
-        public static readonly StyledProperty<string> TextProperty = AvaloniaProperty.Register<SidebarRadioButton, string>(nameof(Text));
+        public static readonly StyledProperty<Geometry> IconDataProperty = 
+            AvaloniaProperty.Register<SidebarRadioButton, Geometry>(nameof(IconData), new PathGeometry());
+        public static readonly StyledProperty<string> TextProperty = AvaloniaProperty.Register<SidebarRadioButton, string>(nameof(Text), "Sidebar");
         public static readonly StyledProperty<string> BoxTextProperty = AvaloniaProperty.Register<SidebarRadioButton, string>(nameof(BoxText));
         public static readonly StyledProperty<IImage?> BoxIconDataProperty = AvaloniaProperty.Register<SidebarRadioButton, IImage?>(nameof(BoxIconData));
         public static readonly StyledProperty<string> BoxTipProperty = AvaloniaProperty.Register<SidebarRadioButton, string>(nameof(BoxTip));
         public static readonly StyledProperty<bool> IsCheckedProperty = AvaloniaProperty.Register<SidebarRadioButton, bool>(nameof(IsChecked), false);
         public static readonly StyledProperty<bool> IsIconLeftProperty = AvaloniaProperty.Register<SidebarRadioButton, bool>(nameof(IsIconLeft), true);
 
-        public IImage? IconData
+        public Geometry IconData
         {
             get => GetValue(IconDataProperty);
             set => SetValue(IconDataProperty, value);
         }
+
 
         public string Text
         {

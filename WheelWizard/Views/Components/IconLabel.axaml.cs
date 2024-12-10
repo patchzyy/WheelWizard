@@ -17,7 +17,7 @@ public class IconLabel : TemplatedControl
     }
     
     public static readonly StyledProperty<double> IconSizeProperty =
-        AvaloniaProperty.Register<IconLabel, double>(nameof(IconSize), 20.0);
+        AvaloniaProperty.Register<IconLabel, double>(nameof(IconSize), 20.0); // Add a default value here
    
     public double IconSize
     {
@@ -53,4 +53,3 @@ public class IconLabel : TemplatedControl
         set => SetValue(IsUnderlinedProperty, value);
     }
 }
-

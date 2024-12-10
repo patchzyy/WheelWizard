@@ -1,7 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
-using Avalonia.Data;
 
 namespace WheelWizard.Views.Components
 {
@@ -11,15 +10,21 @@ namespace WheelWizard.Views.Components
         {
             InitializeComponent();
         }
-        public static readonly StyledProperty<IImage?> IconDataProperty = AvaloniaProperty.Register<DynamicIcon, IImage?>(nameof(IconData));
-        public static readonly StyledProperty<double> IconSizeProperty = AvaloniaProperty.Register<DynamicIcon, double>(nameof(IconSize));
-        public static readonly StyledProperty<IBrush> ForegroundColorProperty = AvaloniaProperty.Register<DynamicIcon, IBrush>(nameof(ForegroundColor), Brushes.Black);
 
-        public IImage? IconData
+        public static readonly StyledProperty<Geometry> IconDataProperty =
+            AvaloniaProperty.Register<DynamicIcon, Geometry>(nameof(IconData));
+
+        public Geometry IconData
         {
             get => GetValue(IconDataProperty);
             set => SetValue(IconDataProperty, value);
         }
+
+        public static readonly StyledProperty<double> IconSizeProperty =
+            AvaloniaProperty.Register<DynamicIcon, double>(nameof(IconSize), 20.0); // Added a default value
+
+        public static readonly StyledProperty<IBrush> ForegroundColorProperty =
+            AvaloniaProperty.Register<DynamicIcon, IBrush>(nameof(ForegroundColor), Brushes.Black); // Default to Black
 
         public double IconSize
         {
@@ -32,6 +37,5 @@ namespace WheelWizard.Views.Components
             get => GetValue(ForegroundColorProperty);
             set => SetValue(ForegroundColorProperty, value);
         }
-        
     }
 }

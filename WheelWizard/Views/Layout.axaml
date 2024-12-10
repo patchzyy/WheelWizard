@@ -57,26 +57,26 @@
         <StackPanel Grid.Column="0" Grid.Row="3" Width="200">
             <TextBlock Text="{x:Static lang:Common.Term_General}" Classes="SidebarSectionText"
                        VerticalAlignment="Bottom" />
-            <comps:SidebarRadioButton IconData="{StaticResource WheelIcon}"
+            <comps:SidebarRadioButton IconData="{StaticResource Home}"
                                       Text="{x:Static lang:Common.PageTitle_Home}" IsChecked="True"/>
-            <comps:SidebarRadioButton IconData="{StaticResource UserIcon}"
+            <comps:SidebarRadioButton IconData="{StaticResource UserCircle}"
                                       HorizontalAlignment="Left"
                                       Text="{x:Static lang:Common.PageTitle_MyProfiles}" x:Name="MyProfilesButton"/>
-            <comps:SidebarRadioButton IconData="{StaticResource StackIcon}"
+            <comps:SidebarRadioButton IconData="{StaticResource CubesStacked}"
                                       HorizontalAlignment="Left"
                                       Text="{x:Static lang:Common.PageTitle_Mods}"/>
 
             <TextBlock Text="{x:Static lang:Common.Term_Online}" Classes="SidebarSectionText" />
-            <comps:SidebarRadioButton IconData="{StaticResource UsersIcon}"
+            <comps:SidebarRadioButton IconData="{StaticResource RoomUsers}"
                                       Text="{x:Static lang:Common.PageTitle_Rooms}" x:Name="RoomsButton"/>
-            <comps:SidebarRadioButton IconData="{StaticResource UserPlusIcon}"
+            <comps:SidebarRadioButton IconData="{StaticResource Friends}"
                                       Text="{x:Static lang:Common.PageTitle_Friends}" x:Name="FriendsButton"
                                       BoxText="0/0"/>
 
             <TextBlock Text="{x:Static lang:Common.Term_Other}" Classes="SidebarSectionText" />
-            <comps:SidebarRadioButton IconData="{StaticResource WrenchIcon}"
+            <comps:SidebarRadioButton IconData="{StaticResource Settings}"
                                       Text="{x:Static lang:Common.PageTitle_Settings}" x:Name="SettingsButton"/>
-            <comps:SidebarRadioButton IconData="{StaticResource SinkIcon}"
+            <comps:SidebarRadioButton IconData="{StaticResource Spinner}"
                                       Text="Kitchen Sink" x:Name="KitchenSinkButton"/>
         </StackPanel>
         
