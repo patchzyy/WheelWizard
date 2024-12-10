@@ -17,7 +17,7 @@ public class IconLabel : TemplatedControl
     }
     
     public static readonly StyledProperty<double> IconSizeProperty =
-        AvaloniaProperty.Register<IconLabel,double>(nameof(IconSize));
+        AvaloniaProperty.Register<IconLabel, double>(nameof(IconSize), 20.0);
    
     public double IconSize
     {
