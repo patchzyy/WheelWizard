@@ -1,93 +1,127 @@
-﻿<UserControl x:Class="WheelWizard.Views.Components.StateBox"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:components="using:WheelWizard.Views.Components"
-             mc:Ignorable="d"
-             x:Name="Root"
-             d:DesignHeight="50" d:DesignWidth="70"
-             HorizontalAlignment="Left"
-             VerticalAlignment="Top">
-    
-    <UserControl.Styles>
-        <Style Selector="Border.StateBoxBorder">
-            <Setter Property="CornerRadius" Value="3" />
-            <Setter Property="Padding" Value="6,3" />
-            <Setter Property="Background" Value="{StaticResource Neutral950}" />
-            
-            <Style Selector="^ /template/ ContentPresenter">
-                <Setter Property="Foreground" Value="{StaticResource Neutral500}" />
-            </Style>
-            
-            <Style Selector="^:dark /template/ ContentPresenter">
-                <Setter Property="Foreground" Value="{StaticResource Neutral500}" />
-            </Style>
-            
-            <Style Selector="^:pointerover /template/ ContentPresenter">
-                <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
-            </Style>
-            
-            <Style Selector="^:dark:pointerover /template/ ContentPresenter">
-                <Setter Property="Foreground" Value="{StaticResource Neutral400}" />
-            </Style>
-            
-            <Style Selector="^ /template/ Rectangle">
-                <Setter Property="IsVisible" Value="True" />
-                <Setter Property="Width" Value="4" />
-            </Style>
-            
-            <Style Selector="^ /template/ TextBlock">
-                <Setter Property="Foreground" Value="{StaticResource Neutral100}" />
-                <Setter Property="FontWeight" Value="Medium" />
-                <Setter Property="VerticalAlignment" Value="Center" />
-            </Style>
-            
-            <Style Selector="^:dark /template/ TextBlock">
-                <Setter Property="Foreground" Value="{StaticResource Neutral200}" />
-            </Style>
-            
-            <Style Selector="^:pointerover /template/ TextBlock">
-                <Setter Property="Foreground" Value="{StaticResource Neutral50}" />
-            </Style>
-            
-            <Style Selector="^:dark:pointerover /template/ TextBlock">
-                <Setter Property="Foreground" Value="{StaticResource Neutral50}" />
-            </Style>
-        </Style>
-        
-        <Style Selector="Border.StateBoxBorder:dark">
-            <Setter Property="Background" Value="{StaticResource Neutral950}" />
-        </Style>
-        
-        <Style Selector="Border.StateBoxBorder /template/ ContentPresenter">
-            <Style Selector="^ /template/ PathIcon">
-                <Setter Property="Width" Value="0" />
-                <Setter Property="Height" Value="0" />
-                <Setter Property="IsVisible" Value="False" />
-            </Style>
-            
-            <Style Selector="^ /template/ Rectangle">
-                <Setter Property="IsVisible" Value="False" />
-            </Style>
-        </Style>
-    </UserControl.Styles>
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:components="using:WheelWizard.Views.Components">
 
-    <Border Name="StateBoxRoot" Classes="StateBoxBorder"
-            ToolTip.Tip="{Binding #Root.TipText}"
-            ToolTip.Placement="{Binding #Root.TipPlacement}"
-            ToolTip.ShowDelay="20">
-        <Grid ColumnDefinitions="Auto">
-            <components:IconLabel
-                Grid.Column="0"
-                IconData="{Binding #Root.IconData}"
-                IconSize="{Binding #Root.IconSize}"
-                Margin="0,0,0,0"
-                Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Text}"
-                FontSize="{Binding #Root.FontSize}"
-                HorizontalAlignment="Left">
-                
-            </components:IconLabel>
-        </Grid>
-    </Border>
-</UserControl>
+    <Design.PreviewWith>
+        <Border Padding="20" Background="{StaticResource Neutral950}">
+            <StackPanel Spacing="5">
+                <components:StateBox Text="Active" />
+                <components:StateBox Text="Dark" Classes="Dark" />
+                <components:StateBox IconData="{StaticResource XMark}" Text="Cross"/>
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <Style Selector="components|StateBox">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="StateBoxRoot" 
+                        Classes="StateBoxBorder"
+                        CornerRadius="3"
+                        Padding="6,3"
+                        Background="{StaticResource Neutral950}"
+                        ToolTip.Tip="{TemplateBinding TipText}"
+                        ToolTip.Placement="{TemplateBinding TipPlacement}"
+                        ToolTip.ShowDelay="20">
+                    <Grid ColumnDefinitions="Auto">
+                        <components:IconLabel
+                            Grid.Column="0"
+                            IconData="{TemplateBinding IconData}"
+                            IconSize="{TemplateBinding IconSize}"
+                            Margin="0,0,0,0"
+                            Text="{TemplateBinding Text}"
+                            FontSize="{TemplateBinding FontSize}"
+                            HorizontalAlignment="Left"
+                            Foreground="{DynamicResource Neutral500}">
+                        </components:IconLabel>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="components|StateBox /template/ Border.StateBoxBorder">
+        <Style Selector="^ /template/ ContentPresenter">
+            <Setter Property="Foreground" Value="{StaticResource Neutral500}" />
+        </Style>
+        
+        <Style Selector="^:dark /template/ ContentPresenter">
+            <Setter Property="Foreground" Value="{StaticResource Neutral500}" />
+        </Style>
+        
+        <Style Selector="^:pointerover /template/ ContentPresenter">
+            <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+        </Style>
+        
+        <Style Selector="^:dark:pointerover /template/ ContentPresenter">
+            <Setter Property="Foreground" Value="{StaticResource Neutral400}" />
+        </Style>
+        
+        <Style Selector="^ /template/ Rectangle">
+            <Setter Property="IsVisible" Value="True" />
+            <Setter Property="Width" Value="4" />
+        </Style>
+        
+        <Style Selector="^ /template/ TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource Neutral100}" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        
+        <Style Selector="^:dark /template/ TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource Neutral200}" />
+        </Style>
+        
+        <Style Selector="^:pointerover /template/ TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource Neutral50}" />
+        </Style>
+        
+        <Style Selector="^:dark:pointerover /template/ TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource Neutral50}" />
+        </Style>
+    </Style>
+
+    <Style Selector="components|StateBox /template/ Border.StateBoxBorder:dark">
+        <Setter Property="Background" Value="{StaticResource Neutral950}" />
+    </Style>
+
+    <Style Selector="components|StateBox /template/ Border.StateBoxBorder /template/ ContentPresenter">
+        <Style Selector="^ /template/ PathIcon">
+            <Setter Property="Width" Value="0" />
+            <Setter Property="Height" Value="0" />
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+        
+        <Style Selector="^ /template/ Rectangle">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+    </Style>
+    
+    <Style Selector="components|StateBox:dark /template/ components|IconLabel">
+        <Setter Property="Foreground" Value="{StaticResource Neutral500}" />
+    </Style>
+    
+    <Style Selector="components|StateBox:pointerover /template/ components|IconLabel">
+        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+    </Style>
+    
+    <Style Selector="components|StateBox:dark:pointerover /template/ components|IconLabel">
+        <Setter Property="Foreground" Value="{StaticResource Neutral400}" />
+    </Style>
+    
+    <Style Selector="components|StateBox /template/ components|IconLabel">
+        <Setter Property="Foreground" Value="{DynamicResource Neutral500}" />
+    </Style>
+
+    <Style Selector="components|StateBox:dark /template/ components|IconLabel">
+        <Setter Property="Foreground" Value="{StaticResource Neutral200}" />
+    </Style>
+
+    <Style Selector="components|StateBox:pointerover /template/ components|IconLabel">
+        <Setter Property="Foreground" Value="{StaticResource Neutral50}" />
+    </Style>
+
+    <Style Selector="components|StateBox:dark:pointerover /template/ components|IconLabel">
+        <Setter Property="Foreground" Value="{StaticResource Neutral50}" />
+    </Style>
+</Styles>

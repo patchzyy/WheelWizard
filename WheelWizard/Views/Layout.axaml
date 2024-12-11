@@ -58,7 +58,6 @@
         </Border>
         
         <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
-
         </StackPanel>
         
         <!-- Sidebar -->
