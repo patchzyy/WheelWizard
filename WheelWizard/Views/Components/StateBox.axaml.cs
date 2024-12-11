@@ -10,8 +10,7 @@ public partial class StateBox : UserControl
     {
         InitializeComponent();
     }
-
-    // Added Text property
+    
     public static readonly StyledProperty<string> TextProperty =
         AvaloniaProperty.Register<StateBox, string>(nameof(Text));
 
@@ -22,7 +21,7 @@ public partial class StateBox : UserControl
     }
     
     public static readonly StyledProperty<Geometry> IconDataProperty = 
-        AvaloniaProperty.Register<SidebarRadioButton, Geometry>(nameof(IconData), new PathGeometry());
+        AvaloniaProperty.Register<SidebarRadioButton, Geometry>(nameof(IconData));
 
     public Geometry IconData
     {
