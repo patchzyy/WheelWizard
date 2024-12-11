@@ -1,8 +1,10 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Input;
 using Avalonia.Media;
 using System;
+using WheelWizard.Views.Pages;
 
 namespace WheelWizard.Views.Components;
 
@@ -25,20 +27,11 @@ public partial class SidebarRadioButton : RadioButton
         get => GetValue(TextProperty);
         set => SetValue(TextProperty, value);
     }
+    
+    public static readonly StyledProperty<Type?> PageTypeProperty =
+        AvaloniaProperty.Register<SidebarRadioButton, Type?>(nameof(PageType));
 
-    public static readonly StyledProperty<bool> IsCheckedProperty =
-        AvaloniaProperty.Register<SidebarRadioButton, bool>(nameof(IsChecked));
-
-    public bool IsChecked
-    {
-        get => GetValue(IsCheckedProperty);
-        set => SetValue(IsCheckedProperty, value);
-    }
-
-    public static readonly StyledProperty<Type> PageTypeProperty =
-        AvaloniaProperty.Register<SidebarRadioButton, Type>(nameof(PageType));
-
-    public Type PageType
+    public Type? PageType
     {
         get => GetValue(PageTypeProperty);
         set => SetValue(PageTypeProperty, value);
@@ -70,6 +63,15 @@ public partial class SidebarRadioButton : RadioButton
         get => GetValue(BoxTipProperty);
         set => SetValue(BoxTipProperty, value);
     }
-
-    // Removed the Click event as it's handled by the RadioButton itself
+    
+    protected override void OnPointerPressed(PointerPressedEventArgs e)
+    {
+        base.OnPointerPressed(e);
+        if (!e.GetCurrentPoint(this).Properties.IsLeftButtonPressed) return;
+        
+        PageType ??= typeof(NotFoundPage);
+        if (Activator.CreateInstance(PageType) is not UserControl page)
+            page = (UserControl)Activator.CreateInstance(typeof(NotFoundPage))!;
+        ViewUtils.NavigateToPage(page);
+    }
 }
