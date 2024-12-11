@@ -29,7 +29,7 @@ public partial class Layout : Window
             {
                 // Assuming you have a way to associate a page type with each button
                 // For example, you could use a custom property or the Tag property
-                var buttonPageType = button.Tag as Type; 
+                var buttonPageType = button.PageType; 
                 button.IsChecked = buttonPageType == page.GetType();
             }
         }

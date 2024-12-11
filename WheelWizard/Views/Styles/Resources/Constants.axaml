@@ -249,5 +249,24 @@
         <Thickness x:Key="SidebarSectionGap">10,20,10,0</Thickness>
 
         <!-- Grid Constants -->
-        <x:Double x:Key="TopRowSize">95</x:Double>
+        <GridLength x:Key="TopRowSize">95</GridLength>
+    
+        <!-- Button Resources -->
+        <CornerRadius x:Key="ButtonCornerRadius">4</CornerRadius>
+    
+        <SolidColorBrush x:Key="ButtonBackground" Color="{StaticResource Neutral700}" />
+        <SolidColorBrush x:Key="ButtonBorderBrush" Color="Transparent" />
+        <SolidColorBrush x:Key="ButtonForeground" Color="{StaticResource Neutral300}" />
+    
+        <SolidColorBrush x:Key="ButtonPointerOverBackground" Color="{StaticResource Neutral600}" />
+        <SolidColorBrush x:Key="ButtonPointerOverBorderBrush" Color="Transparent" />
+        <SolidColorBrush x:Key="ButtonPointerOverForeground" Color="{StaticResource Neutral300}" />
+    
+        <SolidColorBrush x:Key="ButtonPressedBackground" Color="{StaticResource Neutral500}" />
+        <SolidColorBrush x:Key="ButtonPressedBorderBrush" Color="Transparent" />
+        <SolidColorBrush x:Key="ButtonPressedForeground" Color="{StaticResource Neutral300}" />
+    
+        <SolidColorBrush x:Key="ButtonDisabledBackground" Color="{StaticResource Neutral800}" />
+        <SolidColorBrush x:Key="ButtonDisabledBorderBrush" Color="Transparent" />
+        <SolidColorBrush x:Key="ButtonDisabledForeground" Color="{StaticResource Neutral950}" />
 </ResourceDictionary>

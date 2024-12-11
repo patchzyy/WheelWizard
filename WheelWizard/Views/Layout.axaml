@@ -67,7 +67,7 @@
                        VerticalAlignment="Bottom" />
             <comps:SidebarRadioButton IconData="{StaticResource Home}"
                                       Text="{x:Static lang:Common.PageTitle_Home}"
-                                      Tag="{x:Type pages:HomePage}"
+                                      PageType="{x:Type pages:HomePage}"
                                       IsChecked="True"/>
             <comps:SidebarRadioButton IconData="{StaticResource UserCircle}"
                                       HorizontalAlignment="Left"
@@ -85,7 +85,7 @@
 
             <TextBlock Text="{x:Static lang:Common.Term_Other}" Classes="SidebarSectionText" />
             <comps:SidebarRadioButton IconData="{StaticResource Settings}"
-                                      Tag="{x:Type pages:SettingsPage}"
+                                      PageType="{x:Type pages:SettingsPage}"
                                       Text="{x:Static lang:Common.PageTitle_Settings}" x:Name="SettingsButton"/>
             <comps:SidebarRadioButton IconData="{StaticResource Spinner}"
                                       Text="Kitchen Sink" x:Name="KitchenSinkButton"/>

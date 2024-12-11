@@ -2,7 +2,79 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
+             xmlns:comps="clr-namespace:WheelWizard.Views.Components"
+             xmlns:pages="clr-namespace:WheelWizard.Views.Pages"
+             mc:Ignorable="d" d:DesignHeight="831" d:DesignWidth="444"
              x:Class="WheelWizard.Views.Pages.HomePage">
-    Hello i am home
+    <Grid x:Name="CompleteGrid" Margin="{StaticResource EdgeGap}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource TopRowSize}" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="{StaticResource BackgroundLineColor}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
+        
+        <TextBlock Grid.Row="0" Text="{x:Static lang:Common.PageTitle_Home}" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                   Classes="PageTitleText" />
+
+        <Border Grid.Row="1" Background="{StaticResource BackgroundLineColor}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
+        
+        <!-- Placeholder for CurrentUserProfileComponent, you'll need to adapt this -->
+        <!-- <comps:CurrentUserProfileComponent x:Name="CurrentUserProfile"
+                                            Grid.Row="0"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Top"/> -->
+
+        <Border Grid.Row="1" Height="630" Width="250" CornerRadius="125,125,0,0" VerticalAlignment="Bottom"
+                Background="{StaticResource FrameColor}" Margin="{StaticResource NegativeEdgeGap}">
+            <PathIcon HorizontalAlignment="Center" VerticalAlignment="Top"
+                      Data="{StaticResource WheelIcon}" 
+                      x:Name="WheelIcon"
+                      Foreground="{StaticResource Primary50}"
+                      Width="200" Height="200" Margin="0,25">
+            </PathIcon>
+        </Border>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="180" Margin="0,220">
+
+            <TextBlock HorizontalAlignment="Center"
+                       Classes="TitleText"
+                       Text="Retro Rewind"/>
+            
+            <comps:Button x:Name="PlayButton"
+                          IsEnabled="False" 
+                          Variant="Danger"
+                          Text="Loading..."
+                          IconData="{StaticResource ArrowRight}"
+                          IconSize="15"
+                          Click="PlayButton_Click"
+                          Width="300"
+                          Margin="0,20,0,0" />
+
+            <comps:Button x:Name="DolphinButton"
+                          IsEnabled="False"
+                          IconData="{StaticResource DolphinIcon}"
+                          IconSize="30"
+                          ToolTip.Tip="Launch Dolphin"
+                          ToolTip.Placement="Bottom"
+                          ToolTip.ShowDelay="50"
+                          Click="DolphinButton_OnClick"
+                          Width="100" Margin="0,6,0,0" />
+
+            <!-- <Button x:Name="PlayButton" -->
+            <!--         HorizontalAlignment="Center" -->
+            <!--         IsEnabled="False"  -->
+            <!--         Classes="Primary" -->
+            <!--         Height="40" -->
+            <!--         Width="100" -->
+            <!--         Content="Loading..." -->
+            <!--         Click="PlayButton_Click" -->
+            <!--         Margin="0,20,0,0"> -->
+            <!-- </Button> -->
+
+        </StackPanel>
+    </Grid>
 </UserControl>
