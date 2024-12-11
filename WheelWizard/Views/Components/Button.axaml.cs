@@ -7,46 +7,49 @@ using System;
 
 namespace WheelWizard.Views.Components;
 
-public partial class Button : UserControl
+public partial class Button : TemplatedControl  // Change to TemplatedControl
 {
-    private static readonly StyledProperty<IBrush> ForegroundProperty 
+    // Styled properties remain the same
+    public static readonly StyledProperty<IBrush> ForegroundProperty 
         = AvaloniaProperty.Register<Button, IBrush>(nameof(Foreground), Brushes.Black);
-    
+
     public static readonly StyledProperty<ButtonsVariantType> VariantProperty =
         AvaloniaProperty.Register<Button, ButtonsVariantType>(nameof(Variant), ButtonsVariantType.Default);
-    
+
     public static readonly StyledProperty<Geometry> IconDataProperty =
         AvaloniaProperty.Register<Button, Geometry>(nameof(IconData));
-    
+
     public static readonly StyledProperty<double> IconSizeProperty =
         AvaloniaProperty.Register<Button, double>(nameof(IconSize), 20.0);
-    
+
     public static readonly StyledProperty<string> TextProperty =
         AvaloniaProperty.Register<Button, string>(nameof(Text), string.Empty);
-    
+
     public static readonly StyledProperty<System.Windows.Input.ICommand> CommandProperty =
         AvaloniaProperty.Register<Button, System.Windows.Input.ICommand>(nameof(Command));
-    
+
     public static readonly StyledProperty<object> CommandParameterProperty =
         AvaloniaProperty.Register<Button, object>(nameof(CommandParameter));
-    
+
     public static readonly RoutedEvent<RoutedEventArgs> ClickEvent =
         RoutedEvent.Register<Button, RoutedEventArgs>(nameof(Click), RoutingStrategies.Bubble);
-    
+
     public enum ButtonsVariantType
     {
         Primary,
-        Secondary,
+        Warning,
         Default,
         Danger
     }
     
+    // Constructor
     public Button()
     {
-        InitializeComponent();
+        // No need for InitializeComponent() in code-behind for TemplatedControl
         UpdateStyleClasses(Variant);
     }
 
+    // Properties remain the same
     public ButtonsVariantType Variant
     {
         get => GetValue(VariantProperty);
@@ -70,13 +73,13 @@ public partial class Button : UserControl
         get => GetValue(TextProperty);
         set => SetValue(TextProperty, value);
     }
-    
+
     public IBrush Foreground
     {
         get => GetValue(ForegroundProperty);
         set => SetValue(ForegroundProperty, value);
     }
-    
+
     public System.Windows.Input.ICommand Command
     {
         get => GetValue(CommandProperty);
@@ -95,30 +98,32 @@ public partial class Button : UserControl
         remove => RemoveHandler(ClickEvent, value);
     }
 
+    // UpdateStyleClasses remains the same
     private void UpdateStyleClasses(ButtonsVariantType variant)
     {
-        Classes.Remove("primary");
-        Classes.Remove("secondary");
-        Classes.Remove("danger");
-        Classes.Remove("default");
+        Classes.Remove("Primary");
+        Classes.Remove("Warning");
+        Classes.Remove("Danger");
+        Classes.Remove("Default");
 
         switch (variant)
         {
             case ButtonsVariantType.Primary:
-                Classes.Add("primary");
+                Classes.Add("Primary");
                 break;
-            case ButtonsVariantType.Secondary:
-                Classes.Add("secondary");
+            case ButtonsVariantType.Warning:
+                Classes.Add("Warning");
                 break;
             case ButtonsVariantType.Danger:
-                Classes.Add("danger");
+                Classes.Add("Danger");
                 break;
             default:
-                Classes.Add("default");
+                Classes.Add("Default");
                 break;
         }
     }
 
+    // OnPropertyChanged remains the same
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
@@ -129,6 +134,7 @@ public partial class Button : UserControl
         }
     }
 
+    // OnClick remains the same
     protected virtual void OnClick()
     {
         var newEventArgs = new RoutedEventArgs(ClickEvent);
@@ -141,6 +147,7 @@ public partial class Button : UserControl
         }
     }
 
+    // OnPointerPressed remains the same
     protected override void OnPointerPressed(Avalonia.Input.PointerPressedEventArgs e)
     {
         base.OnPointerPressed(e);

@@ -1,29 +1,45 @@
-﻿<UserControl x:Class="WheelWizard.Views.Components.Button"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:components="clr-namespace:WheelWizard.Views.Components"
-             mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="100"
-             x:Name="Root">
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:components="clr-namespace:WheelWizard.Views.Components">
 
-    <Border Background="{Binding Background, ElementName=Root}"
-            BorderBrush="{Binding BorderBrush, ElementName=Root}"
-            BorderThickness="{Binding BorderThickness, ElementName=Root}"
-            CornerRadius="{Binding CornerRadius, ElementName=Root}"
-            Padding="{Binding Padding, ElementName=Root}">
-        <StackPanel Orientation="Horizontal" Spacing="5" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <components:DynamicIcon 
-                IsVisible="{Binding IconData, ElementName=Root, Converter={x:Static ObjectConverters.IsNotNull}}"
-                IconData="{Binding IconData, ElementName=Root}"
-                IconSize="{Binding IconSize, ElementName=Root}"
-                ForegroundColor="{Binding Foreground, ElementName=Root}"/>
-            <TextBlock 
-                IsVisible="{Binding Text, ElementName=Root, Converter={x:Static ObjectConverters.IsNotNull}}"
-                Text="{Binding Text, ElementName=Root}" 
-                VerticalAlignment="Center"
-                Foreground="{Binding Foreground, ElementName=Root}"
-                FontSize="{Binding FontSize, ElementName=Root}" />
-        </StackPanel>
-    </Border>
-</UserControl>
+    <Design.PreviewWith>
+        <Border Padding="20" Background="{StaticResource Neutral950}">
+            <StackPanel Spacing="5">
+                <components:Button Width="150" Text="Default" Classes="default"/>
+                <components:Button Width="150" Text="Primary" Classes="primary"/>
+                <components:Button Width="150" Text="Secondary" Classes="secondary"/>
+                <components:Button Width="150" Text="Danger" Classes="danger"/>
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <Style Selector="components|Button">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="{DynamicResource Neutral700}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource GlobalCornerRadius}" />
+        <Setter Property="Padding" Value="16,10" />
+        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <StackPanel Orientation="Horizontal" Spacing="5" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <components:IconLabel
+                            IsVisible="{TemplateBinding Text, Converter={x:Static ObjectConverters.IsNotNull}}"
+                            IconData="{TemplateBinding IconData}"
+                            IconSize="{TemplateBinding IconSize}"
+                            Text="{TemplateBinding Text}"
+                            VerticalAlignment="Center"
+                            Foreground="{TemplateBinding Foreground}"
+                            />
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

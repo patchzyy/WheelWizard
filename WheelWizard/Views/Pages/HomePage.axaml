@@ -46,12 +46,11 @@
             
             <comps:Button x:Name="PlayButton"
                           IsEnabled="False" 
-                          Variant="Danger"
+                          Variant="Warning"
                           Text="Loading..."
                           IconData="{StaticResource ArrowRight}"
                           IconSize="15"
                           Click="PlayButton_Click"
-                          Width="300"
                           Margin="0,20,0,0" />
 
             <comps:Button x:Name="DolphinButton"

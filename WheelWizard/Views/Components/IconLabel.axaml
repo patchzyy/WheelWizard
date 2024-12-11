@@ -42,12 +42,13 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <StackPanel Orientation="Horizontal">
-                    <components:DynamicIcon 
-                        IconData="{TemplateBinding IconData}"
-                        ForegroundColor="{TemplateBinding Foreground}"
-                        IconSize="{TemplateBinding IconSize}"
-                        IsVisible="{TemplateBinding IsIconLeft}" 
-                        VerticalAlignment="Center"/>
+                    <Path Data="{TemplateBinding IconData}"
+                          Fill="{TemplateBinding Foreground}" 
+                          Stretch="Uniform" 
+                          Width="{TemplateBinding IconSize}"
+                          Height="{TemplateBinding IconSize}"
+                          IsVisible="{TemplateBinding IsIconLeft}" 
+                          VerticalAlignment="Center"/>
                     
                     <TextBlock Text="{TemplateBinding Text}" 
                                Margin="10,0,0,0"
@@ -68,13 +69,14 @@
                         </TextBlock.Styles>
                     </TextBlock>
                     
-                    <components:DynamicIcon
-                        IconData="{TemplateBinding IconData}"
-                        Margin="10,0,0,0"
-                        ForegroundColor="{TemplateBinding Foreground}" 
-                        IconSize="{TemplateBinding IconSize}"
-                        VerticalAlignment="Center"
-                        IsVisible="{TemplateBinding IsIconLeft, Converter={StaticResource InverseBooleanConverter}}"/>
+                    <Path Data="{TemplateBinding IconData}"
+                          Margin="10,0,0,0"
+                          Fill="{TemplateBinding Foreground}" 
+                          Stretch="Uniform" 
+                          Width="{TemplateBinding IconSize}"
+                          Height="{TemplateBinding IconSize}"
+                          VerticalAlignment="Center"
+                          IsVisible="{TemplateBinding IsIconLeft, Converter={StaticResource InverseBooleanConverter}}"/>
                 </StackPanel>
             </ControlTemplate>
         </Setter>
