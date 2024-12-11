@@ -3,15 +3,36 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using System;
 using WheelWizard.Services;
+using WheelWizard.Views.Components;
+using WheelWizard.Views.Pages;
 
 namespace WheelWizard.Views;
 
 public partial class Layout : Window
 {
     private UserControl _currentPage;
+    
+    
     public Layout()
     {
         InitializeComponent();
+        NavigateToPage(new SettingsPage());
+    }
+    public void NavigateToPage(UserControl page)
+    {
+        ContentArea.Content = page;
+
+        // Update the IsChecked state of the SidebarRadioButtons
+        foreach (var child in SidePanelButtons.Children)
+        {
+            if (child is SidebarRadioButton button)
+            {
+                // Assuming you have a way to associate a page type with each button
+                // For example, you could use a custom property or the Tag property
+                var buttonPageType = button.Tag as Type; 
+                button.IsChecked = buttonPageType == page.GetType();
+            }
+        }
     }
 
     private void TopBar_PointerPressed(object? sender, PointerPressedEventArgs e)

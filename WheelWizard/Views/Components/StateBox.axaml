@@ -77,15 +77,17 @@
             ToolTip.Tip="{Binding #Root.TipText}"
             ToolTip.Placement="{Binding #Root.TipPlacement}"
             ToolTip.ShowDelay="20">
-        <Grid ColumnDefinitions="Auto,Auto,*">
+        <Grid ColumnDefinitions="Auto">
             <components:IconLabel
                 Grid.Column="0"
                 IconData="{Binding #Root.IconData}"
                 IconSize="{Binding #Root.IconSize}"
-                Margin="0,0,4,0"
+                Margin="0,0,0,0"
                 Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Text}"
                 FontSize="{Binding #Root.FontSize}"
-                ></components:IconLabel>
+                HorizontalAlignment="Left">
+                
+            </components:IconLabel>
         </Grid>
     </Border>
 </UserControl>

@@ -379,10 +379,6 @@
       <AdditionalFiles Include="Views\Styles\Styles\TextStyles.axaml" />
       <AdditionalFiles Include="Views\Styles\Util\IconExampleComponent.axaml" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Views\Pages\" />
-    </ItemGroup>
     <PropertyGroup>
         <ApplicationIcon>car-wheel.ico</ApplicationIcon>
     </PropertyGroup>
