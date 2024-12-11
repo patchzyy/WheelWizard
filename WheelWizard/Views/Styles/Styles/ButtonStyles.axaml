@@ -1,12 +1,13 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:components="clr-namespace:WheelWizard.Views.Components">
     <Design.PreviewWith>
         <Border Background="{StaticResource Neutral950}" Padding="10" >
             <UniformGrid Columns="2">
                 <Button Classes="Default" Margin="5">Default</Button>
                 <Button Classes="Primary" Margin="5">Primary</Button>
                 <Button Classes="Warning" Margin="5">Warning</Button>
-                <Button Classes="Error" Margin="5">Error</Button>
+                <Button Classes="Danger" Margin="5">Danger</Button>
                 <Button Classes="Default" Margin="5" IsEnabled="False">Disabled</Button>
             </UniformGrid>
         </Border>
@@ -37,6 +38,9 @@
         <Setter Property="Cursor" Value="Hand"/>
     </Style>
 
+    <Style Selector="components|Button:pointerover">
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
     
     <!-- Set foreground of objects in the style -->
     <!-- Add this to that object:  Foreground="{Binding $parent[Button].Foreground}" -->
@@ -45,30 +49,30 @@
         <Setter Property="Foreground" Value="{Binding $parent[Button].Foreground}"/>
     </Style> -->
     
-    <Style Selector="Button.Default">
+    <Style Selector="components|Button.Default">
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
         <Setter Property="Background" Value="{StaticResource Neutral700}" />
     </Style>
-    <Style Selector="Button.Default:pointerover /template/ ContentPresenter">
+    <Style Selector="components|Button.Default:pointerover /template/ ContentPresenter">
         <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
         <Setter Property="Background" Value="{StaticResource Neutral600}" />
     </Style>
-    <Style Selector="Button.Default:pressed /template/ ContentPresenter">
+    <Style Selector="components|Button.Default:pressed /template/ ContentPresenter">
         <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
         <Setter Property="Background" Value="{StaticResource Neutral500}" />
     </Style>
 
-    <Style Selector="Button.Error">
+    <Style Selector="components|Button.Danger">
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="{StaticResource Error100}" />
         <Setter Property="Background" Value="{StaticResource Error700}" />
     </Style>
-    <Style Selector="Button.Error:pointerover /template/ ContentPresenter">
+    <Style Selector="components|Button.Danger:pointerover /template/ ContentPresenter">
         <Setter Property="Foreground" Value="{StaticResource Error50}" />
         <Setter Property="Background" Value="{StaticResource Error600}" />
     </Style>
-    <Style Selector="Button.Error:pressed /template/ ContentPresenter">
+    <Style Selector="components|Button.Danger:pressed /template/ ContentPresenter">
         <Setter Property="Foreground" Value="{StaticResource Error50}" />
         <Setter Property="Background" Value="{StaticResource Error400}" />
     </Style>
@@ -77,30 +81,30 @@
         <Setter Property="Background" Value="{StaticResource Neutral800}" />
     </Style>
     
-    <Style Selector="Button.Warning">
+    <Style Selector="components|Button.Warning">
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="{StaticResource Warning100}" />
         <Setter Property="Background" Value="{StaticResource Warning700}" />
     </Style>
-    <Style Selector="Button.Warning:pointerover /template/ ContentPresenter">
+    <Style Selector="components|Button.Warning:pointerover /template/ ContentPresenter">
         <Setter Property="Foreground" Value="{StaticResource Warning50}" />
         <Setter Property="Background" Value="{StaticResource Warning600}" />
     </Style>
-    <Style Selector="Button.Warning:pressed /template/ ContentPresenter">
+    <Style Selector="components|Button.Warning:pressed /template/ ContentPresenter">
         <Setter Property="Foreground" Value="{StaticResource Warning50}" />
         <Setter Property="Background" Value="{StaticResource Warning500}" />
     </Style>
     
-    <Style Selector="Button.Primary">
+    <Style Selector="components|Button.Primary">
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="{StaticResource Primary50}" />
         <Setter Property="Background" Value="{StaticResource Primary700}" />
     </Style>
-    <Style Selector="Button.Primary:pointerover /template/ ContentPresenter">
+    <Style Selector="components|Button.Primary:pointerover /template/ ContentPresenter">
         <Setter Property="Foreground" Value="{StaticResource Primary50}" />
         <Setter Property="Background" Value="{StaticResource Primary600}" />
     </Style>
-    <Style Selector="Button.Primary:pressed /template/ ContentPresenter">
+    <Style Selector="components|Button.Primary:pressed /template/ ContentPresenter">
         <Setter Property="Foreground" Value="{StaticResource Primary50}" />
         <Setter Property="Background" Value="{StaticResource Primary500}" />
     </Style>

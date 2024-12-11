@@ -26,5 +26,6 @@
         <!-- COMPONENTS -->
         <StyleInclude Source="Components/IconLabel.axaml"/>
         <StyleInclude Source="Components/IconLabelButton.axaml"/>
+        <StyleInclude Source="Components/Button.axaml"/>
     </Application.Styles>
 </Application>
