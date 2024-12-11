@@ -1,0 +1,87 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:components="clr-namespace:WheelWizard.Views.Components">
+    <Design.PreviewWith>
+        <Border Padding="20" Background="{StaticResource Neutral950}">
+            <StackPanel Spacing="5">
+                <components:Button Width="150" Text="Default" Classes="default"/>
+                <components:Button Width="150" Text="Primary" Classes="primary"/>
+                <components:Button Width="150" Text="Secondary" Classes="secondary"/>
+                <components:Button Width="150" Text="Danger" Classes="danger"/>
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <Style Selector="components|Button">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="{DynamicResource Neutral700}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource GlobalCornerRadius}" />
+        <Setter Property="Padding" Value="16,10" />
+        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+    </Style>
+    
+    <Style Selector="components|Button:pointerover">
+        <Setter Property="Background" Value="{DynamicResource Neutral600}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+    
+    <Style Selector="components|Button:pressed">
+        <Setter Property="Background" Value="{DynamicResource Neutral500}" />
+        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+    </Style>
+
+    <Style Selector="components|Button:disabled">
+        <Setter Property="Background" Value="{DynamicResource Neutral800}" />
+        <Setter Property="Foreground" Value="{StaticResource Neutral950}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+    </Style>
+
+    <Style Selector="components|Button.default">
+        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+        <Setter Property="Background" Value="{StaticResource Neutral700}" />
+    </Style>
+    <Style Selector="components|Button.default:pointerover">
+        <Setter Property="Background" Value="{StaticResource Neutral600}" />
+    </Style>
+    <Style Selector="components|Button.default:pressed">
+        <Setter Property="Background" Value="{StaticResource Neutral500}" />
+    </Style>
+
+    <Style Selector="components|Button.primary">
+        <Setter Property="Foreground" Value="{StaticResource Primary50}" />
+        <Setter Property="Background" Value="{StaticResource Primary700}" />
+    </Style>
+    <Style Selector="components|Button.primary:pointerover">
+        <Setter Property="Background" Value="{StaticResource Primary600}" />
+    </Style>
+    <Style Selector="components|Button.primary:pressed">
+        <Setter Property="Background" Value="{StaticResource Primary500}" />
+    </Style>
+
+    <Style Selector="components|Button.secondary">
+        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+        <Setter Property="Background" Value="{StaticResource Neutral700}" />
+    </Style>
+    <Style Selector="components|Button.secondary:pointerover">
+        <Setter Property="Background" Value="{StaticResource Neutral600}" />
+    </Style>
+    <Style Selector="components|Button.secondary:pressed">
+        <Setter Property="Background" Value="{StaticResource Neutral500}" />
+    </Style>
+
+    <Style Selector="components|Button.danger">
+        <Setter Property="Foreground" Value="{StaticResource Error100}" />
+        <Setter Property="Background" Value="{StaticResource Error700}" />
+    </Style>
+    <Style Selector="components|Button.danger:pointerover">
+        <Setter Property="Background" Value="{StaticResource Error600}" />
+    </Style>
+    <Style Selector="components|Button.danger:pressed">
+        <Setter Property="Background" Value="{StaticResource Error400}" />
+    </Style>
+</Styles>

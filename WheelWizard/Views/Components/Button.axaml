@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="WheelWizard.Views.Components.Button"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:components="clr-namespace:WheelWizard.Views.Components"
+             mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="100"
+             x:Name="Root">
+
+    <Border Background="{Binding Background, ElementName=Root}"
+            BorderBrush="{Binding BorderBrush, ElementName=Root}"
+            BorderThickness="{Binding BorderThickness, ElementName=Root}"
+            CornerRadius="{Binding CornerRadius, ElementName=Root}"
+            Padding="{Binding Padding, ElementName=Root}">
+        <StackPanel Orientation="Horizontal" Spacing="5" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <components:DynamicIcon 
+                IsVisible="{Binding IconData, ElementName=Root, Converter={x:Static ObjectConverters.IsNotNull}}"
+                IconData="{Binding IconData, ElementName=Root}"
+                IconSize="{Binding IconSize, ElementName=Root}"
+                ForegroundColor="{Binding Foreground, ElementName=Root}"/>
+            <TextBlock 
+                IsVisible="{Binding Text, ElementName=Root, Converter={x:Static ObjectConverters.IsNotNull}}"
+                Text="{Binding Text, ElementName=Root}" 
+                VerticalAlignment="Center"
+                Foreground="{Binding Foreground, ElementName=Root}"
+                FontSize="{Binding FontSize, ElementName=Root}" />
+        </StackPanel>
+    </Border>
+</UserControl>
