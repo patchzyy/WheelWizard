@@ -10,11 +10,13 @@ namespace WheelWizard.Views;
 
 public partial class Layout : Window
 {
-    private UserControl _currentPage;
+    public static Layout Instance { get; private set; }
     
+    private UserControl _currentPage;
     
     public Layout()
     {
+        Instance = this;
         InitializeComponent();
         NavigateToPage(new SettingsPage());
     }
@@ -25,13 +27,10 @@ public partial class Layout : Window
         // Update the IsChecked state of the SidebarRadioButtons
         foreach (var child in SidePanelButtons.Children)
         {
-            if (child is SidebarRadioButton button)
-            {
-                // Assuming you have a way to associate a page type with each button
-                // For example, you could use a custom property or the Tag property
-                var buttonPageType = button.PageType; 
-                button.IsChecked = buttonPageType == page.GetType();
-            }
+            if (child is not SidebarRadioButton button) continue;
+
+            var buttonPageType = button.PageType; 
+            button.IsChecked = buttonPageType == page.GetType();
         }
     }
 

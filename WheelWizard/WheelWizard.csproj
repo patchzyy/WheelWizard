@@ -364,6 +364,10 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>Online.resx</DependentUpon>
       </Compile>
+      <Compile Update="Views\Pages\NotFoundPage.axaml.cs">
+        <DependentUpon>NotFoundPage.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>
@@ -376,7 +380,6 @@
       <AdditionalFiles Include="Views\Styles\Resources\Constants.axaml" />
       <AdditionalFiles Include="Views\Styles\Resources\Icons.axaml" />
       <AdditionalFiles Include="Views\Styles\Styles\ButtonStyles.axaml" />
-      <AdditionalFiles Include="Views\Styles\Styles\OldButtonStyles.axaml" />
       <AdditionalFiles Include="Views\Styles\Styles\TextStyles.axaml" />
       <AdditionalFiles Include="Views\Styles\Util\IconExampleComponent.axaml" />
     </ItemGroup>
