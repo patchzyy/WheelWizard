@@ -33,7 +33,7 @@
             <PathIcon HorizontalAlignment="Center" VerticalAlignment="Top"
                       Data="{StaticResource WheelIcon}" 
                       x:Name="WheelIcon"
-                      Foreground="{StaticResource Primary50}"
+                      Foreground="{StaticResource Neutral500}"
                       Width="200" Height="200" Margin="0,25">
             </PathIcon>
         </Border>

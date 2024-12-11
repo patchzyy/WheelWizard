@@ -1,85 +1,90 @@
-﻿<UserControl x:Class="WheelWizard.Views.Components.SidebarRadioButton"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:components="using:WheelWizard.Views.Components"
-             xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
-             Height="50" Width="200"
-             mc:Ignorable="d"
-             x:Name="Root"
-             d:DesignHeight="50" d:DesignWidth="200">
-    <RadioButton Classes="SidebarMenuButton"
-                 GroupName="SidebarGroup"
-                 Click="OnClick"
-                 IsChecked="{Binding IsChecked, ElementName=Root, Mode=TwoWay}">
-        <RadioButton.Template>
-            <ControlTemplate>
-                <Border Background="{TemplateBinding Background}"
-                        BorderThickness="0">
-                    <Grid ColumnDefinitions="160,Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <components:IconLabel Grid.Column="0"
-                                              IconData="{Binding #Root.IconData}"
-                                              IconSize="25"
-                                              FontSize="20"
-                                              x:Name="RadioIcon"
-                                              Text="{Binding #Root.Text}"
-                                              Foreground="{TemplateBinding Foreground}"
-                                              Margin="10,0,0,0"
-                                              VerticalAlignment="Center"
-                                              HorizontalAlignment="Left">
-                            <components:IconLabel.IsIconLeft>
-                                <MultiBinding Converter="{x:Static BoolConverters.And}">
-                                    <Binding Path="IconData" ElementName="Root" Converter="{x:Static ObjectConverters.IsNotNull}"/>
-                                    <Binding Path="IsIconLeft" ElementName="Root"/>
-                                </MultiBinding>
-                            </components:IconLabel.IsIconLeft>
-                        </components:IconLabel>
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:components="using:WheelWizard.Views.Components"
+        xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
+        xmlns:pages="clr-namespace:WheelWizard.Views.Pages">
+  <Design.PreviewWith>
+    <Border Padding="20">
+      <StackPanel>
+        <RadioButton Classes="SidebarMenuButton" IsChecked="True">
+          <RadioButton.Content>
+            <components:SidebarRadioButton  IconData="{StaticResource Home}"
+                                             Text="{x:Static lang:Common.PageTitle_Home}"
+                                             PageType="{x:Type pages:HomePage}" />
+          </RadioButton.Content>
+        </RadioButton>
+        
+        <RadioButton Classes="SidebarMenuButton" IsChecked="False">
+          <RadioButton.Content>
+            <components:SidebarRadioButton  IconData="{StaticResource Home}"
+                                             Text="Friends"
+                                             BoxText="0/0"/>
+          </RadioButton.Content>
+        </RadioButton>
+      </StackPanel>
+    </Border>
+  </Design.PreviewWith>
 
-                        <StackPanel Grid.Column="1"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Right"
-                                    Margin="0,0,0,0">
-                            <components:StateBox Classes="Dark" IsVisible="{Binding #Root.BoxText, Converter={x:Static ObjectConverters.IsNotNull}}"
-                                                 Text="{Binding #Root.BoxText}"
-                                                 IconData="{Binding #Root.BoxIconData}"
-                                                 TipText="{Binding #Root.BoxTip}"
-                                                 HorizontalAlignment="Right"
-                                                 TipPlacement="Left" />
-                        </StackPanel>
-                    </Grid>
-                </Border>
-            </ControlTemplate>
-        </RadioButton.Template>
+  <Style Selector="RadioButton.SidebarMenuButton">
+    <Setter Property="Background" Value="{DynamicResource Neutral900}" />
+    <Setter Property="Foreground" Value="{DynamicResource Neutral400}" />
+    <Setter Property="Height" Value="50" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}"
+                BorderThickness="0">
+          <Grid ColumnDefinitions="*,Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <components:IconLabel x:Name="RadioIcon"
+                                  Grid.Column="0"
+                                  IconData="{TemplateBinding IconData}"
+                                  IconSize="25"
+                                  FontSize="20"
+                                  Text="{TemplateBinding Text}"
+                                  Foreground="{TemplateBinding Foreground}"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Center"
+                                  Margin="{DynamicResource LeftEdgeGap}" />
 
-        <RadioButton.Styles>
-            <Style Selector="RadioButton.SidebarMenuButton:pointerover /template/ Border#PART_Border">
-                <Setter Property="Background" Value="{StaticResource Neutral800}" />
-            </Style>
-            <Style Selector="RadioButton.SidebarMenuButton /template/ components|IconLabel#RadioIcon">
-                <Setter Property="Foreground" Value="{TemplateBinding Foreground}" />
-            </Style>
-            <Style Selector="RadioButton.SidebarMenuButton:pointerover /template/ components|IconLabel#RadioIcon">
-                <Setter Property="Foreground" Value="{StaticResource Neutral800}" />
-            </Style>
-            <Style Selector="RadioButton.SidebarMenuButton">
-                <Setter Property="Cursor" Value="Hand"/>
-                <Setter Property="Foreground" Value="{StaticResource Neutral400}" />
-            </Style>
-            <Style Selector="RadioButton.SidebarMenuButton:pointerover">
-                <Setter Property="Foreground" Value="{StaticResource Neutral800}" />
-            </Style>
+            <components:StateBox Grid.Column="1"
+                                 IsVisible="{TemplateBinding BoxText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                                 x:Name="StateBox"
+                                 Margin="{DynamicResource RightEdgeGap}"
+                                 VerticalAlignment="Center"
+                                 HorizontalAlignment="Right"
+                                 Classes="Dark"
+                                 Text="{TemplateBinding BoxText}"
+                                 TipPlacement="Top"
+                                 IconData="{TemplateBinding BoxIconData}"
+                                 TipText="{TemplateBinding BoxTip}"
+                                 />
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
 
-            <Style Selector="RadioButton.SidebarMenuButton:checked /template/ Border#PART_Border">
-                <Setter Property="Background" Value="{StaticResource Neutral950}" />
-            </Style>
-            <Style Selector="RadioButton.SidebarMenuButton:checked /template/ components|IconLabel#RadioIcon">
-                <Setter Property="Foreground" Value="{StaticResource Neutral950}" />
-            </Style>
-            <Style Selector="RadioButton.SidebarMenuButton:checked">
-                <Setter Property="Foreground" Value="{StaticResource Neutral950}" />
-            </Style>
-        </RadioButton.Styles>
+  <Style Selector="RadioButton.SidebarMenuButton /template/ components|IconLabel#RadioIcon">
+    <Style Selector="^:pointerover /template/ #RadioIcon">
+      <Setter Property="Foreground" Value="{StaticResource Primary200}" />
+    </Style>
 
-    </RadioButton>
-</UserControl>
+    <Style Selector="^:pressed /template/ #RadioIcon">
+      <Setter Property="Foreground" Value="{StaticResource Neutral950}" />
+    </Style>
+
+    <Style Selector="^:checked /template/ #RadioIcon">
+      <Setter Property="Foreground" Value="{StaticResource Neutral950}" />
+    </Style>
+  </Style>
+
+  <Style Selector="RadioButton.SidebarMenuButton:pointerover">
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="Background" Value="{StaticResource Neutral800}" />
+    <Setter Property="Foreground" Value="{StaticResource Primary200}" />
+  </Style>
+
+  <Style Selector="RadioButton.SidebarMenuButton:checked">
+    <Setter Property="Background" Value="{StaticResource Primary200}" />
+    <Setter Property="Foreground" Value="{StaticResource Primary300}" />
+  </Style>
+</Styles>

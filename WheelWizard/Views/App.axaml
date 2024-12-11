@@ -27,5 +27,7 @@
         <StyleInclude Source="Components/IconLabel.axaml"/>
         <StyleInclude Source="Components/IconLabelButton.axaml"/>
         <StyleInclude Source="Components/Button.axaml"/>
+        <StyleInclude Source="Components/StateBox.axaml"/>
+        <StyleInclude Source="Components/SidebarRadioButton.axaml"/>
     </Application.Styles>
 </Application>
