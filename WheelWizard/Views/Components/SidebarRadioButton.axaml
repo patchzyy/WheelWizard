@@ -4,11 +4,12 @@
         xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
         xmlns:pages="clr-namespace:WheelWizard.Views.Pages">
   <Design.PreviewWith>
-    <Border Padding="20">
+    <Border Padding="20" Width="300">
       <StackPanel>
         <RadioButton Classes="SidebarMenuButton" IsChecked="True">
           <RadioButton.Content>
             <controls:SidebarRadioButton  IconData="{StaticResource Home}"
+                                          
                                           Text="{x:Static lang:Common.PageTitle_Home}"
                                           PageType="{x:Type pages:HomePage}" />
           </RadioButton.Content>
@@ -16,7 +17,8 @@
         
         <RadioButton Classes="SidebarMenuButton" IsChecked="False">
           <RadioButton.Content>
-            <controls:SidebarRadioButton  IconData="{StaticResource Home}"
+            <controls:SidebarRadioButton  Width="200"
+                                          IconData="{StaticResource Home}"
                                           Text="Friends"
                                           BoxText="0/0"/>
           </RadioButton.Content>
@@ -41,7 +43,7 @@
                                 Text="{TemplateBinding Text}"
                                 Foreground="{TemplateBinding Foreground}"
                                 HorizontalAlignment="Left" VerticalAlignment="Center"
-                                Margin="10,0,0,0" />
+                                Margin="10,0,10,0" />
 
             <controls:StateBox IsVisible="{TemplateBinding BoxText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
                                  x:Name="StateBox" Classes="Dark"
