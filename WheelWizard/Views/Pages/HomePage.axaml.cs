@@ -1,10 +1,11 @@
 ﻿using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using System;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using UserControl = Avalonia.Controls.UserControl;
 
 namespace WheelWizard.Views.Pages;
 
@@ -30,11 +31,11 @@ public partial class HomePage : UserControl
 
     private void DolphinButton_OnClick(object? sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        MessageBox.Show("Dolphin button clicked");
     }
 
     private void PlayButton_Click(object? sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        MessageBox.Show("Play button clicked");
     }
 }
