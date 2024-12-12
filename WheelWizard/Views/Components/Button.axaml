@@ -5,10 +5,10 @@
     <Design.PreviewWith>
         <Border Padding="20" Background="{StaticResource Neutral950}">
             <StackPanel Spacing="5">
-                <components:Button Width="150" Text="Default" Classes="default"/>
-                <components:Button Width="150" Text="Primary" Classes="primary"/>
-                <components:Button Width="150" Text="Secondary" Classes="secondary"/>
-                <components:Button Width="150" Text="Danger" Classes="danger"/>
+                <components:Button Width="150" Text="Default" Variant="Default"/>
+                <components:Button Width="150" Text="Primary" Variant="Primary"/>
+                <components:Button Width="150" Text="Secondary" Variant="Warning"/>
+                <components:Button Width="150" Text="Danger" Variant="Danger"/>
                 <components:Button x:Name="PlayButton"
                                    IsEnabled="False" 
                                    Variant="Warning"

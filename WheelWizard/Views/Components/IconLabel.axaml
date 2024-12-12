@@ -5,6 +5,10 @@
     <Design.PreviewWith>
         <Border Background="{StaticResource Neutral950}" Padding="10" >
             <StackPanel Spacing="10">
+                <controls:IconLabel Text="TextOnly"
+                                    Foreground="White" 
+                                    FontSize="16" />
+                
                 <controls:IconLabel Text="Sample Text" 
                                     IconData="{StaticResource WheelIcon}"
                                     Foreground="White" 
@@ -46,7 +50,7 @@
         <!-- Set Defaults -->
         <Setter Property="Template">
             <ControlTemplate>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" >
                     <Path Data="{TemplateBinding IconData}"
                           Fill="{TemplateBinding Foreground}" 
                           Stretch="Uniform" 

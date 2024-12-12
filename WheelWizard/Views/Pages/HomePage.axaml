@@ -45,7 +45,7 @@
                        Text="Retro Rewind"/>
             
             <comps:Button x:Name="PlayButton"
-                          IsEnabled="False" 
+                          IsEnabled="True" 
                           Variant="Warning"
                           Text="Loading..."
                           IconData="{StaticResource ArrowRight}"
@@ -54,7 +54,7 @@
                           Margin="0,20,0,0" />
 
             <comps:Button x:Name="DolphinButton"
-                          IsEnabled="False"
+                          IsEnabled="True"
                           Height="40"
                           IconData="{StaticResource DolphinIcon}"
                           IconSize="30"
