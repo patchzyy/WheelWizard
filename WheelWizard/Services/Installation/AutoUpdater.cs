@@ -16,7 +16,7 @@ namespace WheelWizard.Services.Installation;
 
 public static class AutoUpdater
 {
-    public const string CurrentVersion = "1.8.5";
+    public const string CurrentVersion = "1.8.6";
     public static async Task CheckForUpdatesAsync()
     {
         var response = await HttpClientHelper.GetAsync<string>(Endpoints.WhWzLatestReleasesUrl);
