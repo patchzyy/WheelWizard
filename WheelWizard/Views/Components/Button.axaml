@@ -9,6 +9,23 @@
                 <components:Button Width="150" Text="Primary" Classes="primary"/>
                 <components:Button Width="150" Text="Secondary" Classes="secondary"/>
                 <components:Button Width="150" Text="Danger" Classes="danger"/>
+                <components:Button x:Name="PlayButton"
+                                   IsEnabled="False" 
+                                   Variant="Warning"
+                                   Text="Loading..."
+                                   IconData="{StaticResource ArrowRight}"
+                                   IconSize="15"
+                                   Margin="0,20,0,0" />
+
+                <components:Button x:Name="DolphinButton"
+                                   IsEnabled="False"
+                                   Height="40"
+                                   IconData="{StaticResource WheelIcon}"
+                                   IconSize="30"
+                                   ToolTip.Tip="Launch Dolphin"
+                                   ToolTip.Placement="Bottom"
+                                   ToolTip.ShowDelay="50"
+                                   Width="100" Margin="0,6,0,0" />
             </StackPanel>
         </Border>
     </Design.PreviewWith>
@@ -35,6 +52,7 @@
                             IconData="{TemplateBinding IconData}"
                             IconSize="{TemplateBinding IconSize}"
                             Text="{TemplateBinding Text}"
+                            Height="{TemplateBinding IconSize}"
                             VerticalAlignment="Center"
                             Foreground="{TemplateBinding Foreground}"
                             />

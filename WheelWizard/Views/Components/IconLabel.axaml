@@ -33,6 +33,11 @@
                                     Foreground="White" 
                                     FontSize="16" 
                                     Width="200"/>
+                <controls:IconLabel
+                    IconData="{StaticResource DolphinIcon}"
+                    IconSize="40"
+                    Foreground="White" 
+                    ></controls:IconLabel>
             </StackPanel>
         </Border>
     </Design.PreviewWith>
@@ -45,13 +50,14 @@
                     <Path Data="{TemplateBinding IconData}"
                           Fill="{TemplateBinding Foreground}" 
                           Stretch="Uniform" 
+                          Margin="0,0,10,0"
                           Width="{TemplateBinding IconSize}"
                           Height="{TemplateBinding IconSize}"
                           IsVisible="{TemplateBinding IsIconLeft}" 
                           VerticalAlignment="Center"/>
                     
                     <TextBlock Text="{TemplateBinding Text}" 
-                               Margin="10,0,0,0"
+                               Margin="0,0,0,0"
                                VerticalAlignment="Center"
                                FontSize="{TemplateBinding FontSize}"
                                Foreground="{TemplateBinding Foreground}"

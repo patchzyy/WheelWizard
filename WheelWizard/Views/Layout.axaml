@@ -58,10 +58,20 @@
         </Border>
         
         <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
+            <comps:StateBox x:Name="PlayerCountBox"  Text="0"
+                                  IconData="{StaticResource UserCouple}"
+                                  IconSize="16"
+                                  TipText="{x:Static lang:Phrases.Hover_PlayersOnline_0}"
+                                  Margin="10,0,0,0" />
+            <comps:StateBox x:Name="RoomCountBox" Text="0"
+                            IconData="{StaticResource RoomUsers}"
+                            IconSize="16"
+                            TipText="{x:Static lang:Phrases.Hover_RoomsOnline_0}"
+                            Margin="10,0,0,0" />
         </StackPanel>
         
         <!-- Sidebar -->
-        <StackPanel x:Name="SidePanelButtons" Grid.Column="0" Grid.Row="3" Width="200">
+        <StackPanel x:Name="SidePanelButtons" Grid.Column="0" Grid.Row="3" Width="192">
             <TextBlock Text="{x:Static lang:Common.Term_General}" Classes="SidebarSectionText"
                        VerticalAlignment="Bottom" />
             <comps:SidebarRadioButton IconData="{StaticResource Home}"

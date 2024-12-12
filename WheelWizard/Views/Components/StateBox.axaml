@@ -3,11 +3,18 @@
         xmlns:components="using:WheelWizard.Views.Components">
 
     <Design.PreviewWith>
-        <Border Padding="20" Background="{StaticResource Neutral950}">
+        <Border Padding="20" Background="{StaticResource Neutral300}">
             <StackPanel Spacing="5">
                 <components:StateBox Text="Active" />
                 <components:StateBox Text="Dark" Classes="Dark" />
-                <components:StateBox IconData="{StaticResource XMark}" Text="Cross"/>
+                <components:StateBox IconData="{StaticResource XMark}" 
+                                     IconSize="14"
+                                     Text="Cross"/>
+                <components:StateBox x:Name="PlayerCountBox"  Text="0"
+                                     IconData="{StaticResource UserCouple}"
+                                     IconSize="16"
+                                     TipText="Number of players in the game"
+                                     Margin="10,0,0,0" />
             </StackPanel>
         </Border>
     </Design.PreviewWith>
@@ -23,7 +30,7 @@
                         ToolTip.Tip="{TemplateBinding TipText}"
                         ToolTip.Placement="{TemplateBinding TipPlacement}"
                         ToolTip.ShowDelay="20">
-                    <Grid ColumnDefinitions="Auto">
+                    <Grid ColumnDefinitions="Auto,*">
                         <components:IconLabel
                             Grid.Column="0"
                             IconData="{TemplateBinding IconData}"

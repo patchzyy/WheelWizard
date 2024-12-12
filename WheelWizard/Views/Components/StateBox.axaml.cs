@@ -23,7 +23,7 @@ public partial class StateBox : TemplatedControl // Change to TemplatedControl
     }
 
     public static readonly StyledProperty<Geometry> IconDataProperty =
-        AvaloniaProperty.Register<StateBox, Geometry>(nameof(IconData)); // Corrected type
+        AvaloniaProperty.Register<StateBox, Geometry>(nameof(IconData));
 
     public Geometry IconData
     {
@@ -32,7 +32,7 @@ public partial class StateBox : TemplatedControl // Change to TemplatedControl
     }
 
     public static readonly StyledProperty<double> IconSizeProperty =
-        AvaloniaProperty.Register<StateBox, double>(nameof(IconSize), 14);
+        AvaloniaProperty.Register<StateBox, double>(nameof(IconSize));
 
     public double IconSize
     {
