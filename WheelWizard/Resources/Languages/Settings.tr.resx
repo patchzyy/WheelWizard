@@ -19,13 +19,13 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="Value_Language_ItalianOg" xml:space="preserve">
-        <value>-</value>
+        <value>Italiano</value>
     </data>
     <data name="Value_Language_TurkishOg" xml:space="preserve">
         <value>-</value>
     </data>
     <data name="Value_Language_JapaneseOg" xml:space="preserve">
-        <value>-</value>
+        <value>日本語</value>
     </data>
     <data name="Value_Language_GermanOg" xml:space="preserve">
         <value>Deutsch</value>
@@ -50,5 +50,8 @@
     </data>
     <data name="Value_Language_KoreanOg" xml:space="preserve">
         <value>-</value>
+    </data>
+    <data name="Value_Language_RussianOg" xml:space="preserve">
+        <value>Русский</value>
     </data>
 </root>

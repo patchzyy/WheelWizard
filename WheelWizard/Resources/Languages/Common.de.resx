@@ -174,4 +174,7 @@
     <data name="Term_Success" xml:space="preserve">
         <value>Erfolgreich</value>
     </data>
+    <data name="Action_Browse" xml:space="preserve">
+        <value>Durchsuchen</value>
+    </data>
 </root>

@@ -19,66 +19,66 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="Button_ViewRoom" xml:space="preserve">
-        <value>Vedi la stanza</value>
+        <value>Просмотреть комнату</value>
     </data>
     <data name="ListTitle_Friends" xml:space="preserve">
-        <value>Amici</value>
+        <value>Друзья</value>
     </data>
     <data name="ListTitle_Players" xml:space="preserve">
-        <value>Giocatori</value>
+        <value>Игроки</value>
     </data>
     <data name="ListTitle_Rooms" xml:space="preserve">
-        <value>Stanze</value>
+        <value>Комнаты</value>
     </data>
     <data name="NoLicense" xml:space="preserve">
-        <value>Nessuna patente</value>
+        <value>Нет лицензии (файла сохранения)</value>
     </data>
     <data name="NoName" xml:space="preserve">
-        <value>Nessun nome</value>
+        <value>Нет имени</value>
     </data>
     <data name="NoProfiles" xml:space="preserve">
-        <value>Nessun profilo</value>
+        <value>Нет профилей</value>
     </data>
     <data name="Region_America" xml:space="preserve">
-        <value>America</value>
+        <value>Америка</value>
     </data>
     <data name="Region_Australia" xml:space="preserve">
-        <value>Australia</value>
+        <value>Австралия</value>
     </data>
     <data name="Region_China" xml:space="preserve">
-        <value>Cina</value>
+        <value>Китай</value>
     </data>
     <data name="Region_Europe" xml:space="preserve">
-        <value>Europa</value>
+        <value>Европа</value>
     </data>
     <data name="Region_Japan" xml:space="preserve">
-        <value>Giappone</value>
+        <value>Япония</value>
     </data>
     <data name="Region_SouthKorea" xml:space="preserve">
-        <value>Corea del Sud</value>
+        <value>Южная Корея</value>
     </data>
     <data name="Region_Taiwan" xml:space="preserve">
-        <value>Taiwan</value>
+        <value>Тайвань</value>
     </data>
     <data name="Stat_FriendCode" xml:space="preserve">
-        <value>Codice Amico</value>
+        <value>Код друга</value>
     </data>
     <data name="Stat_Losses" xml:space="preserve">
-        <value>Sconfitte</value>
+        <value>Поражения</value>
     </data>
     <data name="Stat_PlayerCount" xml:space="preserve">
-        <value>Giocatori</value>
+        <value>Игроки</value>
     </data>
     <data name="Stat_RacesPlayed" xml:space="preserve">
-        <value>Gare giocate</value>
+        <value>Сыграно гонок</value>
     </data>
     <data name="Stat_RoomID" xml:space="preserve">
-        <value>ID della stanza</value>
+        <value>ID комнаты</value>
     </data>
     <data name="Stat_TimeOnline" xml:space="preserve">
-        <value>Tempo online</value>
+        <value>Времени онлайн</value>
     </data>
     <data name="Stat_Wins" xml:space="preserve">
-        <value>Vittorie</value>
+        <value>Победы</value>
     </data>
 </root>

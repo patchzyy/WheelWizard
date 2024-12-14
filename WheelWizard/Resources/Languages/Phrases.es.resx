@@ -133,7 +133,7 @@
         <value>Instalando Retro Rewind por primera vez</value>
     </data>
     <data name="PopupText_LatestWhWzGithub" xml:space="preserve">
-        <value>Obteniendo la ultima versión de WheelWizard desde Github</value>
+        <value>Obteniendo la ultima versión de Wheel Wizard desde Github</value>
     </data>
     <data name="PopupText_ModCombineQuestion" xml:space="preserve">
         <value>¿Quiere combinar todos los archivos en un mod?</value>
@@ -202,10 +202,10 @@
         <value>¿Estas seguro que deseas borrar {$1}?</value>
     </data>
     <data name="PopupText_UnableUpdateWhWz_ReasonLocation" xml:space="preserve">
-        <value>Incapaz de actualizar WheelWizard. Asegurate que la aplicación esta ubicada en una carpeta que se puede editar.\n No se encontró la carpeta actual.</value>
+        <value>Incapaz de actualizar Wheel Wizard. Asegurate que la aplicación esta ubicada en una carpeta que se puede editar.\n No se encontró la carpeta actual.</value>
     </data>
     <data name="PopupText_UnableUpdateWhWz_ReasonNetwork" xml:space="preserve">
-        <value>Incapaz de confirmar la actualidad de su versión de WheelWizard.\n Podrías estar experimentando problemas de conexión.</value>
+        <value>Incapaz de confirmar la actualidad de su versión de Wheel Wizard.\n Podrías estar experimentando problemas de conexión.</value>
     </data>
     <data name="PopupText_UpdateAdmin" xml:space="preserve">
         <value>Actualizando usando administrador</value>
@@ -217,10 +217,10 @@
         <value>Actualizar Retro Rewind</value>
     </data>
     <data name="PopupText_UpdateWhWz" xml:space="preserve">
-        <value>Actualizando WheelWizard</value>
+        <value>Actualizando Wheel Wizard</value>
     </data>
     <data name="PopupText_WhWzUpdateAvailable" xml:space="preserve">
-        <value>Actualización de WheelWizard disponible</value>
+        <value>Actualización de Wheel Wizard disponible</value>
     </data>
     <data name="PupupText_DownloadingMb" xml:space="preserve">
         <value>Descargando {$1} MB</value>

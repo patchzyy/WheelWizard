@@ -192,7 +192,7 @@ Um einem bestimmten Raum beizutreten, musst Du entweder über einen Freund treff
         <value>Installiere Retro Rewind zum ersten mal</value>
     </data>
     <data name="PopupText_LatestWhWzGithub" xml:space="preserve">
-        <value>Beziehe die neueste WheelWizard-Version vom Github</value>
+        <value>Beziehe die neueste Wheel Wizard-Version vom Github</value>
     </data>
     <data name="PopupText_ModCombineQuestion" xml:space="preserve">
         <value>Möchtest du alle Dateien in einem Mod zusammenfassen?</value>
@@ -207,7 +207,7 @@ Um einem bestimmten Raum beizutreten, musst Du entweder über einen Freund treff
         <value>Mehrere Datein ausgewählt</value>
     </data>
     <data name="PopupText_NewVersionWhWz" xml:space="preserve">
-        <value>Version {$1} von WheelWizard ist verfügbar (derzeit für {$2}). Möchtest Du jetzt updaten?</value>
+        <value>Version {$1} von Wheel Wizard ist verfügbar (derzeit für {$2}). Möchtest Du jetzt updaten?</value>
     </data>
     <data name="PopupText_NoModFolder" xml:space="preserve">
         <value>Mod Ordner existiert nicht</value>
@@ -249,10 +249,10 @@ Um einem bestimmten Raum beizutreten, musst Du entweder über einen Freund treff
         <value>Bist du sicher, dass du {$1} löschen möchtest?</value>
     </data>
     <data name="PopupText_UnableUpdateWhWz_ReasonLocation" xml:space="preserve">
-        <value>WheelWizard kann nicht aktualisiert werden. Bitte stell es sicher, dass sich die Anwendung in einem Ordner befindet, in den geschrieben werden kann.\n Der aktuelle Ordner konnte nicht gefunden werden.</value>
+        <value>Wheel Wizard kann nicht aktualisiert werden. Bitte stell es sicher, dass sich die Anwendung in einem Ordner befindet, in den geschrieben werden kann.\n Der aktuelle Ordner konnte nicht gefunden werden.</value>
     </data>
     <data name="PopupText_UnableUpdateWhWz_ReasonNetwork" xml:space="preserve">
-        <value>Es kann nicht überprüft werden, ob WheelWizard auf dem neuesten Stand ist. \nMöglicherweise treten derzeit Netzwerkprobleme auf.</value>
+        <value>Es kann nicht überprüft werden, ob Wheel Wizard auf dem neuesten Stand ist. \nMöglicherweise treten derzeit Netzwerkprobleme auf.</value>
     </data>
     <data name="PopupText_UpdateAdmin" xml:space="preserve">
         <value>Update mit Admin</value>
@@ -264,7 +264,7 @@ Um einem bestimmten Raum beizutreten, musst Du entweder über einen Freund treff
         <value>Aktualisiere Retro Rewind</value>
     </data>
     <data name="PopupText_UpdateWhWz" xml:space="preserve">
-        <value>WheelWizard wird aktualisiert</value>
+        <value>Wheel Wizard wird aktualisiert</value>
     </data>
     <data name="PopupText_WhWzUpdateAvailable" xml:space="preserve">
         <value>Wheel Wizard Update verfügbar</value>

@@ -19,165 +19,165 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="Action_Apply" xml:space="preserve">
-        <value>Aplicar</value>
+        <value>Применить</value>
+    </data>
+    <data name="Action_Browse" xml:space="preserve">
+        <value>Выбрать</value>
     </data>
     <data name="Action_Cancel" xml:space="preserve">
-        <value>Cancelar</value>
+        <value>Отменить</value>
     </data>
     <data name="Action_CopyFriendCode" xml:space="preserve">
-        <value>Copiar clave de amigo</value>
+        <value>Скопировать код друга</value>
     </data>
     <data name="Action_Delete" xml:space="preserve">
-        <value>Borrar</value>
+        <value>Удалить</value>
     </data>
     <data name="Action_DisableAll" xml:space="preserve">
-        <value>Desactivar todo</value>
+        <value>Отключить всё</value>
     </data>
     <data name="Action_Edit" xml:space="preserve">
-        <value>Editar</value>
+        <value>Редактировать</value>
     </data>
     <data name="Action_EnableAll" xml:space="preserve">
-        <value>Activar todo</value>
+        <value>Включить всё</value>
     </data>
     <data name="Action_Export" xml:space="preserve">
-        <value>Exportar</value>
+        <value>Экспортировать</value>
     </data>
     <data name="Action_Import" xml:space="preserve">
-        <value>Importar</value>
+        <value>Импортировать</value>
     </data>
     <data name="Action_Install" xml:space="preserve">
-        <value>Instalar</value>
+        <value>Установить</value>
     </data>
     <data name="Action_Keep" xml:space="preserve">
-        <value>Mantener</value>
+        <value>Оставить</value>
     </data>
     <data name="Action_MaybeLater" xml:space="preserve">
-        <value>Talvez después</value>
+        <value>Позже</value>
     </data>
     <data name="Action_No" xml:space="preserve">
-        <value>No</value>
+        <value>Нет</value>
     </data>
     <data name="Action_OK" xml:space="preserve">
-        <value>Ok</value>
+        <value>ОК</value>
     </data>
     <data name="Action_OpenFolder" xml:space="preserve">
-        <value>Abrir folder</value>
+        <value>Открыть папку</value>
     </data>
     <data name="Action_Play" xml:space="preserve">
-        <value>Jugar</value>
+        <value>Играть</value>
     </data>
     <data name="Action_PlayOffline" xml:space="preserve">
-        <value>Jugar en línea</value>
+        <value>Играть оффлайн</value>
     </data>
     <data name="Action_Rename" xml:space="preserve">
-        <value>Renombrar</value>
+        <value>Переименовать</value>
     </data>
     <data name="Action_Revert" xml:space="preserve">
-        <value>Deshacer</value>
+        <value>Вернуть</value>
     </data>
     <data name="Action_Save" xml:space="preserve">
-        <value>Guardar</value>
+        <value>Сохранить</value>
     </data>
     <data name="Action_Update" xml:space="preserve">
-        <value>Actualizar</value>
+        <value>Обновить</value>
     </data>
     <data name="Action_Yes" xml:space="preserve">
-        <value>Si</value>
+        <value>Да</value>
     </data>
     <data name="Attribute_Enabled" xml:space="preserve">
-        <value>Activado</value>
+        <value>Включено</value>
     </data>
     <data name="Attribute_Id" xml:space="preserve">
         <value>ID</value>
     </data>
     <data name="Attribute_ModName" xml:space="preserve">
-        <value>Nombre de mods</value>
+        <value>Название мода</value>
     </data>
     <data name="Attribute_Name" xml:space="preserve">
-        <value>Nombre</value>
-    </data>
-    <data name="Attribute_Title" xml:space="preserve">
-        <value>Titulo</value>
+        <value>Название</value>
     </data>
     <data name="Attribute_Type" xml:space="preserve">
-        <value>Tipo</value>
+        <value>Тип</value>
     </data>
     <data name="PageTitle_Friends" xml:space="preserve">
-        <value>Amigos</value>
+        <value>Друзья</value>
     </data>
     <data name="PageTitle_Home" xml:space="preserve">
-        <value>Casa</value>
+        <value>Заглавная</value>
     </data>
     <data name="PageTitle_Mods" xml:space="preserve">
-        <value>My Stuff</value>
+        <value>Моды</value>
     </data>
     <data name="PageTitle_MyProfiles" xml:space="preserve">
-        <value>Mis perfiles</value>
+        <value>Мои профили</value>
     </data>
     <data name="PageTitle_RoomDetails" xml:space="preserve">
-        <value>Detalles de la sala</value>
+        <value>Подробности о комнате</value>
     </data>
     <data name="PageTitle_Rooms" xml:space="preserve">
-        <value>Salas</value>
+        <value>Комнаты</value>
     </data>
     <data name="PageTitle_Settings" xml:space="preserve">
-        <value>Ajustes</value>
-    </data>
-    <data name="State_ConfigNotFinished" xml:space="preserve">
-        <value>Ajustes sin terminar</value>
-    </data>
-    <data name="State_Extracting" xml:space="preserve">
-        <value>Extrayendo archivos...</value>
-    </data>
-    <data name="State_Installing" xml:space="preserve">
-        <value>Instalando...</value>
-    </data>
-    <data name="State_Loading" xml:space="preserve">
-        <value>Cargando...</value>
-    </data>
-    <data name="State_NoServer" xml:space="preserve">
-        <value>No servidor</value>
-    </data>
-    <data name="State_Updating" xml:space="preserve">
-        <value>Actualizando...</value>
-    </data>
-    <data name="Term_Error" xml:space="preserve">
-        <value>Error</value>
-    </data>
-    <data name="Term_General" xml:space="preserve">
-        <value>General</value>
-    </data>
-    <data name="Term_No" xml:space="preserve">
-        <value>No</value>
-    </data>
-    <data name="Term_Offline" xml:space="preserve">
-        <value>Desconectado</value>
-    </data>
-    <data name="Term_Online" xml:space="preserve">
-        <value>En línea</value>
-    </data>
-    <data name="Term_Other" xml:space="preserve">
-        <value>Otro</value>
-    </data>
-    <data name="Term_Speed" xml:space="preserve">
-        <value>Velocidad</value>
-    </data>
-    <data name="Term_Success" xml:space="preserve">
-        <value>Éxito</value>
-    </data>
-    <data name="Term_Unknown" xml:space="preserve">
-        <value>Desconocido</value>
-    </data>
-    <data name="Term_Warning" xml:space="preserve">
-        <value>Aviso</value>
-    </data>
-    <data name="Term_Yes" xml:space="preserve">
-        <value>Si</value>
-    </data>
-    <data name="Action_Browse" xml:space="preserve">
-        <value>Buscar</value>
+        <value>Настройки</value>
     </data>
     <data name="Action_ViewMod" xml:space="preserve">
-        <value>Mirar Mod</value>
+        <value>Просмотреть мод</value>
+    </data>
+    <data name="Attribute_Title" xml:space="preserve">
+        <value>Заголовок</value>
+    </data>
+    <data name="State_ConfigNotFinished" xml:space="preserve">
+        <value>Настройка не завершена</value>
+    </data>
+    <data name="State_Extracting" xml:space="preserve">
+        <value>Распаковываем файлы...</value>
+    </data>
+    <data name="State_Installing" xml:space="preserve">
+        <value>Устанавливаем...</value>
+    </data>
+    <data name="State_Loading" xml:space="preserve">
+        <value>Загрузка...</value>
+    </data>
+    <data name="State_NoServer" xml:space="preserve">
+        <value>Нет сервера</value>
+    </data>
+    <data name="State_Updating" xml:space="preserve">
+        <value>Обновляем...</value>
+    </data>
+    <data name="Term_Error" xml:space="preserve">
+        <value>Ошибка</value>
+    </data>
+    <data name="Term_General" xml:space="preserve">
+        <value>Основное</value>
+    </data>
+    <data name="Term_No" xml:space="preserve">
+        <value>Нет</value>
+    </data>
+    <data name="Term_Offline" xml:space="preserve">
+        <value>Не в сети</value>
+    </data>
+    <data name="Term_Online" xml:space="preserve">
+        <value>В сети</value>
+    </data>
+    <data name="Term_Other" xml:space="preserve">
+        <value>Другое</value>
+    </data>
+    <data name="Term_Speed" xml:space="preserve">
+        <value>Скорость</value>
+    </data>
+    <data name="Term_Success" xml:space="preserve">
+        <value>Успех</value>
+    </data>
+    <data name="Term_Unknown" xml:space="preserve">
+        <value>Неизвестно</value>
+    </data>
+    <data name="Term_Warning" xml:space="preserve">
+        <value>Внимание</value>
+    </data>
+    <data name="Term_Yes" xml:space="preserve">
+        <value>Да</value>
     </data>
 </root>

@@ -18,4 +18,91 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="Action_Apply" xml:space="preserve">
+        <value>적용</value>
+    </data>
+    <data name="Action_Browse" xml:space="preserve">
+        <value>검색</value>
+    </data>
+    <data name="Action_Cancel" xml:space="preserve">
+        <value>취소</value>
+    </data>
+    <data name="Action_CopyFriendCode" xml:space="preserve">
+        <value>친구 코드 복사</value>
+    </data>
+    <data name="Action_Delete" xml:space="preserve">
+        <value>삭제</value>
+    </data>
+    <data name="Action_DisableAll" xml:space="preserve">
+        <value>모두 삭제</value>
+    </data>
+    <data name="Action_Edit" xml:space="preserve">
+        <value>수정</value>
+    </data>
+    <data name="Action_EnableAll" xml:space="preserve">
+        <value>모두 활성화</value>
+    </data>
+    <data name="Action_Export" xml:space="preserve">
+        <value>내보내기</value>
+    </data>
+    <data name="Action_Import" xml:space="preserve">
+        <value>불러오기</value>
+    </data>
+    <data name="Action_Install" xml:space="preserve">
+        <value>설치</value>
+    </data>
+    <data name="Action_Keep" xml:space="preserve">
+        <value>유지</value>
+    </data>
+    <data name="Action_MaybeLater" xml:space="preserve">
+        <value>다음번에</value>
+    </data>
+    <data name="Action_No" xml:space="preserve">
+        <value>아니오</value>
+    </data>
+    <data name="Action_OK" xml:space="preserve">
+        <value>OK</value>
+    </data>
+    <data name="Action_OpenFolder" xml:space="preserve">
+        <value>폴더 열기</value>
+    </data>
+    <data name="Action_Play" xml:space="preserve">
+        <value>플레이</value>
+    </data>
+    <data name="Action_PlayOffline" xml:space="preserve">
+        <value>오프라인으로 플레이</value>
+    </data>
+    <data name="Action_Rename" xml:space="preserve">
+        <value>개명</value>
+    </data>
+    <data name="Action_Revert" xml:space="preserve">
+        <value>되돌리기</value>
+    </data>
+    <data name="Action_Save" xml:space="preserve">
+        <value>저장</value>
+    </data>
+    <data name="Action_Update" xml:space="preserve">
+        <value>업데이트</value>
+    </data>
+    <data name="Action_Yes" xml:space="preserve">
+        <value>네</value>
+    </data>
+    <data name="Attribute_Enabled" xml:space="preserve">
+        <value>활성화됨</value>
+    </data>
+    <data name="Attribute_Id" xml:space="preserve">
+        <value>ID</value>
+    </data>
+    <data name="Attribute_ModName" xml:space="preserve">
+        <value>MOD 이름</value>
+    </data>
+    <data name="Attribute_Name" xml:space="preserve">
+        <value>이름</value>
+    </data>
+    <data name="Attribute_Title" xml:space="preserve">
+        <value>제목</value>
+    </data>
+    <data name="Attribute_Type" xml:space="preserve">
+        <value>종류</value>
+    </data>
 </root>

@@ -18,4 +18,56 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="EmptyText_NoFriends" xml:space="preserve">
+        <value>게임에서 친구를 추가 할 수 있습니다.</value>
+    </data>
+    <data name="EmptyText_NoFriends_Title" xml:space="preserve">
+        <value>아직 친구가 없어요!</value>
+    </data>
+    <data name="EmptyText_NoMods" xml:space="preserve">
+        <value>MOD는 게임 작동 방식을 바꿀 수 있습니다. 모드를 불러오기 위해 아래 버튼을 클릭해 주세요.</value>
+    </data>
+    <data name="EmptyText_NoMods_Title" xml:space="preserve">
+        <value>MOD를 찾을 수 없습니다.</value>
+    </data>
+    <data name="EmptyText_NoProfiles" xml:space="preserve">
+        <value>게임을 한 번 이상 실행해야 프로필을 볼 수 있습니다.</value>
+    </data>
+    <data name="EmptyText_NoRooms" xml:space="preserve">
+        <value>인터넷 연결이 끊어졌거나, 아무도 플레이하고 있지 않은 상태입니다.</value>
+    </data>
+    <data name="EmptyText_NoRooms_Title" xml:space="preserve">
+        <value>방을 찾을 수 없습니다.</value>
+    </data>
+    <data name="Hover_FriendsOnline_0" xml:space="preserve">
+        <value>모두 오프라인이네요...</value>
+    </data>
+    <data name="Hover_FriendsOnline_1" xml:space="preserve">
+        <value>1 명의 친구가 온라인입니다</value>
+    </data>
+    <data name="Hover_FriendsOnline_x" xml:space="preserve">
+        <value>{$1} 명의 친구가 온라인입니다</value>
+    </data>
+    <data name="Hover_PlayersOnline_0" xml:space="preserve">
+        <value>모두 오프라인이네요...</value>
+    </data>
+    <data name="Hover_PlayersOnline_1" xml:space="preserve">
+        <value>1 명의 친구가 온라인입니다</value>
+    </data>
+    <data name="Hover_PlayersOnline_x" xml:space="preserve">
+        <value>{$1} 명의 친구가 온라인입니다</value>
+    </data>
+    <data name="Hover_RoomsOnline_0" xml:space="preserve">
+        <value>활동 중인 방이 없습니다</value>
+    </data>
+    <data name="Hover_RoomsOnline_1" xml:space="preserve">
+        <value>1 개의 방이 활동 중입니다</value>
+    </data>
+    <data name="Hover_RoomsOnline_x" xml:space="preserve">
+        <value>{$1} 개의 방이 활동 중입니다</value>
+    </data>
+    <data name="Hover_RoomsPageDisclaimer" xml:space="preserve">
+        <value>주의) 해당 페이지에선 방에 직접 합류하는 기능은 없습니다.
+특정 방에 들어가려면, 친구를 통해 들어가거나 온라인 서버에 가입하여 들어가야 합니다.</value>
+    </data>
 </root>

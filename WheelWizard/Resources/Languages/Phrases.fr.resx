@@ -208,7 +208,7 @@ Voulez-vous l'installer ? </value>
         <value>Plusieurs fichers sélectionnés</value>
     </data>
     <data name="PopupText_NewVersionWhWz" xml:space="preserve">
-        <value>La version {$1} de WheelWizard est disponible (actuellement en {$2}. Voulez-vous mettre à jour maintenant ? </value>
+        <value>La version {$1} de Wheel Wizard est disponible (actuellement en {$2}. Voulez-vous mettre à jour maintenant ? </value>
     </data>
     <data name="PopupText_NoModFolder" xml:space="preserve">
         <value>Le dossier du mod n'existe pas</value>
@@ -252,7 +252,7 @@ Voulez-vous réinstaller Retro Rewind ? </value>
         <value>Êtes-vous sur de vouloir supprimer {$1}?</value>
     </data>
     <data name="PopupText_UnableUpdateWhWz_ReasonLocation" xml:space="preserve">
-        <value>Impossible de mettre à jour WheelWizard. Veuillez bien vérifier que l'application se trouve dans un dossier qui peut être écrit. \n N'a pas pu trouver le dossier actuel.</value>
+        <value>Impossible de mettre à jour Wheel Wizard. Veuillez bien vérifier que l'application se trouve dans un dossier qui peut être écrit. \n N'a pas pu trouver le dossier actuel.</value>
     </data>
     <data name="PopupText_UnableUpdateWhWz_ReasonNetwork" xml:space="preserve">
         <value>Impossible de vérifier si Wheel Wizard est mis à jour. \nVous pourrez expérimenter des problèmes d'internet.</value>
