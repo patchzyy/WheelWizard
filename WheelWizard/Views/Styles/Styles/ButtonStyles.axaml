@@ -65,16 +65,16 @@
 
     <Style Selector="components|Button.Danger">
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Foreground" Value="{StaticResource Error100}" />
-        <Setter Property="Background" Value="{StaticResource Error700}" />
+        <Setter Property="Foreground" Value="{StaticResource Danger100}" />
+        <Setter Property="Background" Value="{StaticResource Danger700}" />
     </Style>
     <Style Selector="components|Button.Danger:pointerover /template/ ContentPresenter">
-        <Setter Property="Foreground" Value="{StaticResource Error50}" />
-        <Setter Property="Background" Value="{StaticResource Error600}" />
+        <Setter Property="Foreground" Value="{StaticResource Danger50}" />
+        <Setter Property="Background" Value="{StaticResource Danger600}" />
     </Style>
     <Style Selector="components|Button.Danger:pressed /template/ ContentPresenter">
-        <Setter Property="Foreground" Value="{StaticResource Error50}" />
-        <Setter Property="Background" Value="{StaticResource Error400}" />
+        <Setter Property="Foreground" Value="{StaticResource Danger50}" />
+        <Setter Property="Background" Value="{StaticResource Danger400}" />
     </Style>
     <Style Selector="Button[IsEnabled=False] /template/ ContentPresenter">
         <Setter Property="Foreground" Value="{StaticResource Neutral950}" />

@@ -85,25 +85,12 @@ public class Button : Avalonia.Controls.Button // Change to TemplatedControl
                 break;
         }
     }
-
-    // OnPropertyChanged remains the same
+    
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
 
         if (change.Property == VariantProperty)
-        {
             UpdateStyleClasses(change.GetNewValue<ButtonsVariantType>());
-        }
-    }
-    
-    // OnPointerPressed remains the same
-    protected override void OnPointerPressed(Avalonia.Input.PointerPressedEventArgs e)
-    {
-        base.OnPointerPressed(e);
-        if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
-        {
-            OnClick();
-        }
     }
 }
