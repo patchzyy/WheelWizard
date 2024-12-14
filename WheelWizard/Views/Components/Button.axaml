@@ -31,12 +31,10 @@
 
     <Style Selector="components|Button">
         <!-- Set Defaults -->
-        <Setter Property="Background" Value="{DynamicResource Neutral700}" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="CornerRadius" Value="{DynamicResource GlobalCornerRadius}" />
         <Setter Property="Padding" Value="16,10" />
-        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
         <Setter Property="Template">
             <ControlTemplate>
                 <Border Background="{TemplateBinding Background}"
@@ -56,5 +54,76 @@
                 </Border>
             </ControlTemplate>
         </Setter>
+    </Style>
+    
+    <!-- ================
+     THE ACTUAL COLORS: 
+     ================ -->
+     <Style Selector="components|Button:pointerover">
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+    <Style Selector="components|Button[IsEnabled=False]">
+        <Setter Property="Foreground" Value="{StaticResource Neutral950}" />
+        <Setter Property="Background" Value="{StaticResource Neutral800}" />
+    </Style>
+    
+    <!-- DEFAULT -->
+    <Style Selector="components|Button.Default">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+        <Setter Property="Background" Value="{StaticResource Neutral700}" />
+    </Style>
+    <Style Selector="components|Button.Default:pointerover">
+        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+        <Setter Property="Background" Value="{StaticResource Neutral600}" />
+    </Style>
+    <Style Selector="components|Button.Default:pressed">
+        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+        <Setter Property="Background" Value="{StaticResource Neutral500}" />
+    </Style>
+    
+    <!-- DANGER -->
+    <Style Selector="components|Button.Danger">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="{StaticResource Danger100}" />
+        <Setter Property="Background" Value="{StaticResource Danger700}" />
+    </Style>
+    <Style Selector="components|Button.Danger:pointerover">
+        <Setter Property="Foreground" Value="{StaticResource Danger50}" />
+        <Setter Property="Background" Value="{StaticResource Danger600}" />
+    </Style>
+    <Style Selector="components|Button.Danger:pressed">
+        <Setter Property="Foreground" Value="{StaticResource Danger50}" />
+        <Setter Property="Background" Value="{StaticResource Danger400}" />
+    </Style>
+    
+    <!-- WARNING -->
+    <Style Selector="components|Button.Warning">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="{StaticResource Warning100}" />
+        <Setter Property="Background" Value="{StaticResource Warning700}" />
+    </Style>
+    <Style Selector="components|Button.Warning:pointerover">
+        <Setter Property="Foreground" Value="{StaticResource Warning50}" />
+        <Setter Property="Background" Value="{StaticResource Warning600}" />
+    </Style>
+    <Style Selector="components|Button.Warning:pressed">
+        <Setter Property="Foreground" Value="{StaticResource Warning50}" />
+        <Setter Property="Background" Value="{StaticResource Warning500}" />
+    </Style>
+    
+    <!-- PRIMARY -->
+    <Style Selector="components|Button.Primary">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="{StaticResource Primary50}" />
+        <Setter Property="Background" Value="{StaticResource Primary700}" />
+    </Style>
+    <Style Selector="components|Button.Primary:pointerover">
+        <Setter Property="Foreground" Value="{StaticResource Primary50}" />
+        <Setter Property="Background" Value="{StaticResource Primary600}" />
+    </Style>
+    <Style Selector="components|Button.Primary:pressed">
+        <Setter Property="Foreground" Value="{StaticResource Primary50}" />
+        <Setter Property="Background" Value="{StaticResource Primary500}" />
     </Style>
 </Styles>
