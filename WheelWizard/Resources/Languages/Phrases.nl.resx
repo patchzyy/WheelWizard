@@ -208,22 +208,22 @@ Om aan een specifieke lobby, moet je deelnemen via een vriend, of hopen deel te 
         <value>Soms is er voor een update admin rechten nodig, wilt je deze voor deze update activeren?</value>
     </data>
     <data name="PopupText_UnableUpdateWhWz_ReasonNetwork" xml:space="preserve">
-        <value>Kan niet controleren of WheelWizard up-to-date is. \nEr zijn mogelijk netwerkproblemen.</value>
+        <value>Kan niet controleren of Wheel Wizard up-to-date is. \nEr zijn mogelijk netwerkproblemen.</value>
     </data>
     <data name="PopupText_RestartAdminFail" xml:space="preserve">
         <value>Het is niet gelukt om opnieuw op te starten met admin rechten.</value>
     </data>
     <data name="PopupText_NewVersionWhWz" xml:space="preserve">
-        <value>Versie {$1} van WheelWizard is beschikbaar (momenteel op {$2}). Wilt je nu updaten?</value>
+        <value>Versie {$1} van Wheel Wizard is beschikbaar (momenteel op {$2}). Wilt je nu updaten?</value>
     </data>
     <data name="PopupText_LatestWhWzGithub" xml:space="preserve">
-        <value>De nieuwste WheelWizard ophalen van github-releases</value>
+        <value>De nieuwste Wheel Wizard ophalen van github-releases</value>
     </data>
     <data name="PopupText_UpdateWhWz" xml:space="preserve">
-        <value>Updating WheelWizard</value>
+        <value>Updating Wheel Wizard</value>
     </data>
     <data name="PopupText_UnableUpdateWhWz_ReasonLocation" xml:space="preserve">
-        <value>WheelWizard kan niet worden ge-update. Zorg ervoor dat de applicatie zich in een folder bevindt waarnaar kan worden geschreven.\n Kan de huidige folder niet vinden.</value>
+        <value>Wheel Wizard kan niet worden ge-update. Zorg ervoor dat de applicatie zich in een folder bevindt waarnaar kan worden geschreven.\n Kan de huidige folder niet vinden.</value>
     </data>
     <data name="PopupText_ReinstallRR" xml:space="preserve">
         <value>Retro Rewind Her-installeren</value>

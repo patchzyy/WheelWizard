@@ -43,7 +43,7 @@
         <value>Will launch dolphins main window along with the game</value>
     </data>
     <data name="InfoText_ForceDisableWiimote" xml:space="preserve">
-        <value>This setting disablesWiimote ingame, but enables it for the Wii chanel</value>
+        <value>This setting disables Wiimote ingame, but enables it for the Wii channel</value>
     </data>
     <data name="Section_Resolution" xml:space="preserve">
         <value>Resolution</value>
@@ -70,7 +70,7 @@
         <value>Renderer</value>
     </data>
     <data name="InfoText_Recommended" xml:space="preserve">
-        <value>This setting will change certain dolpin settings to reduce stuttering and lag spikes</value>
+        <value>This setting will change certain dolphin settings to reduce stuttering and lag spikes</value>
     </data>
     <data name="InfoText_30FPS" xml:space="preserve">
         <value>This setting will force the game to run in 30 FPS (default is 60)</value>
@@ -175,12 +175,12 @@
         <value>Enable Animations</value>
     </data>
     <data name="InfoText_EnableAnimations" xml:space="preserve">
-        <value>This enables the animations in the the wheel wizard app</value>
+        <value>This enables the animations in the the Wheel Wizard app</value>
     </data>
     <data name="Value_Language_Russian" xml:space="preserve">
-        <value />
+        <value>Russian</value>
     </data>
     <data name="Value_Language_RussianOg" xml:space="preserve">
-        <value />
+        <value>Русский</value>
     </data>
 </root>

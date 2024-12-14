@@ -87,7 +87,7 @@ namespace WheelWizard.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This enables the animations in the the wheel wizard app.
+        ///   Looks up a localized string similar to This enables the animations in the the Wheel Wizard app.
         /// </summary>
         public static string InfoText_EnableAnimations {
             get {
@@ -105,7 +105,7 @@ namespace WheelWizard.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This setting disablesWiimote ingame, but enables it for the Wii chanel.
+        ///   Looks up a localized string similar to This setting disables Wiimote ingame, but enables it for the Wii channel.
         /// </summary>
         public static string InfoText_ForceDisableWiimote {
             get {
@@ -123,7 +123,7 @@ namespace WheelWizard.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This setting will change certain dolpin settings to reduce stuttering and lag spikes.
+        ///   Looks up a localized string similar to This setting will change certain dolphin settings to reduce stuttering and lag spikes.
         /// </summary>
         public static string InfoText_Recommended {
             get {
@@ -501,7 +501,7 @@ namespace WheelWizard.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Russian.
         /// </summary>
         public static string Value_Language_Russian {
             get {
@@ -510,7 +510,7 @@ namespace WheelWizard.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Русский.
         /// </summary>
         public static string Value_Language_RussianOg {
             get {

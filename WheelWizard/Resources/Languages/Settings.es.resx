@@ -109,7 +109,7 @@
         <value>VSync</value>
     </data>
     <data name="Option_WhWzLanguage" xml:space="preserve">
-        <value>Idioma de WheelWizard</value>
+        <value>Idioma de Wheel Wizard</value>
     </data>
     <data name="Option_WindowScale" xml:space="preserve">
         <value>Escala de la ventana</value>
@@ -130,7 +130,7 @@
         <value>Resolución</value>
     </data>
     <data name="Section_WhWzAppearance" xml:space="preserve">
-        <value>Apariencia de WheelWizard</value>
+        <value>Apariencia de Wheel Wizard</value>
     </data>
     <data name="Section_Wii" xml:space="preserve">
         <value>Ajustes de Wii</value>
@@ -173,5 +173,11 @@
     </data>
     <data name="Value_Language_Korean" xml:space="preserve">
         <value>Coreano</value>
+    </data>
+    <data name="Value_Language_Russian" xml:space="preserve">
+        <value>Ruso</value>
+    </data>
+    <data name="Value_Language_RussianOg" xml:space="preserve">
+        <value>Русский</value>
     </data>
 </root>

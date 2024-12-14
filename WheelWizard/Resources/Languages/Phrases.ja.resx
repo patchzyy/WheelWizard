@@ -151,7 +151,7 @@
         <value>Retro Rewindをインストール</value>
     </data>
     <data name="PopupText_LatestWhWzGithub" xml:space="preserve">
-        <value>githubから最新のWheelWizardを入手</value>
+        <value>githubから最新のWheel Wizardを入手</value>
     </data>
     <data name="PopupText_ModCombineQuestion" xml:space="preserve">
         <value>すべてのファイルを1つのModにまとめますか？</value>
@@ -173,7 +173,7 @@ My Stuffフォルダーをクリアしますか？</value>
         <value>複数のファイルが選択されています</value>
     </data>
     <data name="PopupText_NewVersionWhWz" xml:space="preserve">
-        <value>WheelWizardのバージョン{$1} (現在のバージョンは{$2}) が利用できます。すぐにアップデートしますか？</value>
+        <value>Wheel Wizardのバージョン{$1} (現在のバージョンは{$2}) が利用できます。すぐにアップデートしますか？</value>
     </data>
     <data name="PopupText_NoModFolder" xml:space="preserve">
         <value>Modフォルダーがありません</value>
@@ -221,10 +221,10 @@ My Stuffフォルダーをクリアしますか？</value>
         <value>{$1}を削除してもよろしいですか？</value>
     </data>
     <data name="PopupText_UnableUpdateWhWz_ReasonLocation" xml:space="preserve">
-        <value>WheelWizardが更新できません。アプリが書き込み可能なフォルダーにあることを確認してください。\n現在のフォルダーが見つかりません。</value>
+        <value>Wheel Wizardが更新できません。アプリが書き込み可能なフォルダーにあることを確認してください。\n現在のフォルダーが見つかりません。</value>
     </data>
     <data name="PopupText_UnableUpdateWhWz_ReasonNetwork" xml:space="preserve">
-        <value>WheelWizardが最新かどうか確認できません。\nネットワークの問題が発生している可能性があります。</value>
+        <value>Wheel Wizardが最新かどうか確認できません。\nネットワークの問題が発生している可能性があります。</value>
     </data>
     <data name="PopupText_UpdateAdmin" xml:space="preserve">
         <value>管理者権限で更新する</value>
@@ -236,10 +236,10 @@ My Stuffフォルダーをクリアしますか？</value>
         <value>Retro Rewindをアップデート</value>
     </data>
     <data name="PopupText_UpdateWhWz" xml:space="preserve">
-        <value>WheelWizardをアップデート</value>
+        <value>Wheel Wizardをアップデート</value>
     </data>
     <data name="PopupText_WhWzUpdateAvailable" xml:space="preserve">
-        <value>WheelWizardのアップデートがあります</value>
+        <value>Wheel Wizardのアップデートがあります</value>
     </data>
     <data name="PupupText_DownloadingMb" xml:space="preserve">
         <value>{$1}MBをダウンロード中</value>

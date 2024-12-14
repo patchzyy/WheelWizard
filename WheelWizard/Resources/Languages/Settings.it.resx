@@ -174,4 +174,10 @@
     <data name="Value_Language_Spanish" xml:space="preserve">
         <value>Spagnolo</value>
     </data>
+    <data name="Value_Language_Russian" xml:space="preserve">
+        <value>Russo</value>
+    </data>
+    <data name="Value_Language_RussianOg" xml:space="preserve">
+        <value>Русский</value>
+    </data>
 </root>

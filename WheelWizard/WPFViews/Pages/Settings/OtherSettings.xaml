@@ -59,7 +59,8 @@
                     <Grid Margin="0,10,0,0">
                         <StackPanel>
                             <TextBlock Style="{StaticResource TinyText}" Text="{x:Static lang:Phrases.Text_ThanksTranslators}"/>
-                            <TextBlock Style="{StaticResource TinyText}" Text="Eppe, GreenWeebo38/Weebo, kytronix, Noël, Haru00007, JGavidia"/>
+                            <TextBlock Style="{StaticResource TinyText}" Text="Eppe, Weebo, kytronix, Noël, Haru00007, JGavidia, OrangeCake_,"/>
+                            <TextBlock Style="{StaticResource TinyText}" Text="Sep, Ismy, rhyy "/>
                         </StackPanel>
                         
                         <Border ToolTipService.InitialShowDelay="50"

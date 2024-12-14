@@ -123,4 +123,61 @@
     <data name="PageTitle_Settings" xml:space="preserve">
         <value>Настройки</value>
     </data>
+    <data name="Action_ViewMod" xml:space="preserve">
+        <value>Просмотреть мод</value>
+    </data>
+    <data name="Attribute_Title" xml:space="preserve">
+        <value>Заголовок</value>
+    </data>
+    <data name="State_ConfigNotFinished" xml:space="preserve">
+        <value>Настройка не завершена</value>
+    </data>
+    <data name="State_Extracting" xml:space="preserve">
+        <value>Распаковываем файлы...</value>
+    </data>
+    <data name="State_Installing" xml:space="preserve">
+        <value>Устанавливаем...</value>
+    </data>
+    <data name="State_Loading" xml:space="preserve">
+        <value>Загрузка...</value>
+    </data>
+    <data name="State_NoServer" xml:space="preserve">
+        <value>Нет сервера</value>
+    </data>
+    <data name="State_Updating" xml:space="preserve">
+        <value>Обновляем...</value>
+    </data>
+    <data name="Term_Error" xml:space="preserve">
+        <value>Ошибка</value>
+    </data>
+    <data name="Term_General" xml:space="preserve">
+        <value>Основное</value>
+    </data>
+    <data name="Term_No" xml:space="preserve">
+        <value>Нет</value>
+    </data>
+    <data name="Term_Offline" xml:space="preserve">
+        <value>Не в сети</value>
+    </data>
+    <data name="Term_Online" xml:space="preserve">
+        <value>В сети</value>
+    </data>
+    <data name="Term_Other" xml:space="preserve">
+        <value>Другое</value>
+    </data>
+    <data name="Term_Speed" xml:space="preserve">
+        <value>Скорость</value>
+    </data>
+    <data name="Term_Success" xml:space="preserve">
+        <value>Успех</value>
+    </data>
+    <data name="Term_Unknown" xml:space="preserve">
+        <value>Неизвестно</value>
+    </data>
+    <data name="Term_Warning" xml:space="preserve">
+        <value>Внимание</value>
+    </data>
+    <data name="Term_Yes" xml:space="preserve">
+        <value>Да</value>
+    </data>
 </root>

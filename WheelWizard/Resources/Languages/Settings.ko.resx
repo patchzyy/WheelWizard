@@ -84,4 +84,7 @@
     <data name="Option_ForceDisableWiimote" xml:space="preserve">
         <value>위모트 강제 비활성</value>
     </data>
+    <data name="Value_Language_RussianOg" xml:space="preserve">
+        <value>Русский</value>
+    </data>
 </root>

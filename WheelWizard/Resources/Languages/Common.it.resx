@@ -177,4 +177,7 @@
     <data name="Term_Yes" xml:space="preserve">
         <value>Sì</value>
     </data>
+    <data name="Action_ViewMod" xml:space="preserve">
+        <value>Visualizza</value>
+    </data>
 </root>

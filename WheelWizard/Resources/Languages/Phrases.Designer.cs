@@ -403,7 +403,7 @@ namespace WheelWizard.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Getting the latest WheelWizard from github releases.
+        ///   Looks up a localized string similar to Getting the latest Wheel Wizard from github releases.
         /// </summary>
         public static string PopupText_LatestWhWzGithub {
             get {
@@ -466,7 +466,7 @@ namespace WheelWizard.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Version {$1} of WheelWizard is available (currently on {$2}). Do you want to update now?.
+        ///   Looks up a localized string similar to Version {$1} of Wheel Wizard is available (currently on {$2}). Do you want to update now?.
         /// </summary>
         public static string PopupText_NewVersionWhWz {
             get {
@@ -511,7 +511,7 @@ namespace WheelWizard.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Old save data was found. Would you like to use it? (recommended.
+        ///   Looks up a localized string similar to Old save data was found. Would you like to use it? (recommended).
         /// </summary>
         public static string PopupText_OldRksysFoundExplained {
             get {
@@ -610,7 +610,7 @@ namespace WheelWizard.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to update WheelWizard. Please ensure the application is located in a folder that can be written to.\n Could not find current folder..
+        ///   Looks up a localized string similar to Unable to update Wheel Wizard. Please ensure the application is located in a folder that can be written to.\n Could not find current folder..
         /// </summary>
         public static string PopupText_UnableUpdateWhWz_ReasonLocation {
             get {
@@ -619,7 +619,7 @@ namespace WheelWizard.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to check if WheelWizard is up to date. \nYou might be experiencing network issues..
+        ///   Looks up a localized string similar to Unable to check if Wheel Wizard is up to date. \nYou might be experiencing network issues..
         /// </summary>
         public static string PopupText_UnableUpdateWhWz_ReasonNetwork {
             get {
@@ -655,7 +655,7 @@ namespace WheelWizard.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Updating WheelWizard.
+        ///   Looks up a localized string similar to Updating Wheel Wizard.
         /// </summary>
         public static string PopupText_UpdateWhWz {
             get {

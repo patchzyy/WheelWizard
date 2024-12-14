@@ -108,4 +108,163 @@
     <data name="PopupText_EnterTitle" xml:space="preserve">
         <value>Укажите заголовок:</value>
     </data>
+    <data name="PopupText_EsimatedTimeRemaining" xml:space="preserve">
+        <value>Осталось примерно:</value>
+    </data>
+    <data name="PopupText_FailCheckUpdates" xml:space="preserve">
+        <value>Не удалось проверить обновления</value>
+    </data>
+    <data name="PopupText_FailedUpdateApply" xml:space="preserve">
+        <value>Не удалось применить обновление. Отменяем.</value>
+    </data>
+    <data name="PopupText_FailedUpdateDelete" xml:space="preserve">
+        <value>Не удалось удалить файлы для обновления. Отменяем</value>
+    </data>
+    <data name="PopupText_InstallingMods" xml:space="preserve">
+        <value>Устанавливаем моды</value>
+    </data>
+    <data name="PopupText_InstallingModsCount" xml:space="preserve">
+        <value>Устанавливаем {$!} модов</value>
+    </data>
+    <data name="PopupText_InstallingRR" xml:space="preserve">
+        <value>Устанавливаем Retro Rewind</value>
+    </data>
+    <data name="PopupText_InstallingRRFirstTime" xml:space="preserve">
+        <value>Устанавливаем Retro Rewind в первый раз</value>
+    </data>
+    <data name="PopupText_LatestWhWzGithub" xml:space="preserve">
+        <value>Получаем последнюю версию Wheel Wizard из GitHub</value>
+    </data>
+    <data name="PopupText_ModCombineQuestion" xml:space="preserve">
+        <value>Хотите соеденить все файлы в один мод?</value>
+    </data>
+    <data name="PopupText_ModNameEmpty" xml:space="preserve">
+        <value>Название мода не может быть пустым.</value>
+    </data>
+    <data name="PopupText_ModNameExists" xml:space="preserve">
+        <value>Мод с названием {$1} уже существует.</value>
+    </data>
+    <data name="PopupText_ModsFound" xml:space="preserve">
+        <value>Моды найдены</value>
+    </data>
+    <data name="PopupText_ModsFoundQuestion" xml:space="preserve">
+        <value>Прямо сейчас вы запускаете игру без модов. Желаете очистить папку my-stuff?</value>
+    </data>
+    <data name="PopupText_MultipleFilesSelected" xml:space="preserve">
+        <value>Выбрано несколько файлов</value>
+    </data>
+    <data name="PopupText_NewVersionWhWz" xml:space="preserve">
+        <value>Версия {$1} Wheel Wizard'а доступна (прямо сейчас. вы на {$2}). Хотите произвести обновление?</value>
+    </data>
+    <data name="PopupText_NoModFolder" xml:space="preserve">
+        <value>Папка с модами не существует</value>
+    </data>
+    <data name="PopupText_NotFindDolphin" xml:space="preserve">
+        <value>Не удалось найти эмулятор Dolphin, пожалуйста, установите путь в настройках.</value>
+    </data>
+    <data name="PopupText_NotFindGame" xml:space="preserve">
+        <value>Не удалось найти игру, пожалуйста, установить путь в настройках.</value>
+    </data>
+    <data name="PopupText_OldRksysFound" xml:space="preserve">
+        <value>Старый rksys.dat был найден</value>
+    </data>
+    <data name="PopupText_OldRksysFoundExplained" xml:space="preserve">
+        <value>Старые данные сохранения были найдена. Желаете их исполльзовать? (рекоммендовано)</value>
+    </data>
+    <data name="PopupText_OldRRFound" xml:space="preserve">
+        <value>Старый Retro Rewind был найден.</value>
+    </data>
+    <data name="PopupText_OldRRFoundExplained" xml:space="preserve">
+        <value>Старые файлы Retro Rewind были найдены. Хотите переместить их в новую директорию?</value>
+    </data>
+    <data name="PopupText_ProcessingXofY" xml:space="preserve">
+        <value>Обработка {$1} из {$2} файлов...</value>
+    </data>
+    <data name="PopupText_ReinstallRR" xml:space="preserve">
+        <value>Переустановить Retro Rewind</value>
+    </data>
+    <data name="PopupText_RestartAdminFail" xml:space="preserve">
+        <value>Не удалось перезапуститься с правами администратора.</value>
+    </data>
+    <data name="PopupText_RRNotDeterment" xml:space="preserve">
+        <value>Не удалос определить вашу версию Retro Rewind. Хотите установить Retro Rewind?</value>
+    </data>
+    <data name="PopupText_RRToOld" xml:space="preserve">
+        <value>Ваша версия Retro Rewind слишком доисторическая. чтобы обновиться. Хотите переустановить Retro Rewind?</value>
+    </data>
+    <data name="PopupText_RRUpToDate" xml:space="preserve">
+        <value>Retro Rewind на последней версии.</value>
+    </data>
+    <data name="PopupText_SettingsSaved" xml:space="preserve">
+        <value>Настройки успешно сохранены!</value>
+    </data>
+    <data name="PopupText_SureDeleteQuestion" xml:space="preserve">
+        <value>Вы уверены что хотите удалить {$1}?</value>
+    </data>
+    <data name="PopupText_UnableUpdateWhWz_ReasonLocation" xml:space="preserve">
+        <value>Не удалось обновить Wheel Wizard. Пожалуйста убедитесь, что исполняемый файл находится в папке куда можно добавлять файлы.\n Не удалось найти текущую папку.</value>
+    </data>
+    <data name="PopupText_UnableUpdateWhWz_ReasonNetwork" xml:space="preserve">
+        <value>Не удалось проверить, обновлён ли Wheel Wizard до последней версии? \nВы возможно испытываете проблемы с подключеним.</value>
+    </data>
+    <data name="PopupText_UpdateAdmin" xml:space="preserve">
+        <value>Обновитесь через права администратора.</value>
+    </data>
+    <data name="PopupText_UpdateAdminExplained" xml:space="preserve">
+        <value>Иногда, для обновления нужны права администратора. Хотите ли вы их активировать ради этого обновления?</value>
+    </data>
+    <data name="PopupText_UpdateRR" xml:space="preserve">
+        <value>Обновить Retro Rewind</value>
+    </data>
+    <data name="PopupText_UpdateWhWz" xml:space="preserve">
+        <value>Обновляем Wheel Wizard</value>
+    </data>
+    <data name="PopupText_WhWzUpdateAvailable" xml:space="preserve">
+        <value>Доступно обновление Wheel Wizard</value>
+    </data>
+    <data name="PupupText_DownloadingMb" xml:space="preserve">
+        <value>скачиваем {$1} МБ</value>
+    </data>
+    <data name="Sidebar_Link_Discord" xml:space="preserve">
+        <value>Наш Discord сервер</value>
+    </data>
+    <data name="Sidebar_Link_Github" xml:space="preserve">
+        <value>Исходный код</value>
+    </data>
+    <data name="Sidebar_Link_Support" xml:space="preserve">
+        <value>Поддержать нас</value>
+    </data>
+    <data name="Text_MadeByString" xml:space="preserve">
+        <value>Сделано: {$1} \n и {$2}</value>
+    </data>
+    <data name="Text_ThanksTranslators" xml:space="preserve">
+        <value>Низкий поклон и спасибо переводчикам:</value>
+    </data>
+    <data name="Text_WhWzTranslationPercentage" xml:space="preserve">
+        <value>Перевод на этот язык завершён на {$1}%</value>
+    </data>
+    <data name="Time_Days_1" xml:space="preserve">
+        <value>1 день</value>
+    </data>
+    <data name="Time_Days_x" xml:space="preserve">
+        <value>{$1} дней</value>
+    </data>
+    <data name="Time_Hours_1" xml:space="preserve">
+        <value>1 час</value>
+    </data>
+    <data name="Time_Hours_x" xml:space="preserve">
+        <value>{$1} часов</value>
+    </data>
+    <data name="Time_Minutes_1" xml:space="preserve">
+        <value>1 минута</value>
+    </data>
+    <data name="Time_Minutes_x" xml:space="preserve">
+        <value>{$1} минут</value>
+    </data>
+    <data name="Time_Seconds_1" xml:space="preserve">
+        <value>1 секунда</value>
+    </data>
+    <data name="Time_Seconds_x" xml:space="preserve">
+        <value>{$1} секунд</value>
+    </data>
 </root>

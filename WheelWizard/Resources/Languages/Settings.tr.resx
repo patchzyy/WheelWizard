@@ -51,4 +51,7 @@
     <data name="Value_Language_KoreanOg" xml:space="preserve">
         <value>-</value>
     </data>
+    <data name="Value_Language_RussianOg" xml:space="preserve">
+        <value>Русский</value>
+    </data>
 </root>

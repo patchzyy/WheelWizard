@@ -177,4 +177,7 @@
     <data name="Value_Language_Korean" xml:space="preserve">
         <value>韓国語</value>
     </data>
+    <data name="Value_Language_RussianOg" xml:space="preserve">
+        <value>Русский</value>
+    </data>
 </root>
