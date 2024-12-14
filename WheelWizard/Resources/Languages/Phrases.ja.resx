@@ -28,31 +28,31 @@
         <value>ここにプロフィールを載せるには一度プレイする必要があります</value>
     </data>
     <data name="Hover_FriendsOnline_0" xml:space="preserve">
-        <value>現在　オンラインのフレンドがいません</value>
+        <value>現在 オンラインのフレンドがいません</value>
     </data>
     <data name="Hover_FriendsOnline_1" xml:space="preserve">
-        <value>現在　オンラインのフレンドが　1人います</value>
+        <value>現在 オンラインのフレンドが 1人います</value>
     </data>
     <data name="Hover_FriendsOnline_x" xml:space="preserve">
-        <value>現在　オンラインのフレンドが　{$1}人います</value>
+        <value>現在 オンラインのフレンドが {$1}人います</value>
     </data>
     <data name="Hover_PlayersOnline_0" xml:space="preserve">
-        <value>現在　オンラインのプレイヤーがいません</value>
+        <value>現在 オンラインのプレイヤーがいません</value>
     </data>
     <data name="Hover_PlayersOnline_1" xml:space="preserve">
-        <value>現在　オンラインのプレイヤーが　1人います</value>
+        <value>現在 オンラインのプレイヤーが 1人います</value>
     </data>
     <data name="Hover_PlayersOnline_x" xml:space="preserve">
-        <value>現在　オンラインのプレイヤーが　{$1}人います</value>
+        <value>現在 オンラインのプレイヤーが {$1}人います</value>
     </data>
     <data name="Hover_RoomsOnline_0" xml:space="preserve">
-        <value>現在　開いているルームがありません</value>
+        <value>現在 開いているルームがありません</value>
     </data>
     <data name="Hover_RoomsOnline_1" xml:space="preserve">
-        <value>現在　開いているルームが　1部屋あります</value>
+        <value>現在 開いているルームが 1部屋あります</value>
     </data>
     <data name="Hover_RoomsOnline_x" xml:space="preserve">
-        <value>現在　開いているルームが　{$1}部屋あります</value>
+        <value>現在 開いているルームが {$1}部屋あります</value>
     </data>
     <data name="Sidebar_Link_Discord" xml:space="preserve">
         <value>お問い合わせ</value>
@@ -73,8 +73,7 @@
         <value>Retro Rewindをインストール (初回)</value>
     </data>
     <data name="EmptyText_NoMods" xml:space="preserve">
-        <value>Modでゲームを改変できます。
-下のボタンを押してModのインポートを開始してください。</value>
+        <value>Modでゲームを改変 (キャラクターの見た目など) できます。下のボタンを押してModのインポートを開始してください。</value>
     </data>
     <data name="EmptyText_NoMods_Title" xml:space="preserve">
         <value>Modが見つかりませんでした</value>

@@ -37,10 +37,10 @@
         <value>Nederlands</value>
     </data>
     <data name="Value_Language_JapaneseOg" xml:space="preserve">
-        <value>-</value>
+        <value>日本語</value>
     </data>
     <data name="Value_Language_ItalianOg" xml:space="preserve">
-        <value>-</value>
+        <value>Italiano</value>
     </data>
     <data name="Value_Language_TurkishOg" xml:space="preserve">
         <value>-</value>
@@ -158,5 +158,20 @@
     </data>
     <data name="Value_Language_KoreanOg" xml:space="preserve">
         <value>-</value>
+    </data>
+    <data name="InfoText_EnableAnimations" xml:space="preserve">
+        <value>Esto activa las animaciones en la aplicación Wheel Wizard</value>
+    </data>
+    <data name="Option_EnableAnimations" xml:space="preserve">
+        <value>Activar Animaciones</value>
+    </data>
+    <data name="Option_RemoveBlur" xml:space="preserve">
+        <value>Quitar Blur</value>
+    </data>
+    <data name="Value_Language_Finnish" xml:space="preserve">
+        <value>Finlandés</value>
+    </data>
+    <data name="Value_Language_Korean" xml:space="preserve">
+        <value>Coreano</value>
     </data>
 </root>

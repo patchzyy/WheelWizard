@@ -34,10 +34,10 @@
         <value>Français</value>
     </data>
     <data name="Value_Language_ItalianOg" xml:space="preserve">
-        <value>-</value>
+        <value>Italiano</value>
     </data>
     <data name="Value_Language_JapaneseOg" xml:space="preserve">
-        <value>-</value>
+        <value>日本語</value>
     </data>
     <data name="Value_Language_SpanishOg" xml:space="preserve">
         <value>Español</value>
@@ -161,5 +161,20 @@
     </data>
     <data name="Value_Language_KoreanOg" xml:space="preserve">
         <value>-</value>
+    </data>
+    <data name="InfoText_EnableAnimations" xml:space="preserve">
+        <value>Ceci active les animations dans l'application Wheel Wizard</value>
+    </data>
+    <data name="Option_EnableAnimations" xml:space="preserve">
+        <value>Activer les animations</value>
+    </data>
+    <data name="Option_RemoveBlur" xml:space="preserve">
+        <value>Retirer le Blur</value>
+    </data>
+    <data name="Value_Language_Finnish" xml:space="preserve">
+        <value>Finlandais</value>
+    </data>
+    <data name="Value_Language_Korean" xml:space="preserve">
+        <value>Coréen</value>
     </data>
 </root>

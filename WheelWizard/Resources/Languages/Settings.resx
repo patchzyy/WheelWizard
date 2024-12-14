@@ -139,10 +139,10 @@
         <value>Français</value>
     </data>
     <data name="Value_Language_ItalianOg" xml:space="preserve">
-        <value>-</value>
+        <value>Italiano</value>
     </data>
     <data name="Value_Language_JapaneseOg" xml:space="preserve">
-        <value>-</value>
+        <value>日本語</value>
     </data>
     <data name="Value_Language_SpanishOg" xml:space="preserve">
         <value>Español</value>
@@ -176,5 +176,11 @@
     </data>
     <data name="InfoText_EnableAnimations" xml:space="preserve">
         <value>This enables the animations in the the wheel wizard app</value>
+    </data>
+    <data name="Value_Language_Russian" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Value_Language_RussianOg" xml:space="preserve">
+        <value />
     </data>
 </root>

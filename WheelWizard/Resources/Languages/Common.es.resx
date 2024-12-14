@@ -174,4 +174,7 @@
     <data name="Term_Yes" xml:space="preserve">
         <value>Si</value>
     </data>
+    <data name="Action_Browse" xml:space="preserve">
+        <value>Buscar</value>
+    </data>
 </root>

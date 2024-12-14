@@ -307,6 +307,26 @@
         <LastGenOutput>Settings.fi.Designer.cs</LastGenOutput>
         <DependentUpon>Settings.resx</DependentUpon>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Common.ru.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Common.ru.Designer.cs</LastGenOutput>
+        <DependentUpon>Common.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Online.ru.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Online.ru.Designer.cs</LastGenOutput>
+        <DependentUpon>Online.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Phrases.ru.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Phrases.ru.Designer.cs</LastGenOutput>
+        <DependentUpon>Phrases.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Settings.ru.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Settings.ru.Designer.cs</LastGenOutput>
+        <DependentUpon>Settings.resx</DependentUpon>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>

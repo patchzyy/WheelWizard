@@ -22,10 +22,10 @@
         <value>-</value>
     </data>
     <data name="Value_Language_JapaneseOg" xml:space="preserve">
-        <value>-</value>
+        <value>日本語</value>
     </data>
     <data name="Value_Language_ItalianOg" xml:space="preserve">
-        <value>-</value>
+        <value>Italiano</value>
     </data>
     <data name="Value_Language_GermanOg" xml:space="preserve">
         <value>Deutsch</value>
@@ -154,12 +154,27 @@
         <value>トルコ語</value>
     </data>
     <data name="CompletePercentage" xml:space="preserve">
-        <value>55</value>
+        <value>100</value>
     </data>
     <data name="Value_Language_FinnishOg" xml:space="preserve">
         <value>-</value>
     </data>
     <data name="Value_Language_KoreanOg" xml:space="preserve">
         <value>-</value>
+    </data>
+    <data name="InfoText_EnableAnimations" xml:space="preserve">
+        <value>Wheel Wizard内のアニメーションを有効にします</value>
+    </data>
+    <data name="Option_EnableAnimations" xml:space="preserve">
+        <value>アニメーションを有効にする</value>
+    </data>
+    <data name="Option_RemoveBlur" xml:space="preserve">
+        <value>ブラー効果の無効化</value>
+    </data>
+    <data name="Value_Language_Finnish" xml:space="preserve">
+        <value>フィンランド語</value>
+    </data>
+    <data name="Value_Language_Korean" xml:space="preserve">
+        <value>韓国語</value>
     </data>
 </root>

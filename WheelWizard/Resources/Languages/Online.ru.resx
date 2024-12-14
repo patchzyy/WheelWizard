@@ -19,24 +19,24 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="Button_ViewRoom" xml:space="preserve">
-        <value>방을 보기</value>
+        <value>Просмотреть комнату</value>
     </data>
     <data name="ListTitle_Friends" xml:space="preserve">
-        <value>친구</value>
+        <value>Друзья</value>
     </data>
     <data name="ListTitle_Players" xml:space="preserve">
-        <value>플레이어</value>
+        <value>Игроки</value>
     </data>
     <data name="ListTitle_Rooms" xml:space="preserve">
-        <value>룸</value>
+        <value>Комнаты</value>
     </data>
     <data name="NoLicense" xml:space="preserve">
-        <value>라이센스 없음</value>
+        <value>Нет лицензии (файла сохранения)</value>
     </data>
     <data name="NoName" xml:space="preserve">
-        <value>이름 없음</value>
+        <value>Нет имени</value>
     </data>
     <data name="NoProfiles" xml:space="preserve">
-        <value>프로필 없음</value>
+        <value>Нет профилей</value>
     </data>
 </root>

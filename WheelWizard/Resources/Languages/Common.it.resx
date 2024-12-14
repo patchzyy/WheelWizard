@@ -18,4 +18,163 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="Action_Apply" xml:space="preserve">
+        <value>Applica</value>
+    </data>
+    <data name="Action_Browse" xml:space="preserve">
+        <value>Cerca</value>
+    </data>
+    <data name="Action_Cancel" xml:space="preserve">
+        <value>Annulla</value>
+    </data>
+    <data name="Action_CopyFriendCode" xml:space="preserve">
+        <value>Copia il Codice Amico</value>
+    </data>
+    <data name="Action_Delete" xml:space="preserve">
+        <value>Cancella</value>
+    </data>
+    <data name="Action_DisableAll" xml:space="preserve">
+        <value>Disattiva Tutto</value>
+    </data>
+    <data name="Action_Edit" xml:space="preserve">
+        <value>Modifica</value>
+    </data>
+    <data name="Action_EnableAll" xml:space="preserve">
+        <value>Attiva Tutto</value>
+    </data>
+    <data name="Action_Export" xml:space="preserve">
+        <value>Esporta</value>
+    </data>
+    <data name="Action_Import" xml:space="preserve">
+        <value>Importa</value>
+    </data>
+    <data name="Action_Install" xml:space="preserve">
+        <value>Installa</value>
+    </data>
+    <data name="Action_Keep" xml:space="preserve">
+        <value>Mantieni</value>
+    </data>
+    <data name="Action_MaybeLater" xml:space="preserve">
+        <value>Forse più tardi</value>
+    </data>
+    <data name="Action_No" xml:space="preserve">
+        <value>No</value>
+    </data>
+    <data name="Action_OK" xml:space="preserve">
+        <value>Ok</value>
+    </data>
+    <data name="Action_OpenFolder" xml:space="preserve">
+        <value>Apri la cartella</value>
+    </data>
+    <data name="Action_Play" xml:space="preserve">
+        <value>Gioca</value>
+    </data>
+    <data name="Action_PlayOffline" xml:space="preserve">
+        <value>Gioca Offline</value>
+    </data>
+    <data name="Action_Rename" xml:space="preserve">
+        <value>Rinomina</value>
+    </data>
+    <data name="Action_Revert" xml:space="preserve">
+        <value>Ripristina</value>
+    </data>
+    <data name="Action_Save" xml:space="preserve">
+        <value>Salva</value>
+    </data>
+    <data name="Action_Update" xml:space="preserve">
+        <value>Aggiorna</value>
+    </data>
+    <data name="Action_Yes" xml:space="preserve">
+        <value>Sì</value>
+    </data>
+    <data name="Attribute_Enabled" xml:space="preserve">
+        <value>Attivato</value>
+    </data>
+    <data name="Attribute_Id" xml:space="preserve">
+        <value>ID</value>
+    </data>
+    <data name="Attribute_ModName" xml:space="preserve">
+        <value>Nome della Mod</value>
+    </data>
+    <data name="Attribute_Name" xml:space="preserve">
+        <value>Nome</value>
+    </data>
+    <data name="Attribute_Title" xml:space="preserve">
+        <value>Titolo</value>
+    </data>
+    <data name="Attribute_Type" xml:space="preserve">
+        <value>Tipo</value>
+    </data>
+    <data name="PageTitle_Friends" xml:space="preserve">
+        <value>Amici</value>
+    </data>
+    <data name="PageTitle_Home" xml:space="preserve">
+        <value>Casa</value>
+    </data>
+    <data name="PageTitle_Mods" xml:space="preserve">
+        <value>My Stuff</value>
+    </data>
+    <data name="PageTitle_MyProfiles" xml:space="preserve">
+        <value>I miei profili</value>
+    </data>
+    <data name="PageTitle_RoomDetails" xml:space="preserve">
+        <value>Dettagli della stanza</value>
+    </data>
+    <data name="PageTitle_Rooms" xml:space="preserve">
+        <value>Stanze</value>
+    </data>
+    <data name="PageTitle_Settings" xml:space="preserve">
+        <value>Impostazioni</value>
+    </data>
+    <data name="State_ConfigNotFinished" xml:space="preserve">
+        <value>Configurazione non terminata</value>
+    </data>
+    <data name="State_Extracting" xml:space="preserve">
+        <value>Estraendo file...</value>
+    </data>
+    <data name="State_Installing" xml:space="preserve">
+        <value>Installando...</value>
+    </data>
+    <data name="State_Loading" xml:space="preserve">
+        <value>Caricando...</value>
+    </data>
+    <data name="State_NoServer" xml:space="preserve">
+        <value>Nessun server</value>
+    </data>
+    <data name="State_Updating" xml:space="preserve">
+        <value>Aggiornando...</value>
+    </data>
+    <data name="Term_Error" xml:space="preserve">
+        <value>Errore</value>
+    </data>
+    <data name="Term_General" xml:space="preserve">
+        <value>Generale</value>
+    </data>
+    <data name="Term_No" xml:space="preserve">
+        <value>No</value>
+    </data>
+    <data name="Term_Offline" xml:space="preserve">
+        <value>Offline</value>
+    </data>
+    <data name="Term_Online" xml:space="preserve">
+        <value>Online</value>
+    </data>
+    <data name="Term_Other" xml:space="preserve">
+        <value>Altro</value>
+    </data>
+    <data name="Term_Speed" xml:space="preserve">
+        <value>Velocità</value>
+    </data>
+    <data name="Term_Success" xml:space="preserve">
+        <value>Successo</value>
+    </data>
+    <data name="Term_Unknown" xml:space="preserve">
+        <value>Sconosciuto</value>
+    </data>
+    <data name="Term_Warning" xml:space="preserve">
+        <value>Avviso</value>
+    </data>
+    <data name="Term_Yes" xml:space="preserve">
+        <value>Sì</value>
+    </data>
 </root>

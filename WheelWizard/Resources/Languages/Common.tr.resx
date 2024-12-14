@@ -27,4 +27,52 @@
     <data name="Action_CopyFriendCode" xml:space="preserve">
         <value>Arkadaş Kodunu Kopyala</value>
     </data>
+    <data name="Action_Browse" xml:space="preserve">
+        <value>Göz at</value>
+    </data>
+    <data name="Action_Delete" xml:space="preserve">
+        <value>Sılmek</value>
+    </data>
+    <data name="Action_DisableAll" xml:space="preserve">
+        <value>Hepsini devre dışı bırak</value>
+    </data>
+    <data name="Action_Edit" xml:space="preserve">
+        <value>Düzenlemek</value>
+    </data>
+    <data name="Action_EnableAll" xml:space="preserve">
+        <value>Hepsini etkinleştir</value>
+    </data>
+    <data name="Action_Export" xml:space="preserve">
+        <value>İhracat</value>
+    </data>
+    <data name="Action_Import" xml:space="preserve">
+        <value>İthal</value>
+    </data>
+    <data name="Action_Install" xml:space="preserve">
+        <value>Yüklemek</value>
+    </data>
+    <data name="Action_No" xml:space="preserve">
+        <value>Hayir</value>
+    </data>
+    <data name="Action_OK" xml:space="preserve">
+        <value>Tamam</value>
+    </data>
+    <data name="Action_Play" xml:space="preserve">
+        <value>Oyna</value>
+    </data>
+    <data name="Action_PlayOffline" xml:space="preserve">
+        <value>Çevrimdışı Oyna</value>
+    </data>
+    <data name="Action_Rename" xml:space="preserve">
+        <value>Yeniden adlandır</value>
+    </data>
+    <data name="Action_Revert" xml:space="preserve">
+        <value>Geri Dön</value>
+    </data>
+    <data name="Action_Save" xml:space="preserve">
+        <value>Kaydet</value>
+    </data>
+    <data name="Action_Update" xml:space="preserve">
+        <value>Güncelleme</value>
+    </data>
 </root>
