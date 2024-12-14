@@ -26,22 +26,24 @@
                                     FontSize="18"
                                     IsUnderlined="True" />
 
-                <controls:IconLabel Text="Large Icon" 
+                <controls:IconLabel Text="Larger Icon" 
                                     IconData="{StaticResource WheelIcon}"
                                     Foreground="Orange" 
                                     FontSize="16"
-                                    IconSize="30" />
-                <TextBlock Foreground="White" Text="Text rendering issues:"/>
+                                    IconSize="50" />
+                <TextBlock Foreground="{StaticResource Neutral400}" Text="Text rendering issues:"
+                           Padding="0,10,0,0" />
+                <!-- Text to long -->
                 <controls:IconLabel Text="This is a very very long text, that should cause some text clipping due to TextWrapping being set to NoWrap" 
                                     IconData="M4 4 H 20 V 20 H 4 Z" 
                                     Foreground="White" 
                                     FontSize="16" 
                                     Width="200"/>
+                <!-- ICON ONLY -->
                 <controls:IconLabel
                     IconData="{StaticResource DolphinIcon}"
                     IconSize="40"
-                    Foreground="White" 
-                    ></controls:IconLabel>
+                    Foreground="White" />
             </StackPanel>
         </Border>
     </Design.PreviewWith>
@@ -58,11 +60,13 @@
                           Width="{TemplateBinding IconSize}"
                           Height="{TemplateBinding IconSize}"
                           IsVisible="{TemplateBinding IsIconLeft}" 
+                          
                           VerticalAlignment="Center"/>
                     
                     <TextBlock Text="{TemplateBinding Text}" 
                                Margin="0,0,0,0"
                                VerticalAlignment="Center"
+                               IsVisible="{TemplateBinding Text, Converter={x:Static ObjectConverters.IsNotNull}}"
                                FontSize="{TemplateBinding FontSize}"
                                Foreground="{TemplateBinding Foreground}"
                                TextWrapping="Wrap">

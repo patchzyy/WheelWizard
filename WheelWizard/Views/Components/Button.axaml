@@ -45,18 +45,15 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding CornerRadius}">
-                    <StackPanel Orientation="Horizontal" Spacing="5" 
-                                HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <components:IconLabel
-                            IsVisible="{TemplateBinding Text, Converter={x:Static ObjectConverters.IsNotNull}}"
-                            IconData="{TemplateBinding IconData}"
-                            IconSize="{TemplateBinding IconSize}"
-                            Text="{TemplateBinding Text}"
-                            Height="{TemplateBinding IconSize}"
-                            VerticalAlignment="Center"
-                            Foreground="{TemplateBinding Foreground}"
-                            />
-                    </StackPanel>
+                    <components:IconLabel
+                        IconData="{TemplateBinding IconData}"
+                        IconSize="{TemplateBinding IconSize}"
+                        Text="{TemplateBinding Text}"
+                        Height="{TemplateBinding IconSize}"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Foreground="{TemplateBinding Foreground}"
+                    />
                 </Border>
             </ControlTemplate>
         </Setter>
