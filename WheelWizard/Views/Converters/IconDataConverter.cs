@@ -1,23 +1,20 @@
-﻿using System;
-using System.Globalization;
-using Avalonia.Data.Converters;
+﻿using Avalonia.Data.Converters;
 using Avalonia.Media;
-using Avalonia.Media.Imaging;
-using Avalonia.Platform;
+using System;
+using System.Globalization;
 
-namespace WheelWizard.Views
+namespace WheelWizard.Views.Converters;
+
+public class IconDataConverter : IValueConverter
 {
-    public class IconDataConverter : IValueConverter
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
-        {
-            if (value is not IImage imageData) return null;
-            return imageData;
-        }
+        if (value is not IImage imageData) return null;
+        return imageData;
+    }
 
-        public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
     }
 }

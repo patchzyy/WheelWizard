@@ -55,8 +55,7 @@
 
             <comps:Button x:Name="DolphinButton"
                           IsEnabled="True"
-                          Height="40"
-                          IconData="{StaticResource DolphinIcon}"
+                          IconData="{StaticResource WheelIcon}"
                           IconSize="30"
                           ToolTip.Tip="Launch Dolphin"
                           ToolTip.Placement="Bottom"

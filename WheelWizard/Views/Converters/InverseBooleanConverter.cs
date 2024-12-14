@@ -3,7 +3,7 @@ using Avalonia.Data.Converters;
 using System;
 using System.Globalization;
 
-namespace WheelWizard.Converters;
+namespace WheelWizard.Views.Converters;
 
 public class InverseBooleanConverter : IValueConverter
 {
