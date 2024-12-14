@@ -7,8 +7,8 @@
             <StackPanel Spacing="5">
                 <components:Button Width="150" Text="Default" Variant="Default"/>
                 <components:Button Width="150" Text="Primary" Variant="Primary"/>
-                <components:Button Width="150" Text="Secondary" Variant="Warning"/>
-                <components:Button Width="150" Text="Danger" Variant="Danger"/>
+                <components:Button Width="150" Text="Secondary" Variant="Warning" />
+                <components:Button Width="150" Text="Danger" Variant="Danger" FontSize="30"/>
                 <components:Button x:Name="PlayButton"
                                    IsEnabled="False" 
                                    Variant="Warning"
@@ -46,7 +46,6 @@
                         IconData="{TemplateBinding IconData}"
                         IconSize="{TemplateBinding IconSize}"
                         Text="{TemplateBinding Text}"
-                        Height="{TemplateBinding IconSize}"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Foreground="{TemplateBinding Foreground}"
@@ -62,6 +61,7 @@
      <Style Selector="components|Button:pointerover">
         <Setter Property="Cursor" Value="Hand"/>
     </Style>
+    
     <Style Selector="components|Button[IsEnabled=False]">
         <Setter Property="Foreground" Value="{StaticResource Neutral950}" />
         <Setter Property="Background" Value="{StaticResource Neutral800}" />
@@ -69,7 +69,6 @@
     
     <!-- DEFAULT -->
     <Style Selector="components|Button.Default">
-        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
         <Setter Property="Background" Value="{StaticResource Neutral700}" />
     </Style>
@@ -84,7 +83,6 @@
     
     <!-- DANGER -->
     <Style Selector="components|Button.Danger">
-        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="{StaticResource Danger100}" />
         <Setter Property="Background" Value="{StaticResource Danger700}" />
     </Style>
@@ -99,7 +97,6 @@
     
     <!-- WARNING -->
     <Style Selector="components|Button.Warning">
-        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="{StaticResource Warning100}" />
         <Setter Property="Background" Value="{StaticResource Warning700}" />
     </Style>
@@ -114,7 +111,6 @@
     
     <!-- PRIMARY -->
     <Style Selector="components|Button.Primary">
-        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="{StaticResource Primary50}" />
         <Setter Property="Background" Value="{StaticResource Primary700}" />
     </Style>
