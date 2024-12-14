@@ -46,38 +46,38 @@
 
                         <!-- Red Scale -->
                         <StackPanel Spacing="2">
-                            <TextBlock HorizontalAlignment="Center">Error</TextBlock>
-                            <Border Width="60" Height="30" Background="{DynamicResource Error50}">
+                            <TextBlock HorizontalAlignment="Center">Danger</TextBlock>
+                            <Border Width="60" Height="30" Background="{DynamicResource Danger50}">
                                 <TextBlock Text="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
-                            <Border Width="60" Height="30" Background="{DynamicResource Error100}">
+                            <Border Width="60" Height="30" Background="{DynamicResource Danger100}">
                                 <TextBlock Text="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
-                            <Border Width="60" Height="30" Background="{DynamicResource Error200}">
+                            <Border Width="60" Height="30" Background="{DynamicResource Danger200}">
                                 <TextBlock Text="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
-                            <Border Width="60" Height="30" Background="{DynamicResource Error300}">
+                            <Border Width="60" Height="30" Background="{DynamicResource Danger300}">
                                 <TextBlock Text="300" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
-                            <Border Width="60" Height="30" Background="{DynamicResource Error400}">
+                            <Border Width="60" Height="30" Background="{DynamicResource Danger400}">
                                 <TextBlock Text="400" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
-                            <Border Width="60" Height="30" Background="{DynamicResource Error500}">
+                            <Border Width="60" Height="30" Background="{DynamicResource Danger500}">
                                 <TextBlock Text="500" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
                             </Border>
-                            <Border Width="60" Height="30" Background="{DynamicResource Error600}">
+                            <Border Width="60" Height="30" Background="{DynamicResource Danger600}">
                                 <TextBlock Text="600" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
                             </Border>
-                            <Border Width="60" Height="30" Background="{DynamicResource Error700}">
+                            <Border Width="60" Height="30" Background="{DynamicResource Danger700}">
                                 <TextBlock Text="700" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
                             </Border>
-                            <Border Width="60" Height="30" Background="{DynamicResource Error800}">
+                            <Border Width="60" Height="30" Background="{DynamicResource Danger800}">
                                 <TextBlock Text="800" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
                             </Border>
-                            <Border Width="60" Height="30" Background="{DynamicResource Error900}">
+                            <Border Width="60" Height="30" Background="{DynamicResource Danger900}">
                                 <TextBlock Text="900" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
                             </Border>
-                            <Border Width="60" Height="30" Background="{DynamicResource Error950}">
+                            <Border Width="60" Height="30" Background="{DynamicResource Danger950}">
                                 <TextBlock Text="950" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
                             </Border>
                         </StackPanel>
@@ -180,17 +180,17 @@
         <Color x:Key="Black">#090A0C</Color>
 
         <!-- Red Scale -->
-        <Color x:Key="Error50">#FFF1F4</Color>
-        <Color x:Key="Error100">#FFE0E6</Color>
-        <Color x:Key="Error200">#FFC5CF</Color>
-        <Color x:Key="Error300">#FF9DAF</Color>
-        <Color x:Key="Error400">#FF6581</Color>
-        <Color x:Key="Error500">#FE2048</Color>
-        <Color x:Key="Error600">#EC163D</Color>
-        <Color x:Key="Error700">#C70E2F</Color>
-        <Color x:Key="Error800">#A4102B</Color>
-        <Color x:Key="Error900">#881429</Color>
-        <Color x:Key="Error950">#4A0511</Color>
+        <Color x:Key="Danger50">#FFF1F4</Color>
+        <Color x:Key="Danger100">#FFE0E6</Color>
+        <Color x:Key="Danger200">#FFC5CF</Color>
+        <Color x:Key="Danger300">#FF9DAF</Color>
+        <Color x:Key="Danger400">#FF6581</Color>
+        <Color x:Key="Danger500">#FE2048</Color>
+        <Color x:Key="Danger600">#EC163D</Color>
+        <Color x:Key="Danger700">#C70E2F</Color>
+        <Color x:Key="Danger800">#A4102B</Color>
+        <Color x:Key="Danger900">#881429</Color>
+        <Color x:Key="Danger950">#4A0511</Color>
 
         <!-- Warning Scale -->
         <Color x:Key="Warning50">#FFFEE7</Color>
