@@ -177,4 +177,7 @@
     <data name="Action_Browse" xml:space="preserve">
         <value>Chercher</value>
     </data>
+    <data name="Action_ViewMod" xml:space="preserve">
+        <value>Détail du Mod</value>
+    </data>
 </root>
