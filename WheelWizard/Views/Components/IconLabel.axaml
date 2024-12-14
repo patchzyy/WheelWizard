@@ -89,20 +89,23 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <StackPanel Orientation="Horizontal" >
-                    <Path Data="{TemplateBinding IconData}"
-                          Fill="{TemplateBinding Foreground}" 
-                          Stretch="Uniform" 
-                          Width="{TemplateBinding IconSize}"
-                          Height="{TemplateBinding IconSize}"
-                          VerticalAlignment="Center">
-                        <Path.IsVisible>
+                    <Border Background="Transparent" 
+                            Width="{TemplateBinding IconSize}"
+                            Height="{TemplateBinding IconSize}">
+                            <Path Data="{TemplateBinding IconData}"
+                                  Fill="{TemplateBinding Foreground}" 
+                                  Stretch="Uniform" 
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center">
+                            </Path>
+                        <Border.IsVisible>
                             <MultiBinding Converter="{StaticResource BoolAndConverter}">
                                 <Binding Path="IsIconLeft" RelativeSource="{RelativeSource TemplatedParent}"/>
                                 <Binding Path="IconData" RelativeSource="{RelativeSource TemplatedParent}"
                                          Converter="{x:Static ObjectConverters.IsNotNull}" />
                             </MultiBinding>
-                        </Path.IsVisible>
-                    </Path>
+                        </Border.IsVisible>
+                    </Border>
                     
                     <!-- This is a replacement for the gap of 10 between the first icon and the text 
                     We dont want this gap to be here if there is only the text or only the icon on the left. 
@@ -138,22 +141,25 @@
                         </TextBlock.Styles>
                     </TextBlock>
                     
-                    <Path Data="{TemplateBinding IconData}"
-                          Margin="10,0,0,0"
-                          Fill="{TemplateBinding Foreground}" 
-                          Stretch="Uniform" 
-                          Width="{TemplateBinding IconSize}"
-                          Height="{TemplateBinding IconSize}"
-                          VerticalAlignment="Center">
-                        <Path.IsVisible>
+                    <Border Background="Transparent"
+                        Width="{TemplateBinding IconSize}"
+                        Height="{TemplateBinding IconSize}"
+                        Margin="10,0,0,0">
+                        <Path Data="{TemplateBinding IconData}"
+                              Fill="{TemplateBinding Foreground}" 
+                              Stretch="Uniform" 
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+                        <Border.IsVisible>
                             <MultiBinding Converter="{StaticResource BoolAndConverter}">
                                 <Binding Path="IsIconLeft" RelativeSource="{RelativeSource TemplatedParent}"
                                          Converter="{StaticResource InverseBooleanConverter}" />
                                 <Binding Path="IconData" RelativeSource="{RelativeSource TemplatedParent}"
                                          Converter="{x:Static ObjectConverters.IsNotNull}" />
                             </MultiBinding>
-                        </Path.IsVisible>
-                    </Path>
+                        </Border.IsVisible>
+                    </Border>
+                    
                 </StackPanel>
             </ControlTemplate>
         </Setter>
