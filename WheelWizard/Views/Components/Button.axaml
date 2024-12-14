@@ -19,13 +19,12 @@
 
                 <components:Button x:Name="DolphinButton"
                                    IsEnabled="False"
-                                   Height="40"
                                    IconData="{StaticResource WheelIcon}"
-                                   IconSize="30"
+                                   IconSize="25"
                                    ToolTip.Tip="Launch Dolphin"
                                    ToolTip.Placement="Bottom"
                                    ToolTip.ShowDelay="50"
-                                   Width="100" Margin="0,6,0,0" />
+                                   HorizontalAlignment="Center" Margin="0,6,0,0" />
             </StackPanel>
         </Border>
     </Design.PreviewWith>

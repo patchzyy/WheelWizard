@@ -23,7 +23,7 @@ public partial class Button : TemplatedControl  // Change to TemplatedControl
         AvaloniaProperty.Register<Button, double>(nameof(IconSize), 20.0);
 
     public static readonly StyledProperty<string> TextProperty =
-        AvaloniaProperty.Register<Button, string>(nameof(Text), string.Empty);
+        AvaloniaProperty.Register<Button, string>(nameof(Text));
 
     public static readonly StyledProperty<System.Windows.Input.ICommand> CommandProperty =
         AvaloniaProperty.Register<Button, System.Windows.Input.ICommand>(nameof(Command));
