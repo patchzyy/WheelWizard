@@ -24,6 +24,7 @@
         <!-- STYLES -->
         <StyleInclude Source="Styles/Styles/ButtonStyles.axaml"/>
         <StyleInclude Source="Styles/Styles/TextStyles.axaml"/>
+        <StyleInclude Source="Styles/Styles/ToggleButtonStyles.axaml"/>
         
         <!-- COMPONENTS -->
         <StyleInclude Source="Components/IconLabel.axaml"/>

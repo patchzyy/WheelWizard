@@ -1,0 +1,54 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Note that all checkboxes and radio buttons are toggle buttons. 
+    This means that if we style the toggleButton instead of the checkbox or radio button, 
+    we can apply the checkbox style to a radio button and vice versa if we want. -->
+    <Design.PreviewWith>
+        <StackPanel Orientation="Horizontal">
+            <Border Padding="20" Background="{StaticResource Neutral950}">
+                <StackPanel>
+                    <ToggleButton Content="Toggle button" />
+                    <CheckBox Content="checkbox 1" />
+                    <CheckBox Content="checkbox 1" IsChecked="True" IsEnabled="False"  />
+                    <CheckBox Content="checkbox 1" IsEnabled="False"  />
+                    <RadioButton Content="Radio 1" />
+                    <RadioButton Content="Radio 2" />
+                    <RadioButton Content="Radio 3" IsChecked="True" IsEnabled="False" />
+                </StackPanel>
+            </Border>
+            <Border Padding="20" Background="{StaticResource Neutral900}">
+                <StackPanel>
+                    <ToggleButton Content="Toggle button" />
+                    <CheckBox Content="checkbox 1" />
+                    <CheckBox Content="checkbox 1" IsChecked="True" IsEnabled="False"  />
+                    <CheckBox Content="checkbox 1" IsEnabled="False"  />
+                    <RadioButton Content="Radio 1" />
+                    <RadioButton Content="Radio 2" />
+                    <RadioButton Content="Radio 3" IsChecked="True" IsEnabled="False" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Design.PreviewWith>
+
+    <!-- Note that all these colors are only accessible in this file. so that's pretty cool -->
+    <Styles.Resources>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="Default-CheckedColor" Color="{StaticResource Primairy400}" />
+            <SolidColorBrush x:Key="Default-InnerWhite" Color="{StaticResource Neutral50}" />
+            <SolidColorBrush x:Key="Default-Background" Color="{StaticResource Neutral950}" />
+            <SolidColorBrush x:Key="Default-BorderColor" Color="{StaticResource Neutral500}" />
+            
+            <SolidColorBrush x:Key="Disabled-CheckedColor" Color="{StaticResource Neutral700}" />
+            <SolidColorBrush x:Key="Disabled-InnerWhite" Color="{StaticResource Neutral500}" />
+            <SolidColorBrush x:Key="Disabled-Background" Color="{StaticResource Neutral900}" />
+            <SolidColorBrush x:Key="Disabled-BorderColor" Color="{StaticResource Neutral700}" />
+        </ResourceDictionary>
+    </Styles.Resources>
+
+    <Style Selector="ToggleButton.Check">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+    </Style>
+
+</Styles>
