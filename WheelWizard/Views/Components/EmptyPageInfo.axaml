@@ -1,0 +1,48 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:WheelWizard.Views.Components">
+    <Design.PreviewWith>
+        <StackPanel Background="{StaticResource Neutral950}" Orientation="Horizontal" Spacing="10">
+            <controls:EmptyPageInfo />
+            
+            <controls:EmptyPageInfo Title="Different Text" 
+                                    BodyText="With different text and stuff, so you can edit that however you want " />
+            
+            <controls:EmptyPageInfo IconData="{StaticResource RoadWarning}" 
+                                    Title="Different Icon"
+                                    BodyText="This is an example that even has a different icon that you can override"/>
+        </StackPanel>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|EmptyPageInfo">
+        <!-- Set Defaults -->
+        <Setter Property="IconData" Value="{StaticResource FlatWheel}"/>
+     
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Border Background="Transparent"
+                            Width="150"
+                            Height="150">
+                        <Path Data="{TemplateBinding IconData}"
+                              Fill="{StaticResource Neutral900}" 
+                              Stretch="Uniform" 
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+                    </Border>
+                    
+                    <TextBlock Text="{TemplateBinding Title}"
+                               Classes="TitleText"
+                               Margin="0,10,0,0"
+                               HorizontalAlignment="Center" />
+                    <TextBlock Text="{TemplateBinding BodyText}"
+                               Classes="BodyText"
+                               Margin="0,10,0,0"
+                               Width="190"
+                               TextAlignment="Center"
+                               HorizontalAlignment="Center" />
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>
