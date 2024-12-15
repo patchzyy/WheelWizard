@@ -3,13 +3,7 @@
         xmlns:components="clr-namespace:WheelWizard.Views.Components">
     <Design.PreviewWith>
         <Border Background="{StaticResource Neutral950}" Padding="10" >
-            <UniformGrid Columns="2">
-                <Button Classes="Default" Margin="5">Default</Button>
-                <Button Classes="Primary" Margin="5">Primary</Button>
-                <Button Classes="Warning" Margin="5">Warning</Button>
-                <Button Classes="Danger" Margin="5">Danger</Button>
-                <Button Classes="Default" Margin="5" IsEnabled="False">Disabled</Button>
-            </UniformGrid>
+            <TextBlock Classes="TitleText">Nothing to display</TextBlock>
         </Border>
     </Design.PreviewWith>
     
@@ -44,4 +38,5 @@
     <!-- <Style Selector="Button.TopButton PathIcon">
         <Setter Property="Foreground" Value="{Binding $parent[Button].Foreground}"/>
     </Style> -->
+    
 </Styles>
