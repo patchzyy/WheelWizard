@@ -45,10 +45,72 @@
         </ResourceDictionary>
     </Styles.Resources>
 
-    <Style Selector="ToggleButton.Check">
+    <!-- Changing the text of all the styles
+        I wish there was a better way to do this, there probably is and i just dont know-->
+    <Style Selector="CheckBox">
         <Setter Property="FontSize" Value="14" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
     </Style>
+    <Style Selector="CheckBox[IsEnabled=False] /template/ ContentPresenter">
+        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+    </Style>
+    <Style Selector="CheckBox[IsEnabled=True] /template/ ContentPresenter">
+        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+    </Style>
 
+    <Style Selector="RadioButton">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+    </Style>
+    <Style Selector="RadioButton[IsEnabled=False] /template/ ContentPresenter">
+        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+    </Style>
+    <Style Selector="RadioButton[IsEnabled=True] /template/ ContentPresenter">
+        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+    </Style>
+    
+    <Style Selector="ToggleButton">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+    </Style>
+    <Style Selector="ToggleButton[IsEnabled=False] /template/ ContentPresenter">
+        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+    </Style>
+    <Style Selector="ToggleButton[IsEnabled=True] /template/ ContentPresenter">
+        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+    </Style>
+    
+    <!-- ============ -->
+    <!--   CHECKBOX   -->
+    <!-- ============ -->
+    <!--
+    <Style Selector="CheckBox">
+        <Setter Property="Background" Value="{StaticResource Default-Background}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Default-BorderColor}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="24" Height="24" x:Name="Border"
+                                          Background="{TemplateBinding Background}"
+                                          BorderBrush="{TemplateBinding BorderBrush}"
+                                          BorderThickness="3"
+                                          CornerRadius="{StaticResource GlobalCornerRadius}">
+                            <TextBlock Foreground="{StaticResource Default-InnerWhite}"  x:Name="Check"
+                                       HorizontalAlignment="Center">x</TextBlock>
+                        </Border>
+                        <ContentPresenter
+                            Content="{TemplateBinding Content}"
+                            VerticalAlignment="Center"
+                            Margin="5,0,0,0" RecognizesAccessKey="True" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style> 
+-->
+    
 </Styles>
