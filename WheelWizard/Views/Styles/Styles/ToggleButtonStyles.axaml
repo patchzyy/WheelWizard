@@ -33,7 +33,7 @@
     <!-- Note that all these colors are only accessible in this file. so that's pretty cool -->
     <Styles.Resources>
         <ResourceDictionary>
-            <SolidColorBrush x:Key="Default-CheckedColor" Color="{StaticResource Primairy400}" />
+            <SolidColorBrush x:Key="Default-CheckedColor" Color="{StaticResource Primary400}" />
             <SolidColorBrush x:Key="Default-InnerWhite" Color="{StaticResource Neutral50}" />
             <SolidColorBrush x:Key="Default-Background" Color="{StaticResource Neutral950}" />
             <SolidColorBrush x:Key="Default-BorderColor" Color="{StaticResource Neutral500}" />
@@ -44,52 +44,29 @@
             <SolidColorBrush x:Key="Disabled-BorderColor" Color="{StaticResource Neutral700}" />
         </ResourceDictionary>
     </Styles.Resources>
-
-    <!-- Changing the text of all the styles
-        I wish there was a better way to do this, there probably is and i just dont know-->
-    <Style Selector="CheckBox">
+    
+    <Style Selector="ToggleButton, RadioButton, CheckBox">
         <Setter Property="FontSize" Value="14" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
-    </Style>
-    <Style Selector="CheckBox[IsEnabled=False] /template/ ContentPresenter">
-        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
-    </Style>
-    <Style Selector="CheckBox[IsEnabled=True] /template/ ContentPresenter">
-        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
-    </Style>
-
-    <Style Selector="RadioButton">
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
-    </Style>
-    <Style Selector="RadioButton[IsEnabled=False] /template/ ContentPresenter">
-        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
-    </Style>
-    <Style Selector="RadioButton[IsEnabled=True] /template/ ContentPresenter">
-        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+        <Style Selector="^[IsEnabled=False] /template/ ContentPresenter">
+            <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+        </Style>
+        <Style Selector="^[IsEnabled=True] /template/ ContentPresenter">
+            <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
+        </Style>
     </Style>
     
-    <Style Selector="ToggleButton">
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
-    </Style>
-    <Style Selector="ToggleButton[IsEnabled=False] /template/ ContentPresenter">
-        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
-    </Style>
-    <Style Selector="ToggleButton[IsEnabled=True] /template/ ContentPresenter">
-        <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
-    </Style>
-    
-    <!-- ============ -->
-    <!--   CHECKBOX   -->
-    <!-- ============ -->
-    <!--
-    <Style Selector="CheckBox">
+    <Style Selector="CheckBox, RadioButton.CheckBox">
         <Setter Property="Background" Value="{StaticResource Default-Background}" />
         <Setter Property="BorderBrush" Value="{StaticResource Default-BorderColor}" />
+        <Style Selector="^[IsChecked=True]">
+            <Setter Property="Background" Value="{StaticResource Default-CheckedColor}" />
+            <Setter Property="BorderBrush" Value="{StaticResource Default-BorderColor}" />
+        </Style>
+        <Style Selector="^:pointerover">
+            <Setter Property="BorderBrush" Value="{StaticResource Default-CheckedColor}" />
+        </Style>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CheckBox">
@@ -100,7 +77,7 @@
                                           BorderThickness="3"
                                           CornerRadius="{StaticResource GlobalCornerRadius}">
                             <TextBlock Foreground="{StaticResource Default-InnerWhite}"  x:Name="Check"
-                                       HorizontalAlignment="Center">x</TextBlock>
+                                       HorizontalAlignment="Center" IsVisible="{TemplateBinding IsChecked}">O</TextBlock>
                         </Border>
                         <ContentPresenter
                             Content="{TemplateBinding Content}"
@@ -111,6 +88,5 @@
             </Setter.Value>
         </Setter>
     </Style> 
--->
     
 </Styles>
