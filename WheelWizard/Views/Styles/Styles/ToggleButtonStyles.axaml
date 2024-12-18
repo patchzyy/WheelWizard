@@ -5,8 +5,8 @@
     we can apply the checkbox style to a radio button and vice versa if we want. -->
     <Design.PreviewWith>
         <StackPanel Orientation="Vertical">
-            <Border Height="50" Background="{StaticResource Neutral950}">
-                <StackPanel Orientation="Horizontal">
+            <Border Height="40" Background="{StaticResource Neutral950}">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" >
                     <RadioButton Content="Option 1" Classes="TopBar" IsChecked="True"/>
                     <RadioButton Content="Option 2" Classes="TopBar" />
                     <RadioButton Content="Option 3" Classes="TopBar" />
@@ -74,6 +74,7 @@
     </Styles.Resources>
     
     <Style Selector="ToggleButton, RadioButton, CheckBox">
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FontSize" Value="14" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="Foreground" Value="{StaticResource Neutral300}" />
@@ -191,35 +192,36 @@
         </Style>
     </Style>
     
-    <Style Selector="RadioButton.TopBar">
+    <Style Selector="RadioButton.TopBar, CheckBox.TopBar">
         <Setter Property="FontSize" Value="16" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="Foreground" Value="{StaticResource Neutral500}" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Padding" Value="10,5" />
-        <Setter Property="Margin" Value="0"/>
         
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
-                    <Border Padding="{TemplateBinding Padding}" 
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="6,6,0,0"
-                            Margin="{TemplateBinding Margin    }">
-                        <ContentPresenter
-                            Content="{TemplateBinding Content}" 
-                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
+                    <ContentPresenter Padding="10,5"
+                                      Background="{TemplateBinding Background}"
+                                      CornerRadius="6,6,0,0"
+                                      Content="{TemplateBinding Content}" 
+                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         
+        
         <Style Selector="^:pointerover /template/ ContentPresenter">
             <Setter Property="Background" Value="{StaticResource Neutral900}"/>
+            <Setter Property="Foreground" Value="{StaticResource Primary300}"/>
         </Style>
- 
+        <Style Selector="^[IsChecked=True] /template/ ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource Neutral700}"/>
+            <Setter Property="Foreground" Value="{StaticResource Primary100}"/>
+        </Style>
+        
+        <Style Selector="^[IsEnabled=False] /template/ ContentPresenter">
+            <Setter Property="FontStyle" Value="Italic"/>
+        </Style>
     </Style>
 </Styles>
