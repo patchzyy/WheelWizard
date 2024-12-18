@@ -1,0 +1,18 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!-- Add Controls for Previewer Here -->
+        </Border>
+    </Design.PreviewWith>
+
+    <Style Selector="Border.SettingsBlockStyle">
+        <Setter Property="Background" Value="{StaticResource Neutral900}" />
+        <Setter Property="CornerRadius" Value="{StaticResource GlobalCornerRadius}" />
+        <Setter Property="Margin" Value="0,0,0,7" />
+        <Setter Property="Padding" Value="10" />
+        <!-- When there is an error or something, you can change the color here to something, then the edge also changes -->
+        <Setter Property="BorderBrush" Value="{StaticResource Neutral900}" />
+        <Setter Property="BorderThickness" Value="3" />
+    </Style>
+</Styles>
