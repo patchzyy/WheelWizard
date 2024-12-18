@@ -7,6 +7,7 @@
         xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
         xmlns:comps="clr-namespace:WheelWizard.Views.Components"
         xmlns:pages="clr-namespace:WheelWizard.Views.Pages"
+        xmlns:settings="clr-namespace:WheelWizard.Views.Pages.Settings"
         Height="876" Width="656" Title="Wheel Wizard" 
         WindowStartupLocation="CenterScreen"
         SystemDecorations="None"
@@ -90,7 +91,7 @@
 
             <TextBlock Text="{x:Static lang:Common.Term_Other}" Classes="SidebarSectionText" />
             <comps:SidebarRadioButton IconData="{StaticResource Settings}"
-                                      PageType="{x:Type pages:SettingsPage}"
+                                      PageType="{x:Type settings:SettingsPage}"
                                       Text="{x:Static lang:Common.PageTitle_Settings}" x:Name="SettingsButton"/>
             <comps:SidebarRadioButton IconData="{StaticResource Spinner}"
                                       Text="Kitchen Sink" x:Name="KitchenSinkButton"/>
