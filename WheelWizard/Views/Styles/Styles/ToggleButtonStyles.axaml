@@ -22,8 +22,8 @@
                         <ToggleButton Content="Toggle button" IsEnabled="False" />
                         <TextBlock Classes="TinyText" Margin="0,5">CheckBox:</TextBlock>
                         <CheckBox Content="checkbox 1" />
-                        <CheckBox Content="checkbox 1" IsChecked="True" IsEnabled="False"  />
-                        <CheckBox Content="checkbox 1" IsEnabled="False"  />
+                        <CheckBox Content="checkbox 2" IsChecked="True" IsEnabled="False"  />
+                        <CheckBox Content="checkbox 3" IsEnabled="False"  />
                         
                         <CheckBox Content="Different Style 1" Classes="RadioButton" IsChecked="True"  />
                         <CheckBox Content="Different Style 2" Classes="RadioButton"   />
@@ -33,6 +33,11 @@
                         <RadioButton Content="Radio 3" IsChecked="True" IsEnabled="False" />
                         <RadioButton Content="Different Style 1" GroupName="DifferentStyle" Classes="CheckBox" IsChecked="True"  />
                         <RadioButton Content="Different Style 2" GroupName="DifferentStyle" Classes="CheckBox"   />
+                        
+                        <TextBlock Classes="TinyText" Margin="0,5">Switch:</TextBlock>
+                        <CheckBox Classes="Switch" Content="Switch 1" />
+                        <CheckBox Classes="Switch" Content="Switch 2" IsChecked="True" IsEnabled="False"  />
+                        <CheckBox Classes="Switch" Content="Switch 3" IsEnabled="False"  />
                     </StackPanel>
                 </Border>
                 <Border Padding="20" Background="{StaticResource Neutral900}">
@@ -40,8 +45,8 @@
                         <ToggleButton Content="Toggle button" />
                         <TextBlock Classes="TinyText" Margin="0,5">CheckBox:</TextBlock>
                         <CheckBox Content="checkbox 1" />
-                        <CheckBox Content="checkbox 1" IsChecked="True" IsEnabled="False"  />
-                        <CheckBox Content="checkbox 1" IsEnabled="False"  />
+                        <CheckBox Content="checkbox 2" IsChecked="True" IsEnabled="False"  />
+                        <CheckBox Content="checkbox 3" IsEnabled="False"  />
                         
                         <CheckBox Content="Different Style 1" Classes="RadioButton" IsChecked="True"  />
                         <CheckBox Content="Different Style 2" Classes="RadioButton"   />
@@ -52,6 +57,11 @@
                         
                         <RadioButton Content="Different Style 1" GroupName="DifferentStyle" Classes="CheckBox" IsChecked="True"  />
                         <RadioButton Content="Different Style 2" GroupName="DifferentStyle" Classes="CheckBox"   />
+                       
+                        <TextBlock Classes="TinyText" Margin="0,5">Switch:</TextBlock>
+                        <CheckBox Classes="SwitchDark" Content="Switch 1" />
+                        <CheckBox Classes="SwitchDark" Content="Switch 2" IsChecked="True" IsEnabled="False"  />
+                        <CheckBox Classes="SwitchDark" Content="Switch 3" IsEnabled="False"  />
                     </StackPanel>
                 </Border>
             </StackPanel>
@@ -163,6 +173,89 @@
                                      Fill="{StaticResource Default-InnerWhite}"
                                      HorizontalAlignment="Center" VerticalAlignment="Center"
                                      x:Name="CheckDot" IsVisible="{TemplateBinding IsChecked}" />
+                        </Border>
+                        <ContentPresenter
+                            Content="{TemplateBinding Content}"
+                            VerticalAlignment="Center"
+                            Margin="5,0,0,0" RecognizesAccessKey="True" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style> 
+    
+    
+    <Style Selector="CheckBox.Switch, RadioButton.Switch">
+        <Setter Property="Background" Value="{StaticResource Neutral700}" />
+        
+        <Style Selector="^:pointerover">
+            <Setter Property="Background" Value="{StaticResource Neutral500}" />
+        </Style>
+        
+        <Style Selector="^[IsChecked=True]">
+            <Setter Property="Background" Value="{StaticResource Default-CheckedColor}" />
+            <Style Selector="^ /template/ Ellipse#SwitchNob">
+                <Setter Property="HorizontalAlignment" Value="Right" />
+            </Style>
+        </Style>
+        
+        <Style Selector="^[IsEnabled=False]">
+            <Setter Property="Background" Value="{StaticResource Neutral700}" />
+            <Style Selector="^ /template/ Ellipse#SwitchNob">
+                <Setter Property="Fill" Value="{StaticResource Disabled-InnerWhite}" />
+            </Style>
+        </Style>
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="42" Height="24"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0"
+                                CornerRadius="13">
+                            <Ellipse Width="18" Height="18" x:Name="SwitchNob"
+                                     Margin="3,0" HorizontalAlignment="Left"
+                                     Fill="{StaticResource Default-InnerWhite}" VerticalAlignment="Center" />
+                        </Border>
+                        <ContentPresenter
+                            Content="{TemplateBinding Content}"
+                            VerticalAlignment="Center"
+                            Margin="5,0,0,0" RecognizesAccessKey="True" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style> 
+    
+    <Style Selector="CheckBox.SwitchDark, RadioButton.SwitchDark">
+        <Setter Property="Background" Value="{StaticResource Default-Background}" />
+
+        <Style Selector="^[IsChecked=True]">
+            <Setter Property="Background" Value="{StaticResource Default-CheckedColor}" />
+            <Style Selector="^ /template/ Ellipse#SwitchNob">
+                <Setter Property="HorizontalAlignment" Value="Right" />
+            </Style>
+        </Style>
+        
+        <Style Selector="^[IsEnabled=False]">
+            <Setter Property="Background" Value="{StaticResource Neutral700}" />
+            <Style Selector="^ /template/ Ellipse#SwitchNob">
+                <Setter Property="Fill" Value="{StaticResource Disabled-InnerWhite}" />
+            </Style>
+        </Style>
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="42" Height="24"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0"
+                                CornerRadius="13">
+                            <Ellipse Width="18" Height="18" x:Name="SwitchNob"
+                                     Margin="3,0" HorizontalAlignment="Left"
+                                     Fill="{StaticResource Default-InnerWhite}" VerticalAlignment="Center" />
                         </Border>
                         <ContentPresenter
                             Content="{TemplateBinding Content}"
