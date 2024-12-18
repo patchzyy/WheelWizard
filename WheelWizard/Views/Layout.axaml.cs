@@ -5,6 +5,7 @@ using System;
 using WheelWizard.Services;
 using WheelWizard.Views.Components;
 using WheelWizard.Views.Pages;
+using SettingsPage = WheelWizard.Views.Pages.Settings.SettingsPage;
 
 namespace WheelWizard.Views;
 
