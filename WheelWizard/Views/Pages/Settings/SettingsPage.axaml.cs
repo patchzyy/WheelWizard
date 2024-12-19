@@ -2,6 +2,7 @@
 using Avalonia.Interactivity;
 using System;
 using WheelWizard.Services.Installation;
+using WheelWizard.Views.Popups;
 
 namespace WheelWizard.Views.Pages.Settings;
 
@@ -43,7 +44,8 @@ public partial class SettingsPage : UserControl
     
     private void DevButton_OnClick(object? sender, RoutedEventArgs e)
     {
-        // This is the button at the top right, that opens the dev tool that we can put ourown stuff in
+        PopupWindow popup = new(true,true,true, "Dev Settings", new(250,250));
+        popup.Show();
     }
 }
 

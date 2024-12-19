@@ -15,14 +15,19 @@
         ExtendClientAreaChromeHints="NoChrome"
         CanResize='False' Background="Transparent">
         
-    <Grid ColumnDefinitions="192,*" RowDefinitions="25,17,88,*,80" Background="{StaticResource FrameColor}">
+    <Grid ColumnDefinitions="192,*" RowDefinitions="25,17,88,*,80" x:Name="CompleteGrid"
+          Background="{StaticResource FrameColor}">
                 
         <Border Grid.ColumnSpan="2"
                 CornerRadius="0"
                 Background="{StaticResource FrameColor}"
                 PointerPressed="TopBar_PointerPressed">
         </Border>
-
+        
+        <Border Grid.RowSpan="999" Grid.ColumnSpan="999" ZIndex="999" IsVisible="False"
+                x:Name="DisabledDarkenEffect" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                Background="Black"  Opacity="0.3"/> 
+        
         <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Bottom">
             <comps:IconLabel IconData="{StaticResource WheelIcon}"
                              Text="Wheel Wizard"
