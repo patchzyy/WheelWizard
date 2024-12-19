@@ -42,6 +42,18 @@ public partial class Layout : Window
             BeginMoveDrag(e);
         }
     }
+    
+    public void DisableEverything()
+    {
+        DisabledDarkenEffect.IsVisible = true;
+        CompleteGrid.IsEnabled = false;
+    }
+
+    public void EnableEverything()
+    {
+        CompleteGrid.IsEnabled = true;
+        DisabledDarkenEffect.IsVisible = false;
+    } 
 
     private void CloseButton_Click(object? sender, RoutedEventArgs e) => Close();
     private void MinimizeButton_Click(object? sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
