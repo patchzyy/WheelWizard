@@ -4,7 +4,6 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using System;
 using System.ComponentModel;
-using System.Windows.Input;
 using WheelWizard.Services.Settings;
 
 namespace WheelWizard.Views.Popups;
@@ -87,11 +86,10 @@ public partial class PopupWindow : Window, INotifyPropertyChanged
     private void PopupWindow_Loaded(object? sender, RoutedEventArgs e)
     {
         BeforeOpen();
-        if (!_allowLayoutInteraction)
-        {
-            ViewUtils.GetLayout().DisableEverything();
-            _disableCount++;
-        }
+        if (_allowLayoutInteraction) return;
+
+        ViewUtils.GetLayout().DisableEverything();
+        _disableCount++;
     }
     
     private void TopBar_PointerPressed(object? sender, PointerPressedEventArgs e)
@@ -102,7 +100,6 @@ public partial class PopupWindow : Window, INotifyPropertyChanged
     
     private void CloseButton_Click(object sender, RoutedEventArgs e) => Close();
     
-
     protected override void OnClosed(EventArgs e)
     {
         BeforeClose();

@@ -1,0 +1,36 @@
+<self:PopupContent xmlns="https://github.com/avaloniaui"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:self="clr-namespace:WheelWizard.Views.Popups"
+      mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+      xmlns:components="clr-namespace:WheelWizard.Views.Components"
+      x:Class="WheelWizard.Views.Popups.Generic.MessageBoxWindow">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Error Message Text -->
+        <TextBlock x:Name="ErrorTextBlock"
+                   Classes="TitleText"
+                   Text="An error has occurred."
+                   FontSize="16"
+                   TextWrapping="Wrap"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Grid.Row="0"
+                   Margin="0,0,0,10"/>
+
+        <!-- OK Button -->
+        <components:Button Grid.Row="0" x:Name="CancelButton"
+                           Text="OK" Width="140"
+                           Variant="Default"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Bottom"
+                           IconData="{StaticResource CheckMark}"
+                           Margin="0,0,10,0"
+                           Click="OkButton_Click"/>
+    </Grid>
+</self:PopupContent>
