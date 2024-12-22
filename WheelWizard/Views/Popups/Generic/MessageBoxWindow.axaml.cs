@@ -1,7 +1,4 @@
-using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
 using System.Media;
 using Button = WheelWizard.Views.Components.Button;
 
