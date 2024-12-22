@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using WheelWizard.Services.GameBanana;
 using WheelWizard.WPFViews.Pages;
-using WheelWizard.WPFViews.Popups.Generic;
+using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.WPFViews.Popups.ModManagment;
 

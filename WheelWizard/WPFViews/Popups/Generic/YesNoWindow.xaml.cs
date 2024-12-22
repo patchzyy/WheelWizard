@@ -8,7 +8,7 @@ public partial class YesNoWindow : PopupContent
     public bool Result { get; private set; }
     
     // Close is allowed, since its the exact same as pressing no
-    public YesNoWindow() : base(true, false,true ,"Wheel Wizard")
+    private YesNoWindow() : base(true, false,true ,"Wheel Wizard")
     {
         InitializeComponent();
         YesButton.Text = Common.Action_Yes;

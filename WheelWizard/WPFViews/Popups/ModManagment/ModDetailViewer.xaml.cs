@@ -111,7 +111,7 @@ public partial class ModDetailViewer : UserControl
     
     private async void Install_Click(object sender, RoutedEventArgs e)
     {
-        var confirmation = new YesNoWindow().SetMainText($"Do you want to download and install the mod: {CurrentMod._sName}?").AwaitAnswer();
+        var confirmation = new Views.Popups.Generic.YesNoWindow().SetMainText($"Do you want to download and install the mod: {CurrentMod._sName}?").AwaitAnswer();
         if (!confirmation)
         {
             MessageBoxWindow.ShowDialog("Download cancelled.");

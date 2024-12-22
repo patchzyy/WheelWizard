@@ -9,7 +9,7 @@ using System.Windows;
 using WheelWizard.Helpers;
 using WheelWizard.Models.Settings;
 using WheelWizard.Resources.Languages;
-using WheelWizard.WPFViews.Popups.Generic;
+using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Services.Launcher;
 
@@ -80,7 +80,7 @@ public static async Task PrepareModsForLaunch()
     }
 
     var totalFiles = finalFiles.Count;
-    var progressWindow = new ProgressWindow(Phrases.PopupText_InstallingMods)
+    var progressWindow = new  WPFViews.Popups.Generic.ProgressWindow(Phrases.PopupText_InstallingMods)
         .SetGoal(Humanizer.ReplaceDynamic(Phrases.PopupText_InstallingModsCount, totalFiles)!);
     progressWindow.Show();
 

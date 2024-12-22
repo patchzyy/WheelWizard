@@ -15,7 +15,7 @@ using WheelWizard.Services.WiiManagement.SaveData;
 using WheelWizard.Utilities.RepeatedTasks;
 using WheelWizard.WPFViews.Components;
 using WheelWizard.WPFViews.Pages;
-using WheelWizard.WPFViews.Popups.Generic;
+using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.WPFViews;
 

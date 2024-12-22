@@ -1,6 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
-using WheelWizard.WPFViews.Popups.Generic;
+using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.WPFViews.Pages.KitchenSink;
 
