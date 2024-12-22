@@ -13,15 +13,17 @@
         </Grid.RowDefinitions>
 
         <!-- Error Message Text -->
-        <TextBlock x:Name="ErrorTextBlock"
-                   Classes="TitleText"
-                   Text="An error has occurred."
-                   FontSize="16"
-                   TextWrapping="Wrap"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   Grid.Row="0"
-                   Margin="0,0,0,10"/>
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,10">
+            
+            <TextBlock Classes="TitleText" x:Name="MainTextBlock"
+                       Text="An error has occurred."
+                       HorizontalAlignment="Left" TextWrapping="Wrap"
+                       Foreground="{StaticResource Neutral300}"
+                       FontSize="18"/>
+            <TextBlock Classes="BodyText" x:Name="ExtraTextBlock"
+                       FontSize="14"
+                       HorizontalAlignment="Left" Margin="0,10,0,0" />
+        </StackPanel>
 
         <!-- OK Button -->
         <components:Button Grid.Row="0" x:Name="CancelButton"

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using WheelWizard.Helpers;
 using WheelWizard.Resources.Languages;
-using WheelWizard.WPFViews.Popups.Generic;
+using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Services.Installation;
 
@@ -76,7 +76,7 @@ public static class RetroRewindInstaller
         var serverResponse = await HttpClientHelper.GetAsync<string>(Endpoints.RRUrl);
         if (!serverResponse.Succeeded)
         {
-            MessageBoxWindow.ShowDialog(Phrases.PopupText_CouldNotConnectServer);
+            await new MessageBoxWindow().SetMainText(Phrases.PopupText_CouldNotConnectServer).ShowDialog();
             return;
         }
         var tempZipPath = Path.Combine(PathManager.LoadFolderPath, "Temp", "RetroRewind.zip");
@@ -124,7 +124,7 @@ public static class RetroRewindInstaller
 
     private static async Task DownloadAndExtractRetroRewind(string tempZipPath)
     {
-        var progressWindow = new ProgressWindow(Phrases.PopupText_InstallingRR);
+        var progressWindow = new WPFViews.Popups.Generic.ProgressWindow(Phrases.PopupText_InstallingRR);
         progressWindow.SetExtraText(Phrases.PopupText_InstallingRRFirstTime);
         progressWindow.Show();
 

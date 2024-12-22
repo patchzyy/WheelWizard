@@ -10,7 +10,7 @@ using WheelWizard.Helpers;
 using WheelWizard.Models;
 using WheelWizard.Models.Github;
 using WheelWizard.Resources.Languages;
-using WheelWizard.WPFViews.Popups.Generic;
+using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Services.Installation;
 
@@ -101,7 +101,7 @@ public static class AutoUpdater
         var currentFolder = Path.GetDirectoryName(currentExecutablePath);
         if (currentFolder is null)
         {
-            MessageBoxWindow.ShowDialog(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation);
+            await new MessageBoxWindow().SetMainText(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation).ShowDialog();
             return;
         }
         var newFilePath = Path.Combine(currentFolder, currentExecutableName+"_new.exe");
@@ -125,7 +125,7 @@ public static class AutoUpdater
         var currentFolder = Path.GetDirectoryName(currentFilePath);
         if (currentFolder is null)
         {
-            MessageBoxWindow.ShowDialog(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation);
+            new MessageBoxWindow().SetMainText(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation).ShowDialog();
             return;
         }
         var scriptFilePath = Path.Combine(currentFolder, "update.ps1");
@@ -200,7 +200,7 @@ public static class AutoUpdater
         }
         catch (Exception ex)
         {
-            MessageBoxWindow.ShowDialog($"Failed to execute the update script. {ex.Message}");
+            new MessageBoxWindow().SetMainText($"Failed to execute the update script. {ex.Message}").ShowDialog();
         }
     }
 
@@ -208,11 +208,12 @@ public static class AutoUpdater
     private static void HandleUpdateCheckError(HttpClientResult<string> response)
     {
         if (response.StatusCodeGroup == 4 || response.StatusCode is 503 or 504)
-            MessageBoxWindow.ShowDialog(Phrases.PopupText_UnableUpdateWhWz_ReasonNetwork);
+            new MessageBoxWindow().SetMainText(Phrases.PopupText_UnableUpdateWhWz_ReasonNetwork).ShowDialog();
         else
         {
-            MessageBoxWindow.ShowDialog("An error occurred while checking for updates. Please try again later. " +
-                                    "\nError: " + response.StatusMessage);
+            new MessageBoxWindow().SetMainText("An error occurred while checking for updates. Please try again later. " + 
+                                               "\nError: " + response.StatusMessage)
+                                  .ShowDialog();
         }
     }
 }

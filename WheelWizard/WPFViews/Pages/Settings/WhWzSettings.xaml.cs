@@ -13,7 +13,7 @@ using WheelWizard.Models.Settings;
 using WheelWizard.Resources.Languages;
 using WheelWizard.Services;
 using WheelWizard.Services.Settings;
-using WheelWizard.WPFViews.Popups.Generic;
+using WheelWizard.Views.Popups.Generic;
 using Button = WheelWizard.WPFViews.Components.Button;
 
 namespace WheelWizard.WPFViews.Pages.Settings;
@@ -153,11 +153,11 @@ public partial class WhWzSettings : UserControl
         TogglePathSettings(false);
         if (!(SettingsHelper.PathsSetupCorrectly() && path1 && path2 && path3))
         {
-            MessageBoxWindow.ShowDialog(Phrases.PopupText_EnsurePathsExists);
+            new MessageBoxWindow().SetMainText(Phrases.PopupText_EnsurePathsExists).ShowDialog();
         }
         else
         {
-            MessageBoxWindow.ShowDialog(Phrases.PopupText_SettingsSaved);
+            new MessageBoxWindow().SetMainText(Phrases.PopupText_SettingsSaved).ShowDialog();
             
             // This is not really the best approach, but it works for now
             if (oldPath1 + oldPath2 + oldPath3 != DolphinExeInput.Text + MarioKartInput.Text + DolphinUserPathInput.Text)

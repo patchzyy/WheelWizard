@@ -45,9 +45,9 @@ public partial class SettingsPage : UserControl
     
     private void DevButton_OnClick(object? sender, RoutedEventArgs e)
     {
-        var popup = new YesNoWindow();
-        popup.SetMainText("Hey plzz respond");
-        popup.SetExtraText("Something else");
+        var popup = new MessageBoxWindow()
+            .SetMainText("Hey plzz respond")
+            .SetExtraText("Something else");
         popup.Show();
     }
 }

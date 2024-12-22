@@ -93,8 +93,8 @@ namespace WheelWizard.Helpers;
             attempt++;
             if (attempt >= MaxRetries)
             {
-                new YesNoWindow().SetMainText("Download timed out")
-                    .SetExtraText($"The download timed out after {MaxRetries} attempts.");
+                new Views.Popups.Generic.YesNoWindow().SetMainText("Download timed out")
+                                                        .SetExtraText($"The download timed out after {MaxRetries} attempts.");
                 break;
             }
 

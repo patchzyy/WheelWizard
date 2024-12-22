@@ -13,7 +13,7 @@ using WheelWizard.Models.Settings;
 using WheelWizard.Resources.Languages;
 using WheelWizard.Services.Installation;
 using WheelWizard.Services.Launcher;
-using WheelWizard.WPFViews.Popups.Generic;
+using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Services;
 
@@ -165,7 +165,7 @@ public class ModManager : INotifyPropertyChanged
 
     private async Task CombineFilesIntoSingleModAsync(string[] filePaths)
     {
-        var modName = new TextInputPopup("Enter Mod Name").ShowDialog();
+        var modName = new WPFViews.Popups.Generic.TextInputPopup("Enter Mod Name").ShowDialog();
         if (!IsValidName(modName)) return;
         var tempZipPath = Path.Combine(Path.GetTempPath(), $"{modName}.zip");
         try
@@ -201,7 +201,7 @@ public class ModManager : INotifyPropertyChanged
 
     public void RenameMod(Mod selectedMod)
     {
-        var newTitle = new TextInputPopup("Enter Mod Title").ShowDialog();
+        var newTitle = new  WPFViews.Popups.Generic.TextInputPopup("Enter Mod Title").ShowDialog();
         if (!IsValidName(newTitle)) return;
 
         var oldTitle = selectedMod.Title;
