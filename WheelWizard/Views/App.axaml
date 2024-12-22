@@ -34,5 +34,6 @@
         <StyleInclude Source="Components/StateBox.axaml"/>
         <StyleInclude Source="Components/SidebarRadioButton.axaml"/>
         <StyleInclude Source="Components/EmptyPageInfo.axaml"/>
+        <StyleInclude Source="Components/FormFieldLabel.axaml"/>
     </Application.Styles>
 </Application>

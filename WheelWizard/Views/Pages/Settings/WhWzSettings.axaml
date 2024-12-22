@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:components="clr-namespace:WheelWizard.Views.Components"
              x:Class="WheelWizard.Views.Pages.Settings.WhWzSettings">
-    WhWz SETTINGS
+    <components:FormFieldLabel Text="Skibidi" TipText="Something else"/>
 </UserControl>

@@ -14,7 +14,7 @@ public partial class StateBox : TemplatedControl // Change to TemplatedControl
 
     // Styled properties remain the same
     public static readonly StyledProperty<string> TextProperty =
-        AvaloniaProperty.Register<StateBox, string>(nameof(Text));
+        AvaloniaProperty.Register<StateBox, string>(nameof(Text), "Form Field Label");
 
     public string Text
     {
