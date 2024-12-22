@@ -18,7 +18,7 @@
             <TextBlock Classes="TitleText" x:Name="MainTextBlock"
                        Text="An error has occurred."
                        HorizontalAlignment="Left" TextWrapping="Wrap"
-                       Foreground="{StaticResource Neutral300}"
+                       Foreground="{StaticResource FormFieldLabelColor}"
                        FontSize="18"/>
             <TextBlock Classes="BodyText" x:Name="ExtraTextBlock"
                        FontSize="14"
