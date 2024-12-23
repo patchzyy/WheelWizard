@@ -65,26 +65,12 @@ public class Button : Avalonia.Controls.Button // Change to TemplatedControl
     // UpdateStyleClasses remains the same
     private void UpdateStyleClasses(ButtonsVariantType variant)
     {
-        Classes.Remove("Primary");
-        Classes.Remove("Warning");
-        Classes.Remove("Danger");
-        Classes.Remove("Default");
-
-        switch (variant)
+        var types = Enum.GetValues<ButtonsVariantType>();
+        foreach (var enumType in types)
         {
-            case ButtonsVariantType.Primary:
-                Classes.Add("Primary");
-                break;
-            case ButtonsVariantType.Warning:
-                Classes.Add("Warning");
-                break;
-            case ButtonsVariantType.Danger:
-                Classes.Add("Danger");
-                break;
-            default:
-                Classes.Add("Default");
-                break;
+            Classes.Remove(enumType.ToString());
         }
+        Classes.Add(variant.ToString());
     }
     
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)

@@ -7,7 +7,7 @@ namespace WheelWizard.Views.Components;
 public class FormFieldLabel : UserControl
 {   
     public static readonly StyledProperty<string> TextProperty =
-        AvaloniaProperty.Register<IconLabel, string>(nameof(Text)); // Add a default value here
+        AvaloniaProperty.Register<FormFieldLabel, string>(nameof(Text)); // Add a default value here
    
     public string Text
     {
@@ -16,7 +16,7 @@ public class FormFieldLabel : UserControl
     }
     
     public static readonly StyledProperty<string> TipTextProperty =
-        AvaloniaProperty.Register<IconLabel, string>(nameof(TipText)); // Add a default value here
+        AvaloniaProperty.Register<FormFieldLabel, string>(nameof(TipText)); // Add a default value here
    
     public string TipText
     {
