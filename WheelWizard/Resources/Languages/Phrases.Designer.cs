@@ -709,7 +709,7 @@ namespace WheelWizard.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Made by: {$1} \n And {$2}.
+        ///   Looks up a localized string similar to Made by: {$1} \n and {$2}.
         /// </summary>
         public static string Text_MadeByString {
             get {

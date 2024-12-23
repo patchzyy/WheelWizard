@@ -28,7 +28,7 @@
         <value>Support us!</value>
     </data>
     <data name="Text_MadeByString" xml:space="preserve">
-        <value>Made by: {$1} \n And {$2}</value>
+        <value>Made by: {$1} \n and {$2}</value>
     </data>
     <data name="Text_ThanksTranslators" xml:space="preserve">
         <value>Thanks a lot to all the translators:</value>
