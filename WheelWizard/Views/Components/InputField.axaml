@@ -1,0 +1,51 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:WheelWizard.Views.Components"
+        xmlns:components="clr-namespace:WheelWizard.Views.Components">
+    <Design.PreviewWith>
+        <controls:InputField />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|InputField">
+        <Setter Property="Background" Value="{StaticResource Neutral800}"/>
+        <Setter Property="Foreground" Value="{StaticResource Neutral200}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Neutral800}"/>
+        
+        <Setter Property="Template">
+            <ControlTemplate>
+                 <StackPanel>
+                     <!-- Label TextBlock -->
+                     <!-- This will be collapsed if the label is empty, but that is done in the controller
+                      since for some reason it just straight up ignores the dataTrigger -->
+                     <components:FormFieldLabel x:Name="LabelElement"
+                                                Text="{TemplateBinding Label}"
+                                                TipText="{TemplateBinding LabelTip}"
+                                                VerticalAlignment="Bottom" />
+
+                     <!-- The border is wrapped inside an outerBorder without the border
+                     This is to ensure that even if there is a funky pixel gap in between the inner part and outer stroke of the border, 
+                     that it will just be filled in with the same background color as the inside -->
+                     <Border HorizontalAlignment="Stretch"
+                             Height="{TemplateBinding Height}"
+                             Background="{TemplateBinding Background}"
+                             BorderBrush="{TemplateBinding BorderBrush}"
+                             BorderThickness="{TemplateBinding BorderThickness}"
+                             CornerRadius="{StaticResource GlobalCornerRadius}">
+                         <Grid>
+                             <TextBlock x:Name="PlaceholderBlock"
+                                        Text="{TemplateBinding Placeholder}"
+                                        Foreground="{StaticResource Neutral500}"
+                                        IsVisible="false"
+                                        VerticalAlignment="Center"
+                                        Margin="{TemplateBinding Padding}" />
+                 
+                             <TextPresenter x:Name="PART_TextPresenter" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                             
+                         </Grid>
+                     </Border>
+                     
+                 </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

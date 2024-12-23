@@ -5,5 +5,9 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:components="clr-namespace:WheelWizard.Views.Components"
              x:Class="WheelWizard.Views.Pages.Settings.OtherSettings">
-    <components:FormFieldLabel Text="Skibidi" TipText=""/>
+    <StackPanel VerticalAlignment="Center">
+        <TextBox VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <components:InputField Label="Something"/>
+    </StackPanel>
+  
 </UserControl>
