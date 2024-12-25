@@ -1,51 +1,81 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="using:WheelWizard.Views.Components"
         xmlns:components="clr-namespace:WheelWizard.Views.Components">
+
     <Design.PreviewWith>
-        <controls:InputField />
+        <Border Padding="20" Background="{StaticResource Neutral950}">
+            <StackPanel Spacing="10" Width="300">
+                <components:InputField Watermark="Enter text here" />
+                <components:InputField Label="Username" Watermark="Enter username" />
+                <components:InputField Label="Password" LabelTip="Enter your password" Watermark="Enter password" />
+                <components:InputField Label="Dark Variant" Variant="Dark" Watermark="Dark variant" />
+            </StackPanel>
+        </Border>
     </Design.PreviewWith>
 
-    <Style Selector="controls|InputField">
-        <Setter Property="Background" Value="{StaticResource Neutral800}"/>
-        <Setter Property="Foreground" Value="{StaticResource Neutral200}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource Neutral800}"/>
-        
+    <Style Selector="components|InputField">
+        <Setter Property="Background" Value="{StaticResource Neutral800}" />
+        <Setter Property="Foreground" Value="{StaticResource Neutral200}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Neutral800}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="2" />
+        <Setter Property="Padding" Value="12,6" />
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <ControlTemplate>
-                 <StackPanel>
-                     <!-- Label TextBlock -->
-                     <!-- This will be collapsed if the label is empty, but that is done in the controller
-                      since for some reason it just straight up ignores the dataTrigger -->
-                     <components:FormFieldLabel x:Name="LabelElement"
-                                                Text="{TemplateBinding Label}"
-                                                TipText="{TemplateBinding LabelTip}"
-                                                VerticalAlignment="Bottom" />
+                <StackPanel>
+                    <components:FormFieldLabel x:Name="LabelElement"
+                                               Text="{TemplateBinding Label}"
+                                               TipText="{TemplateBinding LabelTip}"
+                                               IsVisible="False"
+                                               Margin="0,0,0,4"/>
 
-                     <!-- The border is wrapped inside an outerBorder without the border
-                     This is to ensure that even if there is a funky pixel gap in between the inner part and outer stroke of the border, 
-                     that it will just be filled in with the same background color as the inside -->
-                     <Border HorizontalAlignment="Stretch"
-                             Height="{TemplateBinding Height}"
-                             Background="{TemplateBinding Background}"
-                             BorderBrush="{TemplateBinding BorderBrush}"
-                             BorderThickness="{TemplateBinding BorderThickness}"
-                             CornerRadius="{StaticResource GlobalCornerRadius}">
-                         <Grid>
-                             <TextBlock x:Name="PlaceholderBlock"
-                                        Text="{TemplateBinding Placeholder}"
-                                        Foreground="{StaticResource Neutral500}"
-                                        IsVisible="false"
-                                        VerticalAlignment="Center"
-                                        Margin="{TemplateBinding Padding}" />
-                 
-                             <TextPresenter x:Name="PART_TextPresenter" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                             
-                         </Grid>
-                     </Border>
-                     
-                 </StackPanel>
+                    <Panel>
+                        <TextBlock x:Name="PlaceholderBlock"
+                                   Text="{TemplateBinding Watermark}"
+                                   Foreground="{StaticResource Neutral500}"
+                                   IsVisible="False"
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                   Padding="{TemplateBinding Padding}" />
+                        <TextPresenter x:Name="PART_TextPresenter"
+                                       Background="{TemplateBinding Background}"
+                                       Text="{TemplateBinding Text}"
+                                       CaretIndex="{TemplateBinding CaretIndex}"
+                                       SelectionStart="{TemplateBinding SelectionStart}"
+                                       SelectionEnd="{TemplateBinding SelectionEnd}"
+                                       SelectionBrush="{TemplateBinding SelectionBrush}"
+                                       SelectionForegroundBrush="{TemplateBinding SelectionForegroundBrush}"
+                                       RevealPassword="{TemplateBinding RevealPassword}"
+                                       PasswordChar="{TemplateBinding PasswordChar}" /> 
+                    </Panel>
+                </StackPanel>
             </ControlTemplate>
         </Setter>
+    </Style>
+
+    <Style Selector="components|InputField:dark">
+        <Setter Property="Background" Value="{StaticResource Neutral950}" />
+        <Setter Property="Foreground" Value="{StaticResource Neutral100}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Neutral700}" />
+    </Style>
+
+    <Style Selector="components|InputField:pointerover /template/ ContentPresenter">
+        <Setter Property="BorderBrush" Value="{StaticResource Neutral600}" />
+    </Style>
+
+    <Style Selector="components|InputField:dark:pointerover /template/ ContentPresenter">
+        <Setter Property="BorderBrush" Value="{StaticResource Neutral500}" />
+    </Style>
+
+    <Style Selector="components|InputField:focus /template/ ContentPresenter">
+        <Setter Property="BorderBrush" Value="{StaticResource Primary400}" />
+    </Style>
+
+    <Style Selector="components|InputField:dark:focus /template/ ContentPresenter">
+        <Setter Property="BorderBrush" Value="{StaticResource Primary400}" />
+    </Style>
+    
+    <Style Selector="components|InputField:disabled">
+        <Setter Property="Opacity" Value="0.5" />
     </Style>
 </Styles>
