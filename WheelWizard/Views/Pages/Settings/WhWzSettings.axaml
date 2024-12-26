@@ -3,152 +3,149 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:components="clr-namespace:WheelWizard.Views.Components"
-             xmlns:settings="clr-namespace:WheelWizard.Views.Pages.Settings"
              xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
              mc:Ignorable="d" d:DesignWidth="444" d:DesignHeight="716"
              x:Class="WheelWizard.Views.Pages.Settings.WhWzSettings">
-
-    <Grid>
-        <StackPanel Grid.Row="1">
-            <!-- File location settings -->
-            <StackPanel Margin="0,10,0,0">
-                <StackPanel Orientation="Horizontal">
-                    <components:FormFieldLabel Text="{x:Static lang:Settings.Section_LocationPaths}" />
-                    <Border x:Name="LocationWarningIcon"
-                            ToolTip.Tip="You must set these 3 values before you can start playing retro rewind"
-                            ToolTip.Placement="Top" ToolTip.ShowDelay="50">
-                        <PathIcon x:Name="WarningIcon"
-                                  Data="{StaticResource WarningTriangle}"
-                                  Width="16" Height="16"
-                                   />
-                    </Border>
-                </StackPanel>
-
-                <Border Classes="SettingsBlockStyle" x:Name="LocationBorder">
-                    <StackPanel>
-                        <StackPanel x:Name="LocationInputFields">
-                            <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-                                <components:FormFieldLabel
-                                    Text="{x:Static lang:Settings.Option_DolphinEmulatorExe}"
-                                                           TipText="{x:Static lang:Settings.InfoText_EndWithExe}" />
-
-                                <components:InputField Grid.Row="1" Grid.Column="0"
-                                                       Height="40"
-                                                       Placeholder="{x:Static lang:Phrases.Placeholder_EnterPath}"
-                                                       HorizontalAlignment="Stretch"
-                                                       x:Name="DolphinExeInput" />
-                                <components:Button Grid.Row="1" Grid.Column="1"
-                                                   FontSize="16" Height="40"
-                                                   IconData="{StaticResource Folder}"
-                                                   Click="DolphinExeBrowse_OnClick" Margin="10,0,0,0" />
-                            </Grid>
-
-                            <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-                                <components:FormFieldLabel Text="{x:Static lang:Settings.Option_MarioKartGame}"
-                                                           TipText="Path can end with: .wbfs/.iso/.rvz"
-                                                           Margin="0,6,0,0" />
-                                <components:InputField Grid.Row="1" Grid.Column="0" Height="40"
-                                                       Placeholder="{x:Static lang:Phrases.Placeholder_EnterPath}"
-                                                       HorizontalAlignment="Stretch"
-                                                       x:Name="MarioKartInput" />
-                                <components:Button Grid.Row="1" Grid.Column="1"
-                                                   FontSize="16" Height="40"
-                                                   IconData="{StaticResource Folder}"
-                                                   Click="GameLocationBrowse_OnClick"
-                                                   Margin="10,0,0,0" />
-                            </Grid>
-
-                            <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-                                <components:FormFieldLabel Text="{x:Static lang:Settings.Option_DolphinUserPath}"
-                                                           Margin="0,6,0,0" />
-                                <components:InputField Grid.Row="1" Grid.Column="0"
-                                                       HorizontalAlignment="Stretch"
-                                                       Height="40"
-                                                       Placeholder="{x:Static lang:Phrases.Placeholder_EnterPath}"
-                                                       x:Name="DolphinUserPathInput" />
-                                <components:Button Grid.Row="1" Grid.Column="1"
-                                                   FontSize="16" Height="40"
-                                                   IconData="{StaticResource Folder}"
-                                                   Click="DolphinUserPathBrowse_OnClick" Margin="10,0,0,0" />
-                            </Grid>
-                        </StackPanel>
-                        
-                        <StackPanel Margin="0,10,0,0" Orientation="Horizontal" HorizontalAlignment="Right">
-                            <components:Button Variant="Primary" x:Name="LocationEditButton"
-                                               Text="{x:Static lang:Common.Action_Edit}"
-                                               Click="EditButton_OnClick" Height="40"
-                                               IconData="{StaticResource Pen}"
-                                               Margin="3" />
-                            <components:Button Variant="Warning"
-                                               x:Name="LocationCancelButton" Height="40"
-                                               IsVisible="False" Click="CancelButton_OnClick"
-                                               Text="{x:Static lang:Common.Action_Cancel}" Margin="3" />
-                            <components:Button Variant="Primary"
-                                               Text="{x:Static lang:Common.Action_Save}"
-                                               x:Name="LocationSaveButton"
-                                               Click="SaveButton_OnClick"
-                                               IsVisible="False" Height="40"
-                                               Margin="3" />
-                        </StackPanel>
-                    </StackPanel>
+   
+    <StackPanel>
+        <!-- File location settings -->
+        <StackPanel Margin="0,10,0,0">
+            <StackPanel Orientation="Horizontal">
+                <components:FormFieldLabel Text="{x:Static lang:Settings.Section_LocationPaths}" />
+                <Border x:Name="LocationWarningIcon"
+                        ToolTip.Tip="You must set these 3 values before you can start playing retro rewind"
+                        ToolTip.Placement="Top" ToolTip.ShowDelay="50">
+                    <PathIcon x:Name="WarningIcon"
+                              Data="{StaticResource WarningTriangle}"
+                              Width="16" Height="16"
+                               />
                 </Border>
-                
-                <Grid HorizontalAlignment="Stretch">
-                    <components:Button Variant="Default"
-                                       IsEnabled="True"
-                                       IconData="{StaticResource Folder}"
-                                       HorizontalAlignment="Left"
-                                       Text="{x:Static lang:Settings.Option_OpenConfig}"
-                                       Click="Folder_Click"
-                                       Margin="3" />
-                    <!-- <components:Button Variant="Default" -->
-                    <!--                    IsEnabled="True" -->
-                    <!--                    IconPack="Material" -->
-                    <!--                    IconKind="{x:Static icon:PackIconMaterialKind.ContentSaveEdit}" -->
-                    <!--                    HorizontalAlignment="Right" -->
-                    <!--                    Text="Open Save File" -->
-                    <!--                    Margin="3" /> -->
-                </Grid>
             </StackPanel>
 
-            <components:FormFieldLabel Text="{x:Static lang:Settings.Section_WhWzAppearance}" Margin="0,10,0,0" />
-            <Border Classes="SettingsBlockStyle"
-                    x:Name="WhWzAppearance">
-                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                    <CheckBox Margin="0,2,0,6"
-                              IsChecked="True"
-                              Classes="Switch"
-                              x:Name="EnableAnimations"
-                              Click="EnableAnimations_OnClick">
-                        <components:FormFieldLabel Text="{x:Static lang:Settings.Option_EnableAnimations}"
-                                                    TipText="{x:Static lang:Settings.InfoText_EnableAnimations}" />
-                    </CheckBox>
+            <Border Classes="SettingsBlockStyle" x:Name="LocationBorder">
+                <StackPanel>
+                    <StackPanel x:Name="LocationInputFields">
+                        <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <components:FormFieldLabel
+                                Text="{x:Static lang:Settings.Option_DolphinEmulatorExe}"
+                                                       TipText="{x:Static lang:Settings.InfoText_EndWithExe}" />
+
+                            <components:InputField Grid.Row="1" Grid.Column="0"
+                                                   Height="40"
+                                                   Placeholder="{x:Static lang:Phrases.Placeholder_EnterPath}"
+                                                   HorizontalAlignment="Stretch"
+                                                   x:Name="DolphinExeInput" />
+                            <components:Button Grid.Row="1" Grid.Column="1"
+                                               FontSize="16" Height="40"
+                                               IconData="{StaticResource Folder}"
+                                               Click="DolphinExeBrowse_OnClick" Margin="10,0,0,0" />
+                        </Grid>
+
+                        <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <components:FormFieldLabel Text="{x:Static lang:Settings.Option_MarioKartGame}"
+                                                       TipText="Path can end with: .wbfs/.iso/.rvz"
+                                                       Margin="0,6,0,0" />
+                            <components:InputField Grid.Row="1" Grid.Column="0" Height="40"
+                                                   Placeholder="{x:Static lang:Phrases.Placeholder_EnterPath}"
+                                                   HorizontalAlignment="Stretch"
+                                                   x:Name="MarioKartInput" />
+                            <components:Button Grid.Row="1" Grid.Column="1"
+                                               FontSize="16" Height="40"
+                                               IconData="{StaticResource Folder}"
+                                               Click="GameLocationBrowse_OnClick"
+                                               Margin="10,0,0,0" />
+                        </Grid>
+
+                        <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <components:FormFieldLabel Text="{x:Static lang:Settings.Option_DolphinUserPath}"
+                                                       Margin="0,6,0,0" />
+                            <components:InputField Grid.Row="1" Grid.Column="0"
+                                                   HorizontalAlignment="Stretch"
+                                                   Height="40"
+                                                   Placeholder="{x:Static lang:Phrases.Placeholder_EnterPath}"
+                                                   x:Name="DolphinUserPathInput" />
+                            <components:Button Grid.Row="1" Grid.Column="1"
+                                               FontSize="16" Height="40"
+                                               IconData="{StaticResource Folder}"
+                                               Click="DolphinUserPathBrowse_OnClick" Margin="10,0,0,0" />
+                        </Grid>
+                    </StackPanel>
+                    
+                    <StackPanel Margin="0,10,0,0" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <components:Button Variant="Primary" x:Name="LocationEditButton"
+                                           Text="{x:Static lang:Common.Action_Edit}"
+                                           Click="EditButton_OnClick" Height="40"
+                                           IconData="{StaticResource Pen}"
+                                           Margin="3" />
+                        <components:Button Variant="Warning"
+                                           x:Name="LocationCancelButton" Height="40"
+                                           IsVisible="False" Click="CancelButton_OnClick"
+                                           Text="{x:Static lang:Common.Action_Cancel}" Margin="3" />
+                        <components:Button Variant="Primary"
+                                           Text="{x:Static lang:Common.Action_Save}"
+                                           x:Name="LocationSaveButton"
+                                           Click="SaveButton_OnClick"
+                                           IsVisible="False" Height="40"
+                                           Margin="3" />
+                    </StackPanel>
                 </StackPanel>
             </Border>
+            
+            <Grid HorizontalAlignment="Stretch">
+                <components:Button Variant="Default"
+                                   IsEnabled="True"
+                                   IconData="{StaticResource Folder}"
+                                   HorizontalAlignment="Left"
+                                   Text="{x:Static lang:Settings.Option_OpenConfig}"
+                                   Click="Folder_Click"
+                                   Margin="3" />
+                <!-- <components:Button Variant="Default" -->
+                <!--                    IsEnabled="True" -->
+                <!--                    IconPack="Material" -->
+                <!--                    IconKind="{x:Static icon:PackIconMaterialKind.ContentSaveEdit}" -->
+                <!--                    HorizontalAlignment="Right" -->
+                <!--                    Text="Open Save File" -->
+                <!--                    Margin="3" /> -->
+            </Grid>
         </StackPanel>
-    </Grid>
+
+        <components:FormFieldLabel Text="{x:Static lang:Settings.Section_WhWzAppearance}" Margin="0,10,0,0" />
+        <Border Classes="SettingsBlockStyle"
+                x:Name="WhWzAppearance">
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                <CheckBox Margin="0,2,0,6"
+                          IsChecked="True"
+                          Classes="Switch"
+                          x:Name="EnableAnimations"
+                          Click="EnableAnimations_OnClick">
+                    <components:FormFieldLabel Text="{x:Static lang:Settings.Option_EnableAnimations}"
+                                                TipText="{x:Static lang:Settings.InfoText_EnableAnimations}" />
+                </CheckBox>
+            </StackPanel>
+        </Border>
+    </StackPanel>
 </UserControl>
