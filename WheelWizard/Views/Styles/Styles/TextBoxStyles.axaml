@@ -1,0 +1,68 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:components="clr-namespace:WheelWizard.Views.Components">
+
+    <Design.PreviewWith>
+        <Border Padding="20" Background="{StaticResource Neutral950}">
+            <StackPanel Spacing="10" Width="300">
+                <!-- note done lol -->
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <Style Selector="TextBox">
+        <Setter Property="SelectionBrush" Value="{StaticResource Primary500}"/>
+        <Setter Property="Background" Value="{StaticResource Neutral800}" />
+        <Setter Property="Foreground" Value="{StaticResource Neutral200}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Neutral800}" />
+        <Setter Property="BorderThickness" Value="3" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Focusable" Value="True" />
+    </Style>
+
+    <Style Selector="TextBox.dark">
+        <Setter Property="Background" Value="{StaticResource Neutral950}" />
+        <Setter Property="Foreground" Value="{StaticResource Neutral100}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Neutral950}" />
+    </Style>
+
+    <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{StaticResource Neutral700}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Neutral700}" />
+        <Setter Property="Cursor" Value="IBeam" />
+    </Style>
+
+    <Style Selector="TextBox.dark:pointerover /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{StaticResource Neutral950}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Neutral950}" />
+    </Style>
+
+    <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{StaticResource Neutral700}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Primary500}" />
+    </Style>
+
+    <Style Selector="TextBox.dark:focus /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{StaticResource Neutral950}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Primary500}" />
+    </Style>
+
+    <Style Selector="TextBox:disabled /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{StaticResource Neutral900}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Neutral900}" />
+    </Style>
+    <Style Selector="TextBox.dark:disabled /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{StaticResource Neutral800}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Neutral800}" />
+    </Style>
+    
+    <Style Selector="TextBox:disabled">
+        <Setter Property="Foreground" Value="{StaticResource Neutral600}" />
+    </Style>
+    <Style Selector="TextBox.dark:disabled">
+        <Setter Property="Foreground" Value="{StaticResource Neutral500}" />
+    </Style>
+</Styles>

@@ -26,6 +26,7 @@
         <StyleInclude Source="Styles/Styles/TextStyles.axaml"/>
         <StyleInclude Source="Styles/Styles/ToggleButtonStyles.axaml"/>
         <StyleInclude Source="Styles/Styles/MiscStyles.axaml"/>
+        <StyleInclude Source="Styles/Styles/TextBoxStyles.axaml"/>
         
         <!-- COMPONENTS -->
         <StyleInclude Source="Components/IconLabel.axaml"/>
@@ -35,6 +36,5 @@
         <StyleInclude Source="Components/SidebarRadioButton.axaml"/>
         <StyleInclude Source="Components/EmptyPageInfo.axaml"/>
         <StyleInclude Source="Components/FormFieldLabel.axaml"/>
-        <StyleInclude Source="Components/InputField.axaml"/>
     </Application.Styles>
 </Application>
