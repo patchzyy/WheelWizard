@@ -47,11 +47,11 @@
     </Style>
     
     <Style Selector="TextBlock">
-        <Setter Property="TextElement.FontFamily" Value="Arial, /Resources/Fonts/#ctmkf" />
+        <Setter Property="TextElement.FontFamily" Value="Arial, ares://WheelWizard/Resources/Fonts/#ctmkf" />
     </Style>
    
     <!-- I hope this bit makes sure the whole application does this, but i am not sure lol -->
     <Style Selector="UserControl">
-        <Setter Property="TextElement.FontFamily" Value="Arial, /Resources/Fonts/#ctmkf" />
+        <Setter Property="TextElement.FontFamily" Value="Arial, ares://WheelWizard/Resources/Fonts/#ctmkf" />
     </Style>
 </Styles>

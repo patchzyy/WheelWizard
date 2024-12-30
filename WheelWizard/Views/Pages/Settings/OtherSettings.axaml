@@ -2,12 +2,80 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="444" d:DesignHeight="831"
              xmlns:components="clr-namespace:WheelWizard.Views.Components"
+             xmlns:settings="clr-namespace:WheelWizard.Views.Pages.Settings"
+             xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
+             xmlns:popups="clr-namespace:WheelWizard.Views.Popups.Generic"
              x:Class="WheelWizard.Views.Pages.Settings.OtherSettings">
-    <StackPanel VerticalAlignment="Center">
-        <TextBox VerticalAlignment="Center" HorizontalAlignment="Center"/>
-       
-    </StackPanel>
-  
+
+    <Grid x:Name="DolphinBorder">
+        <StackPanel Margin="0,15,0,0">
+
+            <Border Padding="4" Margin="0,-10,0,10" x:Name="DisabledWarningText"
+                    CornerRadius="{StaticResource GlobalCornerRadius}"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                    Background="{StaticResource Warning600}">
+                <TextBlock HorizontalAlignment="Center" Classes="BodyText"
+                           FontWeight="SemiBold" Text="{x:Static lang:Settings.InfoText_Topbar_LocationWarning}"
+                           Foreground="{StaticResource BackgroundColor}" />
+            </Border>
+
+            <components:FormFieldLabel Text="{x:Static lang:Settings.Section_Wii}" />
+            <Border Classes="SettingsBlockStyle">
+                <StackPanel>
+                    <CheckBox Margin="0,2" IsChecked="False"
+                              Classes="SwitchDark"
+                              x:Name="DisableForce">
+                        <components:FormFieldLabel Text="{x:Static lang:Settings.Option_ForceDisableWiimote}"
+                                                   TipText="{x:Static lang:Settings.InfoText_ForceDisableWiimote}" />
+                    </CheckBox>
+                    <CheckBox Margin="0,2" IsChecked="False"
+                              Classes="SwitchDark"
+                              x:Name="LaunchWithDolphin">
+                        <components:FormFieldLabel Text="{x:Static lang:Settings.Option_LaunchWithDolphin}"
+                                                   TipText="{x:Static lang:Settings.InfoText_LaunchWithDolphin}" />
+                    </CheckBox>
+                </StackPanel>
+            </Border>
+
+            <components:FormFieldLabel Text="{x:Static lang:Settings.Section_Language}" />
+            <Border Classes="SettingsBlockStyle">
+                <StackPanel>
+                    <ComboBox
+                              x:Name="InGameLanguageDropdown"
+                              HorizontalAlignment="Stretch"
+                              Margin="0,0,0,5"
+                              VerticalAlignment="Top">
+                    </ComboBox>
+
+                    <ComboBox
+                              x:Name="WhWzLanguageDropdown"
+                              HorizontalAlignment="Stretch"
+                              Margin="0,0,0,5"
+                              VerticalAlignment="Top">
+                    </ComboBox>
+                    
+                    <TextBlock Classes="TinyText" IsVisible="False" x:Name="TranslationsPercentageText" />
+
+                    <Grid Margin="0,10,0,0">
+                        <StackPanel>
+                            <TextBlock Classes="TinyText" Text="{x:Static lang:Phrases.Text_ThanksTranslators}" />
+                            <TextBlock Classes="TinyText" Text="Eppe, Weebo, kytronix, Noël, Haru00007, JGavidia, OrangeCake_," />
+                            <TextBlock Classes="TinyText" Text="Sep, Ismy, rhyy" />
+                        </StackPanel>
+
+                        <Border ToolTip.Tip="If you are willing to translate for RetroRewind and WheelWizard. Be sure to reach out to Eppe or WantToBeeMe :)"
+                                ToolTip.Placement="Top"
+                                ToolTip.ShowDelay="50"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Right">
+                            <PathIcon Data="{StaticResource InfoTip}" Width="14" Height="14"
+                                      Foreground="{StaticResource FormFieldLabelColor}" />
+                        </Border>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Grid>
 </UserControl>
