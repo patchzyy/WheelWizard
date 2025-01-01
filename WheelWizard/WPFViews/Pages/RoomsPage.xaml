@@ -166,7 +166,7 @@
                                         </icon:PackIconFontAwesome>
                                         <Border.ToolTip>
                                             <components1:ToolTipMessage Alignment="TopCenter"
-                                                                       Content="This is a hover text thing" />
+                                                                       Content="This is an award winning player" />
                                         </Border.ToolTip>
                                         
                                         <Border.Style>

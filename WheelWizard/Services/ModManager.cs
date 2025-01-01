@@ -38,7 +38,6 @@ public class ModManager : INotifyPropertyChanged
     private ModManager()
     {
         _mods = new ObservableCollection<Mod>();
-        LoadModsAsync();
     }
 
     // Events to communicate with the frontend
@@ -121,7 +120,7 @@ public class ModManager : INotifyPropertyChanged
             e.PropertyName == nameof(Mod.Priority))
         {
             _ = SaveModsAsync();
-            SortModsByPriority();
+            // SortModsByPriority();
             ModsChanged?.Invoke();
         }
     }
@@ -145,15 +144,9 @@ public class ModManager : INotifyPropertyChanged
         };
 
         if (openFileDialog.ShowDialog() != true) return;
-
         var selectedFiles = openFileDialog.FileNames;
+        await ProcessModFilesAsync(selectedFiles);
 
-        if (selectedFiles.Length == 1)
-            await ProcessModFilesAsync(selectedFiles);
-        else
-        {
-            await ProcessModFilesAsync(selectedFiles);
-        }
     }
 
     private async Task ProcessModFilesAsync(string[] filePaths)
@@ -211,22 +204,25 @@ public class ModManager : INotifyPropertyChanged
         var newTitle = new TextInputPopup("Enter Mod Title").ShowDialog();
         if (!IsValidName(newTitle)) return;
 
+        var oldTitle = selectedMod.Title;
+        var oldDirectoryName = ModInstallation.GetModDirectoryPath(oldTitle);
+        var newDirectoryName = ModInstallation.GetModDirectoryPath(newTitle);
+
+        // Construct the .ini paths
+        var oldIniPath = Path.Combine(oldDirectoryName, $"{oldTitle}.ini"); // Path before directory rename
+    
         try
         {
-            var oldDirectoryName = ModInstallation.GetModDirectoryPath(selectedMod.Title);
-            var newDirectoryName = ModInstallation.GetModDirectoryPath(newTitle);
             Directory.Move(oldDirectoryName, newDirectoryName);
-            selectedMod.Title = newTitle; // Trigger property changed
-
-            // Rename INI file
-            var oldIniPath = Path.Combine(oldDirectoryName, $"{selectedMod.Title}.ini");
+            var updatedOldIniPath = Path.Combine(newDirectoryName, $"{oldTitle}.ini"); // Path after directory rename
             var newIniPath = Path.Combine(newDirectoryName, $"{newTitle}.ini");
-            if (File.Exists(oldIniPath))
+            if (File.Exists(updatedOldIniPath))
             {
-                File.Move(oldIniPath, newIniPath);
+                File.Move(updatedOldIniPath, newIniPath);
             }
 
-            SaveModsAsync();
+            selectedMod.Title = newTitle;
+            SaveModsAsync(); // Ideally: await SaveModsAsync();
             ModsChanged?.Invoke();
         }
         catch (IOException ex)
@@ -235,24 +231,38 @@ public class ModManager : INotifyPropertyChanged
         }
     }
 
+
     public void DeleteMod(Mod selectedMod)
     {
         var areTheySure = new YesNoWindow().SetMainText(Humanizer.ReplaceDynamic(Phrases.PopupText_SureDeleteQuestion, selectedMod.Title)).AwaitAnswer();
         if (!areTheySure) return;
 
-        RemoveMod(selectedMod);
+        var modDirectory = ModInstallation.GetModDirectoryPath(selectedMod.Title);
+        Console.WriteLine($"Attempting to delete mod directory: {modDirectory}");
+
+        if (!Directory.Exists(modDirectory))
+        {
+            Console.WriteLine($"Mod directory not found: {modDirectory}");
+            RemoveMod(selectedMod);
+            return;
+        }
         try
         {
-            var modDirectory = ModInstallation.GetModDirectoryPath(selectedMod.Title);
-            if (Directory.Exists(modDirectory))
-                Directory.Delete(modDirectory, true);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            var di = new DirectoryInfo(modDirectory);
+            di.Attributes &= ~FileAttributes.ReadOnly; 
+            foreach (var file in di.EnumerateFiles("*", SearchOption.AllDirectories))
+            {
+                file.Attributes &= ~FileAttributes.ReadOnly;
+            }
+            Directory.Delete(modDirectory, true); // true for recursive deletion
+            RemoveMod(selectedMod);
         }
-        catch (IOException)
+        catch (Exception ex) // Catch a more general exception
         {
-            ErrorOccurred?.Invoke($"Failed to delete mod directory. It may be that this file is read only?");
+            ErrorOccurred?.Invoke($"Failed to delete mod directory: {ex.Message}");
         }
-        SaveModsAsync();
-        ModsChanged?.Invoke();
     }
 
     public void OpenModFolder(Mod selectedMod)
