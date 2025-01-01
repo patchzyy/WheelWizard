@@ -5,7 +5,6 @@ using System.IO;
 using System.Security.Principal;
 using System.Text.Json;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using WheelWizard.Helpers;
 using WheelWizard.Models;
 using WheelWizard.Models.Github;
@@ -13,10 +12,9 @@ using WheelWizard.Resources.Languages;
 using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Services.Installation;
-
 public static class AutoUpdater
 {
-    public const string CurrentVersion = "1.8.5";
+    public const string CurrentVersion = "2.0.0";
     public static async Task CheckForUpdatesAsync()
     {
         var response = await HttpClientHelper.GetAsync<string>(Endpoints.WhWzLatestReleasesUrl);

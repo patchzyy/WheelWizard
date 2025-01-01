@@ -21,58 +21,8 @@
         <TextBlock Grid.Row="0" Text="{x:Static lang:Common.PageTitle_Mods}" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                    Style="{StaticResource PageTitleText}" />
         
-        <!-- <components:IconLabelButton IconSize="0" -->
-        <!--                             VerticalAlignment="Top" -->
-        <!--                             Text="Setup URL Scheme" -->
-        <!--                             Color="{StaticResource TitleTextColor}" -->
-        <!--                             FontSize="13" -->
-        <!--                             HoverColor="{StaticResource ErrorTitleTextColor}"/> -->
-        <!-- <components:IconLabelButton IconSize="0" -->
-        <!--                             VerticalAlignment="Top" -->
-        <!--                             Text="Open Pop Up" -->
-        <!--                             Color="{StaticResource TitleTextColor}" -->
-        <!--                             FontSize="13" -->
-        <!--                             HoverColor="{StaticResource ErrorTitleTextColor}" -->
-        <!--                             Click="openPopUp" Margin="180,10,0,0" /> -->
-        <!-- ~1~ <components:IconLabelButton IconSize="0" @1@ -->
-        <!--                             VerticalAlignment="Top" -->
-        <!--                             HorizontalAlignment="Right" -->
-        <!--                             Text="RemoveUrlSceme" -->
-        <!--                             Color="{StaticResource TitleTextColor}" -->
-        <!--                             FontSize="13" -->
-        <!--                             HoverColor="{StaticResource ErrorTitleTextColor}" -->
-        <!--                             Click="RemoveUrlScheme" Margin="5,10,40,0" /> -->
-        <!-- <components:IconLabelButton IconSize="0" -->
-        <!--                             VerticalAlignment="Top" -->
-        <!--                             Text="Check If URL Scheme Is Set" -->
-        <!--                             Color="{StaticResource TitleTextColor}" -->
-        <!--                             FontSize="13" -->
-        <!--                             HoverColor="{StaticResource ErrorTitleTextColor}" -->
-        <!--                             Click="CheckIfSet" Margin="5,30,0,0" /> -->
-        
         <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="12"
                     Orientation="Horizontal" x:Name="TopBarButtons">
-            <!-- 
-            <components:Button IconPack="FontAwesome" x:Name="EnableDisableButton"
-                               Text="{x:Static lang:Common.Action_EnableAll}" Click="EnableClick" Margin="0,0,10,0">
-                <components:Button.Style>
-                    <Style TargetType="components:Button" BasedOn="{StaticResource DefaultButtonStyle}">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}"
-                                         Value="{x:Static lang:Common.Action_EnableAll}">
-                                <Setter Property="IconKind"
-                                        Value="{x:Static icon:PackIconFontAwesomeKind.ToggleOnSolid}" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}"
-                                         Value="{x:Static lang:Common.Action_DisableAll}">
-                                <Setter Property="IconKind"
-                                        Value="{x:Static icon:PackIconFontAwesomeKind.ToggleOffSolid}" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </components:Button.Style>
-            </components:Button>
-            -->
             
             <UniformGrid Columns="2" Rows="1">
                 <components1:Button Variant="Primary" Margin="3,0"
