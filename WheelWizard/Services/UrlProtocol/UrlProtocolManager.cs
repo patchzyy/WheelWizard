@@ -115,6 +115,7 @@ public class UrlProtocolManager
             {
                 throw new FormatException($"Invalid ModID: {parts[0]}");
             }
+            // TODO: IF YOU MAKE THIS WINDOW IN AVALIONA, THEN ALSO MOVE THE THING IN APP.CS TO THE AVALONIA APP.CS
             string downloadURL = parts.Length > 1 ? parts[1] : null;
             var modPopup = new ModIndependentWindow();
             await modPopup.LoadModAsync(modID, downloadURL);

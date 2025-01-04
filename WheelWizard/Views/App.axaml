@@ -7,14 +7,14 @@
 
     <Application.Resources>
         <ResourceDictionary>
+            <!-- CONSTANTS -->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceInclude Source="Styles/Resources/Constants.axaml"/>
                 <ResourceInclude Source="Styles/Resources/Icons.axaml"/>
             </ResourceDictionary.MergedDictionaries>
             
-            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
-            <converters:BoolAndConverter x:Key="BoolAndConverter"/>
-            <converters:BoolOrConverter x:Key="BoolOrConverter"/>
+            <!-- CONVERTERS -->
+            <!-- <converters:BoolAndConverter x:Key="BoolAndConverter"/> -->
         </ResourceDictionary>
     </Application.Resources>
 

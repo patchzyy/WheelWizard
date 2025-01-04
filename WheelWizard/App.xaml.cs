@@ -12,12 +12,10 @@ public partial class App : Application
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
-        SettingsManager.Instance.LoadSettings();
-        AutoUpdater.CheckForUpdatesAsync();
-        UrlProtocolManager.SetWhWzSchemeAsync();
-
+        
         var args = Environment.GetCommandLineArgs();
 
+        // TODO: THIS CODE CAN ONLY MOVE TO AVALIONA IF THE CORRESPONDING POPUP IS ALSO AN AVALONIA WINDOW
         if (args.Length <= 1) return; 
         var protocolArgument = args[1];
         if (protocolArgument.StartsWith("wheelwizard://", StringComparison.OrdinalIgnoreCase))

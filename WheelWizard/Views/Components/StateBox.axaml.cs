@@ -2,19 +2,27 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives; // Add this for PlacementMode
 using Avalonia.Media;
+using System;
 
 namespace WheelWizard.Views.Components;
 
 public partial class StateBox : TemplatedControl // Change to TemplatedControl
 {
+    public enum StateBoxVariantType
+    {
+        Default,
+        Dark
+    }
+    
     public StateBox()
     {
-        // No InitializeComponent() needed for TemplatedControl
+        FontSize = 14;
+        
+        // TODO: make tooltip invisible if the TipText is empty
     }
-
-    // Styled properties remain the same
+    
     public static readonly StyledProperty<string> TextProperty =
-        AvaloniaProperty.Register<StateBox, string>(nameof(Text), "Form Field Label");
+        AvaloniaProperty.Register<StateBox, string>(nameof(Text), "0");
 
     public string Text
     {
@@ -32,7 +40,7 @@ public partial class StateBox : TemplatedControl // Change to TemplatedControl
     }
 
     public static readonly StyledProperty<double> IconSizeProperty =
-        AvaloniaProperty.Register<StateBox, double>(nameof(IconSize));
+        AvaloniaProperty.Register<StateBox, double>(nameof(IconSize), 20);
 
     public double IconSize
     {
@@ -40,15 +48,25 @@ public partial class StateBox : TemplatedControl // Change to TemplatedControl
         set => SetValue(IconSizeProperty, value);
     }
 
-    public static readonly StyledProperty<object> TipTextProperty =
-        AvaloniaProperty.Register<StateBox, object>(nameof(TipText), "Tip goes here");
+    public static readonly StyledProperty<string> TipTextProperty =
+        AvaloniaProperty.Register<StateBox, string>(nameof(TipText));
 
-    public object TipText
+    public string TipText
     {
         get => GetValue(TipTextProperty);
         set => SetValue(TipTextProperty, value);
     }
 
+    public static readonly StyledProperty<StateBoxVariantType> VariantProperty =
+        AvaloniaProperty.Register<StateBox, StateBoxVariantType>(nameof(Variant), StateBoxVariantType.Default);
+    
+    public StateBoxVariantType Variant
+    {
+        get => GetValue(VariantProperty);
+        set => SetValue(VariantProperty, value);
+    }
+
+    
     public static readonly StyledProperty<PlacementMode> TipPlacementProperty =
         AvaloniaProperty.Register<StateBox, PlacementMode>(nameof(TipPlacement), PlacementMode.Right);
 
@@ -57,13 +75,23 @@ public partial class StateBox : TemplatedControl // Change to TemplatedControl
         get => GetValue(TipPlacementProperty);
         set => SetValue(TipPlacementProperty, value);
     }
-
-    public static readonly StyledProperty<double> FontSizeProperty =
-        AvaloniaProperty.Register<StateBox, double>(nameof(FontSize), 12);
-
-    public double FontSize
+    
+    
+    private void UpdateStyleClasses(StateBoxVariantType variant)
     {
-        get => GetValue(FontSizeProperty);
-        set => SetValue(FontSizeProperty, value);
+        var types = Enum.GetValues<StateBoxVariantType>();
+        foreach (var enumType in types)
+        {
+            Classes.Remove(enumType.ToString());
+        }
+        Classes.Add(variant.ToString());
+    }
+    
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
+    {
+        base.OnPropertyChanged(change);
+
+        if (change.Property == VariantProperty)
+            UpdateStyleClasses(change.GetNewValue<StateBoxVariantType>());
     }
 }

@@ -1,6 +1,10 @@
 using Avalonia;
+using Avalonia.Threading;
 using System;
 using System.Threading;
+using WheelWizard.Services.Installation;
+using WheelWizard.Services.Settings;
+using WheelWizard.Services.UrlProtocol;
 
 namespace WheelWizard;
 
@@ -10,7 +14,8 @@ public class Program
     public static void Main(string[] args)
     {
         Console.WriteLine("Application start");
-        
+        Setup();
+            
         var wpfThread = new Thread(() =>
                    {
                        var wpfApp = new App(); // WPF App
@@ -35,7 +40,14 @@ public class Program
                      .UsePlatformDetect()
                      .WithInterFont()
                      .LogToTrace();
-    
+
+    private static void Setup()
+    {
+        SettingsManager.Instance.LoadSettings();
+        AutoUpdater.CheckForUpdatesAsync();
+        UrlProtocolManager.SetWhWzSchemeAsync();
+    }
+
     // TODO: Complete the avalonia transition
     //  - When the whole avalonia views are complete and work, remove the WPFviews folder.
     //  - Remove the 2 threads in the main method, instead it should only have the avalonia app without the thread

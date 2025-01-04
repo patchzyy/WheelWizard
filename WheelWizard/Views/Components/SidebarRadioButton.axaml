@@ -42,7 +42,7 @@
                                  VerticalAlignment="Center" HorizontalAlignment="Right"
                                  Text="{TemplateBinding BoxText}"
                                  TipPlacement="Top"
-                                 IconData="{TemplateBinding BoxIconData}"
+                                 IconSize="0"
                                  TipText="{TemplateBinding BoxTip}"
                                  />
           </Grid>

@@ -99,7 +99,7 @@
                                   VerticalAlignment="Center">
                             </Path>
                         <Border.IsVisible>
-                            <MultiBinding Converter="{StaticResource BoolAndConverter}">
+                            <MultiBinding Converter="{x:Static BoolConverters.And}">
                                 <Binding Path="IsIconLeft" RelativeSource="{RelativeSource TemplatedParent}"/>
                                 <Binding Path="IconData" RelativeSource="{RelativeSource TemplatedParent}"
                                          Converter="{x:Static ObjectConverters.IsNotNull}" />
@@ -112,10 +112,10 @@
                     and so we either need to dynamically change the margin, or do this -->
                     <Rectangle Fill="Transparent"  Width="10" Height="0">
                         <Rectangle.IsVisible>
-                            <MultiBinding Converter="{StaticResource BoolAndConverter}">
+                            <MultiBinding Converter="{x:Static BoolConverters.And}">
                                 <Binding Path="IsIconLeft" RelativeSource="{RelativeSource TemplatedParent}"/>
                                 <Binding Path="Text" RelativeSource="{RelativeSource TemplatedParent}"
-                                         Converter="{x:Static ObjectConverters.IsNotNull}" />
+                                         Converter="{x:Static StringConverters.IsNotNullOrEmpty}" />
                                 <Binding Path="IconData" RelativeSource="{RelativeSource TemplatedParent}"
                                          Converter="{x:Static ObjectConverters.IsNotNull}" />
                             </MultiBinding>
@@ -124,7 +124,7 @@
                     
                     <TextBlock Text="{TemplateBinding Text}" 
                                VerticalAlignment="Center"
-                               IsVisible="{TemplateBinding Text, Converter={x:Static ObjectConverters.IsNotNull}}"
+                               IsVisible="{TemplateBinding Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
                                FontSize="{TemplateBinding FontSize}"
                                Foreground="{TemplateBinding Foreground}"
                                TextWrapping="Wrap">
@@ -151,9 +151,9 @@
                               HorizontalAlignment="Center"
                               VerticalAlignment="Center"/>
                         <Border.IsVisible>
-                            <MultiBinding Converter="{StaticResource BoolAndConverter}">
+                            <MultiBinding  Converter="{x:Static BoolConverters.And}">
                                 <Binding Path="IsIconLeft" RelativeSource="{RelativeSource TemplatedParent}"
-                                         Converter="{StaticResource InverseBooleanConverter}" />
+                                         Converter="{x:Static BoolConverters.Not}" />
                                 <Binding Path="IconData" RelativeSource="{RelativeSource TemplatedParent}"
                                          Converter="{x:Static ObjectConverters.IsNotNull}" />
                             </MultiBinding>

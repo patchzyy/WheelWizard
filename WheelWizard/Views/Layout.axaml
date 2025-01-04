@@ -28,22 +28,6 @@
                 x:Name="DisabledDarkenEffect" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                 Background="Black"  Opacity="0.3"/> 
         
-        <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Bottom">
-            <comps:IconLabel IconData="{StaticResource WheelIcon}"
-                             Text="Wheel Wizard"
-                             Foreground="{StaticResource Neutral400}"
-                             FontSize="20"
-                             Margin="10,10,0,0"
-                             IconSize="31" />
-        </Border>
-        <Border Grid.Row="3"
-                VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10">
-            <StackPanel>
-                <TextBlock Classes="TinyText" x:Name="MadeBy_Part1" Text="Made by: Patchzy" HorizontalAlignment="Right"/>
-                <TextBlock Classes="TinyText" x:Name="MadeBy_Part2" Text="And WantToBeeMe" HorizontalAlignment="Right"/>
-            </StackPanel>
-        </Border>
-        
         <DockPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top">
             <Button Width="30" Height="25" Click="MinimizeButton_Click"  Classes="TopButton">
                 <PathIcon Data="{StaticResource MinMark}" Width="12" Height="12"
@@ -54,7 +38,25 @@
                           Foreground="{Binding $parent[Button].Foreground}" />
             </Button>
         </DockPanel>
-                
+        
+        <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Bottom">
+            <comps:IconLabel IconData="{StaticResource WheelIcon}"
+                             Text="Wheel Wizard"
+                             Foreground="{StaticResource Neutral400}"
+                             FontSize="20"
+                             Margin="10,10,0,0"
+                             IconSize="31" />
+        </Border>
+        
+        <Border Grid.Row="3"
+                VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10">
+            <StackPanel>
+                <TextBlock Classes="TinyText" x:Name="MadeBy_Part1" Text="Made by: Patchzy" HorizontalAlignment="Right"/>
+                <TextBlock Classes="TinyText" x:Name="MadeBy_Part2" Text="And WantToBeeMe" HorizontalAlignment="Right"/>
+            </StackPanel>
+        </Border>
+        
+
         <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="4"
                 CornerRadius="{StaticResource WindowCornerRadiusLeftRightTwix}"
                 Background="{StaticResource BackgroundColor}"/>
@@ -62,20 +64,18 @@
                         x:Name="ContentArea" Margin="{StaticResource EdgeGap}"/>        
         
         <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
-            <comps:StateBox x:Name="PlayerCountBox"  Text="0"
+            <comps:StateBox x:Name="PlayerCountBox" Text="0" Variant="Dark"
                                   IconData="{StaticResource UserCouple}"
-                                  IconSize="16"
                                   TipText="{x:Static lang:Phrases.Hover_PlayersOnline_0}"
                                   Margin="10,0,0,0" />
-            <comps:StateBox x:Name="RoomCountBox" Text="0"
+            <comps:StateBox x:Name="RoomCountBox" Text="0" Variant="Dark"
                             IconData="{StaticResource RoomUsers}"
-                            IconSize="16"
                             TipText="{x:Static lang:Phrases.Hover_RoomsOnline_0}"
                             Margin="10,0,0,0" />
         </StackPanel>
         
         <!-- Sidebar -->
-        <StackPanel x:Name="SidePanelButtons" Grid.Column="0" Grid.Row="3" Width="192">
+        <StackPanel x:Name="SidePanelButtons" Grid.Column="0" Grid.Row="3" Width="192" VerticalAlignment="Top">
             <TextBlock Text="{x:Static lang:Common.Term_General}" Classes="SidebarSectionText"
                        VerticalAlignment="Bottom" />
             <comps:SidebarRadioButton IconData="{StaticResource Home}"

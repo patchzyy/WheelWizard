@@ -69,12 +69,16 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
     
     private void InitializeManagers()
     {
-        LiveAlertsManager.Instance.Start(); // Temporary code, should be moved to a more appropriate location
-        LiveAlertsManager.Instance.Subscribe(this);
-        RRLiveRooms.Instance.Start(); // Temporary code, should be moved to a more appropriate location
-        RRLiveRooms.Instance.Subscribe(this);
-        GameDataLoader.Instance.Start(); // Temporary code, should be moved to a more appropriate location
-        GameDataLoader.Instance.Subscribe(this);
+        // TODO: All the start methods have been commented here
+        //   This is because they where not suppose to be here anyways. Now that we are working with avalonia, i 
+        //   already moved them there, and so the start method is also there. and there is no need for starting it twice
+        
+        //LiveAlertsManager.Instance.Start(); // Temporary code, should be moved to a more appropriate location
+       // LiveAlertsManager.Instance.Subscribe(this);
+        //RRLiveRooms.Instance.Start(); // Temporary code, should be moved to a more appropriate location
+       // RRLiveRooms.Instance.Subscribe(this);
+        //GameDataLoader.Instance.Start(); // Temporary code, should be moved to a more appropriate location
+       // GameDataLoader.Instance.Subscribe(this);
     }
     
     public void NavigateToPage(Page page)

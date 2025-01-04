@@ -37,15 +37,6 @@ public partial class SidebarRadioButton : RadioButton
         set => SetValue(PageTypeProperty, value);
     }
 
-    public static readonly StyledProperty<Geometry> BoxIconDataProperty =
-        AvaloniaProperty.Register<SidebarRadioButton, Geometry>(nameof(BoxIconData));
-
-    public Geometry BoxIconData
-    {
-        get => GetValue(BoxIconDataProperty);
-        set => SetValue(BoxIconDataProperty, value);
-    }
-
     public static readonly StyledProperty<string> BoxTextProperty =
         AvaloniaProperty.Register<SidebarRadioButton, string>(nameof(BoxText));
 

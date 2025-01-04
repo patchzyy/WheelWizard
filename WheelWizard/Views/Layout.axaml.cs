@@ -2,14 +2,23 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using System;
+using System.Linq;
+using WheelWizard.Helpers;
+using WheelWizard.Models.Settings;
+using WheelWizard.Resources.Languages;
 using WheelWizard.Services;
+using WheelWizard.Services.LiveData;
+using WheelWizard.Services.Settings;
+using WheelWizard.Services.WiiManagement.SaveData;
+using WheelWizard.Utilities.RepeatedTasks;
 using WheelWizard.Views.Components;
 using WheelWizard.Views.Pages;
+using WheelWizard.Views.Popups.Generic;
 using SettingsPage = WheelWizard.Views.Pages.Settings.SettingsPage;
 
 namespace WheelWizard.Views;
 
-public partial class Layout : Window
+public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
 {
     public static Layout Instance { get; private set; }
     
@@ -19,8 +28,37 @@ public partial class Layout : Window
     {
         Instance = this;
         InitializeComponent();
+        
+        OnSettingChanged(SettingsManager.SAVED_WINDOW_SCALE);
+        SettingsManager.WINDOW_SCALE.Subscribe(this);
+        
+        var completeString = Humanizer.ReplaceDynamic(Phrases.Text_MadeByString, "Patchzy", "WantToBeeMe" );
+        if (completeString != null && completeString.Contains("\\n"))
+        {
+            var split = completeString.Split("\\n");
+            MadeBy_Part1.Text = split[0];
+            MadeBy_Part2.Text = split[1];
+        }
+        
         NavigateToPage(new SettingsPage());
+        InitializeManagers();
     }
+    
+    public void OnSettingChanged(Setting setting)
+    {
+        // TODO: Implement the scaleFactor resize thingy
+    }
+
+    private void InitializeManagers()
+    {
+        LiveAlertsManager.Instance.Subscribe(this);
+        LiveAlertsManager.Instance.Start(); // Temporary code, should be moved to a more appropriate location
+        RRLiveRooms.Instance.Subscribe(this);
+        RRLiveRooms.Instance.Start(); // Temporary code, should be moved to a more appropriate location
+        GameDataLoader.Instance.Subscribe(this);
+        GameDataLoader.Instance.Start(); // Temporary code, should be moved to a more appropriate location
+    }
+    
     public void NavigateToPage(UserControl page)
     {
         ContentArea.Content = page;
@@ -34,7 +72,56 @@ public partial class Layout : Window
             button.IsChecked = buttonPageType == page.GetType();
         }
     }
+    public void OnUpdate(RepeatedTaskManager sender)
+    {
+        switch (sender)
+        {
+            case RRLiveRooms liveRooms:
+                UpdatePlayerAndRoomCount(liveRooms);
+                break;
+            case LiveAlertsManager liveAlerts:
+                UpdateLiveAlert(liveAlerts);
+                break;
+            
+        }
+    }
 
+     public void UpdatePlayerAndRoomCount(RRLiveRooms sender)
+    {
+        var playerCount = sender.PlayerCount;
+        var roomCount = sender.RoomCount;
+        PlayerCountBox.Text = playerCount.ToString();
+        PlayerCountBox.TipText = playerCount switch
+        {
+            1 => Phrases.Hover_PlayersOnline_1,
+            0 => Phrases.Hover_PlayersOnline_0,
+            _ => Humanizer.ReplaceDynamic(Phrases.Hover_PlayersOnline_x, playerCount) ?? 
+                 $"There are currently {playerCount} players online"
+        };
+        RoomCountBox.Text = roomCount.ToString();
+        RoomCountBox.TipText = roomCount switch
+        {
+            1 => Phrases.Hover_RoomsOnline_1,
+            0 => Phrases.Hover_RoomsOnline_0,
+            _ => Humanizer.ReplaceDynamic(Phrases.Hover_RoomsOnline_x, roomCount) ?? 
+                 $"There are currently {roomCount} rooms active"
+        };
+        var friends = GameDataLoader.Instance.GetCurrentFriends;
+        FriendsButton.BoxText =$"{friends.Count(friend => friend.IsOnline)}/{friends.Count}";
+        FriendsButton.BoxTip = friends.Count(friend => friend.IsOnline) switch
+        {
+            1 => Phrases.Hover_FriendsOnline_1,
+            0 => Phrases.Hover_FriendsOnline_0,
+            _ => Humanizer.ReplaceDynamic(Phrases.Hover_FriendsOnline_x, friends.Count(friend => friend.IsOnline)) ?? 
+                 $"There are currently {friends.Count(friend => friend.IsOnline)} friends online"
+        };
+    }
+     
+    private void UpdateLiveAlert(LiveAlertsManager sender)
+    {
+        // TODO: Implement the live alert icon on the left-bottom
+    }
+    
     private void TopBar_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
         if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
