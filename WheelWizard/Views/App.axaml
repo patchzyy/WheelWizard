@@ -14,7 +14,6 @@
             </ResourceDictionary.MergedDictionaries>
             
             <!-- CONVERTERS -->
-            <!-- <converters:BoolAndConverter x:Key="BoolAndConverter"/> -->
         </ResourceDictionary>
     </Application.Resources>
 

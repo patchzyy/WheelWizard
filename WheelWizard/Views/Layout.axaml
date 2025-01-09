@@ -85,8 +85,8 @@
             <comps:SidebarRadioButton IconData="{StaticResource UserCircle}"
                                       Text="{x:Static lang:Common.PageTitle_MyProfiles}" x:Name="MyProfilesButton"/>
             <comps:SidebarRadioButton IconData="{StaticResource CubesStacked}"
+                                      PageType="{x:Type pages:ModsPage}"
                                       Text="{x:Static lang:Common.PageTitle_Mods}"/>
-
             <TextBlock Text="{x:Static lang:Common.Term_Online}" Classes="SidebarSectionText" />
             <comps:SidebarRadioButton IconData="{StaticResource RoomUsers}"
                                       Text="{x:Static lang:Common.PageTitle_Rooms}" x:Name="RoomsButton"/>

@@ -1,0 +1,103 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+          xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
+          xmlns:components="clr-namespace:WheelWizard.Views.Components"
+          xmlns:pages="clr-namespace:WheelWizard.Views.Pages"
+          mc:Ignorable="d" d:DesignHeight="831" d:DesignWidth="444"
+          x:Class="WheelWizard.Views.Pages.ModsPage">
+ <Grid>
+     <Grid.RowDefinitions>
+         <RowDefinition Height="{StaticResource TopRowSize}" />
+         <RowDefinition Height="*" />
+     </Grid.RowDefinitions>
+
+     <Border Grid.Row="0" Background="{StaticResource BackgroundLineColor}" Height="1"
+             HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
+     <Border Grid.Row="1" Background="{StaticResource BackgroundLineColor}" Height="1"
+             HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
+
+     <TextBlock Grid.Row="0" Text="{x:Static lang:Common.PageTitle_Mods}"
+                HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                Classes="PageTitleText" />
+
+     <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="12"
+                 Orientation="Horizontal" x:Name="TopBarButtons" IsVisible="{Binding HasMods}">
+         <UniformGrid Columns="2" Rows="1">
+             <components:Button Variant="Primary" Margin="3,0"
+                                Text="Browse" IconData="{StaticResource Search}"
+                                Click="BrowseMod_Click" HorizontalAlignment="Center" />
+             <components:Button Variant="Default" Margin="3,0"
+                                Text="{x:Static lang:Common.Action_Import}"
+                                IconData="{StaticResource FileImport}"
+                                Click="ImportMod_Click" HorizontalAlignment="Center" />
+         </UniformGrid>
+     </StackPanel>
+
+     <!-- Empty Mods Message -->
+     <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="PageWithoutMods" IsVisible="{Binding !HasMods}">
+         <components:EmptyPageInfo Title="{x:Static lang:Phrases.EmptyText_NoMods_Title}"
+                                   BodyText="{x:Static lang:Phrases.EmptyText_NoMods}"
+                                   HorizontalAlignment="Center" />
+         <UniformGrid Margin="0,12" Columns="2" Rows="1">
+             <components:Button Variant="Primary" Margin="3,0"
+                                Text="Browse" IconData="{StaticResource Search}"
+                                Click="BrowseMod_Click" HorizontalAlignment="Center" />
+             <components:Button Variant="Default" Margin="3,0"
+                                Text="{x:Static lang:Common.Action_Import}"
+                                IconData="{StaticResource FileImport}"
+                                Click="ImportMod_Click" HorizontalAlignment="Center" />
+         </UniformGrid>
+     </StackPanel>
+
+     <!-- Mods List -->
+     <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" x:Name="PageWithMods" VerticalAlignment="Stretch" IsVisible="{Binding HasMods}">
+         <ListBox x:Name="ModsListBox" ItemsSource="{Binding Mods}">
+             <ListBox.ItemTemplate>
+               <DataTemplate>
+                   <Grid>
+                      <Grid.ColumnDefinitions>
+                         <ColumnDefinition Width="Auto" />
+                         <ColumnDefinition Width="*" />
+                      </Grid.ColumnDefinitions>
+
+                      <CheckBox IsChecked="{Binding IsEnabled, Mode=TwoWay}"
+                                Classes="SwitchDark"
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Margin="0,5" />
+                     <TextBlock Text="{Binding Title}" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    </Grid>
+               </DataTemplate>
+             </ListBox.ItemTemplate>
+              <ListBox.ContextMenu>
+                   <ContextMenu>
+                      <MenuItem Header="{x:Static lang:Common.Action_Rename}" Click="RenameMod_Click" />
+                     <MenuItem Header="{x:Static lang:Common.Action_Delete}" Click="DeleteMod_Click" />
+                     <Separator />
+                     <MenuItem Header="{x:Static lang:Common.Action_ViewMod}" Click="ViewMod_Click"/>
+                     <MenuItem Header="{x:Static lang:Common.Action_OpenFolder}" Click="OpenFolder_Click" />
+                   </ContextMenu>
+               </ListBox.ContextMenu>
+             </ListBox>
+        </StackPanel>
+
+
+     <!-- Loading Indicator -->
+     <ProgressBar x:Name="ProgressBar"
+                  HorizontalAlignment="Center"
+                  IsVisible="False"
+                  Height="20"
+                  VerticalAlignment="Bottom"
+                  Margin="10"
+                  Foreground="{StaticResource Neutral100}" />
+     <TextBlock x:Name="StatusTextBlock"
+                IsVisible="False"
+                HorizontalAlignment="Center"
+                Height="20"
+                VerticalAlignment="Bottom"
+                Margin="10,0,0,30"
+                Text="{x:Static lang:Common.State_Loading}"
+                Foreground="{StaticResource Neutral100}" />
+ </Grid>
+</UserControl>
