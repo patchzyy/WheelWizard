@@ -60,8 +60,8 @@
         <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="4"
                 CornerRadius="{StaticResource WindowCornerRadiusLeftRightTwix}"
                 Background="{StaticResource BackgroundColor}"/>
-        <ContentControl Grid.Column="1" Grid.Row="1" Grid.RowSpan="4"  
-                        x:Name="ContentArea" Margin="{StaticResource EdgeGap}"/>        
+        <ContentControl Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" ClipToBounds="False"
+                        x:Name="ContentArea" Margin="{StaticResource EdgeGap}"/>
         
         <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
             <comps:StateBox x:Name="PlayerCountBox" Text="0" Variant="Dark"

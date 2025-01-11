@@ -6,9 +6,8 @@
              xmlns:popups="clr-namespace:WheelWizard.Views.Popups"
              xmlns:components="clr-namespace:WheelWizard.Views.Components"
              xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
-             mc:Ignorable="d"
-             d:DesignHeight="670"
-             d:DesignWidth="550">
+             ClipToBounds="False"
+             mc:Ignorable="d" d:DesignHeight="670" d:DesignWidth="550">
     <Grid RowDefinitions="140,70,*"
           HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <!-- BANNER START -->

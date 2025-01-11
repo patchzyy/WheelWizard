@@ -69,13 +69,13 @@ public partial class HomePage : UserControl
                 EnableSidebarButtons();
                 break;
             case WheelWizardStatus.RRNotReady:
-                SetButtonState("Activating...", Button.ButtonsVariantType.Warning, "Power", false);
+                SetButtonState("Activating...", Button.ButtonsVariantType.Warning, "RoadWarning", false);
                 DisableSidebarButtons();
                 await RetroRewindInstaller.InstallRetroRewind();
                 EnableSidebarButtons();
                 break;
             case WheelWizardStatus.OutOfDate:
-                SetButtonState(Common.State_Updating, Button.ButtonsVariantType.Warning, "Update", false);
+                SetButtonState(Common.State_Updating, Button.ButtonsVariantType.Warning, "Download", false);
                 DisableSidebarButtons();
                 await RetroRewindUpdater.UpdateRR();
                 EnableSidebarButtons();
@@ -97,26 +97,25 @@ public partial class HomePage : UserControl
         switch (_status)
         {
             case WheelWizardStatus.NoServer:
-                SetButtonState(Common.State_NoServer, Button.ButtonsVariantType.Warning, "ServerNetworkOff");
+                SetButtonState(Common.State_NoServer, Button.ButtonsVariantType.Warning, "RoadError");
                 break;
             case WheelWizardStatus.NoServerButInstalled:
                 SetButtonState(Common.Action_PlayOffline, Button.ButtonsVariantType.Warning, "Play");
                 break;
             case WheelWizardStatus.NoDolphin:
-                SetButtonState(Common.PageTitle_Settings, Button.ButtonsVariantType.Warning, "FilePen");
+                SetButtonState(Common.PageTitle_Settings, Button.ButtonsVariantType.Warning, "Settings");
                 break;
             case WheelWizardStatus.ConfigNotFinished:
-                SetButtonState(Common.State_ConfigNotFinished, Button.ButtonsVariantType.Warning,
-                    "FilePen");
+                SetButtonState(Common.State_ConfigNotFinished, Button.ButtonsVariantType.Warning, "Settings");
                 break;
             case WheelWizardStatus.NoRR:
                 SetButtonState(Common.Action_Install, Button.ButtonsVariantType.Warning, "Download");
                 break;
             case WheelWizardStatus.NoRRActive:
-                SetButtonState("Activated", Button.ButtonsVariantType.Warning, "Power");
+                SetButtonState("Activated", Button.ButtonsVariantType.Warning, "RoadWarning"); // Check if this  is still relevant
                 break;
             case WheelWizardStatus.RRNotReady:
-                SetButtonState("Activate", Button.ButtonsVariantType.Warning, "Power");
+                SetButtonState("Activate", Button.ButtonsVariantType.Warning, "RoadWarning"); // Check if this  is still relevant
                 break;
             case WheelWizardStatus.OutOfDate:
                 SetButtonState(Common.Action_Update, Button.ButtonsVariantType.Warning, "Download");
@@ -127,7 +126,7 @@ public partial class HomePage : UserControl
         }
         if (SettingsHelper.PathsSetupCorrectly()) 
             return;
-        
+     
         DolphinButton.IsEnabled = false;
     }
 
@@ -137,8 +136,9 @@ public partial class HomePage : UserControl
         PlayButton.Text = text;
         PlayButton.Variant = variant;
         PlayButton.IsEnabled = enabled;
-        PlayButton.IconData = (Geometry) Application.Current.FindResource(iconKey)!;
-        DolphinButton.IsEnabled = subButtonsEnabled && SettingsHelper.PathsSetupCorrectly();;
+        if (Application.Current != null && Application.Current.FindResource(iconKey) is Geometry geometry)
+                PlayButton.IconData = geometry;
+        DolphinButton.IsEnabled = subButtonsEnabled && SettingsHelper.PathsSetupCorrectly();
     }
     
     private void DisableSidebarButtons() => Layout.Instance.SidePanelButtons.IsEnabled = false;

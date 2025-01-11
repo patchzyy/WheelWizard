@@ -7,6 +7,7 @@
              xmlns:components="clr-namespace:WheelWizard.Views.Components"
              xmlns:pages="clr-namespace:WheelWizard.Views.Pages"
              xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
+             ClipToBounds="False"
              xmlns:modManagement="clr-namespace:WheelWizard.Views.Popups.ModManagment"
              mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="800">
     <Grid ColumnDefinitions="2*,3*">

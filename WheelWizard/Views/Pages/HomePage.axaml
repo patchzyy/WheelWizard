@@ -5,6 +5,7 @@
              xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
              xmlns:comps="clr-namespace:WheelWizard.Views.Components"
              mc:Ignorable="d" d:DesignHeight="831" d:DesignWidth="444"
+             ClipToBounds="False"
              x:Class="WheelWizard.Views.Pages.HomePage">
     <Grid  x:Name="CompleteGrid">
         <Grid.RowDefinitions>
