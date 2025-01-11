@@ -11,14 +11,17 @@
     <Grid RowDefinitions="140,70,*"
           HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <!-- BANNER START -->
+        
+        <Border Grid.Row="0" x:Name="BannerBackgroundColor" Margin="{StaticResource NegativeEdgeGap}"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{StaticResource Neutral900}"/>
         <Image Grid.Row="0" x:Name="BannerImage" Margin="{StaticResource NegativeEdgeGap}"
-               Stretch="UniformToFill"
-               HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+               Stretch="UniformToFill" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+      
         <Border Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                 Background="{StaticResource BackgroundColor}"
                 Margin="{StaticResource NegativeEdgeGap}">
             <Border.OpacityMask>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
                     <GradientStop Color="Transparent" Offset="0.0" />
                     <GradientStop Color="#FFFFFFDF" Offset="0.8" />
                     <GradientStop Color="White" Offset="1.0" />
@@ -89,6 +92,7 @@
                 <StackPanel>
                     <!-- Image Carousel -->
                     <components:FormFieldLabel Text="Images:"/>
+                    
                     <ItemsControl x:Name="ImageCarousel" Margin="0,0,0,10" MaxHeight="170">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>

@@ -38,6 +38,8 @@ public partial class ModDetailViewer : UserControl
     /// <param name="newDownloadUrl">The download URL to use instead of the one from the mod details.</param>
     public async Task<bool> LoadModDetailsAsync(int ModId, string? newDownloadUrl = null)
     {
+        BannerImage.IsVisible = false; // we turn it off since if you swap page, the wrong banner image still shows
+        // and so we only want to enable this when we have the right banner image again
         try
         {
             var modDetailsResult = await GamebananaSearchHandler.GetModDetailsAsync(ModId);
@@ -48,7 +50,6 @@ public partial class ModDetailViewer : UserControl
             }
             var modDetails = modDetailsResult.Content;
             ImageCarousel.Items.Clear();
-            var firstImage = true;
             if (modDetails._aPreviewMedia?._aImages != null && modDetails._aPreviewMedia._aImages.Any())
             {
                 foreach (var fullImageUrl in modDetails._aPreviewMedia._aImages.Select(image => $"{image._sBaseUrl}/{image._sFile}"))
@@ -64,9 +65,9 @@ public partial class ModDetailViewer : UserControl
                     var bitmap = new Bitmap(memoryStream);
                     
                     ImageCarousel.Items.Add(new { FullImageUrl = bitmap });
-                    if (firstImage)
+                    if (!BannerImage.IsVisible)
                     {
-                        firstImage = false;
+                        BannerImage.IsVisible = true;
                         BannerImage.Source = bitmap;
                     }
                 }
