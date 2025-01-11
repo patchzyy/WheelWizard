@@ -1,8 +1,6 @@
-﻿using Avalonia;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
-using Avalonia.Platform;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,7 +16,7 @@ using WheelWizard.Services.Launcher;
 using WheelWizard.WPFViews.Popups.Generic;
 using MessageBoxWindow = WheelWizard.Views.Popups.Generic.MessageBoxWindow;
 
-namespace WheelWizard.Views.Popups.ModManagment;
+namespace WheelWizard.Views.Popups.ModManagement;
 
 public partial class ModDetailViewer : UserControl
 {

@@ -1,21 +1,19 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Media;
 using Avalonia.Threading;
-using Avalonia.VisualTree;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using WheelWizard.Models.GameBanana;
 using WheelWizard.Services.GameBanana;
 using WheelWizard.Views.Pages;
 using WheelWizard.Views.Popups.Generic;
+using VisualExtensions = Avalonia.VisualTree.VisualExtensions;
 
-namespace WheelWizard.Views.Popups.ModManagment;
+namespace WheelWizard.Views.Popups.ModManagement;
 
 public partial class ModPopupWindow : PopupContent, INotifyPropertyChanged
 {
@@ -125,7 +123,7 @@ public partial class ModPopupWindow : PopupContent, INotifyPropertyChanged
         if (!_hasMoreMods) return;
 
         // Get the ScrollViewer from the ListBox's template
-        var scrollViewer = ModListView.FindDescendantOfType<ScrollViewer>();
+        var scrollViewer = VisualExtensions.FindDescendantOfType<ScrollViewer>(ModListView);
 
         if (scrollViewer != null)
         {

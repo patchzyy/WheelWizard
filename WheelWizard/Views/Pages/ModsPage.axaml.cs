@@ -1,17 +1,15 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using WheelWizard.Models.Settings;
 using WheelWizard.Services;
 using WheelWizard.Views.Popups.Generic;
-using WheelWizard.Views.Popups.ModManagment;
+using ModPopupWindow = WheelWizard.Views.Popups.ModManagement.ModPopupWindow;
 
 namespace WheelWizard.Views.Pages;
 

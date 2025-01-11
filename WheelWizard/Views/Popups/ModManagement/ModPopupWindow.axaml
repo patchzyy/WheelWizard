@@ -1,4 +1,4 @@
-﻿<popups:PopupContent x:Class="WheelWizard.Views.Popups.ModManagment.ModPopupWindow"
+﻿<popups:PopupContent x:Class="WheelWizard.Views.Popups.ModManagement.ModPopupWindow"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,6 +9,7 @@
              xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
              ClipToBounds="False"
              xmlns:modManagement="clr-namespace:WheelWizard.Views.Popups.ModManagment"
+             xmlns:modManagement1="clr-namespace:WheelWizard.Views.Popups.ModManagement"
              mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="800">
     <Grid ColumnDefinitions="2*,3*">
         <!-- Mod List -->
@@ -72,7 +73,7 @@
 
         <!-- Mod Details -->
         <Grid Grid.Column="1" Margin="10,0,0,0">
-            <modManagement:ModDetailViewer x:Name="ModDetailViewer"
+            <modManagement1:ModDetailViewer x:Name="ModDetailViewer"
                                             IsVisible="False"/>
       
             <components:EmptyPageInfo Title="No mod selected" BodyText="Select a mod to view its details" 
