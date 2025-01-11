@@ -81,8 +81,8 @@ public partial class ModDetailViewer : UserControl
             DownloadsCountBox.Text = modDetails._nDownloadCount.ToString();
            
             // IMPORTANT: the text has to be in a div tag. Since otherwise we cant apply any style to the text that has not tags around it
-            ModDescriptionTextBlock.Text = modDetails._sText;
-
+            ModDescriptionHtmlPanel.Text = $"<body>{modDetails._sText}</body>";
+            
             CurrentMod = modDetails;
             CurrentMod.OverrideDownloadUrl = newDownloadUrl;
             UpdateDownloadButtonState(ModId);
@@ -121,7 +121,7 @@ public partial class ModDetailViewer : UserControl
         ModTitle.Text = string.Empty;
         AuthorButton.Text = "Unknown";
         LikesCountBox.Text = ViewsCountBox.Text = DownloadsCountBox.Text = "0";
-        ModDescriptionTextBlock.Text = string.Empty;
+        ModDescriptionHtmlPanel.Text = string.Empty;
         IsVisible = false; 
     }
     
