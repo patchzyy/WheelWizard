@@ -9,10 +9,9 @@
              ClipToBounds="False"
              xmlns:html="clr-namespace:TheArtOfDev.HtmlRenderer.Avalonia;assembly=Avalonia.HtmlRenderer"
              mc:Ignorable="d" d:DesignHeight="670" d:DesignWidth="550">
-    <Grid RowDefinitions="140,70,*"
-          HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <!-- BANNER START -->
+    <Grid RowDefinitions="140,70,*" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         
+        <!-- BANNER START -->
         <Border Grid.Row="0" x:Name="BannerBackgroundColor" Margin="{StaticResource NegativeEdgeGap}"
                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="{StaticResource Neutral900}"/>
         <Image Grid.Row="0" x:Name="BannerImage" Margin="{StaticResource NegativeEdgeGap}"

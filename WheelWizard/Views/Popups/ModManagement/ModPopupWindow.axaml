@@ -5,11 +5,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:popups="clr-namespace:WheelWizard.Views.Popups"
              xmlns:components="clr-namespace:WheelWizard.Views.Components"
-             xmlns:pages="clr-namespace:WheelWizard.Views.Pages"
              xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
              ClipToBounds="False"
-             xmlns:modManagement="clr-namespace:WheelWizard.Views.Popups.ModManagment"
-             xmlns:modManagement1="clr-namespace:WheelWizard.Views.Popups.ModManagement"
+             xmlns:modManagement="clr-namespace:WheelWizard.Views.Popups.ModManagement"
              mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="800">
     <Grid ColumnDefinitions="2*,3*">
         <!-- Mod List -->
@@ -73,7 +71,7 @@
 
         <!-- Mod Details -->
         <Grid Grid.Column="1" Margin="10,0,0,0">
-            <modManagement1:ModDetailViewer x:Name="ModDetailViewer"
+            <modManagement:ModDetailViewer x:Name="ModDetailViewer"
                                             IsVisible="False"/>
       
             <components:EmptyPageInfo Title="No mod selected" BodyText="Select a mod to view its details" 

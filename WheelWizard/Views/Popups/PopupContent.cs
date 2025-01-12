@@ -16,7 +16,6 @@ public abstract class PopupContent : UserControl
             BeforeClose = BeforeClose,
             BeforeOpen = BeforeOpen
         };
-        
     }
 
     protected virtual void BeforeClose() { } // Meant to be overwritten if needed

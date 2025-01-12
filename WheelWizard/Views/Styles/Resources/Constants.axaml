@@ -158,6 +158,10 @@
                             </Border>
                         </StackPanel>
                     </StackPanel>
+
+                    <Border Width="255" Height="30" Background="{DynamicResource Black}" Margin="0,2,0,0">
+                        <TextBlock Text="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                    </Border>   
                 </StackPanel>
             </StackPanel>
         </Border>
