@@ -91,24 +91,22 @@ public class ModManager : INotifyPropertyChanged
 
     public void AddMod(Mod mod)
     {
-        if (!ModInstallation.ModExists(Mods, mod.Title))
-        {
-            mod.PropertyChanged += Mod_PropertyChanged;
-            Mods.Add(mod);
-            SortModsByPriority();
-            _ = SaveModsAsync(); //this calls async method without awaiting it and no warning :)
-            ModsChanged?.Invoke();
-        }
+        if (ModInstallation.ModExists(Mods, mod.Title)) return;
+
+        mod.PropertyChanged += Mod_PropertyChanged;
+        Mods.Add(mod);
+        SortModsByPriority();
+        _ = SaveModsAsync(); //this calls async method without awaiting it and no warning :)
+        ModsChanged?.Invoke();
     }
 
     public void RemoveMod(Mod mod)
     {
-        if (Mods.Contains(mod))
-        {
-            Mods.Remove(mod);
-            _ = SaveModsAsync();
-            ModsChanged?.Invoke();
-        }
+        if (!Mods.Contains(mod)) return;
+
+        Mods.Remove(mod);
+        _ = SaveModsAsync();
+        ModsChanged?.Invoke();
     }
 
     private void Mod_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -201,7 +199,7 @@ public class ModManager : INotifyPropertyChanged
 
     public void RenameMod(Mod selectedMod)
     {
-        var newTitle = new  WPFViews.Popups.Generic.TextInputPopup("Enter Mod Title").ShowDialog();
+        var newTitle = new  TextInputWindow().setLabelText("Enter Mod Title").ShowDialog();
         if (!IsValidName(newTitle)) return;
 
         var oldTitle = selectedMod.Title;
@@ -294,7 +292,6 @@ public class ModManager : INotifyPropertyChanged
         }
         DeleteMod(modToDelete);
     }
-
 
     public void ReorderMod(Mod movedMod, int newIndex)
     {

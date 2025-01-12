@@ -1,0 +1,41 @@
+<self:PopupContent xmlns="https://github.com/avaloniaui"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+                  xmlns:self="clr-namespace:WheelWizard.Views.Popups"
+                  xmlns:components="clr-namespace:WheelWizard.Views.Components"
+                  x:Class="WheelWizard.Views.Popups.Generic.TextInputWindow">
+    <Grid Margin="10" ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto">
+
+        <!-- Dynamic Label -->
+        <TextBlock x:Name="DynamicLabel" Classes="TitleText"
+                   Text="Label Text" FontSize="14" Grid.Row="0"
+                   Margin="0,0,0,10" />
+
+        <!-- InputField -->
+        <TextBox  x:Name="InputField" Grid.Row="1"
+                  Watermark="Enter text here..."
+                  Margin="0,0,0,20"/>
+
+        <!-- Buttons -->
+        <components:Button x:Name="CancelButton"
+                           Grid.Row="2"
+                           Text="Cancel"
+                           Variant="Default"
+                           Width="140"
+                           HorizontalAlignment="Left"
+                           IconData="{StaticResource XMark}"
+                           Margin="0,0,10,0"
+                           Click="CancelButton_Click"/>
+        <components:Button x:Name="SubmitButton"
+                           Grid.Row="2"
+                           Text="Submit"
+                           Variant="Primary"
+                           Width="140"
+                           HorizontalAlignment="Right"
+                           IconData="{StaticResource CheckMark}"
+                           IsEnabled="False"
+                           Click="SubmitButton_Click"/>
+    </Grid>
+</self:PopupContent>
