@@ -163,7 +163,7 @@ public class ModManager : INotifyPropertyChanged
 
     private async Task CombineFilesIntoSingleModAsync(string[] filePaths)
     {
-        var modName = new WPFViews.Popups.Generic.TextInputPopup("Enter Mod Name").ShowDialog();
+        var modName = await new TextInputWindow().setLabelText("Enter Mod Name").ShowDialog();
         if (!IsValidName(modName)) return;
         var tempZipPath = Path.Combine(Path.GetTempPath(), $"{modName}.zip");
         try

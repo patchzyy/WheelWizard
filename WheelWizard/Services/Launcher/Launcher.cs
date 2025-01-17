@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using WheelWizard.Resources.Languages;
 using WheelWizard.Services.Settings;
 using WheelWizard.Services.WiiManagement;
-using WheelWizard.WPFViews.Popups.Generic;
+using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Services.Launcher;
 
@@ -30,7 +30,7 @@ public static class Launcher
         var dolphinLocation = PathManager.DolphinFilePath;
         if (dolphinLocation == "" || !File.Exists(dolphinLocation))
         {
-            MessageBoxWindow.ShowDialog(Phrases.PopupText_NotFindDolphin);
+            new MessageBoxWindow().SetMainText(Phrases.PopupText_NotFindDolphin).Show();
             return;
         }
 
@@ -52,7 +52,7 @@ public static class Launcher
             await ModsLaunchHelper.PrepareModsForLaunch();
             if (!File.Exists(PathManager.GameFilePath))
             {
-                MessageBoxWindow.ShowDialog(Phrases.PopupText_NotFindGame);
+                new MessageBoxWindow().SetMainText(Phrases.PopupText_NotFindGame).Show();
                 return;
             }
 
@@ -64,7 +64,7 @@ public static class Launcher
         catch (Exception e)
         {
             // I rather not translate this message, makes it easier to check where a given error came from
-            MessageBoxWindow.ShowDialog($"Failed to launch Retro Rewind: {e.Message}");
+            new MessageBoxWindow().SetMainText($"Failed to launch Retro Rewind: {e.Message}").Show();
         }
     }
 

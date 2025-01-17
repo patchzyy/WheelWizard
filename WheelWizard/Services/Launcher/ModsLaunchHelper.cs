@@ -80,7 +80,7 @@ public static async Task PrepareModsForLaunch()
     }
 
     var totalFiles = finalFiles.Count;
-    var progressWindow = new  WPFViews.Popups.Generic.ProgressWindow(Phrases.PopupText_InstallingMods)
+    var progressWindow = new ProgressWindow(Phrases.PopupText_InstallingMods)
         .SetGoal(Humanizer.ReplaceDynamic(Phrases.PopupText_InstallingModsCount, totalFiles)!);
     progressWindow.Show();
 

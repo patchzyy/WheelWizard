@@ -1,9 +1,0 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
-    <SolidColorBrush x:Key="ModPage-LinkColorCyan" Color="{StaticResource Cyan300}" />
-    <SolidColorBrush x:Key="ModPage-LinkColorCyan-Hover" Color="{StaticResource Cyan200}" />
-    <SolidColorBrush x:Key="ModPage-LinkColorRed" Color="{StaticResource Red400}" />
-    <SolidColorBrush x:Key="ModPage-LinkColorRed-Hover" Color="{StaticResource Red300}" />
-   
-</ResourceDictionary>

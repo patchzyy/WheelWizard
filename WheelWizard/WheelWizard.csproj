@@ -13,7 +13,7 @@
         <TargetFramework>net7.0-windows</TargetFramework>
         <RootNamespace>WheelWizard</RootNamespace>
         <Nullable>enable</Nullable>
-        <UseWPF>true</UseWPF>
+        <UseWPF>false</UseWPF>
         <Version>1.2.0</Version>
         <Description>This program will manage RetroRewind and mods :)</Description>
         <Copyright>yes,no... maybe</Copyright>

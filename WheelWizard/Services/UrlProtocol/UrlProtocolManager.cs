@@ -3,8 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
-using WheelWizard.WPFViews.Popups.ModManagment;
+using WheelWizard.Views.Popups.ModManagement;
 
 namespace WheelWizard.Services.UrlProtocol;
 

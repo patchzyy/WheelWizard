@@ -124,7 +124,7 @@ public static class RetroRewindInstaller
 
     private static async Task DownloadAndExtractRetroRewind(string tempZipPath)
     {
-        var progressWindow = new WPFViews.Popups.Generic.ProgressWindow(Phrases.PopupText_InstallingRR);
+        var progressWindow = new ProgressWindow(Phrases.PopupText_InstallingRR);
         progressWindow.SetExtraText(Phrases.PopupText_InstallingRRFirstTime);
         progressWindow.Show();
 

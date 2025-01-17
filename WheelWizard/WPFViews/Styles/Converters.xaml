@@ -1,7 +1,0 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:converters1="clr-namespace:WheelWizard.WPFViews.Converters">
-
-    <converters1:CornerRadiusConverter x:Key="CornerRadiusConverter" />
-
-</ResourceDictionary>

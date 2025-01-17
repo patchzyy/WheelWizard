@@ -2,7 +2,7 @@
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using WheelWizard.WPFViews.Popups.Generic;
+using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Helpers;
 
@@ -40,7 +40,7 @@ namespace WheelWizard.Helpers;
             response.EnsureSuccessStatusCode();
             if (response.RequestMessage == null || response.RequestMessage.RequestUri == null)
             {
-                MessageBoxWindow.ShowDialog("Failed to resolve final URL.");
+                new MessageBoxWindow().SetMainText("Failed to resolve final URL.").Show();
                 return null;
             }
 
@@ -83,7 +83,7 @@ namespace WheelWizard.Helpers;
                 downloadedBytes += bytesRead;
 
                 var progress = totalBytes == -1 ? 0 : (int)((float)downloadedBytes / totalBytes * 100);
-                progressPopupWindow.Dispatcher.Invoke(() => progressPopupWindow.UpdateProgress(progress));
+                progressPopupWindow.UpdateProgress(progress);
             }
 
             success = true; // Download completed successfully
@@ -100,25 +100,23 @@ namespace WheelWizard.Helpers;
 
             var delay = (int)Math.Pow(2, attempt) * 1000;
             await Task.Delay(delay);
-            progressPopupWindow.Dispatcher.Invoke(() =>
-                progressPopupWindow.SetExtraText($"Retrying... Attempt {attempt + 1} of {MaxRetries}"));
+            progressPopupWindow.SetExtraText($"Retrying... Attempt {attempt + 1} of {MaxRetries}");
         }
         catch (HttpRequestException ex)
         {
             attempt++;
             if (attempt >= MaxRetries)
             {
-                MessageBoxWindow.ShowDialog($"An HTTP error occurred after {MaxRetries} attempts: {ex.Message}");
+                new MessageBoxWindow().SetMainText($"An HTTP error occurred after {MaxRetries} attempts: {ex.Message}").Show();
                 break;
             }
             var delay = (int)Math.Pow(2, attempt) * 1000;
             await Task.Delay(delay);
-            progressPopupWindow.Dispatcher.Invoke(() =>
-                progressPopupWindow.SetExtraText($"Retrying... Attempt {attempt + 1} of {MaxRetries}"));
+            progressPopupWindow.SetExtraText($"Retrying... Attempt {attempt + 1} of {MaxRetries}");
         }
         catch (Exception ex)
         {
-            MessageBoxWindow.ShowDialog($"An error occurred while downloading the file: {ex.Message}");
+            new MessageBoxWindow().SetMainText($"An error occurred while downloading the file: {ex.Message}").Show();
             break;
         }
     }

@@ -12,7 +12,7 @@ using WheelWizard.Services.LiveData;
 using WheelWizard.Services.Settings;
 using WheelWizard.Utilities.Generators;
 using WheelWizard.Utilities.RepeatedTasks;
-using WheelWizard.WPFViews.Popups.Generic;
+using WheelWizard.Views.Popups.Generic;
 
 //big big thanks to https://kazuki-4ys.github.io/web_apps/FaceThief/ for the JS implementation of reading the rksys file
 //reminder, big endian!!!!
@@ -38,7 +38,7 @@ public class GameDataLoader : RepeatedTaskManager
             catch (Exception ex)
             {
                 // I rather not translate this message, makes it easier to check where a given error came from
-                MessageBoxWindow.ShowDialog($"Error creating save directory: {ex.Message}");
+                new MessageBoxWindow().SetMainText($"Error creating save directory: {ex.Message}").Show();
             }
             return path;
         }
@@ -111,7 +111,7 @@ public class GameDataLoader : RepeatedTaskManager
         catch (Exception e)
         {
             // I rather not translate this message, makes it easier to check where a given error came from
-            MessageBoxWindow.ShowDialog($"An error occurred while loading the game data: {e.Message}");
+            new MessageBoxWindow().SetMainText($"An error occurred while loading the game data: {e.Message}").Show();
         }
     }
     

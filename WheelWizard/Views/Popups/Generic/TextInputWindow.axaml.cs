@@ -1,9 +1,6 @@
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
 using System.Threading.Tasks;
-using WheelWizard.WPFViews.Popups.Generic;
 
 namespace WheelWizard.Views.Popups.Generic;
 

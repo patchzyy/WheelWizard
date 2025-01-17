@@ -13,7 +13,7 @@ using WheelWizard.Services;
 using WheelWizard.Services.GameBanana;
 using WheelWizard.Services.Installation;
 using WheelWizard.Services.Launcher;
-using WheelWizard.WPFViews.Popups.Generic;
+using WheelWizard.Views.Popups.Generic;
 using MessageBoxWindow = WheelWizard.Views.Popups.Generic.MessageBoxWindow;
 
 namespace WheelWizard.Views.Popups.ModManagement;
@@ -165,9 +165,9 @@ public partial class ModDetailViewer : UserControl
                 author = CurrentMod._aSubmitter._sName;
             }
             modId = CurrentMod._idRow;
-            var popup = new TextInputPopup("Enter Mod Name");
+            var popup = new TextInputWindow().setLabelText("Mod Name");
             popup.PopulateText(CurrentMod._sName);
-            var modName = popup.ShowDialog();
+            var modName = await popup.ShowDialog();
             if (string.IsNullOrEmpty(modName))
             {
                 new MessageBoxWindow().SetMainText("Mod name not provided.").Show();

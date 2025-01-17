@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using WheelWizard.Models.Settings;
-using WheelWizard.WPFViews.Popups.Generic;
+using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Services.Installation;
 public static class ModInstallation
@@ -141,7 +141,7 @@ public static class ModInstallation
                 
                 // Update the progress window
                 var progress = (int)((processedEntries / (double)totalEntries) * 100);
-                progressWindow.Dispatcher.Invoke(() => progressWindow.UpdateProgress(progress));
+                progressWindow.UpdateProgress(progress);
                 
                 // Normalize entry path by removing empty folder segments
                 var sanitizedKey = string.Join(Path.DirectorySeparatorChar.ToString(),
@@ -228,12 +228,12 @@ public static class ModInstallation
             // Check if a mod with the same name already exists
             if (ModExists(ModManager.Instance.Mods, givenModName))
             {
-                MessageBoxWindow.ShowDialog($"Mod with name '{givenModName}' already exists.");
+                new MessageBoxWindow().SetMainText($"Mod with name '{givenModName}' already exists.").Show();
                 return;
             }
 
             // Initialize progress window
-            progressWindow = new ProgressWindow("Installing Mod", Application.Current.MainWindow);
+            progressWindow = new ProgressWindow("Installing Mod");
             progressWindow.SetGoal("Extracting files...");
             progressWindow.Show();
 
@@ -261,12 +261,11 @@ public static class ModInstallation
             // Add to ModManager
             ModManager.Instance.AddMod(newMod);
 
-            MessageBoxWindow.ShowDialog($"Mod '{givenModName}' installed successfully.",
-                MessageBoxWindow.MessageType.Message);
+            new MessageBoxWindow().SetMainText($"Mod '{givenModName}' installed successfully.").Show();
         }
         catch (Exception ex)
         {
-            MessageBoxWindow.ShowDialog($"Failed to install mod: {ex.Message}");
+            new MessageBoxWindow().SetMainText($"Failed to install mod: {ex.Message}").Show();
         }
         finally
         {

@@ -59,7 +59,7 @@ public static class RetroRewindUpdater
         var allVersions = await GetAllVersionData();
         var updatesToApply = GetUpdatesToApply(currentVersion, allVersions);
 
-        var progressWindow = new  WPFViews.Popups.Generic.ProgressWindow(Phrases.PopupText_UpdateRR);
+        var progressWindow = new  ProgressWindow(Phrases.PopupText_UpdateRR);
         progressWindow.Show();
 
         // Step 1: Get the version we are updating to
@@ -244,7 +244,7 @@ public static class RetroRewindUpdater
 
     private static async Task<bool> DownloadAndApplyUpdate(
         (string Version, string Url, string Path, string Description) update, 
-        int totalUpdates, int currentUpdateIndex, WPFViews.Popups.Generic.ProgressWindow popupWindow)
+        int totalUpdates, int currentUpdateIndex, ProgressWindow popupWindow)
     {
         var tempZipPath = Path.GetTempFileName();
         try
