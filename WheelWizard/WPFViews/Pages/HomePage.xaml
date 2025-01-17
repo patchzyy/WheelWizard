@@ -34,7 +34,7 @@
                                     Foreground="{StaticResource MainWheel-Icon}"
                                     Width="200" Height="200" Margin="0,25">
                 <!-- 
-                Note that this icon should have the same margin on each side. Decide a padding/border, enter that number in the margin at tb.
+                Note that this icoRRDiscord_Clickhe same margin on each side. Decide a padding/border, enter that number in the margin at tb.
                 Then, double this number, take the width of the parent container, and subtract the doubled margin. 
                 This will give you the width & height of the icon.
             -->
@@ -71,5 +71,17 @@
             </components1:Button>
             
         </StackPanel>
+        <components1:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.DiscordBrands}"
+                                     IconPack="FontAwesome"
+                                     Grid.Row="1"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Bottom"
+                                     Text="Retro Rewind"
+                                     Color="{StaticResource TitleTextColor}"
+                                     FontSize="13"
+                                     HoverColor="{StaticResource SuccessTitleTextColor}"
+                                     Margin="{StaticResource LeftEdgeGap}"
+                                     Click="RRDiscord_Click"
+                                     IconSize="25" />
     </Grid>
 </Page>
