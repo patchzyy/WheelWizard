@@ -197,9 +197,9 @@ public class ModManager : INotifyPropertyChanged
         ModsChanged?.Invoke();
     }
 
-    public void RenameMod(Mod selectedMod)
+    public async void RenameMod(Mod selectedMod)
     {
-        var newTitle = new  TextInputWindow().setLabelText("Enter Mod Title").ShowDialog();
+        var newTitle = await new TextInputWindow().setLabelText("Enter Mod Title").ShowDialog();
         if (!IsValidName(newTitle)) return;
 
         var oldTitle = selectedMod.Title;
@@ -230,9 +230,9 @@ public class ModManager : INotifyPropertyChanged
     }
 
 
-    public void DeleteMod(Mod selectedMod)
+    public async void DeleteMod(Mod selectedMod)
     {
-        var areTheySure = new YesNoWindow().SetMainText(Humanizer.ReplaceDynamic(Phrases.PopupText_SureDeleteQuestion, selectedMod.Title)).AwaitAnswer();
+        var areTheySure = await new YesNoWindow().SetMainText(Humanizer.ReplaceDynamic(Phrases.PopupText_SureDeleteQuestion, selectedMod.Title)).AwaitAnswer();
         if (!areTheySure) return;
 
         var modDirectory = ModInstallation.GetModDirectoryPath(selectedMod.Title);

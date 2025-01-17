@@ -20,7 +20,7 @@ public static class MiiChannelLaunchHelper
                                 .SetMainText("Install MiiChannel?")
                                 .SetExtraText("Do you want to install the MiiChannel to launch it?");
             
-            if (downloadQuestion.AwaitAnswer())
+            if (await downloadQuestion.AwaitAnswer())
             {
                 miiChannelExists = true;
                 await DownloadHelper.DownloadToLocationAsync(Endpoints.MiiChannelWAD, MiiChannelPath, "Downloading MiiChannel");

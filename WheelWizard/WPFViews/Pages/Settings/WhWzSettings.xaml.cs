@@ -108,7 +108,7 @@ public partial class WhWzSettings : UserControl
             MarioKartInput.Text = openFileDialog.FileName;
     }
 
-    private void DolphinUserPathBrowse_OnClick(object sender, RoutedEventArgs e)
+    private async void DolphinUserPathBrowse_OnClick(object sender, RoutedEventArgs e)
     {
         var currentFolder = (string)SettingsManager.USER_FOLDER_PATH.Get();
         CommonOpenFileDialog dialog = new();
@@ -121,7 +121,7 @@ public partial class WhWzSettings : UserControl
             if (!string.IsNullOrEmpty(folderPath))
             {
                 // Ask user if they want to use the automatically found folder
-                var result = new YesNoWindow()
+                var result = await new YesNoWindow()
                     .SetMainText($"{Phrases.PopupText_DolphinFoundText}\n{folderPath}")
                     .SetExtraText(Phrases.PopupText_DolphinFound).AwaitAnswer();
                 if (result)
@@ -200,7 +200,7 @@ public partial class WhWzSettings : UserControl
         DolphinUserPathInput.Text = PathManager.UserFolderPath;
     }
     
-    private void WindowScaleDropdown_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void WindowScaleDropdown_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (!_pageLoaded || _editingScale)
             return;
@@ -234,7 +234,7 @@ public partial class WhWzSettings : UserControl
         
         timer.Start();
         
-        if (yesNoWindow.AwaitAnswer())
+        if (await yesNoWindow.AwaitAnswer())
             SettingsManager.SAVED_WINDOW_SCALE.Set(SettingsManager.WINDOW_SCALE.Get());
         else
         {

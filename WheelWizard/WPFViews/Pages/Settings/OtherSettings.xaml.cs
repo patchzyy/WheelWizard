@@ -76,7 +76,7 @@ public partial class OtherSettings : UserControl
             SettingsManager.RR_LANGUAGE.Set(key);
     }
     
-    private void WhWzLanguageDropdown_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void WhWzLanguageDropdown_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var selectedLanguage = WhWzLanguageDropdown.SelectedItem.ToString();
         var key = SettingValues.WhWzLanguages
@@ -86,11 +86,11 @@ public partial class OtherSettings : UserControl
         if (key == null || key == currentLanguage ) 
             return;
         
-        var yesNoWindow = new YesNoWindow()
+        var yesNoWindow = await new YesNoWindow()
                           .SetMainText("Do you want to apply the new language settings?")
                           .SetExtraText("This will close the current window and open a new one with the new language settings.")
-                          .SetButtonText(Common.Action_Apply, Common.Action_Cancel);
-        if (!yesNoWindow.AwaitAnswer())
+                          .SetButtonText(Common.Action_Apply, Common.Action_Cancel).AwaitAnswer();
+        if (!yesNoWindow)
         {
             var currentWhWzLanguage = (string)SettingsManager.WW_LANGUAGE.Get();
             var whWzLanguageDisplayName = SettingValues.WhWzLanguages[currentWhWzLanguage];

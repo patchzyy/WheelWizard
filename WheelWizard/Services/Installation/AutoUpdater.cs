@@ -37,18 +37,18 @@ public static class AutoUpdater
             return;
         }
 
-        var updateQuestion = new YesNoWindow()
+        var updateQuestion = await new YesNoWindow()
                              .SetButtonText(Common.Action_Update, Common.Action_MaybeLater)
                              .SetMainText(Phrases.PopupText_WhWzUpdateAvailable)
                              .SetExtraText(Humanizer.ReplaceDynamic(Phrases.PopupText_NewVersionWhWz,
-                                                                    latestVersion, currentVersion));
-        if (!updateQuestion.AwaitAnswer()) 
+                                                                    latestVersion, currentVersion)).AwaitAnswer();
+        if (!updateQuestion) 
             return;
         
         var adminQuestion = new YesNoWindow()
                             .SetMainText(Phrases.PopupText_UpdateAdmin)  
                             .SetExtraText(Phrases.PopupText_UpdateAdminExplained);
-        if (adminQuestion.AwaitAnswer())
+        if (await adminQuestion.AwaitAnswer())
             RestartAsAdmin();
         else
             await UpdateAsync(latestRelease.Assets[0].BrowserDownloadUrl);

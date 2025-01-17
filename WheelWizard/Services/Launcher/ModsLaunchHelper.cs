@@ -34,7 +34,7 @@ public static async Task PrepareModsForLaunch()
                                     .SetButtonText(Common.Action_Delete, Common.Action_Keep)
                                     .SetMainText(Phrases.PopupText_ModsFound)
                                     .SetExtraText(Phrases.PopupText_ModsFoundQuestion);
-            if (modsFoundQuestion.AwaitAnswer())
+            if (await modsFoundQuestion.AwaitAnswer())
                 Directory.Delete(MyStuffFolderPath, true);
             
             return;

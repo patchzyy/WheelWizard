@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using System.Threading.Tasks;
 using WheelWizard.WPFViews.Popups.Generic;
 
 namespace WheelWizard.Views.Popups.Generic;
@@ -9,6 +10,7 @@ namespace WheelWizard.Views.Popups.Generic;
 public partial class TextInputWindow : PopupContent
 {
     private string? _result;
+    private TaskCompletionSource<string?>? _tcs;
 
     // Constructor with dynamic label parameter
     public TextInputWindow() : base(true, false, true, "Text Field")
@@ -25,11 +27,11 @@ public partial class TextInputWindow : PopupContent
         return this;
     }
     
-    // Returns the entered text if "Submit" is clicked, or null if "Cancel" is clicked
-    public new string? ShowDialog()
+    public new async Task<string?> ShowDialog()
     {
-        base.ShowDialog();
-        return _result;
+        _tcs = new TaskCompletionSource<string?>();
+        Show(); // or ShowDialog(parentWindow);
+        return await _tcs.Task;
     }
 
     // Handle text changes to enable/disable Submit button
@@ -48,6 +50,7 @@ public partial class TextInputWindow : PopupContent
     private void SubmitButton_Click(object sender, RoutedEventArgs e)
     {
         _result = InputField.Text.Trim();
+        _tcs?.TrySetResult(_result); // Set the result of the task
         Close();
     }
 
@@ -55,6 +58,7 @@ public partial class TextInputWindow : PopupContent
     private void CancelButton_Click(object sender, RoutedEventArgs e)
     {
         _result = null;
+        _tcs?.TrySetResult(null); // Set the result of the task to null
         Close();
     }
     

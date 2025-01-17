@@ -1,5 +1,6 @@
 using Avalonia.Interactivity;
 using Avalonia.Layout;
+using System.Threading.Tasks;
 using WheelWizard.Resources.Languages;
 
 namespace WheelWizard.Views.Popups.Generic;
@@ -7,6 +8,7 @@ namespace WheelWizard.Views.Popups.Generic;
 public partial class YesNoWindow : PopupContent
 {
     public bool Result { get; private set; }
+    private TaskCompletionSource<bool> _tcs;
     
     public YesNoWindow() : base(true, false,true ,"Wheel Wizard")
     {
@@ -43,17 +45,21 @@ public partial class YesNoWindow : PopupContent
     {
         Result = true;
         Close();
+        _tcs.TrySetResult(true); // Signal that the task is complete
     }
     private void noButton_Click(object sender, RoutedEventArgs e)
     {
         Result = false;
         Close();
+        _tcs.TrySetResult(false); // Signal that the task is complete
+
     }
     
-    public bool AwaitAnswer()
+    public async Task<bool> AwaitAnswer()
     {
-        ShowDialog();
-        return Result;
+        _tcs = new TaskCompletionSource<bool>();
+        Show(); // Or ShowDialog(parentWindow) if you need it to be modal
+        return await _tcs.Task;
     }
 }
 

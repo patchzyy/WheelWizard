@@ -152,7 +152,7 @@ public partial class WhWzSettings : UserControl
             if (!string.IsNullOrEmpty(folderPath))
             {
                 // Ask user if they want to use the automatically found folder
-                var result = new YesNoWindow()
+                var result = await new YesNoWindow()
                     .SetMainText($"{Phrases.PopupText_DolphinFoundText}\n{folderPath}")
                     .SetExtraText(Phrases.PopupText_DolphinFound).AwaitAnswer();
                 if (result)
