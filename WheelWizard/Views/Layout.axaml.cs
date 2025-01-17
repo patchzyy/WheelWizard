@@ -27,8 +27,8 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
     public Layout()
     {
         Instance = this;
+        Initialized += ViewUtils.OnInitialized;
         InitializeComponent();
-        
         OnSettingChanged(SettingsManager.SAVED_WINDOW_SCALE);
         SettingsManager.WINDOW_SCALE.Subscribe(this);
         
@@ -44,6 +44,7 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
         InitializeManagers();
     }
     
+
     public void OnSettingChanged(Setting setting)
     {
         // TODO: Implement the scaleFactor resize thingy

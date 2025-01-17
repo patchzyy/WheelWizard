@@ -1,7 +1,5 @@
 using Avalonia;
-using Avalonia.Threading;
 using System;
-using System.Threading;
 using WheelWizard.Services.Installation;
 using WheelWizard.Services.Settings;
 using WheelWizard.Services.UrlProtocol;

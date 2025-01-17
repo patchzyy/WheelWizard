@@ -1,6 +1,8 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using System;
+using WheelWizard.Services.UrlProtocol;
 
 namespace WheelWizard.Views;
 
@@ -20,4 +22,7 @@ public partial class App : Application
 
         base.OnFrameworkInitializationCompleted();
     }
+
+ 
+
 }

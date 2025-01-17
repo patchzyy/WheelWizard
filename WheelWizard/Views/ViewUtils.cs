@@ -1,6 +1,8 @@
 using Avalonia.Controls;
 using System;
+using WheelWizard.Services.UrlProtocol;
 using WheelWizard.Views.Pages.Settings;
+using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Views;
 
@@ -13,6 +15,14 @@ public class ViewUtils
             FileName = link,
             UseShellExecute = true
         });
+    }
+    
+    public static void OnInitialized(object? sender, EventArgs e)
+    {
+        var args = Environment.GetCommandLineArgs();
+        if (args.Length <= 1) return; 
+        var protocolArgument = args[1];
+        UrlProtocolManager.ShowPopupForLaunchUrlAsync(protocolArgument);
     }
     
     public static Layout GetLayout() => Layout.Instance;
