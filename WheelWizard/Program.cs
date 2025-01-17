@@ -15,24 +15,7 @@ public class Program
     {
         Console.WriteLine("Application start");
         Setup();
-            
-        var wpfThread = new Thread(() =>
-                   {
-                       var wpfApp = new App(); // WPF App
-                       wpfApp.InitializeComponent();
-                       wpfApp.Run();
-                   });
-        wpfThread.SetApartmentState(ApartmentState.STA); 
-     
-        
-        var avaloniaThread = new Thread(() =>
-        {
-            BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
-        });
-        avaloniaThread.SetApartmentState(ApartmentState.STA); 
-        
-        avaloniaThread.Start();
-        wpfThread.Start();
+        BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
     }
     
     public static AppBuilder BuildAvaloniaApp()
