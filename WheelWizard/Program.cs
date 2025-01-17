@@ -15,13 +15,7 @@ public class Program
     {
         Console.WriteLine("Application start");
         Setup();
-        var avaloniaThread = new Thread(() =>
-        {
-            BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
-        });
-        avaloniaThread.SetApartmentState(ApartmentState.STA); 
-        
-        avaloniaThread.Start();
+        BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
     }
     
     public static AppBuilder BuildAvaloniaApp()

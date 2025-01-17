@@ -1,8 +1,8 @@
+using Avalonia;
 using Avalonia.Threading;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace WheelWizard.Utilities.RepeatedTasks;
 
@@ -50,7 +50,7 @@ public abstract class RepeatedTaskManager
         _timer.Start();
 
         // Run the initial execution
-        Application.Current.Dispatcher.Invoke(async () => await ExecuteAndNotifyAsync());
+        ExecuteAndNotifyAsync();
     }
 
     public void Stop()
