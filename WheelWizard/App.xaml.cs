@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
+using WheelWizard.Services;
 using WheelWizard.Services.Installation;
 using WheelWizard.Services.Settings;
 using WheelWizard.Services.UrlProtocol;
@@ -15,9 +16,8 @@ public partial class App : Application
         SettingsManager.Instance.LoadSettings();
         AutoUpdater.CheckForUpdatesAsync();
         UrlProtocolManager.SetWhWzSchemeAsync();
-
+        ModManager.Instance.InitializeAsync();
         var args = Environment.GetCommandLineArgs();
-
         if (args.Length <= 1) return; 
         var protocolArgument = args[1];
         if (protocolArgument.StartsWith("wheelwizard://", StringComparison.OrdinalIgnoreCase))
