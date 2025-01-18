@@ -1,7 +1,5 @@
-﻿using WheelWizard.Resources.Languages;
-using System;
+﻿using System;
 using System.IO;
-using System.Windows;
 using WheelWizard.Helpers;
 using WheelWizard.Services.Settings;
 

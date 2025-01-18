@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using WheelWizard.Helpers;
 using WheelWizard.Models.Settings;
 using WheelWizard.Resources.Languages;
@@ -109,8 +108,8 @@ public static async Task PrepareModsForLaunch()
 
             processedFiles++;
             var progress = (int)((processedFiles) / (double)totalFiles * 100);
-            Application.Current.Dispatcher.Invoke(() => progressWindow.UpdateProgress(progress));
-            Application.Current.Dispatcher.Invoke(() => progressWindow.SetExtraText($"{Common.State_Installing} {relativePath}"));
+            progressWindow.UpdateProgress(progress);
+            progressWindow.SetExtraText($"{Common.State_Installing} {relativePath}");
 
             // Check if the destination file exists and is identical
             if (File.Exists(destinationFile))

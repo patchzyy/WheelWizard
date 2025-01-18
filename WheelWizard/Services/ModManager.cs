@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
@@ -7,12 +6,10 @@ using System.IO.Compression;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using System.Windows;
 using WheelWizard.Helpers;
 using WheelWizard.Models.Settings;
 using WheelWizard.Resources.Languages;
 using WheelWizard.Services.Installation;
-using WheelWizard.Services.Launcher;
 using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Services;
@@ -132,19 +129,12 @@ public class ModManager : INotifyPropertyChanged
 
     public async void ImportMods()
     {
-        var joinedExtensions = string.Join(";", ModsLaunchHelper.AcceptedModExtensions);
-        joinedExtensions += ";*.zip";
-        var openFileDialog = new OpenFileDialog
-        {
-            Filter = $"Mod files ({joinedExtensions})|{joinedExtensions}|All files (*.*)|*.*",
-            Title = "Select Mod File",
-            Multiselect = true
-        };
+        var fileType = CustomFilePickerFileType.Mods;
+        var selectedFiles = await FilePickerHelper.OpenFilePickerAsync(fileType, allowMultiple: true, title: "Select Mod File");
 
-        if (openFileDialog.ShowDialog() != true) return;
-        var selectedFiles = openFileDialog.FileNames;
-        await ProcessModFilesAsync(selectedFiles);
+        if (selectedFiles.Count == 0) return;
 
+        await ProcessModFilesAsync(selectedFiles.ToArray());
     }
 
     private async Task ProcessModFilesAsync(string[] filePaths)

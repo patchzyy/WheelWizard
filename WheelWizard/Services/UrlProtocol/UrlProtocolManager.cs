@@ -1,8 +1,13 @@
-﻿using Microsoft.Win32;
+﻿
+#if WINDOWS
+using Microsoft.Win32;
+#endif
+
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
+using WheelWizard.Views.Popups.Generic;
 using WheelWizard.Views.Popups.ModManagement;
 
 namespace WheelWizard.Services.UrlProtocol;
@@ -10,6 +15,7 @@ namespace WheelWizard.Services.UrlProtocol;
 public class UrlProtocolManager
 {
     public const string ProtocolName = "wheelwizard";
+#if WINDOWS
     public static void RegisterCustomScheme(string schemeName)
     {
         var currentExecutablePath = Process.GetCurrentProcess().MainModule!.FileName;
@@ -30,9 +36,16 @@ public class UrlProtocolManager
         var protocolKey = $@"SOFTWARE\Classes\{schemeName}";
         return Registry.CurrentUser.OpenSubKey(protocolKey) != null;
     }
+        public static void RemoveCustomScheme(string schemeName)
+    {
+        var protocolKey = $@"SOFTWARE\Classes\{schemeName}";
+        Registry.CurrentUser.DeleteSubKeyTree(protocolKey);
+    }
+#endif
 
     async public static void SetWhWzSchemeAsync()
     {
+        #if WINDOWS
         var currentExecutablePath = Process.GetCurrentProcess().MainModule!.FileName;
         var protocolKey = $@"SOFTWARE\Classes\{ProtocolName}";
 
@@ -62,13 +75,9 @@ public class UrlProtocolManager
                 }
             }
         }
+    #endif
     }
     
-    public static void RemoveCustomScheme(string schemeName)
-    {
-        var protocolKey = $@"SOFTWARE\Classes\{schemeName}";
-        Registry.CurrentUser.DeleteSubKeyTree(protocolKey);
-    }
 
     public static void ShowPopupForLaunchUrl(string url)
     {
@@ -93,7 +102,7 @@ public class UrlProtocolManager
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Error handling URL: {ex.Message}", "WheelWizard Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            new MessageBoxWindow().SetMainText($"Error handling URL: {ex.Message}").Show();
         }
     }
 
@@ -123,7 +132,7 @@ public class UrlProtocolManager
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Error handling URL: {ex.Message}", "WheelWizard Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            new MessageBoxWindow().SetMainText($"Error handling URL: {ex.Message}").Show();
         }
     }
 }

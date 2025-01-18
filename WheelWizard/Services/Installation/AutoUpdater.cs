@@ -68,7 +68,7 @@ public static class AutoUpdater
             Process.Start(startInfo);
             Environment.Exit(0);
         }
-        catch (System.ComponentModel.Win32Exception)
+        catch (Exception e)
         {
             new YesNoWindow().SetMainText(Phrases.PopupText_RestartAdminFail);
         }

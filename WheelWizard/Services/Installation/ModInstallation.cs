@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
 using WheelWizard.Models.Settings;
 using WheelWizard.Views.Popups.Generic;
 

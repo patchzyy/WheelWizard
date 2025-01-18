@@ -1,7 +1,7 @@
 using WheelWizard.Resources.Languages;
 using System;
 using System.ComponentModel;
-using System.Windows.Media.Imaging;
+using Avalonia.Media.Imaging;
 using WheelWizard.Services.WiiManagement;
 
 namespace WheelWizard.Models.RRInfo;
@@ -15,9 +15,9 @@ public class Mii : INotifyPropertyChanged
     // This never will be set back to false, this is intentional
     // This is to ensure that it will never request the image again after the first time
     private bool _requestingImage;
-    private BitmapImage? _image;
+    private Bitmap? _image;
 
-    public BitmapImage? Image
+    public Bitmap? Image
     {
         get
         {
@@ -41,7 +41,7 @@ public class Mii : INotifyPropertyChanged
         }
     }
     
-    public void SetImage(BitmapImage image, bool loadedSuccessfully)
+    public void SetImage(Bitmap image, bool loadedSuccessfully)
     {
         LoadedImageSuccessfully = loadedSuccessfully;
         Image = image;

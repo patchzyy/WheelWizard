@@ -1,11 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using Avalonia.Media.Imaging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Media.Imaging;
 using WheelWizard.Helpers;
 using WheelWizard.Models.RRInfo;
 
@@ -16,13 +15,13 @@ public static class MiiImageManager
     private const int MaxCachedImages = 126;
     // There are always 2 values, the image itself, and a bool indicating if the image was loaded successfully
     // If it wasn't, it means that that image is just empty, yet it still should not be requested again since it failed
-    private static readonly Dictionary<string, (BitmapImage, bool)> Images = new();
+    private static readonly Dictionary<string, (Bitmap, bool)> Images = new();
     private static readonly Queue<string> ImageOrder = new();
     public static int ImageCount { get; private set; } = 0;
 
-    public static (BitmapImage, bool)? GetCachedMiiImage(string miiData) => Images.TryGetValue(miiData, out var image) ? image : null;
+    public static (Bitmap, bool)? GetCachedMiiImage(string miiData) => Images.TryGetValue(miiData, out var image) ? image : null;
 
-    private static void AddMiiImage(string miiData, (BitmapImage, bool) image)
+    private static void AddMiiImage(string miiData, (Bitmap, bool) image)
     {
         if (!Images.ContainsKey(miiData))
             ImageOrder.Enqueue(miiData);
@@ -36,10 +35,10 @@ public static class MiiImageManager
     }
     
     // Returns the image related to this data, if it is not cached, it will request it
-    public static async Task<(BitmapImage, bool)> LoadBase64MiiImageAsync(string base64MiiData)
+    public static async Task<(Bitmap, bool)> LoadBase64MiiImageAsync(string base64MiiData)
     {
-        if (string.IsNullOrEmpty(base64MiiData)) 
-            return (new BitmapImage(), false);
+        if (string.IsNullOrEmpty(base64MiiData))
+            return (CreateEmptyBitmap(), false);
         
         if (Images.ContainsKey(base64MiiData))
             return Images[base64MiiData];
@@ -61,19 +60,30 @@ public static class MiiImageManager
     }
 
     // Return the image, and a bool indicating if the image was loaded successfully
-    private static async Task<(BitmapImage, bool)> RequestMiiImageAsync(string base64MiiData)
+    private static async Task<(Bitmap, bool)> RequestMiiImageAsync(string base64MiiData)
     {
         using var formData = new MultipartFormDataContent();
         formData.Add(new ByteArrayContent(Convert.FromBase64String(base64MiiData)), "data", "mii.dat");
         formData.Add(new StringContent("wii"), "platform");
+
         var response = await HttpClientHelper.PostAsync<MiiResponse>(Endpoints.MiiStudioUrl, formData);
 
-        if (!response.Succeeded || response.Content is null) 
-            return (new BitmapImage(), false);
+        if (!response.Succeeded || response.Content is null)
+            return (CreateEmptyBitmap(), false);
 
         var miiImageUrl = GetMiiImageUrlFromResponse(response.Content);
-        
-        return (new BitmapImage(new Uri(miiImageUrl)), true);
+
+        try
+        {
+            using var httpClient = new HttpClient();
+            var imageStream = await httpClient.GetStreamAsync(miiImageUrl);
+            var bitmap = new Bitmap(imageStream);
+            return (bitmap, true);
+        }
+        catch
+        {
+            return (CreateEmptyBitmap(), false);
+        }
     }
     
     private static string GetMiiImageUrlFromResponse(MiiResponse response)
@@ -114,5 +124,11 @@ public static class MiiImageManager
         public string? Gender { get; set; }
         public string? Mingle { get; set; }
         public string? Copying { get; set; }
+    }
+    
+    private static Bitmap CreateEmptyBitmap()
+    {
+        using var memoryStream = new MemoryStream();
+        return new Bitmap(memoryStream);
     }
 }

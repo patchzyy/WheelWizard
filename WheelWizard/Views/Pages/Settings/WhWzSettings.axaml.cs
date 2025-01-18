@@ -73,57 +73,29 @@ public partial class WhWzSettings : UserControl
 
     private async void DolphinExeBrowse_OnClick(object sender, RoutedEventArgs e)
     {
-        var currentPath = (string)SettingsManager.DOLPHIN_LOCATION.Get();
-        
-        var topLevel = TopLevel.GetTopLevel(this);
-
-        var files = await topLevel!.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+        var fileType = new FilePickerFileType("Executable files")
         {
-            Title = "Select Dolphin Emulator",
-            AllowMultiple = false,
-            FileTypeFilter = new[] {
-                new FilePickerFileType("Executable files")
-                {
-                    Patterns = new[] { "*.exe" }
-                },
-                new FilePickerFileType("All files")
-                {
-                    Patterns = new[] { "*.*" }
-                }
-            }
-        });
+            Patterns = new[] { "*.exe" }
+        };
 
-        if (files.Count >= 1)
+        var filePath = await FilePickerHelper.OpenSingleFileAsync("Select Dolphin Emulator", new[] { fileType });
+        if (!string.IsNullOrEmpty(filePath))
         {
-            DolphinExeInput.Text = files[0].Path.AbsolutePath;
+            DolphinExeInput.Text = filePath;
         }
     }
 
     private async void GameLocationBrowse_OnClick(object sender, RoutedEventArgs e)
     {
-        var currentPath = (string)SettingsManager.GAME_LOCATION.Get();
-        
-        var topLevel = TopLevel.GetTopLevel(this);
-        
-        var files = await topLevel!.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+        var fileType = new FilePickerFileType("Game files")
         {
-            Title = "Select Mario Kart Wii Game File",
-            AllowMultiple = false,
-            FileTypeFilter = new[] {
-                new FilePickerFileType("Game files")
-                {
-                    Patterns = new[] { "*.iso", "*.wbfs", "*.rvz" }
-                },
-                new FilePickerFileType("All files")
-                {
-                    Patterns = new[] { "*.*" }
-                }
-            }
-        });
+            Patterns = new[] { "*.iso", "*.wbfs", "*.rvz" }
+        };
 
-        if (files.Count >= 1)
+        var filePath = await FilePickerHelper.OpenSingleFileAsync("Select Mario Kart Wii Game File", new[] { fileType });
+        if (!string.IsNullOrEmpty(filePath))
         {
-            MarioKartInput.Text = files[0].Path.AbsolutePath;
+            MarioKartInput.Text = filePath;
         }
     }
 

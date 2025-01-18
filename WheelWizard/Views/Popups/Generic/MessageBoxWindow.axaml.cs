@@ -47,14 +47,15 @@ public partial class MessageBoxWindow : PopupContent
     {
         switch (messageType)
         {
+            //todo: fix sounds for all platforms
             case MessageType.Error:
-                SystemSounds.Hand.Play();
+                // SystemSounds.Hand.Play();
                 break;
             case MessageType.Warning:
-                SystemSounds.Exclamation.Play();
+                // SystemSounds.Exclamation.Play();
                 break;
             case MessageType.Message:
-                SystemSounds.Hand.Play();
+                // SystemSounds.Hand.Play();
                 break;
         }
     }
