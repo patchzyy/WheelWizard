@@ -2,7 +2,9 @@
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -89,6 +91,26 @@ public static class FilePickerHelper
         });
 
         return folders?.FirstOrDefault()?.Path.LocalPath;
+    }
+    
+    public static void OpenFolderInFileManager(string folderPath)
+    {
+        if (OperatingSystem.IsWindows())
+        {
+            Process.Start("explorer.exe", folderPath);
+        }
+        else if (OperatingSystem.IsLinux())
+        {
+            Process.Start("xdg-open", folderPath);
+        }
+        else if (OperatingSystem.IsMacOS())
+        {
+            Process.Start("open", folderPath);
+        }
+        else
+        {
+            throw new PlatformNotSupportedException("Unsupported operating system.");
+        }
     }
 }
 

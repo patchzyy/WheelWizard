@@ -140,7 +140,10 @@ public static class ModInstallation
                 
                 // Update the progress window
                 var progress = (int)((processedEntries / (double)totalEntries) * 100);
+                Avalonia.Threading.Dispatcher.UIThread.Post(() =>
+                {
                 progressWindow.UpdateProgress(progress);
+                });
                 
                 // Normalize entry path by removing empty folder segments
                 var sanitizedKey = string.Join(Path.DirectorySeparatorChar.ToString(),

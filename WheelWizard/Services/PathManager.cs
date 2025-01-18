@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using WheelWizard.Helpers;
 using WheelWizard.Services.Settings;
 
@@ -24,7 +25,26 @@ public static class PathManager
     public static string RiivolutionWhWzFolderPath => Path.Combine(LoadFolderPath, "Riivolution", "WheelWizard");
     public static string RetroRewind6FolderPath => Path.Combine(RiivolutionWhWzFolderPath, "RetroRewind6");
     public static string LoadFolderPath => Path.Combine(UserFolderPath, "Load");
-    public static string ConfigFolderPath => Path.Combine(UserFolderPath, "Config");
+
+    public static string ConfigFolderPath
+    {
+        get
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                return Path.Combine(UserFolderPath, "Config");
+            }
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                return Path.Combine(Environment.GetEnvironmentVariable("HOME") ?? "/", ".var", "app", "org.DolphinEmu.dolphin-emu", "data", "dolphin-emu", "Config");
+            }
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                return Path.Combine(Environment.GetEnvironmentVariable("HOME") ?? "/", "Library", "Application Support", "Dolphin", "Config");
+            }
+            throw new PlatformNotSupportedException("Unsupported operating system");
+        }
+    }
     public static string WiiFolderPath => Path.Combine(UserFolderPath, "Wii");
     
     

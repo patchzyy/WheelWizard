@@ -73,12 +73,18 @@ public partial class WhWzSettings : UserControl
 
     private async void DolphinExeBrowse_OnClick(object sender, RoutedEventArgs e)
     {
-        var fileType = new FilePickerFileType("Executable files")
+        // Define platform-specific executable patterns
+        var executableFileType = new FilePickerFileType("Executable files")
         {
-            Patterns = new[] { "*.exe" }
+            Patterns = Environment.OSVersion.Platform switch
+            {
+                PlatformID.Win32NT => new[] { "*.exe" },
+                PlatformID.Unix or PlatformID.MacOSX => new[] { "*", "*.sh" }, // Unix systems often don't use extensions for executables
+                _ => new[] { "*" } // Fallback
+            }
         };
 
-        var filePath = await FilePickerHelper.OpenSingleFileAsync("Select Dolphin Emulator", new[] { fileType });
+        var filePath = await FilePickerHelper.OpenSingleFileAsync("Select Dolphin Emulator", new[] { executableFileType });
         if (!string.IsNullOrEmpty(filePath))
         {
             DolphinExeInput.Text = filePath;
@@ -100,53 +106,65 @@ public partial class WhWzSettings : UserControl
     }
 
     private async void DolphinUserPathBrowse_OnClick(object sender, RoutedEventArgs e)
+{
+    var currentFolder = (string)SettingsManager.USER_FOLDER_PATH.Get();
+    var topLevel = TopLevel.GetTopLevel(this);
+
+    // If a current folder exists and is valid, suggest it as the starting location
+    if (!string.IsNullOrEmpty(currentFolder) && Directory.Exists(currentFolder))
     {
-        var currentFolder = (string)SettingsManager.USER_FOLDER_PATH.Get();
-        
-        var topLevel = TopLevel.GetTopLevel(this);
-        
-        if (!string.IsNullOrEmpty(currentFolder) && Directory.Exists(currentFolder))
+        var folder = await topLevel!.StorageProvider.TryGetFolderFromPathAsync(currentFolder);
+        var folders = await topLevel.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
         {
-            var folder = await topLevel!.StorageProvider.TryGetFolderFromPathAsync(currentFolder);
-            
-            var folders = await topLevel.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions()
-            {
-                SuggestedStartLocation = folder,
-                AllowMultiple = false
-            });
-            
-            if (folders.Count >= 1)
-                DolphinUserPathInput.Text = folders[0].Path.AbsolutePath;
+            Title = "Select Dolphin User Path",
+            SuggestedStartLocation = folder,
+            AllowMultiple = false
+        });
+
+        if (folders.Count >= 1)
+        {
+            DolphinUserPathInput.Text = folders[0].Path.LocalPath;
         }
-        else
+        return;
+    }
+
+    // Attempt to find Dolphin's default path if no valid folder is set
+    var folderPath = PathManager.TryFindDolphinPath();
+    if (!string.IsNullOrEmpty(folderPath))
+    {
+        // Ask the user if they want to use the automatically found folder
+        var result = await new YesNoWindow()
+            .SetMainText($"{Phrases.PopupText_DolphinFoundText}\n{folderPath}")
+            .SetExtraText(Phrases.PopupText_DolphinFound)
+            .AwaitAnswer();
+
+        if (result)
         {
-            var folderPath = PathManager.TryFindDolphinPath();
-            if (!string.IsNullOrEmpty(folderPath))
-            {
-                // Ask user if they want to use the automatically found folder
-                var result = await new YesNoWindow()
-                    .SetMainText($"{Phrases.PopupText_DolphinFoundText}\n{folderPath}")
-                    .SetExtraText(Phrases.PopupText_DolphinFound).AwaitAnswer();
-                if (result)
-                {
-                    DolphinUserPathInput.Text = folderPath;
-                    return;
-                }
-            }
-            else
-            {
-                new YesNoWindow().SetMainText(Phrases.PopupText_DolphinNotFoundText);
-            }
-            
-            var folders = await topLevel!.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions()
-            {
-                AllowMultiple = false
-            });
-            
-            if (folders.Count >= 1)
-                DolphinUserPathInput.Text = folders[0].Path.AbsolutePath;
+            DolphinUserPathInput.Text = folderPath;
+            return;
         }
     }
+    else
+    {
+        // Notify the user that Dolphin could not be found
+        await new MessageBoxWindow()
+            .SetMainText(Phrases.PopupText_DolphinNotFoundText)
+            .ShowDialog();
+    }
+
+    // Let the user manually select a folder
+    var manualFolders = await topLevel!.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
+    {
+        Title = "Select Dolphin User Path",
+        AllowMultiple = false
+    });
+
+    if (manualFolders.Count >= 1)
+    {
+        DolphinUserPathInput.Text = manualFolders[0].Path.LocalPath;
+    }
+}
+
 
     private void SaveButton_OnClick(object sender, RoutedEventArgs e)
     {
@@ -180,7 +198,8 @@ public partial class WhWzSettings : UserControl
     {
         if (!Directory.Exists(PathManager.WheelWizardAppdataPath))
             Directory.CreateDirectory(PathManager.WheelWizardAppdataPath);
-        Process.Start("explorer.exe", PathManager.WheelWizardAppdataPath);
+        
+        FilePickerHelper.OpenFolderInFileManager(PathManager.WheelWizardAppdataPath);
     }
 
     private void TogglePathSettings(bool enable)

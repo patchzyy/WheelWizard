@@ -108,8 +108,11 @@ public static async Task PrepareModsForLaunch()
 
             processedFiles++;
             var progress = (int)((processedFiles) / (double)totalFiles * 100);
-            progressWindow.UpdateProgress(progress);
-            progressWindow.SetExtraText($"{Common.State_Installing} {relativePath}");
+            Avalonia.Threading.Dispatcher.UIThread.Post(() =>
+            {
+                progressWindow.UpdateProgress(progress);
+                progressWindow.SetExtraText($"{Common.State_Installing} {relativePath}");
+            });
 
             // Check if the destination file exists and is identical
             if (File.Exists(destinationFile))

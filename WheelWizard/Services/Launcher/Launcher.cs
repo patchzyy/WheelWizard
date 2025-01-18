@@ -28,19 +28,46 @@ public static class Launcher
     public static void LaunchDolphin(string arguments = "", bool shellExecute = false)
     {
         var dolphinLocation = PathManager.DolphinFilePath;
-        if (dolphinLocation == "" || !File.Exists(dolphinLocation))
+        if (string.IsNullOrWhiteSpace(dolphinLocation) || !File.Exists(dolphinLocation))
         {
-            new MessageBoxWindow().SetMainText(Phrases.PopupText_NotFindDolphin).Show();
+            new MessageBoxWindow().SetMainText($"Dolphin not found at: {dolphinLocation}").Show();
             return;
         }
 
-        Process.Start(new ProcessStartInfo
+        try
         {
-            FileName = dolphinLocation,
-            Arguments = arguments,
-            UseShellExecute = shellExecute
-        });
+            var startInfo = new ProcessStartInfo();
+
+            // Handle Flatpak Dolphin
+            if (dolphinLocation.Contains("flatpak"))
+            {
+                startInfo.FileName = "flatpak";
+                startInfo.Arguments = $"run org.DolphinEmu.dolphin-emu {arguments}";
+                startInfo.UseShellExecute = false;
+            }
+            else if (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX)
+            {
+                // For non-Flatpak Linux/macOS builds
+                startInfo.FileName = "/bin/bash";
+                startInfo.Arguments = $"-c \"{dolphinLocation} {arguments}\"";
+                startInfo.UseShellExecute = false;
+            }
+            else
+            {
+                // Windows builds
+                startInfo.FileName = dolphinLocation;
+                startInfo.Arguments = arguments;
+                startInfo.UseShellExecute = shellExecute;
+            }
+
+            Process.Start(startInfo);
+        }
+        catch (Exception ex)
+        {
+            new MessageBoxWindow().SetMainText($"Failed to launch Dolphin: {ex.Message}").Show();
+        }
     }
+
     
     public static async Task LaunchRetroRewind()
     {
@@ -52,10 +79,13 @@ public static class Launcher
             await ModsLaunchHelper.PrepareModsForLaunch();
             if (!File.Exists(PathManager.GameFilePath))
             {
-                new MessageBoxWindow().SetMainText(Phrases.PopupText_NotFindGame).Show();
+                Avalonia.Threading.Dispatcher.UIThread.Post(() =>
+                {
+                    new MessageBoxWindow().SetMainText(Phrases.PopupText_NotFindGame).Show();
+                });
                 return;
             }
-
+            
             RetroRewindLaunchHelper.GenerateLaunchJson();
             var dolphinLaunchType = (bool)SettingsManager.LAUNCH_WITH_DOLPHIN.Get() ? "" : "-b";
             LaunchDolphin(
@@ -63,8 +93,10 @@ public static class Launcher
         }
         catch (Exception e)
         {
-            // I rather not translate this message, makes it easier to check where a given error came from
-            new MessageBoxWindow().SetMainText($"Failed to launch Retro Rewind: {e.Message}").Show();
+            Avalonia.Threading.Dispatcher.UIThread.Post(() =>
+            {
+                new MessageBoxWindow().SetMainText($"Failed to launch Retro Rewind: {e.Message}").Show();
+            });
         }
     }
 
