@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using System;
+using WheelWizard.Services;
 using WheelWizard.Services.UrlProtocol;
 using WheelWizard.Views.Pages.Settings;
 using WheelWizard.Views.Popups.Generic;
@@ -20,6 +21,7 @@ public class ViewUtils
     public static void OnInitialized(object? sender, EventArgs e)
     {
         var args = Environment.GetCommandLineArgs();
+        ModManager.Instance.InitializeAsync();
         if (args.Length <= 1) return; 
         var protocolArgument = args[1];
         UrlProtocolManager.ShowPopupForLaunchUrlAsync(protocolArgument);
