@@ -412,6 +412,16 @@
         <LastGenOutput>Common.nb.Designer.cs</LastGenOutput>
         <DependentUpon>Common.resx</DependentUpon>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Online.nb.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Online.nb.Designer.cs</LastGenOutput>
+        <DependentUpon>Online.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Phrases.nb.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Phrases.nb.Designer.cs</LastGenOutput>
+        <DependentUpon>Phrases.resx</DependentUpon>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
