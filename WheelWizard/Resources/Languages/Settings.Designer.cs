@@ -357,6 +357,60 @@ namespace WheelWizard.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Value_Language_Arabic {
+            get {
+                return ResourceManager.GetString("Value_Language_Arabic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -.
+        /// </summary>
+        public static string Value_Language_ArabicOg {
+            get {
+                return ResourceManager.GetString("Value_Language_ArabicOg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Value_Language_Chinese {
+            get {
+                return ResourceManager.GetString("Value_Language_Chinese", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -.
+        /// </summary>
+        public static string Value_Language_ChineseOg {
+            get {
+                return ResourceManager.GetString("Value_Language_ChineseOg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Value_Language_Czech {
+            get {
+                return ResourceManager.GetString("Value_Language_Czech", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -.
+        /// </summary>
+        public static string Value_Language_CzechOg {
+            get {
+                return ResourceManager.GetString("Value_Language_CzechOg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dutch.
         /// </summary>
         public static string Value_Language_Dutch {
@@ -492,11 +546,47 @@ namespace WheelWizard.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to -.
+        ///   Looks up a localized string similar to 한국어.
         /// </summary>
         public static string Value_Language_KoreanOg {
             get {
                 return ResourceManager.GetString("Value_Language_KoreanOg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Value_Language_Norwegian {
+            get {
+                return ResourceManager.GetString("Value_Language_Norwegian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -.
+        /// </summary>
+        public static string Value_Language_NorwegianOg {
+            get {
+                return ResourceManager.GetString("Value_Language_NorwegianOg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Value_Language_Portuguese {
+            get {
+                return ResourceManager.GetString("Value_Language_Portuguese", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -.
+        /// </summary>
+        public static string Value_Language_PortugueseOg {
+            get {
+                return ResourceManager.GetString("Value_Language_PortugueseOg", resourceCulture);
             }
         }
         
@@ -546,7 +636,7 @@ namespace WheelWizard.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to -.
+        ///   Looks up a localized string similar to Türkçe.
         /// </summary>
         public static string Value_Language_TurkishOg {
             get {

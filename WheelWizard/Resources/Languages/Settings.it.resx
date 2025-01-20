@@ -18,36 +18,6 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="Value_Language_KoreanOg" xml:space="preserve">
-        <value>-</value>
-    </data>
-    <data name="Value_Language_TurkishOg" xml:space="preserve">
-        <value>-</value>
-    </data>
-    <data name="Value_Language_SpanishOg" xml:space="preserve">
-        <value>Español</value>
-    </data>
-    <data name="Value_Language_GermanOg" xml:space="preserve">
-        <value>Deutsch</value>
-    </data>
-    <data name="Value_Language_FranceOg" xml:space="preserve">
-        <value>Français</value>
-    </data>
-    <data name="Value_Language_FinnishOg" xml:space="preserve">
-        <value>-</value>
-    </data>
-    <data name="Value_Language_JapaneseOg" xml:space="preserve">
-        <value>日本語</value>
-    </data>
-    <data name="Value_Language_ItalianOg" xml:space="preserve">
-        <value>Italiano</value>
-    </data>
-    <data name="Value_Language_EnglishOg" xml:space="preserve">
-        <value>English</value>
-    </data>
-    <data name="Value_Language_DutchOg" xml:space="preserve">
-        <value>Nederlands</value>
-    </data>
     <data name="CompletePercentage" xml:space="preserve">
         <value>100</value>
     </data>
@@ -177,7 +147,7 @@
     <data name="Value_Language_Russian" xml:space="preserve">
         <value>Russo</value>
     </data>
-    <data name="Value_Language_RussianOg" xml:space="preserve">
-        <value>Русский</value>
+    <data name="Value_Language_Turkish" xml:space="preserve">
+        <value>Turko </value>
     </data>
 </root>

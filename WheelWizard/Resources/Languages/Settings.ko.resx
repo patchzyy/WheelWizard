@@ -18,38 +18,8 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="Value_Language_SpanishOg" xml:space="preserve">
-        <value>Español</value>
-    </data>
-    <data name="Value_Language_ItalianOg" xml:space="preserve">
-        <value>Italiano</value>
-    </data>
-    <data name="Value_Language_JapaneseOg" xml:space="preserve">
-        <value>日本語</value>
-    </data>
-    <data name="Value_Language_TurkishOg" xml:space="preserve">
-        <value>-</value>
-    </data>
-    <data name="Value_Language_KoreanOg" xml:space="preserve">
-        <value>-</value>
-    </data>
-    <data name="Value_Language_FinnishOg" xml:space="preserve">
-        <value>-</value>
-    </data>
-    <data name="Value_Language_EnglishOg" xml:space="preserve">
-        <value>English</value>
-    </data>
-    <data name="Value_Language_DutchOg" xml:space="preserve">
-        <value>Nederlands</value>
-    </data>
-    <data name="Value_Language_FranceOg" xml:space="preserve">
-        <value>Français</value>
-    </data>
-    <data name="Value_Language_GermanOg" xml:space="preserve">
-        <value>Deutsch</value>
-    </data>
     <data name="CompletePercentage" xml:space="preserve">
-        <value>32</value>
+        <value>100</value>
     </data>
     <data name="Category_Video" xml:space="preserve">
         <value>비디오</value>
@@ -84,7 +54,100 @@
     <data name="Option_ForceDisableWiimote" xml:space="preserve">
         <value>위모트 강제 비활성</value>
     </data>
-    <data name="Value_Language_RussianOg" xml:space="preserve">
-        <value>Русский</value>
+    <data name="InfoText_Topbar_LocationWarning" xml:space="preserve">
+        <value>설정이 잠겨있습니다. 지역 설정을 마치면 해금됩니다.</value>
+    </data>
+    <data name="Option_DolphinUserPath" xml:space="preserve">
+        <value>Dolphin 유저 폴더</value>
+    </data>
+    <data name="Option_LaunchWithDolphin" xml:space="preserve">
+        <value>Dolphin 창에서 게임 실행</value>
+    </data>
+    <data name="Option_MakePrimary" xml:space="preserve">
+        <value>이 프로필을 우선으로</value>
+    </data>
+    <data name="Option_MarioKartGame" xml:space="preserve">
+        <value>마리오 카트 Wii 게임 파일</value>
+    </data>
+    <data name="Option_OpenConfig" xml:space="preserve">
+        <value>설정 폴더 열기</value>
+    </data>
+    <data name="Option_Recommended" xml:space="preserve">
+        <value>추천 설정</value>
+    </data>
+    <data name="Option_RemoveBlur" xml:space="preserve">
+        <value>블러 제거</value>
+    </data>
+    <data name="Option_Renderer" xml:space="preserve">
+        <value>렌더링</value>
+    </data>
+    <data name="Option_RRLanguage" xml:space="preserve">
+        <value>레트로 리와인드(Retro Rewind) 언어</value>
+    </data>
+    <data name="Option_ShowFPS" xml:space="preserve">
+        <value>FPS 표시</value>
+    </data>
+    <data name="Option_VSync" xml:space="preserve">
+        <value>수직동기화(VSync)</value>
+    </data>
+    <data name="Option_WhWzLanguage" xml:space="preserve">
+        <value>휠 위저드(Wheel Wizard) 언어</value>
+    </data>
+    <data name="Option_WindowScale" xml:space="preserve">
+        <value>창 해상도</value>
+    </data>
+    <data name="Section_Language" xml:space="preserve">
+        <value>언어</value>
+    </data>
+    <data name="Section_LocationPaths" xml:space="preserve">
+        <value>지역 설정</value>
+    </data>
+    <data name="Section_Performance" xml:space="preserve">
+        <value>성능 설정</value>
+    </data>
+    <data name="Section_Renderer" xml:space="preserve">
+        <value>렌더링 설정</value>
+    </data>
+    <data name="Section_Resolution" xml:space="preserve">
+        <value>해상도</value>
+    </data>
+    <data name="Section_WhWzAppearance" xml:space="preserve">
+        <value>휠 위저드 외관</value>
+    </data>
+    <data name="Section_Wii" xml:space="preserve">
+        <value>Wii 설정</value>
+    </data>
+    <data name="Value_Language_Dutch" xml:space="preserve">
+        <value>네덜란드어</value>
+    </data>
+    <data name="Value_Language_English" xml:space="preserve">
+        <value>영어</value>
+    </data>
+    <data name="Value_Language_Finnish" xml:space="preserve">
+        <value>핀란드어</value>
+    </data>
+    <data name="Value_Language_France" xml:space="preserve">
+        <value>프랑스어</value>
+    </data>
+    <data name="Value_Language_German" xml:space="preserve">
+        <value>독일어</value>
+    </data>
+    <data name="Value_Language_Italian" xml:space="preserve">
+        <value>이탈리아어</value>
+    </data>
+    <data name="Value_Language_Japanese" xml:space="preserve">
+        <value>일본어</value>
+    </data>
+    <data name="Value_Language_Korean" xml:space="preserve">
+        <value>한국어</value>
+    </data>
+    <data name="Value_Language_Russian" xml:space="preserve">
+        <value>러시아어</value>
+    </data>
+    <data name="Value_Language_Spanish" xml:space="preserve">
+        <value>스페인어</value>
+    </data>
+    <data name="Value_Language_Turkish" xml:space="preserve">
+        <value>튀르키예어</value>
     </data>
 </root>

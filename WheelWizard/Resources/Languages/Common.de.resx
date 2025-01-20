@@ -115,7 +115,7 @@
         <value>Unbekannt</value>
     </data>
     <data name="Action_CopyFriendCode" xml:space="preserve">
-        <value>Raum Anzeigen</value>
+        <value>FC kopieren</value>
     </data>
     <data name="Action_Apply" xml:space="preserve">
         <value>Anwenden</value>
@@ -176,5 +176,8 @@
     </data>
     <data name="Action_Browse" xml:space="preserve">
         <value>Durchsuchen</value>
+    </data>
+    <data name="Action_ViewMod" xml:space="preserve">
+        <value>Mod ansehen</value>
     </data>
 </root>

@@ -105,35 +105,17 @@
     <data name="Value_Language_Dutch" xml:space="preserve">
         <value>Nederlands</value>
     </data>
-    <data name="Value_Language_DutchOg" xml:space="preserve">
-        <value>Nederlands</value>
-    </data>
     <data name="Value_Language_English" xml:space="preserve">
         <value>Engels</value>
-    </data>
-    <data name="Value_Language_EnglishOg" xml:space="preserve">
-        <value>English</value>
     </data>
     <data name="Value_Language_German" xml:space="preserve">
         <value>Duits</value>
     </data>
-    <data name="Value_Language_GermanOg" xml:space="preserve">
-        <value>Deutsch</value>
-    </data>
     <data name="Value_Language_France" xml:space="preserve">
         <value>Frans</value>
     </data>
-    <data name="Value_Language_FranceOg" xml:space="preserve">
-        <value>Français</value>
-    </data>
     <data name="Value_Language_Italian" xml:space="preserve">
         <value>Italiaans</value>
-    </data>
-    <data name="Value_Language_ItalianOg" xml:space="preserve">
-        <value>Italiano</value>
-    </data>
-    <data name="Value_Language_JapaneseOg" xml:space="preserve">
-        <value>日本語</value>
     </data>
     <data name="Value_Language_Japanese" xml:space="preserve">
         <value>Japans</value>
@@ -141,14 +123,8 @@
     <data name="Value_Language_Spanish" xml:space="preserve">
         <value>Spaans</value>
     </data>
-    <data name="Value_Language_SpanishOg" xml:space="preserve">
-        <value>Español</value>
-    </data>
     <data name="Value_Language_Turkish" xml:space="preserve">
         <value>Turks</value>
-    </data>
-    <data name="Value_Language_TurkishOg" xml:space="preserve">
-        <value>-</value>
     </data>
     <data name="Option_MakePrimary" xml:space="preserve">
         <value>Zet als hoofd profiel</value>
@@ -156,14 +132,8 @@
     <data name="CompletePercentage" xml:space="preserve">
         <value>100</value>
     </data>
-    <data name="Value_Language_FinnishOg" xml:space="preserve">
-        <value>-</value>
-    </data>
     <data name="Option_RemoveBlur" xml:space="preserve">
         <value>Verwijder wazigheid</value>
-    </data>
-    <data name="Value_Language_KoreanOg" xml:space="preserve">
-        <value>-</value>
     </data>
     <data name="Option_EnableAnimations" xml:space="preserve">
         <value>Animaties aanzetten</value>
@@ -179,8 +149,5 @@
     </data>
     <data name="Value_Language_Russian" xml:space="preserve">
         <value>Russisch</value>
-    </data>
-    <data name="Value_Language_RussianOg" xml:space="preserve">
-        <value>Русский</value>
     </data>
 </root>

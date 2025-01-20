@@ -18,40 +18,136 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="Value_Language_ItalianOg" xml:space="preserve">
-        <value>Italiano</value>
-    </data>
-    <data name="Value_Language_TurkishOg" xml:space="preserve">
-        <value>-</value>
-    </data>
-    <data name="Value_Language_JapaneseOg" xml:space="preserve">
-        <value>日本語</value>
-    </data>
-    <data name="Value_Language_GermanOg" xml:space="preserve">
-        <value>Deutsch</value>
-    </data>
-    <data name="Value_Language_EnglishOg" xml:space="preserve">
-        <value>English</value>
-    </data>
-    <data name="Value_Language_DutchOg" xml:space="preserve">
-        <value>Nederlands</value>
-    </data>
-    <data name="Value_Language_SpanishOg" xml:space="preserve">
-        <value>Español</value>
-    </data>
-    <data name="Value_Language_FranceOg" xml:space="preserve">
-        <value>Français</value>
-    </data>
     <data name="CompletePercentage" xml:space="preserve">
-        <value>1</value>
+        <value>100</value>
     </data>
-    <data name="Value_Language_FinnishOg" xml:space="preserve">
-        <value>-</value>
+    <data name="Category_Video" xml:space="preserve">
+        <value>Video</value>
     </data>
-    <data name="Value_Language_KoreanOg" xml:space="preserve">
-        <value>-</value>
+    <data name="InfoText_30FPS" xml:space="preserve">
+        <value>Bu ayar, oyunu 30 FPS'de çalışmaya zorlar (varsayılan 60'tır).</value>
     </data>
-    <data name="Value_Language_RussianOg" xml:space="preserve">
-        <value>Русский</value>
+    <data name="InfoText_EnableAnimations" xml:space="preserve">
+        <value>Bu, Wheel Wizard uygulamasındaki animasyonları etkinleştirir.</value>
+    </data>
+    <data name="InfoText_EndWithExe" xml:space="preserve">
+        <value>Yol, .exe ile bitmelidir.</value>
+    </data>
+    <data name="InfoText_ForceDisableWiimote" xml:space="preserve">
+        <value>Bu ayar, Wiimote'u oyun içinde devre dışı bırakır, ancak Wii kanalında etkinleştirir.</value>
+    </data>
+    <data name="InfoText_LaunchWithDolphin" xml:space="preserve">
+        <value>Oyunun yanı sıra Dolphin'in ana penceresini de başlatacak.</value>
+    </data>
+    <data name="InfoText_Recommended" xml:space="preserve">
+        <value>Bu ayar, takılmaları ve gecikme dalgalanmalarını azaltmak için belirli Dolphin ayarlarını değiştirir.</value>
+    </data>
+    <data name="InfoText_ResolutionScale" xml:space="preserve">
+        <value>1x yerel çözünürlüktür.</value>
+    </data>
+    <data name="InfoText_Topbar_LocationWarning" xml:space="preserve">
+        <value>Ayarlar devre dışı, önce konum ayarlarını tamamlayın.</value>
+    </data>
+    <data name="Option_DolphinEmulatorExe" xml:space="preserve">
+        <value>Dolphin Emulator yürütülebilir dosyası</value>
+    </data>
+    <data name="Option_DolphinUserPath" xml:space="preserve">
+        <value>Dolphin Kullanıcı Klasörü</value>
+    </data>
+    <data name="Option_EnableAnimations" xml:space="preserve">
+        <value>Animasyonları Etkinleştir</value>
+    </data>
+    <data name="Option_ForceDisableWiimote" xml:space="preserve">
+        <value>Wiimote'u Zorla Devre Dışı Bırak</value>
+    </data>
+    <data name="Option_LaunchWithDolphin" xml:space="preserve">
+        <value>Dolphin Penceresi ile Oyunu Başlat</value>
+    </data>
+    <data name="Option_MakePrimary" xml:space="preserve">
+        <value>Birincil Yap</value>
+    </data>
+    <data name="Option_MarioKartGame" xml:space="preserve">
+        <value>Mario Kart Wii Oyun Dosyası</value>
+    </data>
+    <data name="Option_OpenConfig" xml:space="preserve">
+        <value>Yapılandırma Klasörünü Aç</value>
+    </data>
+    <data name="Option_Recommended" xml:space="preserve">
+        <value>Tavsiye Edilen Ayarlar</value>
+    </data>
+    <data name="Option_RemoveBlur" xml:space="preserve">
+        <value>Bulanıklığı Kaldır</value>
+    </data>
+    <data name="Option_Renderer" xml:space="preserve">
+        <value>Render</value>
+    </data>
+    <data name="Option_RRLanguage" xml:space="preserve">
+        <value>Retro Rewind Dili</value>
+    </data>
+    <data name="Option_ShowFPS" xml:space="preserve">
+        <value>FPS Göster</value>
+    </data>
+    <data name="Option_VSync" xml:space="preserve">
+        <value>VSync</value>
+    </data>
+    <data name="Option_WhWzLanguage" xml:space="preserve">
+        <value>Wheel Wizard Dili</value>
+    </data>
+    <data name="Option_WindowScale" xml:space="preserve">
+        <value>Pencere Ölçeği</value>
+    </data>
+    <data name="Section_Language" xml:space="preserve">
+        <value>Dil</value>
+    </data>
+    <data name="Section_LocationPaths" xml:space="preserve">
+        <value>Konum Ayarları</value>
+    </data>
+    <data name="Section_Performance" xml:space="preserve">
+        <value>Performans Ayarları</value>
+    </data>
+    <data name="Section_Renderer" xml:space="preserve">
+        <value>Render Ayarları</value>
+    </data>
+    <data name="Section_Resolution" xml:space="preserve">
+        <value>Çözünürlük</value>
+    </data>
+    <data name="Section_WhWzAppearance" xml:space="preserve">
+        <value>Wheel Wizard görünümü</value>
+    </data>
+    <data name="Section_Wii" xml:space="preserve">
+        <value>Wii Ayarları</value>
+    </data>
+    <data name="Value_Language_Dutch" xml:space="preserve">
+        <value>Hollandaca</value>
+    </data>
+    <data name="Value_Language_English" xml:space="preserve">
+        <value>İngilizce</value>
+    </data>
+    <data name="Value_Language_Finnish" xml:space="preserve">
+        <value>Fince</value>
+    </data>
+    <data name="Value_Language_France" xml:space="preserve">
+        <value>Fransızca</value>
+    </data>
+    <data name="Value_Language_German" xml:space="preserve">
+        <value>Almanca</value>
+    </data>
+    <data name="Value_Language_Italian" xml:space="preserve">
+        <value>İtalyanca</value>
+    </data>
+    <data name="Value_Language_Japanese" xml:space="preserve">
+        <value>Japonca</value>
+    </data>
+    <data name="Value_Language_Korean" xml:space="preserve">
+        <value>Korece</value>
+    </data>
+    <data name="Value_Language_Russian" xml:space="preserve">
+        <value>Rusça</value>
+    </data>
+    <data name="Value_Language_Spanish" xml:space="preserve">
+        <value>İspanyolca</value>
+    </data>
+    <data name="Value_Language_Turkish" xml:space="preserve">
+        <value>Türkçe</value>
     </data>
 </root>

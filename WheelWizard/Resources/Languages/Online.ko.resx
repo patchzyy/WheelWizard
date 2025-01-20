@@ -39,4 +39,46 @@
     <data name="NoProfiles" xml:space="preserve">
         <value>프로필 없음</value>
     </data>
+    <data name="Region_America" xml:space="preserve">
+        <value>아메리카</value>
+    </data>
+    <data name="Region_Australia" xml:space="preserve">
+        <value>호주</value>
+    </data>
+    <data name="Region_China" xml:space="preserve">
+        <value>중국</value>
+    </data>
+    <data name="Region_Europe" xml:space="preserve">
+        <value>유럽</value>
+    </data>
+    <data name="Region_Japan" xml:space="preserve">
+        <value>일본</value>
+    </data>
+    <data name="Region_SouthKorea" xml:space="preserve">
+        <value>대한민국</value>
+    </data>
+    <data name="Region_Taiwan" xml:space="preserve">
+        <value>대만</value>
+    </data>
+    <data name="Stat_FriendCode" xml:space="preserve">
+        <value>친구 코드</value>
+    </data>
+    <data name="Stat_Losses" xml:space="preserve">
+        <value>패배</value>
+    </data>
+    <data name="Stat_PlayerCount" xml:space="preserve">
+        <value>플레이어</value>
+    </data>
+    <data name="Stat_RacesPlayed" xml:space="preserve">
+        <value>플레이한 레이스 수</value>
+    </data>
+    <data name="Stat_RoomID" xml:space="preserve">
+        <value>룸 ID</value>
+    </data>
+    <data name="Stat_TimeOnline" xml:space="preserve">
+        <value>온라인 시간</value>
+    </data>
+    <data name="Stat_Wins" xml:space="preserve">
+        <value>승리</value>
+    </data>
 </root>

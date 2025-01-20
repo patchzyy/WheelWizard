@@ -148,7 +148,7 @@
         <value>Español</value>
     </data>
     <data name="Value_Language_TurkishOg" xml:space="preserve">
-        <value>-</value>
+        <value>Türkçe</value>
     </data>
     <data name="Option_MakePrimary" xml:space="preserve">
         <value>Make Primary</value>
@@ -169,7 +169,7 @@
         <value>Korean</value>
     </data>
     <data name="Value_Language_KoreanOg" xml:space="preserve">
-        <value>-</value>
+        <value>한국어</value>
     </data>
     <data name="Option_EnableAnimations" xml:space="preserve">
         <value>Enable Animations</value>
@@ -182,5 +182,35 @@
     </data>
     <data name="Value_Language_RussianOg" xml:space="preserve">
         <value>Русский</value>
+    </data>
+    <data name="Value_Language_Arabic" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Value_Language_ArabicOg" xml:space="preserve">
+        <value>-</value>
+    </data>
+    <data name="Value_Language_Czech" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Value_Language_CzechOg" xml:space="preserve">
+        <value>-</value>
+    </data>
+    <data name="Value_Language_Norwegian" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Value_Language_NorwegianOg" xml:space="preserve">
+        <value>-</value>
+    </data>
+    <data name="Value_Language_Chinese" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Value_Language_ChineseOg" xml:space="preserve">
+        <value>-</value>
+    </data>
+    <data name="Value_Language_Portuguese" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Value_Language_PortugueseOg" xml:space="preserve">
+        <value>-</value>
     </data>
 </root>
