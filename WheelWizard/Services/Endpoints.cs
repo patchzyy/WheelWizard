@@ -8,6 +8,7 @@ public static class Endpoints
     public const string RRVersionUrl = RRUrl + "RetroRewind/RetroRewindVersion.txt";
     public const string RRVersionDeleteUrl = RRUrl + "RetroRewind/RetroRewindDelete.txt";
     public const string RRGroupsUrl = "http://zplwii.xyz/api/groups";
+    public const string RRDiscordUrl = "https://discord.gg/yH3ReN8EhQ";
 
     // Wheel Wizard
     public const string WhWzStatusUrl = "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/status.txt";
