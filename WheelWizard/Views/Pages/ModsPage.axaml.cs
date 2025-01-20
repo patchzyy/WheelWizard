@@ -52,7 +52,7 @@ public partial class ModsPage : UserControl, INotifyPropertyChanged
         InitializeComponent();
         DataContext = this;
         SubscribeToModManagerEvents();
-        ModManager.InitializeAsync();
+        ModManager.ReloadAsync();
     }
 
     private void SubscribeToModManagerEvents()

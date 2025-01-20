@@ -21,7 +21,7 @@ public class ViewUtils
     public static void OnInitialized(object? sender, EventArgs e)
     {
         var args = Environment.GetCommandLineArgs();
-        ModManager.Instance.InitializeAsync();
+        ModManager.Instance.ReloadAsync();
         if (args.Length <= 1) return; 
         var protocolArgument = args[1];
         UrlProtocolManager.ShowPopupForLaunchUrlAsync(protocolArgument);
