@@ -48,6 +48,10 @@ public class SettingsManager
                                                                 var newValue = (bool)value!;
                                                                 DOLPHIN_COMPILATION_MODE.Set(newValue ? DolphinShaderCompilationMode.HybridUberShaders : DolphinShaderCompilationMode.Default);
                                                                 DOLPHIN_COMPILE_SHADERS_AT_START.Set(newValue);
+                                                                //Compile shaders at start crashes on linux
+                                                                #if LINUX
+                                                                DOLPHIN_COMPILE_SHADERS_AT_START.Set(false);
+                                                                #endif
                                                                 DOLPHIN_MSAA.Set(newValue ? "0x00000002" : "0x00000001");
                                                                 DOLPHIN_SSAA.Set(false);
                                                             },

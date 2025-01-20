@@ -36,7 +36,7 @@ public static class PathManager
             }
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                return Path.Combine(Environment.GetEnvironmentVariable("HOME") ?? "/", ".var", "app", "org.DolphinEmu.dolphin-emu", "data", "dolphin-emu", "Config");
+                return Path.Combine(Environment.GetEnvironmentVariable("HOME") ?? "/", ".var", "app", "org.DolphinEmu.dolphin-emu", "config", "dolphin-emu");
             }
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {

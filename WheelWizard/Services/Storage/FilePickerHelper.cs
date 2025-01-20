@@ -75,7 +75,7 @@ public static class FilePickerHelper
         return files?.Select(file => file.Path.LocalPath).ToList() ?? new List<string>();
     }
     
-    public static async Task<string?> OpenFolderAsync(string title)
+    public static async Task<IReadOnlyList<IStorageFolder?>> SelectFolderAsync(string title, IStorageFolder? suggestedStartLocation = null)
     {
         var storageProvider = Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
         if (storageProvider == null)
@@ -87,10 +87,11 @@ public static class FilePickerHelper
         var folders = await topLevel.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
         {
             Title = title,
-            AllowMultiple = false
+            AllowMultiple = false,
+            SuggestedStartLocation = suggestedStartLocation
         });
 
-        return folders?.FirstOrDefault()?.Path.LocalPath;
+        return folders;
     }
     
     public static void OpenFolderInFileManager(string folderPath)

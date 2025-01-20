@@ -114,12 +114,7 @@ public partial class WhWzSettings : UserControl
     if (!string.IsNullOrEmpty(currentFolder) && Directory.Exists(currentFolder))
     {
         var folder = await topLevel!.StorageProvider.TryGetFolderFromPathAsync(currentFolder);
-        var folders = await topLevel.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
-        {
-            Title = "Select Dolphin User Path",
-            SuggestedStartLocation = folder,
-            AllowMultiple = false
-        });
+        var folders = await FilePickerHelper.SelectFolderAsync("Select Dolphin User Path", folder);
 
         if (folders.Count >= 1)
         {
@@ -153,11 +148,7 @@ public partial class WhWzSettings : UserControl
     }
 
     // Let the user manually select a folder
-    var manualFolders = await topLevel!.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
-    {
-        Title = "Select Dolphin User Path",
-        AllowMultiple = false
-    });
+    var manualFolders = await FilePickerHelper.SelectFolderAsync("Select Dolphin User Path");
 
     if (manualFolders.Count >= 1)
     {
