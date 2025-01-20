@@ -31,7 +31,7 @@
         <value>Комнаты</value>
     </data>
     <data name="NoLicense" xml:space="preserve">
-        <value>Нет лицензии (файла сохранения)</value>
+        <value>Нет лицензии</value>
     </data>
     <data name="NoName" xml:space="preserve">
         <value>Нет имени</value>
@@ -76,7 +76,7 @@
         <value>ID комнаты</value>
     </data>
     <data name="Stat_TimeOnline" xml:space="preserve">
-        <value>Времени онлайн</value>
+        <value>Время онлайн</value>
     </data>
     <data name="Stat_Wins" xml:space="preserve">
         <value>Победы</value>

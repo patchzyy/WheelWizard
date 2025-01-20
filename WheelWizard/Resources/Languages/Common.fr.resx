@@ -106,7 +106,7 @@
         <value>Garder</value>
     </data>
     <data name="Action_OpenFolder" xml:space="preserve">
-        <value>Ouvir le dossier </value>
+        <value>Ouvrir le dossier </value>
     </data>
     <data name="Action_Rename" xml:space="preserve">
         <value>Renommer</value>

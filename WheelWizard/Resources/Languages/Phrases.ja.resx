@@ -197,7 +197,7 @@ My Stuffフォルダーをクリアしますか？</value>
         <value>古いRetro Rewindのファイルが見つかりました。新しい場所に移動しますか？</value>
     </data>
     <data name="PopupText_ProcessingXofY" xml:space="preserve">
-        <value>{$2}個中{$1 個のファイルを処理しています...</value>
+        <value>{$2}個中{$1} 個のファイルを処理しています...</value>
     </data>
     <data name="PopupText_ReinstallRR" xml:space="preserve">
         <value>Retro Rewindの再インストール</value>

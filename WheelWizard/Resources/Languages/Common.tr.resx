@@ -22,57 +22,162 @@
         <value>Uygula</value>
     </data>
     <data name="Action_Cancel" xml:space="preserve">
-        <value>iptal etmek</value>
+        <value>İptal</value>
     </data>
     <data name="Action_CopyFriendCode" xml:space="preserve">
         <value>Arkadaş Kodunu Kopyala</value>
     </data>
     <data name="Action_Browse" xml:space="preserve">
-        <value>Göz at</value>
+        <value>Gözat</value>
     </data>
     <data name="Action_Delete" xml:space="preserve">
-        <value>Sılmek</value>
+        <value>Sil</value>
     </data>
     <data name="Action_DisableAll" xml:space="preserve">
-        <value>Hepsini devre dışı bırak</value>
+        <value>Hepsini Devre Dışı Bırak</value>
     </data>
     <data name="Action_Edit" xml:space="preserve">
-        <value>Düzenlemek</value>
+        <value>Düzenle</value>
     </data>
     <data name="Action_EnableAll" xml:space="preserve">
-        <value>Hepsini etkinleştir</value>
+        <value>Hepsini Etkinleştir</value>
     </data>
     <data name="Action_Export" xml:space="preserve">
-        <value>İhracat</value>
+        <value>Dışa Aktar</value>
     </data>
     <data name="Action_Import" xml:space="preserve">
-        <value>İthal</value>
+        <value>İçe Aktar</value>
     </data>
     <data name="Action_Install" xml:space="preserve">
-        <value>Yüklemek</value>
+        <value>Yükle</value>
     </data>
     <data name="Action_No" xml:space="preserve">
-        <value>Hayir</value>
+        <value>Hayır</value>
     </data>
     <data name="Action_OK" xml:space="preserve">
         <value>Tamam</value>
     </data>
     <data name="Action_Play" xml:space="preserve">
-        <value>Oyna</value>
+        <value>Oynat</value>
     </data>
     <data name="Action_PlayOffline" xml:space="preserve">
         <value>Çevrimdışı Oyna</value>
     </data>
     <data name="Action_Rename" xml:space="preserve">
-        <value>Yeniden adlandır</value>
+        <value>Yeniden Adlandır</value>
     </data>
     <data name="Action_Revert" xml:space="preserve">
-        <value>Geri Dön</value>
+        <value>Geri Al</value>
     </data>
     <data name="Action_Save" xml:space="preserve">
         <value>Kaydet</value>
     </data>
     <data name="Action_Update" xml:space="preserve">
-        <value>Güncelleme</value>
+        <value>Güncelle</value>
+    </data>
+    <data name="Action_Keep" xml:space="preserve">
+        <value>Sakla</value>
+    </data>
+    <data name="Action_MaybeLater" xml:space="preserve">
+        <value>Belki Daha Sonra</value>
+    </data>
+    <data name="Action_OpenFolder" xml:space="preserve">
+        <value>Klasörü Aç</value>
+    </data>
+    <data name="Action_ViewMod" xml:space="preserve">
+        <value>Modu Görüntüle</value>
+    </data>
+    <data name="Action_Yes" xml:space="preserve">
+        <value>Evet</value>
+    </data>
+    <data name="Attribute_Enabled" xml:space="preserve">
+        <value>Etkin</value>
+    </data>
+    <data name="Attribute_Id" xml:space="preserve">
+        <value>Kimlik</value>
+    </data>
+    <data name="Attribute_ModName" xml:space="preserve">
+        <value>Modların Adı</value>
+    </data>
+    <data name="Attribute_Name" xml:space="preserve">
+        <value>Ad</value>
+    </data>
+    <data name="Attribute_Title" xml:space="preserve">
+        <value>Başlık</value>
+    </data>
+    <data name="Attribute_Type" xml:space="preserve">
+        <value>Tür</value>
+    </data>
+    <data name="PageTitle_Friends" xml:space="preserve">
+        <value>Arkadaşlar</value>
+    </data>
+    <data name="PageTitle_Home" xml:space="preserve">
+        <value>Anasayfa</value>
+    </data>
+    <data name="PageTitle_Mods" xml:space="preserve">
+        <value>Benim Eşyalarım</value>
+    </data>
+    <data name="PageTitle_MyProfiles" xml:space="preserve">
+        <value>Profillerim</value>
+    </data>
+    <data name="PageTitle_RoomDetails" xml:space="preserve">
+        <value>Oda Detayları</value>
+    </data>
+    <data name="PageTitle_Rooms" xml:space="preserve">
+        <value>Odalar</value>
+    </data>
+    <data name="PageTitle_Settings" xml:space="preserve">
+        <value>Ayarlar</value>
+    </data>
+    <data name="State_ConfigNotFinished" xml:space="preserve">
+        <value>Yapılandırma Tamamlanmadı</value>
+    </data>
+    <data name="State_Extracting" xml:space="preserve">
+        <value>Dosyalar Çıkartılıyor...</value>
+    </data>
+    <data name="State_Installing" xml:space="preserve">
+        <value>Yükleniyor...</value>
+    </data>
+    <data name="State_Loading" xml:space="preserve">
+        <value>Yükleniyor...</value>
+    </data>
+    <data name="State_NoServer" xml:space="preserve">
+        <value>Sunucu Yok</value>
+    </data>
+    <data name="State_Updating" xml:space="preserve">
+        <value>Güncelleniyor...</value>
+    </data>
+    <data name="Term_Error" xml:space="preserve">
+        <value>Hata</value>
+    </data>
+    <data name="Term_General" xml:space="preserve">
+        <value>Genel</value>
+    </data>
+    <data name="Term_No" xml:space="preserve">
+        <value>Hayır</value>
+    </data>
+    <data name="Term_Offline" xml:space="preserve">
+        <value>Çevrimdışı</value>
+    </data>
+    <data name="Term_Online" xml:space="preserve">
+        <value>Çevrimiçi</value>
+    </data>
+    <data name="Term_Other" xml:space="preserve">
+        <value>Diğer</value>
+    </data>
+    <data name="Term_Speed" xml:space="preserve">
+        <value>Hız</value>
+    </data>
+    <data name="Term_Success" xml:space="preserve">
+        <value>Başarı</value>
+    </data>
+    <data name="Term_Unknown" xml:space="preserve">
+        <value>Bilinmiyor</value>
+    </data>
+    <data name="Term_Warning" xml:space="preserve">
+        <value>Uyarı</value>
+    </data>
+    <data name="Term_Yes" xml:space="preserve">
+        <value>Evet</value>
     </data>
 </root>
