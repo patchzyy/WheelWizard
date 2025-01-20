@@ -6,6 +6,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using WheelWizard.Models.Enums;
 using WheelWizard.Resources.Languages;
+using WheelWizard.Services;
 using WheelWizard.Services.Installation;
 using WheelWizard.Services.Launcher;
 using WheelWizard.Services.Other;
@@ -202,5 +203,14 @@ public partial class HomePage
         {
             _isSpeedBoostActive = false;
         }
+    }
+
+    private void RRDiscord_Click(object sender, RoutedEventArgs e)
+    {
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+        {
+            FileName = Endpoints.RRDiscordUrl,
+            UseShellExecute = true
+        });
     }
 }

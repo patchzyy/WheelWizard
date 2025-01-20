@@ -23,9 +23,11 @@ public class Room
     public bool IsPublic => Type == "public";
     public string GameMode => Rk switch
     {
-        "vs_10" => "VS",
+        "vs_10" => "RR",
         "vs_11" => "TT",
+        "vs_12" => "200",
         "vs_751" => "VS",
+        "vs_-1" => "Reg",
         _ => "??"
     };
 }
