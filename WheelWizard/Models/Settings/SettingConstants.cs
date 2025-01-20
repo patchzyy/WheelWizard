@@ -48,7 +48,9 @@ public static class SettingValues
         { "ja", () => CreateLanguageString("Japanese") },
         { "es", () => CreateLanguageString("Spanish") },
         { "it", () => CreateLanguageString("Italian") },
-        { "ru", () => CreateLanguageString("Russian") }
+        { "ru", () => CreateLanguageString("Russian") },
+        { "ko", () => CreateLanguageString("Korean") },
+        { "tr", () => CreateLanguageString("Turkish") }
     };
     
     private static string CreateLanguageString(string language)
