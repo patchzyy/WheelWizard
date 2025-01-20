@@ -6,6 +6,6 @@
              xmlns:components="clr-namespace:WheelWizard.Views.Components"
              x:Class="WheelWizard.Views.Pages.UserProfilePage">
    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-       <components:EmptyPageInfo Title="User Profiles Comming Soon" BodyText="The developers are hard at work porting everything over to this new build. This page has not yet been moved over." />
+       <components:EmptyPageInfo Title="User Profiles Coming Soon" BodyText="The developers are hard at work porting everything over to this new build. This page has not yet been moved over." />
    </Grid>
 </UserControl>

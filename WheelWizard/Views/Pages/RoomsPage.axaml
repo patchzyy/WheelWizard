@@ -6,6 +6,6 @@
              xmlns:components="clr-namespace:WheelWizard.Views.Components"
              x:Class="WheelWizard.Views.Pages.RoomsPage">
    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-       <components:EmptyPageInfo Title="Rooms Page Comming Soon" BodyText="The developers are hard at work porting everything over to this new build. This page has not yet been moved over." />
+       <components:EmptyPageInfo Title="Rooms Page Coming Soon" BodyText="The developers are hard at work porting everything over to this new build. This page has not yet been moved over." />
    </Grid>
 </UserControl>
