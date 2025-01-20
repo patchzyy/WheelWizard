@@ -40,8 +40,12 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
             MadeBy_Part2.Text = split[1];
         }
         
-        NavigateToPage(new SettingsPage());
+        NavigateToPage(new HomePage());
         InitializeManagers();
+
+    #if RELEASE_BUILD
+        KitchenSinkButton.IsVisible = false;
+    #endif
     }
     
 
@@ -150,4 +154,3 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
     private void Github_Click(object sender, EventArgs e) =>  ViewUtils.OpenLink(Endpoints.WhWzGithubUrl);
     private void Support_Click(object sender, EventArgs e) => ViewUtils.OpenLink(Endpoints.SupportLink);
 }
-

@@ -17,7 +17,7 @@ public class Program
     }
     
     public static AppBuilder BuildAvaloniaApp()
-        => AppBuilder.Configure<WheelWizard.Views.App>()
+        => AppBuilder.Configure<Views.App>()
                      .UsePlatformDetect()
                      .WithInterFont()
                      .LogToTrace();

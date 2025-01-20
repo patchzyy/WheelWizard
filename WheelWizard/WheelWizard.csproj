@@ -290,6 +290,18 @@
             <DependentUpon>SettingsPage.axaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
+        <Compile Update="Views\Pages\FriendsPage.axaml.cs">
+          <DependentUpon>FriendsPage.axaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\RoomsPage.axaml.cs">
+          <DependentUpon>RoomsPage.axaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Pages\UserProfilePage.axaml.cs">
+          <DependentUpon>UserProfilePage.axaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>

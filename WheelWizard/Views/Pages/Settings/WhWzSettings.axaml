@@ -15,7 +15,7 @@
                 <Border x:Name="LocationWarningIcon"
                         ToolTip.Tip="You must set these 3 values before you can start playing retro rewind"
                         ToolTip.Placement="Top" ToolTip.ShowDelay="50">
-                    <PathIcon x:Name="WarningIcon"
+                    <PathIcon x:Name="WarningIcon" Foreground="{StaticResource Warning600}"
                               Data="{StaticResource WarningTriangle}"
                               Width="16" Height="16"
                                />
