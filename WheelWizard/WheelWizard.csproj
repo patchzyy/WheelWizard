@@ -113,25 +113,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Update="Resources\Languages\Common.resx">
-        <Generator>PublicResXFileCodeGenerator</Generator>
-        <LastGenOutput>Common.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Languages\Common.nl.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Common.nl.Designer.cs</LastGenOutput>
-        <DependentUpon>Common.resx</DependentUpon>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Languages\Common.fr.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Common.fr.Designer.cs</LastGenOutput>
-        <DependentUpon>Common.resx</DependentUpon>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Languages\Common.de.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Common.de.Designer.cs</LastGenOutput>
-        <DependentUpon>Common.resx</DependentUpon>
-      </EmbeddedResource>
       <EmbeddedResource Update="Resources\Languages\Phrases.resx">
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>Phrases.Designer.cs</LastGenOutput>
@@ -168,11 +149,6 @@
         <LastGenOutput>Phrases.de.Designer.cs</LastGenOutput>
         <DependentUpon>Phrases.resx</DependentUpon>
       </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Languages\Common.es.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Common.es.Designer.cs</LastGenOutput>
-        <DependentUpon>Common.resx</DependentUpon>
-      </EmbeddedResource>
       <EmbeddedResource Update="Resources\Languages\Phrases.es.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Phrases.es.Designer.cs</LastGenOutput>
@@ -207,11 +183,6 @@
         <LastGenOutput>Online.nl.Designer.cs</LastGenOutput>
         <DependentUpon>Online.resx</DependentUpon>
       </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Languages\Common.tr.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Common.tr.Designer.cs</LastGenOutput>
-        <DependentUpon>Common.resx</DependentUpon>
-      </EmbeddedResource>
       <EmbeddedResource Update="Resources\Languages\Online.tr.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Online.tr.Designer.cs</LastGenOutput>
@@ -226,11 +197,6 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Settings.tr.Designer.cs</LastGenOutput>
         <DependentUpon>Settings.resx</DependentUpon>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Languages\Common.ja.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Common.ja.Designer.cs</LastGenOutput>
-        <DependentUpon>Common.resx</DependentUpon>
       </EmbeddedResource>
       <EmbeddedResource Update="Resources\Languages\Online.ja.resx">
         <Generator>ResXFileCodeGenerator</Generator>
@@ -257,11 +223,6 @@
         <LastGenOutput>Settings.kr.Designer.cs</LastGenOutput>
         <DependentUpon>Settings.resx</DependentUpon>
       </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Languages\Common.it.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Common.it.Designer.cs</LastGenOutput>
-        <DependentUpon>Common.resx</DependentUpon>
-      </EmbeddedResource>
       <EmbeddedResource Update="Resources\Languages\Online.it.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Online.it.Designer.cs</LastGenOutput>
@@ -282,16 +243,6 @@
         <LastGenOutput>Online.kr.Designer.cs</LastGenOutput>
         <DependentUpon>Online.resx</DependentUpon>
       </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Languages\Common.ko.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Common.ko.Designer.cs</LastGenOutput>
-        <DependentUpon>Common.resx</DependentUpon>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Languages\Common.fi.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Common.fi.Designer.cs</LastGenOutput>
-        <DependentUpon>Common.resx</DependentUpon>
-      </EmbeddedResource>
       <EmbeddedResource Update="Resources\Languages\Online.fi.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Online.fi.Designer.cs</LastGenOutput>
@@ -306,11 +257,6 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Settings.fi.Designer.cs</LastGenOutput>
         <DependentUpon>Settings.resx</DependentUpon>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Languages\Common.ru.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Common.ru.Designer.cs</LastGenOutput>
-        <DependentUpon>Common.resx</DependentUpon>
       </EmbeddedResource>
       <EmbeddedResource Update="Resources\Languages\Online.ru.resx">
         <Generator>ResXFileCodeGenerator</Generator>
@@ -327,14 +273,148 @@
         <LastGenOutput>Settings.ru.Designer.cs</LastGenOutput>
         <DependentUpon>Settings.resx</DependentUpon>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Online.ar.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Online.ar.Designer.cs</LastGenOutput>
+        <DependentUpon>Online.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Phrases.ar.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Phrases.ar.Designer.cs</LastGenOutput>
+        <DependentUpon>Phrases.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Settings.ar.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Settings.ar.Designer.cs</LastGenOutput>
+        <DependentUpon>Settings.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Settings.zh.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Settings.zh.Designer.cs</LastGenOutput>
+        <DependentUpon>Settings.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Settings.pt.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Settings.pt.Designer.cs</LastGenOutput>
+        <DependentUpon>Settings.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Settings.cs.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Settings.cs.Designer.cs</LastGenOutput>
+        <DependentUpon>Settings.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Phrases.cs.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Phrases.cs.Designer.cs</LastGenOutput>
+        <DependentUpon>Phrases.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Phrases.pt.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Phrases.pt.Designer.cs</LastGenOutput>
+        <DependentUpon>Phrases.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Phrases.zh.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Phrases.zh.Designer.cs</LastGenOutput>
+        <DependentUpon>Phrases.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Online.cs.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Online.cs.Designer.cs</LastGenOutput>
+        <DependentUpon>Online.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Online.pt.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Online.pt.Designer.cs</LastGenOutput>
+        <DependentUpon>Online.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Online.zh.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Online.zh.Designer.cs</LastGenOutput>
+        <DependentUpon>Online.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Common.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Common.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Common.de.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Common.de.Designer.cs</LastGenOutput>
+        <DependentUpon>Common.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Common.es.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Common.es.Designer.cs</LastGenOutput>
+        <DependentUpon>Common.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Common.fi.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Common.fi.Designer.cs</LastGenOutput>
+        <DependentUpon>Common.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Common.fr.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Common.fr.Designer.cs</LastGenOutput>
+        <DependentUpon>Common.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Common.it.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Common.it.Designer.cs</LastGenOutput>
+        <DependentUpon>Common.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Common.ja.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Common.ja.Designer.cs</LastGenOutput>
+        <DependentUpon>Common.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Common.ko.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Common.ko.Designer.cs</LastGenOutput>
+        <DependentUpon>Common.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Common.nl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Common.nl.Designer.cs</LastGenOutput>
+        <DependentUpon>Common.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Common.tr.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Common.tr.Designer.cs</LastGenOutput>
+        <DependentUpon>Common.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Common.ru.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Common.ru.Designer.cs</LastGenOutput>
+        <DependentUpon>Common.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Common.ar.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Common.ar.Designer.cs</LastGenOutput>
+        <DependentUpon>Common.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Common.zh.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Common.zh.Designer.cs</LastGenOutput>
+        <DependentUpon>Common.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Common.pt.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Common.pt.Designer.cs</LastGenOutput>
+        <DependentUpon>Common.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Common.cs.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Common.cs.Designer.cs</LastGenOutput>
+        <DependentUpon>Common.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Common.nb.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Common.nb.Designer.cs</LastGenOutput>
+        <DependentUpon>Common.resx</DependentUpon>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Resources\Languages\Common.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Common.resx</DependentUpon>
-      </Compile>
       <Compile Update="Resources\Languages\Phrases.Designer.cs">
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
@@ -349,6 +429,11 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>Online.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Languages\Common.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Common.resx</DependentUpon>
       </Compile>
     </ItemGroup>
     <PropertyGroup>
