@@ -62,7 +62,7 @@
                         <StackPanel>
                             <TextBlock Classes="TinyText" Text="{x:Static lang:Phrases.Text_ThanksTranslators}" />
                             <TextBlock Classes="TinyText" Text="Eppe, Weebo, kytronix, Noël, Haru00007, JGavidia, OrangeCake_," />
-                            <TextBlock Classes="TinyText" Text="Sep, Ismy, rhyy" />
+                            <TextBlock Classes="TinyText" Text="Sep, Ismy, rhyy, Sinseiga" />
                         </StackPanel>
 
                         <Border ToolTip.Tip="If you are willing to translate for RetroRewind and WheelWizard. Be sure to reach out to Eppe or WantToBeeMe :)"
