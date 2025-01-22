@@ -1,0 +1,27 @@
+name: Build
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+
+      - name: Build project
+        run: .\build.bat
+
+      - name: Upload .exe file to GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: gh release upload '${{ github.ref_name }}' .\WheelWizard\bin\Release\net7.0-windows\win-x64\publish\WheelWizard.exe --repo '${{ github.repository }}'
