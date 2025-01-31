@@ -22,7 +22,7 @@
         <value>Amis</value>
     </data>
     <data name="PageTitle_Mods" xml:space="preserve">
-        <value>My Stuff</value>
+        <value>Mes Mods</value>
     </data>
     <data name="PageTitle_MyProfiles" xml:space="preserve">
         <value>Mes Licences</value>
@@ -31,7 +31,7 @@
         <value>Salles</value>
     </data>
     <data name="PageTitle_Settings" xml:space="preserve">
-        <value>Paremètres</value>
+        <value>Paramètres</value>
     </data>
     <data name="Term_General" xml:space="preserve">
         <value>Général</value>
