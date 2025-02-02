@@ -21,12 +21,20 @@
         <Setter Property="Padding" Value="5" />
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Focusable" Value="True" />
+        
+        <Style Selector="^ /template/ TextBlock#PART_Watermark">
+            <Setter Property="Foreground" Value="{StaticResource Neutral400}"/>
+        </Style>
     </Style>
 
     <Style Selector="TextBox.dark">
         <Setter Property="Background" Value="{StaticResource Neutral950}" />
         <Setter Property="Foreground" Value="{StaticResource Neutral100}" />
         <Setter Property="BorderBrush" Value="{StaticResource Neutral950}" />
+        
+        <Style Selector="^ /template/ TextBlock#PART_Watermark">
+            <Setter Property="Foreground" Value="{StaticResource Neutral500}"/>
+        </Style>
     </Style>
 
     <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
@@ -61,8 +69,14 @@
     
     <Style Selector="TextBox:disabled">
         <Setter Property="Foreground" Value="{StaticResource Neutral600}" />
+        <Style Selector="^ /template/ TextBlock#PART_Watermark">
+            <Setter Property="Foreground" Value="{StaticResource Neutral950}"/>
+        </Style>
     </Style>
     <Style Selector="TextBox.dark:disabled">
         <Setter Property="Foreground" Value="{StaticResource Neutral500}" />
+        <Style Selector="^ /template/ TextBlock#PART_Watermark">
+            <Setter Property="Foreground" Value="{StaticResource Neutral500}"/>
+        </Style>
     </Style>
 </Styles>
