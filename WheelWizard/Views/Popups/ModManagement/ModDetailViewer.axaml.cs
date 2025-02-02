@@ -60,6 +60,12 @@ public partial class ModDetailViewer : UserControl
     /// <param name="newDownloadUrl">The download URL to use instead of the one from the mod details.</param>
     public async Task<bool> LoadModDetailsAsync(int ModId, string? newDownloadUrl = null)
     {
+        // TODO: Instead of just not laoding when it is already loading something. it should instead cnacle the currently loading mod thing, or just load it after this one. which ever is easier
+        //      since now we get a de-sync between the mod list and the actually loaded mod.
+        //      this de-sync however is better than without this check, since then you get 2 mods details pages that are being merged together.
+        if (loading)
+            return false;
+        
         loading = true;
         ResetVisibility();
 
