@@ -78,17 +78,7 @@ public class ModRecord
     public int _nViewCount { get; set; }
 
     // URL of the first image
-    public string FirstImageUrl
-    {
-        get
-        {
-            if (_aPreviewMedia?._aImages != null && _aPreviewMedia._aImages.Count > 0)
-            {
-                return $"{_aPreviewMedia._aImages[0]._sBaseUrl}/{_aPreviewMedia._aImages[0]._sFile}";
-            }
-            return string.Empty;
-        }
-    }
+    public string FirstImageUrl => _aPreviewMedia?._aImages is { Count: > 0 } ? $"{_aPreviewMedia._aImages[0]._sBaseUrl}/{_aPreviewMedia._aImages[0]._sFile}" : string.Empty;
 
     // License details for the mod
     public License _aLicense { get; set; }

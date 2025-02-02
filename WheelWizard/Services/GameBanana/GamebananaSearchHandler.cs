@@ -10,8 +10,8 @@ using Models;
 
 public class GamebananaSearchHandler
 {
-    public const string BaseUrl = Endpoints.GameBananaBaseUrl;
-    public const int GAME_ID = 5896;
+    private const string BaseUrl = Endpoints.GameBananaBaseUrl;
+    private const int GAME_ID = 5896;
     
     public static async Task<HttpClientResult<GameBananaResponse>> SearchModsAsync(string searchString, int page = 1, int perPage = 20)
     {
@@ -33,14 +33,7 @@ public class GamebananaSearchHandler
     public static async Task<HttpClientResult<ModDetailResponse>> GetModDetailsAsync(int modId)
     {
         var modDetailUrl = $"{BaseUrl}/Mod/{modId}/ProfilePage";
-        Console.WriteLine("Mod Detail URL: " + modDetailUrl);
         var result = await HttpClientHelper.GetAsync<ModDetailResponse>(modDetailUrl);
-
-        if (!result.Succeeded)
-        {
-            Console.WriteLine($"Error fetching mod details: {result.StatusMessage} (HTTP {result.StatusCode})");
-        }
-
         return result;
     }
     

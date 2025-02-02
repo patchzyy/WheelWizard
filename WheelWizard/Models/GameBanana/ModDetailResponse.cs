@@ -51,68 +51,68 @@ public class ModDetailResponse
     public SuperCategory _aSuperCategory { get; set; }
     public List<Credit> _aCredits { get; set; }
     public List<string> _aEmbeddedMedia { get; set; }
-}
+    
+    public class FileDetail
+    {
+        public int _idRow { get; set; }
+        public string _sFile { get; set; }
+        public int _nFilesize { get; set; }
+        public string _sDescription { get; set; }
+        public long _tsDateAdded { get; set; }
+        public int _nDownloadCount { get; set; }
+        public string _sAnalysisState { get; set; }
+        public string _sAnalysisResultCode { get; set; }
+        public string _sAnalysisResult { get; set; }
+        public bool _bContainsExe { get; set; }
+        public string _sDownloadUrl { get; set; }
+        public string _sMd5Checksum { get; set; }
+        public string _sClamAvResult { get; set; }
+        public string _sAvastAvResult { get; set; }
+    }
+    
+    public class LicenseChecklist
+    {
+        public List<string> yes { get; set; }
+        public List<string> ask { get; set; }
+        public List<string> only_if_same { get; set; }
+        public List<string> no { get; set; }
+    }
+    
+    public class Embeddables
+    {
+        public string _sEmbeddableImageBaseUrl { get; set; }
+        public List<string> _aVariants { get; set; }
+    }
 
-public class FileDetail
-{
-    public int _idRow { get; set; }
-    public string _sFile { get; set; }
-    public int _nFilesize { get; set; }
-    public string _sDescription { get; set; }
-    public long _tsDateAdded { get; set; }
-    public int _nDownloadCount { get; set; }
-    public string _sAnalysisState { get; set; }
-    public string _sAnalysisResultCode { get; set; }
-    public string _sAnalysisResult { get; set; }
-    public bool _bContainsExe { get; set; }
-    public string _sDownloadUrl { get; set; }
-    public string _sMd5Checksum { get; set; }
-    public string _sClamAvResult { get; set; }
-    public string _sAvastAvResult { get; set; }
-}
-
-public class LicenseChecklist
-{
-    public List<string> yes { get; set; }
-    public List<string> ask { get; set; }
-    public List<string> only_if_same { get; set; }
-    public List<string> no { get; set; }
-}
-
-public class Embeddables
-{
-    public string _sEmbeddableImageBaseUrl { get; set; }
-    public List<string> _aVariants { get; set; }
-}
-
-public class Category
-{
-    public int _idRow { get; set; }
-    public string _sName { get; set; }
-    public string _sModelName { get; set; }
-    public string _sProfileUrl { get; set; }
-    public string _sIconUrl { get; set; }
-}
-
-public class SuperCategory
-{
-    public int _idRow { get; set; }
-    public string _sName { get; set; }
-    public string _sModelName { get; set; }
-    public string _sProfileUrl { get; set; }
-    public string _sIconUrl { get; set; }
-}
-
-public class Credit
-{
-    public string _sGroupName { get; set; }
-    public List<Author> _aAuthors { get; set; }
-}
-
-public class Author
-{
-    public int _idRow { get; set; }
-    public string _sName { get; set; }
-    public string _sProfileUrl { get; set; }
-    public bool _bIsOnline { get; set; }
+    public class Category
+    {
+        public int _idRow { get; set; }
+        public string _sName { get; set; }
+        public string _sModelName { get; set; }
+        public string _sProfileUrl { get; set; }
+        public string _sIconUrl { get; set; }
+    }
+    
+    public class SuperCategory
+    {
+        public int _idRow { get; set; }
+        public string _sName { get; set; }
+        public string _sModelName { get; set; }
+        public string _sProfileUrl { get; set; }
+        public string _sIconUrl { get; set; }
+    }
+    
+    public class Credit
+    {
+        public string _sGroupName { get; set; }
+        public List<Author> _aAuthors { get; set; }
+    }
+    
+    public class Author
+    {
+        public int _idRow { get; set; }
+        public string _sName { get; set; }
+        public string _sProfileUrl { get; set; }
+        public bool _bIsOnline { get; set; }
+    }
 }

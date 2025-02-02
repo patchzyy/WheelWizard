@@ -36,9 +36,6 @@ public partial class ModPopupWindow : PopupContent, INotifyPropertyChanged
         InitializeComponent();
         DataContext = this;
         ModListView.ItemsSource = Mods;
-
-        ModDetailViewer.IsVisible = false;
-        EmptyDetailsView.IsVisible = true;
         Loaded += ModPopupWindow_Loaded;
     }
 
@@ -158,33 +155,11 @@ public partial class ModPopupWindow : PopupContent, INotifyPropertyChanged
     private async void ModListView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
         if (ModListView.SelectedItem is ModRecord selectedMod)
-        {
-            EmptyDetailsView.IsVisible = false;
-            ModDetailViewer.IsVisible = true;
             await ModDetailViewer.LoadModDetailsAsync(selectedMod._idRow);
-        }
         else
-        {
-            ModDetailViewer.HideViewer();
-            EmptyDetailsView.IsVisible = true;
-        }
+            await ModDetailViewer.LoadModDetailsAsync(-1);
     }
-
-    /// <summary>
-    /// Public method to load mod details independently of the list.
-    /// </summary>
-    public async Task LoadModDetailsExternallyAsync(ModRecord mod)
-    {
-
-        // Hide the list view and show the detail viewer
-        ModListView.SelectedItem = null;
-        EmptyDetailsView.IsVisible = false;
-        ModDetailViewer.IsVisible = true;
-
-        // Load the mod details
-        await ModDetailViewer.LoadModDetailsAsync(mod._idRow);
-    }
-
+    
     // Implement INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
 

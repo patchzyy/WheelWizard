@@ -20,13 +20,37 @@ namespace WheelWizard.Views.Popups.ModManagement;
 
 public partial class ModDetailViewer : UserControl
 {
-    private ModDetailResponse CurrentMod { get; set; }
+    private bool loading;
+    private ModDetailResponse? CurrentMod { get; set; }
     
     public ModDetailViewer()
     {
         InitializeComponent();
-        this.IsVisible = false;
+        ResetVisibility();
         UnInstallButton.IsVisible = false;
+    }
+
+    private void ResetVisibility()
+    {
+        // Method returns false if the details page is not shown
+        if (loading)
+        {
+            LoadingView.IsVisible = true;
+            NoDetailsView.IsVisible = false;
+            DetailsView.IsVisible = false;
+            return;
+        }
+        if (CurrentMod == null)
+        {
+            LoadingView.IsVisible = false;
+            NoDetailsView.IsVisible = true;
+            DetailsView.IsVisible = false;
+            return;
+        }
+
+        LoadingView.IsVisible = false;
+        NoDetailsView.IsVisible = false;
+        DetailsView.IsVisible = true;
     }
 
     /// <summary>
@@ -36,78 +60,76 @@ public partial class ModDetailViewer : UserControl
     /// <param name="newDownloadUrl">The download URL to use instead of the one from the mod details.</param>
     public async Task<bool> LoadModDetailsAsync(int ModId, string? newDownloadUrl = null)
     {
-        BannerImage.IsVisible = false; // we turn it off since if you swap page, the wrong banner image still shows
-        // and so we only want to enable this when we have the right banner image again
-        try
-        {
-            var modDetailsResult = await GamebananaSearchHandler.GetModDetailsAsync(ModId);
-            if (!modDetailsResult.Succeeded || modDetailsResult.Content == null)
-            {
-                new MessageBoxWindow().SetMainText($"Failed to retrieve mod details: {modDetailsResult.StatusMessage}").Show();
-                return false;
-            }
-            var modDetails = modDetailsResult.Content;
-            ImageCarousel.Items.Clear();
-            if (modDetails._aPreviewMedia?._aImages != null && modDetails._aPreviewMedia._aImages.Any())
-            {
-                foreach (var fullImageUrl in modDetails._aPreviewMedia._aImages.Select(image => $"{image._sBaseUrl}/{image._sFile}"))
-                {
-                    using var httpClient = new HttpClient();
-                    var response = await httpClient.GetAsync(fullImageUrl);
-                    response.EnsureSuccessStatusCode();
-                    
-                    await using var stream = await response.Content.ReadAsStreamAsync();
-                    var memoryStream = new MemoryStream();
-                    await stream.CopyToAsync(memoryStream);
-                    memoryStream.Position = 0;
-                    var bitmap = new Bitmap(memoryStream);
-                    
-                    ImageCarousel.Items.Add(new { FullImageUrl = bitmap });
-                    if (!BannerImage.IsVisible)
-                    {
-                        BannerImage.IsVisible = true;
-                        BannerImage.Source = bitmap;
-                    }
-                }
-            }
+        loading = true;
+        ResetVisibility();
 
-            ModTitle.Text = modDetails._sName;
-            AuthorButton.Text = modDetails._aSubmitter._sName;
-            
-            LikesCountBox.Text = modDetails._nLikeCount.ToString();
-            ViewsCountBox.Text = modDetails._nViewCount.ToString();
-            DownloadsCountBox.Text = modDetails._nDownloadCount.ToString();
-           
-            // IMPORTANT: the text has to be in a div tag. Since otherwise we cant apply any style to the text that has not tags around it
-            ModDescriptionHtmlPanel.Text = $"<body>{modDetails._sText}</body>";
-            
-            CurrentMod = modDetails;
-            CurrentMod.OverrideDownloadUrl = newDownloadUrl;
-            UpdateDownloadButtonState(ModId);
-            IsVisible = true;
-        }
-        catch (Exception ex)
+        var modDetailsResult = await GamebananaSearchHandler.GetModDetailsAsync(ModId);
+        if (!modDetailsResult.Succeeded || modDetailsResult.Content == null)
         {
-            new MessageBoxWindow().SetMainText("An error occurred while fetching mod details: " + ex.Message).Show();
+            CurrentMod = null;
+            NoDetailsView.Title = "Failed to retrieve mod info";
+            NoDetailsView.BodyText = modDetailsResult.StatusMessage ?? "An error occurred while fetching mod details.";
+            loading = false;
+            ResetVisibility();
             return false;
         }
+        
+        CurrentMod = modDetailsResult.Content;
+      
+        // SETTING THE MOD DETAILS
+        ModTitle.Text = CurrentMod._sName;
+        AuthorButton.Text = CurrentMod._aSubmitter._sName;
 
+        LikesCountBox.Text = CurrentMod._nLikeCount.ToString();
+        ViewsCountBox.Text = CurrentMod._nViewCount.ToString();
+        DownloadsCountBox.Text = CurrentMod._nDownloadCount.ToString();
+
+        // IMPORTANT: the text has to be in a div tag. Since otherwise we cant apply any style to the text that has not tags around it
+        ModDescriptionHtmlPanel.Text = $"<body>{CurrentMod._sText}</body>";
+        CurrentMod.OverrideDownloadUrl = newDownloadUrl;
+        UpdateDownloadButtonState(ModId);
+        
+        // IMAGE LOADING
+        ImageCarousel.Items.Clear();
+        BannerImage.IsVisible = false; // should be false, will be set to true later, we use it as a flag to know if we have to set the first image as the banner
+        
+        if (CurrentMod._aPreviewMedia?._aImages == null || !CurrentMod._aPreviewMedia._aImages.Any())
+        {
+            loading = false;
+            ResetVisibility();
+            return true;
+        }
+       
+        foreach (var fullImageUrl in CurrentMod._aPreviewMedia._aImages.Select(image => $"{image._sBaseUrl}/{image._sFile}"))
+        {
+            using var httpClient = new HttpClient();
+            var response = await httpClient.GetAsync(fullImageUrl);
+            response.EnsureSuccessStatusCode();
+
+            await using var stream = await response.Content.ReadAsStreamAsync();
+            var memoryStream = new MemoryStream();
+            await stream.CopyToAsync(memoryStream);
+            memoryStream.Position = 0;
+            var bitmap = new Bitmap(memoryStream);
+
+            ImageCarousel.Items.Add(new { FullImageUrl = bitmap });
+            
+            if (BannerImage.IsVisible) continue;
+            // code here only happens the first iteration of the loop
+            BannerImage.IsVisible = true;
+            BannerImage.Source = bitmap;
+            loading = false;
+            ResetVisibility();
+        }
         return true;
     }
     
     private void UpdateDownloadButtonState(int modId)
     {
-        if (ModManager.Instance.IsModInstalled(modId))
-        {
-            InstallButton.Content = "Installed";
-            InstallButton.IsEnabled = false;
-            UnInstallButton.IsVisible = true;
-            return;
-        }
-        
-        InstallButton.Content = "Download and Install";
-        InstallButton.IsEnabled = true; // Enable button if not installed
-        UnInstallButton.IsVisible = false;
+        var isInstalled = ModManager.Instance.IsModInstalled(modId);
+        InstallButton.Content = isInstalled ? "Installed": "Download and Install";
+        InstallButton.IsEnabled = !isInstalled; 
+        UnInstallButton.IsVisible = isInstalled;
     }
 
     /// <summary>
