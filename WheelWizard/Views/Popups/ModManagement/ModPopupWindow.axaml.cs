@@ -124,23 +124,19 @@ public partial class ModPopupWindow : PopupContent, INotifyPropertyChanged
 
         // Get the ScrollViewer from the ListBox's template
         var scrollViewer = VisualExtensions.FindDescendantOfType<ScrollViewer>(ModListView);
+        if (scrollViewer == null) return;
 
-        if (scrollViewer != null)
-        {
-            // Check if we're near the bottom of the scrollable content
-            var verticalOffset = scrollViewer.Offset.Y;
-            var extentHeight = scrollViewer.Extent.Height;
-            var viewportHeight = scrollViewer.Viewport.Height;
+        // Check if we're near the bottom of the scrollable content
+        var verticalOffset = scrollViewer.Offset.Y;
+        var extentHeight = scrollViewer.Extent.Height;
+        var viewportHeight = scrollViewer.Viewport.Height;
 
-            // Calculate remaining scroll distance (adjusting for a potential rounding error)
-            var remainingScroll = extentHeight - verticalOffset - viewportHeight;
+        // Calculate remaining scroll distance (adjusting for a potential rounding error)
+        var remainingScroll = extentHeight - verticalOffset - viewportHeight;
 
-            // Load more when we're within the threshold of the bottom
-            if (remainingScroll <= ScrollThreshold)
-            {
-                await LoadMods(_currentPage + 1, _currentSearchTerm);
-            }
-        }
+        // Load more when we're within the threshold of the bottom
+        if (remainingScroll <= ScrollThreshold)
+            await LoadMods(_currentPage + 1, _currentSearchTerm);
     }
 
     /// <summary>
@@ -148,15 +144,11 @@ public partial class ModPopupWindow : PopupContent, INotifyPropertyChanged
     /// </summary>
     private async void Search_Click(object? sender, RoutedEventArgs e)
     {
-        _currentSearchTerm = SearchTextBox.Text.Trim();
+        _currentSearchTerm = SearchTextBox.Text?.Trim() ?? "";
         _currentPage = 1;
         _hasMoreMods = true;
 
-        Dispatcher.UIThread.InvokeAsync(() =>
-        {
-            Mods.Clear();
-        });
-
+        Dispatcher.UIThread.InvokeAsync(Mods.Clear);
         await LoadMods(_currentPage, _currentSearchTerm);
     }
 
@@ -167,16 +159,12 @@ public partial class ModPopupWindow : PopupContent, INotifyPropertyChanged
     {
         if (ModListView.SelectedItem is ModRecord selectedMod)
         {
-            // Hide the empty view and show the detail viewer
             EmptyDetailsView.IsVisible = false;
             ModDetailViewer.IsVisible = true;
-
-            // Load the selected mod details into the ModDetailViewer
             await ModDetailViewer.LoadModDetailsAsync(selectedMod._idRow);
         }
         else
         {
-            // Show the empty view and hide the detail viewer
             ModDetailViewer.HideViewer();
             EmptyDetailsView.IsVisible = true;
         }

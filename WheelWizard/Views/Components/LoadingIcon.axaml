@@ -1,0 +1,75 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:WheelWizard.Views.Components">
+    <Design.PreviewWith >
+        <StackPanel Orientation="Vertical" Spacing="5" Background="Black">
+            <StackPanel Orientation="Horizontal" Spacing="5">
+                <Border Background="{StaticResource Neutral950}" Padding="10" CornerRadius="3">
+                    <controls:LoadingIcon VerticalAlignment="Center"/>
+                </Border>
+         
+                <Border Background="{StaticResource Neutral950}" Padding="10" CornerRadius="3">
+                    <controls:LoadingIcon AdditionalText="Loading..." VerticalAlignment="Center"/>
+                </Border>
+
+                <Border Background="{StaticResource Neutral900}" Padding="10" CornerRadius="3">
+                    <controls:LoadingIcon Foreground="{StaticResource Neutral600}"
+                                          AdditionalText="Color changed" VerticalAlignment="Center"/>
+                </Border>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Spacing="5">
+                <Border Background="{StaticResource Neutral950}" Padding="10" CornerRadius="3">
+                    <controls:LoadingIcon VerticalAlignment="Center" IconSize="45"/>
+                </Border>
+
+                <Border Background="{StaticResource Neutral900}" Padding="10" CornerRadius="3">
+                    <controls:LoadingIcon Foreground="{StaticResource Neutral600}" FontSize="20"
+                                          AdditionalText="Font size change" VerticalAlignment="Center"/>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+    </Design.PreviewWith>
+    <Style Selector="controls|LoadingIcon">
+   
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Orientation="Vertical">
+                    <Border Background="Transparent" x:Name="PART_IconBorder" 
+                            Width="{TemplateBinding IconSize}"
+                            Height="{TemplateBinding IconSize}">
+                        <Path Data="{StaticResource Spinner}"
+                              Fill="{TemplateBinding Foreground}" 
+                              Stretch="Uniform" 
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center">
+                       
+                            <Path.Styles>
+                                <Style Selector="Path">
+                                    <Style.Animations>
+                                        <Animation Duration="0:0:1.5" IterationCount="INFINITE">
+                                            <KeyFrame Cue="0%">
+                                                <Setter Property="RotateTransform.Angle" Value="0"/>
+                                            </KeyFrame>
+                                            <KeyFrame Cue="100%">
+                                                <Setter Property="RotateTransform.Angle" Value="360"/>
+                                            </KeyFrame>
+                                        </Animation>
+                                    </Style.Animations>
+                                </Style>
+                            
+                            </Path.Styles>
+                        </Path>
+                    </Border>
+
+                    <TextBlock Text="{TemplateBinding AdditionalText}" 
+                               VerticalAlignment="Center"
+                               Margin="0,5,0,0"
+                               IsVisible="{TemplateBinding AdditionalText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                               FontSize="{TemplateBinding FontSize}"
+                               Foreground="{TemplateBinding Foreground}"
+                               TextWrapping="Wrap"/>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

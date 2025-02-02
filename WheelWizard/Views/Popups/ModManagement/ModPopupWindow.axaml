@@ -71,9 +71,7 @@
 
         <!-- Mod Details -->
         <Grid Grid.Column="1" Margin="10,0,0,0">
-            <modManagement:ModDetailViewer x:Name="ModDetailViewer"
-                                            IsVisible="False"/>
-      
+            <modManagement:ModDetailViewer x:Name="ModDetailViewer" IsVisible="False"/>
             <components:EmptyPageInfo Title="No mod selected" BodyText="Select a mod to view its details" 
                                       IconData="{StaticResource Banana}" x:Name="EmptyDetailsView"/>
         </Grid>

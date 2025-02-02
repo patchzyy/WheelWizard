@@ -7,7 +7,8 @@ namespace WheelWizard.Views.Popups.ModManagement;
 
 public partial class ModIndependentWindow : PopupContent
 {
-    public ModIndependentWindow(Window owner = null) :  base(true, false, true, "Mod Details", new Vector(500, 700))
+    public ModIndependentWindow(string windowTitle = "Mod Details") : 
+        base(true, false, true, windowTitle, new Vector(500, 700))
     {
         InitializeComponent();
     }

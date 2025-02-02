@@ -48,15 +48,6 @@
                             Foreground="White" 
                             FontSize="14" />
                     </Border>
-                    <!-- IMPORTANT: THERE IS AS YOU CAN SEE A DIFFERENCE BETWEEN Text=null && Text="", 
-                     The latter is an empty string, aka, still a string, and so the padding is still added -->
-                    <Border Background="Red" HorizontalAlignment="Left">
-                        <controls:IconLabel 
-                            Text=""
-                            IconData="{StaticResource WheelIcon}"
-                            Foreground="White" 
-                            FontSize="14" />
-                    </Border>
                     
                     <Border Background="Red" HorizontalAlignment="Left">
                         <controls:IconLabel 
