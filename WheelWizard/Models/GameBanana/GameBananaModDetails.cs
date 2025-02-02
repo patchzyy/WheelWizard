@@ -2,7 +2,7 @@
 
 namespace WheelWizard.Models.GameBanana;
 
-public class ModDetailResponse
+public class GameBananaModDetails
 {
     public string? OverrideDownloadUrl { get; set; }
     public int _idRow { get; set; }
@@ -11,7 +11,7 @@ public class ModDetailResponse
     public long _tsDateModified { get; set; }
     public long _tsDateAdded { get; set; }
     public string _sProfileUrl { get; set; }
-    public PreviewMedia _aPreviewMedia { get; set; }
+    public GameBananaPreviewMedia _aPreviewMedia { get; set; }
     public string _sCommentsMode { get; set; }
     public bool _bAccessorIsSubmitter { get; set; }
     public bool _bIsTrashed { get; set; }
@@ -45,8 +45,8 @@ public class ModDetailResponse
     public bool _bAcceptsDonations { get; set; }
     public bool _bShowRipePromo { get; set; }
     public Embeddables _aEmbeddables { get; set; }
-    public Submitter _aSubmitter { get; set; }
-    public Game _aGame { get; set; }
+    public GameBananaSubmitter _aSubmitter { get; set; }
+    public GameBananaGame _aGame { get; set; }
     public Category _aCategory { get; set; }
     public SuperCategory _aSuperCategory { get; set; }
     public List<Credit> _aCredits { get; set; }

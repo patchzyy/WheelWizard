@@ -21,7 +21,7 @@ namespace WheelWizard.Views.Popups.ModManagement;
 public partial class ModDetailViewer : UserControl
 {
     private bool loading;
-    private ModDetailResponse? CurrentMod { get; set; }
+    private GameBananaModDetails? CurrentMod { get; set; }
     
     public ModDetailViewer()
     {
