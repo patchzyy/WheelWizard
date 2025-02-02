@@ -11,7 +11,7 @@ using WheelWizard.Services.LiveData;
 using WheelWizard.Services.Settings;
 using WheelWizard.Services.WiiManagement.SaveData;
 using WheelWizard.Utilities.RepeatedTasks;
-using WheelWizard.Views.Components;
+using WheelWizard.Views.Components.PageSpecific;
 using WheelWizard.Views.Pages;
 using WheelWizard.Views.Popups.Generic;
 using SettingsPage = WheelWizard.Views.Pages.Settings.SettingsPage;

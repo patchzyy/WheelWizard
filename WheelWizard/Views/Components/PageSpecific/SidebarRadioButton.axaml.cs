@@ -1,12 +1,11 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Media;
 using System;
 using WheelWizard.Views.Pages;
 
-namespace WheelWizard.Views.Components;
+namespace WheelWizard.Views.Components.PageSpecific;
 
 public partial class SidebarRadioButton : RadioButton
 {

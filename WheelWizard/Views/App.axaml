@@ -28,11 +28,11 @@
         <StyleInclude Source="Styles/Styles/TextBoxStyles.axaml"/>
         
         <!-- COMPONENTS -->
+        <StyleInclude Source="Components/PageSpecific/SidebarRadioButton.axaml"/>
         <StyleInclude Source="Components/IconLabel.axaml"/>
         <StyleInclude Source="Components/IconLabelButton.axaml"/>
         <StyleInclude Source="Components/Button.axaml"/>
         <StyleInclude Source="Components/StateBox.axaml"/>
-        <StyleInclude Source="Components/SidebarRadioButton.axaml"/>
         <StyleInclude Source="Components/EmptyPageInfo.axaml"/>
         <StyleInclude Source="Components/FormFieldLabel.axaml"/>
         <StyleInclude Source="Components/LoadingIcon.axaml"/>

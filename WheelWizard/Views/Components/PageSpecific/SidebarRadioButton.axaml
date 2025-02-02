@@ -1,6 +1,7 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="using:WheelWizard.Views.Components"
+        xmlns:controls="using:WheelWizard.Views.Components.PageSpecific"
+        xmlns:comps="using:WheelWizard.Views.Components"
         xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
         xmlns:pages="clr-namespace:WheelWizard.Views.Pages">
   <Design.PreviewWith>
@@ -29,22 +30,22 @@
         <Border Background="{TemplateBinding Background}"
                 BorderThickness="0" >
           <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <controls:IconLabel x:Name="RadioIcon" IconSize="25" FontSize="20"
-                                IconData="{TemplateBinding IconData}"
-                                Text="{TemplateBinding Text}"
-                                Foreground="{TemplateBinding Foreground}"
-                                HorizontalAlignment="Left" VerticalAlignment="Center"
-                                Margin="10,0,10,0" />
+            <comps:IconLabel x:Name="RadioIcon" IconSize="25" FontSize="20"
+                             IconData="{TemplateBinding IconData}"
+                             Text="{TemplateBinding Text}"
+                             Foreground="{TemplateBinding Foreground}"
+                             HorizontalAlignment="Left" VerticalAlignment="Center"
+                             Margin="10,0,10,0" />
 
-            <controls:StateBox IsVisible="{TemplateBinding BoxText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
-                                 x:Name="StateBox" Classes="Dark"
-                                 Margin="0,0,10,0"
-                                 VerticalAlignment="Center" HorizontalAlignment="Right"
-                                 Text="{TemplateBinding BoxText}"
-                                 TipPlacement="Top"
-                                 IconSize="0"
-                                 TipText="{TemplateBinding BoxTip}"
-                                 />
+            <comps:StateBox IsVisible="{TemplateBinding BoxText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                            x:Name="StateBox" Classes="Dark"
+                            Margin="0,0,10,0"
+                            VerticalAlignment="Center" HorizontalAlignment="Right"
+                            Text="{TemplateBinding BoxText}"
+                            TipPlacement="Top"
+                            IconSize="0"
+                            TipText="{TemplateBinding BoxTip}"
+            />
           </Grid>
         </Border>
       </ControlTemplate>

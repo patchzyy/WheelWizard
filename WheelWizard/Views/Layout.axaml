@@ -6,6 +6,7 @@
         x:Class="WheelWizard.Views.Layout"
         xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
         xmlns:comps="clr-namespace:WheelWizard.Views.Components"
+        xmlns:psComps="clr-namespace:WheelWizard.Views.Components.PageSpecific"
         xmlns:pages="clr-namespace:WheelWizard.Views.Pages"
         xmlns:settings="clr-namespace:WheelWizard.Views.Pages.Settings"
         Height="876" Width="656" Title="Wheel Wizard" 
@@ -78,31 +79,31 @@
         <StackPanel x:Name="SidePanelButtons" Grid.Column="0" Grid.Row="3" Width="192" VerticalAlignment="Top">
             <TextBlock Text="{x:Static lang:Common.Term_General}" Classes="SidebarSectionText"
                        VerticalAlignment="Bottom" />
-            <comps:SidebarRadioButton IconData="{StaticResource Home}"
-                                      Text="{x:Static lang:Common.PageTitle_Home}"
-                                      PageType="{x:Type pages:HomePage}"
-                                      IsChecked="True"/>
-            <comps:SidebarRadioButton IconData="{StaticResource UserCircle}"
-                                      PageType="{x:Type pages:UserProfilePage}"
-                                      Text="{x:Static lang:Common.PageTitle_MyProfiles}" x:Name="MyProfilesButton"/>
-            <comps:SidebarRadioButton IconData="{StaticResource CubesStacked}"
-                                      PageType="{x:Type pages:ModsPage}"
-                                      Text="{x:Static lang:Common.PageTitle_Mods}"/>
+            <psComps:SidebarRadioButton IconData="{StaticResource Home}"
+                                        Text="{x:Static lang:Common.PageTitle_Home}"
+                                        PageType="{x:Type pages:HomePage}"
+                                        IsChecked="True"/>
+            <psComps:SidebarRadioButton IconData="{StaticResource UserCircle}"
+                                        PageType="{x:Type pages:UserProfilePage}"
+                                        Text="{x:Static lang:Common.PageTitle_MyProfiles}" x:Name="MyProfilesButton"/>
+            <psComps:SidebarRadioButton IconData="{StaticResource CubesStacked}"
+                                        PageType="{x:Type pages:ModsPage}"
+                                        Text="{x:Static lang:Common.PageTitle_Mods}"/>
             <TextBlock Text="{x:Static lang:Common.Term_Online}" Classes="SidebarSectionText" />
-            <comps:SidebarRadioButton IconData="{StaticResource RoomUsers}"
-                                      PageType="{x:Type pages:RoomsPage}"
-                                      Text="{x:Static lang:Common.PageTitle_Rooms}" x:Name="RoomsButton"/>
-            <comps:SidebarRadioButton IconData="{StaticResource Friends}"
-                                      Text="{x:Static lang:Common.PageTitle_Friends}" x:Name="FriendsButton"
-                                      PageType="{x:Type pages:FriendsPage}"
-                                      BoxText="0/0"/>
+            <psComps:SidebarRadioButton IconData="{StaticResource RoomUsers}"
+                                        PageType="{x:Type pages:RoomsPage}"
+                                        Text="{x:Static lang:Common.PageTitle_Rooms}" x:Name="RoomsButton"/>
+            <psComps:SidebarRadioButton IconData="{StaticResource Friends}"
+                                        Text="{x:Static lang:Common.PageTitle_Friends}" x:Name="FriendsButton"
+                                        PageType="{x:Type pages:FriendsPage}"
+                                        BoxText="0/0"/>
 
             <TextBlock Text="{x:Static lang:Common.Term_Other}" Classes="SidebarSectionText" />
-            <comps:SidebarRadioButton IconData="{StaticResource Settings}"
-                                      PageType="{x:Type settings:SettingsPage}"
-                                      Text="{x:Static lang:Common.PageTitle_Settings}" x:Name="SettingsButton"/>
-            <comps:SidebarRadioButton IconData="{StaticResource Spinner}"
-                                      Text="Kitchen Sink" x:Name="KitchenSinkButton"/>
+            <psComps:SidebarRadioButton IconData="{StaticResource Settings}"
+                                        PageType="{x:Type settings:SettingsPage}"
+                                        Text="{x:Static lang:Common.PageTitle_Settings}" x:Name="SettingsButton"/>
+            <psComps:SidebarRadioButton IconData="{StaticResource Spinner}"
+                                        Text="Kitchen Sink" x:Name="KitchenSinkButton"/>
         </StackPanel>
         
         <Border Grid.Column="0" Grid.Row="4" Background="{StaticResource Neutral800}">

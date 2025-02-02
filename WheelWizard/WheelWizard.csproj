@@ -302,6 +302,10 @@
           <DependentUpon>UserProfilePage.axaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
+        <Compile Update="Views\Components\PageSpecific\SidebarRadioButton.axaml.cs">
+          <DependentUpon>SidebarRadioButton.axaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>
