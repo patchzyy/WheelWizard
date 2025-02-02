@@ -9,7 +9,7 @@ public class LoadingIcon : TemplatedControl
 {
     public LoadingIcon()
     {
-        var color = Application.Current?.FindResource("Neutral900");
+        var color = Application.Current?.FindResource("Neutral800");
         if(color !=null) Foreground = new SolidColorBrush((Color)color);
     }
     
