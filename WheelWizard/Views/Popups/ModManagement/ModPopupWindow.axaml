@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:popups="clr-namespace:WheelWizard.Views.Popups"
              xmlns:components="clr-namespace:WheelWizard.Views.Components"
+             xmlns:specificComps="clr-namespace:WheelWizard.Views.Components.PageSpecific"
              xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
              ClipToBounds="False"
              xmlns:modManagement="clr-namespace:WheelWizard.Views.Popups.ModManagement"
@@ -31,39 +32,30 @@
             </Grid>
 
             <!-- Mod List -->
-            <ListBox Grid.Row="2" Name="ModListView" 
-                     SelectionMode="Single"
-                     SelectionChanged="ModListView_SelectionChanged" 
-                     Margin="0,0,10,0"
-                     Background="Transparent"
-                     BorderThickness="0"
+            <ListBox Grid.Row="2" Name="ModListView" SelectionMode="Single"
+                     SelectionChanged="ModListView_SelectionChanged" Padding="0"
+                     Background="Transparent" BorderThickness="0"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      ScrollViewer.VerticalScrollBarVisibility="Auto">
+               
+                <!-- We remove the default styling, it looks bad -->
+                <ListBox.Styles>
+                    <Style Selector="ListBoxItem">
+                        <Setter Property="Padding" Value="0"/>
+                    </Style>
+                    <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter, ListBoxItem:selected /template/ ContentPresenter">
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Style>
+                </ListBox.Styles>
+                
+                <!-- now we use our own component, looks way better -->
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderThickness="0"  Padding="5" 
-                                Background="{StaticResource Neutral900}">
-                            <Grid ColumnDefinitions="100,*">
-                                <Image Grid.Column="0" Width="90" Height="90" 
-                                       Source="{Binding FirstImageUrl}" 
-                                       Stretch="UniformToFill" 
-                                       Margin="0,0,10,0"/>
-
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                    <components:FormFieldLabel Text="{Binding _sName}" />
-                                    <TextBlock Classes="TinyText" Text="{Binding _aSubmitter._sName}" />
-
-                                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                        <components:StateBox Text="{Binding _nLikeCount}" TipText="Likes" 
-                                                             IconData="{StaticResource Heart}"
-                                                             Margin="3"/>
-                                        <components:StateBox Text="{Binding _nViewCount}" TipText="Views" 
-                                                             IconData="{StaticResource Eye}"
-                                                             Margin="3"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
+                        <specificComps:ModBrowserListItem Width="284" Height="89" Margin="0,4,9,4"
+                                                          ModTitle="{Binding _sName}"
+                                                          ModAuthor="{Binding _aSubmitter._sName}"
+                                                          ViewCount="{Binding _nViewCount}"
+                                                          LikeCount="{Binding _nLikeCount}"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

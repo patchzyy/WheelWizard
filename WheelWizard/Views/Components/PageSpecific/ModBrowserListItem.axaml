@@ -1,0 +1,96 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:WheelWizard.Views.Components.PageSpecific"
+        xmlns:components="using:WheelWizard.Views.Components">
+    <Design.PreviewWith>
+        <StackPanel Spacing="6" Background="{StaticResource Neutral950}">
+            <controls:ModBrowserListItem Width="294" Height="89"
+                                         ModTitle="My Title"
+                                         ModAuthor="Me"/>
+            
+            <controls:ModBrowserListItem Width="294" Height="89"
+                                         ModTitle="Some other mod"
+                                         ModAuthor="somebody else"/>
+            
+            <controls:ModBrowserListItem Width="294" Height="89"
+                                         ModTitle="Coolest mod ever made"
+                                         ModAuthor="random guy"
+                                         Classes="TestSelected"/> <!-- Dont use this class in the code, it servers no real usefull purpose -->
+            
+            <controls:ModBrowserListItem Width="294" Height="89"
+                                         ModTitle="My Title"
+                                         ModAuthor="Me"/>
+        </StackPanel>
+      
+    </Design.PreviewWith>
+
+    <Style Selector="controls|ModBrowserListItem">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border x:Name="PART_ModItemBorder"
+                    BorderThickness="0" CornerRadius="6" Background="{StaticResource Neutral900}">
+                    <Grid ColumnDefinitions="1*, 2*">
+                        <!-- Image -->
+                        <Border Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="PART_ImageBorder"
+                                CornerRadius="6,0,0,6" Background="{StaticResource Neutral700}"/>
+                        <!--
+                        <Image Grid.Column="0" Width="90" Height="90" 
+                               Source="{Binding FirstImageUrl}" 
+                               Stretch="UniformToFill" 
+                               Margin="0,0,10,0"/> -->
+                        
+                        <!-- Text -->
+                        <StackPanel Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="6">
+                            <components:FormFieldLabel Text="{TemplateBinding ModTitle}" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Classes="TinyText" Text="By: " />
+                                <TextBlock Classes="TinyText" Text="{TemplateBinding ModAuthor}" />
+                            </StackPanel>
+                        </StackPanel>
+                        
+                        <!-- Icon -->
+                        <StackPanel Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                                    Orientation="Horizontal" Spacing="2" Margin="4">
+                            <components:StateBox Text="{TemplateBinding LikeCount}" TipText="Likes" 
+                                                 IconData="{StaticResource Heart}"
+                                                 Margin="3" Variant="Dark"/>
+                            <components:StateBox Text="{TemplateBinding ViewCount}" TipText="Views" 
+                                                 IconData="{StaticResource Eye}"
+                                                 Margin="3" Variant="Dark"/>
+                            <!-- Apparently its hard to get the downloads count without sending a request constantly
+                            <components:StateBox Text="{TemplateBinding DownloadCount}" TipText="Downloads" 
+                                                 IconData="{StaticResource Download}"
+                                                 Margin="3" Variant="Dark"/> -->
+                        </StackPanel>
+                        
+                        <Border Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                                x:Name="PART_OverlayBorder" CornerRadius="5" BorderThickness="3" IsVisible="False"
+                                Background="Transparent" BorderBrush="{StaticResource Primary600}">
+                            <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="3"
+                                    Background="{StaticResource Primary200}" Opacity="0.15"/>
+                        </Border>
+                    </Grid>
+                    
+                    <Border.Styles>
+                        <Style Selector="Border#PART_ModItemBorder:pointerover">
+                            <Setter Property="Background" Value="{StaticResource Neutral700}"/>
+                            <Style Selector="^ Border#PART_ImageBorder">
+                                <Setter Property="Background" Value="{StaticResource Neutral500}"/>
+                            </Style>
+                            <Style Selector="^ components|StateBox">
+                                <Setter Property="Variant" Value="Default"/>
+                            </Style>
+                        </Style>
+                        
+                        <Style Selector="ListBoxItem:selected Border#PART_ModItemBorder, controls|ModBrowserListItem.TestSelected Border#PART_ModItemBorder">
+                            <Style Selector="^ Border#PART_OverlayBorder">
+                                <Setter Property="IsVisible" Value="True"/>
+                            </Style>
+                        </Style>
+                    </Border.Styles>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>
