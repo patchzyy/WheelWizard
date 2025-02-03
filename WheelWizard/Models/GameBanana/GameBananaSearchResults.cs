@@ -13,19 +13,6 @@ public class GameBananaSearchResults
         public bool _bIsComplete { get; set; }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     /*
     public List<ModRecord> _aRecords { get; set; } // List of records representing mods or other GameBanana content
     
