@@ -39,6 +39,17 @@ public partial class UserProfilePage : Page
                 break;
             }
         }
+        
+        foreach (var item in RegionDropdownIfBroken.Items)
+        {
+            if (item is ComboBoxItem comboItem && 
+                comboItem.Tag is MarioKartWiiEnums.Regions tagRegion && 
+                tagRegion == region)
+            {
+                RegionDropdownIfBroken.SelectedItem = comboItem;
+                break;
+            }
+        }
     }
 
 
@@ -66,14 +77,25 @@ public partial class UserProfilePage : Page
         {
             if (region == MarioKartWiiEnums.Regions.None)
                 continue;
-            var item = new ComboBoxItem
+        
+            // Create a new ComboBoxItem for the first dropdown
+            var itemForRegionDropdown = new ComboBoxItem
             {
                 Content = region.ToString(),
                 Tag = region,
                 IsEnabled = validRegions.Contains(region)
             };
 
-            RegionDropdown.Items.Add(item);
+            // Create a separate ComboBoxItem for the second dropdown
+            var itemForRegionDropdownIfBroken = new ComboBoxItem
+            {
+                Content = region.ToString(),
+                Tag = region,
+                IsEnabled = validRegions.Contains(region)
+            };
+
+            RegionDropdown.Items.Add(itemForRegionDropdown);
+            RegionDropdownIfBroken.Items.Add(itemForRegionDropdownIfBroken);
         }
     }
     
@@ -141,10 +163,25 @@ public partial class UserProfilePage : Page
         if (RegionDropdown.SelectedItem is not ComboBoxItem item || 
             item.Tag is not MarioKartWiiEnums.Regions region) 
             return;
-        
+        RegionDropdownIfBroken.SelectedItem = RegionDropdown.SelectedItem;
+
         SettingsManager.RR_REGION.Set(region);
         GameDataLoader.Instance.LoadGameData();
         CurrentUserProfile.PopulateComponent();
         PopulateMii();
+        SetRegionDropdown();
+    }
+
+    private void RegionDropdownIfBroken_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (RegionDropdownIfBroken.SelectedItem is not ComboBoxItem item || 
+            item.Tag is not MarioKartWiiEnums.Regions region) 
+            return;
+
+        SettingsManager.RR_REGION.Set(region);
+        GameDataLoader.Instance.LoadGameData();
+        CurrentUserProfile.PopulateComponent();
+        PopulateMii();
+        SetRegionDropdown();
     }
 }

@@ -45,7 +45,8 @@
                              <Trigger Property="IsEnabled" Value="False">
                                  <Setter TargetName="border" Property="Background" Value="{StaticResource DropdownItem-Disabled}" />
                                  <Setter Property="Foreground" Value="{StaticResource DropdownItem-DisabledForeground}" />
-                                 <Setter TargetName="DisabledMark" Property="Visibility" Value="Visible" />
+                                 <Setter TargetName="DisabledMark" Property="Visibility" Value="Visible"/>
+                                 <Setter TargetName="SelectedCheck" Property="Visibility" Value="Collapsed" />
                              </Trigger>
                          </ControlTemplate.Triggers>
                      </ControlTemplate>
