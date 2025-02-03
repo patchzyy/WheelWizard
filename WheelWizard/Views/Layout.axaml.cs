@@ -20,6 +20,8 @@ namespace WheelWizard.Views;
 
 public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
 {
+    public const double WindowHeight = 876;
+    public const double WindowWidth = 656;
     public static Layout Instance { get; private set; }
     
     private UserControl _currentPage;
@@ -29,6 +31,7 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
         Instance = this;
         Initialized += ViewUtils.OnInitialized;
         InitializeComponent();
+        
         OnSettingChanged(SettingsManager.SAVED_WINDOW_SCALE);
         SettingsManager.WINDOW_SCALE.Subscribe(this);
         
@@ -51,7 +54,12 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
 
     public void OnSettingChanged(Setting setting)
     {
-        // TODO: Implement the scaleFactor resize thingy
+        // Note that this method will also be called whenever the setting changes
+        var scaleFactor = (double)setting.Get();
+        Height = WindowHeight * scaleFactor;
+        Width = WindowWidth * scaleFactor;
+        // ScaleTransform.ScaleX = scaleFactor;
+        // ScaleTransform.ScaleY = scaleFactor;
     }
 
     private void InitializeManagers()
@@ -130,9 +138,7 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
     private void TopBar_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
         if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
-        {
             BeginMoveDrag(e);
-        }
     }
     
     public void DisableEverything()
