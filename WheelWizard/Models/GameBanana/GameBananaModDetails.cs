@@ -4,8 +4,10 @@ namespace WheelWizard.Models.GameBanana;
 
 public class GameBananaModDetails
 {
-    public string? OverrideDownloadUrl { get; set; }
     public int _idRow { get; set; }
+    
+    public string? OverrideDownloadUrl { get; set; }
+    
     public long _tsDateModified { get; set; }
     public long _tsDateAdded { get; set; }
     public GameBananaPreviewMedia _aPreviewMedia { get; set; }

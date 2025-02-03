@@ -14,7 +14,7 @@
         SystemDecorations="None"
         ExtendClientAreaToDecorationsHint="True"
         ExtendClientAreaChromeHints="NoChrome"
-        CanResize='False' Background="Transparent">
+        CanResize='False' Background="red">
         
     <Grid ColumnDefinitions="192,*" RowDefinitions="25,17,88,*,80" x:Name="CompleteGrid"
           Background="{StaticResource FrameColor}">

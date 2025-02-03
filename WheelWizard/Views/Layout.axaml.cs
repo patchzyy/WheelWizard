@@ -1,6 +1,8 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 using System;
 using System.Linq;
 using WheelWizard.Helpers;
@@ -58,8 +60,7 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
         var scaleFactor = (double)setting.Get();
         Height = WindowHeight * scaleFactor;
         Width = WindowWidth * scaleFactor;
-        // ScaleTransform.ScaleX = scaleFactor;
-        // ScaleTransform.ScaleY = scaleFactor;
+        CompleteGrid.RenderTransform = new ScaleTransform(scaleFactor, scaleFactor);
     }
 
     private void InitializeManagers()
