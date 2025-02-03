@@ -21,9 +21,11 @@ public class GameBananaModDetails
     public int _nPostCount { get; set; }
     public List<GameBananaModFile> _aFiles { get; set; }
     
-    public int _nDownloadCount { get; set; }
+    public int? _nDownloadCount { get; set; }
+    public string? _sModelName { get; set; }
     // public List<string> _aTags { get; set; } // (e.g., "Stable", "In Development")
     
+    /*
     public string _nStatus { get; set; }
     public bool _bIsPrivate { get; set; }
     public string _sCommentsMode { get; set; }
@@ -82,5 +84,5 @@ public class GameBananaModDetails
         public string _sName { get; set; }
         public string _sProfileUrl { get; set; }
         public bool _bIsOnline { get; set; }
-    }
+    } */
 }

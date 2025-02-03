@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using WheelWizard.Models.GameBanana;
 using WheelWizard.Services.GameBanana;
 using WheelWizard.Views.Pages;
 using WheelWizard.Views.Popups.Generic;
@@ -18,7 +19,7 @@ namespace WheelWizard.Views.Popups.ModManagement;
 public partial class ModPopupWindow : PopupContent, INotifyPropertyChanged
 {
     // Collection to hold the mods
-    private ObservableCollection<ModRecord> Mods { get; set; } = new ObservableCollection<ModRecord>();
+    private ObservableCollection<GameBananaModDetails> Mods { get; set; } = new ObservableCollection<GameBananaModDetails>();
 
     // Pagination variables
     private int _currentPage = 1;
@@ -155,7 +156,7 @@ public partial class ModPopupWindow : PopupContent, INotifyPropertyChanged
     private async void ModListView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
         var modId = -1;
-        if (ModListView.SelectedItem is ModRecord selectedMod)
+        if (ModListView.SelectedItem is GameBananaModDetails selectedMod)
             modId = selectedMod._idRow;
         
         await ModDetailViewer.LoadModDetailsAsync(modId);
