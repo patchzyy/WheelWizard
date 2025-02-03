@@ -547,6 +547,15 @@ namespace WheelWizard.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to reinstall Retro Rewind?.
+        /// </summary>
+        public static string PopupText_ReinstallQuestion {
+            get {
+                return ResourceManager.GetString("PopupText_ReinstallQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reinstall Retro Rewind.
         /// </summary>
         public static string PopupText_ReinstallRR {

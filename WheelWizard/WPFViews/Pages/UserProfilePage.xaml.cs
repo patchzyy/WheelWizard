@@ -1,7 +1,10 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
+using WheelWizard.Models.Enums;
 using WheelWizard.Models.Settings;
 using WheelWizard.Resources.Languages;
+using WheelWizard.Services.Other;
 using WheelWizard.Services.Settings;
 using WheelWizard.Services.WiiManagement.SaveData;
 
@@ -15,14 +18,31 @@ public partial class UserProfilePage : Page
     public UserProfilePage()
     {
         InitializeComponent();
-  
         _currentUserIndex = FocussedUser;
-        PopulateMiiOnStartup();
+        PopulateMii();
         FavoriteCheckBox.Checked += SetFavoriteUser;
+        PopulateRegions();
+        SetRegionDropdown();
     }
 
-        
-    private void PopulateMiiOnStartup()
+    private void SetRegionDropdown()
+    {
+        var region = (MarioKartWiiEnums.Regions)SettingsManager.RR_REGION.Get();
+    
+        foreach (var item in RegionDropdown.Items)
+        {
+            if (item is ComboBoxItem comboItem && 
+                comboItem.Tag is MarioKartWiiEnums.Regions tagRegion && 
+                tagRegion == region)
+            {
+                RegionDropdown.SelectedItem = comboItem;
+                break;
+            }
+        }
+    }
+
+
+    private void PopulateMii()
     {
         var validUsers = GameDataLoader.Instance.HasAnyValidUsers;
         
@@ -37,6 +57,24 @@ public partial class UserProfilePage : Page
         PopulateMiiNames();
         SetInitialSelectedMii();
         UpdatePage();
+    }
+    
+    private void PopulateRegions()
+    {
+        var validRegions = RRRegionManager.GetValidRegions();
+        foreach (var region in Enum.GetValues<MarioKartWiiEnums.Regions>())
+        {
+            if (region == MarioKartWiiEnums.Regions.None)
+                continue;
+            var item = new ComboBoxItem
+            {
+                Content = region.ToString(),
+                Tag = region,
+                IsEnabled = validRegions.Contains(region)
+            };
+
+            RegionDropdown.Items.Add(item);
+        }
     }
     
     private void TopBarRadio_OnClick(object sender, RoutedEventArgs e)
@@ -96,5 +134,17 @@ public partial class UserProfilePage : Page
     {
         if (FindName($"Mii{_currentUserIndex}") is RadioButton radioButton)
             radioButton.IsChecked = true;
+    }
+
+    private void RegionDropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (RegionDropdown.SelectedItem is not ComboBoxItem item || 
+            item.Tag is not MarioKartWiiEnums.Regions region) 
+            return;
+        
+        SettingsManager.RR_REGION.Set(region);
+        GameDataLoader.Instance.LoadGameData();
+        CurrentUserProfile.PopulateComponent();
+        PopulateMii();
     }
 }

@@ -231,6 +231,15 @@ namespace WheelWizard.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reinstall RR.
+        /// </summary>
+        public static string Option_Reinstall {
+            get {
+                return ResourceManager.GetString("Option_Reinstall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove Blur.
         /// </summary>
         public static string Option_RemoveBlur {
@@ -290,6 +299,15 @@ namespace WheelWizard.Resources.Languages {
         public static string Option_WindowScale {
             get {
                 return ResourceManager.GetString("Option_WindowScale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installation.
+        /// </summary>
+        public static string Section_Installation {
+            get {
+                return ResourceManager.GetString("Section_Installation", resourceCulture);
             }
         }
         

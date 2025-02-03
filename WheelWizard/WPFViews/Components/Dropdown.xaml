@@ -28,6 +28,9 @@
                                  <icon:PackIconFontAwesome x:Name="SelectedCheck" VerticalAlignment="Center" Kind="CircleCheckSolid" Visibility="Collapsed"
                                                            HorizontalAlignment="Right" Foreground="{StaticResource DropdownItemSelectedCheck}"
                                                            Width="16" Height="16" Margin="6,0"/>
+                                 <icon:PackIconFontAwesome x:Name="DisabledMark" VerticalAlignment="Center" Kind="CircleXmarkSolid" Visibility="Collapsed"
+                                                           HorizontalAlignment="Right" Foreground="{StaticResource DropdownItem-DisabledForeground}"
+                                                           Width="16" Height="16" Margin="6,0"/>
                              </Grid>
                            
                          </Border>
@@ -39,7 +42,11 @@
                                  <Setter TargetName="border" Property="Background" Value="{StaticResource DropdownItem-Selected}" />
                                  <Setter TargetName="SelectedCheck" Property="Visibility" Value="Visible" />
                              </Trigger>
-                             
+                             <Trigger Property="IsEnabled" Value="False">
+                                 <Setter TargetName="border" Property="Background" Value="{StaticResource DropdownItem-Disabled}" />
+                                 <Setter Property="Foreground" Value="{StaticResource DropdownItem-DisabledForeground}" />
+                                 <Setter TargetName="DisabledMark" Property="Visibility" Value="Visible" />
+                             </Trigger>
                          </ControlTemplate.Triggers>
                      </ControlTemplate>
                  </Setter.Value>

@@ -103,7 +103,7 @@
                                         components1:StaticListView.IsSortable="True" />
                         <GridViewColumn Header="{x:Static lang:Online.Stat_FriendCode}" DisplayMemberBinding="{Binding Fc}" Width="135"
                                         components1:StaticListView.IsSortable="True" />
-                        <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Ev}" Width="80"
+                        <GridViewColumn Header="VR" DisplayMemberBinding="{Binding Ev}" Width="65"
                                         components1:StaticListView.IsSortable="True" />
                         
                         <GridViewColumn Header="" Width="35">

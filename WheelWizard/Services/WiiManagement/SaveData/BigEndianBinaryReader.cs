@@ -3,7 +3,7 @@ using System.Text;
 
 namespace WheelWizard.Services.WiiManagement.SaveData;
 
-public static class BigEdianBinaryReader
+public static class BigEndianBinaryReader
 {
     //Helper functions to convert a buffer to an uint using big endian
     public static uint BufferToUint32(byte[] data, int offset)

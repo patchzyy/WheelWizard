@@ -78,6 +78,15 @@
                  
                 </StackPanel>
             </Border>
+            <components1:FormFieldLabel Text="{x:Static lang:Settings.Section_Installation}" />
+            <components1:Button Variant="Default"
+                                IsEnabled="True"
+                                IconPack="Material"
+                                IconKind="{x:Static icon:PackIconMaterialKind.DownloadMultiple}"
+                                HorizontalAlignment="Left"
+                                Text="{x:Static lang:Settings.Option_Reinstall}"
+                                Click="Reinstall_RetroRewind"
+                                Margin="3" />
         </StackPanel>
     </Grid>
 </UserControl>
