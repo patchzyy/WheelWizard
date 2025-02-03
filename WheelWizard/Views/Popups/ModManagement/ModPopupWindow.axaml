@@ -27,7 +27,7 @@
             </Grid>
 
             <!-- Mod List -->
-            <ListBox Grid.Row="2" Name="ModListView" SelectionMode="Single"
+            <ListBox Grid.Row="2" x:Name="ModListView" SelectionMode="Single"
                      SelectionChanged="ModListView_SelectionChanged" Padding="0"
                      Background="Transparent" BorderThickness="0"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"

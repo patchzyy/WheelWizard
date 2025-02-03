@@ -17,8 +17,8 @@ public class GameBananaSearchResults
 public class ModRecord
 {
     public string? OverrideDownloadUrl { get; set; }
-
     public int _idRow { get; set; }
+    
     public string _sModelName { get; set; }
     public string _sSingularTitle { get; set; }
     public string _sName { get; set; }
@@ -33,27 +33,20 @@ public class ModRecord
     public GameBananaPreviewMedia _aPreviewMedia { get; set; }
     public GameBananaSubmitter _aSubmitter { get; set; }
     public GameBananaGame _aGame { get; set; }
-    public RootCategory _aCategory { get; set; }
+    public GamebananaCatagory _aCategory { get; set; }
 
     public string _sText { get; set; } // Mod description or text (from _sText or _sDescription)
     public string _sDescription { get; set; }  // Some mods may also use _sDescription, so you can handle both
         
     public License _aLicense { get; set; }
     public TrashInfo _aTrashInfo { get; set; } // only if the mod is trashed
-    public List<ModFile> _aFiles { get; set; }
+    public List<GameBananaModFile> _aFiles { get; set; }
     public List<string> _aEmbeddedMedia { get; set; }
     
     public string _sDevelopmentState { get; set; } // (e.g., "In Development", "Final/Stable")
     public int _iCompletionPercentage { get; set; } // Percentage of completion if it's still being developed (0–100%)
     // URL of the first image
     public string FirstImageUrl => _aPreviewMedia?._aImages is { Count: > 0 } ? $"{_aPreviewMedia._aImages[0]._sBaseUrl}/{_aPreviewMedia._aImages[0]._sFile}" : string.Empty;
-    
-    public class RootCategory
-    {
-        public string _sName { get; set; } //  (e.g., "Maps", "Characters")
-        public string _sProfileUrl { get; set; }
-        public string _sIconUrl { get; set; }
-    }
     
     public class License
     {
@@ -68,21 +61,9 @@ public class ModRecord
         }
     }
     
-    
     public class TrashInfo
     {
         public string _sReason { get; set; }
         public long _tsTrashDate { get; set; } // Date when the mod was trashed (timestamp)
-    }
-    
-    public class ModFile
-    {
-        public int _idRow { get; set; }
-        public string _sFile { get; set; }
-        public int _nFilesize { get; set; }
-        public string _sDownloadUrl { get; set; }
-        public string _sAnalysisResult { get; set; } // Analysis result of the file (e.g., "clean", "contains_exe")
-        public bool _bContainsExe { get; set; }
-        public string _sMd5Checksum { get; set; }
     }
 }

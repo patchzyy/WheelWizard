@@ -21,6 +21,7 @@ namespace WheelWizard.Views.Popups.ModManagement;
 public partial class ModDetailViewer : UserControl
 {
     private bool loading;
+    private bool loadingVisual;
     private GameBananaModDetails? CurrentMod { get; set; }
     
     public ModDetailViewer()
@@ -33,7 +34,7 @@ public partial class ModDetailViewer : UserControl
     private void ResetVisibility()
     {
         // Method returns false if the details page is not shown
-        if (loading)
+        if (loadingVisual)
         {
             LoadingView.IsVisible = true;
             NoDetailsView.IsVisible = false;
@@ -66,6 +67,7 @@ public partial class ModDetailViewer : UserControl
         if (loading)
             return false;
         
+        loadingVisual = true;
         loading = true;
         ResetVisibility();
 
@@ -76,6 +78,7 @@ public partial class ModDetailViewer : UserControl
             NoDetailsView.Title = "Failed to retrieve mod info";
             NoDetailsView.BodyText = modDetailsResult.StatusMessage ?? "An error occurred while fetching mod details.";
             loading = false;
+            loadingVisual = false;
             ResetVisibility();
             return false;
         }
@@ -102,6 +105,7 @@ public partial class ModDetailViewer : UserControl
         if (CurrentMod._aPreviewMedia?._aImages == null || !CurrentMod._aPreviewMedia._aImages.Any())
         {
             loading = false;
+            loadingVisual = false;
             ResetVisibility();
             return true;
         }
@@ -124,9 +128,10 @@ public partial class ModDetailViewer : UserControl
             // code here only happens the first iteration of the loop
             BannerImage.IsVisible = true;
             BannerImage.Source = bitmap;
-            loading = false;
+            loadingVisual = false;
             ResetVisibility();
         }
+        loading = false;
         return true;
     }
     

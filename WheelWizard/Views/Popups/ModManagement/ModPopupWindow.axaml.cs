@@ -154,10 +154,11 @@ public partial class ModPopupWindow : PopupContent, INotifyPropertyChanged
     /// </summary>
     private async void ModListView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
+        var modId = -1;
         if (ModListView.SelectedItem is ModRecord selectedMod)
-            await ModDetailViewer.LoadModDetailsAsync(selectedMod._idRow);
-        else
-            await ModDetailViewer.LoadModDetailsAsync(-1);
+            modId = selectedMod._idRow;
+        
+        await ModDetailViewer.LoadModDetailsAsync(modId);
     }
     
     // Implement INotifyPropertyChanged
