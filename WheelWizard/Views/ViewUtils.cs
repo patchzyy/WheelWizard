@@ -32,6 +32,6 @@ public class ViewUtils
 
     public static void RefreshWindow(SettingsPage settingsPage)
     {
-        Console.WriteLine("boop");
+       
     }
 }

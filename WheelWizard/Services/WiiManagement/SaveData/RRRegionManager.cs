@@ -14,7 +14,6 @@ public class RRRegionManager
         
         foreach (var region in Enum.GetValues<MarioKartWiiEnums.Regions>())
         {
-            Console.WriteLine((region));
             if (region == MarioKartWiiEnums.Regions.None)
                 continue;
 

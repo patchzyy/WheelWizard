@@ -285,7 +285,6 @@ public class GameDataLoader : RepeatedTaskManager
                 }
             }
             var saveFileFolder = Path.Combine(SaveFilePath, RRRegionManager.ConvertRegionToGameID(Currentregion));
-            Console.WriteLine(saveFileFolder);
             var saveFile = Directory.GetFiles(saveFileFolder, "rksys.dat", SearchOption.TopDirectoryOnly);
             return saveFile.Length == 0 ? null : File.ReadAllBytes(saveFile[0]);
         }
