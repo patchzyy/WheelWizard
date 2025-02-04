@@ -26,7 +26,8 @@
         <StyleInclude Source="Styles/Styles/ToggleButtonStyles.axaml"/>
         <StyleInclude Source="Styles/Styles/MiscStyles.axaml"/>
         <StyleInclude Source="Styles/Styles/TextBoxStyles.axaml"/>
-        
+        <StyleInclude Source="Styles/Styles/DropdownStyles.axaml"/>
+
         <!-- COMPONENTS -->
         <StyleInclude Source="Components/IconLabel.axaml"/>
         <StyleInclude Source="Components/IconLabelButton.axaml"/>

@@ -100,7 +100,7 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
         }
     }
 
-     public void UpdatePlayerAndRoomCount(RRLiveRooms sender)
+    public void UpdatePlayerAndRoomCount(RRLiveRooms sender)
     {
         var playerCount = sender.PlayerCount;
         var roomCount = sender.RoomCount;

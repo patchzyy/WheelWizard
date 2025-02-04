@@ -42,19 +42,17 @@
             <components:FormFieldLabel Text="{x:Static lang:Settings.Section_Language}" />
             <Border Classes="SettingsBlockStyle">
                 <StackPanel>
-                    <ComboBox
-                              x:Name="InGameLanguageDropdown"
+                    <components:FormFieldLabel Text="{x:Static lang:Settings.Option_RRLanguage}" />
+                    <ComboBox x:Name="InGameLanguageDropdown"
                               HorizontalAlignment="Stretch"
                               Margin="0,0,0,5"
-                              VerticalAlignment="Top">
-                    </ComboBox>
+                              VerticalAlignment="Top"/>
 
-                    <ComboBox
-                              x:Name="WhWzLanguageDropdown"
+                    <components:FormFieldLabel Text="{x:Static lang:Settings.Option_WhWzLanguage}" />
+                    <ComboBox x:Name="WhWzLanguageDropdown"
                               HorizontalAlignment="Stretch"
                               Margin="0,0,0,5"
-                              VerticalAlignment="Top">
-                    </ComboBox>
+                              VerticalAlignment="Top"/>
                     
                     <TextBlock Classes="TinyText" IsVisible="False" x:Name="TranslationsPercentageText" />
 
