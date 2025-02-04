@@ -4,19 +4,115 @@
         xmlns:controls="using:WheelWizard.Views.Components.WhWzLibrary"
         xmlns:components="using:WheelWizard.Views.Components.StandardLibrary">
     <Design.PreviewWith>
-        <controls:DetailedProfileBox />
+        <StackPanel Orientation="Horizontal">
+            <Border Padding="10" Background="{StaticResource Neutral950}"
+                    Width="440">
+                <controls:DetailedProfileBox FriendCode="1234-5678-9012"
+                                             UserName="Lum Patch"
+                                             IsChecked="True"
+                                             Vr="5000" Br="5000"
+                                             IsOnline="False"
+                                             TotalRaces="12" TotalWon="1345"/>
+            </Border>
+            <Border Padding="10" Background="{StaticResource Neutral950}"
+                    Width="440">
+                <controls:DetailedProfileBox FriendCode="1234-5678-9012"
+                                             UserName="Lum Patch"
+                                             IsChecked="False"
+                                             Vr="5000" Br="5000"
+                                             IsOnline="True"
+                                             TotalRaces="12" TotalWon="1345"/>
+            </Border>
+        </StackPanel>
+      
     </Design.PreviewWith>
 
     <Style Selector="controls|DetailedProfileBox">
-        <!-- Set Defaults -->
         <Setter Property="Template">
             <ControlTemplate>
-                <RadioButton Margin="10,10,0,10" x:Name="CheckBox" VerticalAlignment="Top"
-                             IsChecked="{TemplateBinding IsChecked}" Classes="CheckBox">
-                    <components:FormFieldLabel Text="{x:Static lang:Settings.Option_MakePrimary}" 
-                                               TipText="The primary profile is used as reference in the wheel wizard client" />
-                </RadioButton>
+                <Border Background="{StaticResource Neutral900}" CornerRadius="6">
+                    <Grid ColumnDefinitions="4*,3*" RowDefinitions="216,100,60" Margin="10" ClipToBounds="False">
+                        <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" CornerRadius="99999"
+                                HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.5" IsVisible="{TemplateBinding IsOnline}"
+                                Background="{StaticResource Primary200}" Height="200" Width="200"  Effect="blur(250)">
+                            
+                        </Border>
+                        <!-- HEAD BORDER -->
+                        <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" BorderBrush="{StaticResource Neutral600}"
+                                BorderThickness="1" Margin="0,0,0,10" CornerRadius="4" x:Name="PART_HeadBorder"
+                                Background="{StaticResource Neutral950}">
+                            <Grid>
+                                <StackPanel Margin="7">
+                                    <TextBlock Classes="TitleText" Text="{TemplateBinding UserName}"/>
+                                   
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Classes="BodyText" Text="{TemplateBinding FriendCode}"/>
+                                        <components:IconLabelButton VerticalAlignment="Center" x:Name="CopyFcButton"
+                                                                    IconData="{StaticResource Copy}"
+                                                                    Margin="7,0,0,0" IconSize="20"
+                                                                    Foreground="{StaticResource Neutral500}" 
+                                                                    HoverForeground="{StaticResource Neutral400}"/>
+                                    </StackPanel>
+                                   
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                        
+                       
+                        
+                        <!-- FIRST INFORMATION LAYER -->
+                        <RadioButton Grid.Column="0" Grid.Row="1" Margin="5,6,0,0" x:Name="CheckBox" VerticalAlignment="Top"
+                                     IsChecked="{TemplateBinding IsChecked}" Classes="CheckBox">
+                            <components:FormFieldLabel Text="{x:Static lang:Settings.Option_MakePrimary}" 
+                                                       TipText="The primary profile is used as reference in the wheel wizard client" />
+                        </RadioButton>
+                        
+                        <StackPanel Grid.Column="1" Grid.Row="1" Margin="0,7,0,0">
+                            <components:FormFieldLabel Text="Status" />
+                            <TextBlock IsVisible="{TemplateBinding IsOnline}" Text="{x:Static lang:Common.Term_Online}"
+                                       Classes="BodyText" Foreground="{StaticResource Primary400}"/>
+                            <!-- I have no idea why the Foreground is not working -->
+                            <TextBlock Classes="BodyText" Text="{x:Static lang:Common.Term_Offline}"
+                                       IsVisible="{TemplateBinding IsOnline,Converter={x:Static BoolConverters.Not}}"/>
+                        </StackPanel>
+                        
+                        <Grid Grid.Column="0" Grid.Row="1" ColumnDefinitions="3*,4*" 
+                              Margin="5,0,0,10" VerticalAlignment="Bottom">
+                            <StackPanel Grid.Column="0">
+                                <components:FormFieldLabel Text="VR" />
+                                <TextBlock Classes="BodyText" Text="{TemplateBinding Vr}"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1">
+                                <components:FormFieldLabel Text="BR" />
+                                <TextBlock Classes="BodyText" Text="{TemplateBinding Br}"/>
+                            </StackPanel>
+                        </Grid>
+                        
+                        <components:Button Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                           IsEnabled="{TemplateBinding IsOnline}" x:Name="ViewRoomButton"
+                                           Text="View Room" IconData="{StaticResource Road}" Margin="0,0,0,10"/>
+                        <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
+                                Background="{StaticResource BackgroundLineColor}" Height="1" 
+                                HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="-10,0" />
+                        <!-- SECOND INFORMATION LAYER -->
+                        
+                        <StackPanel Grid.Column="0" Grid.Row="2" Margin="5,8,0,0">
+                            <components:FormFieldLabel Text="Total games won" />
+                            <TextBlock Classes="BodyText" Text="{TemplateBinding TotalWon}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Grid.Row="2" Margin="0,8,0,0">
+                            <components:FormFieldLabel Text="Total games played" />
+                            <TextBlock Classes="BodyText" Text="{TemplateBinding TotalRaces}"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                
             </ControlTemplate>
         </Setter>
+    </Style>
+    
+    <Style Selector="controls|DetailedProfileBox[IsOnline=true] /template/ Border#PART_HeadBorder">
+        <Setter Property="BorderBrush" Value="{StaticResource Primary400}"/>
     </Style>
 </Styles>

@@ -48,7 +48,10 @@
                  HorizontalAlignment="Right" VerticalAlignment="Top"/>
        
        <Grid Grid.Row="1">
-           <whwzComps:DetailedProfileBox OnChecked="CheckBox_SetPrimaryUser" x:Name="CurrentUserProfile"/>
+           <whwzComps:DetailedProfileBox x:Name="CurrentUserProfile" 
+                                         OnChecked="CheckBox_SetPrimaryUser" ViewRoomAction="Button_ViewRoom"
+                                         VerticalAlignment="Top" HorizontalAlignment="Stretch"
+                                         Margin="0,10,0,0" />
            
            <components:EmptyPageInfo x:Name="NoProfilesInfo"
                                      HorizontalAlignment="Center" Title="{x:Static lang:Online.NoProfiles}"

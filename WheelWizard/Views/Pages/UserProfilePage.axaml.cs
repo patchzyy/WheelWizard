@@ -97,9 +97,23 @@ public partial class UserProfilePage : UserControl
     
     private void UpdatePage()
     {
-        var a = GameDataLoader.Instance.GetUserData(_currentUserIndex);
-        // PlayerStats.UpdateStats(GameDataLoader.Instance.GetUserData(_currentUserIndex));
         CurrentUserProfile.IsChecked = FocussedUser == _currentUserIndex;
+        
+        var user = GameDataLoader.Instance.GetUserData(_currentUserIndex);
+        CurrentUserProfile.FriendCode = user.FriendCode;
+        CurrentUserProfile.UserName = user.MiiName;
+        CurrentUserProfile.IsOnline = user.IsOnline;
+        CurrentUserProfile.Vr = user.Vr.ToString();
+        CurrentUserProfile.Br = user.Br.ToString();
+
+        CurrentUserProfile.TotalRaces = user.TotalRaceCount.ToString();
+        CurrentUserProfile.TotalWon =user.TotalWinCount.ToString();
+    }
+
+    private void Button_ViewRoom(object sender, RoutedEventArgs e)
+    {
+        // TODO: Implement this
+        // It should open the room that the user is currently in. ( the button is only enabled if the player is in a room)
     }
     
     private void CheckBox_SetPrimaryUser(object sender, RoutedEventArgs e) => SetUserAsPrimary();
