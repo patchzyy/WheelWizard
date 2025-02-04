@@ -2,10 +2,58 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="656" d:DesignHeight="876"
+             xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
              xmlns:components="clr-namespace:WheelWizard.Views.Components.StandardLibrary"
+             xmlns:whwzComps="clr-namespace:WheelWizard.Views.Components.WhWzLibrary"
              x:Class="WheelWizard.Views.Pages.UserProfilePage">
    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-       <components:EmptyPageInfo Title="User Profiles Coming Soon" BodyText="The developers are hard at work porting everything over to this new build. This page has not yet been moved over." />
+       <Grid.RowDefinitions>
+           <RowDefinition Height="{StaticResource TopRowSize}" />
+           <!-- This is the total height as the (Title + infoSection) - (padding) -->
+           <RowDefinition />
+       </Grid.RowDefinitions>
+       <Border Grid.Row="0" Background="{StaticResource BackgroundLineColor}" Height="1" 
+               HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
+       <Border Grid.Row="1" Background="{StaticResource BackgroundLineColor}" Height="1" 
+               HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
+       <TextBlock Grid.Row="0" Text="{x:Static lang:Common.PageTitle_MyProfiles}" HorizontalAlignment="Left" VerticalAlignment="Top"
+                  Classes="PageTitleText" />
+       
+       <ScrollViewer Grid.Row="0"  HorizontalScrollBarVisibility="Auto">
+           <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                       x:Name="RadioButtons">
+               <!-- DONT ADD ANYTHING TO THIS STACK PANEL OR YOU WILL RUIN THE LAYOUT -->
+               <!-- WE ARE LAZY IN THE CODE, AND SO WE USE CHILD INDEXING TO GET THE RADIO BUTTONS -->
+               <RadioButton Classes="TopBar"
+                            Click="TopBarRadio_OnClick" Tag="0" 
+                            x:Name="Mii0" Content="{x:Static lang:Online.NoLicense}" 
+                            IsChecked="True" IsEnabled="False"/>
+               <RadioButton Classes="TopBar"
+                            Click="TopBarRadio_OnClick" Tag="1" 
+                            x:Name="Mii1" Content="{x:Static lang:Online.NoLicense}" 
+                            IsEnabled="False"/>
+               <RadioButton Classes="TopBar"
+                            Click="TopBarRadio_OnClick" Tag="2" 
+                            x:Name="Mii2" Content="{x:Static lang:Online.NoLicense}" 
+                            IsEnabled="False"/>
+               <RadioButton Classes="TopBar"
+                            Click="TopBarRadio_OnClick" Tag="3" 
+                            x:Name="Mii3" Content="{x:Static lang:Online.NoLicense}" 
+                            IsEnabled="False" />
+           </StackPanel>
+       </ScrollViewer>
+       
+       <ComboBox Grid.Row="0" x:Name="RegionDropdown" Margin="3,12" MinWidth="160"
+                 HorizontalAlignment="Right" VerticalAlignment="Top"/>
+       
+       <Grid Grid.Row="1">
+           <whwzComps:DetailedProfileBox OnChecked="CheckBox_SetPrimaryUser" x:Name="CurrentUserProfile"/>
+           
+           <components:EmptyPageInfo x:Name="NoProfilesInfo"
+                                     HorizontalAlignment="Center" Title="{x:Static lang:Online.NoProfiles}"
+                                     BodyText="{x:Static lang:Phrases.EmptyText_NoProfiles}" />
+       </Grid>
+ 
    </Grid>
 </UserControl>

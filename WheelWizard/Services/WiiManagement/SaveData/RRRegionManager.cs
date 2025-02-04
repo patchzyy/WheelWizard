@@ -23,23 +23,16 @@ public class RRRegionManager
 
             // Check if the directory exists
             if (!Directory.Exists(regionFolderPath))
-            {
                 continue;
-            }
-                
 
             // Check if there is at least one .rksys file in the folder
             var rksysFiles = Directory.EnumerateFiles(regionFolderPath, "rksys.dat", SearchOption.TopDirectoryOnly);
             if (rksysFiles.Any())
-            {
                 validRegions.Add(region);
-            }
         }
         //if no valid regions are found, add the none region
         if (validRegions.Count == 0)
-        {
             validRegions.Add(MarioKartWiiEnums.Regions.None);
-        }
         return validRegions;
     }
     public static string ConvertRegionToGameID(MarioKartWiiEnums.Regions region) => region switch

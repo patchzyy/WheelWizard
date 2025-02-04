@@ -1,5 +1,3 @@
-using WheelWizard.Resources.Languages;
-using System;
 using System.ComponentModel;
 using Avalonia.Media.Imaging;
 using WheelWizard.Services.WiiManagement;

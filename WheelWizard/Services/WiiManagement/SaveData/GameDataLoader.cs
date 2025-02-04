@@ -75,20 +75,10 @@ public class GameDataLoader : RepeatedTaskManager
     public void RefreshOnlineStatus()
     {
         var currentRooms = RRLiveRooms.Instance.CurrentRooms;
-        if (currentRooms.Count > 0)
+        var onlinePlayers = currentRooms.SelectMany(room => room.Players.Values).ToList();
+        foreach (var user in GameData.Users)
         {
-            var onlinePlayers = currentRooms.SelectMany(room => room.Players.Values).ToList();
-            foreach (var user in GameData.Users)
-            {
-                user.IsOnline = onlinePlayers.Any(player => player.Fc == user.FriendCode);
-            }
-        }
-        else
-        {
-            foreach (var user in GameData.Users)
-            {
-                user.IsOnline = false;
-            }
+            user.IsOnline = onlinePlayers.Any(player => player.Fc == user.FriendCode);
         }
     }
     

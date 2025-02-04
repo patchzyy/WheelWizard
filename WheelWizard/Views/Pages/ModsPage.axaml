@@ -5,7 +5,7 @@
           xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
           xmlns:components="clr-namespace:WheelWizard.Views.Components.StandardLibrary"
           xmlns:pages="clr-namespace:WheelWizard.Views.Pages"
-          mc:Ignorable="d" d:DesignHeight="831" d:DesignWidth="444"
+          mc:Ignorable="d" d:DesignWidth="656" d:DesignHeight="876"
           x:Class="WheelWizard.Views.Pages.ModsPage">
  <Grid>
      <Grid.RowDefinitions>

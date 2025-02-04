@@ -15,7 +15,7 @@ public static class MiiImageManager
     private const int MaxCachedImages = 126;
     // There are always 2 values, the image itself, and a bool indicating if the image was loaded successfully
     // If it wasn't, it means that that image is just empty, yet it still should not be requested again since it failed
-    private static readonly Dictionary<string, (Bitmap, bool)> Images = new();
+    private static readonly Dictionary<string, (Bitmap smallImage, bool success)> Images = new();
     private static readonly Queue<string> ImageOrder = new();
     public static int ImageCount { get; private set; } = 0;
 

@@ -31,8 +31,8 @@
                         <RadioButton Content="Radio 1" />
                         <RadioButton Content="Radio 2" />
                         <RadioButton Content="Radio 3" IsChecked="True" IsEnabled="False" />
-                        <RadioButton Content="Different Style 1" GroupName="DifferentStyle" Classes="CheckBox" IsChecked="True"  />
-                        <RadioButton Content="Different Style 2" GroupName="DifferentStyle" Classes="CheckBox"   />
+                        <RadioButton Content="Different Style 1" GroupName="DifferentStyle" Classes="CheckBox" IsChecked="True" />
+                        <RadioButton Content="Different Style 2" GroupName="DifferentStyle" Classes="CheckBox" />
                         
                         <TextBlock Classes="TinyText" Margin="0,5">Switch:</TextBlock>
                         <CheckBox Classes="Switch" Content="Switch 1" />

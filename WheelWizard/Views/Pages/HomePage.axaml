@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
              xmlns:comps="clr-namespace:WheelWizard.Views.Components.StandardLibrary"
-             mc:Ignorable="d" d:DesignHeight="831" d:DesignWidth="444"
+             mc:Ignorable="d" d:DesignWidth="656" d:DesignHeight="876"
              ClipToBounds="False"
              x:Class="WheelWizard.Views.Pages.HomePage">
     <Grid  x:Name="CompleteGrid">

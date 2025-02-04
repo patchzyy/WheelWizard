@@ -40,5 +40,6 @@
         <!-- PAGE SPECIFIC COMPONENTS -->
         <StyleInclude Source="Components/WhWzLibrary/SidebarRadioButton.axaml"/>
         <StyleInclude Source="Components/WhWzLibrary/ModBrowserListItem.axaml"/>
+        <StyleInclude Source="Components/WhWzLibrary/DetailedProfileBox.axaml"/>
     </Application.Styles>
 </Application>

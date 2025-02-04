@@ -1,0 +1,22 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
+        xmlns:controls="using:WheelWizard.Views.Components.WhWzLibrary"
+        xmlns:components="using:WheelWizard.Views.Components.StandardLibrary">
+    <Design.PreviewWith>
+        <controls:DetailedProfileBox />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|DetailedProfileBox">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <RadioButton Margin="10,10,0,10" x:Name="CheckBox" VerticalAlignment="Top"
+                             IsChecked="{TemplateBinding IsChecked}" Classes="CheckBox">
+                    <components:FormFieldLabel Text="{x:Static lang:Settings.Option_MakePrimary}" 
+                                               TipText="The primary profile is used as reference in the wheel wizard client" />
+                </RadioButton>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>
