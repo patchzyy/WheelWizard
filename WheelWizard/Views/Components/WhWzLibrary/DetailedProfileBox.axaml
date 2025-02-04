@@ -50,6 +50,7 @@
                                         <components:IconLabelButton VerticalAlignment="Center" x:Name="CopyFcButton"
                                                                     IconData="{StaticResource Copy}"
                                                                     Margin="7,0,0,0" IconSize="20"
+                                                                    IsVisible="{TemplateBinding FriendCode, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
                                                                     Foreground="{StaticResource Neutral500}" 
                                                                     HoverForeground="{StaticResource Neutral400}"/>
                                     </StackPanel>

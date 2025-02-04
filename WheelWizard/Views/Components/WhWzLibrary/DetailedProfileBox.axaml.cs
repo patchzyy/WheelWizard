@@ -1,6 +1,8 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Primitives;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using System;
 
@@ -88,7 +90,7 @@ public class DetailedProfileBox : UserControl
 
     private void CopyFriendCode(object? obj, EventArgs e)
     {
-        
+        TopLevel.GetTopLevel(this)?.Clipboard?.SetTextAsync(FriendCode);
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
