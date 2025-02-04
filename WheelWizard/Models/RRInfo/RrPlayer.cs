@@ -4,7 +4,7 @@ using WheelWizard.Utilities;
 
 namespace WheelWizard.Models.RRInfo;
 
-public class Player 
+public class RrPlayer 
 {
     // These variables should not be renamed since they are directly mapped to the JSON object
     public required string Count { get; set; } // you can have one Wii that with 2 players (and hence the Mii list)

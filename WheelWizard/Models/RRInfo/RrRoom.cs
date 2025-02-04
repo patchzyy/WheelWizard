@@ -6,7 +6,7 @@ using WheelWizard.Helpers;
 
 namespace WheelWizard.Models.RRInfo;
 
-public class Room
+public class RrRoom
 {
     public required string Id { get; set; }
     public string? Game { get; set; } // it always exists, but we dont care since we dont use it (and its always "mariokartwii")
@@ -15,7 +15,7 @@ public class Room
     public required bool Suspend { get; set; }
     public required string Host { get; set; } // the key of player in the players map (that started the room)
     public string? Rk { get; set; } // RK does not exists in private rooms
-    public required Dictionary<string, Player> Players { get; set; }
+    public required Dictionary<string, RrPlayer> Players { get; set; }
 
     public int PlayerCount => Players.Sum(p => p.Value.PlayerCount);
 

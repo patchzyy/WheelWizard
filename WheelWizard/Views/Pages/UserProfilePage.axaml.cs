@@ -19,7 +19,7 @@ public partial class UserProfilePage : UserControl
     {
         InitializeComponent();
         ResetMiiTopBar();
-        SelectMii(FocussedUser);
+        ViewMii(FocussedUser);
         PopulateRegions();
         UpdatePage();
         
@@ -54,7 +54,7 @@ public partial class UserProfilePage : UserControl
         }
     }
 
-    private void SelectMii(int? mii = null)
+    private void ViewMii(int? mii = null)
     {
         _currentUserIndex = mii ?? _currentUserIndex;
         if (RadioButtons.Children[_currentUserIndex] is RadioButton radioButton)
@@ -97,6 +97,7 @@ public partial class UserProfilePage : UserControl
     
     private void UpdatePage()
     {
+        var a = GameDataLoader.Instance.GetUserData(_currentUserIndex);
         // PlayerStats.UpdateStats(GameDataLoader.Instance.GetUserData(_currentUserIndex));
         CurrentUserProfile.IsChecked = FocussedUser == _currentUserIndex;
     }
@@ -123,10 +124,9 @@ public partial class UserProfilePage : UserControl
         GameDataLoader.Instance.LoadGameData();
         ResetMiiTopBar();
         
-        SelectMii(0); // Just in case you have current user set as 4. and you change to a region where there are only 3 users.
+        ViewMii(0); // Just in case you have current user set as 4. and you change to a region where there are only 3 users.
         SetUserAsPrimary();
         
         UpdatePage();
     }
 }
-

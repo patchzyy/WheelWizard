@@ -9,7 +9,7 @@ using WheelWizard.Utilities;
 
 namespace WheelWizard.Models.GameData;
 
-public abstract class BasePlayer : INotifyPropertyChanged
+public abstract class GameDataPlayer : INotifyPropertyChanged
 {
     public required string FriendCode { get; init; }
     public required uint Vr { get; init; }

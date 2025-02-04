@@ -58,10 +58,10 @@ public class GameDataLoader : RepeatedTaskManager
     private const int FriendDataOffset = 0x56D0;
     private const int FriendDataSize = 0x1C0;
     private const int MiiSize = 0x4A;
-    public User GetCurrentUser => Instance.GameData.Users[(int)SettingsManager.FOCUSSED_USER.Get()];
-    public List<Friend> GetCurrentFriends => Instance.GameData.Users[(int)SettingsManager.FOCUSSED_USER.Get()].Friends;
+    public GameDataUser GetCurrentUser => Instance.GameData.Users[(int)SettingsManager.FOCUSSED_USER.Get()];
+    public List<GameDataFriend> GetCurrentFriends => Instance.GameData.Users[(int)SettingsManager.FOCUSSED_USER.Get()].Friends;
     public Models.GameData.GameData GetGameData => Instance.GameData;
-    public User GetUserData(int index) => GameData.Users[index];
+    public GameDataUser GetUserData(int index) => GameData.Users[index];
     public bool HasAnyValidUsers => GameData.Users.Any(user => user.FriendCode != "0000-0000-0000");
 
     
@@ -109,7 +109,7 @@ public class GameDataLoader : RepeatedTaskManager
     
     private void CreateDummyUser()
     {
-        var dummyUser = new User
+        var dummyUser = new GameDataUser
         {
             FriendCode = "0000-0000-0000",
             MiiData = new MiiData
@@ -126,7 +126,7 @@ public class GameDataLoader : RepeatedTaskManager
             Br = 5000,
             TotalRaceCount = 0,
             TotalWinCount = 0,
-            Friends = new List<Friend>(),
+            Friends = new List<GameDataFriend>(),
             RegionId = 10, //10 will default to unknown
             IsOnline = false
         };
@@ -154,10 +154,10 @@ public class GameDataLoader : RepeatedTaskManager
             CreateDummyUser();
     }
 
-    private User ParseUser(int offset)
+    private GameDataUser ParseUser(int offset)
     {
         if (_saveData == null) throw new ArgumentNullException(nameof(_saveData));
-        var user = new User
+        var user = new GameDataUser
         {
             MiiData = ParseMiiData(offset + 0x14),
             FriendCode = FriendCodeGenerator.GetFriendCode(_saveData, offset + 0x5C),
@@ -206,14 +206,14 @@ public class GameDataLoader : RepeatedTaskManager
         return Array.Empty<byte>();
     }
 
-    private void ParseFriends(User user, int userOffset)
+    private void ParseFriends(GameDataUser gameDataUser, int userOffset)
     {
         var friendOffset = userOffset + FriendDataOffset;
         for (var i = 0; i < MaxFriendNum; i++)
         {
             var currentOffset = friendOffset + i * FriendDataSize;
             if (!CheckMiiData(currentOffset + 0x1A)) continue;
-            var friend = new Friend
+            var friend = new GameDataFriend
             {
                 Vr = BigEndianBinaryReader.BufferToUint16(_saveData, currentOffset + 0x16), // peaks at 9999 so kinda useless
                 Br = BigEndianBinaryReader.BufferToUint16(_saveData, currentOffset + 0x18), // same here
@@ -233,7 +233,7 @@ public class GameDataLoader : RepeatedTaskManager
                     ClientId = 0
                 },
             };
-            user.Friends.Add(friend);
+            gameDataUser.Friends.Add(friend);
         }
     }
 

@@ -10,7 +10,7 @@ namespace WheelWizard.Services.LiveData;
 
 public class RRLiveRooms : RepeatedTaskManager
 {
-    public List<Room> CurrentRooms { get; private set; } = new();
+    public List<RrRoom> CurrentRooms { get; private set; } = new();
     public int PlayerCount => CurrentRooms.Sum(room => room.PlayerCount);
     public int RoomCount => CurrentRooms.Count;
 
@@ -21,13 +21,13 @@ public class RRLiveRooms : RepeatedTaskManager
 
     protected override async Task ExecuteTaskAsync()
     { 
-        var response = await HttpClientHelper.GetAsync<List<Room>>(Endpoints.RRGroupsUrl);
+        var response = await HttpClientHelper.GetAsync<List<RrRoom>>(Endpoints.RRGroupsUrl);
         // var response = HttpClientHelper.MockResult<List<Room>>(Mocker.GroupApiResponse);
 
         // It is not important enough to bore the user with an error message or something.
         // they are not hindered if there is an error, they just don't see the rooms. that's it.
         if (!response.Succeeded || response.Content is null)
-            CurrentRooms = new List<Room>();
+            CurrentRooms = new List<RrRoom>();
         else CurrentRooms = response.Content;
     }
 }
