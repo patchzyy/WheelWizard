@@ -5,6 +5,7 @@ using System.Linq;
 using WheelWizard.Helpers;
 using WheelWizard.Models.Settings;
 using WheelWizard.Resources.Languages;
+using WheelWizard.Services.Installation;
 using WheelWizard.Services.Settings;
 using WheelWizard.Views.Popups.Generic;
 
@@ -120,5 +121,10 @@ public partial class OtherSettings : UserControl
 
         SettingsManager.WW_LANGUAGE.Set(key);
         ViewUtils.RefreshWindow(new SettingsPage(new OtherSettings()));
+    }
+
+    private async void Reinstall_RetroRewind(object sender, RoutedEventArgs e)
+    {
+        await RetroRewindInstaller.ReinstallRR();
     }
 }

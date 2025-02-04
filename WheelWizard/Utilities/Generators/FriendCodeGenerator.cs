@@ -10,7 +10,7 @@ public class FriendCodeGenerator
     
     public static string GetFriendCode(byte[] data, int offset)
     {
-        var pid = BigEdianBinaryReader.BufferToUint32(data, offset);
+        var pid = BigEndianBinaryReader.BufferToUint32(data, offset);
         if (pid == 0) return string.Empty;
         
         var srcBuf = new byte[]

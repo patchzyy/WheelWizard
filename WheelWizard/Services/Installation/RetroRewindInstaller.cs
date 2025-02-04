@@ -51,7 +51,7 @@ public static class RetroRewindInstaller
     public static async Task InstallRetroRewind()
     {
         if (IsRetroRewindInstalled())
-            await HandleReinstall();
+            DeleteExistingRetroRewind();
 
         if (hasOldrksys())
         {
@@ -81,20 +81,21 @@ public static class RetroRewindInstaller
         }
         var tempZipPath = Path.Combine(PathManager.LoadFolderPath, "Temp", "RetroRewind.zip");
         await DownloadAndExtractRetroRewind(tempZipPath);
+        await RetroRewindUpdater.UpdateRR();
     }
 
-    private static async Task HandleReinstall()
+    public static async Task ReinstallRR()
     {
-        var result = await new YesNoWindow()
-            .SetMainText(Phrases.PopupText_AlreadyFilesRR)
-            .SetExtraText(Phrases.PopupText_ReinstallRR)
+        var result = new YesNoWindow()
+            .SetMainText(Phrases.PopupText_ReinstallRR)
+            .SetExtraText(Phrases.PopupText_ReinstallQuestion)
             .AwaitAnswer();
         
-
         if (!result) 
             return;
         
         DeleteExistingRetroRewind();
+        await InstallRetroRewind();
     }
 
     private static void HandleMovingOldRR()
@@ -173,7 +174,7 @@ public static class RetroRewindInstaller
 
     private static void DeleteExistingRetroRewind()
     {
-        var retroRewindPath = PathManager.RiivolutionWhWzFolderPath;
+        var retroRewindPath = PathManager.RetroRewind6FolderPath;
         if (Directory.Exists(retroRewindPath))
             Directory.Delete(retroRewindPath, true);
     }

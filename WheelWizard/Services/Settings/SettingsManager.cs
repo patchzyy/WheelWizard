@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using WheelWizard.Helpers;
 using WheelWizard.Models.Settings;
+using WheelWizard.Services.Other;
 
 namespace WheelWizard.Services.Settings;
 
@@ -20,6 +21,7 @@ public class SettingsManager
     public static Setting SAVED_WINDOW_SCALE = new WhWzSetting(typeof(double), "WindowScale", 1.0).SetValidation(value => (double)(value ?? -1) >= 0.5 && (double)(value ?? -1) <= 2.0);
     public static Setting RR_LANGUAGE = new WhWzSetting(typeof(int), "RR_Language", 0).SetValidation(value => SettingValues.RrLanguages.ContainsKey((int)(value ?? -1)));
     public static Setting REMOVE_BLUR = new WhWzSetting(typeof(bool), "REMOVE_BLUR", true);
+    public static Setting RR_REGION = new WhWzSetting(typeof(MarioKartWiiEnums.Regions), "RR_Region", RRRegionManager.GetValidRegions().First());
     public static Setting WW_LANGUAGE = new WhWzSetting(typeof(string), "WW_Language", "en").SetValidation(value => SettingValues.WhWzLanguages.ContainsKey((string)value!));
     
     // Dolphin Settings
@@ -43,6 +45,7 @@ public class SettingsManager
                                                             value => _internalScale = (double)value!,
                                                             () => _internalScale == -1.0 ? SAVED_WINDOW_SCALE.Get() : _internalScale
                                                             ).SetDependencies(SAVED_WINDOW_SCALE);
+    
     
     public static Setting RECOMMENDED_SETTINGS = new VirtualSetting(typeof(bool), value => {
                                                                 var newValue = (bool)value!;

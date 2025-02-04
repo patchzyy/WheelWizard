@@ -24,6 +24,9 @@ public static class PathManager
     // helper paths for folders used across multiple files
     public static string RiivolutionWhWzFolderPath => Path.Combine(LoadFolderPath, "Riivolution", "WheelWizard");
     public static string RetroRewind6FolderPath => Path.Combine(RiivolutionWhWzFolderPath, "RetroRewind6");
+    
+    //this is not the folder your save file is located in, but its the folder where every Region folder is, so the save file is in SaveFolderPath/Region
+    public static string SaveFolderPath => Path.Combine(RiivolutionWhWzFolderPath, "riivolution", "Save" ,"RetroWFC");
     public static string LoadFolderPath => Path.Combine(UserFolderPath, "Load");
 
     public static string ConfigFolderPath

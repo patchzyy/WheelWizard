@@ -6,9 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using WheelWizard.Models.Enums;
 using WheelWizard.Models.GameData;
 using WheelWizard.Models.RRInfo;
 using WheelWizard.Services.LiveData;
+using WheelWizard.Services.Other;
 using WheelWizard.Services.Settings;
 using WheelWizard.Utilities.Generators;
 using WheelWizard.Utilities.RepeatedTasks;
@@ -27,7 +29,7 @@ public class GameDataLoader : RepeatedTaskManager
     {
         get
         {
-            var path = Path.Combine(PathManager.RiivolutionWhWzFolderPath, "riivolution", "save");
+            var path = Path.Combine(PathManager.RiivolutionWhWzFolderPath, "riivolution", "save", "RetroWFC");
             if (Directory.Exists(path)) 
                 return path;
             
@@ -169,11 +171,11 @@ public class GameDataLoader : RepeatedTaskManager
         {
             MiiData = ParseMiiData(offset + 0x14),
             FriendCode = FriendCodeGenerator.GetFriendCode(_saveData, offset + 0x5C),
-            Vr = BigEdianBinaryReader.BufferToUint16(_saveData, offset + 0xB0),
-            Br = BigEdianBinaryReader.BufferToUint16(_saveData, offset + 0xB2),
-            TotalRaceCount = BigEdianBinaryReader.BufferToUint32(_saveData, offset + 0xB4),
-            TotalWinCount = BigEdianBinaryReader.BufferToUint32(_saveData, offset + 0xDC),
-            RegionId = (BigEdianBinaryReader.BufferToUint16(_saveData, 0x23308 + 0x3802) / 4096)
+            Vr = BigEndianBinaryReader.BufferToUint16(_saveData, offset + 0xB0),
+            Br = BigEndianBinaryReader.BufferToUint16(_saveData, offset + 0xB2),
+            TotalRaceCount = BigEndianBinaryReader.BufferToUint32(_saveData, offset + 0xB4),
+            TotalWinCount = BigEndianBinaryReader.BufferToUint32(_saveData, offset + 0xDC),
+            RegionId = (BigEndianBinaryReader.BufferToUint16(_saveData, 0x23308 + 0x3802) / 4096)
         };
         ParseFriends(user, offset);
         return user;
@@ -187,7 +189,7 @@ public class GameDataLoader : RepeatedTaskManager
         {
             Mii = new Mii
             {
-                Name = BigEdianBinaryReader.GetUtf16String(_saveData,offset, 10),
+                Name = BigEndianBinaryReader.GetUtf16String(_saveData,offset, 10),
                 Data = Convert.ToBase64String(GetMiiData(BitConverter.ToUInt32(_saveData, offset + 0x14)))
             },
             
@@ -223,18 +225,18 @@ public class GameDataLoader : RepeatedTaskManager
             if (!CheckMiiData(currentOffset + 0x1A)) continue;
             var friend = new Friend
             {
-                Vr = BigEdianBinaryReader.BufferToUint16(_saveData, currentOffset + 0x16), // peaks at 9999 so kinda useless
-                Br = BigEdianBinaryReader.BufferToUint16(_saveData, currentOffset + 0x18), // same here
+                Vr = BigEndianBinaryReader.BufferToUint16(_saveData, currentOffset + 0x16), // peaks at 9999 so kinda useless
+                Br = BigEndianBinaryReader.BufferToUint16(_saveData, currentOffset + 0x18), // same here
                 FriendCode = FriendCodeGenerator.GetFriendCode(_saveData, currentOffset + 4),
-                Wins = BigEdianBinaryReader.BufferToUint16(_saveData, currentOffset + 0x14),
-                Losses = BigEdianBinaryReader.BufferToUint16(_saveData, currentOffset + 0x12),
+                Wins = BigEndianBinaryReader.BufferToUint16(_saveData, currentOffset + 0x14),
+                Losses = BigEndianBinaryReader.BufferToUint16(_saveData, currentOffset + 0x12),
                 CountryCode = _saveData[currentOffset + 0x68],
                 RegionId = _saveData[currentOffset + 0x69],
                 MiiData = new MiiData
                 {
                     Mii = new Mii
                     {
-                        Name = BigEdianBinaryReader.GetUtf16String(_saveData, currentOffset + 0x1C, 10),
+                        Name = BigEndianBinaryReader.GetUtf16String(_saveData, currentOffset + 0x1C, 10),
                         Data = Convert.ToBase64String(_saveData.AsSpan(currentOffset + 0x1A, MiiSize))
                     },
                     AvatarId = 0,
@@ -268,8 +270,23 @@ public class GameDataLoader : RepeatedTaskManager
         {
             if (!Directory.Exists(SaveFilePath))
                 return null;
-
-            var saveFile = Directory.GetFiles(SaveFilePath, "rksys.dat", SearchOption.AllDirectories);
+            var Currentregion = (MarioKartWiiEnums.Regions)SettingsManager.RR_REGION.Get();
+            if (Currentregion == MarioKartWiiEnums.Regions.None)
+            {
+                //double check if there is a save file in the save folder
+                if (RRRegionManager.GetValidRegions().First() != MarioKartWiiEnums.Regions.None)
+                {
+                    Currentregion = RRRegionManager.GetValidRegions().First();
+                    SettingsManager.RR_REGION.Set(Currentregion);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            var saveFileFolder = Path.Combine(SaveFilePath, RRRegionManager.ConvertRegionToGameID(Currentregion));
+            Console.WriteLine(saveFileFolder);
+            var saveFile = Directory.GetFiles(saveFileFolder, "rksys.dat", SearchOption.TopDirectoryOnly);
             return saveFile.Length == 0 ? null : File.ReadAllBytes(saveFile[0]);
         }
         catch (Exception ex)
