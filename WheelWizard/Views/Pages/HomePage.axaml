@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
-             xmlns:comps="clr-namespace:WheelWizard.Views.Components"
+             xmlns:comps="clr-namespace:WheelWizard.Views.Components.StandardLibrary"
              mc:Ignorable="d" d:DesignHeight="831" d:DesignWidth="444"
              ClipToBounds="False"
              x:Class="WheelWizard.Views.Pages.HomePage">

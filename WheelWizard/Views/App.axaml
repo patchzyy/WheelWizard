@@ -28,17 +28,17 @@
         <StyleInclude Source="Styles/Styles/TextBoxStyles.axaml"/>
         <StyleInclude Source="Styles/Styles/DropdownStyles.axaml"/>
 
-        <!-- COMPONENTS -->
-        <StyleInclude Source="Components/IconLabel.axaml"/>
-        <StyleInclude Source="Components/IconLabelButton.axaml"/>
-        <StyleInclude Source="Components/Button.axaml"/>
-        <StyleInclude Source="Components/StateBox.axaml"/>
-        <StyleInclude Source="Components/EmptyPageInfo.axaml"/>
-        <StyleInclude Source="Components/FormFieldLabel.axaml"/>
-        <StyleInclude Source="Components/LoadingIcon.axaml"/>
+        <!-- STANDARD COMPONENTS -->
+        <StyleInclude Source="Components/StandardLibrary/IconLabel.axaml"/>
+        <StyleInclude Source="Components/StandardLibrary/IconLabelButton.axaml"/>
+        <StyleInclude Source="Components/StandardLibrary/Button.axaml"/>
+        <StyleInclude Source="Components/StandardLibrary/StateBox.axaml"/>
+        <StyleInclude Source="Components/StandardLibrary/EmptyPageInfo.axaml"/>
+        <StyleInclude Source="Components/StandardLibrary/FormFieldLabel.axaml"/>
+        <StyleInclude Source="Components/StandardLibrary/LoadingIcon.axaml"/>
         
         <!-- PAGE SPECIFIC COMPONENTS -->
-        <StyleInclude Source="Components/PageSpecific/SidebarRadioButton.axaml"/>
-        <StyleInclude Source="Components/PageSpecific/ModBrowserListItem.axaml"/>
+        <StyleInclude Source="Components/WhWzLibrary/SidebarRadioButton.axaml"/>
+        <StyleInclude Source="Components/WhWzLibrary/ModBrowserListItem.axaml"/>
     </Application.Styles>
 </Application>

@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             xmlns:components="clr-namespace:WheelWizard.Views.Components"
+             xmlns:components="clr-namespace:WheelWizard.Views.Components.StandardLibrary"
              x:Class="WheelWizard.Views.Pages.FriendsPage">
    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
        <components:EmptyPageInfo Title="Friend Page Coming Soon" BodyText="The developers are hard at work porting everything over to this new build. This page has not yet been moved over." />

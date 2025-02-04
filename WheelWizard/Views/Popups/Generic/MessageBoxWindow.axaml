@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:self="clr-namespace:WheelWizard.Views.Popups"
       mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-      xmlns:components="clr-namespace:WheelWizard.Views.Components"
+      xmlns:components="clr-namespace:WheelWizard.Views.Components.StandardLibrary"
       x:Class="WheelWizard.Views.Popups.Generic.MessageBoxWindow">
     <Grid Margin="10">
         <Grid.RowDefinitions>

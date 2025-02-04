@@ -1,7 +1,7 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:conv="clr-namespace:WheelWizard.Views.Converters"
-        xmlns:components="using:WheelWizard.Views.Components">
+        xmlns:components="using:WheelWizard.Views.Components.StandardLibrary">
 
     <Design.PreviewWith>
         <Border Padding="20" Background="{StaticResource Neutral300}">

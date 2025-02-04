@@ -5,7 +5,7 @@ using Avalonia.Input;
 using Avalonia.Media;
 using System;
 
-namespace WheelWizard.Views.Components;
+namespace WheelWizard.Views.Components.StandardLibrary;
 
 public class IconLabelButton : IconLabel
 {

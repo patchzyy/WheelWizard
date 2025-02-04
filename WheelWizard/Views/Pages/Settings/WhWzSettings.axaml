@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:components="clr-namespace:WheelWizard.Views.Components"
+             xmlns:components="clr-namespace:WheelWizard.Views.Components.StandardLibrary"
              xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
              mc:Ignorable="d" d:DesignWidth="444" d:DesignHeight="716"
              x:Class="WheelWizard.Views.Pages.Settings.WhWzSettings">

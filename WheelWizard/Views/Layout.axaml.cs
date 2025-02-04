@@ -1,4 +1,3 @@
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -13,10 +12,8 @@ using WheelWizard.Services.LiveData;
 using WheelWizard.Services.Settings;
 using WheelWizard.Services.WiiManagement.SaveData;
 using WheelWizard.Utilities.RepeatedTasks;
-using WheelWizard.Views.Components.PageSpecific;
+using WheelWizard.Views.Components.WhWzLibrary;
 using WheelWizard.Views.Pages;
-using WheelWizard.Views.Popups.Generic;
-using SettingsPage = WheelWizard.Views.Pages.Settings.SettingsPage;
 
 namespace WheelWizard.Views;
 

@@ -1,11 +1,8 @@
 ﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
 using Avalonia.Media;
-using Avalonia.Interactivity;
 using System;
 
-namespace WheelWizard.Views.Components;
+namespace WheelWizard.Views.Components.StandardLibrary;
 
 public class Button : Avalonia.Controls.Button // Change to TemplatedControl
 {

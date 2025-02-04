@@ -1,7 +1,7 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="using:WheelWizard.Views.Components.PageSpecific"
-        xmlns:components="using:WheelWizard.Views.Components">
+        xmlns:controls="using:WheelWizard.Views.Components.WhWzLibrary"
+        xmlns:components="using:WheelWizard.Views.Components.StandardLibrary">
     <Design.PreviewWith>
         <StackPanel Spacing="6" Background="{StaticResource Neutral950}">
             <controls:ModBrowserListItem Width="294" Height="89"

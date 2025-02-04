@@ -5,7 +5,6 @@ using Avalonia.Media;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using WheelWizard.Helpers;
@@ -197,14 +196,14 @@ public partial class WhWzSettings : UserControl
         {
             var color = (Color)Application.Current.FindResource("Warning600");
             LocationBorder.BorderBrush = new SolidColorBrush(color);
-            LocationEditButton.Variant = Components.Button.ButtonsVariantType.Warning;
+            LocationEditButton.Variant = Components.StandardLibrary.Button.ButtonsVariantType.Warning;
             LocationWarningIcon.IsVisible = true;
         }
         else
         {
             var color = (Color)Application.Current.FindResource("Primary600");
             LocationBorder.BorderBrush = new SolidColorBrush(color);
-            LocationEditButton.Variant = Components.Button.ButtonsVariantType.Primary;
+            LocationEditButton.Variant = Components.StandardLibrary.Button.ButtonsVariantType.Primary;
             LocationWarningIcon.IsVisible = false;
         }
 

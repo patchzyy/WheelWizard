@@ -1,7 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.Primitives;
 
-namespace WheelWizard.Views.Components.PageSpecific;
+namespace WheelWizard.Views.Components.WhWzLibrary;
 
 public class ModBrowserListItem : TemplatedControl
 {

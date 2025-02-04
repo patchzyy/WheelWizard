@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="444" d:DesignHeight="831"
-             xmlns:components="clr-namespace:WheelWizard.Views.Components"
+             xmlns:components="clr-namespace:WheelWizard.Views.Components.StandardLibrary"
              xmlns:settings="clr-namespace:WheelWizard.Views.Pages.Settings"
              xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
              xmlns:popups="clr-namespace:WheelWizard.Views.Popups.Generic"

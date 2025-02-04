@@ -11,9 +11,8 @@ using WheelWizard.Services.Installation;
 using WheelWizard.Services.Launcher;
 using WheelWizard.Services.Other;
 using WheelWizard.Services.Settings;
-using WheelWizard.Views.Components;
 using WheelWizard.Views.Pages.Settings;
-using Button = WheelWizard.Views.Components.Button;
+using Button = WheelWizard.Views.Components.StandardLibrary.Button;
 
 namespace WheelWizard.Views.Pages;
 
@@ -130,7 +129,7 @@ public partial class HomePage : UserControl
         DolphinButton.IsEnabled = false;
     }
 
-    private void SetButtonState(string text, Components.Button.ButtonsVariantType variant, string iconKey,
+    private void SetButtonState(string text, Button.ButtonsVariantType variant, string iconKey,
         bool enabled = true, bool subButtonsEnabled = true)
     {
         PlayButton.Text = text;

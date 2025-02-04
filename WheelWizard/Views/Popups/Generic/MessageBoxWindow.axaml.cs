@@ -1,6 +1,6 @@
 using Avalonia.Interactivity;
 using System.Media;
-using Button = WheelWizard.Views.Components.Button;
+using Button = WheelWizard.Views.Components.StandardLibrary.Button;
 
 namespace WheelWizard.Views.Popups.Generic;
 

@@ -1,8 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
 
-namespace WheelWizard.Views.Components;
+namespace WheelWizard.Views.Components.StandardLibrary;
 
 public class FormFieldLabel : UserControl
 {   

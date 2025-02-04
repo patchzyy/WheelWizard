@@ -306,6 +306,34 @@
           <DependentUpon>SidebarRadioButton.axaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
+        <Compile Update="Views\Components\StandardLibrary\Button.axaml.cs">
+          <DependentUpon>Button.axaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Components\StandardLibrary\EmptyPageInfo.axaml.cs">
+          <DependentUpon>EmptyPageInfo.axaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Components\StandardLibrary\FormFieldLabel.axaml.cs">
+          <DependentUpon>FormFieldLabel.axaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Components\StandardLibrary\IconLabel.axaml.cs">
+          <DependentUpon>IconLabel.axaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Components\StandardLibrary\IconLabelButton.axaml.cs">
+          <DependentUpon>IconLabelButton.axaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Components\StandardLibrary\LoadingIcon.axaml.cs">
+          <DependentUpon>LoadingIcon.axaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Components\StandardLibrary\StateBox.axaml.cs">
+          <DependentUpon>StateBox.axaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>

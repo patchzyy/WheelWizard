@@ -1,6 +1,6 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="using:WheelWizard.Views.Components">
+        xmlns:controls="using:WheelWizard.Views.Components.StandardLibrary">
     <Design.PreviewWith>
         <StackPanel Background="{StaticResource Neutral900}" Spacing="5">
             <controls:FormFieldLabel Text="Form Field Label" TipText="With a tip yay"/>

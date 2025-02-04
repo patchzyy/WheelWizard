@@ -3,7 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Media;
 
-namespace WheelWizard.Views.Components;
+namespace WheelWizard.Views.Components.StandardLibrary;
 
 public class LoadingIcon : TemplatedControl
 {
