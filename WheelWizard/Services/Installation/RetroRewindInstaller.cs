@@ -86,7 +86,7 @@ public static class RetroRewindInstaller
 
     public static async Task ReinstallRR()
     {
-        var result = new YesNoWindow()
+        var result = await new YesNoWindow()
             .SetMainText(Phrases.PopupText_ReinstallRR)
             .SetExtraText(Phrases.PopupText_ReinstallQuestion)
             .AwaitAnswer();
