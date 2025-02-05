@@ -7,7 +7,7 @@ using System;
 
 namespace WheelWizard.Views.Components.WhWzLibrary;
 
-public class DetailedProfileBox : UserControl
+public class DetailedProfileBox : MiiImageLoader
 {
     
     public static readonly StyledProperty<Bitmap?> MiiImageProperty =

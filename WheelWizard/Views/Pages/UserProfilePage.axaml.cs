@@ -15,8 +15,15 @@ namespace WheelWizard.Views.Pages;
 
 public partial class UserProfilePage : UserControl, INotifyPropertyChanged
 {
-    private Mii? _mii;
-    public Bitmap? MiiImage => _mii?.Image;
+    private Mii? _currentMii;
+    public Mii? CurrentMii 
+    { 
+        get => _currentMii;
+        set { 
+            _currentMii = value;
+            OnPropertyChanged(nameof(CurrentMii));
+        }
+    }
 
     private int _currentUserIndex;
     private static int FocussedUser => (int)SettingsManager.FOCUSSED_USER.Get();
@@ -111,12 +118,7 @@ public partial class UserProfilePage : UserControl, INotifyPropertyChanged
         CurrentUserProfile.IsOnline = user.IsOnline;
         CurrentUserProfile.Vr = user.Vr.ToString();
         CurrentUserProfile.Br = user.Br.ToString();
-        _mii = user.MiiData?.Mii;
-        _mii.PropertyChanged += (sender, args) => {
-            if (args.PropertyName == nameof(Mii.Image))
-                OnPropertyChanged(nameof(MiiImage));
-        };
-        OnPropertyChanged(nameof(MiiImage));
+        CurrentMii = user.MiiData?.Mii;
 
         CurrentUserProfile.TotalRaces = user.TotalRaceCount.ToString();
         CurrentUserProfile.TotalWon =user.TotalWinCount.ToString();

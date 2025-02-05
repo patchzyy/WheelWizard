@@ -1,0 +1,17 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:WheelWizard.Views.Components.WhWzLibrary">
+    <Design.PreviewWith>
+        <controls:MiiImageLoader />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|MiiImageLoader">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Image HorizontalAlignment="Center" VerticalAlignment="Stretch" 
+                       Source="{TemplateBinding MiiImage, Mode=OneWay}"/>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>
