@@ -2,20 +2,20 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
+using Avalonia.Media.Imaging;
 using System;
-using WheelWizard.Models.RRInfo;
 
 namespace WheelWizard.Views.Components.WhWzLibrary;
 
 public class DetailedProfileBox : UserControl
 {
     
-    public static readonly StyledProperty<Mii?> MiiProperty =
-        AvaloniaProperty.Register<DetailedProfileBox, Mii?>(nameof(Mii));
-    public Mii? Mii
+    public static readonly StyledProperty<Bitmap?> MiiImageProperty =
+        AvaloniaProperty.Register<DetailedProfileBox, Bitmap?>(nameof(MiiImage));
+    public Bitmap? MiiImage
     {
-        get => GetValue(MiiProperty);
-        set => SetValue(MiiProperty, value);
+        get => GetValue(MiiImageProperty);
+        set => SetValue(MiiImageProperty, value);
     }
     
     public static readonly StyledProperty<bool> IsOnlineProperty =
@@ -116,10 +116,6 @@ public class DetailedProfileBox : UserControl
         var copyFcButton  = e.NameScope.Find<StandardLibrary.IconLabelButton>("CopyFcButton");
         if (copyFcButton != null) 
             copyFcButton.Click += CopyFriendCode;
-        
-        var miiImage = e.NameScope.Find<Image>("MiiImage");
-        if (miiImage != null)
-            miiImage.Source = Mii?.Image;
     }
 }
 

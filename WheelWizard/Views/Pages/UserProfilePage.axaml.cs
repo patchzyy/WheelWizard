@@ -1,7 +1,10 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Media.Imaging;
 using System;
+using System.ComponentModel;
 using WheelWizard.Models.Enums;
+using WheelWizard.Models.RRInfo;
 using WheelWizard.Services.Other;
 using WheelWizard.Services.Settings;
 using WheelWizard.Services.WiiManagement.SaveData;
@@ -10,8 +13,11 @@ using WheelWizard.Resources.Languages;
 
 namespace WheelWizard.Views.Pages;
 
-public partial class UserProfilePage : UserControl
+public partial class UserProfilePage : UserControl, INotifyPropertyChanged
 {
+    private Mii? _mii;
+    public Bitmap? MiiImage => _mii?.Image;
+
     private int _currentUserIndex;
     private static int FocussedUser => (int)SettingsManager.FOCUSSED_USER.Get();
     
@@ -22,7 +28,7 @@ public partial class UserProfilePage : UserControl
         ViewMii(FocussedUser);
         PopulateRegions();
         UpdatePage();
-        
+        DataContext = this;
         // Make sure this action gets subscribed AFTER the PopulateRegions method
         RegionDropdown.SelectionChanged += RegionDropdown_SelectionChanged;
     }
@@ -105,7 +111,12 @@ public partial class UserProfilePage : UserControl
         CurrentUserProfile.IsOnline = user.IsOnline;
         CurrentUserProfile.Vr = user.Vr.ToString();
         CurrentUserProfile.Br = user.Br.ToString();
-        CurrentUserProfile.Mii = user.MiiData?.Mii;
+        _mii = user.MiiData?.Mii;
+        _mii.PropertyChanged += (sender, args) => {
+            if (args.PropertyName == nameof(Mii.Image))
+                OnPropertyChanged(nameof(MiiImage));
+        };
+        OnPropertyChanged(nameof(MiiImage));
 
         CurrentUserProfile.TotalRaces = user.TotalRaceCount.ToString();
         CurrentUserProfile.TotalWon =user.TotalWinCount.ToString();
@@ -143,5 +154,12 @@ public partial class UserProfilePage : UserControl
         SetUserAsPrimary();
         
         UpdatePage();
+    }
+    
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

@@ -24,8 +24,7 @@ public partial class ModsPage : UserControl, INotifyPropertyChanged
     private Point _startPoint;
 
     private bool _hasMods;
-
-     public bool HasMods
+    public bool HasMods
     {
         get => _hasMods;
         set
