@@ -42,9 +42,13 @@
                                            TipText="Simulating no internet connection for some parts of the application" />
             </CheckBox>
          
-            <components:Button Variant="Default" Text="Force enable layout (does not effect ShowDialog)"
+            <components:Button Variant="Default" Text="Force enable layout"
                                IconSize="0" HorizontalAlignment="Left" Margin="0,2"
                                Click="ForceEnableLayout_OnClick" />
+            
+            <components:Button Variant="Default" Text="Test progress popup" x:Name="ProgressButtonTest"
+                               IconSize="0" HorizontalAlignment="Left" Margin="0,2"
+                               Click="TestProgressPopup_OnClick" />
         </StackPanel>
 
     </Grid>

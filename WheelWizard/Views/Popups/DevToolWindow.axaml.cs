@@ -1,16 +1,18 @@
-﻿using Avalonia;
-using Avalonia.Interactivity;
+﻿using Avalonia.Interactivity;
+using Avalonia.Threading;
+using System.Threading.Tasks;
 using WheelWizard.Helpers;
 using WheelWizard.Services.LiveData;
 using WheelWizard.Services.WiiManagement;
 using WheelWizard.Utilities.DevTools;
 using WheelWizard.Utilities.RepeatedTasks;
+using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Views.Popups;
 
 public partial class DevToolWindow : PopupContent, IRepeatedTaskListener
 {
-    public DevToolWindow() : base(true, true, true, "Dev Tool", size: new(400, 600))
+    public DevToolWindow() : base(true, true, true, "Dev Tool", size: new(440, 600))
     {
         InitializeComponent();
         AppStateMonitor.Instance.Subscribe(this);
@@ -30,7 +32,6 @@ public partial class DevToolWindow : PopupContent, IRepeatedTaskListener
     // to be an observer pattern besides this, and it would make the codebase more complex for no reason.
     public void OnUpdate(RepeatedTaskManager sender)
     {
-    
         RrRefreshTimeLeft.Text = RRLiveRooms.Instance.TimeUntilNextTick.Seconds.ToString();
         MiiImagesCashed.Text = MiiImageManager.ImageCount.ToString();
     }
@@ -44,5 +45,27 @@ public partial class DevToolWindow : PopupContent, IRepeatedTaskListener
     private void WhWzTopMost_OnClick(object sender, RoutedEventArgs e) => ViewUtils.GetLayout().Topmost = WhWzTopMost.IsChecked == true;
     private void HttpHelperOff_OnClick(object sender, RoutedEventArgs e) => HttpClientHelper.FakeConnectionToInternet = HttpHelperOff.IsChecked != true;
     private void ForceEnableLayout_OnClick(object sender, RoutedEventArgs e) => ViewUtils.GetLayout().EnableEverything();
+    private async void TestProgressPopup_OnClick(object sender, RoutedEventArgs e)
+    {
+        ProgressButtonTest.IsEnabled = false;
+        var progressWindow = new ProgressWindow("test progress !!");
+        progressWindow.SetGoal("Setting a goal!");
+        progressWindow.Show();
+        
+        for (var i = 0; i < 5; i++)
+        {
+            Dispatcher.UIThread.Invoke(() =>
+            {
+                progressWindow.UpdateProgress(i * 20);
+                progressWindow.SetExtraText($"This is information for iteration {i}");
+                if(i == 3) progressWindow.SetGoal($"Changed the Goal");
+            });
+            await Task.Delay(1000); 
+        }
+        Dispatcher.UIThread.Invoke(() =>
+        {
+            progressWindow.Close();
+            ProgressButtonTest.IsEnabled = true;
+        });
+    }
 }
-

@@ -3,22 +3,20 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    xmlns:popups="clr-namespace:WheelWizard.Views.Popups"
+                    xmlns:popups="clr-namespace:WheelWizard.Views.Popups" ClipToBounds="False"
                     mc:Ignorable="d" d:DesignHeight="170" d:DesignWidth="400">
-    <Grid Margin="10" ClipToBounds="False">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- Goal Description -->
-        <Border Grid.Row="0" Background="{StaticResource Primary500}" Margin="-10,-10,-10,0" CornerRadius="6,6,0,0">
+        <Border Grid.Row="0" Background="{StaticResource Primary500}" Margin="-10" >
             <TextBlock Margin="10" x:Name="GoalTextBlock"
-                       Classes="TitleText"
+                       Classes="TitleText" FontSize="18"
                        HorizontalAlignment="Left" VerticalAlignment="Center"
-                       Foreground="{StaticResource Primary50}"
-                       FontSize="18"/>
+                       Foreground="{StaticResource Primary50}" />
         </Border>
 
         <!-- Extra Information -->
@@ -30,12 +28,12 @@
         </StackPanel>
 
         <!-- Progress Bar -->
-        <ProgressBar Grid.Row="2" VerticalAlignment="Bottom" x:Name="ProgressBar" Height="20"
+        <ProgressBar Grid.Row="1" VerticalAlignment="Bottom" x:Name="ProgressBar" Height="20"
                      Minimum="0" Maximum="100" Value="0"
                      IsIndeterminate="False"
                      BorderThickness="0"
                      Foreground="{StaticResource Primary500}" 
-                     Background="{StaticResource BackgroundLine}"
+                     Background="{StaticResource BackgroundLineColor}"
                      Margin="0,0,0,10"/>
     </Grid>
 </popups:PopupContent>
