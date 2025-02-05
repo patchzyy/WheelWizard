@@ -1,0 +1,51 @@
+﻿<self:PopupContent xmlns="https://github.com/avaloniaui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:self="clr-namespace:WheelWizard.Views.Popups"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:components="clr-namespace:WheelWizard.Views.Components.StandardLibrary"
+                   mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+                   x:Class="WheelWizard.Views.Popups.DevToolWindow">
+     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <!-- MONITORING BIT -->
+        <StackPanel Grid.Row="0" >
+            <TextBlock Text="Monitoring" HorizontalAlignment="Left" VerticalAlignment="Top" Classes="PageTitleText"/>
+            <StackPanel Orientation="Horizontal"  Margin="0,0,0,10" >
+                <components:StateBox x:Name="MiiImagesCashed" Variant="Default" Text="0"
+                                     TipPlacement="Top" Margin="10,0,0,0"
+                                     IconData="{StaticResource UserCircle}"
+                                     TipText="Amount of Mii-images cashed in memory" />
+                <components:StateBox x:Name="RrRefreshTimeLeft" Variant="Default" Text="0"
+                                     TipPlacement="Top" Margin="10,0,0,0"
+                                     IconData="{StaticResource Hourglass}"
+                                     TipText="Time until the next RR rooms refresh" />
+            </StackPanel>
+            <Border Background="{StaticResource BackgroundLine}" Height="1" HorizontalAlignment="Stretch"
+                    VerticalAlignment="Bottom" />
+        </StackPanel>
+      
+        <!-- TOOLS BIT -->
+        <StackPanel Grid.Row="1" >
+            <TextBlock Text="Tools" HorizontalAlignment="Left" VerticalAlignment="Top" Classes="PageTitleText"/>
+            <CheckBox Margin="0,2" IsChecked="False" Classes="Switch"
+                      x:Name="WhWzTopMost" Click="WhWzTopMost_OnClick">
+                Wheel Wizard always on top
+            </CheckBox>
+            <CheckBox Margin="0,2" IsChecked="False" Classes="Switch"
+                      x:Name="HttpHelperOff"  Click="HttpHelperOff_OnClick">
+                <components:FormFieldLabel Text="Turn off HttpHelper"
+                                           TipText="Simulating no internet connection for some parts of the application" />
+            </CheckBox>
+         
+            <components:Button Variant="Default" Text="Force enable layout (does not effect ShowDialog)"
+                               IconSize="0" HorizontalAlignment="Left" Margin="0,2"
+                               Click="ForceEnableLayout_OnClick" />
+        </StackPanel>
+
+    </Grid>
+</self:PopupContent>

@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
@@ -83,6 +84,8 @@ public partial class PopupWindow : Window, INotifyPropertyChanged
         var marginXCorrection = ((scaleFactor * size.Value.X) - size.Value.X)/2f;
         var marginYCorrection = ((scaleFactor * size.Value.Y) - size.Value.Y)/2f;
         CompleteGrid.Margin = new Thickness(marginXCorrection, marginYCorrection);
+
+        Position = mainWindow.Position;
         Loaded += PopupWindow_Loaded;
     }
     

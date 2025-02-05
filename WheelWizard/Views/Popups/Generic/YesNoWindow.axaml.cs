@@ -15,7 +15,6 @@ public partial class YesNoWindow : PopupContent
         InitializeComponent();
         YesButton.Text = Common.Action_Yes;
         NoButton.Text = Common.Action_No;
-        
     }
 
     public YesNoWindow SetMainText(string mainText)

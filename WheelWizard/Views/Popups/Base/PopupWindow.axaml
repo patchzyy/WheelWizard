@@ -11,7 +11,7 @@
         CanResize='False' Background="Transparent"
         Title="{Binding WindowTitle}">
     <Grid x:Name="CompleteGrid">
-        <Border Background="{StaticResource  BackgroundColor}" CornerRadius="3"
+        <Border Background="{StaticResource  BackgroundColor}" CornerRadius="4"
                 BorderThickness="1" BorderBrush="{StaticResource BackgroundLineColor}">
             <Grid>
                 <Grid.RowDefinitions>

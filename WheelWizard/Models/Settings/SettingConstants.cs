@@ -17,7 +17,7 @@ public static class SettingValues
     public const string NoName = "no name";
     public const string NoLicense = "no license";
     
-    public static readonly double[] WindowScales = { 0.7, 0.8, 0.9, 1.0, 1.2, 1.3, 1.4 };
+    public static readonly double[] WindowScales = { 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4 };
     
     public static readonly Dictionary<string, string> GFXRenderers = new()
     {

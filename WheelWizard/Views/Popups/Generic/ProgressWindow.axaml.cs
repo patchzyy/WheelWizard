@@ -14,9 +14,7 @@ public partial class ProgressWindow : PopupContent
     private double? _totalMb = null;
     private DispatcherTimer _updateTimer;
 
-    public ProgressWindow() : this("")
-    {
-    }
+    public ProgressWindow() : this("Progress Window") { }
 
     public ProgressWindow(string windowTitle) : base(false, false, true, windowTitle, new(400, 230))
     {

@@ -4,9 +4,8 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:popups="clr-namespace:WheelWizard.Views.Popups"
-                    xmlns:components="clr-namespace:WheelWizard.Views.Components"
                     mc:Ignorable="d" d:DesignHeight="170" d:DesignWidth="400">
-    <Grid Margin="10">
+    <Grid Margin="10" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>

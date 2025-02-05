@@ -13,7 +13,7 @@
         WindowStartupLocation="CenterScreen"
         SystemDecorations="None"
         ExtendClientAreaToDecorationsHint="False"
-        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaChromeHints="NoChrome" 
         CanResize='False' Background="Transparent">
     <Grid ColumnDefinitions="192,*" RowDefinitions="25,17,88,*,80" x:Name="CompleteGrid"
           Background="{StaticResource FrameColor}">

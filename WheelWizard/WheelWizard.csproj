@@ -334,6 +334,14 @@
           <DependentUpon>StateBox.axaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
+        <Compile Update="Views\Popups\Generic\ProgressWindow.axaml.cs">
+          <DependentUpon>ProgressWindow.axaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Popups\Base\PopupWindow.axaml.cs">
+          <DependentUpon>PopupWindow.axaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>

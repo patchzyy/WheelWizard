@@ -2,6 +2,7 @@
 using Avalonia.Interactivity;
 using System;
 using WheelWizard.Services.Installation;
+using WheelWizard.Views.Popups;
 using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Views.Pages.Settings;
@@ -42,12 +43,6 @@ public partial class SettingsPage : UserControl
         SettingsContent.Content = instance;
     }
     
-    private void DevButton_OnClick(object? sender, RoutedEventArgs e)
-    {
-        var popup = new MessageBoxWindow()
-            .SetMainText("Hey plzz respond")
-            .SetExtraText("Something else");
-        popup.Show();
-    }
+    private void DevButton_OnClick(object? sender, RoutedEventArgs e) => new DevToolWindow().Show();
 }
 
