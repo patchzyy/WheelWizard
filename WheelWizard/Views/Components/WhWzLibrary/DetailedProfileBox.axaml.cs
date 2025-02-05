@@ -1,15 +1,23 @@
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Primitives;
-using Avalonia.Input;
 using Avalonia.Interactivity;
 using System;
+using WheelWizard.Models.RRInfo;
 
 namespace WheelWizard.Views.Components.WhWzLibrary;
 
 public class DetailedProfileBox : UserControl
 {
+    
+    public static readonly StyledProperty<Mii?> MiiProperty =
+        AvaloniaProperty.Register<DetailedProfileBox, Mii?>(nameof(Mii));
+    public Mii? Mii
+    {
+        get => GetValue(MiiProperty);
+        set => SetValue(MiiProperty, value);
+    }
+    
     public static readonly StyledProperty<bool> IsOnlineProperty =
         AvaloniaProperty.Register<DetailedProfileBox, bool>(nameof(IsOnline));
     public bool IsOnline
@@ -101,13 +109,17 @@ public class DetailedProfileBox : UserControl
         if (checkBox != null)
             checkBox.Checked += OnChecked;
         
-        var viewRoomButton  = e.NameScope.Find<Components.StandardLibrary.Button>("ViewRoomButton");
+        var viewRoomButton  = e.NameScope.Find<StandardLibrary.Button>("ViewRoomButton");
         if (viewRoomButton != null)
             viewRoomButton.Click += ViewRoomAction;
         
-        var copyFcButton  = e.NameScope.Find<Components.StandardLibrary.IconLabelButton>("CopyFcButton");
+        var copyFcButton  = e.NameScope.Find<StandardLibrary.IconLabelButton>("CopyFcButton");
         if (copyFcButton != null) 
             copyFcButton.Click += CopyFriendCode;
+        
+        var miiImage = e.NameScope.Find<Image>("MiiImage");
+        if (miiImage != null)
+            miiImage.Source = Mii?.Image;
     }
 }
 

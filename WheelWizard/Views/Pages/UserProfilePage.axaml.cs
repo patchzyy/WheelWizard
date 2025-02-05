@@ -105,6 +105,7 @@ public partial class UserProfilePage : UserControl
         CurrentUserProfile.IsOnline = user.IsOnline;
         CurrentUserProfile.Vr = user.Vr.ToString();
         CurrentUserProfile.Br = user.Br.ToString();
+        CurrentUserProfile.Mii = user.MiiData?.Mii;
 
         CurrentUserProfile.TotalRaces = user.TotalRaceCount.ToString();
         CurrentUserProfile.TotalWon =user.TotalWinCount.ToString();

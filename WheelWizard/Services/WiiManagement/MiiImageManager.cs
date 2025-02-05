@@ -1,5 +1,6 @@
 ﻿using Avalonia.Media.Imaging;
 using Newtonsoft.Json;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -40,8 +41,8 @@ public static class MiiImageManager
         if (string.IsNullOrEmpty(base64MiiData))
             return (CreateEmptyBitmap(), false);
         
-        if (Images.ContainsKey(base64MiiData))
-            return Images[base64MiiData];
+        if (Images.TryGetValue(base64MiiData, out var value))
+            return value;
         
         var newImage = await RequestMiiImageAsync(base64MiiData);
         AddMiiImage(base64MiiData, newImage);
@@ -72,18 +73,15 @@ public static class MiiImageManager
             return (CreateEmptyBitmap(), false);
 
         var miiImageUrl = GetMiiImageUrlFromResponse(response.Content);
+        using var httpClient = new HttpClient();
+        using var imageResponse = await httpClient.GetAsync(miiImageUrl);
 
-        try
-        {
-            using var httpClient = new HttpClient();
-            var imageStream = await httpClient.GetStreamAsync(miiImageUrl);
-            var bitmap = new Bitmap(imageStream);
-            return (bitmap, true);
-        }
-        catch
-        {
+        if (!imageResponse.IsSuccessStatusCode) 
             return (CreateEmptyBitmap(), false);
-        }
+
+        var imageStream = await imageResponse.Content.ReadAsStreamAsync();
+        var bitmap = new Bitmap(imageStream);
+        return (bitmap, true);
     }
     
     private static string GetMiiImageUrlFromResponse(MiiResponse response)
@@ -128,7 +126,12 @@ public static class MiiImageManager
     
     private static Bitmap CreateEmptyBitmap()
     {
-        using var memoryStream = new MemoryStream();
-        return new Bitmap(memoryStream);
+        using var bitmap = new SKBitmap(1, 1);
+        using var canvas = new SKCanvas(bitmap);
+        canvas.Clear(SKColors.Transparent); // Or any color you prefer
+    
+        using var image = SKImage.FromBitmap(bitmap);
+        using var data = image.Encode(SKEncodedImageFormat.Png, 1);
+        return new (data.AsStream());
     }
 }
