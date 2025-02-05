@@ -1,3 +1,4 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -58,6 +59,9 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
         Height = WindowHeight * scaleFactor;
         Width = WindowWidth * scaleFactor;
         CompleteGrid.RenderTransform = new ScaleTransform(scaleFactor, scaleFactor);
+        var marginXCorrection = ((scaleFactor * WindowWidth) - WindowWidth)/2f;
+        var marginYCorrection = ((scaleFactor * WindowHeight) - WindowHeight)/2f;
+        CompleteGrid.Margin = new Thickness(marginXCorrection, marginYCorrection);
     }
 
     private void InitializeManagers()

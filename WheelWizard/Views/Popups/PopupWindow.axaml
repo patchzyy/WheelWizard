@@ -6,12 +6,11 @@
         x:Class="WheelWizard.Views.Popups.PopupWindow"
         SystemDecorations="None"
         WindowStartupLocation="CenterOwner"
-        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaToDecorationsHint="False"
         ExtendClientAreaChromeHints="NoChrome"
         CanResize='False' Background="Transparent"
         Title="{Binding WindowTitle}">
-    <Grid>
-        
+    <Grid x:Name="CompleteGrid">
         <Border Background="{StaticResource  BackgroundColor}" CornerRadius="3"
                 BorderThickness="1" BorderBrush="{StaticResource BackgroundLineColor}">
             <Grid>

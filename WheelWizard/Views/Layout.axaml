@@ -12,10 +12,9 @@
         Height="876" Width="656" Title="Wheel Wizard" 
         WindowStartupLocation="CenterScreen"
         SystemDecorations="None"
-        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaToDecorationsHint="False"
         ExtendClientAreaChromeHints="NoChrome"
-        CanResize='False' Background="red">
-        <!-- RED is temporary, to show the window border, It should actually be Transparent!! -->
+        CanResize='False' Background="Transparent">
     <Grid ColumnDefinitions="192,*" RowDefinitions="25,17,88,*,80" x:Name="CompleteGrid"
           Background="{StaticResource FrameColor}">
                 

@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 using System;
 using System.ComponentModel;
 using WheelWizard.Services.Settings;
@@ -12,8 +13,10 @@ public partial class PopupWindow : Window, INotifyPropertyChanged
 {
     public PopupWindow()
     {
+        // Constructor is never used, however, UI elements must have a constructor with no params
         InitializeComponent();
         DataContext = this;
+        Loaded += PopupWindow_Loaded;
     }
     
    private static int _disableCount = 0; // This is used to keep track of how many popups are open that disable the layout
@@ -72,16 +75,17 @@ public partial class PopupWindow : Window, INotifyPropertyChanged
         
         InitializeComponent();
         DataContext = this;
-                
+
         var scaleFactor = (double)SettingsManager.WINDOW_SCALE.Get();
-        // This bit should be done in the axaml file aswell
-        // Something.ScaleX = scaleFactor;
-        // Something.ScaleY = scaleFactor;
         Width = size!.Value.X * scaleFactor;
         Height = size.Value.Y * scaleFactor;
-        
+        CompleteGrid.RenderTransform = new ScaleTransform(scaleFactor, scaleFactor);
+        var marginXCorrection = ((scaleFactor * size.Value.X) - size.Value.X)/2f;
+        var marginYCorrection = ((scaleFactor * size.Value.Y) - size.Value.Y)/2f;
+        CompleteGrid.Margin = new Thickness(marginXCorrection, marginYCorrection);
         Loaded += PopupWindow_Loaded;
     }
+    
 
     private void PopupWindow_Loaded(object? sender, RoutedEventArgs e)
     {
