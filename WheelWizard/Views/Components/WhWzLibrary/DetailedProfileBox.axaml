@@ -57,7 +57,8 @@
                                 BorderThickness="1" Margin="0,0,0,10" CornerRadius="4" x:Name="PART_HeadBorder"
                                 Background="{StaticResource Neutral950}">
                             <Grid>
-                                <controls:MiiImageLoader Mii="{TemplateBinding Mii}" HorizontalAlignment="Center" VerticalAlignment="Stretch" />
+                                <controls:MiiImageLoader Mii="{TemplateBinding Mii}" HorizontalAlignment="Center" VerticalAlignment="Stretch" 
+                                                         FallBackColor="{StaticResource Neutral700}" />
                           
                                 <StackPanel Margin="7">
                                     <TextBlock Classes="TitleText" Text="{TemplateBinding UserName}"/>

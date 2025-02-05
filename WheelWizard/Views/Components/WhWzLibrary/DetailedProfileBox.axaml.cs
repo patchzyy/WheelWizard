@@ -4,11 +4,24 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
 using System;
+using System.ComponentModel;
+using WheelWizard.Models.RRInfo;
 
 namespace WheelWizard.Views.Components.WhWzLibrary;
 
-public class DetailedProfileBox : MiiImageLoader
+public class DetailedProfileBox : TemplatedControl, INotifyPropertyChanged
 {
+    public static readonly StyledProperty<Mii?> MiiProperty =
+        AvaloniaProperty.Register<DetailedProfileBox, Mii?>(nameof(Mii));
+    public Mii? Mii
+    {
+        get => GetValue(MiiProperty);
+        set   
+        {
+            SetValue(MiiProperty, value);
+            OnPropertyChanged(nameof(Mii));
+        }
+    }
     
     public static readonly StyledProperty<Bitmap?> MiiImageProperty =
         AvaloniaProperty.Register<DetailedProfileBox, Bitmap?>(nameof(MiiImage));
@@ -117,5 +130,10 @@ public class DetailedProfileBox : MiiImageLoader
         if (copyFcButton != null) 
             copyFcButton.Click += CopyFriendCode;
     }
+    
+    public event PropertyChangedEventHandler? PropertyChanged;
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 }
-

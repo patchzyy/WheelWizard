@@ -5,7 +5,6 @@ namespace WheelWizard.Views.Components.WhWzLibrary;
 
 public class ModBrowserListItem : TemplatedControl
 {
-    
     public static readonly StyledProperty<string> ModTitleProperty =
         AvaloniaProperty.Register<ModBrowserListItem, string>(nameof(ModTitle));
 
