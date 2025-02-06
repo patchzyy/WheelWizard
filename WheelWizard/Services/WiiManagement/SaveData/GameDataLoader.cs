@@ -390,6 +390,9 @@ public class GameDataLoader : RepeatedTaskManager
 
                 // Finally, write the updated _saveData back to rksys.dat
                 SaveRksysToFile();
+                
+                InternalMiiManager.UpdateMiiName(user.MiiData.ClientId, newName);
+
             }
 
         }
