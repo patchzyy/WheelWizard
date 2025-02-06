@@ -70,6 +70,12 @@
                                                                     IsVisible="{TemplateBinding FriendCode, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
                                                                     Foreground="{StaticResource Neutral500}" 
                                                                     HoverForeground="{StaticResource Neutral400}"/>
+                                        <components:IconLabelButton VerticalAlignment="Center" x:Name="EditMiiName"
+                                                                    IconData="{StaticResource Pen}"
+                                                                    Margin="7,0,0,0" IconSize="20"
+                                                                    IsVisible="{TemplateBinding FriendCode, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                                                                    Foreground="{StaticResource Neutral500}" 
+                                                                    HoverForeground="{StaticResource Neutral400}"/>
                                     </StackPanel>
                                 </StackPanel>
                             </Grid>

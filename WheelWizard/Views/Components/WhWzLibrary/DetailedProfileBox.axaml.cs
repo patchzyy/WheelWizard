@@ -6,6 +6,8 @@ using Avalonia.Media.Imaging;
 using System;
 using System.ComponentModel;
 using WheelWizard.Models.RRInfo;
+using WheelWizard.Services.Settings;
+using WheelWizard.Services.WiiManagement.SaveData;
 
 namespace WheelWizard.Views.Components.WhWzLibrary;
 
@@ -108,10 +110,17 @@ public class DetailedProfileBox : TemplatedControl, INotifyPropertyChanged
         get => GetValue(ViewRoomActionProperty);
         set => SetValue(ViewRoomActionProperty, value);
     }
+    
 
     private void CopyFriendCode(object? obj, EventArgs e)
     {
         TopLevel.GetTopLevel(this)?.Clipboard?.SetTextAsync(FriendCode);
+    }
+    
+    private void ChangeMiiName(object? obj, EventArgs e)
+    {
+        int userIndex = (int)SettingsManager.FOCUSSED_USER.Get();
+        GameDataLoader.Instance.PromptLicenseNameChange(userIndex);
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
@@ -129,6 +138,10 @@ public class DetailedProfileBox : TemplatedControl, INotifyPropertyChanged
         var copyFcButton  = e.NameScope.Find<StandardLibrary.IconLabelButton>("CopyFcButton");
         if (copyFcButton != null) 
             copyFcButton.Click += CopyFriendCode;
+        
+        var changeNameButton  = e.NameScope.Find<StandardLibrary.IconLabelButton>("EditMiiName");
+        if (changeNameButton != null) 
+            changeNameButton.Click += ChangeMiiName;
     }
     
     public event PropertyChangedEventHandler? PropertyChanged;

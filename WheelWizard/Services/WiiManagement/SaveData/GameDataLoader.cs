@@ -283,6 +283,173 @@ public class GameDataLoader : RepeatedTaskManager
             return null;
         }
     }
+    /// <summary>
+    /// Calculates the CRC32 of the specified slice of bytes using the
+    /// standard polynomial (0xEDB88320) in the same way MKWii does.
+    /// </summary>
+    public static uint ComputeCrc32(byte[] data, int offset, int length)
+    {
+        const uint POLY = 0xEDB88320;
+        uint crc = 0xFFFFFFFF;
+
+        for (int i = offset; i < offset + length; i++)
+        {
+            byte b = data[i];
+            crc ^= b;
+            for (int j = 0; j < 8; j++)
+            {
+                if ((crc & 1) != 0)
+                    crc = (crc >> 1) ^ POLY;
+                else
+                    crc >>= 1;
+            }
+        }
+
+        return ~crc;
+    }
+
+    /// <summary>
+    /// Write a 32-bit value as big-endian into the given array starting at `dstOffset`.
+    /// </summary>
+    public static void WriteBigEndianUint32(byte[] arr, int dstOffset, uint value)
+    {
+        arr[dstOffset + 0] = (byte)((value >> 24) & 0xFF);
+        arr[dstOffset + 1] = (byte)((value >> 16) & 0xFF);
+        arr[dstOffset + 2] = (byte)((value >>  8) & 0xFF);
+        arr[dstOffset + 3] = (byte)( value        & 0xFF);
+    }
+
+    /// <summary>
+    /// Fixes the MKWii save file by recalculating and inserting the CRC32 at 0x27FFC.
+    /// </summary>
+    public static void FixRksysCrc(byte[] rksysData)
+    {
+        if (rksysData == null || rksysData.Length < 0x2BC000)
+            throw new ArgumentException("Invalid rksys.dat data");
+
+        // 1) Compute CRC over [0 .. 0x27FFB].
+        int lengthToCrc = 0x27FFC; // 0x27FFC is exclusive (the CRC bytes themselves)
+        uint newCrc = ComputeCrc32(rksysData, 0, lengthToCrc);
+
+        // 2) Write CRC at offset 0x27FFC in big-endian.
+        WriteBigEndianUint32(rksysData, 0x27FFC, newCrc);
+    }
+    
+    
+    /// <summary>
+        /// Prompts the player to change the name of a selected license, updates our internal memory,
+        /// and writes the result back to the <c>_saveData</c> array for eventual saving to disk.
+        /// </summary>
+        /// <param name="userIndex">Which license slot (0–3) to rename.</param>
+        public async void PromptLicenseNameChange(int userIndex)
+        {
+            // Validate user index
+            if (userIndex is < 0 or >= MaxPlayerNum)
+            {
+                new MessageBoxWindow()
+                    .SetMainText("Invalid license index. Please select a valid license.")
+                    .Show();
+                return;
+            }
+
+            // Grab the license data from memory
+            var user = GameData.Users[userIndex];
+            
+            // If it’s a dummy license ("0000-0000-0000"), we can’t rename it
+            if (user.FriendCode == "0000-0000-0000")
+            {
+                new MessageBoxWindow()
+                    .SetMainText("This license is not valid and cannot be renamed.")
+                    .Show();
+                return;
+            }
+
+            // Current name to display in the popup (already stored in user object)
+            var currentName = user.MiiData.Mii.Name ?? "";
+
+            // Show a simple text input popup using Avalonia's TextInputWindow
+            var renamePopup = new TextInputWindow()
+                .setLabelText($"Enter new name for {currentName}:");
+
+            // Populate the text field with the current name
+            renamePopup.PopulateText(currentName);
+            
+            // Show the dialog asynchronously and get the user's input
+            var newName = await renamePopup.ShowDialog();
+
+            if (!string.IsNullOrWhiteSpace(newName))
+            {
+                // In Mario Kart Wii, license names are capped at 10 characters (20 bytes in UTF-16).
+                newName = newName.Length > 10 ? newName.Substring(0, 10) : newName;
+
+                // Update in-memory license data
+                user.MiiData.Mii.Name = newName;
+
+                // Safely update the big-endian UTF-16 name in the local _saveData buffer
+                WriteLicenseNameToSaveData(userIndex, newName);
+
+                // Finally, write the updated _saveData back to rksys.dat
+                SaveRksysToFile();
+            }
+
+        }
+
+        /// <summary>
+        /// Writes a new UTF-16 big-endian name for a license into our <c>_saveData</c> buffer.
+        /// This does not write to disk; <c>SaveRksysToFile()</c> must be called for persistence.
+        /// </summary>
+        private void WriteLicenseNameToSaveData(int userIndex, string newName)
+        {
+            if (_saveData == null || _saveData.Length < RksysSize) return;
+
+            // Calculate the offset for the license’s Mii name:
+            //  0x08 is where the first RKPD block starts,
+            //  each license is 0x8CC0 bytes,
+            //  and within each RKPD block the name starts at +0x14.
+            var rkpdOffset = 0x8 + userIndex * RkpdSize;
+            var nameOffset = rkpdOffset + 0x14;
+
+            // Convert the new name to big-endian UTF-16 (2 bytes per char)
+            var nameBytes = Encoding.BigEndianUnicode.GetBytes(newName);
+
+            // Clear out the existing 20 bytes in the buffer
+            for (int i = 0; i < 20; i++)
+                _saveData[nameOffset + i] = 0;
+
+            // Copy our new name bytes (up to 20 bytes)
+            Array.Copy(nameBytes, 0, _saveData, nameOffset, Math.Min(nameBytes.Length, 20));
+        }
+
+        /// <summary>
+        /// Saves the current <c>_saveData</c> buffer back to disk as rksys.dat.
+        /// This ensures the name change (and any other modifications) become persistent.
+        /// </summary>
+        private void SaveRksysToFile()
+        {
+            if (_saveData == null) return;
+
+            FixRksysCrc(_saveData);
+
+            // Determine the correct folder for the region, e.g. "RMCE" or "RMCP", etc.
+            var currentRegion = (MarioKartWiiEnums.Regions)SettingsManager.RR_REGION.Get();
+            var saveFolder = Path.Combine(SaveFilePath, RRRegionManager.ConvertRegionToGameID(currentRegion));
+
+            try
+            {
+                Directory.CreateDirectory(saveFolder);
+                var path = Path.Combine(saveFolder, "rksys.dat");
+                File.WriteAllBytes(path, _saveData);
+
+                // Optionally show a status message:
+                // new MessageBoxWindow().SetMainText("Name changed successfully!").Show();
+            }
+            catch (Exception ex)
+            {
+                new MessageBoxWindow()
+                    .SetMainText($"Failed to save rksys.dat.\n{ex.Message}")
+                    .Show();
+            }
+        }
 
 
     protected override Task ExecuteTaskAsync()
