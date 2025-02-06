@@ -359,7 +359,7 @@ public class GameDataLoader : RepeatedTaskManager
             if (user.FriendCode == "0000-0000-0000")
             {
                 new MessageBoxWindow()
-                    .SetMainText("This license is not valid and cannot be renamed.")
+                    .SetMainText("This license is not complete and cannot be renamed.")
                     .Show();
                 return;
             }
@@ -377,23 +377,30 @@ public class GameDataLoader : RepeatedTaskManager
             // Show the dialog asynchronously and get the user's input
             var newName = await renamePopup.ShowDialog();
 
-            if (!string.IsNullOrWhiteSpace(newName))
+            if (string.IsNullOrWhiteSpace(newName)) return;
+            
+            //make sure name only has characters and numbers
+            if (!newName.All(char.IsLetterOrDigit))
             {
-                // In Mario Kart Wii, license names are capped at 10 characters (20 bytes in UTF-16).
-                newName = newName.Length > 10 ? newName.Substring(0, 10) : newName;
-
-                // Update in-memory license data
-                user.MiiData.Mii.Name = newName;
-
-                // Safely update the big-endian UTF-16 name in the local _saveData buffer
-                WriteLicenseNameToSaveData(userIndex, newName);
-
-                // Finally, write the updated _saveData back to rksys.dat
-                SaveRksysToFile();
-                
-                InternalMiiManager.UpdateMiiName(user.MiiData.ClientId, newName);
-
+                new MessageBoxWindow()
+                    .SetMainText("Names can only contain letters and numbers.")
+                    .Show();
+                return;
             }
+            
+            // In Mario Kart Wii, license names are capped at 10 characters (20 bytes in UTF-16).
+            newName = newName.Length > 10 ? newName.Substring(0, 10) : newName;
+
+            // Update in-memory license data
+            user.MiiData.Mii.Name = newName;
+
+            // Safely update the big-endian UTF-16 name in the local _saveData buffer
+            WriteLicenseNameToSaveData(userIndex, newName);
+
+            // Finally, write the updated _saveData back to rksys.dat
+            SaveRksysToFile();
+                
+            InternalMiiManager.UpdateMiiName(user.MiiData.ClientId, newName);
 
         }
 
