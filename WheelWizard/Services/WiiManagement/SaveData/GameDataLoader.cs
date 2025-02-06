@@ -380,6 +380,15 @@ public class GameDataLoader : RepeatedTaskManager
             if (string.IsNullOrWhiteSpace(newName)) return;
             
             //make sure name only has characters and numbers
+            
+            //name must be at least 3 characters long
+            if (newName.Length < 3)
+            {
+                new MessageBoxWindow()
+                    .SetMainText("Names must be at least 3 characters long.")
+                    .Show();
+                return;
+            }
             if (!newName.All(char.IsLetterOrDigit))
             {
                 new MessageBoxWindow()
