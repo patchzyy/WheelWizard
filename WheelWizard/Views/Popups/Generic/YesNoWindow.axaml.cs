@@ -42,18 +42,15 @@ public partial class YesNoWindow : PopupContent
     
     private void yesButton_Click(object sender, RoutedEventArgs e)
     {
-        Close();
         Result = true;
-        _tcs.TrySetResult(true); // Signal that the task is complete
-    }
-    private void noButton_Click(object sender, RoutedEventArgs e)
-    {
+        _tcs.TrySetResult(true);// Signal that the task is complete
         Close();
     }
+    private void noButton_Click(object sender, RoutedEventArgs e) => Close();
 
     protected override void BeforeClose()
     {
-        Result = false;
+        // If you want to return something different, then to the TrySetResult before you close it
         _tcs.TrySetResult(false);
     }
 
