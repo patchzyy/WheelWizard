@@ -1,15 +1,12 @@
-﻿using WheelWizard.Resources.Languages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using WheelWizard.Models.Enums;
 using WheelWizard.Models.GameData;
 using WheelWizard.Models.MiiImages;
-using WheelWizard.Models.RRInfo;
 using WheelWizard.Services.LiveData;
 using WheelWizard.Services.Other;
 using WheelWizard.Services.Settings;

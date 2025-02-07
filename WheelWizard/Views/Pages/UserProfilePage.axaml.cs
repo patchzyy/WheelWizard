@@ -1,11 +1,9 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Media.Imaging;
 using System;
 using System.ComponentModel;
 using WheelWizard.Models.Enums;
 using WheelWizard.Models.MiiImages;
-using WheelWizard.Models.RRInfo;
 using WheelWizard.Services.Other;
 using WheelWizard.Services.Settings;
 using WheelWizard.Services.WiiManagement.SaveData;
