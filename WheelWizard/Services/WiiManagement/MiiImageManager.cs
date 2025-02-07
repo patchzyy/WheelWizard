@@ -3,107 +3,59 @@ using Newtonsoft.Json;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using WheelWizard.Helpers;
-using WheelWizard.Models.RRInfo;
+using WheelWizard.Models.MiiImages;
 
 namespace WheelWizard.Services.WiiManagement;
 
 public static class MiiImageManager
 {
-    private const int MaxCachedImages = 126;
-    // There are always 2 values, the image itself, and a bool indicating if the image was loaded successfully
-    // If it wasn't, it means that that image is just empty, yet it still should not be requested again since it failed
-    private static readonly Dictionary<string, (Bitmap smallImage, bool success)> Images = new();
-    private static readonly Queue<string> ImageOrder = new();
-    public static int ImageCount { get; private set; } = 0;
-
-    public static (Bitmap, bool)? GetCachedMiiImage(string miiData) => Images.TryGetValue(miiData, out var image) ? image : null;
-
-    private static void AddMiiImage(string miiData, (Bitmap, bool) image)
+    #region Mii Data
+    private const int MaxCachedParsedMiiData = 126;
+    private static readonly Dictionary<string, string?> ParsedMiiData = new();
+    private static readonly Queue<string> ParsedMiiDataOrder = new();
+    public static int ParsedMiiDataCount { get; private set; } = 0;
+    private static void AddParsedMiiData(string rawData, string? parsedData)
     {
-        if (!Images.ContainsKey(miiData))
-            ImageOrder.Enqueue(miiData);
-        Images[miiData] = image;
+        if (!ParsedMiiData.ContainsKey(rawData))
+            ParsedMiiDataOrder.Enqueue(rawData);
+        ParsedMiiData[rawData] = parsedData;
 
-        ImageCount = Images.Count;
-        if (Images.Count <= MaxCachedImages) return;
-        var oldestMiiData = ImageOrder.Dequeue();
-        Images.Remove(oldestMiiData);
-        ImageCount = MaxCachedImages;
+        ParsedMiiDataCount = ParsedMiiData.Count;
+        if (ParsedMiiData.Count <= MaxCachedParsedMiiData) return;
+        var oldestMiiData = ParsedMiiDataOrder.Dequeue();
+        ParsedMiiData.Remove(oldestMiiData);
+        ParsedMiiDataCount = MaxCachedImages;
     }
     
-    // Returns the image related to this data, if it is not cached, it will request it
-    public static async Task<(Bitmap, bool)> LoadBase64MiiImageAsync(string base64MiiData)
+    private static async Task<string?> LoadParsedMiiDataAsync(string? rawData)
     {
-        if (string.IsNullOrEmpty(base64MiiData))
-            return (CreateEmptyBitmap(), false);
+        if(string.IsNullOrEmpty(rawData))
+            return null; // We don't even have to cache it, since null or empty is going to be this anyways
         
-        if (Images.TryGetValue(base64MiiData, out var value))
+        if (ParsedMiiData.TryGetValue(rawData, out var value))
             return value;
         
-        var newImage = await RequestMiiImageAsync(base64MiiData);
-        AddMiiImage(base64MiiData, newImage);
-        return newImage;
-    }
-
-    // Creates a new image of this Mii and adds it to the cache (if it was loaded successfully)
-    public static async void ResetMiiImageAsync(Mii mii)
-    {
-        var miiData = mii.Data;
-        var newImage = await RequestMiiImageAsync(miiData);
-        AddMiiImage(miiData, newImage);
-        if (mii.Image == newImage.Item1) return;
-
-        mii.SetImage(newImage.Item1, newImage.Item2);
-    }
-
-    // Return the image, and a bool indicating if the image was loaded successfully
-    private static async Task<(Bitmap, bool)> RequestMiiImageAsync(string base64MiiData)
-    {
-        using var formData = new MultipartFormDataContent();
-        formData.Add(new ByteArrayContent(Convert.FromBase64String(base64MiiData)), "data", "mii.dat");
-        formData.Add(new StringContent("wii"), "platform");
-
-        var response = await HttpClientHelper.PostAsync<MiiResponse>(Endpoints.MiiStudioUrl, formData);
-
-        if (!response.Succeeded || response.Content is null)
-            return (CreateEmptyBitmap(), false);
-
-        var miiImageUrl = GetMiiImageUrlFromResponse(response.Content);
-        using var httpClient = new HttpClient();
-        using var imageResponse = await httpClient.GetAsync(miiImageUrl);
-
-        if (!imageResponse.IsSuccessStatusCode) 
-            return (CreateEmptyBitmap(), false);
-
-        var imageStream = await imageResponse.Content.ReadAsStreamAsync();
-        var bitmap = new Bitmap(imageStream);
-        return (bitmap, true);
+        var newParsedData = await RequestParsedMiiDataAsync(rawData);
+        AddParsedMiiData(rawData, newParsedData);
+        return newParsedData;
     }
     
-    private static string GetMiiImageUrlFromResponse(MiiResponse response)
+    private static async Task<string?> RequestParsedMiiDataAsync(string rawData)
     {
-        var queryParams = new List<string>
-        {
-            $"data={response.MiiData}",
-            "type=face", "expression=normal",
-            "width=270",
-            "bgColor=FFFFFF00",
-            "clothesColor=default",
-            "cameraXRotate=0", "cameraYRotate=0", "cameraZRotate=0",
-            "characterXRotate=0", "characterYRotate=0", "characterZRotate=0",
-            "lightDirectionMode=none",
-            "instanceCount=1",
-            "instanceRotationMode=model"
-        };
-        var queryString = string.Join("&", queryParams);
-        return $"{Endpoints.MiiImageUrl}?{queryString}";
-    }
+        using var formData = new MultipartFormDataContent();
+        formData.Add(new ByteArrayContent(Convert.FromBase64String(rawData)), "data", "mii.dat");
+        formData.Add(new StringContent("wii"), "platform");
 
-    private class MiiResponse
+        var response = await HttpClientHelper.PostAsync<ParsedMiiResponse>(Endpoints.MiiStudioUrl, formData);
+        if (!response.Succeeded || response?.Content?.MiiData is null)
+            return null;
+        return response.Content.MiiData;
+    }
+    
+    private class ParsedMiiResponse
     {
         [JsonProperty("mii")]
         public string? MiiData { get; set; }
@@ -124,6 +76,73 @@ public static class MiiImageManager
         public string? Copying { get; set; }
     }
     
+    #endregion
+   
+    
+    #region Mii Images
+    private const int MaxCachedImages = 126;
+    // There are always 2 values, the image itself, and a bool indicating if the image was loaded successfully
+    // If it wasn't, it means that that image is just empty, yet it still should not be requested again since it failed
+    private static readonly Dictionary<string, (Bitmap smallImage, bool success)> Images = new();
+    private static readonly Queue<string> ImageOrder = new();
+    public static int ImageCount { get; private set; } = 0;
+
+    public static (Bitmap, bool)? GetCachedMiiImage(MiiImage miiConfig) => Images.TryGetValue(miiConfig.CachingKey, out var image) ? image : null;
+
+    private static void AddMiiImage(MiiImage miiConfig, (Bitmap, bool) image)
+    {
+        if (!Images.ContainsKey(miiConfig.CachingKey))
+            ImageOrder.Enqueue(miiConfig.CachingKey);
+        Images[miiConfig.CachingKey] = image;
+
+        ImageCount = Images.Count;
+        if (Images.Count <= MaxCachedImages) return;
+        var oldestMiiData = ImageOrder.Dequeue();
+        Images.Remove(oldestMiiData);
+        ImageCount = MaxCachedImages;
+    }
+    
+    // Returns the image related to this data, if it is not cached, it will request it
+    public static async Task<(Bitmap, bool)> LoadBase64MiiImageAsync(MiiImage miiConfig)
+    {
+        if (string.IsNullOrEmpty(miiConfig.Data))
+            return (CreateEmptyBitmap(), false);
+        
+        if (Images.TryGetValue(miiConfig.CachingKey, out var value))
+            return value;
+        
+        var newImage = await RequestMiiImageAsync(miiConfig);
+        AddMiiImage(miiConfig, newImage);
+        return newImage;
+    }
+
+    // Creates a new image of this Mii and adds it to the cache (if it was loaded successfully)
+    public static async void ResetMiiImageAsync(MiiImage miiImage)
+    {
+        var newImage = await RequestMiiImageAsync(miiImage);
+        AddMiiImage(miiImage, newImage);
+        
+        if (miiImage.Image == newImage.Item1) return;
+        miiImage.SetImage(newImage.Item1, newImage.Item2);
+    }
+
+    // Return the image, and a bool indicating if the image was loaded successfully
+    private static async Task<(Bitmap, bool)> RequestMiiImageAsync(MiiImage miiConfig)
+    {
+        var parsedMiiData = await LoadParsedMiiDataAsync(miiConfig.Data);
+        if (string.IsNullOrEmpty(parsedMiiData)) return (CreateEmptyBitmap(), false);
+
+        var miiImageUrl = MiiImageVariants.Get(miiConfig.Variant)(parsedMiiData);
+        using var httpClient = new HttpClient();
+        using var imageResponse = await httpClient.GetAsync($"{Endpoints.MiiImageUrl}?{miiImageUrl}");
+
+        if (!imageResponse.IsSuccessStatusCode) 
+            return (CreateEmptyBitmap(), false);
+
+        var imageStream = await imageResponse.Content.ReadAsStreamAsync();
+        var bitmap = new Bitmap(imageStream);
+        return (bitmap, true);
+    }
     private static Bitmap CreateEmptyBitmap()
     {
         using var bitmap = new SKBitmap(1, 1);
@@ -134,4 +153,7 @@ public static class MiiImageManager
         using var data = image.Encode(SKEncodedImageFormat.Png, 1);
         return new (data.AsStream());
     }
+    #endregion
 }
+
+

@@ -5,9 +5,9 @@ namespace WheelWizard.Models.GameBanana;
 public class GameBananaModDetails
 {
     public int _idRow { get; set; }
-    
+
     public string? OverrideDownloadUrl { get; set; }
-    
+
     public long _tsDateModified { get; set; }
     public long _tsDateAdded { get; set; }
     public GameBananaPreviewMedia _aPreviewMedia { get; set; }
@@ -15,19 +15,20 @@ public class GameBananaModDetails
     public string _sProfileUrl { get; set; }
     public int _nLikeCount { get; set; }
     public int _nViewCount { get; set; }
-    public string _sText { get; set; } 
+    public string _sText { get; set; }
     public List<string> _aEmbeddedMedia { get; set; }
     public GameBananaSubmitter _aSubmitter { get; set; }
     public GameBananaGame _aGame { get; set; }
     public GamebananaCatagory _aCategory { get; set; }
     public int _nPostCount { get; set; }
     public List<GameBananaModFile> _aFiles { get; set; }
-    
+
     public int? _nDownloadCount { get; set; }
     public string? _sModelName { get; set; }
     // public List<string> _aTags { get; set; } // (e.g., "Stable", "In Development")
-    
-    /*
+}
+
+/*
     public string _nStatus { get; set; }
     public bool _bIsPrivate { get; set; }
     public string _sCommentsMode { get; set; }
@@ -86,5 +87,5 @@ public class GameBananaModDetails
         public string _sName { get; set; }
         public string _sProfileUrl { get; set; }
         public bool _bIsOnline { get; set; }
-    } */
-}
+    }
+*/

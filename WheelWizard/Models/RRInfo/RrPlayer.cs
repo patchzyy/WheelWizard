@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using WheelWizard.Models.Enums;
+using WheelWizard.Models.MiiImages;
 using WheelWizard.Utilities;
 
 namespace WheelWizard.Models.RRInfo;

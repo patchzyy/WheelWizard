@@ -20,6 +20,10 @@
                                      TipPlacement="Top" Margin="10,0,0,0"
                                      IconData="{StaticResource UserCircle}"
                                      TipText="Amount of Mii-images cashed in memory" />
+                <components:StateBox x:Name="MiiParsedDataCashed" Variant="Default" Text="0"
+                                     TipPlacement="Top" Margin="10,0,0,0"
+                                     IconData="{StaticResource Code}"
+                                     TipText="Amount of Parsed Mii-data cashed in memory" />
                 <components:StateBox x:Name="RrRefreshTimeLeft" Variant="Default" Text="0"
                                      TipPlacement="Top" Margin="10,0,0,0"
                                      IconData="{StaticResource Hourglass}"

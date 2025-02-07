@@ -1,15 +1,20 @@
+﻿using Avalonia.Media.Imaging;
 using System.ComponentModel;
-using Avalonia.Media.Imaging;
 using WheelWizard.Services.WiiManagement;
 
-namespace WheelWizard.Models.RRInfo;
+namespace WheelWizard.Models.MiiImages;
 
-public class Mii : INotifyPropertyChanged
+public class MiiImage : INotifyPropertyChanged
 {
-    public required string Data { get; set; }
-    public required string Name { get; set; }
-    public bool LoadedImageSuccessfully { get; private set; } // default false, dont set this manually
+    private Mii Parent { get; }
+    public string Data => Parent.Data;
+    public MiiImageVariants.Variant Variant { get; }
+    public MiiImage(Mii parent, MiiImageVariants.Variant variant) => (Parent, Variant) = (parent,variant);
+
+    public string CachingKey => $"{Data}_{Variant}";
     
+    public bool LoadedImageSuccessfully { get; private set; } // default false, dont set this manually
+
     // This never will be set back to false, this is intentional
     // This is to ensure that it will never request the image again after the first time
     private bool _requestingImage;
@@ -22,13 +27,13 @@ public class Mii : INotifyPropertyChanged
             if (_image != null || _requestingImage) return _image;
             // it will set it to true, meaning this code can only be executed once due to the above check
             _requestingImage = true; 
-            
-            var newImage = MiiImageManager.GetCachedMiiImage(Data);
+        
+            var newImage = MiiImageManager.GetCachedMiiImage(this);
             if (newImage == null)
                 MiiImageManager.ResetMiiImageAsync(this);
             else
                 SetImage(newImage.Value.Item1, newImage.Value.Item2);
-            
+        
             return _image;
         }
         private set
@@ -38,13 +43,12 @@ public class Mii : INotifyPropertyChanged
             OnPropertyChanged(nameof(Image));
         }
     }
-    
+
     public void SetImage(Bitmap image, bool loadedSuccessfully)
     {
         LoadedImageSuccessfully = loadedSuccessfully;
         Image = image;
     }
-    
     public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged(string propertyName)

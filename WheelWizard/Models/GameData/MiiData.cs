@@ -1,4 +1,4 @@
-﻿using WheelWizard.Models.RRInfo;
+﻿using WheelWizard.Models.MiiImages;
 
 namespace WheelWizard.Models.GameData;
 

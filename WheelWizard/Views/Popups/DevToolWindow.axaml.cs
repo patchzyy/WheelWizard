@@ -34,6 +34,7 @@ public partial class DevToolWindow : PopupContent, IRepeatedTaskListener
     {
         RrRefreshTimeLeft.Text = RRLiveRooms.Instance.TimeUntilNextTick.Seconds.ToString();
         MiiImagesCashed.Text = MiiImageManager.ImageCount.ToString();
+        MiiParsedDataCashed.Text = MiiImageManager.ParsedMiiDataCount.ToString();
     }
     
     private void LoadSettings()
