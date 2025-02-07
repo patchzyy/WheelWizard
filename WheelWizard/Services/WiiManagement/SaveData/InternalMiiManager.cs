@@ -26,7 +26,7 @@ namespace WheelWizard.Services.WiiManagement.SaveData
         {
             var miis = new List<byte[]>();
             var allMiiData = GetMiiDb();
-            if (allMiiData.Length < 4) // If file is obviously too small
+            if (allMiiData.Length < 4)
                 return miis;
 
             using var memoryStream = new MemoryStream(allMiiData);
@@ -166,8 +166,8 @@ namespace WheelWizard.Services.WiiManagement.SaveData
             //   bits9-5: day (we set to 1)
             //   bits4-1: favColor (0)
             //   bit0: isFavorite (0)
+            
             ushort header = (ushort)((0 << 15) | (0 << 14) | (1 << 10) | (1 << 5) | (0 << 1) | 0);
-            // ushort header = (ushort)((1 << 15) | 1);
 
             WriteUInt16BigEndian(newMiiBlock, 0x00, header);
 
@@ -191,10 +191,8 @@ namespace WheelWizard.Services.WiiManagement.SaveData
             newMiiBlock[0x1B] = (byte)((newClientId >> 24) & 0xFF);
 
             // -- Offset 0x1C-0x1F: System ID (set to zero)
-            for (int i = 0; i < 4; i++)
-            {
-                newMiiBlock[0x1C + i] = 0;
-            }
+            byte[] validSystemId = new byte[] { 0x42, 0xBC, 0xE1, 0xC2 };
+            Array.Copy(validSystemId, 0, newMiiBlock, 0x1C, 4);
 
             // -- Offset 0x20-0x21: Face features
             // Fields: faceShape (3), skinColor (3), facialFeature (4),
@@ -290,6 +288,10 @@ namespace WheelWizard.Services.WiiManagement.SaveData
             // -- Offset 0x36-0x49: Creator name (10 UTF-16 code units).
             // For a new Mii we leave this blank (all zeros).
             // (If desired, you could write a default creator name using Encoding.BigEndianUnicode.)
+            
+            string creatorName = "Creator".PadRight(10, '\0');
+            byte[] creatorBytes = Encoding.BigEndianUnicode.GetBytes(creatorName);
+            Array.Copy(creatorBytes, 0, newMiiBlock, 0x36, Math.Min(creatorBytes.Length, 20));
 
             // 4) Put the new block into that slot
             allMiis[slotIndex] = newMiiBlock;
@@ -426,7 +428,7 @@ namespace WheelWizard.Services.WiiManagement.SaveData
         /// Calculates a CRC16 (CCITT-FALSE) checksum for a portion of the given data.
         /// This is used for RFL_DB.dat validation at offset 0x1F1DE (covers the preceding bytes).
         /// </summary>
-        private static ushort CalculateCRC16(byte[] data, int offset, int length)
+        public static ushort CalculateCRC16(byte[] data, int offset, int length)
         {
             const ushort polynomial = 0x1021;
             ushort crc = 0x0000;
@@ -434,7 +436,7 @@ namespace WheelWizard.Services.WiiManagement.SaveData
             for (int i = offset; i < offset + length; i++)
             {
                 crc ^= (ushort)(data[i] << 8);
-                for (int bit = 0; bit < 8; bit++)
+                for (int j = 0; j < 8; j++)
                 {
                     if ((crc & 0x8000) != 0)
                         crc = (ushort)((crc << 1) ^ polynomial);

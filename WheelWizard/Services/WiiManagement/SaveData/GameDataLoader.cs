@@ -530,17 +530,12 @@ namespace WheelWizard.Services.WiiManagement.SaveData
             if (_saveData == null || _saveData.Length < RksysSize) return;
 
             var rkpdOffset = 0x8 + userIndex * RkpdSize;
-            int avatarIdOffset = rkpdOffset + 0x10;
-            int clientIdOffset = rkpdOffset + 0x14;
+            int avatarIdOffset = rkpdOffset + 0x28; // Corrected offset to 0x28 based on documentation
+            int clientIdOffset = rkpdOffset + 0x2C; // Corrected offset to 0x2C based on documentation
 
-            var avatarBytes = BitConverter.GetBytes(avatarId);
-            var clientBytes = BitConverter.GetBytes(clientId);
-
-            // This is typically little-endian data in memory, but we must double-check how
-            // MKWii expects it. For safety, let's do the same endianness used in parsing.
-            // The original code does direct `BitConverter.ToUInt32()`, so let's store it same-endian.
-            Array.Copy(avatarBytes, 0, _saveData, avatarIdOffset, 4);
-            Array.Copy(clientBytes, 0, _saveData, clientIdOffset, 4);
+            // Use WriteBigEndianUint32 to write in big-endian format
+            WriteBigEndianUint32(_saveData, avatarIdOffset, avatarId);
+            WriteBigEndianUint32(_saveData, clientIdOffset, clientId);
         }
 
         /// <summary>
