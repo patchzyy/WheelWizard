@@ -58,7 +58,7 @@
                                 Background="{StaticResource Neutral950}">
                             <Grid>
                                 <controls:MiiImageLoader Mii="{TemplateBinding Mii}" HorizontalAlignment="Center" VerticalAlignment="Stretch" 
-                                                         ImageVariant="DEFAULT" ConstraintRotationToVertical="True"
+                                                         ImageVariant="SLIGHT_SIDE_PROFILE" ConstraintRotationToVertical="True"
                                                          FallBackColor="{StaticResource Neutral700}" />
                           
                                 <StackPanel Margin="7">

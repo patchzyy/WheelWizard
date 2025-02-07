@@ -9,19 +9,19 @@ public static class MiiImageVariants
     public enum Variant
     {
         DEFAULT,
-        SURPRISED
+        SLIGHT_SIDE_PROFILE
     }
 
     private static Dictionary<Variant, Func<string, string>> _variantMap = new()
     {
-        [Variant.DEFAULT] = GetMiiImageUrlFromResponse(Expression.NORMAL, new()),
-        [Variant.SURPRISED] = GetMiiImageUrlFromResponse(Expression.SURPRISE, new(350,15,355))
+        [Variant.DEFAULT] = GetMiiImageUrlFromResponse(Expression.NORMAL, new(), 0),
+        [Variant.SLIGHT_SIDE_PROFILE] = GetMiiImageUrlFromResponse(Expression.SMILE, new(350,15,355),12),
     };
     
     
     #region SETUP
     public static Func<string, string> Get(Variant variant) => _variantMap[variant];
-    private static Func<string, string> GetMiiImageUrlFromResponse(Expression expression, Vector3 characterRotation)
+    private static Func<string, string> GetMiiImageUrlFromResponse(Expression expression, Vector3 characterRotation, int cameraTilt)
     {
         return (miiData) =>
         {
@@ -33,7 +33,7 @@ public static class MiiImageVariants
                 "width=270",
                 "bgColor=FFFFFF00",
                 "clothesColor=default",
-                "cameraXRotate=0",
+                "cameraXRotate=12",
                 "cameraYRotate=0",
                 "cameraZRotate=0",
                 $"characterXRotate={(int)characterRotation.X}",
