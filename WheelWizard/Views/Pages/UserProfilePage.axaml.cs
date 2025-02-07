@@ -139,7 +139,7 @@ public partial class UserProfilePage : UserControl, INotifyPropertyChanged
         SettingsManager.FOCUSSED_USER.Set(_currentUserIndex);
         
         CurrentUserProfile.IsChecked = true; 
-        // Even though its true when this method is called, we still set it to true,
+        // Even though it's true when this method is called, we still set it to true,
         // since Avalonia has some weird ass cashing, It might just be that that is because this method is actually deprecated
     }
     

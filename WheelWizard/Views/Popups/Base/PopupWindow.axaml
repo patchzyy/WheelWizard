@@ -6,7 +6,7 @@
         x:Class="WheelWizard.Views.Popups.PopupWindow"
         SystemDecorations="None"
         WindowStartupLocation="CenterOwner"
-        ExtendClientAreaToDecorationsHint="False"
+        ExtendClientAreaToDecorationsHint="True"
         ExtendClientAreaChromeHints="NoChrome"
         CanResize='False' Background="Transparent"
         Title="{Binding WindowTitle}">

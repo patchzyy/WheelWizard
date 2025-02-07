@@ -248,7 +248,6 @@ public partial class WhWzSettings : UserControl
             yesNoWindow.Close();
             timer.Stop();
         };
-        
         timer.Start();
 
         var yesNoAnswer = await yesNoWindow.AwaitAnswer();

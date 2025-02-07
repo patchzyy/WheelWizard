@@ -12,7 +12,7 @@
         Height="876" Width="656" Title="Wheel Wizard" 
         WindowStartupLocation="CenterScreen"
         SystemDecorations="None"
-        ExtendClientAreaToDecorationsHint="False"
+        ExtendClientAreaToDecorationsHint="True"
         ExtendClientAreaChromeHints="NoChrome" 
         CanResize='False' Background="Transparent">
     <Grid ColumnDefinitions="192,*" RowDefinitions="25,17,88,*,80" x:Name="CompleteGrid"

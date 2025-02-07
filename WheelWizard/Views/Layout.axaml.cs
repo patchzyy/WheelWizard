@@ -62,6 +62,7 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
         var marginXCorrection = ((scaleFactor * WindowWidth) - WindowWidth)/2f;
         var marginYCorrection = ((scaleFactor * WindowHeight) - WindowHeight)/2f;
         CompleteGrid.Margin = new Thickness(marginXCorrection, marginYCorrection);
+        //ExtendClientAreaToDecorationsHint = scaleFactor <= 1.2f;
     }
 
     private void InitializeManagers()
