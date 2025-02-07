@@ -158,6 +158,11 @@ public partial class UserProfilePage : UserControl, INotifyPropertyChanged
         UpdatePage();
     }
     
+    private void ChangeMiiName(object? obj, EventArgs e)
+    {
+        GameDataLoader.Instance.PromptLicenseNameChange(_currentUserIndex);
+    }
+    
     public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged(string propertyName)

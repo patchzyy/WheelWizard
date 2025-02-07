@@ -112,13 +112,11 @@ public class MiiImageLoader : TemplatedControl, INotifyPropertyChanged
             if (loadingIcon != null)
                 loadingIcon.IconSize = newValue*0.7;
 
-            if (fallbackIcon != null)
-            {
-                fallbackIcon.Width = newValue * 0.85;
-                fallbackIcon.Height = newValue * 0.85;
-                fallbackIcon.Margin = new Thickness(0,0,0,-newValue * 0.05);
-            }
-            
+            if (fallbackIcon == null) return;
+            fallbackIcon.Width = newValue * 0.85;
+            fallbackIcon.Height = newValue * 0.85;
+            fallbackIcon.Margin = new Thickness(0,0,0,-newValue * 0.05);
+
         }, DispatcherPriority.Render); 
     }
 }

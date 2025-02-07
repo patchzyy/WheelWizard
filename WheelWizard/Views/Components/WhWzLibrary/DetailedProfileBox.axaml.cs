@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
 using System;
@@ -103,6 +104,14 @@ public class DetailedProfileBox : TemplatedControl, INotifyPropertyChanged
         set => SetValue(OnCheckedProperty, value);
     }
     
+    public static readonly StyledProperty< EventHandler?> OnRenameProperty =
+        AvaloniaProperty.Register<DetailedProfileBox,  EventHandler?>(nameof(OnRename));
+    public  EventHandler? OnRename
+    {
+        get => GetValue(OnRenameProperty);
+        set => SetValue(OnRenameProperty, value);
+    }
+    
     public static readonly StyledProperty< EventHandler<RoutedEventArgs>?> ViewRoomActionProperty =
         AvaloniaProperty.Register<DetailedProfileBox,  EventHandler<RoutedEventArgs>?>(nameof(ViewRoomAction));
     public  EventHandler<RoutedEventArgs>? ViewRoomAction
@@ -115,12 +124,6 @@ public class DetailedProfileBox : TemplatedControl, INotifyPropertyChanged
     private void CopyFriendCode(object? obj, EventArgs e)
     {
         TopLevel.GetTopLevel(this)?.Clipboard?.SetTextAsync(FriendCode);
-    }
-    
-    private void ChangeMiiName(object? obj, EventArgs e)
-    {
-        int userIndex = (int)SettingsManager.FOCUSSED_USER.Get();
-        GameDataLoader.Instance.PromptLicenseNameChange(userIndex);
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
@@ -135,13 +138,13 @@ public class DetailedProfileBox : TemplatedControl, INotifyPropertyChanged
         if (viewRoomButton != null)
             viewRoomButton.Click += ViewRoomAction;
         
+        var changeNameButton  = e.NameScope.Find<StandardLibrary.IconLabelButton>("EditMiiName");
+        if (changeNameButton != null) 
+            changeNameButton.Click += OnRename;
+        
         var copyFcButton  = e.NameScope.Find<StandardLibrary.IconLabelButton>("CopyFcButton");
         if (copyFcButton != null) 
             copyFcButton.Click += CopyFriendCode;
-        
-        var changeNameButton  = e.NameScope.Find<StandardLibrary.IconLabelButton>("EditMiiName");
-        if (changeNameButton != null) 
-            changeNameButton.Click += ChangeMiiName;
     }
     
     public event PropertyChangedEventHandler? PropertyChanged;

@@ -52,6 +52,7 @@
                                          OnChecked="CheckBox_SetPrimaryUser" ViewRoomAction="Button_ViewRoom"
                                          VerticalAlignment="Top" HorizontalAlignment="Stretch"
                                          Mii="{Binding CurrentMii}"
+                                         OnRename="ChangeMiiName"
                                          Margin="0,10,0,0" />
            
            <components:EmptyPageInfo x:Name="NoProfilesInfo"
