@@ -53,35 +53,38 @@
                         </Border>
                         
                         <!-- HEAD BORDER -->
-                        <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" BorderBrush="{StaticResource Neutral600}"
-                                BorderThickness="1" Margin="0,0,0,10" CornerRadius="4" x:Name="PART_HeadBorder"
-                                Background="{StaticResource Neutral950}">
-                            <Grid>
-                                <controls:MiiImageLoader Mii="{TemplateBinding Mii}" HorizontalAlignment="Center" VerticalAlignment="Stretch" 
-                                                         ImageVariant="SLIGHT_SIDE_PROFILE" ConstraintRotationToVertical="True"
-                                                         FallBackColor="{StaticResource Neutral700}" />
-                          
-                                <StackPanel Margin="7">
-                                    <StackPanel Orientation="Horizontal">
-                                    <TextBlock Classes="TitleText" Text="{TemplateBinding UserName}"/>
-                                    <components:IconLabelButton VerticalAlignment="Center" x:Name="EditMiiName"
-                                                                IconData="{StaticResource Pen}"
-                                                                Margin="7,0,0,0" IconSize="20"
-                                                                Foreground="{StaticResource Neutral500}" 
-                                                                HoverForeground="{StaticResource Neutral400}"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Classes="BodyText" Text="{TemplateBinding FriendCode}"/>
-                                        <components:IconLabelButton VerticalAlignment="Center" x:Name="CopyFcButton"
-                                                                    IconData="{StaticResource Copy}"
-                                                                    Margin="7,0,0,0" IconSize="20"
-                                                                    IsVisible="{TemplateBinding FriendCode, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
-                                                                    Foreground="{StaticResource Neutral500}" 
-                                                                    HoverForeground="{StaticResource Neutral400}"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
+                        <Border  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" BorderBrush="{StaticResource Neutral600}"
+                                 BorderThickness="1" Margin="0,0,5,10" CornerRadius="4" x:Name="PART_HeadBorderFace"
+                                 Background="{StaticResource Neutral950}">
+                           <Grid>
+                               <controls:MiiImageLoader Mii="{TemplateBinding Mii}" HorizontalAlignment="Center" VerticalAlignment="Stretch" 
+                                                        ImageVariant="SLIGHT_SIDE_PROFILE_DEFAULT" ConstraintRotationToVertical="True"
+                                                        x:Name="MiiFaceImageLoader"
+                                                        FallBackColor="{StaticResource Neutral700}" />
+                        
+                               <StackPanel Margin="7">
+                                   <StackPanel Orientation="Horizontal">
+                                   <TextBlock Classes="TitleText" Text="{TemplateBinding UserName}"/>
+                                   <components:IconLabelButton VerticalAlignment="Center" x:Name="EditMiiName"
+                                                               IconData="{StaticResource Pen}"
+                                                               Margin="7,0,0,0" IconSize="20"
+                                                               Foreground="{StaticResource Neutral500}" 
+                                                               HoverForeground="{StaticResource Neutral400}"/>
+                                   </StackPanel>
+                                   <StackPanel Orientation="Horizontal">
+                                       <TextBlock Classes="BodyText" Text="{TemplateBinding FriendCode}"/>
+                                       <components:IconLabelButton VerticalAlignment="Center" x:Name="CopyFcButton"
+                                                                   IconData="{StaticResource Copy}"
+                                                                   Margin="7,0,0,0" IconSize="20"
+                                                                   IsVisible="{TemplateBinding FriendCode, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                                                                   Foreground="{StaticResource Neutral500}" 
+                                                                   HoverForeground="{StaticResource Neutral400}"/>
+                                   </StackPanel>
+                               </StackPanel>
+                           </Grid>
                         </Border>
+                        
+                       
                         
                        
                         
@@ -137,7 +140,9 @@
         </Setter>
     </Style>
     
-    <Style Selector="controls|DetailedProfileBox[IsOnline=true] /template/ Border#PART_HeadBorder">
-        <Setter Property="BorderBrush" Value="{StaticResource Primary400}"/>
+    <Style Selector="controls|DetailedProfileBox[IsOnline=true]">
+        <Style Selector="^ /template/ Border#PART_HeadBorderFace">
+            <Setter Property="BorderBrush" Value="{StaticResource Primary400}"/>
+        </Style>
     </Style>
 </Styles>

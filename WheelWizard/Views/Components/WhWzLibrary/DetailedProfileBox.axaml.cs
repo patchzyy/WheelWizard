@@ -126,6 +126,7 @@ public class DetailedProfileBox : TemplatedControl, INotifyPropertyChanged
     {
         TopLevel.GetTopLevel(this)?.Clipboard?.SetTextAsync(FriendCode);
     }
+    
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
@@ -146,6 +147,21 @@ public class DetailedProfileBox : TemplatedControl, INotifyPropertyChanged
         var copyFcButton  = e.NameScope.Find<StandardLibrary.IconLabelButton>("CopyFcButton");
         if (copyFcButton != null) 
             copyFcButton.Click += CopyFriendCode;
+        
+                
+        var miiImageLoader  = e.NameScope.Find<MiiImageLoader>("MiiFaceImageLoader");
+        if (miiImageLoader != null)
+        {
+            var oldVariant = miiImageLoader.ImageVariant;
+            miiImageLoader.ImageVariant = MiiImageVariants.Variant.SLIGHT_SIDE_PROFILE_SURPISED;
+            miiImageLoader.ImageVariant = MiiImageVariants.Variant.SLIGHT_SIDE_PROFILE_FRUSTATED;
+            miiImageLoader.ImageVariant = oldVariant;
+
+            miiImageLoader.PointerEntered += (_, _) => miiImageLoader.ImageVariant = MiiImageVariants.Variant.SLIGHT_SIDE_PROFILE_SURPISED;
+            miiImageLoader.PointerExited += (_, _) => miiImageLoader.ImageVariant = oldVariant;
+            miiImageLoader.PointerPressed += (_, _) => miiImageLoader.ImageVariant = MiiImageVariants.Variant.SLIGHT_SIDE_PROFILE_FRUSTATED;
+            miiImageLoader.PointerReleased += (_, _) => miiImageLoader.ImageVariant = MiiImageVariants.Variant.SLIGHT_SIDE_PROFILE_SURPISED;
+        }
     }
     
     public event PropertyChangedEventHandler? PropertyChanged;

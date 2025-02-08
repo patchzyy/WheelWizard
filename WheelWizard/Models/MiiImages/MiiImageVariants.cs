@@ -9,13 +9,22 @@ public static class MiiImageVariants
     public enum Variant
     {
         DEFAULT,
-        SLIGHT_SIDE_PROFILE
+        SLIGHT_SIDE_PROFILE_DEFAULT,
+        SLIGHT_SIDE_PROFILE_SURPISED,
+        SLIGHT_SIDE_PROFILE_FRUSTATED,
+        FULL_BODY,
     }
 
     private static Dictionary<Variant, Func<string, string>> _variantMap = new()
     {
         [Variant.DEFAULT] = GetMiiImageUrlFromResponse(Expression.NORMAL, BodyType.FACE, ImageSize.SMALL),
-        [Variant.SLIGHT_SIDE_PROFILE] = GetMiiImageUrlFromResponse(Expression.SMILE, BodyType.FACE, ImageSize.MEDIUM,
+        [Variant.FULL_BODY] = GetMiiImageUrlFromResponse(Expression.NORMAL, BodyType.ALL_BODY, ImageSize.MEDIUM),
+        [Variant.SLIGHT_SIDE_PROFILE_DEFAULT] = GetMiiImageUrlFromResponse(Expression.SMILE, BodyType.FACE, ImageSize.MEDIUM,
+            characterRotation: new(350,15,355), cameraTilt: 12),
+        [Variant.SLIGHT_SIDE_PROFILE_SURPISED] = GetMiiImageUrlFromResponse(Expression.SURPRISE, BodyType.FACE, ImageSize.MEDIUM,
+            characterRotation: new(350,15,355), cameraTilt: 12),
+        
+        [Variant.SLIGHT_SIDE_PROFILE_FRUSTATED] = GetMiiImageUrlFromResponse(Expression.FRUSTRATED, BodyType.FACE, ImageSize.MEDIUM,
             characterRotation: new(350,15,355), cameraTilt: 12),
     };
     
@@ -54,7 +63,7 @@ public static class MiiImageVariants
     {
         NORMAL,
         SMILE,
-        FRUSTATED,
+        FRUSTRATED,
         ANGER,
         BLINK,
         SORROW,
