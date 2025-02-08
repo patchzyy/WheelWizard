@@ -18,7 +18,7 @@
                       ClipToBounds="True">
                     <components:LoadingIcon HorizontalAlignment="Center" VerticalAlignment="Stretch" x:Name="MiiLoadingIcon"
                                             IsVisible="{TemplateBinding MiiImage, Converter={x:Static ObjectConverters.IsNull}}"
-                                            Foreground="{TemplateBinding LoadingColor}"/>
+                                            Foreground="{TemplateBinding Foreground}"/>
                     
                     <PathIcon x:Name="MiiFallBackIcon" HorizontalAlignment="Center" VerticalAlignment="Bottom"
                               Foreground="{TemplateBinding FallBackColor}" Data="{StaticResource User}">

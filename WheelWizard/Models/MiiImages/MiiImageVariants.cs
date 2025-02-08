@@ -19,9 +19,9 @@ public static class MiiImageVariants
     {
         [Variant.DEFAULT] = GetMiiImageUrlFromResponse(Expression.NORMAL, BodyType.FACE, ImageSize.SMALL),
         [Variant.FULL_BODY] = GetMiiImageUrlFromResponse(Expression.NORMAL, BodyType.ALL_BODY, ImageSize.MEDIUM),
-        [Variant.SLIGHT_SIDE_PROFILE_DEFAULT] = GetMiiImageUrlFromResponse(Expression.SMILE, BodyType.FACE, ImageSize.MEDIUM,
+        [Variant.SLIGHT_SIDE_PROFILE_DEFAULT] = GetMiiImageUrlFromResponse(Expression.NORMAL, BodyType.FACE, ImageSize.MEDIUM,
             characterRotation: new(350,15,355), cameraTilt: 12),
-        [Variant.SLIGHT_SIDE_PROFILE_SURPISED] = GetMiiImageUrlFromResponse(Expression.SURPRISE, BodyType.FACE, ImageSize.MEDIUM,
+        [Variant.SLIGHT_SIDE_PROFILE_SURPISED] = GetMiiImageUrlFromResponse(Expression.SMILE, BodyType.FACE, ImageSize.MEDIUM,
             characterRotation: new(350,15,355), cameraTilt: 12),
         
         [Variant.SLIGHT_SIDE_PROFILE_FRUSTATED] = GetMiiImageUrlFromResponse(Expression.FRUSTRATED, BodyType.FACE, ImageSize.MEDIUM,
