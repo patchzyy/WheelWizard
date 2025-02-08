@@ -7,7 +7,7 @@ using WheelWizard.Models.MiiImages;
 
 namespace WheelWizard.Views.Components.WhWzLibrary.MiiImages;
 
-public class BaseMiiImage : TemplatedControl, INotifyPropertyChanged
+public abstract class BaseMiiImage : TemplatedControl, INotifyPropertyChanged
 {
     public static readonly StyledProperty<bool> MiiLoadedProperty =
         AvaloniaProperty.Register<BaseMiiImage, bool>(nameof(MiiLoaded));
