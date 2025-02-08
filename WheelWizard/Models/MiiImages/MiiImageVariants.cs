@@ -14,26 +14,29 @@ public static class MiiImageVariants
 
     private static Dictionary<Variant, Func<string, string>> _variantMap = new()
     {
-        [Variant.DEFAULT] = GetMiiImageUrlFromResponse(Expression.NORMAL, new(), 0),
-        [Variant.SLIGHT_SIDE_PROFILE] = GetMiiImageUrlFromResponse(Expression.SMILE, new(350,15,355),12),
+        [Variant.DEFAULT] = GetMiiImageUrlFromResponse(Expression.NORMAL, BodyType.FACE, ImageSize.SMALL),
+        [Variant.SLIGHT_SIDE_PROFILE] = GetMiiImageUrlFromResponse(Expression.SMILE, BodyType.FACE, ImageSize.MEDIUM,
+            characterRotation: new(350,15,355), cameraTilt: 12),
     };
     
     
     #region SETUP
     public static Func<string, string> Get(Variant variant) => _variantMap[variant];
-    private static Func<string, string> GetMiiImageUrlFromResponse(Expression expression, Vector3 characterRotation, int cameraTilt)
+    private static Func<string, string> GetMiiImageUrlFromResponse(
+        Expression expression, BodyType type, ImageSize size, 
+        Vector3 characterRotation = new(), int cameraTilt = 0)
     {
         return (miiData) =>
         {
             var queryParams = new List<string>
             {
                 $"data={miiData}",
-                "type=face",
+                $"type={type.ToString().ToLower()}",
                 $"expression={expression.ToString().ToLower()}",
-                "width=270",
+                $"width={(int)size}",
                 "bgColor=FFFFFF00",
                 "clothesColor=default",
-                "cameraXRotate=12",
+                $"cameraXRotate={cameraTilt}",
                 "cameraYRotate=0",
                 "cameraZRotate=0",
                 $"characterXRotate={(int)characterRotation.X}",
@@ -56,6 +59,17 @@ public static class MiiImageVariants
         BLINK,
         SORROW,
         SURPRISE
+    }
+
+    private enum BodyType
+    {
+        FACE,
+        ALL_BODY
+    }
+    private enum ImageSize
+    {
+        SMALL = 270,
+        MEDIUM = 512,
     }
     
     #endregion
