@@ -342,6 +342,14 @@
           <DependentUpon>PopupWindow.axaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
+        <Compile Update="Views\Components\WhWzLibrary\MiiImages\MiiImageLoader.axaml.cs">
+          <DependentUpon>MiiImageLoader.axaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Components\WhWzLibrary\MiiImages\MiiCarousel.axaml.cs">
+          <DependentUpon>MiiCarousel.axaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>

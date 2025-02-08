@@ -1,16 +1,17 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:components="using:WheelWizard.Views.Components.StandardLibrary"
-        xmlns:controls="using:WheelWizard.Views.Components.WhWzLibrary">
+        xmlns:controls="using:WheelWizard.Views.Components.WhWzLibrary"
+        xmlns:miiImages="clr-namespace:WheelWizard.Views.Components.WhWzLibrary.MiiImages">
     <Design.PreviewWith>
         <Border Background="{StaticResource Neutral950}" Width="600" Height="600">
-            <controls:MiiImageLoader HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+            <miiImages:MiiImageLoader HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                                      HeightAsScalingReference="True" FallBackColor="{StaticResource Neutral700}"
                                      />
         </Border>
     </Design.PreviewWith>
 
-    <Style Selector="controls|MiiImageLoader">
+    <Style Selector="miiImages|MiiImageLoader">
         <!-- Set Defaults -->
         <Setter Property="Template">
             <ControlTemplate>

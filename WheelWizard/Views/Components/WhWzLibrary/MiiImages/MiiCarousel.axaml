@@ -1,0 +1,17 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:WheelWizard.Views.Components.WhWzLibrary"
+        xmlns:miiImages="clr-namespace:WheelWizard.Views.Components.WhWzLibrary.MiiImages">
+    <Design.PreviewWith>
+        <miiImages:MiiCarousel />
+    </Design.PreviewWith>
+
+    <Style Selector="miiImages|MiiCarousel">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <TextBlock Text="Templated Control" />
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

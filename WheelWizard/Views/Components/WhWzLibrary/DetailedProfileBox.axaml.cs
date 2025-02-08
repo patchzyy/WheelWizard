@@ -10,6 +10,7 @@ using WheelWizard.Models.MiiImages;
 using WheelWizard.Models.RRInfo;
 using WheelWizard.Services.Settings;
 using WheelWizard.Services.WiiManagement.SaveData;
+using WheelWizard.Views.Components.WhWzLibrary.MiiImages;
 
 namespace WheelWizard.Views.Components.WhWzLibrary;
 

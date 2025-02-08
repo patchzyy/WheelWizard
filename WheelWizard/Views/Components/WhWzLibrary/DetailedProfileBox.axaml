@@ -2,7 +2,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
         xmlns:controls="using:WheelWizard.Views.Components.WhWzLibrary"
-        xmlns:components="using:WheelWizard.Views.Components.StandardLibrary">
+        xmlns:components="using:WheelWizard.Views.Components.StandardLibrary"
+        xmlns:miiImages="clr-namespace:WheelWizard.Views.Components.WhWzLibrary.MiiImages">
     <Design.PreviewWith>
         <StackPanel Orientation="Horizontal">
             <Border Padding="10" Background="{StaticResource Neutral950}"
@@ -57,7 +58,7 @@
                                  BorderThickness="1" Margin="0,0,5,10" CornerRadius="4" x:Name="PART_HeadBorderFace"
                                  Background="{StaticResource Neutral950}">
                            <Grid>
-                               <controls:MiiImageLoader Mii="{TemplateBinding Mii}" HorizontalAlignment="Center" VerticalAlignment="Stretch" 
+                               <miiImages:MiiImageLoader Mii="{TemplateBinding Mii}" HorizontalAlignment="Center" VerticalAlignment="Stretch" 
                                                         ImageVariant="SLIGHT_SIDE_PROFILE_DEFAULT" ConstraintRotationToVertical="True"
                                                         x:Name="MiiFaceImageLoader"
                                                         FallBackColor="{StaticResource Neutral700}" />
