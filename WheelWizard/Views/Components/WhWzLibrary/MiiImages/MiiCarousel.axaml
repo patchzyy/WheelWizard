@@ -3,14 +3,17 @@
         xmlns:controls="using:WheelWizard.Views.Components.WhWzLibrary"
         xmlns:miiImages="clr-namespace:WheelWizard.Views.Components.WhWzLibrary.MiiImages">
     <Design.PreviewWith>
-        <miiImages:MiiCarousel />
+        <Border Padding="10" Background="{StaticResource Neutral950}"
+                Width="440">
+            <miiImages:MiiCarousel/>
+        </Border>
     </Design.PreviewWith>
 
     <Style Selector="miiImages|MiiCarousel">
         <!-- Set Defaults -->
         <Setter Property="Template">
             <ControlTemplate>
-                <TextBlock Text="Templated Control" />
+                <TextBlock Text="TODO: create the carousel" />
             </ControlTemplate>
         </Setter>
     </Style>

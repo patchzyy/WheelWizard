@@ -51,12 +51,12 @@ public abstract class BaseMiiImage : TemplatedControl, INotifyPropertyChanged
         set => SetValue(MiiProperty, value);
     }
     
-    protected static MiiImageVariants.Variant CoerceVariant(AvaloniaObject o, MiiImageVariants.Variant value)
+    private static MiiImageVariants.Variant CoerceVariant(AvaloniaObject o, MiiImageVariants.Variant value)
     {
         ((BaseMiiImage)o).OnVariantChanged(value);
         return value;
     }
-    protected static Mii? CoerceMii(AvaloniaObject o, Mii? value)
+    private static Mii? CoerceMii(AvaloniaObject o, Mii? value)
     {
         ((BaseMiiImage)o).OnMiiChanged(value);
         return value;
