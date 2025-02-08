@@ -154,14 +154,14 @@ public class DetailedProfileBox : TemplatedControl, INotifyPropertyChanged
         {
             // We set them all at least one, just to make sure the request is being send.
             // sometimes this still works goofy though, for some reason
-            miiImageLoader.ImageVariant = MiiImageVariants.Variant.SLIGHT_SIDE_PROFILE_SURPISED;
-            miiImageLoader.ImageVariant = MiiImageVariants.Variant.SLIGHT_SIDE_PROFILE_FRUSTATED;
+            miiImageLoader.ImageVariant = MiiImageVariants.Variant.SLIGHT_SIDE_PROFILE_HOVER;
+            miiImageLoader.ImageVariant = MiiImageVariants.Variant.SLIGHT_SIDE_PROFILE_INTERACT;
             miiImageLoader.ImageVariant = MiiImageVariants.Variant.SLIGHT_SIDE_PROFILE_DEFAULT;
 
-            miiImageLoader.PointerEntered += (_, _) => miiImageLoader.ImageVariant = MiiImageVariants.Variant.SLIGHT_SIDE_PROFILE_SURPISED;
-            miiImageLoader.PointerExited += (_, _) => miiImageLoader.ImageVariant =  MiiImageVariants.Variant.SLIGHT_SIDE_PROFILE_DEFAULT;
-            miiImageLoader.PointerPressed += (_, _) => miiImageLoader.ImageVariant = MiiImageVariants.Variant.SLIGHT_SIDE_PROFILE_FRUSTATED;
-            miiImageLoader.PointerReleased += (_, _) => miiImageLoader.ImageVariant = MiiImageVariants.Variant.SLIGHT_SIDE_PROFILE_SURPISED;
+            miiImageLoader.PointerEntered += (_, _) => miiImageLoader.ImageVariant = MiiImageVariants.Variant.SLIGHT_SIDE_PROFILE_HOVER;
+            miiImageLoader.PointerExited += (_, _) => miiImageLoader.ImageVariant = MiiImageVariants.Variant.SLIGHT_SIDE_PROFILE_DEFAULT;
+            miiImageLoader.PointerPressed += (_, _) => miiImageLoader.ImageVariant = MiiImageVariants.Variant.SLIGHT_SIDE_PROFILE_INTERACT;
+            miiImageLoader.PointerReleased += (_, _) => miiImageLoader.ImageVariant = MiiImageVariants.Variant.SLIGHT_SIDE_PROFILE_HOVER;
         }
     }
     

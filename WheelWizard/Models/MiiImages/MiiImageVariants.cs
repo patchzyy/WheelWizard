@@ -10,8 +10,8 @@ public static class MiiImageVariants
     {
         DEFAULT,
         SLIGHT_SIDE_PROFILE_DEFAULT,
-        SLIGHT_SIDE_PROFILE_SURPISED,
-        SLIGHT_SIDE_PROFILE_FRUSTATED,
+        SLIGHT_SIDE_PROFILE_HOVER,
+        SLIGHT_SIDE_PROFILE_INTERACT,
         FULL_BODY,
     }
 
@@ -21,10 +21,10 @@ public static class MiiImageVariants
         [Variant.FULL_BODY] = GetMiiImageUrlFromResponse(Expression.NORMAL, BodyType.ALL_BODY, ImageSize.MEDIUM),
         [Variant.SLIGHT_SIDE_PROFILE_DEFAULT] = GetMiiImageUrlFromResponse(Expression.NORMAL, BodyType.FACE, ImageSize.MEDIUM,
             characterRotation: new(350,15,355), cameraTilt: 12),
-        [Variant.SLIGHT_SIDE_PROFILE_SURPISED] = GetMiiImageUrlFromResponse(Expression.SMILE, BodyType.FACE, ImageSize.MEDIUM,
+        [Variant.SLIGHT_SIDE_PROFILE_HOVER] = GetMiiImageUrlFromResponse(Expression.SMILE, BodyType.FACE, ImageSize.MEDIUM,
             characterRotation: new(350,15,355), cameraTilt: 12),
         
-        [Variant.SLIGHT_SIDE_PROFILE_FRUSTATED] = GetMiiImageUrlFromResponse(Expression.FRUSTRATED, BodyType.FACE, ImageSize.MEDIUM,
+        [Variant.SLIGHT_SIDE_PROFILE_INTERACT] = GetMiiImageUrlFromResponse(Expression.FRUSTRATED, BodyType.FACE, ImageSize.MEDIUM,
             characterRotation: new(350,15,355), cameraTilt: 12),
     };
     
