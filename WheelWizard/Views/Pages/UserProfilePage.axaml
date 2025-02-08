@@ -6,6 +6,7 @@
              xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
              xmlns:components="clr-namespace:WheelWizard.Views.Components.StandardLibrary"
              xmlns:whwzComps="clr-namespace:WheelWizard.Views.Components.WhWzLibrary"
+             xmlns:whwzMiiComps="clr-namespace:WheelWizard.Views.Components.WhWzLibrary.MiiImages"
              x:Class="WheelWizard.Views.Pages.UserProfilePage">
    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
        <Grid.RowDefinitions>
@@ -54,6 +55,10 @@
                                          Mii="{Binding CurrentMii}"
                                          OnRename="ChangeMiiName"
                                          Margin="0,10,0,0" />
+           
+           <whwzMiiComps:MiiCarousel VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                                     Mii="{Binding CurrentMii}"
+                                     x:Name="CurrentUserCarousel" Height="280"/>
            
            <components:EmptyPageInfo x:Name="NoProfilesInfo"
                                      HorizontalAlignment="Center" Title="{x:Static lang:Online.NoProfiles}"

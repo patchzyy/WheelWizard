@@ -43,6 +43,7 @@ public partial class UserProfilePage : UserControl, INotifyPropertyChanged
     {
         var validUsers = GameDataLoader.Instance.HasAnyValidUsers;
         CurrentUserProfile.IsVisible = validUsers;
+        CurrentUserCarousel.IsVisible = validUsers;
         NoProfilesInfo.IsVisible = !validUsers;
         
         var data = GameDataLoader.Instance.GetGameData;

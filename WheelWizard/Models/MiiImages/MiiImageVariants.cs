@@ -18,7 +18,7 @@ public static class MiiImageVariants
     private static Dictionary<Variant, Func<string, string>> _variantMap = new()
     {
         [Variant.DEFAULT] = GetMiiImageUrlFromResponse(Expression.NORMAL, BodyType.FACE, ImageSize.SMALL),
-        [Variant.FULL_BODY] = GetMiiImageUrlFromResponse(Expression.NORMAL, BodyType.ALL_BODY, ImageSize.MEDIUM),
+        [Variant.FULL_BODY] = GetMiiImageUrlFromResponse(Expression.NORMAL, BodyType.ALL_BODY, ImageSize.MEDIUM, instanceCount: 6),
         [Variant.SLIGHT_SIDE_PROFILE_DEFAULT] = GetMiiImageUrlFromResponse(Expression.NORMAL, BodyType.FACE, ImageSize.MEDIUM,
             characterRotation: new(350,15,355), cameraTilt: 12),
         [Variant.SLIGHT_SIDE_PROFILE_HOVER] = GetMiiImageUrlFromResponse(Expression.SMILE, BodyType.FACE, ImageSize.MEDIUM,
@@ -33,7 +33,7 @@ public static class MiiImageVariants
     public static Func<string, string> Get(Variant variant) => _variantMap[variant];
     private static Func<string, string> GetMiiImageUrlFromResponse(
         Expression expression, BodyType type, ImageSize size, 
-        Vector3 characterRotation = new(), int cameraTilt = 0)
+        Vector3 characterRotation = new(), int cameraTilt = 0, int instanceCount = 1)
     {
         return (miiData) =>
         {
@@ -52,7 +52,7 @@ public static class MiiImageVariants
                 $"characterYRotate={(int)characterRotation.Y}",
                 $"characterZRotate={(int)characterRotation.Z}",
                 "lightDirectionMode=none",
-                "instanceCount=1",
+                $"instanceCount={instanceCount}",
                 "instanceRotationMode=model"
             };
             return string.Join("&", queryParams);
