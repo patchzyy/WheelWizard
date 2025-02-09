@@ -337,17 +337,7 @@ namespace WheelWizard.Services.WiiManagement.SaveData
 
             return ~crc;
         }
-
-        /// <summary>
-        /// Write a 32-bit value as big-endian into the given array starting at `dstOffset`.
-        /// </summary>
-        public static void WriteBigEndianUint32(byte[] arr, int dstOffset, uint value)
-        {
-            arr[dstOffset + 0] = (byte)((value >> 24) & 0xFF);
-            arr[dstOffset + 1] = (byte)((value >> 16) & 0xFF);
-            arr[dstOffset + 2] = (byte)((value >>  8) & 0xFF);
-            arr[dstOffset + 3] = (byte)( value        & 0xFF);
-        }
+        
 
         /// <summary>
         /// Fixes the MKWii save file by recalculating and inserting the CRC32 at 0x27FFC.
@@ -362,7 +352,7 @@ namespace WheelWizard.Services.WiiManagement.SaveData
             uint newCrc = ComputeCrc32(rksysData, 0, lengthToCrc);
 
             // 2) Write CRC at offset 0x27FFC in big-endian.
-            WriteBigEndianUint32(rksysData, 0x27FFC, newCrc);
+            BigEndianBinaryReader.WriteUInt32BigEndian(rksysData, 0x27FFC, newCrc);
         }
 
         // ------------------------------------------------------------------
@@ -518,22 +508,15 @@ namespace WheelWizard.Services.WiiManagement.SaveData
 
         /// <summary>
         /// Writes the specified AvatarId and ClientId into the license’s Mii data area 
-        /// in our local `_saveData` buffer.
-        /// 
-        ///   offset +0x10 => AvatarId (4 bytes)
-        ///   offset +0x14 => ClientId (4 bytes)
         /// </summary>
         private void WriteLicenseMiiIdsToSaveData(int userIndex, uint avatarId, uint clientId)
         {
             if (_saveData == null || _saveData.Length < RksysSize) return;
-
             var rkpdOffset = 0x8 + userIndex * RkpdSize;
-            int avatarIdOffset = rkpdOffset + 0x28; // Corrected offset to 0x28 based on documentation
-            int clientIdOffset = rkpdOffset + 0x2C; // Corrected offset to 0x2C based on documentation
-
-            // Use WriteBigEndianUint32 to write in big-endian format
-            WriteBigEndianUint32(_saveData, avatarIdOffset, avatarId);
-            WriteBigEndianUint32(_saveData, clientIdOffset, clientId);
+            int avatarIdOffset = rkpdOffset + 0x28;
+            int clientIdOffset = rkpdOffset + 0x2C;
+            BigEndianBinaryReader.WriteUInt32BigEndian(_saveData, avatarIdOffset, avatarId);
+            BigEndianBinaryReader.WriteUInt32BigEndian(_saveData, clientIdOffset, clientId);
         }
 
         /// <summary>
