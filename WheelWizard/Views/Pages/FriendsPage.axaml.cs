@@ -44,7 +44,6 @@ public partial class FriendsPage : UserControl, INotifyPropertyChanged, IRepeate
     
     private void UpdateFriendList(GameDataLoader gameDataLoader)
     { 
-        // Console.WriteLine($"Loading data {gameDataLoader.GetCurrentFriends.Count}");
         var newList = gameDataLoader.GetCurrentFriends.OrderByDescending(f => f.IsOnline).ToList();
         for (var i = 0; i < newList.Count; i++) // Update existing items and add new ones
         {   
