@@ -9,13 +9,11 @@
                 <components:StateBox Text="Active" />
                 <components:StateBox Text="Dark" Classes="Dark" />
                 <components:StateBox IconData="{StaticResource XMark}" 
-                                     IconSize="14"
-                                     Text="Cross"/>
-                <components:StateBox x:Name="PlayerCountBox"  Text="0"
+                                     IconSize="14" Text="Cross"/>
+                <components:StateBox x:Name="PlayerCountBox"  Text="0" IconSize="16"
                                      IconData="{StaticResource UserCouple}"
-                                     IconSize="16"
                                      TipText="Number of players in the game"
-                                     Margin="10,0,0,0" />
+                                     HorizontalAlignment="Center"/>
             </StackPanel>
         </Border>
     </Design.PreviewWith>
@@ -34,10 +32,7 @@
                                 IsVisible="{TemplateBinding IconData, Converter={x:Static ObjectConverters.IsNotNull}}"
                                 Width="{TemplateBinding IconSize}" Height="{TemplateBinding IconSize}">
                             <Path Data="{TemplateBinding IconData}" x:Name="PART_StateBox_IconPath"
-                                  Stretch="Uniform" 
-                                  HorizontalAlignment="Center"
-                                  VerticalAlignment="Center">
-                            </Path>
+                                  Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         
                         <Rectangle Grid.Column="1" Width="4"

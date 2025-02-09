@@ -32,18 +32,7 @@
                      Background="Transparent" BorderThickness="0"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      ScrollViewer.VerticalScrollBarVisibility="Auto">
-               
-                <!-- We remove the default styling, it looks bad -->
-                <ListBox.Styles>
-                    <Style Selector="ListBoxItem">
-                        <Setter Property="Padding" Value="0"/>
-                    </Style>
-                    <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter, ListBoxItem:selected /template/ ContentPresenter">
-                        <Setter Property="Background" Value="Transparent"/>
-                    </Style>
-                </ListBox.Styles>
                 
-                <!-- now we use our own component, looks way better -->
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <specificComps:ModBrowserListItem Width="284" Height="89" Margin="0,4,9,4"

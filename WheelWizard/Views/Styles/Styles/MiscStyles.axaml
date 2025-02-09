@@ -15,4 +15,13 @@
         <Setter Property="BorderBrush" Value="{StaticResource Neutral900}" />
         <Setter Property="BorderThickness" Value="3" />
     </Style>
+    
+    <Styles>
+        <Style Selector="ListBoxItem">
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+        <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter, ListBoxItem:selected /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+    </Styles>
 </Styles>

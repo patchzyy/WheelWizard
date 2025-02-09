@@ -45,8 +45,17 @@
            </StackPanel>
        </ScrollViewer>
        
-       <ComboBox Grid.Row="0" x:Name="RegionDropdown" Margin="3,12" MinWidth="160"
-                 HorizontalAlignment="Right" VerticalAlignment="Top"/>
+       <StackPanel  Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal">
+           <Border VerticalAlignment="Center" HorizontalAlignment="Center"
+                   ToolTip.Tip="This only shows regions YOU have played on"
+                   ToolTip.Placement="Top" ToolTip.ShowDelay="20"
+                   Width="18" Height="18" Margin="10">
+               <PathIcon Foreground="{StaticResource TitleIconColor}" Margin="15,2,5,0"
+                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Data="{StaticResource InfoTip}" />
+           </Border>
+           <ComboBox x:Name="RegionDropdown" Margin="3,12" MinWidth="160"
+                     HorizontalAlignment="Right" VerticalAlignment="Top"/>
+       </StackPanel>
        
        <Grid Grid.Row="1">
            <whwzComps:DetailedProfileBox x:Name="CurrentUserProfile" 

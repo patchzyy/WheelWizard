@@ -3,9 +3,55 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="656" d:DesignHeight="876"
-             xmlns:components="clr-namespace:WheelWizard.Views.Components.StandardLibrary"
+             xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
+             xmlns:comps="clr-namespace:WheelWizard.Views.Components.StandardLibrary"
+             xmlns:whWzComp="clr-namespace:WheelWizard.Views.Components.WhWzLibrary"
              x:Class="WheelWizard.Views.Pages.FriendsPage">
-   <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-       <components:EmptyPageInfo Title="Friend Page Coming Soon" BodyText="The developers are hard at work porting everything over to this new build. This page has not yet been moved over." />
+   <Grid >
+       <Grid.RowDefinitions>
+           <RowDefinition Height="{StaticResource TopRowSize}" />
+           <!-- This is the total height as the (Title + infoSection) - (padding) -->
+           <RowDefinition />
+       </Grid.RowDefinitions>
+       <Border Grid.Row="0" Background="{StaticResource BackgroundLineColor}" Height="1" HorizontalAlignment="Stretch"
+               VerticalAlignment="Bottom" />
+      
+       <Border Grid.Row="1" Background="{StaticResource BackgroundLineColor}" Height="1" HorizontalAlignment="Stretch"
+               VerticalAlignment="Bottom" />
+       
+       <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+           <TextBlock Text="{x:Static lang:Common.PageTitle_Friends}" Classes="PageTitleText" />
+           <Border VerticalAlignment="Center" HorizontalAlignment="Center"
+                   ToolTip.Tip="To add friends you need to add them in-game."
+                   ToolTip.Placement="Top" ToolTip.ShowDelay="20"
+                   Width="18" Height="18">
+               <PathIcon Foreground="{StaticResource TitleIconColor}" Margin="15,2,5,0"
+                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Data="{StaticResource InfoTip}" />
+           </Border>
+       </StackPanel>
+       
+       <ListBox Grid.Row="1" x:Name="FriendsListView" SelectionMode="Single"
+                Padding="0" Background="Transparent" BorderThickness="0"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                ScrollViewer.VerticalScrollBarVisibility="Auto">
+           <ListBox.ItemTemplate>
+               <DataTemplate>
+                   <whWzComp:FriendsListItem Width="428" Height="124"
+                                             UserName="{Binding MiiName}"
+                                             FriendCode="{Binding FriendCode}"
+                                             Vr="{Binding Vr}" 
+                                             Br="{Binding Br}"
+                                             Mii="{Binding Mii}"
+                                             IsOnline="{Binding IsOnline}"
+                                             TotalRaces="{Binding TotalRaceCount}"
+                                             TotalWon="{Binding TotalWinCount}"/>
+               </DataTemplate>
+           </ListBox.ItemTemplate>
+       </ListBox>
+       
+                  
+       <comps:EmptyPageInfo Grid.Row="1" x:Name="NoProfilesInfo"
+                            HorizontalAlignment="Center" Title="{x:Static lang:Phrases.EmptyText_NoFriends_Title}"
+                            BodyText="{x:Static lang:Phrases.EmptyText_NoFriends}" />
    </Grid>
 </UserControl>

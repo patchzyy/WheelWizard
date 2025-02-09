@@ -19,7 +19,7 @@ namespace WheelWizard.Views.Popups.ModManagement;
 public partial class ModPopupWindow : PopupContent, INotifyPropertyChanged
 {
     // Collection to hold the mods
-    private ObservableCollection<GameBananaModDetails> Mods { get; set; } = new ObservableCollection<GameBananaModDetails>();
+    private ObservableCollection<GameBananaModDetails> Mods { get; } = new ObservableCollection<GameBananaModDetails>();
 
     // Pagination variables
     private int _currentPage = 1;
