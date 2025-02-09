@@ -35,16 +35,16 @@
        
 
   
-       <Grid Grid.Row="1" x:Name="VisibleWhenFriends" RowDefinitions="*, 7*">
-           <Grid Grid.Row="0" Margin="10,0" >
-               <comps:FormFieldLabel Text="Sort by:"
-                                     VerticalAlignment="Top"/>
-               <ComboBox x:Name="SortByDropdown"
-                         SelectionChanged="SortByDropdown_OnSelectionChanged"
-                         Margin="0,20,0,5"
-                         VerticalAlignment="Top"/>
+       <Grid Grid.Row="1" x:Name="VisibleWhenFriends" RowDefinitions="*, 12*">
+           <Grid Grid.Row="0" Margin="10,0"  >
+               <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,6" HorizontalAlignment="Right">
+                   <comps:FormFieldLabel Text="Sort by:" VerticalAlignment="Center"/>
+                   <ComboBox x:Name="SortByDropdown"
+                             SelectionChanged="SortByDropdown_OnSelectionChanged" MinWidth="160"
+                             VerticalAlignment="Top"/>
+               </StackPanel>
            
-               <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom"   Margin="0,5">
+               <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,6">
                    <comps:FormFieldLabel Text="{x:Static lang:Online.ListTitle_Friends}"/>
                    <comps:StateBox Text="0" IconSize="0" x:Name="ListItemCount"/>
                </StackPanel>
