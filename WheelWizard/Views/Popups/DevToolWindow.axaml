@@ -53,6 +53,10 @@
             <components:Button Variant="Default" Text="Test progress popup" x:Name="ProgressButtonTest"
                                IconSize="0" HorizontalAlignment="Left" Margin="0,2"
                                Click="TestProgressPopup_OnClick" />
+            
+            <components:Button Variant="Default" Text="Clear Image Cache"
+                               IconSize="0" HorizontalAlignment="Left" Margin="0,2"
+                               Click="ClearImageCache_OnClick" />
         </StackPanel>
 
     </Grid>

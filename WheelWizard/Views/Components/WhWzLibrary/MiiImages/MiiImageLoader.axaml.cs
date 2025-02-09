@@ -20,6 +20,15 @@ public class MiiImageLoader : BaseMiiImage
         set => SetValue(ShowLoadingProperty, value);
     }
     
+    public static readonly StyledProperty<IBrush> LoadingColorProperty =
+        AvaloniaProperty.Register<MiiImageLoader, IBrush>(nameof(LoadingColor));
+
+    public IBrush LoadingColor
+    {
+        get => GetValue(LoadingColorProperty);
+        set => SetValue(LoadingColorProperty, value);
+    }
+    
     public static readonly StyledProperty<IBrush> FallBackColorProperty =
         AvaloniaProperty.Register<MiiImageLoader, IBrush>(nameof(FallBackColor));
 

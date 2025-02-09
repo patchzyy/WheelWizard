@@ -72,4 +72,3 @@ public partial class FriendsPage : UserControl, INotifyPropertyChanged, IRepeate
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
-

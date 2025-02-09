@@ -42,6 +42,7 @@
         <StyleInclude Source="Components/WhWzLibrary/ModBrowserListItem.axaml"/>
         <StyleInclude Source="Components/WhWzLibrary/DetailedProfileBox.axaml"/>
         <StyleInclude Source="Components/WhWzLibrary/FriendsListItem.axaml"/>
+        <StyleInclude Source="Components/WhWzLibrary/CurrentUserProfile.axaml"/>
         <StyleInclude Source="Components/WhWzLibrary/MiiImages/MiiImageLoader.axaml"/>
         <StyleInclude Source="Components/WhWzLibrary/MiiImages/MiiCarousel.axaml"/>
     </Application.Styles>

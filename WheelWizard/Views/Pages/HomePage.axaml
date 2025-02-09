@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
              xmlns:comps="clr-namespace:WheelWizard.Views.Components.StandardLibrary"
+             xmlns:whwzComps="clr-namespace:WheelWizard.Views.Components.WhWzLibrary"
              mc:Ignorable="d" d:DesignWidth="656" d:DesignHeight="876"
              ClipToBounds="False"
              x:Class="WheelWizard.Views.Pages.HomePage">
@@ -20,11 +21,8 @@
         <Border Grid.Row="1" Background="{StaticResource BackgroundLineColor}" Height="1" HorizontalAlignment="Stretch"
                 VerticalAlignment="Bottom" />
         
-        <!-- Placeholder for CurrentUserProfileComponent, you'll need to adapt this -->
-        <!-- <comps:CurrentUserProfileComponent x:Name="CurrentUserProfile"
-                                            Grid.Row="0"
-                                            HorizontalAlignment="Right"
-                                            VerticalAlignment="Top"/> -->
+        <whwzComps:CurrentUserProfile Grid.Row="0" x:Name="CurrentUserProfile"
+                                      HorizontalAlignment="Right" VerticalAlignment="Top"/>
 
         <Border Grid.Row="1" Height="630" Width="250" CornerRadius="125,125,0,0" VerticalAlignment="Bottom"
                 Background="{StaticResource FrameColor}" Margin="{StaticResource NegativeEdgeGap}">

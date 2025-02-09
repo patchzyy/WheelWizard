@@ -17,7 +17,7 @@
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="MiiImageContainer"
                       ClipToBounds="True">
                     <components:LoadingIcon HorizontalAlignment="Center" VerticalAlignment="Stretch" x:Name="MiiLoadingIcon"
-                                            Foreground="{TemplateBinding Foreground}">
+                                            Foreground="{TemplateBinding LoadingColor}">
                         <components:LoadingIcon.IsVisible>
                             <MultiBinding Converter="{x:Static BoolConverters.And}">
                                 <Binding Path="ShowLoading" RelativeSource="{RelativeSource TemplatedParent}"/>

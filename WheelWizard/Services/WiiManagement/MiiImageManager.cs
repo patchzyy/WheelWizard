@@ -154,6 +154,17 @@ public static class MiiImageManager
         return new (data.AsStream());
     }
     #endregion
+
+    public static void ClearImageCache()
+    {
+        ParsedMiiData.Clear();
+        ParsedMiiDataOrder.Clear();
+        ParsedMiiDataCount = 0;
+        
+        Images.Clear();
+        ImageOrder.Clear();
+        ImageCount = 0;
+    }
 }
 
 
