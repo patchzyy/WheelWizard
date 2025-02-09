@@ -70,7 +70,7 @@ public class GameDataLoader : RepeatedTaskManager
     public List<GameDataFriend> GetCurrentFriends 
         => Instance.GameData.Users[(int)SettingsManager.FOCUSSED_USER.Get()].Friends;
 
-    public Models.GameData.GameData GetGameData 
+    public GameData GetGameData 
         => Instance.GameData;
 
     public GameDataUser GetUserData(int index) 
@@ -81,7 +81,7 @@ public class GameDataLoader : RepeatedTaskManager
 
     private GameDataLoader() : base(40)
     {
-        GameData = new Models.GameData.GameData();
+        GameData = new GameData();
         LoadGameData();
     }
 
@@ -110,17 +110,14 @@ public class GameDataLoader : RepeatedTaskManager
             if (_saveData != null && ValidateMagicNumber())
             {
                 ParseUsers();
-                Console.WriteLine("[LoadGameData] rksys.dat loaded and parsed successfully.");
                 return;
             }
 
             // If the file was invalid or not found, create 4 dummy licenses
             GameData.Users.Clear();
             for (var i = 0; i < MaxPlayerNum; i++)
-            {
                 CreateDummyUser();
-            }
-            Console.WriteLine("[LoadGameData] No valid rksys.dat found. Created dummy users.");
+            
         }
         catch (Exception e)
         {
@@ -211,7 +208,7 @@ public class GameDataLoader : RepeatedTaskManager
         var clientId = BitConverter.ToUInt32(_saveData, offset + 0x14);
 
         // Convert the Mii block from RFL_DB if it’s actually valid
-        byte[] rawMii = InternalMiiManager.GetMiiDataByClientId(clientId);
+        var rawMii = InternalMiiManager.GetMiiDataByClientId(clientId);
 
         var miiData = new MiiData
         {
@@ -319,13 +316,13 @@ public class GameDataLoader : RepeatedTaskManager
     public static uint ComputeCrc32(byte[] data, int offset, int length)
     {
         const uint POLY = 0xEDB88320;
-        uint crc = 0xFFFFFFFF;
+        var crc = 0xFFFFFFFF;
 
-        for (int i = offset; i < offset + length; i++)
+        for (var i = offset; i < offset + length; i++)
         {
-            byte b = data[i];
+            var b = data[i];
             crc ^= b;
-            for (int j = 0; j < 8; j++)
+            for (var j = 0; j < 8; j++)
             {
                 if ((crc & 1) != 0)
                     crc = (crc >> 1) ^ POLY;
@@ -345,25 +342,13 @@ public class GameDataLoader : RepeatedTaskManager
     {
         if (rksysData == null || rksysData.Length < RksysSize)
             throw new ArgumentException("Invalid rksys.dat data");
-
-        // 1) Compute CRC over [0 .. 0x27FFB].
-        int lengthToCrc = 0x27FFC; // 0x27FFC is exclusive (the CRC bytes themselves)
-        uint newCrc = ComputeCrc32(rksysData, 0, lengthToCrc);
+        
+        var lengthToCrc = 0x27FFC;
+        var newCrc = ComputeCrc32(rksysData, 0, lengthToCrc);
 
         // 2) Write CRC at offset 0x27FFC in big-endian.
         BigEndianBinaryReader.WriteUInt32BigEndian(rksysData, 0x27FFC, newCrc);
     }
-
-    // ------------------------------------------------------------------
-    //  NEW / MODIFIED CODE FOR “NO NAME” → GENERATE A REAL MII
-    // ------------------------------------------------------------------
-
-    /// <summary>
-    /// Prompts the user to change the name of a selected license. If the license
-    /// is “no name” or has no real Mii data, we first generate a Mii in RFL_DB.dat,
-    /// link it, and then allow naming.
-    /// </summary>
-    /// <param name="userIndex">Which license slot (0–3) to rename.</param>
     public async void PromptLicenseNameChange(int userIndex)
     {
         // Validate user index
@@ -374,46 +359,23 @@ public class GameDataLoader : RepeatedTaskManager
                 .Show();
             return;
         }
-
-        // Grab the license data from memory
         var user = GameData.Users[userIndex];
-        Console.WriteLine($"[PromptLicenseNameChange] Selected license slot: {userIndex}, current name: '{user.MiiData?.Mii?.Name}'");
-
-        // If it’s a dummy license with friend code "0000-0000-0000", we also check if it’s truly incomplete.
-        // The user specifically said: "Don't rely on friend code for that check." So we skip that.
-        // Instead, check if the Mii is "no name" or if the raw data is empty.
-        bool miiIsEmptyOrNoName = IsNoNameOrEmptyMii(user);
+        var miiIsEmptyOrNoName = IsNoNameOrEmptyMii(user);
 
         if (miiIsEmptyOrNoName)
         {
-            Console.WriteLine("[PromptLicenseNameChange] Detected an empty/no-name Mii. Generating new Mii in the RFL_DB...");
-
-            // 1) Generate a brand new Mii block in RFL_DB with some placeholder name (we’ll rename next).
-            //    This also gives us a brand-new ClientId.
-            uint newClientId = InternalMiiManager.CreateNewMiiInDb("TempMii");
-
-            // 2) Update the user’s license structure to reference this new Mii
-            user.MiiData.Mii.Data = Convert.ToBase64String(InternalMiiManager.GetMiiDataByClientId(newClientId));
-            user.MiiData.Mii.Name = "TempMii";   // Next step is renaming anyway.
-            user.MiiData.ClientId = newClientId;
-            user.MiiData.AvatarId = newClientId; // Typically the same in MKWii saves.
-
-            // Write these new IDs into the rksys.dat local buffer
-            WriteLicenseMiiIdsToSaveData(userIndex, newClientId, newClientId);
-            
-            // Save to disk so our new Mii reference is recognized
-            SaveRksysToFile();
-
-            Console.WriteLine($"[PromptLicenseNameChange] Created new Mii with clientId=0x{newClientId:X8} and updated license slot {userIndex}.");
+            new MessageBoxWindow().SetMainText("This license has no Mii data or is incomplete.\n" +
+                "Please use the Mii Channel to create a Mii first.")
+                .Show();
+            return;
         }
-        else
+        if (user.MiiData == null || user.MiiData.Mii == null)
         {
-            Console.WriteLine("[PromptLicenseNameChange] License already has a valid Mii; proceeding to rename.");
+            new MessageBoxWindow().SetMainText("This license has no Mii data or is incomplete.\n" +
+                "Please use the Mii Channel to create a Mii first.")
+                .Show();
+            return;
         }
-
-        // Now do the normal rename flow:
-
-        // Show a popup to get the new name
         var currentName = user.MiiData.Mii.Name ?? "";
         var renamePopup = new TextInputWindow()
             .setLabelText($"Enter new name for {currentName}:");
@@ -438,42 +400,27 @@ public class GameDataLoader : RepeatedTaskManager
                 .Show();
             return;
         }
-
-        // Trim to max 10 chars for MKWii license
         if (newName.Length > 10)
             newName = newName.Substring(0, 10);
-
-        // Update in-memory license data
         user.MiiData.Mii.Name = newName;
-
-        // Safely update the big-endian UTF-16 name in the local _saveData buffer
         WriteLicenseNameToSaveData(userIndex, newName);
-
-        // Also update the Mii name in the RFL_DB (using the saved ClientId)
-        bool updated = InternalMiiManager.UpdateMiiName(user.MiiData.ClientId, newName);
-        Console.WriteLine(updated
-            ? $"[PromptLicenseNameChange] Mii name updated in RFL_DB for clientId=0x{user.MiiData.ClientId:X8}."
-            : "[PromptLicenseNameChange] Could not update Mii name in RFL_DB (clientId not found?).");
-
-        // Finally, write the updated _saveData back to rksys.dat
+        var updated = InternalMiiManager.UpdateMiiName(user.MiiData.ClientId, newName);
+        if (!updated)
+        {
+            new MessageBoxWindow()
+                .SetMainText("Failed to update the Mii name in the Mii database.")
+                .Show();
+        }
         SaveRksysToFile();
-
-        Console.WriteLine($"[PromptLicenseNameChange] License rename finished. New name: {newName}");
     }
-
-    /// <summary>
-    /// Checks if the given GameDataUser has a “no name” or effectively empty Mii data.
-    /// </summary>
     private bool IsNoNameOrEmptyMii(GameDataUser user)
     {
         if (user?.MiiData?.Mii == null)
             return true;
 
-        string name = user.MiiData.Mii.Name?.Trim() ?? "";
+        var name = user.MiiData.Mii.Name?.Trim() ?? "";
         if (name.Equals("no name", StringComparison.OrdinalIgnoreCase))
             return true;
-
-        // Also consider the base64 Mii data (74 bytes). If empty or all zeros, treat as no Mii.
         var raw = Convert.FromBase64String(user.MiiData.Mii.Data ?? "");
         if (raw.Length != 74) return true; // Not valid
         if (raw.All(b => b == 0)) return true;
@@ -481,55 +428,21 @@ public class GameDataLoader : RepeatedTaskManager
         // Otherwise, it’s presumably valid
         return false;
     }
-
-    /// <summary>
-    /// Writes a new UTF-16 big-endian name for a license into our <c>_saveData</c> buffer
-    /// at offset:  0x8 + userIndex*0x8CC0 + 0x14
-    /// (within the "RKPD" block).
-    /// </summary>
     private void WriteLicenseNameToSaveData(int userIndex, string newName)
     {
         if (_saveData == null || _saveData.Length < RksysSize) return;
-
         var rkpdOffset = 0x8 + userIndex * RkpdSize; 
         var nameOffset = rkpdOffset + 0x14;
-
-        // Convert the new name to big-endian UTF-16 (2 bytes per char)
         var nameBytes = Encoding.BigEndianUnicode.GetBytes(newName);
-
-        // Clear out existing 20 bytes for the name area
-        for (int i = 0; i < 20; i++)
+        for (var i = 0; i < 20; i++)
             _saveData[nameOffset + i] = 0;
-
-        // Copy new name bytes (up to 20)
         Array.Copy(nameBytes, 0, _saveData, nameOffset, Math.Min(nameBytes.Length, 20));
     }
-
-    /// <summary>
-    /// Writes the specified AvatarId and ClientId into the license’s Mii data area 
-    /// </summary>
-    private void WriteLicenseMiiIdsToSaveData(int userIndex, uint avatarId, uint clientId)
-    {
-        if (_saveData == null || _saveData.Length < RksysSize) return;
-        var rkpdOffset = 0x8 + userIndex * RkpdSize;
-        int avatarIdOffset = rkpdOffset + 0x28;
-        int clientIdOffset = rkpdOffset + 0x2C;
-        BigEndianBinaryReader.WriteUInt32BigEndian(_saveData, avatarIdOffset, avatarId);
-        BigEndianBinaryReader.WriteUInt32BigEndian(_saveData, clientIdOffset, clientId);
-    }
-
-    /// <summary>
-    /// Saves the current <c>_saveData</c> buffer back to disk as “rksys.dat”.
-    /// This ensures any modifications become persistent.
-    /// </summary>
+    
     private void SaveRksysToFile()
     {
         if (_saveData == null) return;
-
-        // Recalculate CRC
         FixRksysCrc(_saveData);
-
-        // Determine folder for the region
         var currentRegion = (MarioKartWiiEnums.Regions)SettingsManager.RR_REGION.Get();
         var saveFolder = Path.Combine(SaveFilePath, RRRegionManager.ConvertRegionToGameID(currentRegion));
 
@@ -538,8 +451,6 @@ public class GameDataLoader : RepeatedTaskManager
             Directory.CreateDirectory(saveFolder);
             var path = Path.Combine(saveFolder, "rksys.dat");
             File.WriteAllBytes(path, _saveData);
-
-            Console.WriteLine("[SaveRksysToFile] Successfully wrote updated rksys.dat.");
         }
         catch (Exception ex)
         {
@@ -551,7 +462,6 @@ public class GameDataLoader : RepeatedTaskManager
 
     protected override Task ExecuteTaskAsync()
     {
-        // This gets periodically called by RepeatedTaskManager base class
         LoadGameData();
         return Task.CompletedTask;
     }
