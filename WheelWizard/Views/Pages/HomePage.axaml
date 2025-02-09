@@ -21,7 +21,7 @@
         <Border Grid.Row="1" Background="{StaticResource BackgroundLineColor}" Height="1" HorizontalAlignment="Stretch"
                 VerticalAlignment="Bottom" />
         
-        <whwzComps:CurrentUserProfile Grid.Row="0" x:Name="CurrentUserProfile"
+        <whwzComps:CurrentUserProfile Grid.Row="0" x:Name="CurrentUserProfile" Margin="10,0"
                                       HorizontalAlignment="Right" VerticalAlignment="Top"/>
 
         <Border Grid.Row="1" Height="630" Width="250" CornerRadius="125,125,0,0" VerticalAlignment="Bottom"

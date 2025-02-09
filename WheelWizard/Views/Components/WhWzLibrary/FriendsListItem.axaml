@@ -42,7 +42,7 @@
                                 Margin="-10,-5,0,-5" CornerRadius="7,0,0,7"/>
                         <miiComp:MiiImageLoader Grid.Column="0" Grid.ColumnSpan="2" Margin="-35,-25,0,-5" HorizontalAlignment="Left"
                                                 Mii="{TemplateBinding Mii}" FallBackColor="{StaticResource Neutral500}"
-                                                ImageVariant="SLIGHT_SIDE_PROFILE_DEFAULT" ShowLoading="False"/>
+                                                ImageVariant="SLIGHT_SIDE_PROFILE_DEFAULT" LoadingColor="Transparent"/>
                         
                         <Border Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource Neutral900}"
                                 Margin="-10,-5,0,-5" CornerRadius="7,0,0,7">

@@ -7,12 +7,6 @@ namespace WheelWizard.Views.Components.StandardLibrary;
 
 public class LoadingIcon : TemplatedControl
 {
-    public LoadingIcon()
-    {
-        var color = Application.Current?.FindResource("Neutral800");
-        if(color !=null) Foreground = new SolidColorBrush((Color)color);
-    }
-    
     public static readonly StyledProperty<double> IconSizeProperty =
         AvaloniaProperty.Register<LoadingIcon, double>(nameof(IconSize), 20.0);
 
