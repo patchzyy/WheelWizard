@@ -57,18 +57,37 @@ public partial class FriendsPage : UserControl, INotifyPropertyChanged, IRepeate
         {
             FriendList.RemoveAt(FriendList.Count - 1);
         }
+        ListItemCount.Text = FriendList.Count.ToString();
         HandleVisibility();
     }
     
     private void HandleVisibility()
     {
-        NoProfilesInfo.IsVisible = FriendList.Count <= 0;
+        VisibleWhenNoFriends.IsVisible = FriendList.Count <= 0;
+        VisibleWhenFriends.IsVisible = FriendList.Count > 0;
     }
     
+    private void SortByDropdown_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        
+    }
+    
+    private enum ListOrderCondition
+    {
+        IS_ONLINE,
+        VR,
+        BR,
+        NAME,
+        WINS,
+        TOTAL_RACES,
+    }
+        
+    #region PropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
     
     protected virtual void OnPropertyChanged(string propertyName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+    #endregion
 }

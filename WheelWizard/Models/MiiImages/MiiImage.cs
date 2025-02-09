@@ -49,10 +49,11 @@ public class MiiImage : INotifyPropertyChanged
         LoadedImageSuccessfully = loadedSuccessfully;
         Image = image;
     }
+    #region PropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
-
     protected virtual void OnPropertyChanged(string propertyName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+    #endregion
 }
