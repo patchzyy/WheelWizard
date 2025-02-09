@@ -1,7 +1,6 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:components="using:WheelWizard.Views.Components.StandardLibrary"
-        xmlns:controls="using:WheelWizard.Views.Components.WhWzLibrary"
         xmlns:miiImages="clr-namespace:WheelWizard.Views.Components.WhWzLibrary.MiiImages">
     <Design.PreviewWith>
         <Border Background="{StaticResource Neutral950}" Width="600" Height="600">
@@ -18,8 +17,15 @@
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="MiiImageContainer"
                       ClipToBounds="True">
                     <components:LoadingIcon HorizontalAlignment="Center" VerticalAlignment="Stretch" x:Name="MiiLoadingIcon"
-                                            IsVisible="{TemplateBinding MiiImage, Converter={x:Static ObjectConverters.IsNull}}"
-                                            Foreground="{TemplateBinding Foreground}"/>
+                                            Foreground="{TemplateBinding Foreground}">
+                        <components:LoadingIcon.IsVisible>
+                            <MultiBinding Converter="{x:Static BoolConverters.And}">
+                                <Binding Path="ShowLoading" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                <Binding Path="MiiImage" RelativeSource="{RelativeSource TemplatedParent}"
+                                         Converter="{x:Static ObjectConverters.IsNull}" />
+                            </MultiBinding>
+                        </components:LoadingIcon.IsVisible>
+                    </components:LoadingIcon>
                     
                     <PathIcon x:Name="MiiFallBackIcon" HorizontalAlignment="Center" VerticalAlignment="Bottom"
                               Foreground="{TemplateBinding FallBackColor}" Data="{StaticResource User}">

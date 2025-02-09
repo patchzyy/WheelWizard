@@ -9,13 +9,13 @@ namespace WheelWizard.Views.Components.WhWzLibrary.MiiImages;
 
 public class MiiCarousel : BaseMiiImage
 {
-    private const int CarouselInstanceCount = 6;
+    private const int CarouselInstanceCount = 8;
     private static int CurrentCarouselInstance = 0;
     
     
     public MiiCarousel()
     {
-        ImageVariant = MiiImageVariants.Variant.FULL_BODY;
+        ImageVariant = MiiImageVariants.Variant.FULL_BODY_CAROUSEL;
     }
     
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)

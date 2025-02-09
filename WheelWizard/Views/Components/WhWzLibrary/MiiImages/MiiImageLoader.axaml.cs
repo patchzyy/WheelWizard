@@ -12,6 +12,14 @@ public class MiiImageLoader : BaseMiiImage
     private static bool _initializedRandomRotation = false;
     private static bool _randomRotation = false;
     
+    public static readonly StyledProperty<bool> ShowLoadingProperty =
+        AvaloniaProperty.Register<MiiImageLoader, bool>(nameof(ShowLoading), true);
+    public bool ShowLoading
+    {
+        get => GetValue(ShowLoadingProperty);
+        set => SetValue(ShowLoadingProperty, value);
+    }
+    
     public static readonly StyledProperty<IBrush> FallBackColorProperty =
         AvaloniaProperty.Register<MiiImageLoader, IBrush>(nameof(FallBackColor));
 
