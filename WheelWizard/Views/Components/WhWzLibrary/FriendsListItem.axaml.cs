@@ -41,19 +41,21 @@ public class FriendsListItem : TemplatedControl
     }
     
     public static readonly StyledProperty<string> VrProperty =
-        AvaloniaProperty.Register<FriendsListItem, string>(nameof(Vr));
+        AvaloniaProperty.Register<FriendsListItem, string>(nameof(Vr), coerce: CoerceVrAndBr);
     public string Vr
     {
         get => GetValue(VrProperty);
         set => SetValue(VrProperty, value);
     }
     public static readonly StyledProperty<string> BrProperty =
-        AvaloniaProperty.Register<FriendsListItem, string>(nameof(Br));
+        AvaloniaProperty.Register<FriendsListItem, string>(nameof(Br), coerce: CoerceVrAndBr);
     public string Br
     {
         get => GetValue(BrProperty);
         set => SetValue(BrProperty, value);
     }
+    
+    private static string CoerceVrAndBr(AvaloniaObject o, string value) => value == "9999" ? "9999+" : value;
     
     public static readonly StyledProperty<string> FriendCodeProperty =
         AvaloniaProperty.Register<FriendsListItem, string>(nameof(FriendCode));
