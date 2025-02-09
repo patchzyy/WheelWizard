@@ -11,21 +11,15 @@
     </Design.PreviewWith>
 
     <Style Selector="miiImages|MiiImageLoader">
-        <!-- Set Defaults -->
+        <Setter Property="FallBackColor" Value="{StaticResource Neutral700}" />
+        <Setter Property="LoadingColor" Value="{StaticResource Neutral900}" />
         <Setter Property="Template">
             <ControlTemplate>
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="MiiImageContainer"
                       ClipToBounds="True">
                     <components:LoadingIcon HorizontalAlignment="Center" VerticalAlignment="Stretch" x:Name="MiiLoadingIcon"
-                                            Foreground="{TemplateBinding LoadingColor}">
-                        <components:LoadingIcon.IsVisible>
-                            <MultiBinding Converter="{x:Static BoolConverters.And}">
-                                <Binding Path="ShowLoading" RelativeSource="{RelativeSource TemplatedParent}"/>
-                                <Binding Path="MiiImage" RelativeSource="{RelativeSource TemplatedParent}"
-                                         Converter="{x:Static ObjectConverters.IsNull}" />
-                            </MultiBinding>
-                        </components:LoadingIcon.IsVisible>
-                    </components:LoadingIcon>
+                                            Foreground="{TemplateBinding LoadingColor}"
+                                            IsVisible="{TemplateBinding MiiImage, Converter={x:Static ObjectConverters.IsNull} }"/>
                     
                     <PathIcon x:Name="MiiFallBackIcon" HorizontalAlignment="Center" VerticalAlignment="Bottom"
                               Foreground="{TemplateBinding FallBackColor}" Data="{StaticResource User}">

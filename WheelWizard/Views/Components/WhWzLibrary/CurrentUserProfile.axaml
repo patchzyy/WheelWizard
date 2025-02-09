@@ -10,11 +10,10 @@
     <Style Selector="controls|CurrentUserProfile">
         <Setter Property="Template">
             <ControlTemplate>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Background="Transparent" >
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Right"
-                                VerticalAlignment="Top" Margin="0,6,0,0">
-                        
-                        <TextBlock HorizontalAlignment="Right"  VerticalAlignment="Top"
+                                VerticalAlignment="Top" Margin="0,-10,0,0">
+                        <TextBlock HorizontalAlignment="Right"  VerticalAlignment="Center"
                                    Classes="SidebarSectionText"  x:Name="PlayerNameBlock"
                                    Text="{TemplateBinding UserName}"
                                    Margin="0,0,10,0"/>
@@ -25,15 +24,29 @@
                     </StackPanel>
                     
                     <Border CornerRadius="999999" ClipToBounds="True" Background="{StaticResource Neutral900}"
-                            Width="50" Height="50">
+                            Width="50" Height="50" x:Name="Part_MiiBall">
                         <miiComp:MiiImageLoader HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                                Mii="{TemplateBinding Mii}" LoadingColor="Aqua"
+                                                LoadingColor="{StaticResource Neutral600}"
+                                                Mii="{TemplateBinding Mii}" x:Name="Part_MiiImage"
                                                 FallBackColor="{StaticResource Neutral600}"
-                                                ImageVariant="DEFAULT"/>
+                                                ImageVariant="SMALL"/>
                     </Border>
                
                 </StackPanel>
             </ControlTemplate>
         </Setter>
+            
+        <Style Selector="^:pointerover">
+            <Style Selector="^ /template/ Border#Part_MiiBall">
+                <Setter Property="Background" Value="{StaticResource Neutral800}"/>
+            </Style>
+            <Style Selector="^ /template/ miiComp|MiiImageLoader#Part_MiiImage">
+                <Setter Property="LoadingColor" Value="{StaticResource Neutral500}"/>
+                <Setter Property="FallBackColor" Value="{StaticResource Neutral500}"/>
+            </Style>
+            <Style Selector="^ /template/ TextBlock">
+                <Setter Property="Foreground" Value="{StaticResource Neutral300}"/>
+            </Style>
+        </Style>
     </Style>
 </Styles>

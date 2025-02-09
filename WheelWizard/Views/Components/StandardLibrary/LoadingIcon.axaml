@@ -30,8 +30,9 @@
         </StackPanel>
     </Design.PreviewWith>
     <Style Selector="controls|LoadingIcon">
-   
+   <Setter Property="Foreground" Value="{StaticResource Neutral800}"/>
         <Setter Property="Template">
+            
             <ControlTemplate>
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Border Background="Transparent" x:Name="PART_IconBorder" 

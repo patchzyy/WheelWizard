@@ -30,6 +30,9 @@
            </Border>
        </StackPanel>
        
+       <whWzComp:CurrentUserProfile Grid.Row="0" x:Name="CurrentUserProfile" Margin="10,0"
+                                    HorizontalAlignment="Right" VerticalAlignment="Top"/>
+       
        <ListBox Grid.Row="1" x:Name="FriendsListView" SelectionMode="Single"
                 Padding="0" Background="Transparent" BorderThickness="0"
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"

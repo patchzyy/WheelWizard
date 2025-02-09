@@ -35,7 +35,7 @@ public abstract class BaseMiiImage : TemplatedControl, INotifyPropertyChanged
     
    public static readonly StyledProperty<MiiImageVariants.Variant> ImageVariantProperty =
          AvaloniaProperty.Register<BaseMiiImage, MiiImageVariants.Variant>(
-             nameof(ImageVariant), MiiImageVariants.Variant.DEFAULT, coerce: CoerceVariant);
+             nameof(ImageVariant), MiiImageVariants.Variant.SMALL, coerce: CoerceVariant);
     
     public MiiImageVariants.Variant ImageVariant
     {

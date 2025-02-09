@@ -1,11 +1,13 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Input;
 using System.ComponentModel;
 using WheelWizard.Models.MiiImages;
 using WheelWizard.Models.Settings;
 using WheelWizard.Resources.Languages;
 using WheelWizard.Services.WiiManagement.SaveData;
+using WheelWizard.Views.Pages;
 
 namespace WheelWizard.Views.Components.WhWzLibrary;
 
@@ -55,7 +57,9 @@ public class CurrentUserProfile : TemplatedControl, INotifyPropertyChanged
         UserName = name;
         FriendCode = currentUser.FriendCode;
         Mii = currentUser.Mii;
-    }    
+    }
+
+    protected override void OnPointerPressed(PointerPressedEventArgs e) => ViewUtils.NavigateToPage(new UserProfilePage());
     
     public event PropertyChangedEventHandler? PropertyChanged;
     protected virtual void OnPropertyChanged(string propertyName)
