@@ -1,0 +1,106 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
+        xmlns:controls="using:WheelWizard.Views.Components.WhWzLibrary"
+        xmlns:components="using:WheelWizard.Views.Components.StandardLibrary"
+        xmlns:miiComp="using:WheelWizard.Views.Components.WhWzLibrary.MiiImages">
+    <Design.PreviewWith>
+        <StackPanel Spacing="6" Background="{StaticResource Neutral950}">
+            <controls:FriendsListItem Width="428" Height="124"
+                                      FriendCode="1234-5678-9012"
+                                      UserName="Lum Patch"
+                                      Vr="5000" Br="5000"
+                                      TotalRaces="12" TotalWon="1345"/>
+            
+            <controls:FriendsListItem Width="428" Height="124" IsOnline="True"
+                                      FriendCode="1234-5678-9012"
+                                      UserName="Someone Else"
+                                      Vr="5000" Br="5000"
+                                      TotalRaces="213" TotalWon="12"/> 
+            
+            <controls:FriendsListItem Width="428" Height="124"
+                                      FriendCode="1234-5678-9012"
+                                      UserName="WantToBeeMe"
+                                      Vr="5000" Br="5000"
+                                      TotalRaces="213" TotalWon="12"/>
+            
+            <controls:FriendsListItem Width="428" Height="124"
+                                      FriendCode="1234-5678-9012"
+                                      UserName="Random Guy"
+                                      Vr="5000" Br="5000"
+                                      TotalRaces="213" TotalWon="12"/>
+        </StackPanel>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|FriendsListItem">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{StaticResource Neutral900}" CornerRadius="6" Padding="10,5" x:Name="PART_BaseBorder"
+                        ClipToBounds="True">
+                    <Grid ColumnDefinitions="2*, 5*, 5*">
+                        <Border Grid.Column="0" Background="{StaticResource Neutral700}"
+                                Margin="-10,-5,0,-5" CornerRadius="7,0,0,7"/>
+                        <miiComp:MiiImageLoader Grid.Column="0" Grid.ColumnSpan="2" Margin="-35,-25,0,-5" HorizontalAlignment="Left"
+                                                Mii="{TemplateBinding Mii}" FallBackColor="{StaticResource Neutral500}"
+                                                ImageVariant="SLIGHT_SIDE_PROFILE_DEFAULT" ShowLoading="False"/>
+                        
+                        <Border Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource Neutral900}"
+                                Margin="-10,-5,0,-5" CornerRadius="7,0,0,7">
+                            <Border.OpacityMask>
+                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                    <GradientStop Color="Transparent" Offset="0.78" />
+                                    <GradientStop Color="#FFFFFFDF" Offset="1" />
+                                </LinearGradientBrush>
+                            </Border.OpacityMask>
+                        </Border>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Bottom" IsVisible="{TemplateBinding IsOnline}" 
+                                   Text="{x:Static lang:Common.Term_Online}"
+                                   FontSize="16" Foreground="{StaticResource Neutral200}"/>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Bottom"  Text="{x:Static lang:Common.Term_Offline}"
+                                   FontSize="16" IsVisible="{TemplateBinding IsOnline,Converter={x:Static BoolConverters.Not}}" 
+                                   Foreground="{StaticResource Neutral200}" />
+                        
+                        <Border Margin="-10,-5" Grid.Column="0" Grid.ColumnSpan="9999" CornerRadius="6" x:Name="PART_BorderColor"
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="2" BorderBrush="Transparent" />
+                        
+                        <StackPanel Grid.Column="1"  Margin="15,5,0,0">
+                                <TextBlock Classes="TitleText" Text="{TemplateBinding UserName}"/>
+                                <TextBlock Classes="BodyText" Text="{TemplateBinding FriendCode}"/>
+                        </StackPanel>
+                        
+                        <Grid Grid.Column="1" Margin="15,0,0,5" ColumnDefinitions="3*,4*" VerticalAlignment="Bottom">
+                            <StackPanel Grid.Column="0">
+                                <components:FormFieldLabel Text="VR" />
+                                <TextBlock Classes="BodyText" Text="{TemplateBinding Vr}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <components:FormFieldLabel Text="BR" />
+                                <TextBlock Classes="BodyText" Text="{TemplateBinding Br}"/>
+                            </StackPanel>
+                        </Grid>
+                        
+                        <components:Button Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top"
+                                           Variant="Primary"
+                                           IsEnabled="{TemplateBinding IsOnline}" x:Name="ViewRoomButton"
+                                           Text="View Room" IconData="{StaticResource Road}" Margin="5,10"/>
+                        
+                        <Grid Grid.Column="2" Margin="15,0,0,5" ColumnDefinitions="3*,4*" VerticalAlignment="Bottom">
+                            <StackPanel Grid.Column="0">
+                                <components:FormFieldLabel Text="Wins" />
+                                <TextBlock Classes="BodyText" Text="{TemplateBinding TotalWon}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <components:FormFieldLabel Text="Races" />
+                                <TextBlock Classes="BodyText" Text="{TemplateBinding TotalRaces}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="controls|FriendsListItem[IsOnline=true] /template/ Border#PART_BorderColor">
+        <Setter Property="BorderBrush" Value="{StaticResource Primary300}"/>
+    </Style>
+</Styles>

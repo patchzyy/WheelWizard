@@ -99,8 +99,7 @@
                         <StackPanel Grid.Column="1" Grid.Row="1" Margin="0,7,0,0">
                             <components:FormFieldLabel Text="Status" />
                             <TextBlock IsVisible="{TemplateBinding IsOnline}" Text="{x:Static lang:Common.Term_Online}"
-                                       Classes="BodyText" Foreground="{StaticResource Primary400}"/>
-                            <!-- I have no idea why the Foreground is not working -->
+                                       FontSize="16" Foreground="{StaticResource Primary400}"/>
                             <TextBlock Classes="BodyText" Text="{x:Static lang:Common.Term_Offline}"
                                        IsVisible="{TemplateBinding IsOnline,Converter={x:Static BoolConverters.Not}}"/>
                         </StackPanel>
