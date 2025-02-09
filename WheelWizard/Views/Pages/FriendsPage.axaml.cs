@@ -15,6 +15,9 @@ namespace WheelWizard.Views.Pages;
 
 public partial class FriendsPage : UserControl, INotifyPropertyChanged, IRepeatedTaskListener
 {
+    // Made this static intentionally.
+    // I personally don't think its worth saving it as a setting.
+    // Though I do see the use in saving it when using the app so you can swap pages in the meantime
     private static ListOrderCondition CurrentOrder = ListOrderCondition.IS_ONLINE;
     
     private ObservableCollection<GameDataFriend> _friendlist = new();
