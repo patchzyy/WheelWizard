@@ -37,14 +37,15 @@
            <ListBox.ItemTemplate>
                <DataTemplate>
                    <whWzComp:FriendsListItem Width="428" Height="124"
+                                             Margin="0,5"
                                              UserName="{Binding MiiName}"
                                              FriendCode="{Binding FriendCode}"
                                              Vr="{Binding Vr}" 
                                              Br="{Binding Br}"
                                              Mii="{Binding Mii}"
                                              IsOnline="{Binding IsOnline}"
-                                             TotalRaces="{Binding TotalRaceCount}"
-                                             TotalWon="{Binding TotalWinCount}"/>
+                                             TotalLosses="{Binding Losses}"
+                                             TotalWon="{Binding Wins}"/>
                </DataTemplate>
            </ListBox.ItemTemplate>
        </ListBox>

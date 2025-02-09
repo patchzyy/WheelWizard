@@ -32,12 +32,12 @@ public class FriendsListItem : TemplatedControl
         get => GetValue(TotalWonProperty);
         set => SetValue(TotalWonProperty, value);
     }
-    public static readonly StyledProperty<string> TotalRacesProperty =
-        AvaloniaProperty.Register<FriendsListItem, string>(nameof(TotalRaces));
-    public string TotalRaces
+    public static readonly StyledProperty<string> TotalLossesProperty =
+        AvaloniaProperty.Register<FriendsListItem, string>(nameof(TotalLosses));
+    public string TotalLosses
     {
-        get => GetValue(TotalRacesProperty);
-        set => SetValue(TotalRacesProperty, value);
+        get => GetValue(TotalLossesProperty);
+        set => SetValue(TotalLossesProperty, value);
     }
     
     public static readonly StyledProperty<string> VrProperty =

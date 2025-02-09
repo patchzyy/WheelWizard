@@ -10,25 +10,25 @@
                                       FriendCode="1234-5678-9012"
                                       UserName="Lum Patch"
                                       Vr="5000" Br="5000"
-                                      TotalRaces="12" TotalWon="1345"/>
+                                      TotalLosses="12" TotalWon="1345"/>
             
             <controls:FriendsListItem Width="428" Height="124" IsOnline="True"
                                       FriendCode="1234-5678-9012"
                                       UserName="Someone Else"
                                       Vr="5000" Br="5000"
-                                      TotalRaces="213" TotalWon="12"/> 
+                                      TotalLosses="213" TotalWon="12"/> 
             
             <controls:FriendsListItem Width="428" Height="124"
                                       FriendCode="1234-5678-9012"
                                       UserName="WantToBeeMe"
                                       Vr="5000" Br="5000"
-                                      TotalRaces="213" TotalWon="12"/>
+                                      TotalLosses="213" TotalWon="12"/>
             
             <controls:FriendsListItem Width="428" Height="124"
                                       FriendCode="1234-5678-9012"
                                       UserName="Random Guy"
                                       Vr="5000" Br="5000"
-                                      TotalRaces="213" TotalWon="12"/>
+                                      TotalLosses="213" TotalWon="12"/>
         </StackPanel>
     </Design.PreviewWith>
 
@@ -82,16 +82,17 @@
                         <components:Button Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top"
                                            Variant="Primary"
                                            IsEnabled="{TemplateBinding IsOnline}" x:Name="ViewRoomButton"
-                                           Text="View Room" IconData="{StaticResource Road}" Margin="5,10"/>
+                                           Text="{x:Static lang:Online.Button_ViewRoom}" 
+                                           IconData="{StaticResource Road}" Margin="5,10"/>
                         
                         <Grid Grid.Column="2" Margin="15,0,0,5" ColumnDefinitions="3*,4*" VerticalAlignment="Bottom">
                             <StackPanel Grid.Column="0">
-                                <components:FormFieldLabel Text="Wins" />
+                                <components:FormFieldLabel Text="{x:Static lang:Online.Stat_Wins}" />
                                 <TextBlock Classes="BodyText" Text="{TemplateBinding TotalWon}"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1">
-                                <components:FormFieldLabel Text="Races" />
-                                <TextBlock Classes="BodyText" Text="{TemplateBinding TotalRaces}"/>
+                                <components:FormFieldLabel Text="{x:Static lang:Online.Stat_Losses}" />
+                                <TextBlock Classes="BodyText" Text="{TemplateBinding TotalLosses}"/>
                             </StackPanel>
                         </Grid>
                     </Grid>
