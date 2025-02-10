@@ -3,7 +3,6 @@ using System;
 using WheelWizard.Services;
 using WheelWizard.Services.UrlProtocol;
 using WheelWizard.Views.Pages.Settings;
-using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Views;
 

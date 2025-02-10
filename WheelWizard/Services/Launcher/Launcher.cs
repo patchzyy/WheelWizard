@@ -30,7 +30,11 @@ public static class Launcher
         var dolphinLocation = PathManager.DolphinFilePath;
         if (string.IsNullOrWhiteSpace(dolphinLocation) || !File.Exists(dolphinLocation))
         {
-            new MessageBoxWindow().SetMainText($"Dolphin not found at: {dolphinLocation}").Show();
+            new MessageBoxWindow()
+                .SetMessageType(MessageBoxWindow.MessageType.Warning)
+                .SetTitleText("Dolphin not found")
+                .SetInfoText($"Dolphin not found at: {dolphinLocation} \n" +
+                             "Please make sure the settings are set up correctly.").Show();
             return;
         }
 
@@ -64,7 +68,10 @@ public static class Launcher
         }
         catch (Exception ex)
         {
-            new MessageBoxWindow().SetMainText($"Failed to launch Dolphin: {ex.Message}").Show();
+            new MessageBoxWindow()
+                .SetMessageType(MessageBoxWindow.MessageType.Error)
+                .SetTitleText("Failed to launch Dolphin")
+                .SetInfoText($"Reason: {ex.Message}").Show();
         }
     }
 
@@ -81,7 +88,10 @@ public static class Launcher
             {
                 Avalonia.Threading.Dispatcher.UIThread.Post(() =>
                 {
-                    new MessageBoxWindow().SetMainText(Phrases.PopupText_NotFindGame).Show();
+                    new MessageBoxWindow()
+                        .SetMessageType(MessageBoxWindow.MessageType.Warning)
+                        .SetTitleText("Invalid game path")
+                        .SetInfoText(Phrases.PopupText_NotFindGame).Show();
                 });
                 return;
             }
@@ -91,11 +101,14 @@ public static class Launcher
             LaunchDolphin(
                 $"{dolphinLaunchType} -e \"{RRLaunchJsonFilePath}\" --config=Dolphin.Core.EnableCheats=False");
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
             Avalonia.Threading.Dispatcher.UIThread.Post(() =>
             {
-                new MessageBoxWindow().SetMainText($"Failed to launch Retro Rewind: {e.Message}").Show();
+                new MessageBoxWindow()
+                    .SetMessageType(MessageBoxWindow.MessageType.Error)
+                    .SetTitleText("Failed to launch Retro Rewind")
+                    .SetInfoText($"Reason: {ex.Message}").Show();
             });
         }
     }

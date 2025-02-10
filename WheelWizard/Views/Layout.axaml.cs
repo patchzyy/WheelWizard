@@ -9,6 +9,7 @@ using WheelWizard.Helpers;
 using WheelWizard.Models.Settings;
 using WheelWizard.Resources.Languages;
 using WheelWizard.Services;
+using WheelWizard.Services.Installation;
 using WheelWizard.Services.LiveData;
 using WheelWizard.Services.Settings;
 using WheelWizard.Services.WiiManagement.SaveData;
@@ -45,7 +46,7 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
         
         NavigateToPage(new HomePage());
         InitializeManagers();
-
+        
     #if RELEASE_BUILD
         KitchenSinkButton.IsVisible = false;
     #endif

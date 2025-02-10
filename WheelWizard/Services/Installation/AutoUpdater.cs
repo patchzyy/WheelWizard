@@ -20,7 +20,18 @@ public static class AutoUpdater
         var response = await HttpClientHelper.GetAsync<string>(Endpoints.WhWzLatestReleasesUrl);
         if (!response.Succeeded || response.Content is null)
         {
-            HandleUpdateCheckError(response);
+            // If it failed, it can be due to many reasons. We don't want to always throw an error,
+            // since most of the times its simply because the wifi is not on or something
+            // It's not useful to send that error in that case so we filter those out first.
+            if (response.StatusCodeGroup != 4 && response.StatusCode is not 503 and not 504)
+            {
+                await new MessageBoxWindow()
+                    .SetMessageType(MessageBoxWindow.MessageType.Error)
+                    .SetTitleText("Failed to check for updates")
+                    .SetInfoText("An error occurred while checking for updates. Please try again later. " + 
+                                  "\nError: " + response.StatusMessage)
+                    .ShowDialog();
+            }
             return;
         }
         
@@ -37,21 +48,21 @@ public static class AutoUpdater
             return;
         }
 
+        var popupExtraText = Humanizer.ReplaceDynamic(Phrases.PopupText_NewVersionWhWz, latestVersion, currentVersion);
         var updateQuestion = await new YesNoWindow()
                              .SetButtonText(Common.Action_Update, Common.Action_MaybeLater)
                              .SetMainText(Phrases.PopupText_WhWzUpdateAvailable)
-                             .SetExtraText(Humanizer.ReplaceDynamic(Phrases.PopupText_NewVersionWhWz,
-                                                                    latestVersion, currentVersion)).AwaitAnswer();
+                             .SetExtraText(popupExtraText)
+                             .AwaitAnswer();
         if (!updateQuestion) 
             return;
         
         var adminQuestion = new YesNoWindow()
                             .SetMainText(Phrases.PopupText_UpdateAdmin)  
                             .SetExtraText(Phrases.PopupText_UpdateAdminExplained);
-        if (await adminQuestion.AwaitAnswer())
-            RestartAsAdmin();
-        else
-            await UpdateAsync(latestRelease.Assets[0].BrowserDownloadUrl);
+        
+        if (await adminQuestion.AwaitAnswer()) RestartAsAdmin();
+        else await UpdateAsync(latestRelease.Assets[0].BrowserDownloadUrl);
     }
     
     private static void RestartAsAdmin()
@@ -99,7 +110,10 @@ public static class AutoUpdater
         var currentFolder = Path.GetDirectoryName(currentExecutablePath);
         if (currentFolder is null)
         {
-            await new MessageBoxWindow().SetMainText(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation).ShowDialog();
+            await new MessageBoxWindow()
+                .SetMessageType(MessageBoxWindow.MessageType.Warning)
+                .SetTitleText("Unable to update wheel wizard")
+                .SetInfoText(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation).ShowDialog();
             return;
         }
         var newFilePath = Path.Combine(currentFolder, currentExecutableName+"_new.exe");
@@ -123,7 +137,11 @@ public static class AutoUpdater
         var currentFolder = Path.GetDirectoryName(currentFilePath);
         if (currentFolder is null)
         {
-            new MessageBoxWindow().SetMainText(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation).ShowDialog();
+            new MessageBoxWindow()
+                .SetMessageType(MessageBoxWindow.MessageType.Warning)
+                .SetTitleText("Unable to update wheel wizard")
+                .SetTitleText(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation)
+                .ShowDialog();
             return;
         }
         var scriptFilePath = Path.Combine(currentFolder, "update.ps1");
@@ -198,20 +216,11 @@ public static class AutoUpdater
         }
         catch (Exception ex)
         {
-            new MessageBoxWindow().SetMainText($"Failed to execute the update script. {ex.Message}").ShowDialog();
-        }
-    }
-
-    
-    private static void HandleUpdateCheckError(HttpClientResult<string> response)
-    {
-        if (response.StatusCodeGroup == 4 || response.StatusCode is 503 or 504)
-            new MessageBoxWindow().SetMainText(Phrases.PopupText_UnableUpdateWhWz_ReasonNetwork).ShowDialog();
-        else
-        {
-            new MessageBoxWindow().SetMainText("An error occurred while checking for updates. Please try again later. " + 
-                                               "\nError: " + response.StatusMessage)
-                                  .ShowDialog();
+            new MessageBoxWindow()
+                .SetMessageType(MessageBoxWindow.MessageType.Error)
+                .SetTitleText("Unable to update wheel wizard")
+                .SetTitleText($"Failed to execute the update script. {ex.Message}")
+                .ShowDialog();
         }
     }
 }

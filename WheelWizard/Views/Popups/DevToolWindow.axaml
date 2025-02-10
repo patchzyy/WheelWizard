@@ -50,9 +50,14 @@
                                IconSize="0" HorizontalAlignment="Left" Margin="0,2"
                                Click="ForceEnableLayout_OnClick" />
             
-            <components:Button Variant="Default" Text="Test progress popup" x:Name="ProgressButtonTest"
-                               IconSize="0" HorizontalAlignment="Left" Margin="0,2"
-                               Click="TestProgressPopup_OnClick" />
+            <StackPanel Orientation="Horizontal" Spacing="4">
+                <components:Button Variant="Default" Text="Test progress popup" x:Name="ProgressButtonTest"
+                                   IconSize="0" HorizontalAlignment="Left" Margin="0,2"
+                                   Click="TestProgressPopup_OnClick" />
+                <components:Button Variant="Default" Text="Test message popups"
+                                   IconSize="0" HorizontalAlignment="Left" Margin="0,2"
+                                   Click="TestMessagePopups_OnClick" />
+            </StackPanel>
             
             <components:Button Variant="Default" Text="Clear Image Cache"
                                IconSize="0" HorizontalAlignment="Left" Margin="0,2"

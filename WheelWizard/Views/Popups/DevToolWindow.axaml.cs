@@ -48,6 +48,9 @@ public partial class DevToolWindow : PopupContent, IRepeatedTaskListener
     private void ForceEnableLayout_OnClick(object sender, RoutedEventArgs e) => ViewUtils.GetLayout().EnableEverything();
 
     private void ClearImageCache_OnClick(object sender, RoutedEventArgs e) => MiiImageManager.ClearImageCache();
+    
+    
+    #region Popup Tests
     private async void TestProgressPopup_OnClick(object sender, RoutedEventArgs e)
     {
         ProgressButtonTest.IsEnabled = false;
@@ -71,4 +74,28 @@ public partial class DevToolWindow : PopupContent, IRepeatedTaskListener
             ProgressButtonTest.IsEnabled = true;
         });
     }
+    
+    private void TestMessagePopups_OnClick(object sender, RoutedEventArgs e)
+    {
+       new MessageBoxWindow()
+            // .SetMessageType(MessageBoxWindow.MessageType.Message) // Default, so you dont have to type this
+            .SetTitleText("Saved Successfully!")
+            .SetInfoText("The name you entered has sucessfully saved in the system")
+            .Show();
+       
+       new MessageBoxWindow()
+           .SetMessageType(MessageBoxWindow.MessageType.Warning)
+           .SetTitleText("Invalid license.")
+           .SetInfoText("This license has no Mii data or is incomplete.\n" +
+                        "Please use the Mii Channel to create a Mii first. \n \n \n abncd")
+           .Show();
+       
+       new MessageBoxWindow()
+           .SetMessageType(MessageBoxWindow.MessageType.Error)
+           .SetTitleText("Update error.")
+           .SetInfoText("An error occured when trying top update Retro Rewind.")
+           .Show();
+    }
+
+    #endregion
 }

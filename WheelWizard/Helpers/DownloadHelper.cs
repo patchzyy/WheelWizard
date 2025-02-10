@@ -40,7 +40,8 @@ namespace WheelWizard.Helpers;
             response.EnsureSuccessStatusCode();
             if (response.RequestMessage == null || response.RequestMessage.RequestUri == null)
             {
-                new MessageBoxWindow().SetMainText("Failed to resolve final URL.").Show();
+                // Do we want this error?
+                // new MessageBoxWindow().SetTitleText("Failed to resolve final URL.").Show();
                 return null;
             }
 
@@ -93,8 +94,10 @@ namespace WheelWizard.Helpers;
             attempt++;
             if (attempt >= MaxRetries)
             {
-                new Views.Popups.Generic.YesNoWindow().SetMainText("Download timed out")
-                                                        .SetExtraText($"The download timed out after {MaxRetries} attempts.");
+                new MessageBoxWindow()
+                    .SetMessageType(MessageBoxWindow.MessageType.Error)
+                    .SetTitleText("Download timed out")
+                    .SetInfoText($"The download timed out after {MaxRetries} attempts.");
                 break;
             }
 
@@ -107,7 +110,10 @@ namespace WheelWizard.Helpers;
             attempt++;
             if (attempt >= MaxRetries)
             {
-                new MessageBoxWindow().SetMainText($"An HTTP error occurred after {MaxRetries} attempts: {ex.Message}").Show();
+                new MessageBoxWindow()
+                    .SetMessageType(MessageBoxWindow.MessageType.Error)
+                    .SetTitleText("Tried to many times")
+                    .SetInfoText($"An HTTP error occurred after {MaxRetries} attempts: {ex.Message}").Show();
                 break;
             }
             var delay = (int)Math.Pow(2, attempt) * 1000;
@@ -116,7 +122,10 @@ namespace WheelWizard.Helpers;
         }
         catch (Exception ex)
         {
-            new MessageBoxWindow().SetMainText($"An error occurred while downloading the file: {ex.Message}").Show();
+            new MessageBoxWindow()
+                .SetMessageType(MessageBoxWindow.MessageType.Error)
+                .SetTitleText("Download error")
+                .SetInfoText($"An error occurred while downloading the file: {ex.Message}").Show();
             break;
         }
     }

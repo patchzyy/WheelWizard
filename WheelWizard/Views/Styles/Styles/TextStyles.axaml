@@ -13,45 +13,44 @@
         </Border>
     </Design.PreviewWith>
     
-    <Style Selector="TextBlock.TitleText">
+    <Style Selector="TextBlock.TitleText, SelectableTextBlock.TitleText">
         <Setter Property="FontSize" Value="23" />
         <Setter Property="Foreground" Value="{StaticResource Neutral400}" />
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
 
     <!-- Page Title is just a normal Title, but with extra margin -->
-    <Style Selector="TextBlock.PageTitleText">
+    <Style Selector="TextBlock.PageTitleText, SelectableTextBlock.PageTitleText">
         <Setter Property="Margin" Value="3,12" />
         <Setter Property="FontSize" Value="23" />
         <Setter Property="Foreground" Value="{StaticResource Neutral400}" />
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
 
-    <Style Selector="TextBlock.BodyText">
+    <Style Selector="TextBlock.BodyText, SelectableTextBlock.BodyText">
         <Setter Property="FontSize" Value="16" />
         <Setter Property="Foreground" Value="{StaticResource Neutral400}" />
         <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
     <!-- Sidebar Section text also has a lot of margin to make it fit -->
-    <Style Selector="TextBlock.SidebarSectionText">
+    <Style Selector="TextBlock.SidebarSectionText, SelectableTextBlock.SidebarSectionText">
         <Setter Property="FontSize" Value="16" />
         <Setter Property="Foreground" Value="{StaticResource Neutral400}" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="Margin" Value="10,20,10,0" />
     </Style>
 
-    <Style Selector="TextBlock.TinyText">
+    <Style Selector="TextBlock.TinyText, SelectableTextBlock.TinyText">
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Foreground" Value="{StaticResource Neutral400}" />
     </Style>
     
-    <Style Selector="TextBlock">
+    <Style Selector="TextBlock, SelectableTextBlock, UserControl">
         <Setter Property="TextElement.FontFamily" Value="Arial, ares://WheelWizard/Resources/Fonts/#ctmkf" />
     </Style>
-   
-    <!-- I hope this bit makes sure the whole application does this, but i am not sure lol -->
-    <Style Selector="UserControl">
-        <Setter Property="TextElement.FontFamily" Value="Arial, ares://WheelWizard/Resources/Fonts/#ctmkf" />
+    
+    <Style Selector="SelectableTextBlock">
+        <Setter Property="SelectionBrush" Value="{StaticResource Primary500}"/>
     </Style>
 </Styles>

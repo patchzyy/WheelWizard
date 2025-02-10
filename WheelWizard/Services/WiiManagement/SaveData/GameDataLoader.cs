@@ -40,8 +40,11 @@ public class GameDataLoader : RepeatedTaskManager
             }
             catch (Exception ex)
             {
-                // Display an error if we cannot create the directory.
-                new MessageBoxWindow().SetMainText($"Error creating save directory: {ex.Message}").Show();
+                new MessageBoxWindow()
+                    .SetMessageType(MessageBoxWindow.MessageType.Error)
+                    .SetTitleText($"creating save directory failed")
+                    .SetInfoText($"Error: {ex.Message}")
+                    .Show();
             }
             return path;
         }
@@ -122,7 +125,9 @@ public class GameDataLoader : RepeatedTaskManager
         catch (Exception e)
         {
             new MessageBoxWindow()
-                .SetMainText($"An error occurred while loading the game data: {e.Message}")
+                .SetMessageType(MessageBoxWindow.MessageType.Error)
+                .SetTitleText("Loading game data failed")
+                .SetInfoText($"An error occurred while loading the game data: {e.Message}")
                 .Show();
         }
     }
@@ -351,12 +356,9 @@ public class GameDataLoader : RepeatedTaskManager
     }
     public async void PromptLicenseNameChange(int userIndex)
     {
-        // Validate user index
-        if (userIndex < 0 || userIndex >= MaxPlayerNum)
+        if (userIndex is < 0 or >= MaxPlayerNum)
         {
-            new MessageBoxWindow()
-                .SetMainText("Invalid license index. Please select a valid license.")
-                .Show();
+            InvalidLicenseMessage("Invalid license index. Please select a valid license.");
             return;
         }
         var user = GameData.Users[userIndex];
@@ -364,16 +366,14 @@ public class GameDataLoader : RepeatedTaskManager
 
         if (miiIsEmptyOrNoName)
         {
-            new MessageBoxWindow().SetMainText("This license has no Mii data or is incomplete.\n" +
-                "Please use the Mii Channel to create a Mii first.")
-                .Show();
+            InvalidLicenseMessage("This license has no Mii data or is incomplete.\n" +
+                                  "Please use the Mii Channel to create a Mii first.");
             return;
         }
-        if (user.MiiData == null || user.MiiData.Mii == null)
+        if (user.MiiData?.Mii == null)
         {
-            new MessageBoxWindow().SetMainText("This license has no Mii data or is incomplete.\n" +
-                "Please use the Mii Channel to create a Mii first.")
-                .Show();
+            InvalidLicenseMessage("This license has no Mii data or is incomplete.\n" +
+                                  "Please use the Mii Channel to create a Mii first.");
             return;
         }
         var currentName = user.MiiData.Mii.Name ?? "";
@@ -388,16 +388,12 @@ public class GameDataLoader : RepeatedTaskManager
         // Basic checks
         if (newName.Length < 3)
         {
-            new MessageBoxWindow()
-                .SetMainText("Names must be at least 3 characters long.")
-                .Show();
+            InvalidNameMessage("Names must be at least 3 characters long.");
             return;
         }
         if (!newName.All(char.IsLetterOrDigit))
         {
-            new MessageBoxWindow()
-                .SetMainText("Names can only contain letters and numbers.")
-                .Show();
+            InvalidNameMessage("Names can only contain letters and numbers.");
             return;
         }
         if (newName.Length > 10)
@@ -408,8 +404,11 @@ public class GameDataLoader : RepeatedTaskManager
         if (!updated)
         {
             new MessageBoxWindow()
-                .SetMainText("Failed to update the Mii name in the Mii database.")
+                .SetMessageType(MessageBoxWindow.MessageType.Error)
+                .SetTitleText("Failed to update the Mii name.")
+                .SetInfoText("It was unable to update the name in the files necessary to complete the name change.")
                 .Show();
+          
         }
         SaveRksysToFile();
     }
@@ -455,11 +454,31 @@ public class GameDataLoader : RepeatedTaskManager
         catch (Exception ex)
         {
             new MessageBoxWindow()
-                .SetMainText($"Failed to save rksys.dat.\n{ex.Message}")
+                .SetMessageType(MessageBoxWindow.MessageType.Error)
+                .SetInfoText($"Failed to save rksys.dat.\n{ex.Message}")
+                .SetTitleText("Failed to save the 'save' file")
                 .Show();
         }
     }
 
+    private void InvalidLicenseMessage(string info)
+    {
+        new MessageBoxWindow()
+            .SetMessageType(MessageBoxWindow.MessageType.Warning)
+            .SetTitleText("Invalid license.")
+            .SetInfoText(info)
+            .Show();
+    }
+    
+    private void InvalidNameMessage(string info)
+    {
+        new MessageBoxWindow()
+            .SetMessageType(MessageBoxWindow.MessageType.Warning)
+            .SetTitleText("Invalid Name.")
+            .SetInfoText(info)
+            .Show();
+    }
+    
     protected override Task ExecuteTaskAsync()
     {
         LoadGameData();

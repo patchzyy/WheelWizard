@@ -1,32 +1,35 @@
-<self:PopupContent xmlns="https://github.com/avaloniaui"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:self="clr-namespace:WheelWizard.Views.Popups"
-      mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-      xmlns:components="clr-namespace:WheelWizard.Views.Components.StandardLibrary"
-      x:Class="WheelWizard.Views.Popups.Generic.MessageBoxWindow">
-    <Grid Margin="10">
+<self:PopupContent x:Class="WheelWizard.Views.Popups.Generic.MessageBoxWindow"
+                   xmlns="https://github.com/avaloniaui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:self="clr-namespace:WheelWizard.Views.Popups" ClipToBounds="False"
+                   mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+                   xmlns:components="clr-namespace:WheelWizard.Views.Components.StandardLibrary">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
+        
+        <!-- Message Title -->
+        <Border Grid.Row="0" Margin="-10" x:Name="TitleBorder">
+            <SelectableTextBlock Margin="10" x:Name="MessageTitleBlock"
+                                 Classes="TitleText" FontSize="18"
+                                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                                 Foreground="{StaticResource Primary50}" />
+        </Border>
 
-        <!-- Error Message Text -->
-        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,10">
-            
-            <TextBlock Classes="TitleText" x:Name="MainTextBlock"
-                       Text="An error has occurred."
-                       HorizontalAlignment="Left" TextWrapping="Wrap"
-                       Foreground="{StaticResource FormFieldLabelColor}"
-                       FontSize="18"/>
-            <TextBlock Classes="BodyText" x:Name="ExtraTextBlock"
-                       FontSize="14"
-                       HorizontalAlignment="Left" Margin="0,10,0,0" />
-        </StackPanel>
+        <!-- Message Text -->
+        <ScrollViewer Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,10"
+                      VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <SelectableTextBlock Classes="BodyText" x:Name="MessageInformationBlock" FontSize="14" TextWrapping="Wrap"
+                                 HorizontalAlignment="Left" Margin="0,10,0,0" />
+        </ScrollViewer>
 
         <!-- OK Button -->
-        <components:Button Grid.Row="0" x:Name="CancelButton"
+        <components:Button Grid.Row="2" x:Name="CancelButton"
                            Text="OK" Width="140"
                            Variant="Default"
                            HorizontalAlignment="Center"
@@ -34,5 +37,20 @@
                            IconData="{StaticResource CheckMark}"
                            Margin="0,0,10,0"
                            Click="OkButton_Click"/>
+        
+        <Grid.Styles>
+            <Style Selector="Border#TitleBorder.Message">
+                <Setter Property="Background" Value="Transparent" />
+            </Style>
+            <Style Selector="Border#TitleBorder.Message">
+                <Setter Property="Background" Value="{StaticResource Primary500}" />
+            </Style>
+            <Style Selector="Border#TitleBorder.Warning">
+                <Setter Property="Background" Value="{StaticResource Warning700}" />
+            </Style>
+            <Style Selector="Border#TitleBorder.Error">
+                <Setter Property="Background" Value="{StaticResource Danger700}" />
+            </Style>
+        </Grid.Styles>
     </Grid>
 </self:PopupContent>

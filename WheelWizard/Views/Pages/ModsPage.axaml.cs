@@ -81,7 +81,11 @@ public partial class ModsPage : UserControl, INotifyPropertyChanged
 
     private void OnErrorOccurred(string message)
     {
-        new MessageBoxWindow().SetMainText(message).Show();
+        new MessageBoxWindow()
+            .SetMessageType(MessageBoxWindow.MessageType.Error)
+            .SetTitleText("An error occured")
+            .SetInfoText(message)
+            .Show();
     }
     
     private void BrowseMod_Click(object sender, RoutedEventArgs e)
@@ -167,13 +171,22 @@ public partial class ModsPage : UserControl, INotifyPropertyChanged
     {
         if (ModsListBox.SelectedItem is not Mod selectedMod)
         {
-            new MessageBoxWindow().SetMainText("Failed to view the selected mod").Show();
+            // You actually never see this error, however, if for some unknown reason it happens, we don't want to disregard it
+            new MessageBoxWindow()
+                .SetMessageType(MessageBoxWindow.MessageType.Warning)
+                .SetTitleText("Cannot view the selected mod")
+                .SetInfoText("Something went wrong when trying to open the selected mod")
+                .Show();
             return;
         }
        
         if (selectedMod.ModID == -1)
         {
-            new MessageBoxWindow().SetMainText("Cannot view mod that was not installed through the mod browser").Show();
+            new MessageBoxWindow()
+                .SetMessageType(MessageBoxWindow.MessageType.Warning)
+                .SetTitleText("Cannot view the selected mod")
+                .SetInfoText("Cannot view mod that was not installed through the mod browser.")
+                .Show();
             return;
         }
         

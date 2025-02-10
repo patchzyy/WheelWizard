@@ -65,7 +65,7 @@
                         
                                <StackPanel Margin="7">
                                    <StackPanel Orientation="Horizontal">
-                                   <TextBlock Classes="TitleText" Text="{TemplateBinding UserName}"/>
+                                   <SelectableTextBlock Classes="TitleText" Text="{TemplateBinding UserName}"/>
                                    <components:IconLabelButton VerticalAlignment="Center" x:Name="EditMiiName"
                                                                IconData="{StaticResource Pen}"
                                                                Margin="7,0,0,0" IconSize="20"
@@ -73,7 +73,7 @@
                                                                HoverForeground="{StaticResource Neutral400}"/>
                                    </StackPanel>
                                    <StackPanel Orientation="Horizontal">
-                                       <TextBlock Classes="BodyText" Text="{TemplateBinding FriendCode}"/>
+                                       <SelectableTextBlock Classes="BodyText" Text="{TemplateBinding FriendCode}"/>
                                        <components:IconLabelButton VerticalAlignment="Center" x:Name="CopyFcButton"
                                                                    IconData="{StaticResource Copy}"
                                                                    Margin="7,0,0,0" IconSize="20"
@@ -98,22 +98,22 @@
                         
                         <StackPanel Grid.Column="1" Grid.Row="1" Margin="0,7,0,0">
                             <components:FormFieldLabel Text="Status" />
-                            <TextBlock IsVisible="{TemplateBinding IsOnline}" Text="{x:Static lang:Common.Term_Online}"
-                                       FontSize="16" Foreground="{StaticResource Primary400}"/>
-                            <TextBlock Classes="BodyText" Text="{x:Static lang:Common.Term_Offline}"
-                                       IsVisible="{TemplateBinding IsOnline,Converter={x:Static BoolConverters.Not}}"/>
+                            <SelectableTextBlock IsVisible="{TemplateBinding IsOnline}" Text="{x:Static lang:Common.Term_Online}"
+                                                 FontSize="16" Foreground="{StaticResource Primary400}"/>
+                            <SelectableTextBlock Classes="BodyText" Text="{x:Static lang:Common.Term_Offline}"
+                                                 IsVisible="{TemplateBinding IsOnline,Converter={x:Static BoolConverters.Not}}"/>
                         </StackPanel>
                         
                         <Grid Grid.Column="0" Grid.Row="1" ColumnDefinitions="3*,4*" 
                               Margin="5,0,0,10" VerticalAlignment="Bottom">
                             <StackPanel Grid.Column="0">
                                 <components:FormFieldLabel Text="VR" />
-                                <TextBlock Classes="BodyText" Text="{TemplateBinding Vr}"/>
+                                <SelectableTextBlock Classes="BodyText" Text="{TemplateBinding Vr}"/>
                             </StackPanel>
 
                             <StackPanel Grid.Column="1">
                                 <components:FormFieldLabel Text="BR" />
-                                <TextBlock Classes="BodyText" Text="{TemplateBinding Br}"/>
+                                <SelectableTextBlock Classes="BodyText" Text="{TemplateBinding Br}"/>
                             </StackPanel>
                         </Grid>
                         
@@ -128,11 +128,11 @@
                         
                         <StackPanel Grid.Column="0" Grid.Row="2" Margin="5,8,0,0">
                             <components:FormFieldLabel Text="Total games won" />
-                            <TextBlock Classes="BodyText" Text="{TemplateBinding TotalWon}"/>
+                            <SelectableTextBlock Classes="BodyText" Text="{TemplateBinding TotalWon}"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Grid.Row="2" Margin="0,8,0,0">
                             <components:FormFieldLabel Text="Total games played" />
-                            <TextBlock Classes="BodyText" Text="{TemplateBinding TotalRaces}"/>
+                            <SelectableTextBlock Classes="BodyText" Text="{TemplateBinding TotalRaces}"/>
                         </StackPanel>
                     </Grid>
                 </Border>

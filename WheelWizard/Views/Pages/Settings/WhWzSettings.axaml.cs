@@ -140,9 +140,10 @@ public partial class WhWzSettings : UserControl
         }
         else
         {
-            // Notify the user that Dolphin could not be found
             await new MessageBoxWindow()
-                .SetMainText(Phrases.PopupText_DolphinNotFoundText)
+                .SetMessageType(MessageBoxWindow.MessageType.Warning)
+                .SetTitleText("Dolphin Emulator folder not found.")
+                .SetInfoText(Phrases.PopupText_DolphinNotFoundText)
                 .ShowDialog();
         }
 
@@ -167,11 +168,19 @@ public partial class WhWzSettings : UserControl
         TogglePathSettings(false);
         if (!(SettingsHelper.PathsSetupCorrectly() && path1 && path2 && path3))
         {
-            new MessageBoxWindow().SetMainText(Phrases.PopupText_EnsurePathsExists).ShowDialog();
+            new MessageBoxWindow()
+                .SetMessageType(MessageBoxWindow.MessageType.Warning)
+                .SetTitleText("Invalid configuration.")
+                .SetInfoText(Phrases.PopupText_EnsurePathsExists)
+                .ShowDialog();
         }
         else
         {
-            new MessageBoxWindow().SetMainText(Phrases.PopupText_SettingsSaved).ShowDialog();
+            new MessageBoxWindow()
+                .SetMessageType(MessageBoxWindow.MessageType.Message)
+                .SetTitleText(Phrases.PopupText_SettingsSaved)
+                .SetInfoText(Phrases.PopupText_SettingsSaved)
+                .ShowDialog();
 
             // This is not really the best approach, but it works for now
             if (oldPath1 + oldPath2 + oldPath3 != DolphinExeInput.Text + MarioKartInput.Text + DolphinUserPathInput.Text)

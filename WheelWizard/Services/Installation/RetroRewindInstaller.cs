@@ -76,7 +76,10 @@ public static class RetroRewindInstaller
         var serverResponse = await HttpClientHelper.GetAsync<string>(Endpoints.RRUrl);
         if (!serverResponse.Succeeded)
         {
-            await new MessageBoxWindow().SetMainText(Phrases.PopupText_CouldNotConnectServer).ShowDialog();
+            await new MessageBoxWindow()
+                .SetMessageType(MessageBoxWindow.MessageType.Warning)
+                .SetTitleText("Could not connect to the server")
+                .SetInfoText(Phrases.PopupText_CouldNotConnectServer).ShowDialog();
             return;
         }
         var tempZipPath = Path.Combine(PathManager.LoadFolderPath, "Temp", "RetroRewind.zip");

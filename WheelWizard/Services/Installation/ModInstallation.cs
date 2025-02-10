@@ -230,7 +230,10 @@ public static class ModInstallation
             // Check if a mod with the same name already exists
             if (ModExists(ModManager.Instance.Mods, givenModName))
             {
-                new MessageBoxWindow().SetMainText($"Mod with name '{givenModName}' already exists.").Show();
+                new MessageBoxWindow()
+                    .SetMessageType(MessageBoxWindow.MessageType.Warning)
+                    .SetTitleText("Invalid Mod name")
+                    .SetInfoText($"Mod with name '{givenModName}' already exists.").Show();
                 return;
             }
 
@@ -263,11 +266,19 @@ public static class ModInstallation
             // Add to ModManager
             ModManager.Instance.AddMod(newMod);
 
-            new MessageBoxWindow().SetMainText($"Mod '{givenModName}' installed successfully.").Show();
+            new MessageBoxWindow()
+                .SetMessageType(MessageBoxWindow.MessageType.Message)
+                .SetTitleText("Successfully installed mod!")
+                .SetInfoText($"Mod '{givenModName}' installed successfully.")
+                .Show();
         }
         catch (Exception ex)
         {
-            new MessageBoxWindow().SetMainText($"Failed to install mod: {ex.Message}").Show();
+            new MessageBoxWindow()
+                .SetMessageType(MessageBoxWindow.MessageType.Warning)
+                .SetTitleText("Failed to install mod!")
+                .SetInfoText($"Error: {ex.Message}")
+                .Show();
         }
         finally
         {

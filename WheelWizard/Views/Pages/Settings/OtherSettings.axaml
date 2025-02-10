@@ -56,9 +56,9 @@
 
                     <Grid Margin="0,10,0,0">
                         <StackPanel>
-                            <TextBlock Classes="TinyText" Text="{x:Static lang:Phrases.Text_ThanksTranslators}" />
-                            <TextBlock Classes="TinyText" Text="Eppe, Weebo, kytronix, Noël, Haru00007, JGavidia, OrangeCake_," />
-                            <TextBlock Classes="TinyText" Text="Sep, Ismy, rhyy, Sinseiga" />
+                            <SelectableTextBlock Classes="TinyText" Text="{x:Static lang:Phrases.Text_ThanksTranslators}" />
+                            <SelectableTextBlock Classes="TinyText" Text="Eppe, Weebo, kytronix, Noël, Haru00007, JGavidia, OrangeCake_," />
+                            <SelectableTextBlock Classes="TinyText" Text="Sep, Ismy, rhyy, Sinseiga" />
                         </StackPanel>
 
                         <Border ToolTip.Tip="If you are willing to translate for RetroRewind and WheelWizard. Be sure to reach out to Eppe or WantToBeeMe :)"

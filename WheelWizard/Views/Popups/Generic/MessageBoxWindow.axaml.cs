@@ -1,4 +1,5 @@
 using Avalonia.Interactivity;
+using System;
 using System.Media;
 using Button = WheelWizard.Views.Components.StandardLibrary.Button;
 
@@ -14,30 +15,33 @@ public partial class MessageBoxWindow : PopupContent
     }
     private MessageType messageType = MessageType.Message;
     
-    public MessageBoxWindow() : base(true, false, true, "Message")
+    public MessageBoxWindow() : base(true, false, true, "Message", new(400, 230))
     {
         InitializeComponent();
-        CancelButton.Variant = Button.ButtonsVariantType.Primary;
+        SetMessageType(messageType);
     }
     
     public MessageBoxWindow SetMessageType(MessageType newType)
     {
         messageType = newType;
-        if (messageType == MessageType.Message)
-            CancelButton.Variant = Button.ButtonsVariantType.Primary;
-        Window.Title = messageType.ToString();
+        CancelButton.Variant = messageType == MessageType.Message ? 
+            Button.ButtonsVariantType.Primary: 
+            Button.ButtonsVariantType.Default;
+        
+        Window.WindowTitle = messageType.ToString();
+        TitleBorder.Classes.Add(messageType.ToString());
         return this;
     }
     
-    public MessageBoxWindow SetMainText(string mainText)
+    public MessageBoxWindow SetTitleText(string mainText)
     {
-        MainTextBlock.Text = mainText;
+        MessageTitleBlock.Text = mainText;
         return this;
     }
     
-    public MessageBoxWindow SetExtraText(string extraText)
+    public MessageBoxWindow SetInfoText(string extraText)
     {
-        ExtraTextBlock.Text = extraText;
+        MessageInformationBlock.Text = extraText;
         return this;
     }
 
@@ -48,13 +52,13 @@ public partial class MessageBoxWindow : PopupContent
         switch (messageType)
         {
             //todo: fix sounds for all platforms
-            case MessageType.Error:
+            case MessageType.Error :
                 // SystemSounds.Hand.Play();
                 break;
             case MessageType.Warning:
                 // SystemSounds.Exclamation.Play();
                 break;
-            case MessageType.Message:
+            case MessageType.Message or _:
                 // SystemSounds.Hand.Play();
                 break;
         }

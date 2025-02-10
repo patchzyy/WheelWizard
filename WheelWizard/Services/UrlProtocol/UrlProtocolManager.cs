@@ -1,12 +1,9 @@
-﻿
-#if WINDOWS
+﻿#if WINDOWS
 using Microsoft.Win32;
 #endif
-
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using System.Windows;
 using WheelWizard.Views.Popups.Generic;
 using WheelWizard.Views.Popups.ModManagement;
 
@@ -15,6 +12,7 @@ namespace WheelWizard.Services.UrlProtocol;
 public class UrlProtocolManager
 {
     public const string ProtocolName = "wheelwizard";
+    
 #if WINDOWS
     public static void RegisterCustomScheme(string schemeName)
     {
@@ -41,11 +39,9 @@ public class UrlProtocolManager
         var protocolKey = $@"SOFTWARE\Classes\{schemeName}";
         Registry.CurrentUser.DeleteSubKeyTree(protocolKey);
     }
-#endif
 
-    async public static void SetWhWzSchemeAsync()
+    async private static void SetWhWzSchemeAsyncInternally()
     {
-        #if WINDOWS
         var currentExecutablePath = Process.GetCurrentProcess().MainModule!.FileName;
         var protocolKey = $@"SOFTWARE\Classes\{ProtocolName}";
 
@@ -75,56 +71,29 @@ public class UrlProtocolManager
                 }
             }
         }
-    #endif
     }
+#endif
     
-
-    public static void ShowPopupForLaunchUrl(string url)
+    async public static void SetWhWzSchemeAsync()
     {
-        try
-        {
-            // Remove the protocol prefix
-            string content = url.Replace("wheelwizard://", "").Trim();
-            // Remove any trailing slash
-            content = content.TrimEnd('/');
-
-            // Parse ModID and DownloadURL
-            string[] parts = content.Split(',');
-
-            if (!int.TryParse(parts[0], out int modID))
-            {
-                throw new FormatException($"Invalid ModID: {parts[0]}");
-            }
-            string downloadURL = parts.Length > 1 ? parts[1] : null;
-            var modPopup = new ModIndependentWindow();
-            modPopup.LoadModAsync(1234);
-            modPopup.ShowDialog();
-        }
-        catch (Exception ex)
-        {
-            new MessageBoxWindow().SetMainText($"Error handling URL: {ex.Message}").Show();
-        }
+        // TODO: Note that this will never be called, since `#if WINDOWS` is nothing, that does not exist
+#if WINDOWS
+        SetWhWzSchemeAsyncInternally();
+#endif
     }
 
     public static async Task ShowPopupForLaunchUrlAsync(string url)
     {
+        // Remove the protocol prefix
+        var content = url.Replace("wheelwizard://", "").Trim().TrimEnd('/');
+        var parts = content.Split(',');
         try
         {
-            // Remove the protocol prefix
-            string content = url.Replace("wheelwizard://", "").Trim();
-
-            // Remove any trailing slash
-            content = content.TrimEnd('/');
-
-            // Parse ModID and DownloadURL
-            string[] parts = content.Split(',');
-
-            if (!int.TryParse(parts[0], out int modID))
-            {
+            if (!int.TryParse(parts[0], out var modID))
                 throw new FormatException($"Invalid ModID: {parts[0]}");
-            }
+            
             // TODO: IF YOU MAKE THIS WINDOW IN AVALIONA, THEN ALSO MOVE THE THING IN APP.CS TO THE AVALONIA APP.CS
-            string downloadURL = parts.Length > 1 ? parts[1] : null;
+            var downloadURL = parts.Length > 1 ? parts[1] : null;
             var modPopup = new ModIndependentWindow();
             await modPopup.LoadModAsync(modID, downloadURL);
             modPopup.ShowDialog();
@@ -132,7 +101,11 @@ public class UrlProtocolManager
         }
         catch (Exception ex)
         {
-            new MessageBoxWindow().SetMainText($"Error handling URL: {ex.Message}").Show();
+            new MessageBoxWindow()
+                .SetMessageType(MessageBoxWindow.MessageType.Error)
+                .SetTitleText("Couldn't load URL")
+                .SetInfoText($"Error handling URL: {ex.Message}")
+                .Show();
         }
     }
 }

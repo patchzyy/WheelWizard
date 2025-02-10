@@ -14,7 +14,6 @@ using WheelWizard.Services.GameBanana;
 using WheelWizard.Services.Installation;
 using WheelWizard.Services.Launcher;
 using WheelWizard.Views.Popups.Generic;
-using MessageBoxWindow = WheelWizard.Views.Popups.Generic.MessageBoxWindow;
 
 namespace WheelWizard.Views.Popups.ModManagement;
 
@@ -158,12 +157,10 @@ public partial class ModDetailViewer : UserControl
     
     private async void Install_Click(object sender, RoutedEventArgs e)
     {
-        var confirmation = await new Views.Popups.Generic.YesNoWindow().SetMainText($"Do you want to download and install the mod: {CurrentMod._sName}?").AwaitAnswer();
-        if (!confirmation)
-        {
-            new MessageBoxWindow().SetMainText("Download cancelled.").Show();
-            return;
-        }
+        var confirmation = await new YesNoWindow()
+            .SetMainText($"Do you want to download and install the mod: {CurrentMod._sName}?")
+            .AwaitAnswer();
+        if (!confirmation) return;
     
         try
         {
@@ -173,7 +170,11 @@ public partial class ModDetailViewer : UserControl
                 : CurrentMod._aFiles.Select(f => f._sDownloadUrl).ToList();
             if (!downloadUrls.Any())
             {
-                new MessageBoxWindow().SetMainText("No downloadable files found for this mod.").Show();
+                new MessageBoxWindow()
+                    .SetMessageType(MessageBoxWindow.MessageType.Warning)
+                    .SetTitleText("Unable to download the mod")
+                    .SetInfoText("No downloadable files found for this mod.")
+                    .Show();
                 return;
             }
             var progressWindow = new ProgressWindow($"Downloading {CurrentMod._sName}");
@@ -188,28 +189,38 @@ public partial class ModDetailViewer : UserControl
             var file = Directory.GetFiles(ModsLaunchHelper.TempModsFolderPath).FirstOrDefault();
             if (file == null)
             {
-                new MessageBoxWindow().SetMainText("Downloaded file not found.").Show();
+                new MessageBoxWindow()
+                    .SetMessageType(MessageBoxWindow.MessageType.Warning)
+                    .SetTitleText("Unable to download the mod")
+                    .SetInfoText("Downloaded file not found.")
+                    .Show();
                 return;
             }
             var author = "-1";
-            var modId = -1;
             if (CurrentMod._aSubmitter?._sName != null)
-            {
                 author = CurrentMod._aSubmitter._sName;
-            }
-            modId = CurrentMod._idRow;
+            
+            var modId = CurrentMod._idRow;
             var popup = new TextInputWindow().setLabelText("Mod Name");
             popup.PopulateText(CurrentMod._sName);
             var modName = await popup.ShowDialog();
             if (string.IsNullOrEmpty(modName))
             {
-                new MessageBoxWindow().SetMainText("Mod name not provided.").Show();
+                new MessageBoxWindow()
+                    .SetMessageType(MessageBoxWindow.MessageType.Warning)
+                    .SetTitleText("Mod name Invalid.")
+                    .SetInfoText("Please provide a mod name.")
+                    .Show();
                 return;
             }
             var invalidChars = Path.GetInvalidFileNameChars();
             if (modName.Any(c => invalidChars.Contains(c)))
             {
-                new MessageBoxWindow().SetMainText("Mod name contains invalid characters.").Show();
+                new MessageBoxWindow()
+                    .SetMessageType(MessageBoxWindow.MessageType.Warning)
+                    .SetTitleText("Mod name Invalid.")
+                    .SetInfoText("Mod name contains invalid characters.")
+                    .Show();
                 Directory.Delete(ModsLaunchHelper.TempModsFolderPath, true);
                 return;
             }
@@ -218,7 +229,11 @@ public partial class ModDetailViewer : UserControl
         }
         catch (Exception ex)
         {
-            new MessageBoxWindow().SetMainText("An error occurred during download: " + ex.Message).Show();
+            new MessageBoxWindow()
+                .SetMessageType(MessageBoxWindow.MessageType.Error)
+                .SetTitleText("Download failed.")
+                .SetInfoText("An error occurred during download: " + ex.Message)
+                .Show();
         }
         LoadModDetailsAsync(CurrentMod._idRow);
     }
