@@ -406,7 +406,7 @@ public class GameDataLoader : RepeatedTaskManager
             new MessageBoxWindow()
                 .SetMessageType(MessageBoxWindow.MessageType.Error)
                 .SetTitleText("Failed to update the Mii name.")
-                .SetInfoText("It was unable to update the name in the files necessary to complete the name change.")
+                .SetInfoText("It was unable to update the name in the Mii Database file.")
                 .Show();
           
         }
