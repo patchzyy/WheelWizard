@@ -52,10 +52,10 @@
                        VerticalAlignment="Bottom"  />
            </Grid>
            
-           <ListBox  Grid.Row="1" x:Name="FriendsListView" SelectionMode="Single"
-                     Padding="0" Background="Transparent" BorderThickness="0"
-                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                     ScrollViewer.VerticalScrollBarVisibility="Auto">
+           <ListBox Grid.Row="1" x:Name="FriendsListView" SelectionMode="Single"
+                    Padding="0" Background="Transparent" BorderThickness="0"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto">
                <ListBox.ItemTemplate>
                    <DataTemplate>
                        <whWzComp:FriendsListItem Width="428" Height="124"

@@ -5,8 +5,6 @@ using System.ComponentModel;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Net.Mail;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using WheelWizard.Helpers;
 using WheelWizard.Models.Settings;
@@ -28,7 +26,7 @@ public class ModManager : INotifyPropertyChanged
         private set
         {
             _mods = value;
-            OnPropertyChanged();
+            OnPropertyChanged(nameof(Mods));
         }
     }
 
@@ -39,44 +37,38 @@ public class ModManager : INotifyPropertyChanged
         _mods = new ObservableCollection<Mod>();
     }
 
-    // Events to communicate with the frontend
-    public event Action? ModsLoaded;
-    public event Action? ModsChanged;
-    public event Action? ModProcessingStarted;
-    public event Action? ModProcessingCompleted;
-    public event Action<int, int, string>? ModProcessingProgress;
-    public event Action<string>? ErrorOccurred;
-
     public bool IsModInstalled(int modID)
     {
         return Mods.Any(mod => mod.ModID == modID);
     }
 
-    public async void ReloadAsync()
-    {
-        await LoadModsAsync();
-        ModsLoaded?.Invoke();
-    }
+    public async void ReloadAsync() => await LoadModsAsync();
 
-    public async Task LoadModsAsync()
+    private async Task LoadModsAsync()
     {
         try
         {
-            Mods = await ModInstallation.LoadModsAsync();
+            // Unsubscribe all the old mods and resubscribe all the new mods
             foreach (var mod in Mods)
+            {
+                mod.PropertyChanged -= Mod_PropertyChanged;
+            }
+
+            var newMods = await ModInstallation.LoadModsAsync();
+            foreach (var mod in newMods)
             {
                 mod.PropertyChanged += Mod_PropertyChanged;
             }
-            OnPropertyChanged(nameof(Mods));
-            ModsChanged?.Invoke();
+
+            Mods = newMods;
         }
         catch (Exception ex)
         {
-            ErrorOccurred?.Invoke($"Failed to load mods: {ex.Message}");
+            ErrorOccurred($"Failed to load mods: {ex.Message}");
         }
     }
 
-    public async Task SaveModsAsync()
+    public async void SaveModsAsync()
     {
         try
         {
@@ -84,7 +76,7 @@ public class ModManager : INotifyPropertyChanged
         }
         catch (Exception ex)
         {
-            ErrorOccurred?.Invoke($"Failed to save mods: {ex.Message}");
+            ErrorOccurred($"Failed to save mods: {ex.Message}");
         }
     }
 
@@ -95,8 +87,7 @@ public class ModManager : INotifyPropertyChanged
         mod.PropertyChanged += Mod_PropertyChanged;
         Mods.Add(mod);
         SortModsByPriority();
-        _ = SaveModsAsync(); //this calls async method without awaiting it and no warning :)
-        ModsChanged?.Invoke();
+        SaveModsAsync(); 
     }
 
     public void RemoveMod(Mod mod)
@@ -104,29 +95,26 @@ public class ModManager : INotifyPropertyChanged
         if (!Mods.Contains(mod)) return;
 
         Mods.Remove(mod);
-        _ = SaveModsAsync();
-        ModsChanged?.Invoke();
+        SaveModsAsync();
+        OnPropertyChanged(nameof(Mods));
     }
 
     private void Mod_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(Mod.IsEnabled) ||
-            e.PropertyName == nameof(Mod.Title) ||
-            e.PropertyName == nameof(Mod.Author) ||
-            e.PropertyName == nameof(Mod.ModID) ||
-            e.PropertyName == nameof(Mod.Priority))
-        {
-            _ = SaveModsAsync();
-            // SortModsByPriority();
-            ModsChanged?.Invoke();
-        }
+        if (e.PropertyName != nameof(Mod.IsEnabled) &&
+            e.PropertyName != nameof(Mod.Title) &&
+            e.PropertyName != nameof(Mod.Author) &&
+            e.PropertyName != nameof(Mod.ModID) &&
+            e.PropertyName != nameof(Mod.Priority)) return;
+        
+        SaveModsAsync();
+        SortModsByPriority();
     }
 
     private void SortModsByPriority()
     {
         var sortedMods = new ObservableCollection<Mod>(Mods.OrderBy(m => m.Priority));
         Mods = sortedMods;
-        OnPropertyChanged(nameof(Mods));
     }
 
     public async void ImportMods()
@@ -141,16 +129,14 @@ public class ModManager : INotifyPropertyChanged
 
     private async Task ProcessModFilesAsync(string[] filePaths)
     {
-        ShowProcessing(true);
         try
         {
             await CombineFilesIntoSingleModAsync(filePaths);
         }
         catch (Exception ex)
         {
-            ErrorOccurred?.Invoke($"Failed to process mod files: {ex.Message}");
+            ErrorOccurred($"Failed to process mod files: {ex.Message}");
         }
-        ShowProcessing(false);
     }
 
     private async Task CombineFilesIntoSingleModAsync(string[] filePaths)
@@ -171,11 +157,10 @@ public class ModManager : INotifyPropertyChanged
             await ModInstallation.InstallModFromFileAsync(tempZipPath, modName, author: "-1", modID: -1);
             if (File.Exists(tempZipPath))
                 File.Delete(tempZipPath);
-            ModProcessingCompleted?.Invoke();
         }
         catch (Exception ex)
         {
-            ErrorOccurred?.Invoke($"Failed to combine and install mod: {ex.Message}");
+            ErrorOccurred($"Failed to combine and install mod: {ex.Message}");
         }
     }
 
@@ -186,7 +171,7 @@ public class ModManager : INotifyPropertyChanged
             mod.IsEnabled = enable;
         }
         _isProcessing = !_isProcessing;
-        ModsChanged?.Invoke();
+        OnPropertyChanged(nameof(Mods));
     }
     
     public async void RenameMod(Mod selectedMod)
@@ -195,7 +180,6 @@ public class ModManager : INotifyPropertyChanged
 
     if (!IsValidName(newTitle)) return;
     
-
     var oldTitle = selectedMod.Title;
 
     var oldDirectoryName = ModInstallation.GetModDirectoryPath(oldTitle);
@@ -228,12 +212,12 @@ public class ModManager : INotifyPropertyChanged
         // Update the selectedMod's title
         selectedMod.Title = newTitle;
         await selectedMod.SaveToIniAsync(newIniPath);
-        await SaveModsAsync();
-        ModsChanged?.Invoke();
+        SaveModsAsync();
+        OnPropertyChanged(nameof(Mods));
     }
     catch (IOException ex)
     {
-        ErrorOccurred?.Invoke($"Failed to rename mod directory: {ex.Message}");
+        ErrorOccurred($"Failed to rename mod directory: {ex.Message}");
     }
     finally
     {
@@ -242,7 +226,7 @@ public class ModManager : INotifyPropertyChanged
             Directory.Delete(oldDirectoryName, true);
         }
     }
-    ModsChanged?.Invoke();
+ 
     ReloadAsync();
 }
 
@@ -253,11 +237,9 @@ public class ModManager : INotifyPropertyChanged
         if (!areTheySure) return;
 
         var modDirectory = ModInstallation.GetModDirectoryPath(selectedMod.Title);
-        Console.WriteLine($"Attempting to delete mod directory: {modDirectory}");
 
         if (!Directory.Exists(modDirectory))
         {
-            Console.WriteLine($"Mod directory not found: {modDirectory}");
             RemoveMod(selectedMod);
             return;
         }
@@ -276,7 +258,7 @@ public class ModManager : INotifyPropertyChanged
         }
         catch (Exception ex) // Catch a more general exception
         {
-            ErrorOccurred?.Invoke($"Failed to delete mod directory: {ex.Message}");
+            ErrorOccurred($"Failed to delete mod directory: {ex.Message}");
         }
     }
 
@@ -294,7 +276,7 @@ public class ModManager : INotifyPropertyChanged
         }
         else
         {
-            ErrorOccurred?.Invoke(Phrases.PopupText_NoModFolder);
+            ErrorOccurred(Phrases.PopupText_NoModFolder);
         }
     }
     
@@ -304,13 +286,13 @@ public class ModManager : INotifyPropertyChanged
     
         if (modToDelete == null)
         {
-            ErrorOccurred?.Invoke($"No mod found with ID: {modId}");
+            ErrorOccurred($"No mod found with ID: {modId}");
             return;
         }
         DeleteMod(modToDelete);
     }
 
-    public void ReorderMod(Mod movedMod, int newIndex)
+    public void MoveMod(Mod movedMod, int newIndex)
     {
         var oldIndex = Mods.IndexOf(movedMod);
         if (oldIndex < 0 || newIndex < 0 || newIndex >= Mods.Count) return;
@@ -321,37 +303,38 @@ public class ModManager : INotifyPropertyChanged
             Mods[i].Priority = i;
         }
         SaveModsAsync();
-        ModsChanged?.Invoke();
+        OnPropertyChanged(nameof(Mods));
     }
 
-    // Helper Methods
 
     private bool IsValidName(string? name)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
-            ErrorOccurred?.Invoke(Phrases.PopupText_ModNameEmpty);
+            ErrorOccurred(Phrases.PopupText_ModNameEmpty);
             return false;
         }
 
         if (!ModInstallation.ModExists(Mods, name)) return true;
 
-        ErrorOccurred?.Invoke(Humanizer.ReplaceDynamic(Phrases.PopupText_ModNameExists, name));
+        ErrorOccurred(Humanizer.ReplaceDynamic(Phrases.PopupText_ModNameExists, name));
         return false;
     }
 
-    private void ShowProcessing(bool isProcessing)
-    {
-        if (isProcessing)
-            ModProcessingStarted?.Invoke();
-        else
-            ModProcessingCompleted?.Invoke();
-    }
 
+    private void ErrorOccurred(string? errorMessage)
+    {
+        new MessageBoxWindow()
+            .SetMessageType(MessageBoxWindow.MessageType.Error)
+            .SetTitleText("An error occured")
+            .SetInfoText(errorMessage)
+            .Show();
+    }
+    
     #region PropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    protected virtual void OnPropertyChanged(string propertyName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }

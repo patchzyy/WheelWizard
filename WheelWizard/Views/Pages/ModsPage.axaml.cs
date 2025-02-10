@@ -1,11 +1,7 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Input;
+﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Threading;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using WheelWizard.Models.Settings;
 using WheelWizard.Services;
 using WheelWizard.Views.Popups.Generic;
@@ -18,9 +14,6 @@ public partial class ModsPage : UserControl, INotifyPropertyChanged
 {
     public ModManager ModManager => ModManager.Instance;
     public ObservableCollection<Mod> Mods => ModManager.Mods;
-    
-    private int _draggedIndex = -1;
-    private Point _startPoint;
 
     private bool _hasMods;
     public bool HasMods
@@ -31,61 +24,29 @@ public partial class ModsPage : UserControl, INotifyPropertyChanged
             if (_hasMods == value) return;
 
             _hasMods = value;
-            OnPropertyChanged();
-            UpdateVisibility();
+            OnPropertyChanged(nameof(HasMods));
         }
     }
-
-     private void UpdateVisibility()
-     {
-        Dispatcher.UIThread.InvokeAsync(() => {
-             PageWithoutMods.IsVisible = !HasMods;
-            TopBarButtons.IsVisible = HasMods;
-            PageWithMods.IsVisible = HasMods;
-        });
-     }
 
     public ModsPage()
     {
         InitializeComponent();
         DataContext = this;
-        SubscribeToModManagerEvents();
+        ModManager.PropertyChanged += OnModsChanged;
         ModManager.ReloadAsync();
     }
 
-    private void SubscribeToModManagerEvents()
+    private void OnModsChanged(object? sender, PropertyChangedEventArgs e)
     {
-        ModManager.ModsLoaded += OnModsLoaded;
-        ModManager.ModsChanged += OnModsChanged;
-        ModManager.ModProcessingStarted += OnModProcessingStarted;
-        ModManager.ModProcessingCompleted += OnModProcessingCompleted;
-        ModManager.ModProcessingProgress += OnModProcessingProgress;
-        ModManager.ErrorOccurred += OnErrorOccurred;
+        if(e.PropertyName == nameof(ModManager.Mods))
+            OnModsChanged();
     }
-
-    private void OnModsLoaded() => UpdateEmptyListMessageVisibility();
-    private void OnModsChanged() => UpdateEmptyListMessageVisibility();
-    private void UpdateEmptyListMessageVisibility() => HasMods = Mods.Count > 0;
-     
-    private void OnModProcessingStarted() => ShowLoading(true);
-    private void OnModProcessingCompleted() => ShowLoading(false);
     
-    private void OnModProcessingProgress(int current, int total, string status)
+    private void OnModsChanged()
     {
-        Dispatcher.UIThread.InvokeAsync(() =>
-        {
-            ProgressBar.Value = (double)current / total * 100;
-            StatusTextBlock.Text = status;
-        }, DispatcherPriority.Background);
-    }
-
-    private void OnErrorOccurred(string message)
-    {
-        new MessageBoxWindow()
-            .SetMessageType(MessageBoxWindow.MessageType.Error)
-            .SetTitleText("An error occured")
-            .SetInfoText(message)
-            .Show();
+        ListItemCount.Text = ModManager.Mods.Count.ToString();
+        OnPropertyChanged(nameof(Mods));
+        HasMods = Mods.Count > 0;
     }
     
     private void BrowseMod_Click(object sender, RoutedEventArgs e)
@@ -97,56 +58,12 @@ public partial class ModsPage : UserControl, INotifyPropertyChanged
     {
         ModManager.ImportMods();
     }
-    
-    private void ModsListBox_DragEnter(object sender, DragEventArgs e)
-    {
-        if (e.Source is not ListBox source)
-              return;
-         
-        if (!e.Data.Contains(DataFormats.Text))
-            e.DragEffects = DragDropEffects.None;
-    }
-      
-    private void ModsListBox_DragOver(object sender, DragEventArgs e)
-    {
-        if (e.Source is not ListBox source)
-            return;
-        
-        if (!e.Data.Contains(DataFormats.Text))
-            e.DragEffects = DragDropEffects.None;
-    }
-
-    private void ModsListBox_Drop(object sender, DragEventArgs e)
-    {
-        if (e.Source is not ListBox source)
-              return;
-        
-        var targetIndex = FindIndex(source, e.GetPosition(source).Y);
-        if (_draggedIndex == -1 || targetIndex == -1 || targetIndex == _draggedIndex) return;
-
-        ModManager.ReorderMod(Mods[_draggedIndex],targetIndex);
-        _draggedIndex = -1;
-
-
-    }
-     
-    private int FindIndex(ListBox listBox, double Y) {
-
-        for (var i = 0; i < listBox.ItemCount; i++) {
-            var item = listBox.ContainerFromIndex(i) as ListBoxItem;
-            if (item != null && Y < (item.TranslatePoint(new Point(0,item.Bounds.Height), listBox).Value.Y)) {
-                return i;
-            }
-        }
-        return -1;
-    }
 
     private void RenameMod_Click(object sender, RoutedEventArgs e)
     {
         if (ModsListBox.SelectedItem is not Mod selectedMod)
              return;
         ModManager.RenameMod(selectedMod);
-        OnModsChanged();
     }
 
     private void DeleteMod_Click(object sender, RoutedEventArgs e)
@@ -155,8 +72,6 @@ public partial class ModsPage : UserControl, INotifyPropertyChanged
             return;
         
         ModManager.DeleteMod(selectedMod);
-        OnModsChanged();
-        ModManager.LoadModsAsync();
     }
     
     private void OpenFolder_Click(object sender, RoutedEventArgs e)
@@ -194,21 +109,41 @@ public partial class ModsPage : UserControl, INotifyPropertyChanged
         modPopup.LoadModAsync(selectedMod.ModID);
         modPopup.ShowDialog();
     }
-
-
-    private void ShowLoading(bool isLoading)
+    
+        /*
+    private static ListOrderCondition CurrentOrder = ListOrderCondition.PRIORITY;
+    private void PopulateSortingList()
     {
-        Dispatcher.UIThread.InvokeAsync(() =>
+        foreach (ListOrderCondition type in Enum.GetValues(typeof(ListOrderCondition)))
         {
-            ProgressBar.IsVisible = isLoading;
-            StatusTextBlock.IsVisible = isLoading;
-        });
+            var name = type switch
+            { // TODO: Should be replaced with actual translations
+                ListOrderCondition.IS_CHECKED => "Is Enabled",
+                ListOrderCondition.NAME => "Mod Name",
+                ListOrderCondition.PRIORITY => "Priority"
+            };
+
+            SortByDropdown.Items.Add(name);
+        }
+        SortByDropdown.SelectedIndex = (int)CurrentOrder;
+    }
+
+    private void SortByDropdown_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        CurrentOrder = (ListOrderCondition)SortByDropdown.SelectedIndex;
     }
     
+    private enum ListOrderCondition
+    {
+        PRIORITY,
+        IS_CHECKED,
+        NAME
+    }
+    */
     #region PropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    protected virtual void OnPropertyChanged(string propertyName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }

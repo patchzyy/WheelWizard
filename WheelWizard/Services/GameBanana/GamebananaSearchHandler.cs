@@ -19,14 +19,12 @@ public class GamebananaSearchHandler
         if (page < 1) page = 1;
         if (perPage < 1 || perPage > 50) perPage = 20;
         var searchUrl = $"{BaseUrl}/Util/Search/Results?_sSearchString={searchString}&_nPage={page}&_nPerpage={perPage}&_idGameRow={GAME_ID}";
-        Console.WriteLine("Request URL: " + searchUrl);
+        //Console.WriteLine("Request URL: " + searchUrl);
         var result = await HttpClientHelper.GetAsync<GameBananaSearchResults>(searchUrl);
 
         if (!result.Succeeded)
-        {
             Console.WriteLine($"Error: {result.StatusMessage} (HTTP {result.StatusCode})");
-        }
-
+        
         return result;
     }
     
