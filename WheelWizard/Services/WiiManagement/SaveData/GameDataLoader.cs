@@ -398,7 +398,8 @@ public class GameDataLoader : RepeatedTaskManager
         }
         if (newName.Length > 10)
             newName = newName.Substring(0, 10);
-        user.MiiData.Mii.Name = newName;
+        user.MiiData.Mii.Name = newName; // This should be updated just in case someone uses it, but its not the one that updates the profile page
+        user.MiiName = newName; // This is the one with the notification
         WriteLicenseNameToSaveData(userIndex, newName);
         var updated = InternalMiiManager.UpdateMiiName(user.MiiData.ClientId, newName);
         if (!updated)
@@ -410,7 +411,15 @@ public class GameDataLoader : RepeatedTaskManager
                 .Show();
           
         }
-        SaveRksysToFile();
+
+        if (SaveRksysToFile())
+        {
+            new MessageBoxWindow()
+                .SetMessageType(MessageBoxWindow.MessageType.Message)
+                .SetTitleText("Successfully updated name")
+                .SetInfoText($"Successfully updated Mii name to {user.MiiData.Mii.Name}")
+                .Show();
+        }
     }
     private bool IsNoNameOrEmptyMii(GameDataUser user)
     {
@@ -438,9 +447,9 @@ public class GameDataLoader : RepeatedTaskManager
         Array.Copy(nameBytes, 0, _saveData, nameOffset, Math.Min(nameBytes.Length, 20));
     }
     
-    private void SaveRksysToFile()
+    private bool SaveRksysToFile()
     {
-        if (_saveData == null) return;
+        if (_saveData == null) return false;
         FixRksysCrc(_saveData);
         var currentRegion = (MarioKartWiiEnums.Regions)SettingsManager.RR_REGION.Get();
         var saveFolder = Path.Combine(SaveFilePath, RRRegionManager.ConvertRegionToGameID(currentRegion));
@@ -458,7 +467,10 @@ public class GameDataLoader : RepeatedTaskManager
                 .SetInfoText($"Failed to save rksys.dat.\n{ex.Message}")
                 .SetTitleText("Failed to save the 'save' file")
                 .Show();
+            return false;
         }
+
+        return true;
     }
 
     private void InvalidLicenseMessage(string info)

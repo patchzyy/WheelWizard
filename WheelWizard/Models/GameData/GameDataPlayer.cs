@@ -58,7 +58,10 @@ public abstract class GameDataPlayer : INotifyPropertyChanged
             else if (MiiData.Mii == null)
                 MiiData.Mii = new Mii { Data = "", Name = value };
             else
+            {
                 MiiData.Mii.Name = value;
+                OnPropertyChanged(nameof(MiiName));
+            }
         }
     }
 

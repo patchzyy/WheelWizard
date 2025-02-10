@@ -3,6 +3,7 @@ using Avalonia.Interactivity;
 using System;
 using System.ComponentModel;
 using WheelWizard.Models.Enums;
+using WheelWizard.Models.GameData;
 using WheelWizard.Models.MiiImages;
 using WheelWizard.Services.Other;
 using WheelWizard.Services.Settings;
@@ -14,6 +15,7 @@ namespace WheelWizard.Views.Pages;
 
 public partial class UserProfilePage : UserControl, INotifyPropertyChanged
 {
+    private GameDataUser? currentPlayer;
     private Mii? _currentMii;
     public Mii? CurrentMii 
     { 
@@ -111,17 +113,25 @@ public partial class UserProfilePage : UserControl, INotifyPropertyChanged
     private void UpdatePage()
     {
         CurrentUserProfile.IsChecked = FocussedUser == _currentUserIndex;
+        if(currentPlayer != null) currentPlayer.PropertyChanged -= OnMiiNameChanged;
         
-        var user = GameDataLoader.Instance.GetUserData(_currentUserIndex);
-        CurrentUserProfile.FriendCode = user.FriendCode;
-        CurrentUserProfile.UserName = user.MiiName;
-        CurrentUserProfile.IsOnline = user.IsOnline;
-        CurrentUserProfile.Vr = user.Vr.ToString();
-        CurrentUserProfile.Br = user.Br.ToString();
-        CurrentMii = user.MiiData?.Mii;
+        currentPlayer = GameDataLoader.Instance.GetUserData(_currentUserIndex);
+        CurrentUserProfile.FriendCode = currentPlayer.FriendCode;
+        CurrentUserProfile.UserName = currentPlayer.MiiName;
+        CurrentUserProfile.IsOnline = currentPlayer.IsOnline;
+        CurrentUserProfile.Vr = currentPlayer.Vr.ToString();
+        CurrentUserProfile.Br = currentPlayer.Br.ToString();
+        CurrentMii = currentPlayer.MiiData?.Mii;
 
-        CurrentUserProfile.TotalRaces = user.TotalRaceCount.ToString();
-        CurrentUserProfile.TotalWon =user.TotalWinCount.ToString();
+        currentPlayer.PropertyChanged += OnMiiNameChanged;
+        CurrentUserProfile.TotalRaces = currentPlayer.TotalRaceCount.ToString();
+        CurrentUserProfile.TotalWon =currentPlayer.TotalWinCount.ToString();
+    }
+
+    private void OnMiiNameChanged(object? sender, PropertyChangedEventArgs args)
+    {
+        if (args.PropertyName != nameof(currentPlayer.MiiName)) return;
+        CurrentUserProfile.UserName = currentPlayer.MiiName;
     }
 
     private void Button_ViewRoom(object sender, RoutedEventArgs e)

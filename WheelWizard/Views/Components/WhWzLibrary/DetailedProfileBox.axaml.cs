@@ -89,7 +89,7 @@ public class DetailedProfileBox : TemplatedControl, INotifyPropertyChanged
         get => GetValue(UserNameProperty);
         set => SetValue(UserNameProperty, value);
     }
-    
+
     public static readonly StyledProperty<bool> IsCheckedProperty =
         AvaloniaProperty.Register<DetailedProfileBox, bool>(nameof(IsChecked));
     public bool IsChecked
@@ -122,17 +122,15 @@ public class DetailedProfileBox : TemplatedControl, INotifyPropertyChanged
         set => SetValue(ViewRoomActionProperty, value);
     }
     
-
     private void CopyFriendCode(object? obj, EventArgs e)
     {
         TopLevel.GetTopLevel(this)?.Clipboard?.SetTextAsync(FriendCode);
     }
     
-
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
-
+        
         var checkBox = e.NameScope.Find<RadioButton>("CheckBox");
         if (checkBox != null)
             checkBox.Checked += OnChecked;
@@ -149,9 +147,9 @@ public class DetailedProfileBox : TemplatedControl, INotifyPropertyChanged
         if (copyFcButton != null) 
             copyFcButton.Click += CopyFriendCode;
         
-                
         var miiImageLoader  = e.NameScope.Find<MiiImageLoader>("MiiFaceImageLoader");
-        if (miiImageLoader != null)
+        var animationsEnabled = (bool)SettingsManager.ENABLE_ANIMATIONS.Get();
+        if (miiImageLoader != null && animationsEnabled)
         {
             // We set them all at least one, just to make sure the request is being send.
             // sometimes this still works goofy though, for some reason
