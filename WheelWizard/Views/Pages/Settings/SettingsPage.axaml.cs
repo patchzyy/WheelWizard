@@ -16,12 +16,23 @@ public partial class SettingsPage : UserControl
         
         WhWzVersionText.Text = "WhWz: v" + AutoUpdater.CurrentVersion;
         RrVersionText.Text = "RR: " + RetroRewindInstaller.CurrentRRVersion();
-        
-    #if DEBUG
-        ReleaseText.IsVisible = true;
+
+        var part1 = "Release";
+        var part2 = "Unknown OS";
+#if DEBUG
+        part1 = "Dev";
         DevButton.IsVisible = true;
-    #endif
+#endif
+       
+#if WINDOWS
+       part2 = "Windows";
+#elif LINUX
+        part2 = "Linux";
+#elif MACOS
+        part2 = "Macos";
+#endif
         
+        ReleaseText.Text = $"{part1} - {part2}";
         SettingsContent.Content = initialSettingsPage;
     }
 

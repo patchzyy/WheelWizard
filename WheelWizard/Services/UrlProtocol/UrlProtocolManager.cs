@@ -12,6 +12,8 @@ namespace WheelWizard.Services.UrlProtocol;
 public class UrlProtocolManager
 {
     public const string ProtocolName = "wheelwizard";
+
+    #region Windows only
     
 #if WINDOWS
     public static void RegisterCustomScheme(string schemeName)
@@ -76,11 +78,11 @@ public class UrlProtocolManager
     
     async public static void SetWhWzSchemeAsync()
     {
-        // TODO: Note that this will never be called, since `#if WINDOWS` is nothing, that does not exist
 #if WINDOWS
         SetWhWzSchemeAsyncInternally();
 #endif
     }
+    #endregion
 
     public static async Task ShowPopupForLaunchUrlAsync(string url)
     {
@@ -92,7 +94,6 @@ public class UrlProtocolManager
             if (!int.TryParse(parts[0], out var modID))
                 throw new FormatException($"Invalid ModID: {parts[0]}");
             
-            // TODO: IF YOU MAKE THIS WINDOW IN AVALIONA, THEN ALSO MOVE THE THING IN APP.CS TO THE AVALONIA APP.CS
             var downloadURL = parts.Length > 1 ? parts[1] : null;
             var modPopup = new ModIndependentWindow();
             await modPopup.LoadModAsync(modID, downloadURL);
