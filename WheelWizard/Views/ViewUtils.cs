@@ -76,6 +76,22 @@ public class ViewUtils
         oldWindow.Close();
         newWindow.UpdatePlayerAndRoomCount(RRLiveRooms.Instance);
     }
+
+    public static T? FindParent<T>(object? child, int maxSearchDepth = 10)
+    {
+        StyledElement? currentParent = null;
+        if (child is StyledElement childElement) currentParent = childElement.Parent;
+        if (currentParent == null) return default;
+        
+        var currentDepth = 1;
+        while (currentDepth < maxSearchDepth)
+        {
+            if (currentParent is T parentElement) return parentElement;
+            if (currentParent?.Parent != null) currentParent = currentParent.Parent;
+            currentDepth++;
+        }
+        return default;
+    }
     
 }
 

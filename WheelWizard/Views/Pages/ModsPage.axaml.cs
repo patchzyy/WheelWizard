@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -156,4 +157,25 @@ public partial class ModsPage : UserControl, INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
     #endregion
+
+    private void TextBox_OnTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        var mod = GetParentsMod(e);
+        if (mod == null || e.Source is not TextBox textBox) return;
+
+        // If the text is empty, then the user is still editing the thing. we don't wanna invoke the thing change then
+        if (textBox.Text?.Trim() == "") return;
+        
+        if(int.TryParse(textBox.Text, out var newPriority))
+            mod.Priority = newPriority;
+        else
+            textBox.Text = mod.Priority.ToString();
+    }
+    
+    private Mod? GetParentsMod(RoutedEventArgs eventArgs)
+    {
+        var parent = ViewUtils.FindParent<ListBoxItem>(eventArgs.Source);
+        if(parent?.Content is Mod mod) return mod;
+        return null;
+    }
 }

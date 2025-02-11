@@ -88,15 +88,33 @@
                              </Grid.ColumnDefinitions>
                              
                              <CheckBox  Grid.Column="0" IsChecked="{Binding IsEnabled, Mode=TwoWay}"
-                                        Classes="SwitchDark"
-                                        HorizontalAlignment="Center" VerticalAlignment="Center"
-                                        Margin="0,5" />
+                                        Classes="SwitchDark"  Margin="0,5" 
+                                        HorizontalAlignment="Center" VerticalAlignment="Center" />
                              <TextBlock Text="{Binding Title}" FontSize="14" Foreground="{StaticResource Neutral100}"
                                         Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0"/>
                              
-                             <components:StateBox Grid.Column="1" IconSize="0" Text="{Binding Priority}"
+                             <!-- Yes i know that it already works without any change event if we remove Mode=OneWay -->
+                             <!-- Removing that will make it so editing that will also edit the model -->
+                             <!-- however, it works really weird if you do that -->
+                             <TextBox Grid.Column="1" Text="{Binding Priority, Mode=OneWay}" Classes="dark"
+                                        HorizontalAlignment="Right" VerticalAlignment="Center"
+                                        TextChanged="TextBox_OnTextChanged"
+                                        MinWidth="25" MaxWidth="50" MinHeight="30" Height="30" Padding="0">
+                                 <TextBox.Styles>
+                                     <Style Selector="TextBox /template/ DockPanel#PART_InnerDockPanel">
+                                        
+                                         <Setter Property="Margin" Value="0"/>
+                                     </Style>
+                                     <Style Selector="TextBox /template/ ScrollViewer#PART_ScrollViewer">
+                                         <Setter Property="HorizontalAlignment" Value="Center"/>
+                                         <Setter Property="VerticalScrollBarVisibility" Value="Hidden"/>
+                                     </Style>
+                                 </TextBox.Styles>
+                             </TextBox>
+                             
+                             <!-- <components:StateBox Grid.Column="1" IconSize="0" Text="{Binding Priority}"
                                                   TipText="Priority" Variant="Dark" TipPlacement="Top"
-                                                  HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                                  HorizontalAlignment="Right" VerticalAlignment="Center" /> -->
                          </Grid>
                          <Border.Styles>
                              <Style Selector="Border#PART_ModBackground">
