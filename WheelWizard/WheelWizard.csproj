@@ -2,7 +2,7 @@
     <PropertyGroup>
         <!-- Program Config -->
         <StartupObject>WheelWizard.Program</StartupObject>
-        <OutputType>Exe</OutputType>
+        <OutputType>WinExe</OutputType>
         <TargetFramework>net7.0</TargetFramework>
         <RootNamespace>WheelWizard</RootNamespace>
         <Nullable>enable</Nullable>
@@ -15,17 +15,13 @@
         <RepositoryUrl>https://github.com/patchzyy/WheelWizard</RepositoryUrl>
         <ApplicationIcon>car-wheel.ico</ApplicationIcon>
     </PropertyGroup>
-    
-    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-        <DefineConstants>RELEASE_BUILD</DefineConstants>
-    </PropertyGroup>
         
     <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'win-x64'">
         <DefineConstants>WINDOWS</DefineConstants>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'linux-x64'">
-        <DefineConstants>LUNIX</DefineConstants>
+        <DefineConstants>LINUX</DefineConstants>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'osx-x64'">

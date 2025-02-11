@@ -11,7 +11,7 @@ public class Program
     [STAThread]
     public static void Main(string[] args)
     {
-        Console.WriteLine("Application start");
+        PrintStartUpMessage();
         Setup();
         BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
     }
@@ -27,5 +27,26 @@ public class Program
         SettingsManager.Instance.LoadSettings();
         AutoUpdater.CheckForUpdatesAsync();
         UrlProtocolManager.SetWhWzSchemeAsync();
+    }
+
+
+    private static void PrintStartUpMessage()
+    {
+        var modeCheck = "release";
+        var osCheck = "unknown";
+
+#if DEBUG
+        modeCheck = "debug";
+#endif
+
+#if WINDOWS
+        osCheck = "windows";
+#elif LINUX
+        osCheck = "linux";
+#elif MACOS
+        osCheck = "macos";
+#endif
+
+        Console.WriteLine($"Application start [mode: {modeCheck}, os: {osCheck}]");
     }
 } 

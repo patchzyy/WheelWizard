@@ -17,9 +17,9 @@ public partial class SettingsPage : UserControl
         WhWzVersionText.Text = "WhWz: v" + AutoUpdater.CurrentVersion;
         RrVersionText.Text = "RR: " + RetroRewindInstaller.CurrentRRVersion();
         
-    #if RELEASE_BUILD
-        ReleaseText.IsVisible = false;
-        DevButton.IsVisible = false;
+    #if DEBUG
+        ReleaseText.IsVisible = true;
+        DevButton.IsVisible = true;
     #endif
         
         SettingsContent.Content = initialSettingsPage;

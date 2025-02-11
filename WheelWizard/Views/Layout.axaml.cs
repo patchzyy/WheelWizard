@@ -47,8 +47,8 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
         NavigateToPage(new HomePage());
         InitializeManagers();
         
-    #if RELEASE_BUILD
-        KitchenSinkButton.IsVisible = false;
+    #if DEBUG
+        KitchenSinkButton.IsVisible = true;
     #endif
     }
     

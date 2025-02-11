@@ -23,7 +23,7 @@ public static class HttpClientHelper
 
     public static async Task<HttpClientResult<T>> PostAsync<T>(string url, HttpContent? body)
     {
-    #if !RELEASE_BUILD
+    #if DEBUG
         if (!FakeConnectionToInternet)
             return GetErrorResult<T>(new ("No internet connection"));
     #endif
@@ -59,7 +59,7 @@ public static class HttpClientHelper
 
     public static async Task<HttpClientResult<T>> GetAsync<T>(string url)
     {
-    #if !RELEASE_BUILD
+    #if DEBUG
         if (!FakeConnectionToInternet)
             return GetErrorResult<T>(new ("No internet connection"));
     #endif
@@ -133,19 +133,15 @@ public static class HttpClientHelper
     
     public static void CleanupConnections()
     {
-        if (LazyHttpClient.IsValueCreated)
-        {
-            HttpClient.DefaultRequestHeaders.Clear();
-            HttpClient.CancelPendingRequests();
-        }
+        if (!LazyHttpClient.IsValueCreated) return;
+        HttpClient.DefaultRequestHeaders.Clear();
+        HttpClient.CancelPendingRequests();
     }
     
     public static void ResetHttpClient()
     {
         if (LazyHttpClient.IsValueCreated)
-        {
             HttpClient.Dispose();
-        }
         
         // This will force the creation of a new HttpClient on the next use
         new Lazy<HttpClient>(() =>

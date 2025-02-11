@@ -101,7 +101,7 @@
             <psComps:SidebarRadioButton IconData="{StaticResource Settings}"
                                         PageType="{x:Type settings:SettingsPage}"
                                         Text="{x:Static lang:Common.PageTitle_Settings}" x:Name="SettingsButton"/>
-            <psComps:SidebarRadioButton IconData="{StaticResource Spinner}"
+            <psComps:SidebarRadioButton IconData="{StaticResource Spinner}" IsVisible="False"
                                         Text="Kitchen Sink" x:Name="KitchenSinkButton"/>
         </StackPanel>
         
