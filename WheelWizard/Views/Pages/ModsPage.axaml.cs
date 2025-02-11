@@ -2,6 +2,7 @@
 using Avalonia.Interactivity;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using WheelWizard.Models.Settings;
 using WheelWizard.Services;
 using WheelWizard.Views.Popups.Generic;
@@ -47,6 +48,7 @@ public partial class ModsPage : UserControl, INotifyPropertyChanged
         ListItemCount.Text = ModManager.Mods.Count.ToString();
         OnPropertyChanged(nameof(Mods));
         HasMods = Mods.Count > 0;
+        EnableAllCheckbox.IsChecked = !ModManager.Mods.Select(mod => mod.IsEnabled).Contains(false);
     }
     
     private void BrowseMod_Click(object sender, RoutedEventArgs e)
@@ -108,6 +110,12 @@ public partial class ModsPage : UserControl, INotifyPropertyChanged
         var modPopup = new ModIndependentWindow();
         modPopup.LoadModAsync(selectedMod.ModID);
         modPopup.ShowDialog();
+    }
+    
+        
+    private void ToggleButton_OnIsCheckedChanged(object? sender, RoutedEventArgs e)
+    {
+       ModManager.ToggleAllMods(EnableAllCheckbox.IsChecked == true);
     }
     
         /*

@@ -54,6 +54,11 @@
 
      <Grid Grid.Row="1" x:Name="PageWithMods" RowDefinitions="*, 12*" IsVisible="{Binding HasMods}">
          <Grid Grid.Row="0" Margin="10,0"  >
+              
+             <CheckBox Grid.Column="0" Classes="Switch"  x:Name="EnableAllCheckbox"
+                       HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5"
+                       Click="ToggleButton_OnIsCheckedChanged"
+                       Content="{x:Static lang:Common.Action_EnableAll}" />
              
              <!-- THIS IS A COOL IDEA, BUT IT HAS TO BE SUPPORTED FIRST
              <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,6" HorizontalAlignment="Right">
