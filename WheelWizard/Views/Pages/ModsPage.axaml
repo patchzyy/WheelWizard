@@ -96,21 +96,25 @@
                              <!-- Yes i know that it already works without any change event if we remove Mode=OneWay -->
                              <!-- Removing that will make it so editing that will also edit the model -->
                              <!-- however, it works really weird if you do that -->
-                             <TextBox Grid.Column="1" Text="{Binding Priority, Mode=OneWay}" Classes="dark"
-                                        HorizontalAlignment="Right" VerticalAlignment="Center"
-                                        LostFocus="InputElement_OnLostFocus" Padding="0"
-                                        MinWidth="25" MaxWidth="50" MinHeight="30" Height="30">
-                                 <TextBox.Styles>
-                                     <Style Selector="TextBox /template/ DockPanel#PART_InnerDockPanel">
+                             <StackPanel Grid.Column="1"  Orientation="Horizontal"  HorizontalAlignment="Right" VerticalAlignment="Center">
+                                 <TextBlock Text="Priority: " FontSize="14" Foreground="{StaticResource Neutral100}"
+                                            VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                 <TextBox Text="{Binding Priority, Mode=OneWay}" Classes="dark"
+                                          LostFocus="InputElement_OnLostFocus" Padding="0"
+                                          MinWidth="25" MaxWidth="50" MinHeight="30" Height="30">
+                                     <TextBox.Styles>
+                                         <Style Selector="TextBox /template/ DockPanel#PART_InnerDockPanel">
                                         
-                                         <Setter Property="Margin" Value="0"/>
-                                     </Style>
-                                     <Style Selector="TextBox /template/ ScrollViewer#PART_ScrollViewer">
-                                         <Setter Property="HorizontalAlignment" Value="Center"/>
-                                         <Setter Property="VerticalScrollBarVisibility" Value="Hidden"/>
-                                     </Style>
-                                 </TextBox.Styles>
-                             </TextBox>
+                                             <Setter Property="Margin" Value="0"/>
+                                         </Style>
+                                         <Style Selector="TextBox /template/ ScrollViewer#PART_ScrollViewer">
+                                             <Setter Property="HorizontalAlignment" Value="Center"/>
+                                             <Setter Property="VerticalScrollBarVisibility" Value="Hidden"/>
+                                         </Style>
+                                     </TextBox.Styles>
+                                 </TextBox>
+                             </StackPanel>
+                            
                              
                              <!-- <components:StateBox Grid.Column="1" IconSize="0" Text="{Binding Priority}"
                                                   TipText="Priority" Variant="Dark" TipPlacement="Top"
