@@ -51,17 +51,18 @@ public class SettingsManager
     public static Setting RECOMMENDED_SETTINGS = new VirtualSetting(typeof(bool), value => {
                                                                 var newValue = (bool)value!;
                                                                 DOLPHIN_COMPILATION_MODE.Set(newValue ? DolphinShaderCompilationMode.HybridUberShaders : DolphinShaderCompilationMode.Default);
+                                                            #if WINDOWS
                                                                 DOLPHIN_COMPILE_SHADERS_AT_START.Set(newValue);
-                                                                //Compile shaders at start crashes on linux
-                                                                #if LINUX
-                                                                DOLPHIN_COMPILE_SHADERS_AT_START.Set(false);
-                                                                #endif
+                                                            #endif
                                                                 DOLPHIN_MSAA.Set(newValue ? "0x00000002" : "0x00000001");
                                                                 DOLPHIN_SSAA.Set(false);
                                                             },
                                                             () => {
                                                                 var value1 = (DolphinShaderCompilationMode)DOLPHIN_COMPILATION_MODE.Get();
-                                                                var value2 = (bool)DOLPHIN_COMPILE_SHADERS_AT_START.Get();
+                                                                var value2 = true;
+                                                            #if WINDOWS
+                                                                value2 = (bool)DOLPHIN_COMPILE_SHADERS_AT_START.Get();
+                                                            #endif
                                                                 var value3 = (string)DOLPHIN_MSAA.Get();
                                                                 var value4 = (bool)DOLPHIN_SSAA.Get();
                                                                 return !value4 && value2 && value3 == "0x00000002" && value1 == DolphinShaderCompilationMode.HybridUberShaders;
