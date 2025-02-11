@@ -98,8 +98,8 @@
                              <!-- however, it works really weird if you do that -->
                              <TextBox Grid.Column="1" Text="{Binding Priority, Mode=OneWay}" Classes="dark"
                                         HorizontalAlignment="Right" VerticalAlignment="Center"
-                                        TextChanged="TextBox_OnTextChanged"
-                                        MinWidth="25" MaxWidth="50" MinHeight="30" Height="30" Padding="0">
+                                        LostFocus="InputElement_OnLostFocus" Padding="0"
+                                        MinWidth="25" MaxWidth="50" MinHeight="30" Height="30">
                                  <TextBox.Styles>
                                      <Style Selector="TextBox /template/ DockPanel#PART_InnerDockPanel">
                                         

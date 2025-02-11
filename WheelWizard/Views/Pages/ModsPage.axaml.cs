@@ -1,9 +1,12 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Threading;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using WheelWizard.Models.Settings;
 using WheelWizard.Services;
 using WheelWizard.Views.Popups.Generic;
@@ -157,14 +160,11 @@ public partial class ModsPage : UserControl, INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
     #endregion
-
-    private void TextBox_OnTextChanged(object? sender, TextChangedEventArgs e)
+    
+    private void InputElement_OnLostFocus(object? sender, RoutedEventArgs e)
     {
         var mod = GetParentsMod(e);
         if (mod == null || e.Source is not TextBox textBox) return;
-
-        // If the text is empty, then the user is still editing the thing. we don't wanna invoke the thing change then
-        if (textBox.Text?.Trim() == "") return;
         
         if(int.TryParse(textBox.Text, out var newPriority))
             mod.Priority = newPriority;
