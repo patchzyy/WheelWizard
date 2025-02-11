@@ -1,5 +1,4 @@
 using WheelWizard.Models.Enums;
-using System;
 using System.Linq;
 using WheelWizard.Helpers;
 using WheelWizard.Models.Settings;
@@ -9,7 +8,7 @@ namespace WheelWizard.Services.Settings;
 
 public class SettingsManager
 {
-    // Wheel Wizard Settings
+    #region Wheel Wizard Settings
     public static Setting USER_FOLDER_PATH = new WhWzSetting(typeof(string),"UserFolderPath", "").SetValidation(value => FileHelper.DirectoryExists(value as string ?? string.Empty));
     public static Setting DOLPHIN_LOCATION = new WhWzSetting(typeof(string),"DolphinLocation", "").SetValidation(value => FileHelper.FileExists(value as string ?? string.Empty));
     public static Setting GAME_LOCATION = new WhWzSetting(typeof(string),"GameLocation", "").SetValidation(value => FileHelper.FileExists(value as string ?? string.Empty));
@@ -23,8 +22,9 @@ public class SettingsManager
     public static Setting REMOVE_BLUR = new WhWzSetting(typeof(bool), "REMOVE_BLUR", true);
     public static Setting RR_REGION = new WhWzSetting(typeof(MarioKartWiiEnums.Regions), "RR_Region", RRRegionManager.GetValidRegions().First());
     public static Setting WW_LANGUAGE = new WhWzSetting(typeof(string), "WW_Language", "en").SetValidation(value => SettingValues.WhWzLanguages.ContainsKey((string)value!));
+    #endregion
     
-    // Dolphin Settings
+    #region Dolphin Settings
     public static Setting VSYNC = new DolphinSetting(typeof(bool), ("GFX.ini", "Hardware", "VSync"), false);
     public static Setting INTERNAL_RESOLUTION = new DolphinSetting(typeof(int), ("GFX.ini", "Settings", "InternalResolution"), 1)
         .SetValidation(value => (int)(value ?? -1) >= 0);
@@ -38,8 +38,9 @@ public class SettingsManager
     private static Setting DOLPHIN_SSAA = new DolphinSetting(typeof(bool), ("GFX.ini", "Settings", "SSAA"), false);
     private static Setting DOLPHIN_MSAA = new DolphinSetting(typeof(string), ("GFX.ini", "Settings", "MSAA"), "0x00000001").SetValidation(
         value => ( value?.ToString() ?? "") is "0x00000001" or "0x00000002" or "0x00000004" or "0x00000008");
+    #endregion
     
-    // Virtual Settings
+    #region Virtual Settings
     private static double _internalScale = -1.0;
     public static Setting WINDOW_SCALE = new VirtualSetting(typeof(double), 
                                                             value => _internalScale = (double)value!,
@@ -65,8 +66,10 @@ public class SettingsManager
                                                                 var value4 = (bool)DOLPHIN_SSAA.Get();
                                                                 return !value4 && value2 && value3 == "0x00000002" && value1 == DolphinShaderCompilationMode.HybridUberShaders;
                                                             }).SetDependencies(DOLPHIN_COMPILATION_MODE, DOLPHIN_COMPILE_SHADERS_AT_START, DOLPHIN_MSAA, DOLPHIN_SSAA);
+    #endregion
+
     
-    
+    #region Base Settings Manager 
     // dont ever make this a static class, it is required to be an instance class to ensure all settings are loaded
     public static SettingsManager Instance { get; } = new();
     private SettingsManager() { }
@@ -77,4 +80,5 @@ public class SettingsManager
         DolphinSettingManager.Instance.LoadSettings();
         SettingsHelper.LoadExtraStuff();
     }
+    #endregion
 }

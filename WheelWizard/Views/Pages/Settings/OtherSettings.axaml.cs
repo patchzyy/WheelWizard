@@ -120,11 +120,8 @@ public partial class OtherSettings : UserControl
         }
 
         SettingsManager.WW_LANGUAGE.Set(key);
-        ViewUtils.RefreshWindow(new SettingsPage(new OtherSettings()));
+        ViewUtils.RefreshWindow();
     }
 
-    private async void Reinstall_RetroRewind(object sender, RoutedEventArgs e)
-    {
-        await RetroRewindInstaller.ReinstallRR();
-    }
+    private async void Reinstall_RetroRewind(object sender, RoutedEventArgs e) => await RetroRewindInstaller.ReinstallRR();
 }

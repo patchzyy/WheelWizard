@@ -72,6 +72,12 @@
                     </Grid>
                 </StackPanel>
             </Border>
+            
+            <components:FormFieldLabel Text="{x:Static lang:Settings.Section_Installation}" />
+            <components:Button Variant="Default" IsEnabled="True" HorizontalAlignment="Left"
+                               IconData="{StaticResource Download}"
+                               Text="{x:Static lang:Settings.Option_Reinstall}"
+                               Click="Reinstall_RetroRewind" Margin="3" />
         </StackPanel>
     </Grid>
 </UserControl>
