@@ -49,7 +49,7 @@ public class WhWzSetting : Setting
    
    private bool SetArray(JsonElement value, Type elementType, bool skipSave = false)
    {
-       var json = value.GetRawText();
+       var json = value.GetRawText().Trim('\0'); 
        var arrayType = Array.CreateInstance(elementType, 0).GetType();
        var array = (Array)JsonSerializer.Deserialize(json, arrayType)!;
        return Set(array, skipSave);

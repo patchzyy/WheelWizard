@@ -34,7 +34,7 @@ public static class AutoUpdater
             }
             return;
         }
-        
+        response.Content = response.Content.Trim('\0');
         var latestRelease = JsonSerializer.Deserialize<GithubRelease>(response.Content);
         if (latestRelease?.TagName is null) return;
         

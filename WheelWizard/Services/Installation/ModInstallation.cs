@@ -47,6 +47,7 @@ public static class ModInstallation
             {
                 // Backward compatibility: Load from JSON and convert to INI
                 var json = await File.ReadAllTextAsync(_configFilePath);
+                json = json.Trim('\0');
                 var modDataList = JsonSerializer.Deserialize<ObservableCollection<ModData>>(json) ?? new ObservableCollection<ModData>();
 
                 foreach (var modData in modDataList)

@@ -50,6 +50,7 @@ public class WhWzSettingManager
         var jsonString = FileHelper.ReadAllTextSafe(ConfigFilePath);
         if (jsonString == null)
             return;
+        jsonString.Trim('\0');
         
         var loadedSettings = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(jsonString);
         if (loadedSettings == null) 
