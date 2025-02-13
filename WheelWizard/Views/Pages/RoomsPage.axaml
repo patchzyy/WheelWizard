@@ -3,9 +3,113 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="656" d:DesignHeight="876"
+             xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
              xmlns:components="clr-namespace:WheelWizard.Views.Components.StandardLibrary"
+             xmlns:miiComp="using:WheelWizard.Views.Components.WhWzLibrary.MiiImages"
              x:Class="WheelWizard.Views.Pages.RoomsPage">
-   <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-       <components:EmptyPageInfo Title="Rooms Page Coming Soon" BodyText="The developers are hard at work porting everything over to this new build. This page has not yet been moved over." />
-   </Grid>
+   <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource TopRowSize}" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+       
+       <Border Grid.Row="0" Background="{StaticResource BackgroundLineColor}" Height="1" HorizontalAlignment="Stretch"
+               VerticalAlignment="Bottom" />
+      
+       <Border Grid.Row="2" Background="{StaticResource BackgroundLineColor}" Height="1" HorizontalAlignment="Stretch"
+               VerticalAlignment="Bottom" />
+       
+       <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+           <TextBlock Text="{x:Static lang:Common.PageTitle_RoomDetails}" Classes="PageTitleText" />
+           <Border VerticalAlignment="Center" HorizontalAlignment="Center"
+                   ToolTip.Tip="{x:Static lang:Phrases.Hover_RoomsPageDisclaimer}"
+                   ToolTip.Placement="Top" ToolTip.ShowDelay="20"
+                   Width="18" Height="18">
+               <PathIcon Foreground="{StaticResource TitleIconColor}" Margin="15,2,5,0"
+                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Data="{StaticResource InfoTip}" />
+           </Border>
+       </StackPanel>
+       
+        <TextBox Grid.Row="0" Width="200"
+                               Watermark="{x:Static lang:Phrases.Placeholder_SearchForPlayers}"
+                               VerticalAlignment="Bottom"
+                               TextChanged="PlayerSearchField_OnTextChanged"
+                               HorizontalAlignment="Right"
+                               Margin="10,0,10,10"
+                               x:Name="PlayerSearchField" />
+
+        <components:EmptyPageInfo Grid.Row="2" x:Name="EmptyRoomsView"
+                                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                                  Title="{x:Static lang:Phrases.EmptyText_NoRooms_Title}"
+                                  BodyText="{x:Static lang:Phrases.EmptyText_NoRooms}" />
+
+      
+        <ListBox x:Name="RoomsView" SelectionMode="Single" Padding="0" 
+                 Background="Transparent" BorderThickness="0" Grid.Row="2" 
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                     <Border x:Name="PART_ModBackground"
+                         CornerRadius="6" Margin="0,3" Padding="7,0">
+                     <Grid Height="30">
+                         <Grid.ColumnDefinitions>
+                             <ColumnDefinition Width="50" />
+                             <ColumnDefinition Width="*" />
+                         </Grid.ColumnDefinitions>
+                         
+                         
+                     </Grid>
+                     <Border.Styles>
+                         <Style Selector="Border#PART_ModBackground">
+                             <Setter Property="Background" Value="{StaticResource Neutral900}"/>
+                         </Style>
+                         <Style Selector="Border#PART_ModBackground:pointerover">
+                             <Setter Property="Background" Value="{StaticResource Neutral700}"/>
+                         </Style>
+                     </Border.Styles>
+                 </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+       
+         <ListBox x:Name="PlayersListView" SelectionMode="Single" Padding="0" 
+                     Background="Transparent" BorderThickness="0" Grid.Row="2" 
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border x:Name="PART_ModBackground"
+                                CornerRadius="6" Margin="0,3" Padding="7,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                             
+                             
+                                <Border CornerRadius="999999" ClipToBounds="True" Background="{StaticResource Neutral950}"
+                                        Width="40" Height="40" x:Name="Part_MiiBall" Margin="0,3">
+                                    <miiComp:MiiImageLoader HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                                            LoadingColor="{StaticResource Neutral600}"
+                                                            Mii="{Binding FirstMii}" x:Name="Part_MiiImage"
+                                                            FallBackColor="{StaticResource Neutral600}"
+                                                            ImageVariant="SMALL"/>
+                                </Border>
+                                
+                            </Grid>
+                            <Border.Styles>
+                                <Style Selector="Border#PART_ModBackground">
+                                    <Setter Property="Background" Value="{StaticResource Neutral900}"/>
+                                </Style>
+                                <Style Selector="Border#PART_ModBackground:pointerover">
+                                    <Setter Property="Background" Value="{StaticResource Neutral700}"/>
+                                </Style>
+                            </Border.Styles>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+    </Grid>
 </UserControl>
