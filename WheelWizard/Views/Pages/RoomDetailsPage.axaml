@@ -76,9 +76,8 @@
                  ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border CornerRadius="6" Margin="0,3" Padding="7,0">
-                        <Grid ColumnDefinitions="Auto,*,Auto,Auto">
-
+                    <Border CornerRadius="6" Margin="0,3" Padding="7,0" Background="{StaticResource Neutral800}">
+                        <Grid ColumnDefinitions="Auto,100,140,100">
                             <Border Grid.Column="0" CornerRadius="999999" ClipToBounds="True" Background="{StaticResource Neutral950}"
                                         Width="50" Height="50" Margin="0,3">
                                     <miiComp:MiiImageLoader HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
@@ -90,16 +89,13 @@
 
                             <TextBlock Grid.Column="1" Text="{Binding Name}" FontSize="14" Foreground="{StaticResource Neutral100}"
                                         VerticalAlignment="Center" Margin="10,0,0,0"/>
-
-                            <TextBlock Grid.Column="2" Text="{Binding Fc}" FontSize="14" Foreground="{StaticResource Neutral100}"
+                            <TextBlock Grid.Column="2" Text="{Binding Fc}"
+                                       FontSize="14" Foreground="{StaticResource Neutral100}"
+                                       HorizontalAlignment="Left"
                                        VerticalAlignment="Center" Margin="10,0,0,0"/>
 
                             <TextBlock Grid.Column="3" Text="{Binding Ev}" FontSize="14" Foreground="{StaticResource Neutral100}"
                                        VerticalAlignment="Center" Margin="10,0,0,0"/>
-                            
-                            <PathIcon Grid.Column="4" Data="{StaticResource WarningTip}"
-                                      Foreground="{StaticResource Warning700}" VerticalAlignment="Center" Margin="10,0,0,0"
-                                      IsVisible="{Binding WinPosition, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
 
                         </Grid>
                     </Border>

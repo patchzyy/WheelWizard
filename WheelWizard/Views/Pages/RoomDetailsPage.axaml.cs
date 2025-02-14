@@ -1,10 +1,13 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using WheelWizard.Models.MiiImages;
 using WheelWizard.Models.RRInfo;
 using WheelWizard.Services.LiveData;
+using WheelWizard.Utilities.Generators;
 using WheelWizard.Utilities.RepeatedTasks;
 using WheelWizard.Views.Pages;
 
@@ -35,6 +38,21 @@ public partial class RoomDetailPage : UserControl, INotifyPropertyChanged, IRepe
             OnPropertyChanged(nameof(PlayersList));
         }
     }
+
+    public RoomDetailPage()
+    {
+        //this should only be called by the designer
+        //todo: make a custom design test room
+        InitializeComponent();
+        DataContext = this;
+        
+        // Create a fake room for design-time preview
+        Room = FakeRoomGenerator.CreateDesignTestRoom();
+        PlayersList = new ObservableCollection<RrPlayer>(Room.Players.Values);
+        PlayersListView.ItemsSource = PlayersList;
+    }
+
+    
 
     public RoomDetailPage(RrRoom room)
     {
