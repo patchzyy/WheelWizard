@@ -12,6 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="{StaticResource TopRowSize}" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -41,7 +42,16 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0">
+            <StackPanel
+                Grid.Row="0"
+                Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,6">
+                <components:FormFieldLabel Text="{x:Static lang:Online.ListTitle_Friends}"/>
+                <components:StateBox Text="0" IconSize="0" x:Name="ListItemCount"/>
+            </StackPanel>
+            
+            <StackPanel 
+                Grid.Row="0"
+                Grid.Column="0">
                 <components:FormFieldLabel Text="{x:Static lang:Online.Stat_RoomID}" Margin="0,0,2,0" />
                 <TextBlock Text="{Binding Room.Id}"
                            Classes="BodyText" />
@@ -67,10 +77,11 @@
                     <Binding Path="Room.Type" Converter="{StaticResource IsEqualTo}" ConverterParameter="private"/>
                 </PathIcon.IsVisible>
             </PathIcon>
-
         </Grid>
-
+        
+        
         <ListBox Grid.Row="2" x:Name="PlayersListView" SelectionMode="Single" Padding="0"
+                 Margin="0,0,0,0"
                  Background="Transparent" BorderThickness="0"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ScrollViewer.VerticalScrollBarVisibility="Auto">
@@ -79,7 +90,7 @@
                     <Border CornerRadius="6" Margin="0,3" Padding="7,0" Background="{StaticResource Neutral800}">
                         <Grid ColumnDefinitions="Auto,100,140,100">
                             <Border Grid.Column="0" CornerRadius="999999" ClipToBounds="True" Background="{StaticResource Neutral950}"
-                                        Width="50" Height="50" Margin="0,3">
+                                    Width="50" Height="50" Margin="0,3">
                                     <miiComp:MiiImageLoader HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                                             LoadingColor="{StaticResource Neutral600}"
                                                             Mii="{Binding FirstMii}"
