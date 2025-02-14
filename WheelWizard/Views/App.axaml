@@ -14,6 +14,7 @@
             </ResourceDictionary.MergedDictionaries>
             
             <!-- CONVERTERS -->
+            <converters:IsEqualToConverter x:Key="IsEqualTo"/>
         </ResourceDictionary>
     </Application.Resources>
 

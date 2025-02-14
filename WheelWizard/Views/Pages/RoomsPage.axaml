@@ -48,7 +48,8 @@
         <ListBox x:Name="RoomsView" SelectionMode="Single" Padding="0" 
                  Background="Transparent" BorderThickness="0" Grid.Row="2" 
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                 ScrollViewer.VerticalScrollBarVisibility="Auto">
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 SelectionChanged="RoomsView_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                      <Border x:Name="PART_ModBackground"

@@ -1,0 +1,117 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="656" d:DesignHeight="876"
+             xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
+             xmlns:components="clr-namespace:WheelWizard.Views.Components.StandardLibrary"
+             xmlns:miiComp="using:WheelWizard.Views.Components.WhWzLibrary.MiiImages"
+             
+             x:Class="WheelWizard.Views.Pages.RoomDetailPage">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource TopRowSize}" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="{StaticResource BackgroundLineColor}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
+        
+        <Border Grid.Row="2" Background="{StaticResource BackgroundLineColor}" Height="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
+
+        <TextBlock Grid.Row="0" Text="{x:Static lang:Common.PageTitle_RoomDetails}"
+                   HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                   Classes="PageTitleText" />
+
+        <components:IconLabelButton Grid.Row="0" 
+                               IconData="{StaticResource ArrowLeft}"
+                               Text="{x:Static lang:Common.PageTitle_Rooms}"
+                               Foreground="{StaticResource TitleTextColor}"
+                               HoverForeground="{StaticResource Primary200}"
+                               VerticalAlignment="Top" HorizontalAlignment="Left"
+                               Click="GoBackClick" />
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <components:FormFieldLabel Text="{x:Static lang:Online.Stat_RoomID}" Margin="0,0,2,0" />
+                <TextBlock Text="{Binding Room.Id}"
+                           Classes="BodyText" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <components:FormFieldLabel Text="{x:Static lang:Online.Stat_TimeOnline}" Margin="0,0,2,0" />
+                <TextBlock Text="{Binding Room.TimeOnline}"
+                           Classes="BodyText" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="2">
+                <components:FormFieldLabel Text="{x:Static lang:Common.Attribute_Type}" Margin="0,0,2,0" />
+                <TextBlock Text="{Binding Room.GameMode}"
+                           Classes="BodyText" />
+            </StackPanel>
+
+
+            <PathIcon Grid.Column="3" Height="30" Width="30" Margin="3,12"
+                      HorizontalAlignment="Right" VerticalAlignment="Top"
+                      Data="{StaticResource Lock}" Foreground="{StaticResource TitleTextColor}">
+                <PathIcon.IsVisible>
+                    <Binding Path="Room.Type" Converter="{StaticResource IsEqualTo}" ConverterParameter="private"/>
+                </PathIcon.IsVisible>
+            </PathIcon>
+
+        </Grid>
+
+        <ListBox Grid.Row="2" x:Name="PlayersListView" SelectionMode="Single" Padding="0"
+                 Background="Transparent" BorderThickness="0"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border CornerRadius="6" Margin="0,3" Padding="7,0">
+                        <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+
+                            <Border Grid.Column="0" CornerRadius="999999" ClipToBounds="True" Background="{StaticResource Neutral950}"
+                                        Width="50" Height="50" Margin="0,3">
+                                    <miiComp:MiiImageLoader HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                                            LoadingColor="{StaticResource Neutral600}"
+                                                            Mii="{Binding FirstMii}"
+                                                            FallBackColor="{StaticResource Neutral600}"
+                                                            ImageVariant="SMALL"/>
+                                </Border>
+
+                            <TextBlock Grid.Column="1" Text="{Binding Name}" FontSize="14" Foreground="{StaticResource Neutral100}"
+                                        VerticalAlignment="Center" Margin="10,0,0,0"/>
+
+                            <TextBlock Grid.Column="2" Text="{Binding Fc}" FontSize="14" Foreground="{StaticResource Neutral100}"
+                                       VerticalAlignment="Center" Margin="10,0,0,0"/>
+
+                            <TextBlock Grid.Column="3" Text="{Binding Ev}" FontSize="14" Foreground="{StaticResource Neutral100}"
+                                       VerticalAlignment="Center" Margin="10,0,0,0"/>
+                            
+                            <PathIcon Grid.Column="4" Data="{StaticResource WarningTip}"
+                                      Foreground="{StaticResource Warning700}" VerticalAlignment="Center" Margin="10,0,0,0"
+                                      IsVisible="{Binding WinPosition, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="{x:Static lang:Common.Action_CopyFriendCode}" Click="CopyFriendCode_OnClick" />
+                </ContextMenu>
+            </ListBox.ContextMenu>
+        </ListBox>
+
+    </Grid>
+</UserControl>

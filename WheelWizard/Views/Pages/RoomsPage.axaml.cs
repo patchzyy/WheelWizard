@@ -113,4 +113,17 @@ public partial class RoomsPage : UserControl, INotifyPropertyChanged, IRepeatedT
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
     #endregion
+
+    private void RoomsView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (RoomsView.SelectedItem is RrRoom selectedRoom)
+        {
+            ViewUtils.NavigateToPage(new RoomDetailPage(selectedRoom));
+
+            // Deselect the item immediately after navigating.  This is important
+            // for a good user experience.  Otherwise, the item stays selected,
+            // and if you navigate back, you can't re-select the same item.
+            RoomsView.SelectedItem = null;
+        }
+    }
 }
