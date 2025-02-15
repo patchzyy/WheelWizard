@@ -9,9 +9,10 @@ public class RrPlayerFactory : MockingDataFactory<RrPlayer, RrPlayerFactory>
     protected override string DictionaryKeyGenerator(RrPlayer value) => value.Name;
     private static int _playerCount = 1;
     
-    public override RrPlayer Create()
+    public override RrPlayer Create(int? seed = null)
     {
         var playerId = _playerCount++;
+        var rand = Rand(seed);
         return new RrPlayer
         {
             Count = "1",
@@ -21,9 +22,9 @@ public class RrPlayerFactory : MockingDataFactory<RrPlayer, RrPlayerFactory>
             ConnFail = "0",
             Suspend = "0",
             Fc = FriendCodeFactory.Instance.Create(),
-            Ev = ((int)(new Random().NextDouble() * 9999)).ToString(),
-            Eb = ((int)(new Random().NextDouble() * 9999)).ToString(),
-            Mii = MiiFactory.Instance.CreateMultiple(1).ToList()
+            Ev = ((int)(rand.NextDouble() * 9999)).ToString(),
+            Eb = ((int)(rand.NextDouble() * 9999)).ToString(),
+            Mii = MiiFactory.Instance.CreateMultiple(1, seed).ToList()
         };
     }
 }

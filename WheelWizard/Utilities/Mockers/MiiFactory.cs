@@ -28,12 +28,12 @@ public class MiiFactory : MockingDataFactory<Mii, MiiFactory>
         "wBIATABpAGMAbwByAGkAYwBlAAAAAAosgAAAAAAAAAAgTH5AuUUo8kiRCtgAbUALguAAiiUFAAAAAAAAAAAAAAAAAAAAAAAAAAA="
     };
     
-    public override Mii Create()
+    public override Mii Create(int? seed = null)
     {
         return new Mii
         {
             Name = $"Mii {_miiCount++}", 
-            Data = dataList[(int)(new Random().NextDouble() * dataList.Length)]
+            Data = dataList[(int)(Rand(seed).NextDouble() * dataList.Length)]
         };
     }
 }

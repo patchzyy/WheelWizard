@@ -32,26 +32,25 @@
                                VerticalAlignment="Top" HorizontalAlignment="Left"
                                Click="GoBackClick" />
 
-        <Grid Grid.Row="1" ColumnDefinitions="2*,3*,*,*" RowDefinitions="*,*">
+        <Grid Grid.Row="1" ColumnDefinitions="2*,3*,*,*">
             <StackPanel 
-                Grid.Row="1"
                 Grid.Column="0">
                 <components:FormFieldLabel Text="{x:Static lang:Online.Stat_RoomID}" Margin="0,0,2,0" />
                 <SelectableTextBlock Text="{Binding Room.Id}" Classes="BodyText" />
             </StackPanel>
 
-            <StackPanel Grid.Column="1" Grid.Row="1">
+            <StackPanel Grid.Column="1">
                 <components:FormFieldLabel Text="{x:Static lang:Online.Stat_TimeOnline}" Margin="0,0,2,0" />
                 <SelectableTextBlock Text="{Binding Room.TimeOnline}" Classes="BodyText" />
             </StackPanel>
 
-            <StackPanel Grid.Column="2" Grid.Row="1">
+            <StackPanel Grid.Column="2">
                 <components:FormFieldLabel Text="{x:Static lang:Common.Attribute_Type}" Margin="0,0,2,0" />
                 <SelectableTextBlock Text="{Binding Room.GameMode}" Classes="BodyText" />
             </StackPanel>
 
 
-            <PathIcon Grid.Row="0" Grid.Column="3" Height="30" Width="30" Margin="3,12"
+            <PathIcon Grid.Column="3" Height="30" Width="30" Margin="3,12"
                       HorizontalAlignment="Right" VerticalAlignment="Top"
                       Data="{StaticResource Lock}" Foreground="{StaticResource TitleTextColor}">
                 <PathIcon.IsVisible>
