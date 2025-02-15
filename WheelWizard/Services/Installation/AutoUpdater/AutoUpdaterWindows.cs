@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Security.Principal;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ using WheelWizard.Views.Popups.Generic;
 namespace WheelWizard.Services.Installation;
 public static class AutoUpdaterWindows
 {
-    public const string CurrentVersion = "2.0.0";
+    public const string CurrentVersion = AutoUpdater.CurrentVersion;
     public static async Task CheckForUpdatesAsync()
     {
         var response = await HttpClientHelper.GetAsync<string>(Endpoints.WhWzLatestReleasesUrl);
@@ -39,11 +40,19 @@ public static class AutoUpdaterWindows
         
         var currentVersion = SemVersion.Parse(CurrentVersion, SemVersionStyles.Any);
         var latestVersion = SemVersion.Parse(latestRelease.TagName.TrimStart('v'), SemVersionStyles.Any);
+        
 
         if (currentVersion.ComparePrecedenceTo(latestVersion) >= 0) return;
+        
+        var windowsAsset = latestRelease.Assets.FirstOrDefault(asset => asset.BrowserDownloadUrl.EndsWith(".exe", StringComparison.OrdinalIgnoreCase));
+        if (windowsAsset == null)
+        {
+            //do nothing because there might just only be a linux or mac version
+            return;
+        }
         if (IsAdministrator())
         {
-            await UpdateAsync(latestRelease.Assets[0].BrowserDownloadUrl);
+            await UpdateAsync(windowsAsset.BrowserDownloadUrl);
             return;
         }
 
@@ -61,7 +70,7 @@ public static class AutoUpdaterWindows
                             .SetExtraText(Phrases.PopupText_UpdateAdminExplained);
         
         if (await adminQuestion.AwaitAnswer()) RestartAsAdmin();
-        else await UpdateAsync(latestRelease.Assets[0].BrowserDownloadUrl);
+        else await UpdateAsync(windowsAsset.BrowserDownloadUrl);
     }
     
     private static void RestartAsAdmin()
