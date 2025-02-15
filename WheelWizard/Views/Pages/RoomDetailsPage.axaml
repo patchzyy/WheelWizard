@@ -73,7 +73,8 @@
             <ListBox Grid.Row="1" x:Name="PlayersListView" SelectionMode="Single" BorderThickness="0"
                      Padding="0" Margin="0" Background="Transparent" ItemsSource="{Binding PlayersList}"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-                     ScrollViewer.VerticalScrollBarVisibility="Auto">
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     SelectionChanged="PlayerView_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border Classes="BoxItemBackground">
@@ -112,6 +113,18 @@
                         </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
+                
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="{x:Static lang:Common.Action_CopyFriendCode}" Click="CopyFriendCode_OnClick" />
+                        <!--
+                        <MenuItem Header="{x:Static lang:Common.Action_CopyFriendCode}" Click="CopyFriendCode_OnClick" />
+                        <Separator />
+                        <MenuItem Header="{x:Static lang:Common.Action_CopyFriendCode}" Click="CopyFriendCode_OnClick" />
+                        <MenuItem Header="{x:Static lang:Common.Action_CopyFriendCode}" Click="CopyFriendCode_OnClick" />
+                         -->
+                    </ContextMenu>
+                </ListBox.ContextMenu>
             </ListBox>
         </Grid>
     </Grid>

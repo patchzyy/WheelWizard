@@ -88,7 +88,7 @@ public partial class ModsPage : UserControl, INotifyPropertyChanged
         ModManager.OpenModFolder(selectedMod);
     }
     
-        private void ViewMod_Click(object sender, RoutedEventArgs e)
+    private void ViewMod_Click(object sender, RoutedEventArgs e)
     {
         if (ModsListBox.SelectedItem is not Mod selectedMod)
         {

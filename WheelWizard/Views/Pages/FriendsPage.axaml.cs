@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Interactivity;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -120,6 +121,12 @@ public partial class FriendsPage : UserControl, INotifyPropertyChanged, IRepeate
         TOTAL_RACES,
     }
         
+    private void CopyFriendCode_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (FriendsListView.SelectedItem is not GameDataFriend selectedPlayer) return;
+        TopLevel.GetTopLevel(this)?.Clipboard?.SetTextAsync(selectedPlayer.FriendCode);
+    }
+    
     #region PropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
     

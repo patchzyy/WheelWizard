@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using System;
 using System.Collections.ObjectModel;
@@ -117,7 +118,20 @@ public partial class RoomsPage : UserControl, INotifyPropertyChanged, IRepeatedT
         // for a good user experience. Otherwise, the item stays selected,
         // and if you navigate back, you can't re-select the same item.
     }
-    
+
+    private void PlayerView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (e.Source is not ListBox listBox) return;
+        if (listBox.SelectedItem is not RrPlayer selectedRoom) return;
+
+        var room = Rooms.FirstOrDefault(r => r.Players.ContainsValue(selectedRoom));
+        ViewUtils.NavigateToPage(new RoomDetailsPage(room));
+        listBox.SelectedItem = null;
+        // Deselect the item immediately after navigating. This is important
+        // for a good user experience. Otherwise, the item stays selected,
+        // and if you navigate back, you can't re-select the same item.
+    }
+
     #region PropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
 

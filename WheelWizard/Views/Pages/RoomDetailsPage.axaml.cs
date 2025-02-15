@@ -91,6 +91,12 @@ public partial class RoomDetailsPage : UserControl, INotifyPropertyChanged, IRep
     {
         RRLiveRooms.Instance.Unsubscribe(this);
     }
+    
+    private void PlayerView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (e.Source is not ListBox listBox) return;
+        listBox.ContextMenu?.Open();
+    }
 
     #region PropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
