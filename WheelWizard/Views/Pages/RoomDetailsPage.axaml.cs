@@ -39,9 +39,8 @@ public partial class RoomDetailsPage : UserControl, INotifyPropertyChanged, IRep
     {
         InitializeComponent();
         DataContext = this;
-        Room = RrRoomFactory.Instance.Create(123); // Create a fake room for design-time preview
+        Room = RrRoomFactory.Instance.Create(); // Create a fake room for design-time preview
         PlayersList = new ObservableCollection<RrPlayer>(Room.Players.Values);
-        PlayersListView.ItemsSource = PlayersList;
         ListItemCount.Text = PlayersList.Count.ToString();
     }
 
@@ -54,7 +53,6 @@ public partial class RoomDetailsPage : UserControl, INotifyPropertyChanged, IRep
         PlayersList = new ObservableCollection<RrPlayer>(Room.Players.Values);
 
         RRLiveRooms.Instance.Subscribe(this);
-        PlayersListView.ItemsSource = PlayersList;
         ListItemCount.Text = PlayersList.Count.ToString();
         Unloaded += RoomsDetailPage_Unloaded;
     }

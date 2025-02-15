@@ -24,7 +24,7 @@
                     <Grid>
                         <TextBlock FontSize="16" Margin="10,0" Text="{Binding WindowTitle}"
                                    VerticalAlignment="Center" HorizontalAlignment="Left"
-                                   Foreground="{StaticResource TitleTextHover}"/>
+                                   Foreground="{StaticResource Neutral300}"/>
                         
                         <DockPanel HorizontalAlignment="Right" VerticalAlignment="Top">
                             <Button Width="30" Height="25" Click="CloseButton_Click" Classes="TopButton" IsVisible="{Binding CanClose}" >

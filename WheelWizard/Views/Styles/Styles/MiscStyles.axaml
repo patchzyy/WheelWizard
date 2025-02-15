@@ -16,15 +16,24 @@
         <Setter Property="BorderThickness" Value="3" />
     </Style>
     
-    <Styles>
-        <Style Selector="ListBoxItem">
-            <Setter Property="Padding" Value="0"/>
-        </Style>
-        <Style Selector="ListBox">
-            <Setter Property="Background" Value="Transparent"/>
-        </Style>
-        <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter, ListBoxItem:selected /template/ ContentPresenter">
-            <Setter Property="Background" Value="Transparent"/>
-        </Style>
-    </Styles>
+
+    <Style Selector="ListBoxItem">
+        <Setter Property="Padding" Value="0"/>
+    </Style>
+    <Style Selector="ListBox">
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+    <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter, ListBoxItem:selected /template/ ContentPresenter">
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+    
+    <Style Selector="ListBoxItem Border.BoxItemBackground">
+        <Setter Property="CornerRadius" Value="6"/>
+        <Setter Property="Margin" Value="0,3"/>
+        <Setter Property="Padding" Value="7,0"/>
+        <Setter Property="Background" Value="{StaticResource Neutral900}"/>
+    </Style>
+    <Style Selector="ListBoxItem Border.BoxItemBackground:pointerover">
+        <Setter Property="Background" Value="{StaticResource Neutral700}"/>
+    </Style>
 </Styles>

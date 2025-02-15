@@ -79,8 +79,7 @@
          <ListBox Grid.Row="1" x:Name="ModsListBox" ItemsSource="{Binding Mods}" Margin="10,5">
              <ListBox.ItemTemplate>
                  <DataTemplate>
-                     <Border x:Name="PART_ModBackground"
-                             CornerRadius="6" Margin="0,3" Padding="7,0">
+                     <Border Classes="BoxItemBackground">
                          <Grid>
                              <Grid.ColumnDefinitions>
                                  <ColumnDefinition Width="50" />
@@ -120,14 +119,6 @@
                                                   TipText="Priority" Variant="Dark" TipPlacement="Top"
                                                   HorizontalAlignment="Right" VerticalAlignment="Center" /> -->
                          </Grid>
-                         <Border.Styles>
-                             <Style Selector="Border#PART_ModBackground">
-                                 <Setter Property="Background" Value="{StaticResource Neutral900}"/>
-                             </Style>
-                             <Style Selector="Border#PART_ModBackground:pointerover">
-                                 <Setter Property="Background" Value="{StaticResource Neutral700}"/>
-                             </Style>
-                         </Border.Styles>
                      </Border>
                  </DataTemplate>
              </ListBox.ItemTemplate>

@@ -44,9 +44,6 @@ public partial class RoomsPage : UserControl, INotifyPropertyChanged, IRepeatedT
         Rooms = new ObservableCollection<RrRoom>(RRLiveRooms.Instance.CurrentRooms);
         RRLiveRooms.Instance.Subscribe(this);
         
-        RoomsView.ItemsSource = Rooms;
-        PlayersListView.ItemsSource = Players;
-        
         OnUpdate(RRLiveRooms.Instance);
         Unloaded += RoomsPage_Unloaded;
     }
@@ -58,20 +55,22 @@ public partial class RoomsPage : UserControl, INotifyPropertyChanged, IRepeatedT
         Rooms.Clear();
         var count = liveRooms.RoomCount;
         EmptyRoomsView.IsVisible = count == 0;
-        RoomsView.IsVisible = count != 0;
+        RoomsListViewContainer.IsVisible = count != 0;
         if (count == 0) return;
 
         foreach (var room in liveRooms.CurrentRooms)
             Rooms.Add(room);
         
+        RoomsNiceLabel.IsVisible = liveRooms.CurrentRooms.Count == 69;
+        RoomsListItemCount.Text = liveRooms.CurrentRooms.Count.ToString();
         PerformSearch(_searchQuery);
     }
     
     private void PerformSearch(string? query)
     {
         var isStringEmpty = string.IsNullOrWhiteSpace(query);
-        RoomsView.IsVisible = isStringEmpty;
-        PlayersListView.IsVisible = !isStringEmpty;
+        RoomsListViewContainer.IsVisible = isStringEmpty;
+        PlayerListViewContainer.IsVisible = !isStringEmpty;
         
         if (isStringEmpty) return;
 
@@ -87,6 +86,9 @@ public partial class RoomsPage : UserControl, INotifyPropertyChanged, IRepeatedT
         {
             Players.Add(player);
         }
+        
+        PlayerNiceLabel.IsVisible = matchingPlayers.Count == 69;
+        PlayerListItemCount.Text = matchingPlayers.Count.ToString();
     }
     
     private void RoomsPage_Unloaded(object sender, RoutedEventArgs e)
@@ -110,10 +112,11 @@ public partial class RoomsPage : UserControl, INotifyPropertyChanged, IRepeatedT
     
     private void RoomsView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        if (RoomsView.SelectedItem is not RrRoom selectedRoom) return;
+        if (e.Source is not ListBox listBox) return;
+        if (listBox.SelectedItem is not RrRoom selectedRoom) return;
         
         ViewUtils.NavigateToPage(new RoomDetailsPage(selectedRoom));
-        RoomsView.SelectedItem = null;
+        listBox.SelectedItem = null;
         // Deselect the item immediately after navigating. This is important
         // for a good user experience. Otherwise, the item stays selected,
         // and if you navigate back, you can't re-select the same item.

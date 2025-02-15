@@ -10,7 +10,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="{StaticResource TopRowSize}" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="40" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -32,7 +32,7 @@
                                VerticalAlignment="Top" HorizontalAlignment="Left"
                                Click="GoBackClick" />
 
-        <Grid Grid.Row="1" ColumnDefinitions="2*,3*,*,*">
+        <Grid Grid.Row="1" ColumnDefinitions="3*,6*,2*,2*" Margin="10,0">
             <StackPanel 
                 Grid.Column="0">
                 <components:FormFieldLabel Text="{x:Static lang:Online.Stat_RoomID}" Margin="0,0,2,0" />
@@ -59,28 +59,25 @@
             </PathIcon>
         </Grid>
         
-        <Grid Grid.Row="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/> 
-                <RowDefinition Height="*"/>   
-            </Grid.RowDefinitions>
+        <Grid Grid.Row="2" RowDefinitions="*, 16*" Margin="10,0">
             
-            <StackPanel
-                Grid.Row="0"
-                Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,6">
-                <components:FormFieldLabel Text="{x:Static lang:Online.ListTitle_Players}"/>
-                <components:StateBox Text="0" IconSize="0" x:Name="ListItemCount"/>
-            </StackPanel>
+            <Grid Grid.Row="0" >
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,6">
+                    <components:FormFieldLabel Text="{x:Static lang:Online.ListTitle_Players}"/>
+                    <components:StateBox Text="0" IconSize="0" x:Name="ListItemCount"/>
+                </StackPanel>
+                <Border Background="{StaticResource BackgroundLineColor}" Height="1" HorizontalAlignment="Stretch"
+                        VerticalAlignment="Bottom"  />
+            </Grid>
             
-            <ListBox Grid.Row="1" x:Name="PlayersListView" SelectionMode="Single"
-                     Padding="0" Margin="0,0,0,0"
-                     Background="Transparent" BorderThickness="0"
-                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            <ListBox Grid.Row="1" x:Name="PlayersListView" SelectionMode="Single" BorderThickness="0"
+                     Padding="0" Margin="0" Background="Transparent" ItemsSource="{Binding PlayersList}"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                      ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border CornerRadius="6" Margin="0,3" Padding="7,0" Background="{StaticResource Neutral800}">
-                            <Grid ColumnDefinitions="Auto,100,140,100">
+                        <Border Classes="BoxItemBackground">
+                            <Grid ColumnDefinitions="Auto,140,100,100">
                                 <Border Grid.Column="0" CornerRadius="999999" ClipToBounds="True" 
                                         Background="{StaticResource Neutral950}" Width="50" Height="50" Margin="0,3">
                                     <miiComp:MiiImageLoader HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
@@ -90,12 +87,27 @@
                                                             ImageVariant="SMALL"/>
                                 </Border>
            
-                                <TextBlock Grid.Column="1" Text="{Binding Name}" FontSize="14" Foreground="{StaticResource Neutral100}"
-                                           VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                <TextBlock Grid.Column="2" Text="{Binding Fc}" FontSize="14" Foreground="{StaticResource Neutral100}"
-                                           HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                <TextBlock Grid.Column="3" Text="{Binding Ev}" FontSize="14" Foreground="{StaticResource Neutral100}"
-                                           VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                <StackPanel Grid.Column="1"  VerticalAlignment="Center" >
+                                    <components:FormFieldLabel Text="{Binding Name}"  Margin="10,0,0,0"/>
+                                    <TextBlock Text="{Binding Fc}" FontSize="14" 
+                                               Classes="TinyText" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                               Margin="10,0,0,0"/>
+                                </StackPanel>
+                                
+                                
+                                <StackPanel Grid.Column="2"  VerticalAlignment="Center" >
+                                    <components:FormFieldLabel Text="Vr"  Margin="10,0,0,0"/>
+                                    <TextBlock Text="{Binding Ev}" FontSize="14" 
+                                               Classes="TinyText" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                               Margin="10,0,0,0"/>
+                                </StackPanel>
+                                
+                                <StackPanel Grid.Column="3"  VerticalAlignment="Center" >
+                                    <components:FormFieldLabel Text="Br"  Margin="10,0,0,0"/>
+                                    <TextBlock Text="{Binding Eb}" FontSize="14" 
+                                               Classes="TinyText" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                               Margin="10,0,0,0"/>
+                                </StackPanel>
                             </Grid>
                         </Border>
                     </DataTemplate>
