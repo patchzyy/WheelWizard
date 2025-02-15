@@ -2,10 +2,10 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Security.Principal;
 using System.Text.Json;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using WheelWizard.Helpers;
 using WheelWizard.Models;
 using WheelWizard.Models.Github;
@@ -15,7 +15,7 @@ using WheelWizard.WPFViews.Popups.Generic;
 namespace WheelWizard.Services.Installation;
 public static class AutoUpdater
 {
-    public const string CurrentVersion = "1.8.11";
+    public const string CurrentVersion = "1.8.12";
     public static async Task CheckForUpdatesAsync()
     {
         var response = await HttpClientHelper.GetAsync<string>(Endpoints.WhWzLatestReleasesUrl);
@@ -32,9 +32,17 @@ public static class AutoUpdater
         var latestVersion = SemVersion.Parse(latestRelease.TagName.TrimStart('v'), SemVersionStyles.Any);
 
         if (currentVersion.ComparePrecedenceTo(latestVersion) >= 0) return;
+        
+        var windowsAsset = latestRelease.Assets.FirstOrDefault(asset => asset.BrowserDownloadUrl.EndsWith(".exe", StringComparison.OrdinalIgnoreCase));
+        if (windowsAsset == null)
+        {
+            MessageBoxWindow.ShowDialog("Please manually update WheelWizard to the latest version. " +
+                                        "No Windows executable was found in the latest release.");
+            return;
+        }
         if (IsAdministrator())
         {
-            await UpdateAsync(latestRelease.Assets[0].BrowserDownloadUrl);
+            await UpdateAsync(windowsAsset.BrowserDownloadUrl);
             return;
         }
 
@@ -52,7 +60,8 @@ public static class AutoUpdater
         if (adminQuestion.AwaitAnswer())
             RestartAsAdmin();
         else
-            await UpdateAsync(latestRelease.Assets[0].BrowserDownloadUrl);
+        
+            await UpdateAsync(windowsAsset.BrowserDownloadUrl);
     }
     
     private static void RestartAsAdmin()
@@ -71,7 +80,7 @@ public static class AutoUpdater
         }
         catch (System.ComponentModel.Win32Exception)
         {
-            new YesNoWindow().SetMainText(Phrases.PopupText_RestartAdminFail);
+            new YesNoWindow().SetMainText(Phrases.PopupText_RestartAdminFail).ShowDialog();
         }
     }
     
