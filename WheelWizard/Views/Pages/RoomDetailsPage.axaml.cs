@@ -45,11 +45,11 @@ public partial class RoomDetailPage : UserControl, INotifyPropertyChanged, IRepe
         //todo: make a custom design test room
         InitializeComponent();
         DataContext = this;
-        
         // Create a fake room for design-time preview
         Room = FakeRoomGenerator.CreateDesignTestRoom();
         PlayersList = new ObservableCollection<RrPlayer>(Room.Players.Values);
         PlayersListView.ItemsSource = PlayersList;
+        ListItemCount.Text = PlayersList.Count.ToString();
     }
 
     
@@ -64,6 +64,7 @@ public partial class RoomDetailPage : UserControl, INotifyPropertyChanged, IRepe
 
         RRLiveRooms.Instance.Subscribe(this);
         PlayersListView.ItemsSource = PlayersList;
+        ListItemCount.Text = PlayersList.Count.ToString();
         Unloaded += RoomsDetailPage_Unloaded;
     }
 
@@ -86,6 +87,7 @@ public partial class RoomDetailPage : UserControl, INotifyPropertyChanged, IRepe
         {
             PlayersList.Add(p);
         }
+        ListItemCount.Text = PlayersList.Count.ToString();
     }
 
     private void GoBackClick(object? sender, EventArgs eventArgs) => ViewUtils.NavigateToPage(new RoomsPage());
