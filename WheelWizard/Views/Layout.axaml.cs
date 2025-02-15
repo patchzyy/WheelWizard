@@ -87,6 +87,10 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
 
             var buttonPageType = button.PageType; 
             button.IsChecked = buttonPageType == page.GetType();
+            
+            // TODO: make a better way to have these type of exceptions
+            if(button.PageType == typeof(RoomsPage) && typeof(RoomDetailsPage) == page.GetType())
+                button.IsChecked = true;
         }
     }
     public void OnUpdate(RepeatedTaskManager sender)

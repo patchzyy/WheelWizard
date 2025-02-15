@@ -49,17 +49,17 @@
            <!-- The grid they are in right now is not nesesairy if we want to only have 1 visible at a time
              But if we are going to update the search to allow showing both, then this is nesesairy -->
            <Grid Grid.Row="0" RowDefinitions="*, 16*" Margin="10,0" x:Name="RoomsListViewContainer">
-            <Grid Grid.Row="0" >
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,6">
-                    <components:FormFieldLabel Text="{x:Static lang:Online.ListTitle_Rooms}"/>
-                    <components:StateBox Text="0" IconSize="0" x:Name="RoomsListItemCount"/>
-                    <components:FormFieldLabel Foreground="{StaticResource Primary400}" Margin="4,0,0,0"
-                                               Text="Nice!" x:Name="RoomsNiceLabel" IsVisible="False"/>
-                </StackPanel>
-                <Border Background="{StaticResource BackgroundLineColor}" Height="1" HorizontalAlignment="Stretch"
-                        VerticalAlignment="Bottom"  />
-
-            </Grid>
+                <Grid Grid.Row="0" >
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,6">
+                        <components:FormFieldLabel Text="{x:Static lang:Online.ListTitle_Rooms}"/>
+                        <components:StateBox Text="0" IconSize="0" x:Name="RoomsListItemCount"/>
+                        <components:FormFieldLabel Foreground="{StaticResource Primary400}" Margin="4,0,0,0"
+                                                   Text="Nice!" x:Name="RoomsNiceLabel" IsVisible="False"/>
+                    </StackPanel>
+                    <Border Background="{StaticResource BackgroundLineColor}" Height="1" HorizontalAlignment="Stretch"
+                            VerticalAlignment="Bottom"  />
+    
+                </Grid>
             
             <ListBox SelectionMode="Single" Padding="0"  ItemsSource="{Binding Rooms}"
                      Background="Transparent" BorderThickness="0" Grid.Row="1"
@@ -69,16 +69,23 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border Classes="BoxItemBackground">
-                            <Grid ColumnDefinitions="Auto,140,140,100">
-                                <!-- Temporary, will replace this later with path icon, but its cool that this exists --> 
-                                <Border Grid.Column="0" CornerRadius="999999" ClipToBounds="True" 
+                            <Grid ColumnDefinitions="Auto,110,140,*">
+                                <PathIcon Data="{StaticResource Road}" Width="50" Height="50" Classes="RoadIcon"
+                                          Margin="0,3"   IsVisible="{Binding IsPublic }"
+                                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0"/>
+                                <PathIcon Data="{StaticResource RoadLocked}" Width="50" Height="50" Classes="RoadIcon"
+                                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Margin="0,3"
+                                          IsVisible="{Binding IsPublic, Converter={x:Static BoolConverters.Not}}" />
+                                
+                                <!-- Temporary, will replace this later with path icon, but it's cool that this exists --> 
+                               <!-- <Border Grid.Column="0" CornerRadius="999999" ClipToBounds="True" 
                                         Background="{StaticResource Neutral950}" Width="50" Height="50" Margin="0,3">
                                     <miiComp:MiiImageLoader HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                                             LoadingColor="{StaticResource Neutral600}"
                                                             Mii="{Binding HostMii}"
                                                             FallBackColor="{StaticResource Neutral600}"
                                                             ImageVariant="SMALL"/>
-                                </Border>
+                                </Border> -->
                                 
                                 <StackPanel Grid.Column="1"  VerticalAlignment="Center" >
                                     <components:FormFieldLabel Text="{Binding GameMode}"  Margin="10,0,0,0"/>
@@ -86,7 +93,28 @@
                                                Classes="TinyText" HorizontalAlignment="Left" VerticalAlignment="Center"
                                                Margin="10,0,0,0"/>
                                 </StackPanel>
+                                
+                                <StackPanel Grid.Column="2" VerticalAlignment="Center" >
+                                    <components:FormFieldLabel Text="{x:Static lang:Online.Stat_TimeOnline}"  Margin="10,0,0,0"/>
+                                    <TextBlock Text="{Binding TimeOnline}" FontSize="14" 
+                                               Classes="TinyText" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                               Margin="10,0,0,0"/>
+                                </StackPanel>
+                     
+                                <components:StateBox Grid.Column="3" IconData="{StaticResource UserCouple}"
+                                                     Text="{Binding PlayerCount}" VerticalAlignment="Center" 
+                                                     Variant="Dark"
+                                                     HorizontalAlignment="Right"  Margin="0,0,10,0"/>
                             </Grid>
+                            
+                            <Border.Styles>
+                                <Style Selector="ListBoxItem Border.BoxItemBackground PathIcon.RoadIcon">
+                                    <Setter Property="Foreground" Value="{StaticResource Neutral500}"/>
+                                </Style>
+                                <Style Selector="ListBoxItem Border.BoxItemBackground:pointerover PathIcon.RoadIcon">
+                                    <Setter Property="Foreground" Value="{StaticResource Neutral400}"/>
+                                </Style>
+                            </Border.Styles>
                         </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

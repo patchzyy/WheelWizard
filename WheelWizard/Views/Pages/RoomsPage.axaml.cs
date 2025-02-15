@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Linq;
 using WheelWizard.Models.RRInfo;
 using WheelWizard.Services.LiveData;
-using WheelWizard.Utilities.Mockers;
 using WheelWizard.Utilities.RepeatedTasks;
 
 namespace WheelWizard.Views.Pages;
@@ -82,9 +81,7 @@ public partial class RoomsPage : UserControl, INotifyPropertyChanged, IRepeatedT
             .ToList();
 
         foreach (var player in matchingPlayers)
-        {
             Players.Add(player);
-        }
         
         PlayerNiceLabel.IsVisible = matchingPlayers.Count == 69;
         PlayerListItemCount.Text = matchingPlayers.Count.ToString();
@@ -105,8 +102,8 @@ public partial class RoomsPage : UserControl, INotifyPropertyChanged, IRepeatedT
     private void PlayerSearchField_OnTextChanged(object? sender, TextChangedEventArgs e)
     {
         if (e.Source is not TextBox textBox) return;
-        PerformSearch(textBox.Text);
         _searchQuery = textBox.Text;
+        PerformSearch(textBox.Text);
     }
     
     private void RoomsView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
