@@ -12,6 +12,8 @@ namespace WheelWizard.Views.Pages;
 
 public partial class RoomsPage : UserControl, INotifyPropertyChanged, IRepeatedTaskListener
 {
+    private string? _searchQuery;
+    
     private readonly ObservableCollection<RrRoom> _rooms = new();
     public ObservableCollection<RrRoom> Rooms
     {
@@ -62,7 +64,7 @@ public partial class RoomsPage : UserControl, INotifyPropertyChanged, IRepeatedT
         foreach (var room in liveRooms.CurrentRooms)
             Rooms.Add(room);
         
-        PerformSearch(null);
+        PerformSearch(_searchQuery);
     }
     
     private void PerformSearch(string? query)
@@ -103,6 +105,18 @@ public partial class RoomsPage : UserControl, INotifyPropertyChanged, IRepeatedT
     {
         if (e.Source is not TextBox textBox) return;
         PerformSearch(textBox.Text);
+        _searchQuery = textBox.Text;
+    }
+    
+    private void RoomsView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (RoomsView.SelectedItem is not RrRoom selectedRoom) return;
+        
+        ViewUtils.NavigateToPage(new RoomDetailsPage(selectedRoom));
+        RoomsView.SelectedItem = null;
+        // Deselect the item immediately after navigating. This is important
+        // for a good user experience. Otherwise, the item stays selected,
+        // and if you navigate back, you can't re-select the same item.
     }
     
     #region PropertyChanged
@@ -113,17 +127,4 @@ public partial class RoomsPage : UserControl, INotifyPropertyChanged, IRepeatedT
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
     #endregion
-
-    private void RoomsView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
-    {
-        if (RoomsView.SelectedItem is RrRoom selectedRoom)
-        {
-            ViewUtils.NavigateToPage(new RoomDetailsPage(selectedRoom));
-
-            // Deselect the item immediately after navigating.  This is important
-            // for a good user experience.  Otherwise, the item stays selected,
-            // and if you navigate back, you can't re-select the same item.
-            RoomsView.SelectedItem = null;
-        }
-    }
 }

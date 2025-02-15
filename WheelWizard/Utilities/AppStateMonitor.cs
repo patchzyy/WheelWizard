@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using WheelWizard.Utilities.RepeatedTasks;
 
-namespace WheelWizard.Utilities.DevTools;
+namespace WheelWizard.Utilities;
 
 public class AppStateMonitor : RepeatedTaskManager
 {

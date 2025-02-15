@@ -6,6 +6,7 @@ using System.ComponentModel;
 using WheelWizard.Models.RRInfo;
 using WheelWizard.Services.LiveData;
 using WheelWizard.Utilities.Generators;
+using WheelWizard.Utilities.Mockers;
 using WheelWizard.Utilities.RepeatedTasks;
 
 namespace WheelWizard.Views.Pages;
@@ -36,12 +37,9 @@ public partial class RoomDetailsPage : UserControl, INotifyPropertyChanged, IRep
 
     public RoomDetailsPage()
     {
-        //this should only be called by the designer
-        //todo: make a custom design test room
         InitializeComponent();
         DataContext = this;
-        // Create a fake room for design-time preview
-        Room = FakeRoomGenerator.CreateDesignTestRoom();
+        Room = RrRoomFactory.Instance.Create(); // Create a fake room for design-time preview
         PlayersList = new ObservableCollection<RrPlayer>(Room.Players.Values);
         PlayersListView.ItemsSource = PlayersList;
         ListItemCount.Text = PlayersList.Count.ToString();

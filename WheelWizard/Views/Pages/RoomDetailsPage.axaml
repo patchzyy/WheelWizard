@@ -33,32 +33,21 @@
                                Click="GoBackClick" />
 
         <Grid Grid.Row="1" ColumnDefinitions="2*,3*,*,*" RowDefinitions="*,*">
-
-            <StackPanel
-                Grid.Row="0"
-                Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,6">
-                <components:FormFieldLabel Text="{x:Static lang:Online.ListTitle_Players}"/>
-                <components:StateBox Text="0" IconSize="0" x:Name="ListItemCount"/>
-            </StackPanel>
-            
             <StackPanel 
                 Grid.Row="1"
                 Grid.Column="0">
                 <components:FormFieldLabel Text="{x:Static lang:Online.Stat_RoomID}" Margin="0,0,2,0" />
-                <TextBlock Text="{Binding Room.Id}"
-                           Classes="BodyText" />
+                <SelectableTextBlock Text="{Binding Room.Id}" Classes="BodyText" />
             </StackPanel>
 
             <StackPanel Grid.Column="1" Grid.Row="1">
                 <components:FormFieldLabel Text="{x:Static lang:Online.Stat_TimeOnline}" Margin="0,0,2,0" />
-                <TextBlock Text="{Binding Room.TimeOnline}"
-                           Classes="BodyText" />
+                <SelectableTextBlock Text="{Binding Room.TimeOnline}" Classes="BodyText" />
             </StackPanel>
 
             <StackPanel Grid.Column="2" Grid.Row="1">
                 <components:FormFieldLabel Text="{x:Static lang:Common.Attribute_Type}" Margin="0,0,2,0" />
-                <TextBlock Text="{Binding Room.GameMode}"
-                           Classes="BodyText" />
+                <SelectableTextBlock Text="{Binding Room.GameMode}" Classes="BodyText" />
             </StackPanel>
 
 
@@ -71,56 +60,48 @@
             </PathIcon>
         </Grid>
         
-        
         <Grid Grid.Row="2">
-    <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"/> 
-        <RowDefinition Height="*"/>   
-    </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/> 
+                <RowDefinition Height="*"/>   
+            </Grid.RowDefinitions>
             
-    <Border Background="Transparent" Padding="10,10,0,0" Grid.Row="0">
-        <Grid ColumnDefinitions="60,100,140,100">
-            <TextBlock Grid.Column="1" Text="{x:Static lang:Common.Attribute_Name}" 
-                       FontSize="14" Foreground="{StaticResource TitleTextColor}" />
-            <TextBlock Grid.Column="2" Text="{x:Static lang:Online.Stat_FriendCode}"
-                       FontSize="14" Foreground="{StaticResource TitleTextColor}" />
-            <TextBlock Grid.Column="3" Text="VR"
-                       FontSize="14" Foreground="{StaticResource TitleTextColor}" />
-        </Grid>
-    </Border>
-
-
-    <ListBox Grid.Row="1" x:Name="PlayersListView" SelectionMode="Single"
-             Padding="0" Margin="0,0,0,0"
-             Background="Transparent" BorderThickness="0"
-             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-             ScrollViewer.VerticalScrollBarVisibility="Auto">
-        <ListBox.ItemTemplate>
-            <DataTemplate>
-                <Border CornerRadius="6" Margin="0,3" Padding="7,0" Background="{StaticResource Neutral800}">
-                    <Grid ColumnDefinitions="Auto,100,140,100">
-                        <Border Grid.Column="0" CornerRadius="999999" ClipToBounds="True" 
-                                Background="{StaticResource Neutral950}" Width="50" Height="50" Margin="0,3">
-                            <miiComp:MiiImageLoader HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                                    LoadingColor="{StaticResource Neutral600}"
-                                                    Mii="{Binding FirstMii}"
-                                                    FallBackColor="{StaticResource Neutral600}"
-                                                    ImageVariant="SMALL"/>
+            <StackPanel
+                Grid.Row="0"
+                Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,6">
+                <components:FormFieldLabel Text="{x:Static lang:Online.ListTitle_Players}"/>
+                <components:StateBox Text="0" IconSize="0" x:Name="ListItemCount"/>
+            </StackPanel>
+            
+            <ListBox Grid.Row="1" x:Name="PlayersListView" SelectionMode="Single"
+                     Padding="0" Margin="0,0,0,0"
+                     Background="Transparent" BorderThickness="0"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border CornerRadius="6" Margin="0,3" Padding="7,0" Background="{StaticResource Neutral800}">
+                            <Grid ColumnDefinitions="Auto,100,140,100">
+                                <Border Grid.Column="0" CornerRadius="999999" ClipToBounds="True" 
+                                        Background="{StaticResource Neutral950}" Width="50" Height="50" Margin="0,3">
+                                    <miiComp:MiiImageLoader HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                                            LoadingColor="{StaticResource Neutral600}"
+                                                            Mii="{Binding FirstMii}"
+                                                            FallBackColor="{StaticResource Neutral600}"
+                                                            ImageVariant="SMALL"/>
+                                </Border>
+           
+                                <TextBlock Grid.Column="1" Text="{Binding Name}" FontSize="14" Foreground="{StaticResource Neutral100}"
+                                           VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                <TextBlock Grid.Column="2" Text="{Binding Fc}" FontSize="14" Foreground="{StaticResource Neutral100}"
+                                           HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                <TextBlock Grid.Column="3" Text="{Binding Ev}" FontSize="14" Foreground="{StaticResource Neutral100}"
+                                           VerticalAlignment="Center" Margin="10,0,0,0"/>
+                            </Grid>
                         </Border>
-
-                        <TextBlock Grid.Column="1" Text="{Binding Name}" FontSize="14" Foreground="{StaticResource Neutral100}"
-                                   VerticalAlignment="Center" Margin="10,0,0,0"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Fc}" FontSize="14" Foreground="{StaticResource Neutral100}"
-                                   HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                        <TextBlock Grid.Column="3" Text="{Binding Ev}" FontSize="14" Foreground="{StaticResource Neutral100}"
-                                   VerticalAlignment="Center" Margin="10,0,0,0"/>
-                    </Grid>
-                </Border>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-    </ListBox>
-</Grid>
-
-
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
     </Grid>
 </UserControl>

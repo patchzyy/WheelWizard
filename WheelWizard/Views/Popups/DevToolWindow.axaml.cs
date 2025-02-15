@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using WheelWizard.Helpers;
 using WheelWizard.Services.LiveData;
 using WheelWizard.Services.WiiManagement;
-using WheelWizard.Utilities.DevTools;
+using WheelWizard.Utilities;
 using WheelWizard.Utilities.RepeatedTasks;
 using WheelWizard.Views.Popups.Generic;
 

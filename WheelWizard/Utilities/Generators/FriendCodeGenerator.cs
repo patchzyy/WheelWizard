@@ -7,7 +7,6 @@ namespace WheelWizard.Utilities.Generators;
 
 public class FriendCodeGenerator
 {
-    
     public static string GetFriendCode(byte[] data, int offset)
     {
         var pid = BigEndianBinaryReader.BufferToUint32(data, offset);
