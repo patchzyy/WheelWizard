@@ -6,13 +6,12 @@ using System.Security.Principal;
 using System.Text.Json;
 using System.Threading.Tasks;
 using WheelWizard.Helpers;
-using WheelWizard.Models;
 using WheelWizard.Models.Github;
 using WheelWizard.Resources.Languages;
 using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Services.Installation;
-public static class AutoUpdater
+public static class AutoUpdaterWindows
 {
     public const string CurrentVersion = "2.0.0";
     public static async Task CheckForUpdatesAsync()

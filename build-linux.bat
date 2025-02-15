@@ -1,1 +1,1 @@
-dotnet publish -r linux-x64 -c Release /p:PublishSingleFile=true /p:IncludeAllContentForSelfExtract=true /p:IncludeNativeLibrariesForSelfExtract=true /p:EnableCompressionInSingleFile=true --self-contained true
+dotnet publish -r linux-x64 -c Release /p:PublishSingleFile=true /p:IncludeAllContentForSelfExtract=true /p:IncludeNativeLibrariesForSelfExtract=true /p:EnableCompressionInSingleFile=true --self-contained true && chmod +x WheelWizard/bin/Release/net7.0/linux-x64/publish/WheelWizard
