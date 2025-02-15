@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using WheelWizard.Models.RRInfo;
 using WheelWizard.Services.LiveData;
+using WheelWizard.Utilities.Mockers;
 using WheelWizard.Utilities.RepeatedTasks;
 
 namespace WheelWizard.Views.Pages;
@@ -40,8 +41,6 @@ public partial class RoomsPage : UserControl, INotifyPropertyChanged, IRepeatedT
     {
         InitializeComponent();
         DataContext = this;
-        
-        Rooms = new ObservableCollection<RrRoom>(RRLiveRooms.Instance.CurrentRooms);
         RRLiveRooms.Instance.Subscribe(this);
         
         OnUpdate(RRLiveRooms.Instance);

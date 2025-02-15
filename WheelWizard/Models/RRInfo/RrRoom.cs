@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using WheelWizard.Helpers;
+using WheelWizard.Models.MiiImages;
 
 namespace WheelWizard.Models.RRInfo;
 
@@ -21,7 +22,7 @@ public class RrRoom
 
     public string TimeOnline => Humanizer.HumanizeTimeSpan(DateTime.UtcNow - Created);
     public bool IsPublic => Type == "public";
-    public string GameMode => Rk switch
+    public string GameModeAbbrev => Rk switch
     {
         "vs_10" => "RR",
         "vs_11" => "TT",
@@ -30,4 +31,14 @@ public class RrRoom
         "vs_-1" => "Reg",
         _ => "??"
     };
+    public string GameMode => Rk switch
+    {
+        "vs_10" => "Retro Rewind 150CC",
+        "vs_11" => "Online Time Trails",
+        "vs_12" => "Retro Rewind 200CC",
+        "vs_751" => "Verses",
+        "vs_-1" => "Reg?? idk what this is",
+        _ => "Unknown Game Mode"
+    };
+    public Mii? HostMii => Players.GetValueOrDefault(Host)?.FirstMii;
 }
