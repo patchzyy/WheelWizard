@@ -67,7 +67,8 @@
                                                  Mii="{Binding Mii}"
                                                  IsOnline="{Binding IsOnline}"
                                                  TotalLosses="{Binding Losses}"
-                                                 TotalWon="{Binding Wins}"/>
+                                                 TotalWon="{Binding Wins}"
+                                                 ViewRoomAction="ViewRoom_OnClick"/>
                    </DataTemplate>
                </ListBox.ItemTemplate>
                <ListBox.ContextMenu>

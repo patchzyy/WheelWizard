@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 using System;
+using WheelWizard.Models.GameData;
 using WheelWizard.Models.MiiImages;
 
 namespace WheelWizard.Views.Components.WhWzLibrary;
@@ -73,20 +74,25 @@ public class FriendsListItem : TemplatedControl
         set => SetValue(UserNameProperty, value);
     }
     
-    public static readonly StyledProperty< EventHandler<RoutedEventArgs>?> ViewRoomActionProperty =
-        AvaloniaProperty.Register<FriendsListItem,  EventHandler<RoutedEventArgs>?>(nameof(ViewRoomAction));
-    public  EventHandler<RoutedEventArgs>? ViewRoomAction
+    public static readonly StyledProperty< Action<string>?> ViewRoomActionProperty =
+        AvaloniaProperty.Register<FriendsListItem,  Action<string>?>(nameof(ViewRoomAction));
+    public  Action<string>? ViewRoomAction
     {
         get => GetValue(ViewRoomActionProperty);
         set => SetValue(ViewRoomActionProperty, value);
     }
 
+    public void ViewRoom(object? sender, RoutedEventArgs e)
+    {
+        ViewRoomAction.Invoke(FriendCode);
+    }
+    
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
         var viewRoomButton = e.NameScope.Find<StandardLibrary.Button>("ViewRoomButton");
         if (viewRoomButton != null)
-            viewRoomButton.Click += ViewRoomAction;
+            viewRoomButton.Click += ViewRoom;
     }
 }
 

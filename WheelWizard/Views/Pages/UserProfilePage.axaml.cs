@@ -2,6 +2,7 @@
 using Avalonia.Interactivity;
 using System;
 using System.ComponentModel;
+using System.Linq;
 using WheelWizard.Models.Enums;
 using WheelWizard.Models.GameData;
 using WheelWizard.Models.MiiImages;
@@ -10,6 +11,8 @@ using WheelWizard.Services.Settings;
 using WheelWizard.Services.WiiManagement.SaveData;
 using WheelWizard.Models.Settings;
 using WheelWizard.Resources.Languages;
+using WheelWizard.Services.LiveData;
+using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Views.Pages;
 
@@ -133,12 +136,6 @@ public partial class UserProfilePage : UserControl, INotifyPropertyChanged
         if (args.PropertyName != nameof(currentPlayer.MiiName)) return;
         CurrentUserProfile.UserName = currentPlayer.MiiName;
     }
-
-    private void Button_ViewRoom(object sender, RoutedEventArgs e)
-    {
-        // TODO: Implement this
-        // It should open the room that the user is currently in. ( the button is only enabled if the player is in a room)
-    }
     
     private void CheckBox_SetPrimaryUser(object sender, RoutedEventArgs e) => SetUserAsPrimary();
     private void SetUserAsPrimary()
@@ -173,10 +170,30 @@ public partial class UserProfilePage : UserControl, INotifyPropertyChanged
         GameDataLoader.Instance.PromptLicenseNameChange(_currentUserIndex);
     }
     
+    private void ViewRoom_OnClick(string friendCode)
+    {
+        foreach (var room in RRLiveRooms.Instance.CurrentRooms)
+        {
+            if (room.Players.All(player => player.Value.Fc != friendCode))
+                continue;
+    
+            ViewUtils.NavigateToPage(new RoomDetailsPage(room));
+            return;
+        }
+       
+        new MessageBoxWindow()
+            .SetTitleText("Couldn't find the room")
+            .SetInfoText("Whoops, could not find the room that this player is supposedly playing in")
+            .SetMessageType(MessageBoxWindow.MessageType.Warning)
+            .Show();
+    }
+    
+    #region PropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged(string propertyName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+    #endregion
 }

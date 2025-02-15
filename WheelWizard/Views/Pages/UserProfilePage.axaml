@@ -59,7 +59,7 @@
        
        <Grid Grid.Row="1">
            <whwzComps:DetailedProfileBox x:Name="CurrentUserProfile" 
-                                         OnChecked="CheckBox_SetPrimaryUser" ViewRoomAction="Button_ViewRoom"
+                                         OnChecked="CheckBox_SetPrimaryUser" ViewRoomAction="ViewRoom_OnClick"
                                          VerticalAlignment="Top" HorizontalAlignment="Stretch"
                                          Mii="{Binding CurrentMii}"
                                          OnRename="ChangeMiiName"

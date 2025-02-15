@@ -6,8 +6,10 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using WheelWizard.Models.GameData;
+using WheelWizard.Services.LiveData;
 using WheelWizard.Services.WiiManagement.SaveData;
 using WheelWizard.Utilities.RepeatedTasks;
+using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Views.Pages;
 
@@ -125,6 +127,24 @@ public partial class FriendsPage : UserControl, INotifyPropertyChanged, IRepeate
     {
         if (FriendsListView.SelectedItem is not GameDataFriend selectedPlayer) return;
         TopLevel.GetTopLevel(this)?.Clipboard?.SetTextAsync(selectedPlayer.FriendCode);
+    }
+    
+    private void ViewRoom_OnClick(string friendCode)
+    {
+        foreach (var room in RRLiveRooms.Instance.CurrentRooms)
+        {
+            if (room.Players.All(player => player.Value.Fc != friendCode))
+                continue;
+    
+            ViewUtils.NavigateToPage(new RoomDetailsPage(room));
+            return;
+        }
+       
+        new MessageBoxWindow()
+            .SetTitleText("Couldn't find the room")
+            .SetInfoText("Whoops, could not find the room that this player is supposedly playing in")
+            .SetMessageType(MessageBoxWindow.MessageType.Warning)
+            .Show();
     }
     
     #region PropertyChanged

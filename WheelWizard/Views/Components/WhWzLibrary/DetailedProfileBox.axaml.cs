@@ -114,12 +114,17 @@ public class DetailedProfileBox : TemplatedControl, INotifyPropertyChanged
         set => SetValue(OnRenameProperty, value);
     }
     
-    public static readonly StyledProperty< EventHandler<RoutedEventArgs>?> ViewRoomActionProperty =
-        AvaloniaProperty.Register<DetailedProfileBox,  EventHandler<RoutedEventArgs>?>(nameof(ViewRoomAction));
-    public  EventHandler<RoutedEventArgs>? ViewRoomAction
+    public static readonly StyledProperty< Action<string>?> ViewRoomActionProperty =
+        AvaloniaProperty.Register<FriendsListItem,  Action<string>?>(nameof(ViewRoomAction));
+    public  Action<string>? ViewRoomAction
     {
         get => GetValue(ViewRoomActionProperty);
         set => SetValue(ViewRoomActionProperty, value);
+    }
+
+    public void ViewRoom(object? sender, RoutedEventArgs e)
+    {
+        ViewRoomAction.Invoke(FriendCode);
     }
     
     private void CopyFriendCode(object? obj, EventArgs e)
@@ -137,7 +142,7 @@ public class DetailedProfileBox : TemplatedControl, INotifyPropertyChanged
         
         var viewRoomButton  = e.NameScope.Find<StandardLibrary.Button>("ViewRoomButton");
         if (viewRoomButton != null)
-            viewRoomButton.Click += ViewRoomAction;
+            viewRoomButton.Click += ViewRoom;
         
         var changeNameButton  = e.NameScope.Find<StandardLibrary.IconLabelButton>("EditMiiName");
         if (changeNameButton != null) 
