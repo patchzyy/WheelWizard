@@ -454,6 +454,9 @@
             <DependentUpon>MiiCarousel.axaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
+        <Compile Update="Views\Pages\RoomDetailsPage.axaml.cs">
+          <DependentUpon>RoomDetailsPage.axaml</DependentUpon>
+        </Compile>
 
     </ItemGroup>
     

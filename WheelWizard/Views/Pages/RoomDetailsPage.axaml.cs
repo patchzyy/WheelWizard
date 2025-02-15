@@ -1,19 +1,16 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using WheelWizard.Models.MiiImages;
 using WheelWizard.Models.RRInfo;
 using WheelWizard.Services.LiveData;
 using WheelWizard.Utilities.Generators;
 using WheelWizard.Utilities.RepeatedTasks;
-using WheelWizard.Views.Pages;
 
 namespace WheelWizard.Views.Pages;
 
-public partial class RoomDetailPage : UserControl, INotifyPropertyChanged, IRepeatedTaskListener
+public partial class RoomDetailsPage : UserControl, INotifyPropertyChanged, IRepeatedTaskListener
 {
     private RrRoom _room;
     public RrRoom Room
@@ -26,8 +23,6 @@ public partial class RoomDetailPage : UserControl, INotifyPropertyChanged, IRepe
         }
     }
     
-    
-
     private readonly ObservableCollection<RrPlayer> _playersList = new();
     public ObservableCollection<RrPlayer> PlayersList
     {
@@ -39,7 +34,7 @@ public partial class RoomDetailPage : UserControl, INotifyPropertyChanged, IRepe
         }
     }
 
-    public RoomDetailPage()
+    public RoomDetailsPage()
     {
         //this should only be called by the designer
         //todo: make a custom design test room
@@ -52,9 +47,7 @@ public partial class RoomDetailPage : UserControl, INotifyPropertyChanged, IRepe
         ListItemCount.Text = PlayersList.Count.ToString();
     }
 
-    
-
-    public RoomDetailPage(RrRoom room)
+    public RoomDetailsPage(RrRoom room)
     {
         InitializeComponent();
         DataContext = this;

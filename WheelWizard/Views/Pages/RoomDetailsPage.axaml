@@ -6,7 +6,7 @@
              xmlns:lang="clr-namespace:WheelWizard.Resources.Languages"
              xmlns:components="clr-namespace:WheelWizard.Views.Components.StandardLibrary"
              xmlns:miiComp="using:WheelWizard.Views.Components.WhWzLibrary.MiiImages"
-             x:Class="WheelWizard.Views.Pages.RoomDetailPage">
+             x:Class="WheelWizard.Views.Pages.RoomDetailsPage">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="{StaticResource TopRowSize}" />
