@@ -3,7 +3,6 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Threading;
-using System;
 using System.Threading.Tasks;
 using WheelWizard.Models.Enums;
 using WheelWizard.Resources.Languages;
@@ -18,25 +17,12 @@ namespace WheelWizard.Views.Pages;
 
 public partial class HomePage : UserControl
 {
-    private double _wheelRotationAngle = 0;
     private WheelWizardStatus _status;
     public HomePage()
     {
         InitializeComponent();
         UpdateActionButton();
-        // StartWheelRotation(); // Removed spinning for now
     }
-
-    private async void StartWheelRotation()
-    {
-        // while (true) // Infinite loop for continuous rotation
-        // {
-        //     _wheelRotationAngle = (_wheelRotationAngle + 0.1) % 360; // Increment the angle, reset at 360
-        //     // WheelRotation.Angle = _wheelRotationAngle; // Update the rotation angle
-        //     await Task.Delay(10); // A small delay to control the speed of rotation
-        // }
-    }
-    
 
     private void DolphinButton_OnClick(object? sender, RoutedEventArgs e)
     {

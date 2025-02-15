@@ -4,11 +4,10 @@ using System.Text.Json.Serialization;
 using WheelWizard.Models.RRLaunchModels;
 using WheelWizard.Services.Settings;
 
-namespace WheelWizard.Services.Launcher;
+namespace WheelWizard.Services.Launcher.Helpers;
 
 public static class RetroRewindLaunchHelper
 {
-
     private static string XmlFilePath => Path.Combine(PathManager.RiivolutionWhWzFolderPath, "riivolution", "RetroRewind6.xml");
     private static string JsonFilePath => Path.Combine(PathManager.WheelWizardAppdataPath, "RR.json");
     

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using WheelWizard.Resources.Languages;
+using WheelWizard.Services.Launcher.Helpers;
 using WheelWizard.Services.Settings;
 using WheelWizard.Services.WiiManagement;
 using WheelWizard.Views.Popups.Generic;
@@ -74,7 +75,6 @@ public static class Launcher
                 .SetInfoText($"Reason: {ex.Message}").Show();
         }
     }
-
     
     public static async Task LaunchRetroRewind()
     {

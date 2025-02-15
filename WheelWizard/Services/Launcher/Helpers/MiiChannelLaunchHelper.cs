@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using WheelWizard.Helpers;
 using WheelWizard.Views.Popups.Generic;
 
-namespace WheelWizard.Services.Launcher;
+namespace WheelWizard.Services.Launcher.Helpers;
 
 public static class MiiChannelLaunchHelper
 {

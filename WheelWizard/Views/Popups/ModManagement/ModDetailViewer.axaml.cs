@@ -13,6 +13,7 @@ using WheelWizard.Services;
 using WheelWizard.Services.GameBanana;
 using WheelWizard.Services.Installation;
 using WheelWizard.Services.Launcher;
+using WheelWizard.Services.Launcher.Helpers;
 using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Views.Popups.ModManagement;
