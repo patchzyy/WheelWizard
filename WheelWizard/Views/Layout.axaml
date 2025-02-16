@@ -75,9 +75,9 @@
         </StackPanel>
         
         <!-- Sidebar -->
+        <TextBlock Text="{x:Static lang:Common.Term_General}" Classes="SidebarSectionText"
+                   VerticalAlignment="Bottom" Grid.Row="2" />
         <StackPanel x:Name="SidePanelButtons" Grid.Column="0" Grid.Row="3" Width="192" VerticalAlignment="Top">
-            <TextBlock Text="{x:Static lang:Common.Term_General}" Classes="SidebarSectionText"
-                       VerticalAlignment="Bottom" />
             <psComps:SidebarRadioButton IconData="{StaticResource Home}"
                                         Text="{x:Static lang:Common.PageTitle_Home}"
                                         PageType="{x:Type pages:HomePage}"
