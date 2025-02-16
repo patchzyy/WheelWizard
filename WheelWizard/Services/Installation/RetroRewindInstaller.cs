@@ -62,17 +62,6 @@ public static class RetroRewindInstaller
                 await backupOldrksys();
 
         }
-        if (HasOldRR())
-        {
-            var retroRewindFound = new YesNoWindow()
-                                .SetMainText(Phrases.PopupText_OldRRFound)
-                                .SetExtraText(Phrases.PopupText_OldRRFoundExplained);
-            if (await retroRewindFound.AwaitAnswer()) 
-            {
-                HandleMovingOldRR();
-                return;
-            }
-        }
         var serverResponse = await HttpClientHelper.GetAsync<string>(Endpoints.RRUrl);
         if (!serverResponse.Succeeded)
         {
@@ -119,13 +108,6 @@ public static class RetroRewindInstaller
         Directory.Move(oldRRFolder, newRRFolder);
        
     }
-    public static bool HasOldRR()
-    {
-        var oldRRFolder = Path.Combine(PathManager.LoadFolderPath, "Riivolution", "RetroRewind6");
-        var oldRRXml = Path.Combine(PathManager.LoadFolderPath, "Riivolution", "riivolution", "RetroRewind6.xml");
-        return Directory.Exists(oldRRFolder) && File.Exists(oldRRXml);
-    }
-
     private static async Task DownloadAndExtractRetroRewind(string tempZipPath)
     {
         var progressWindow = new ProgressWindow(Phrases.PopupText_InstallingRR);

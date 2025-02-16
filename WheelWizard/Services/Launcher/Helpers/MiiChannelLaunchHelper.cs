@@ -1,6 +1,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using WheelWizard.Helpers;
+using WheelWizard.Services.WiiManagement;
 using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Services.Launcher.Helpers;
@@ -11,6 +12,7 @@ public static class MiiChannelLaunchHelper
     
     public static async Task LaunchMiiChannel()
     {
+        WiiMoteSettings.EnableVirtualWiiMote();
         var miiChannelExists = File.Exists(MiiChannelPath);;
         
         if (!miiChannelExists)
@@ -30,6 +32,6 @@ public static class MiiChannelLaunchHelper
         }
 
         if(miiChannelExists)
-            Launcher.LaunchDolphin($"-b \"{MiiChannelPath}\"");
+            DolphinLaunchHelper.LaunchDolphin($"-b \"{MiiChannelPath}\"");
     }
 }

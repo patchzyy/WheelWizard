@@ -80,7 +80,7 @@ public static class ModsLaunchHelper
     
         await Task.Run(() =>
         {
-            int processedFiles = 0;
+            var processedFiles = 0;
             // Delete files in MyStuff that are not in finalFiles
             if (Directory.Exists(MyStuffFolderPath))
             {

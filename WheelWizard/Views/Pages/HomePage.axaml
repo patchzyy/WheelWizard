@@ -40,10 +40,7 @@
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="180" Margin="0,220">
 
-            <TextBlock HorizontalAlignment="Center"
-                       Classes="TitleText"
-                       Text="Retro Rewind"/>
-            
+            <TextBlock HorizontalAlignment="Center" Classes="TitleText" x:Name="GameTitle"/>
             <comps:Button x:Name="PlayButton"
                           IsEnabled="True" 
                           Variant="Primary"
