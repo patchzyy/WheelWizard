@@ -14,7 +14,7 @@ public partial class SettingsPage : UserControl
     {
         InitializeComponent();
         
-        WhWzVersionText.Text = "WhWz: v" + AutoUpdaterWindows.CurrentVersion;
+        WhWzVersionText.Text = "WhWz: v" + AutoUpdater.CurrentVersion;
         RrVersionText.Text = "RR: " + RetroRewindInstaller.CurrentRRVersion();
 
         var part1 = "Release";

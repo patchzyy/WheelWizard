@@ -25,8 +25,8 @@ public class Program
     private static void Setup()
     {
         SettingsManager.Instance.LoadSettings();
-        AutoUpdater.CheckForUpdatesAsync();
         UrlProtocolManager.SetWhWzSchemeAsync();
+        AutoUpdater.CheckForUpdatesAsync();
     }
 
 

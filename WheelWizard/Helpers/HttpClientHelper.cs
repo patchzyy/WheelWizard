@@ -6,6 +6,8 @@ using WheelWizard.Models;
 
 namespace WheelWizard.Helpers;
 
+
+//todo: Use static HttpClient with pooled connection lifetime https://stackoverflow.com/a/77379657
 public static class HttpClientHelper
 {
     // This is bool here is just for testing purposes and should never be used in the production code.
@@ -15,7 +17,7 @@ public static class HttpClientHelper
     private static readonly Lazy<HttpClient> LazyHttpClient = new Lazy<HttpClient>(() =>
     {
         var client = new HttpClient();
-        client.DefaultRequestHeaders.UserAgent.ParseAdd("WheelWizard/1.0");
+        client.DefaultRequestHeaders.UserAgent.ParseAdd("WheelWizard/2.0");
         return client;
     });
     
@@ -147,7 +149,7 @@ public static class HttpClientHelper
         new Lazy<HttpClient>(() =>
         {
             var client = new HttpClient();
-            client.DefaultRequestHeaders.UserAgent.ParseAdd("WheelWizard/1.0");
+            client.DefaultRequestHeaders.UserAgent.ParseAdd("WheelWizard/2.0");
             return client;
         });
     }

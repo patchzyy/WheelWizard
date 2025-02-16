@@ -56,6 +56,10 @@ public partial class YesNoWindow : PopupContent
 
     public async Task<bool> AwaitAnswer()
     {
+        if (!Avalonia.Threading.Dispatcher.UIThread.CheckAccess())
+        {
+            return await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => AwaitAnswer());
+        }
         _tcs = new TaskCompletionSource<bool>();
         Show(); // Or ShowDialog(parentWindow) if you need it to be modal
         return await _tcs.Task;

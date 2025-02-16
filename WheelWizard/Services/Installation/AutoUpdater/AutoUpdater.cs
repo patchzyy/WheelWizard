@@ -1,17 +1,29 @@
-﻿namespace WheelWizard.Services.Installation;
+﻿using System;
+using System.Threading.Tasks;
+
+namespace WheelWizard.Services.Installation;
 
 public class AutoUpdater
 {
     
     public const string CurrentVersion = "1.0.0";
-    public static void CheckForUpdatesAsync()
+    public static async void CheckForUpdatesAsync()
     {
-    #if WINDOWS
-            AutoUpdaterWindows.CheckForUpdatesAsync();
-    #elif LINUX
-            AutoUpdaterLinux.CheckForUpdatesAsync();
-    #elif MACOS
+        IUpdaterPlatform? autoUpdaterPlatform = null;
+#if WINDOWS
+            autoUpdaterPlatform = new AutoUpdaterWindows();
+#elif LINUX
+            autoUpdaterPlatform = new AutoUpdaterLinux();
+#elif MACOS
             // MacOS updater
-    #endif
+#elif DEBUG
+        autoUpdaterPlatform = new AutoUpdaterWindows();
+#endif
+        if (autoUpdaterPlatform == null)
+            throw new PlatformNotSupportedException("The current platform is not supported by the auto updater.");
+        IAutoUpdateHandler updateHandler = new AutoUpdaterHandler(autoUpdaterPlatform);
+        
+        //todo: how to run this in a background thread?
+        await updateHandler.CheckForUpdatesAsync();
     }
 }

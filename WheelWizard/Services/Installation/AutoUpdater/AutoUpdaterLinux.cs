@@ -1,127 +1,79 @@
-﻿using System.Linq;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using WheelWizard.Helpers;
 using WheelWizard.Models.Github;
 using WheelWizard.Resources.Languages;
 using WheelWizard.Views.Popups.Generic;
-using Semver;
-using System;
-using System.Diagnostics;
-using System.IO;
-using System.Text.Json;
-using System.Threading.Tasks;
 
-namespace WheelWizard.Services.Installation;
-public static class AutoUpdaterLinux
+namespace WheelWizard.Services.Installation
 {
-    public const string CurrentVersion = AutoUpdater.CurrentVersion;
-    public static async Task CheckForUpdatesAsync()
+    public class AutoUpdaterLinux : IUpdaterPlatform
     {
-        var response = await HttpClientHelper.GetAsync<string>(Endpoints.WhWzLatestReleasesUrl);
-        if (!response.Succeeded || response.Content is null)
+        public GithubAsset? GetAssetForCurrentPlatform(GithubRelease release)
         {
-            if (response.StatusCodeGroup != 4 && response.StatusCode is not 503 and not 504)
+            // Locate the Linux asset based on an identifier in the URL.
+            return release.Assets.FirstOrDefault(asset =>
+                asset.BrowserDownloadUrl.Contains("WheelWizard_Linux", StringComparison.OrdinalIgnoreCase));
+        }
+
+        public async Task ExecuteUpdateAsync(string downloadUrl)
+        {
+            var currentExecutablePath = Process.GetCurrentProcess().MainModule!.FileName;
+            var currentExecutableName = Path.GetFileName(currentExecutablePath);
+            var currentFolder = Path.GetDirectoryName(currentExecutablePath);
+
+            if (currentFolder is null)
             {
                 await new MessageBoxWindow()
-                    .SetMessageType(MessageBoxWindow.MessageType.Error)
-                    .SetTitleText("Failed to check for updates")
-                    .SetInfoText("An error occurred while checking for updates. Please try again later. " +
-                                 "\nError: " + response.StatusMessage)
+                    .SetMessageType(MessageBoxWindow.MessageType.Warning)
+                    .SetTitleText("Unable to update Wheel Wizard")
+                    .SetInfoText(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation)
                     .ShowDialog();
+                return;
             }
-            return;
+
+            // Download the new executable to a temporary file.
+            var newFilePath = Path.Combine(currentFolder, currentExecutableName + "_new");
+            if (File.Exists(newFilePath))
+                File.Delete(newFilePath);
+
+            await DownloadHelper.DownloadToLocationAsync(
+                downloadUrl,
+                newFilePath,
+                Phrases.PopupText_UpdateWhWz,
+                Phrases.PopupText_LatestWhWzGithub,
+                ForceGivenFilePath: true);
+
+            // Wait briefly to ensure the file is fully written.
+            await Task.Delay(201);
+
+            // Create and run the shell script to perform the update.
+            CreateAndRunShellScript(currentExecutablePath, newFilePath);
+
+            Environment.Exit(0);
         }
 
-        response.Content = response.Content.Trim('\0');
-        var latestRelease = JsonSerializer.Deserialize<GithubRelease>(response.Content);
-        if (latestRelease?.TagName is null)
-            return;
-
-        var currentVersion = SemVersion.Parse(CurrentVersion, SemVersionStyles.Any);
-        var latestVersion = SemVersion.Parse(latestRelease.TagName.TrimStart('v'), SemVersionStyles.Any);
-
-        // If the current version is equal to or newer than the latest release, nothing to do.
-        if (currentVersion.ComparePrecedenceTo(latestVersion) >= 0)
-            return;
-
-        // Locate the Linux asset (assuming its URL contains "WheelWizard_Linux")
-        var linuxAsset = latestRelease.Assets.FirstOrDefault(asset =>
-            asset.BrowserDownloadUrl.Contains("WheelWizard_Linux", StringComparison.OrdinalIgnoreCase));
-        if (linuxAsset == null)
+        private static void CreateAndRunShellScript(string currentFilePath, string newFilePath)
         {
-            // No Linux asset available; nothing to update.
-            return;
-        }
+            var currentFolder = Path.GetDirectoryName(currentFilePath);
+            if (currentFolder is null)
+            {
+                new MessageBoxWindow()
+                    .SetMessageType(MessageBoxWindow.MessageType.Warning)
+                    .SetTitleText("Unable to update Wheel Wizard")
+                    .SetInfoText(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation)
+                    .ShowDialog();
+                return;
+            }
 
-        // Ask the user if they want to update
-        var popupExtraText = Humanizer.ReplaceDynamic(Phrases.PopupText_NewVersionWhWz, latestVersion, currentVersion);
-        var updateQuestion = await new YesNoWindow()
-                                .SetButtonText(Common.Action_Update, Common.Action_MaybeLater)
-                                .SetMainText(Phrases.PopupText_WhWzUpdateAvailable)
-                                .SetExtraText(popupExtraText)
-                                .AwaitAnswer();
-        if (!updateQuestion)
-            return;
+            var scriptFilePath = Path.Combine(currentFolder, "update.sh");
+            var originalFileName = Path.GetFileName(currentFilePath);
+            var newFileName = Path.GetFileName(newFilePath);
 
-        await UpdateAsync(linuxAsset.BrowserDownloadUrl);
-    }
-
-    private static async Task UpdateAsync(string downloadUrl)
-    {
-        // Get the current executable details.
-        var currentExecutablePath = Process.GetCurrentProcess().MainModule!.FileName;
-        var currentExecutableName = Path.GetFileName(currentExecutablePath);
-        var currentFolder = Path.GetDirectoryName(currentExecutablePath);
-        if (currentFolder is null)
-        {
-            await new MessageBoxWindow()
-                .SetMessageType(MessageBoxWindow.MessageType.Warning)
-                .SetTitleText("Unable to update Wheel Wizard")
-                .SetInfoText(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation)
-                .ShowDialog();
-            return;
-        }
-
-        // Download the new file to a temporary location (e.g. "WheelWizard_Linux_new")
-        var newFilePath = Path.Combine(currentFolder, currentExecutableName + "_new");
-        if (File.Exists(newFilePath))
-            File.Delete(newFilePath);
-
-        await DownloadHelper.DownloadToLocationAsync(
-            downloadUrl, 
-            newFilePath, 
-            Phrases.PopupText_UpdateWhWz,
-            Phrases.PopupText_LatestWhWzGithub,
-            ForceGivenFilePath: true);
-
-        // Wait briefly to ensure the file is fully written
-        await Task.Delay(200);
-
-        // Create and run the Bash script that will perform the update.
-        CreateAndRunShellScript(currentExecutablePath, newFilePath);
-
-        // Exit the current process to allow the update to proceed.
-        Environment.Exit(0);
-    }
-
-    private static void CreateAndRunShellScript(string currentFilePath, string newFilePath)
-    {
-        var currentFolder = Path.GetDirectoryName(currentFilePath);
-        if (currentFolder is null)
-        {
-            new MessageBoxWindow()
-                .SetMessageType(MessageBoxWindow.MessageType.Warning)
-                .SetTitleText("Unable to update Wheel Wizard")
-                .SetInfoText(Phrases.PopupText_UnableUpdateWhWz_ReasonLocation)
-                .ShowDialog();
-            return;
-        }
-
-        var scriptFilePath = Path.Combine(currentFolder, "update.sh");
-        var originalFileName = Path.GetFileName(currentFilePath);
-        var newFileName = Path.GetFileName(newFilePath);
-
-        // The Bash script waits until the current process is no longer running, replaces the old binary, sets execute permissions, starts the new binary, and cleans up.
-        var scriptContent = $@"#!/bin/bash
+            var scriptContent = $@"#!/bin/bash
 echo 'Starting update process...'
 
 # Give a short delay to ensure the application has exited
@@ -140,50 +92,49 @@ rm -- ""{scriptFilePath}""
 
 echo 'Update completed successfully.'
 ";
-        File.WriteAllText(scriptFilePath, scriptContent);
+            File.WriteAllText(scriptFilePath, scriptContent);
 
-        // Ensure the script is executable.
-        try
-        {
-            Process.Start(new ProcessStartInfo
+            // Ensure the script is executable.
+            try
             {
-                FileName = "chmod",
-                Arguments = $"+x \"{scriptFilePath}\"",
-                CreateNoWindow = true,
-                UseShellExecute = false
-            })?.WaitForExit();
-        }
-        catch (Exception ex)
-        {
-            new MessageBoxWindow()
-                .SetMessageType(MessageBoxWindow.MessageType.Error)
-                .SetTitleText("Unable to update Wheel Wizard")
-                .SetInfoText($"Failed to set execute permission for the update script. {ex.Message}")
-                .ShowDialog();
-        }
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "chmod",
+                    Arguments = $"+x \"{scriptFilePath}\"",
+                    CreateNoWindow = true,
+                    UseShellExecute = false
+                })?.WaitForExit();
+            }
+            catch (Exception ex)
+            {
+                new MessageBoxWindow()
+                    .SetMessageType(MessageBoxWindow.MessageType.Error)
+                    .SetTitleText("Unable to update Wheel Wizard")
+                    .SetInfoText($"Failed to set execute permission for the update script. {ex.Message}")
+                    .ShowDialog();
+            }
 
-        // Start the Bash script.
-        var processStartInfo = new ProcessStartInfo
-        {
-            FileName = "bash",
-            Arguments = $"\"{scriptFilePath}\"",
-            CreateNoWindow = false,
-            UseShellExecute = false,
-            WorkingDirectory = currentFolder
-        };
+            var processStartInfo = new ProcessStartInfo
+            {
+                FileName = "bash",
+                Arguments = $"\"{scriptFilePath}\"",
+                CreateNoWindow = false,
+                UseShellExecute = false,
+                WorkingDirectory = currentFolder
+            };
 
-        try
-        {
-            Process.Start(processStartInfo);
-        }
-        catch (Exception ex)
-        {
-            new MessageBoxWindow()
-                .SetMessageType(MessageBoxWindow.MessageType.Error)
-                .SetTitleText("Unable to update Wheel Wizard")
-                .SetInfoText($"Failed to execute the update script. {ex.Message}")
-                .ShowDialog();
+            try
+            {
+                Process.Start(processStartInfo);
+            }
+            catch (Exception ex)
+            {
+                new MessageBoxWindow()
+                    .SetMessageType(MessageBoxWindow.MessageType.Error)
+                    .SetTitleText("Unable to update Wheel Wizard")
+                    .SetInfoText($"Failed to execute the update script. {ex.Message}")
+                    .ShowDialog();
+            }
         }
     }
 }
-
