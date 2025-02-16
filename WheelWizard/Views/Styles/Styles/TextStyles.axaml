@@ -47,7 +47,7 @@
     </Style>
     
     <Style Selector="TextBlock, SelectableTextBlock, UserControl">
-        <Setter Property="TextElement.FontFamily" Value="Arial, ares://WheelWizard/Resources/Fonts/#ctmkf" />
+        <Setter Property="TextElement.FontFamily" Value="Arial, avares://WheelWizard/Resources/Fonts/ctmkf.ttf#ctmkf" />
     </Style>
     
     <Style Selector="SelectableTextBlock">

@@ -53,6 +53,7 @@ public class RrRoom
         
         "vs_751" => "Versus",
         "vs_-1" => "Regular",
+        "vs" => "Regular",
         _ => IsPublic ? "Unknown Mode" : "Private Room"
     };
     public Mii? HostMii => Players.GetValueOrDefault(Host)?.FirstMii;

@@ -386,6 +386,11 @@ public class GameDataLoader : RepeatedTaskManager
         if (string.IsNullOrWhiteSpace(newName)) return;
 
         // Basic checks
+        if (newName.Length > 10)
+        {
+            InvalidNameMessage("Names must be at most 10 characters long.");
+            return;
+        }
         if (newName.Length < 3)
         {
             InvalidNameMessage("Names must be at least 3 characters long.");
@@ -393,8 +398,11 @@ public class GameDataLoader : RepeatedTaskManager
         }
         if (!newName.All(char.IsLetterOrDigit))
         {
-            InvalidNameMessage("Names can only contain letters and numbers.");
-            return;
+            if (!newName.Any(char.IsWhiteSpace))
+            {
+                InvalidNameMessage("Names can only contain letters and numbers.");
+                return;
+            }
         }
         if (newName.Length > 10)
             newName = newName.Substring(0, 10);
