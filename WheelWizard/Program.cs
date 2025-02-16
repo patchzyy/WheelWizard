@@ -1,6 +1,7 @@
 using Avalonia;
 using System;
 using WheelWizard.Services.Installation;
+using WheelWizard.Services.Installation.AutoUpdater;
 using WheelWizard.Services.Settings;
 using WheelWizard.Services.UrlProtocol;
 

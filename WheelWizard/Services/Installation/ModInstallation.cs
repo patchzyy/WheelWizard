@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using System.Windows;
 using WheelWizard.Models.Settings;
 using WheelWizard.Views.Popups.Generic;
 
@@ -181,9 +180,6 @@ public static class ModInstallation
             throw new Exception($"Failed to extract archive file: {ex.Message}");
         }
     }
-
-
-
     
     private static IArchive OpenArchive(string filePath, string extension)
     {
@@ -287,4 +283,3 @@ public static class ModInstallation
         }
     }
 }
-

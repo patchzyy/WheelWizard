@@ -1,8 +1,7 @@
-﻿using Semver;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using WheelWizard.Models.Github;
 
-namespace WheelWizard.Services.Installation;
+namespace WheelWizard.Services.Installation.AutoUpdater;
 
 public interface IUpdaterPlatform
 {

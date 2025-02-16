@@ -6,7 +6,7 @@ using WheelWizard.Models.Github;
 using WheelWizard.Resources.Languages;
 using WheelWizard.Views.Popups.Generic;
 
-namespace WheelWizard.Services.Installation;
+namespace WheelWizard.Services.Installation.AutoUpdater;
 
 interface IAutoUpdateHandler   
 {
@@ -14,6 +14,7 @@ interface IAutoUpdateHandler
     /// The current version of the application.
     /// </summary>
     string CurrentVersion { get; }
+
     /// <summary>
     /// Runs the entire update process flow (checks for updates, downloads, and installs them).
     /// </summary>
@@ -24,7 +25,7 @@ public class AutoUpdaterHandler : IAutoUpdateHandler
 {
     private readonly IUpdaterPlatform _updaterPlatform;
     //todo: look into assembly versioning c# best practices 
-    public virtual string CurrentVersion => AutoUpdater.CurrentVersion;
+    public virtual string CurrentVersion => Installation.AutoUpdater.AutoUpdater.CurrentVersion;
 
     public AutoUpdaterHandler(IUpdaterPlatform updaterPlatform)
     {
@@ -54,8 +55,7 @@ public class AutoUpdaterHandler : IAutoUpdateHandler
             await _updaterPlatform.ExecuteUpdateAsync(asset.BrowserDownloadUrl);
         });
     }
-
-
+    
     private async Task<GithubRelease?> GetLatestReleaseAsync()
     {
         var response = await HttpClientHelper.GetAsync<string>(Endpoints.WhWzLatestReleasesUrl);
@@ -83,5 +83,4 @@ public class AutoUpdaterHandler : IAutoUpdateHandler
         var latestVersion = SemVersion.Parse(latestRelease.TagName.TrimStart('v'), SemVersionStyles.Any);
         return currentVersion.ComparePrecedenceTo(latestVersion) < 0 ? latestRelease : null;
     }
-
 }

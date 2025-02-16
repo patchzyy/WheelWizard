@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Threading.Tasks;
 
-namespace WheelWizard.Services.Installation;
+namespace WheelWizard.Services.Installation.AutoUpdater;
 
 public class AutoUpdater
 {
