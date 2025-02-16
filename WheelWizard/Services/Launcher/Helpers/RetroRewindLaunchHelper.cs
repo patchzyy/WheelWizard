@@ -17,9 +17,8 @@ public static class RetroRewindLaunchHelper
     {
         var language = (int)SettingsManager.RR_LANGUAGE.Get();
         var removeBlur = (bool)SettingsManager.REMOVE_BLUR.Get();
-        var gameMode = (RrGameMode)SettingsManager.RETRO_REWIND_GAMEMODE.Get();
-        Console.WriteLine($"Launching RR for: {gameMode}");
-        
+        var gameMode = (int)SettingsManager.RETRO_REWIND_GAMEMODE.Get();
+
         var launchConfig = new LaunchConfig
         {
             BaseFile = PathManager.GameFilePath,
@@ -32,7 +31,7 @@ public static class RetroRewindLaunchHelper
                     {
                         Options = new[]
                         {
-                            new OptionConfig { Choice = 1, OptionName = "Pack", SectionName = "Retro Rewind" },
+                            new OptionConfig { Choice = gameMode, OptionName = "Pack", SectionName = "Retro Rewind" },
                             new OptionConfig { Choice = 2, OptionName = "My Stuff", SectionName = "Retro Rewind" },
                             new OptionConfig { Choice = language, OptionName = "Language", SectionName = "Retro Rewind" },
                             new OptionConfig { Choice = removeBlur ? 1 : 0, OptionName = "Remove Blur", SectionName = "Retro Rewind" }

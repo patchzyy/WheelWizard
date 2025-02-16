@@ -23,7 +23,7 @@ public partial class HomePage : UserControl
     private static List<ILauncher> _launcherTypes = new List<ILauncher>()
     { // Add Launcher instances here , every launch instance is a new start screen
         new RrLauncher(),
-        // new RrCtsLauncher()
+        new RrCtsLauncher()
         //GoogleLauncher.Instance
     };
 

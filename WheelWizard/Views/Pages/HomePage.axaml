@@ -26,7 +26,7 @@
 
         <StackPanel Grid.Row="1"  Orientation="Horizontal" VerticalAlignment="Top" Margin="0,6" HorizontalAlignment="Right"
                     x:Name="GameModeOption">
-            <comps:FormFieldLabel Text="Game modes:" VerticalAlignment="Center" />
+            <comps:FormFieldLabel Text="Game mode:" VerticalAlignment="Center" />
             <ComboBox x:Name="GameModeDropdown"
                       SelectionChanged="GameModeDropdown_OnSelectionChanged" MinWidth="160"
                       VerticalAlignment="Top"/>
