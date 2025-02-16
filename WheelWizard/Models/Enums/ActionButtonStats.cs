@@ -6,7 +6,7 @@ public enum WheelWizardStatus
     NoServer,
     NoDolphin,
     ConfigNotFinished,
-    NotDownloaded,
+    NotInstalled,
     NoServerButInstalled,
     OutOfDate,
     Ready

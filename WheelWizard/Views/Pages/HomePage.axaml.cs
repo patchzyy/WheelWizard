@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using WheelWizard.Models.Enums;
 using WheelWizard.Resources.Languages;
-using WheelWizard.Services.Installation;
 using WheelWizard.Services.Launcher;
 using WheelWizard.Services.Launcher.Helpers;
 using WheelWizard.Services.Settings;
@@ -23,7 +22,8 @@ public partial class HomePage : UserControl
     private static int _launcherIndex = 0; // Make sure this index never goes over the list index
     private static List<ILauncher> _launcherTypes = new List<ILauncher>()
     { // Add Launcher instances here , every launch instance is a new start screen
-        RetroRewindLauncher.Instance
+        RetroRewindLauncher.Instance,
+        //GoogleLauncher.Instance
     };
 
     private WheelWizardStatus _status;
@@ -52,7 +52,7 @@ public partial class HomePage : UserControl
                 new(Common.State_ConfigNotFinished, Button.ButtonsVariantType.Warning, "Settings", NavigateToSettings, true)
             },
             {
-                WheelWizardStatus.NotDownloaded,
+                WheelWizardStatus.NotInstalled,
                 new(Common.Action_Install, Button.ButtonsVariantType.Warning, "Download", Download, true)
             },
             {
@@ -69,6 +69,7 @@ public partial class HomePage : UserControl
     public HomePage()
     {
         InitializeComponent();
+        PopulateGameModeDropdown();
         UpdatePage();
     }
 
@@ -108,6 +109,25 @@ public partial class HomePage : UserControl
         UpdateActionButton();
         DisableAllButtonsTemporarily();
     }
+    
+    private void GameModeDropdown_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        _launcherIndex = GameModeDropdown.SelectedIndex;
+        UpdatePage();
+    }
+
+    private void PopulateGameModeDropdown()
+    {
+        // If there is only 1 option, we don't want to confuse the player with that option
+        GameModeOption.IsVisible = _launcherTypes.Count > 1;
+        if (!GameModeOption.IsVisible) return;
+        
+        foreach (var launcherType in _launcherTypes)
+        {
+            GameModeDropdown.Items.Add(launcherType.GameTitle);
+        }
+        GameModeDropdown.SelectedIndex = _launcherIndex;
+    }
 
     private async void UpdateActionButton()
     {
@@ -117,6 +137,16 @@ public partial class HomePage : UserControl
         SetButtonState(currentButtonState); 
     }
 
+    private void DisableAllButtonsTemporarily()
+    {
+        CompleteGrid.IsEnabled = false;
+        //wait 5 seconds before re-enabling the buttons
+        Task.Delay(2000).ContinueWith(_ =>
+        {
+            Dispatcher.UIThread.InvokeAsync(() => CompleteGrid.IsEnabled = true);
+        });
+    }
+    
     private void SetButtonState(MainButtonState state)
     {
         PlayButton.Text = state.Text;
@@ -125,15 +155,6 @@ public partial class HomePage : UserControl
         if (Application.Current != null && Application.Current.FindResource(state.IconName) is Geometry geometry)
                 PlayButton.IconData = geometry;
         DolphinButton.IsEnabled = state.SubButtonsEnabled && SettingsHelper.PathsSetupCorrectly();
-    }
-    private void DisableAllButtonsTemporarily()
-    {
-        CompleteGrid.IsEnabled = false;
-        //wait 5 seconds before re-enabling the buttons
-        Task.Delay(5000).ContinueWith(_ =>
-        {
-            Dispatcher.UIThread.InvokeAsync(() => CompleteGrid.IsEnabled = true);
-        });
     }
     
     public class MainButtonState

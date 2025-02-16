@@ -24,6 +24,14 @@
         <whwzComps:CurrentUserProfile Grid.Row="0" x:Name="CurrentUserProfile" Margin="10,0"
                                       HorizontalAlignment="Right" VerticalAlignment="Top"/>
 
+        <StackPanel Grid.Row="1"  Orientation="Horizontal" VerticalAlignment="Top" Margin="0,6" HorizontalAlignment="Right"
+                    x:Name="GameModeOption">
+            <comps:FormFieldLabel Text="Game modes:" VerticalAlignment="Center" />
+            <ComboBox x:Name="GameModeDropdown"
+                      SelectionChanged="GameModeDropdown_OnSelectionChanged" MinWidth="160"
+                      VerticalAlignment="Top"/>
+        </StackPanel>
+        
         <Border Grid.Row="1" Height="630" Width="250" CornerRadius="125,125,0,0" VerticalAlignment="Bottom"
                 Background="{StaticResource FrameColor}" Margin="{StaticResource NegativeEdgeGap}">
             <PathIcon HorizontalAlignment="Center" VerticalAlignment="Top"

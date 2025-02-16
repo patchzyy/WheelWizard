@@ -17,7 +17,6 @@ public class RetroRewindLauncher : ILauncher
     protected static RetroRewindLauncher? _instance;
     public static RetroRewindLauncher Instance => _instance ??= new RetroRewindLauncher();
     public string GameTitle => "Retro Rewind";
-    
     private static string RrLaunchJsonFilePath => Path.Combine(PathManager.WheelWizardAppdataPath, "RR.json");
     public async Task Launch()
     {
@@ -71,7 +70,7 @@ public class RetroRewindLauncher : ILauncher
         if (!serverEnabled.Succeeded)
             return rrInstalled ? WheelWizardStatus.NoServerButInstalled : WheelWizardStatus.NoServer;
 
-        if (!rrInstalled) return WheelWizardStatus.NotDownloaded;
+        if (!rrInstalled) return WheelWizardStatus.NotInstalled;
         
         var retroRewindUpToDate = await RetroRewindUpdater.IsRRUpToDate(RetroRewindInstaller.CurrentRRVersion());
         return !retroRewindUpToDate ? WheelWizardStatus.OutOfDate : WheelWizardStatus.Ready;
