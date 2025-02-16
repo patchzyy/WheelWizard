@@ -12,13 +12,14 @@ using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Services.Launcher;
 
-public class RetroRewindLauncher : ILauncher
+public abstract class RrBaseLauncher : ILauncher
 {
-    protected static RetroRewindLauncher? _instance;
-    public static RetroRewindLauncher Instance => _instance ??= new RetroRewindLauncher();
-    public string GameTitle => "Retro Rewind";
+    public abstract string GameTitle { get; }
     private static string RrLaunchJsonFilePath => Path.Combine(PathManager.WheelWizardAppdataPath, "RR.json");
-    public async Task Launch()
+
+    public abstract Task Launch();
+    
+    protected async Task DoLaunch()
     {
         try
         {

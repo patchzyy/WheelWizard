@@ -67,6 +67,12 @@ public class SettingsManager
                                                                 var value4 = (bool)DOLPHIN_SSAA.Get();
                                                                 return !value4 && value2 && value3 == "0x00000002" && value1 == DolphinShaderCompilationMode.HybridUberShaders;
                                                             }).SetDependencies(DOLPHIN_COMPILATION_MODE, DOLPHIN_COMPILE_SHADERS_AT_START, DOLPHIN_MSAA, DOLPHIN_SSAA);
+
+    private static RrGameMode _internalRrGameMode = RrGameMode.RETRO_TRACKS;
+    public static Setting RETRO_REWIND_GAMEMODE = new VirtualSetting(typeof(RrGameMode),
+                                                            value => _internalRrGameMode = (RrGameMode)value!,
+                                                            () => _internalRrGameMode
+                                                            );
     #endregion
 
     

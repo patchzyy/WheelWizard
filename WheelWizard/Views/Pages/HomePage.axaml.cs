@@ -22,7 +22,8 @@ public partial class HomePage : UserControl
     private static int _launcherIndex = 0; // Make sure this index never goes over the list index
     private static List<ILauncher> _launcherTypes = new List<ILauncher>()
     { // Add Launcher instances here , every launch instance is a new start screen
-        RetroRewindLauncher.Instance,
+        new RrLauncher(),
+        // new RrCtsLauncher()
         //GoogleLauncher.Instance
     };
 

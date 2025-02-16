@@ -1,6 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using WheelWizard.Models.Enums;
 using WheelWizard.Models.RRLaunchModels;
 using WheelWizard.Services.Settings;
 
@@ -15,6 +17,9 @@ public static class RetroRewindLaunchHelper
     {
         var language = (int)SettingsManager.RR_LANGUAGE.Get();
         var removeBlur = (bool)SettingsManager.REMOVE_BLUR.Get();
+        var gameMode = (RrGameMode)SettingsManager.RETRO_REWIND_GAMEMODE.Get();
+        Console.WriteLine($"Launching RR for: {gameMode}");
+        
         var launchConfig = new LaunchConfig
         {
             BaseFile = PathManager.GameFilePath,
