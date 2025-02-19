@@ -140,7 +140,13 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
      
     private void UpdateLiveAlert(LiveAlertsManager sender)
     {
-        // TODO: Implement the live alert icon on the left-bottom
+        var visible = sender.Status != null && sender.Status.StatusVariant != LiveAlertsManager.LiveStatusVariant.None;
+        LiveStatusBorder.IsVisible = visible;
+        if (!visible) return;
+        
+        ToolTip.SetTip(LiveStatusBorder, sender.Status!.Message);
+        LiveStatusBorder.Classes.Clear();
+        LiveStatusBorder.Classes.Add(sender.Status!.StatusVariant.ToString());
     }
     
     private void TopBar_PointerPressed(object? sender, PointerPressedEventArgs e)

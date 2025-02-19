@@ -74,6 +74,44 @@
                             Margin="10,0,0,0" />
         </StackPanel>
         
+        <Border Grid.Column="0" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                ToolTip.Tip="This only shows regions YOU have played on"
+                ToolTip.Placement="TopEdgeAlignedLeft" ToolTip.ShowDelay="20"
+                x:Name="LiveStatusBorder" IsVisible="False"
+                Width="32" Height="32" Margin="6">
+            <PathIcon VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <Border.Styles>
+                <Style Selector="Border PathIcon">
+                    <Setter Property="Foreground" Value="Transparent"/>
+                </Style>
+                <Style Selector="Border.Warning PathIcon">
+                    <Setter Property="Foreground" Value="{StaticResource Warning500}"/>
+                    <Setter Property="Data" Value="{StaticResource WarningTip}"/>
+                </Style>
+                <Style Selector="Border.Error PathIcon">
+                    <Setter Property="Foreground" Value="{StaticResource Danger500}"/>
+                    <Setter Property="Data" Value="{StaticResource ErrorTip}"/>
+                </Style>
+                <Style Selector="Border.Success PathIcon">
+                    <Setter Property="Foreground" Value="{StaticResource Primary300}"/>
+                    <Setter Property="Data" Value="{StaticResource SuccessTip}"/>
+                </Style>
+                <Style Selector="Border.Info PathIcon">
+                    <Setter Property="Foreground" Value="{StaticResource Neutral200}"/>
+                    <Setter Property="Data" Value="{StaticResource InfoTip}"/>
+                </Style>
+                <Style Selector="Border.Question PathIcon">
+                    <Setter Property="Foreground" Value="{StaticResource Warning600}"/>
+                    <Setter Property="Data" Value="{StaticResource QuestionTip}"/>
+                </Style>
+                <Style Selector="Border.Party PathIcon">
+                    <Setter Property="Foreground" Value="{StaticResource Danger300}"/>
+                    <Setter Property="Data" Value="{StaticResource StarIcon}"/>
+                </Style>
+            </Border.Styles>
+        </Border>
+       
+        
         <!-- Sidebar -->
         <TextBlock Text="{x:Static lang:Common.Term_General}" Classes="SidebarSectionText"
                    VerticalAlignment="Bottom" Grid.Row="2" />

@@ -8,45 +8,47 @@ namespace WheelWizard.Services.LiveData;
 
 public class LiveAlertsManager : RepeatedTaskManager
 {
-    public string StatusMessage { get; private set; } = "";
-    public string StatusMessageType { get; private set; } = "";
-
+    public LiveStatus? Status { get; private set; }
+    
     private static LiveAlertsManager? _instance;
     public static LiveAlertsManager Instance => _instance ??= new LiveAlertsManager();
 
     private LiveAlertsManager() : base(90) { }
 
-    private static (string, string) ParseStatus(string status)
-    {
-        var parts = status.Split("\n");
-        var firstLine = parts.FirstOrDefault();
-        if (string.IsNullOrWhiteSpace(firstLine))
-            return ("", "");
-
-        var firstLineParts = firstLine.Split("|");
-        if (firstLineParts.Length != 2)
-            return ("", "");
-
-        var messageType = firstLineParts[0];
-        var message = firstLineParts[1];
-        message = Regex.Replace(message, @"\\u000A", "\n");
-        return (messageType, message);
-    }
-
     protected override async Task ExecuteTaskAsync()
     {
-        var response = await HttpClientHelper.GetAsync<string>(Endpoints.WhWzStatusUrl);
-        if (!response.Succeeded || response.Content is null)
+        var response = await HttpClientHelper.GetAsync<LiveStatus>(Endpoints.WhWzStatusUrl);
+        Status = response.Content ?? new()
         {
-            // We DONT want to show anything if the request failed.
-            // There is no use-case for this and it will only confuse the user.
-            StatusMessage = "";
-            StatusMessageType = "";
-            return;
-        }
+            Message = "Can't connect to the servers. \nYou might experience internet connection issues.", 
+            Variant = "warning"
+        };
+    }
 
-        var (messageType, message) = ParseStatus(response.Content);
-        StatusMessage = message;
-        StatusMessageType = messageType;
+    public class LiveStatus
+    {
+        public required string Variant { get; set; }
+        public required string Message { get; set; }
+        public LiveStatusVariant StatusVariant => Variant.ToLower() switch
+            {
+                "warning" => LiveStatusVariant.Warning,
+                "error" => LiveStatusVariant.Error,
+                "success" => LiveStatusVariant.Success,
+                "info" => LiveStatusVariant.Info,
+                "party" => LiveStatusVariant.Party,
+                "question" => LiveStatusVariant.Question,
+                _ => LiveStatusVariant.None
+            };
+    }
+
+    public enum LiveStatusVariant
+    {
+        None,
+        Warning,
+        Error,
+        Success,
+        Info,
+        Party,
+        Question
     }
 }
