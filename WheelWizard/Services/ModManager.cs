@@ -340,4 +340,3 @@ public class ModManager : INotifyPropertyChanged
     }
     #endregion
 }
-
