@@ -38,8 +38,3 @@ You can add more sections if needed. Here are some suggestions:
 
 Following these guidelines helps us review and merge PRs faster. Thanks for contributing!
 
-
-### Kitchen Sink
-
-To look at the components that we have, you can open the Kitchen Sink. To get there you can uncomment the sidebar button in the `layout.xaml` file. Once uncommented, it should show up right away when you start up WheelWizard. This allows you to test and see all the available components and styles in the application.
-(yes it looks real messy right now, this kitchen sink will be organized soon dont worry)
