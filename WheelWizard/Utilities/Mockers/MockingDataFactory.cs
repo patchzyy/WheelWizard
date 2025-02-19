@@ -5,6 +5,8 @@ namespace WheelWizard.Utilities.Mockers;
 
 public abstract class MockingDataFactory<T, U> where U: MockingDataFactory<T,U>, new()
 {
+    public static T StaticSingle => Instance.Create();
+    
     public static U Instance { get; } = new U();
     public abstract T Create(int? seed = null);
 

@@ -92,13 +92,6 @@ public partial class RoomsPage : UserControl, INotifyPropertyChanged, IRepeatedT
     {
         RRLiveRooms.Instance.Unsubscribe(this);
     }
-
-    private void CopyFriendCode_OnClick(object sender, RoutedEventArgs e)
-    {
-        // var selectedPlayer = PlayersListView.GetCurrentContextItem<RrPlayer>();
-        // if (selectedPlayer == null) return;
-        // TopLevel.GetTopLevel(this)?.Clipboard?.SetTextAsync(selectedPlayer.Fc);
-    }
     
     private void PlayerSearchField_OnTextChanged(object? sender, TextChangedEventArgs e)
     {

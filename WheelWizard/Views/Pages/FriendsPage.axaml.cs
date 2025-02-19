@@ -9,6 +9,7 @@ using WheelWizard.Models.GameData;
 using WheelWizard.Services.LiveData;
 using WheelWizard.Services.WiiManagement.SaveData;
 using WheelWizard.Utilities.RepeatedTasks;
+using WheelWizard.Views.Popups;
 using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Views.Pages;
@@ -127,6 +128,13 @@ public partial class FriendsPage : UserControl, INotifyPropertyChanged, IRepeate
     {
         if (FriendsListView.SelectedItem is not GameDataFriend selectedPlayer) return;
         TopLevel.GetTopLevel(this)?.Clipboard?.SetTextAsync(selectedPlayer.FriendCode);
+    }
+    
+    private void OpenCarousel_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (FriendsListView.SelectedItem is not GameDataFriend selectedPlayer) return;
+        if(selectedPlayer.Mii == null) return;
+        new MiiCarouselWindow().SetMii(selectedPlayer.Mii).Show();
     }
     
     private void ViewRoom_OnClick(string friendCode)

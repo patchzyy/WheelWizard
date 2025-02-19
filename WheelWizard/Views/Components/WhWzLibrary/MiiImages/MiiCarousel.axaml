@@ -1,11 +1,12 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:components="using:WheelWizard.Views.Components.StandardLibrary"
+        xmlns:mocker="clr-namespace:WheelWizard.Utilities.Mockers"
         xmlns:miiImages="clr-namespace:WheelWizard.Views.Components.WhWzLibrary.MiiImages">
     <Design.PreviewWith>
         <Border Padding="10" Background="{StaticResource Neutral950}"
                 Width="440" Height="300">
-            <miiImages:MiiCarousel/>
+            <miiImages:MiiCarousel Mii="{x:Static mocker:MiiFactory.StaticSingle}"/>
         </Border>
     </Design.PreviewWith>
 

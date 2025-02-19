@@ -1,0 +1,16 @@
+﻿<self:PopupContent xmlns="https://github.com/avaloniaui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:self="clr-namespace:WheelWizard.Views.Popups"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:components="using:WheelWizard.Views.Components.StandardLibrary"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:miiImages="clr-namespace:WheelWizard.Views.Components.WhWzLibrary.MiiImages"
+                   mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" ClipToBounds="False"
+                   x:Class="WheelWizard.Views.Popups.MiiCarouselWindow">
+    <Grid>
+        <components:LoadingIcon HorizontalAlignment="Center" VerticalAlignment="Center" IconSize="180" 
+                                x:Name="MiiLoadingIcon" Foreground="{StaticResource Neutral800}"/>
+        <miiImages:MiiCarousel x:Name="Carousel" VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                               Height="280"/>
+    </Grid>
+</self:PopupContent>

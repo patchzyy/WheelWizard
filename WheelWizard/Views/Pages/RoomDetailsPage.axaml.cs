@@ -8,6 +8,7 @@ using WheelWizard.Services.LiveData;
 using WheelWizard.Utilities.Generators;
 using WheelWizard.Utilities.Mockers;
 using WheelWizard.Utilities.RepeatedTasks;
+using WheelWizard.Views.Popups;
 
 namespace WheelWizard.Views.Pages;
 
@@ -85,6 +86,13 @@ public partial class RoomDetailsPage : UserControl, INotifyPropertyChanged, IRep
     {
         if (PlayersListView.SelectedItem is not RrPlayer selectedPlayer) return;
         TopLevel.GetTopLevel(this)?.Clipboard?.SetTextAsync(selectedPlayer.Fc);
+    }
+    
+    private void OpenCarousel_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (PlayersListView.SelectedItem is not RrPlayer selectedPlayer) return;
+        if(selectedPlayer.FirstMii == null) return;
+        new MiiCarouselWindow().SetMii(selectedPlayer.FirstMii).Show();
     }
 
     private void RoomsDetailPage_Unloaded(object sender, RoutedEventArgs e)

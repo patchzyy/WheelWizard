@@ -51,7 +51,6 @@ public partial class Layout : Window, IRepeatedTaskListener, ISettingListener
         KitchenSinkButton.IsVisible = true;
     #endif
     }
-    
 
     public void OnSettingChanged(Setting setting)
     {

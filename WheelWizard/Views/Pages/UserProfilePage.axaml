@@ -45,7 +45,7 @@
            </StackPanel>
        </ScrollViewer>
        
-       <StackPanel  Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal">
+       <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal">
            <Border VerticalAlignment="Center" HorizontalAlignment="Center"
                    ToolTip.Tip="This only shows regions YOU have played on"
                    ToolTip.Placement="Top" ToolTip.ShowDelay="20"

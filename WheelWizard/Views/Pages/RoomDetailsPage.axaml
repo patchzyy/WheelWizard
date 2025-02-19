@@ -117,6 +117,7 @@
                 <ListBox.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="{x:Static lang:Common.Action_CopyFriendCode}" Click="CopyFriendCode_OnClick" />
+                        <MenuItem Header="View Mii" Click="OpenCarousel_OnClick" />
                         <!--
                         <MenuItem Header="{x:Static lang:Common.Action_CopyFriendCode}" Click="CopyFriendCode_OnClick" />
                         <Separator />

@@ -1,4 +1,5 @@
 ﻿using Avalonia.Media.Imaging;
+using System;
 using System.ComponentModel;
 using WheelWizard.Services.WiiManagement;
 
@@ -15,7 +16,7 @@ public class MiiImage : INotifyPropertyChanged
     
     public bool LoadedImageSuccessfully { get; private set; } // default false, dont set this manually
 
-    // This never will be set back to false, this is intentional
+    // This will never be set back to false, this is intentional
     // This is to ensure that it will never request the image again after the first time
     private bool _requestingImage;
     private Bitmap? _image;

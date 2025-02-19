@@ -18,6 +18,8 @@ public abstract class BaseMiiImage : TemplatedControl, INotifyPropertyChanged
         {
             SetValue(MiiLoadedProperty, value);
             OnPropertyChanged(nameof(MiiLoaded));
+            if(value)
+                MiiImageLoaded?.Invoke(this, EventArgs.Empty);
         }
     }
     
@@ -92,6 +94,7 @@ public abstract class BaseMiiImage : TemplatedControl, INotifyPropertyChanged
     }
 
     public event EventHandler MiiChanged;
+    public event EventHandler MiiImageLoaded;
     
     #region PropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
