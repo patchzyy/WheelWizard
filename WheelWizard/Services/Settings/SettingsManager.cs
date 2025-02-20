@@ -1,5 +1,6 @@
 using WheelWizard.Models.Enums;
 using System.Linq;
+using System.Runtime.InteropServices;
 using WheelWizard.Helpers;
 using WheelWizard.Models.Settings;
 using WheelWizard.Services.Other;
@@ -10,7 +11,21 @@ public class SettingsManager
 {
     #region Wheel Wizard Settings
     public static Setting USER_FOLDER_PATH = new WhWzSetting(typeof(string),"UserFolderPath", "").SetValidation(value => FileHelper.DirectoryExists(value as string ?? string.Empty));
-    public static Setting DOLPHIN_LOCATION = new WhWzSetting(typeof(string),"DolphinLocation", "").SetValidation(value => FileHelper.FileExists(value as string ?? string.Empty));
+    
+    
+    public static Setting DOLPHIN_LOCATION = new WhWzSetting(typeof(string), "DolphinLocation", "")
+        .SetValidation(value =>
+        {
+            var pathOrCommand = value as string ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(pathOrCommand))
+                return false;
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                return FileHelper.FileExists(pathOrCommand) || LinuxVerifications.IsValidCommand(pathOrCommand);
+            
+            return FileHelper.FileExists(pathOrCommand);
+        });
+    
+    
     public static Setting GAME_LOCATION = new WhWzSetting(typeof(string),"GameLocation", "").SetValidation(value => FileHelper.FileExists(value as string ?? string.Empty));
     public static Setting FORCE_WIIMOTE = new WhWzSetting(typeof(bool),"ForceWiimote", false);
     public static Setting LAUNCH_WITH_DOLPHIN = new WhWzSetting(typeof(bool),"LaunchWithDolphin", false);

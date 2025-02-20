@@ -51,7 +51,7 @@ public static class PathManager
     public static string WiiFolderPath => Path.Combine(UserFolderPath, "Wii");
     
     
-    public static string? TryFindDolphinPath()
+    public static string? TryFindUserFolderPath()
     {
         var appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                                        "Dolphin Emulator");

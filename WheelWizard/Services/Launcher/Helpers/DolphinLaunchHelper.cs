@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using WheelWizard.Services.Settings;
 using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Services.Launcher.Helpers;
@@ -21,23 +22,11 @@ public static class DolphinLaunchHelper
     
     public static void LaunchDolphin(string arguments = "", bool shellExecute = false)
     {
-        var dolphinLocation = PathManager.DolphinFilePath;
-        if (string.IsNullOrWhiteSpace(dolphinLocation) || !File.Exists(dolphinLocation))
-        {
-            new MessageBoxWindow()
-                .SetMessageType(MessageBoxWindow.MessageType.Warning)
-                .SetTitleText("Dolphin not found")
-                .SetInfoText($"Dolphin not found at: {dolphinLocation} \n" +
-                             "Please make sure the settings are set up correctly.")
-                .Show();
-            return;
-        }
-
         try
         {
             var startInfo = new ProcessStartInfo();
-
-            // Handle Flatpak Dolphin
+            
+            var dolphinLocation = (string)SettingsManager.DOLPHIN_LOCATION.Get();
             if (dolphinLocation.Contains("flatpak"))
             {
                 startInfo.FileName = "flatpak";
@@ -46,7 +35,6 @@ public static class DolphinLaunchHelper
             }
             else if (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX)
             {
-                // For non-Flatpak Linux/macOS builds
                 startInfo.FileName = "/bin/bash";
                 startInfo.Arguments = $"-c \"{dolphinLocation} {arguments}\"";
                 startInfo.UseShellExecute = false;
