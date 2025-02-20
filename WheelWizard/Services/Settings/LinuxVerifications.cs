@@ -1,5 +1,10 @@
-﻿using System.Diagnostics;
+﻿using Avalonia.Threading;
+using System;
+using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Services.Settings;
 
@@ -9,18 +14,18 @@ public static class LinuxVerifications
     {
         try
         {
-            var processInfo = new System.Diagnostics.ProcessStartInfo
+            var processInfo = new ProcessStartInfo
             {
-                FileName = "/bin/sh", 
+                FileName = "/bin/sh",
                 Arguments = $"-c \"command -v {command.Split(' ').First()}\"",
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 UseShellExecute = false,
-                CreateNoWindow = true
+                CreateNoWindow = true,
             };
 
-            using var process = System.Diagnostics.Process.Start(processInfo);
-            process.WaitForExit(3000); // Wait up to 3 seconds
+            using var process = Process.Start(processInfo);
+            process.WaitForExit();
             return process.ExitCode == 0;
         }
         catch
@@ -28,7 +33,7 @@ public static class LinuxVerifications
             return false;
         }
     }
-    
+
     public static bool IsDolphinInstalledInFlatpak()
     {
         try
@@ -43,17 +48,126 @@ public static class LinuxVerifications
                 CreateNoWindow = true,
             };
 
-            using (var process = Process.Start(processInfo))
-            {
-                process.WaitForExit(5000); // wait up to 5 seconds
-                return process.ExitCode == 0;
-            }
+            using var process = Process.Start(processInfo);
+            process.WaitForExit();
+            return process.ExitCode == 0;
         }
         catch
         {
             return false;
         }
     }
-    
-    
+
+    // Helper method to run a process asynchronously with progress reporting.
+    private static async Task<int> RunProcessWithProgressAsync(string fileName, string arguments, IProgress<int> progress = null)
+    {
+        var processInfo = new ProcessStartInfo
+        {
+            FileName = fileName,
+            Arguments = arguments,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false,
+            CreateNoWindow = true,
+        };
+
+        using var process = Process.Start(processInfo);
+
+        // Listen for output data to parse progress.
+        process.OutputDataReceived += (sender, e) =>
+        {
+            if (string.IsNullOrWhiteSpace(e.Data)) 
+                return;
+            
+            var match = Regex.Match(e.Data, @"(\d+)%");
+            if (match.Success && int.TryParse(match.Groups[1].Value, out int percent))
+            {
+                progress?.Report(percent);
+            }
+        };
+        
+        process.ErrorDataReceived += (sender, e) =>
+        {
+            if (string.IsNullOrWhiteSpace(e.Data)) 
+                return;
+            
+            var match = Regex.Match(e.Data, @"(\d+)%");
+            if (match.Success && int.TryParse(match.Groups[1].Value, out int percent))
+            {
+                progress?.Report(percent);
+            }
+        };
+
+        process.BeginOutputReadLine();
+        process.BeginErrorReadLine();
+
+        await process.WaitForExitAsync();
+        return process.ExitCode;
+    }
+
+    /// <summary>
+    /// Checks if Flatpak is installed by verifying the command exists.
+    /// </summary>
+    /// <returns>True if Flatpak is available; otherwise, false.</returns>
+    public static bool isFlatPakInstalled()
+    {
+        return IsValidCommand("flatpak");
+    }
+
+    /// <summary>
+    /// Installs Flatpak
+    /// Reports progress via the provided IProgress callback.
+    /// </summary>
+    /// <returns>True if installation succeeded; otherwise, false.</returns>
+    public static async Task<bool> InstallFlatpak(IProgress<int> progress = null)
+    {
+        if (isFlatPakInstalled())
+            return true;
+
+        // Detect the package manager
+        var packageManager = LinuxHelper.DetectPackageManager();
+        if (string.IsNullOrEmpty(packageManager))
+            return false; // Unsupported distro
+
+        // Install Flatpak
+        var exitCode = await RunProcessWithProgressAsync("pkexec", $"{packageManager} install -y flatpak", progress);
+        if (exitCode is 127 or 126) //this is error unauthorized
+        {
+            Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                new MessageBoxWindow().SetTitleText("Error")
+                    .SetTitleText("You need to be an administrator to install Flatpak").Show();
+            });
+        }
+        return exitCode == 0 && isFlatPakInstalled();
+    }
+
+    /// <summary>
+    /// Installs Dolphin via Flatpak.
+    /// Ensures that Flatpak is installed and reports progress via the provided IProgress callback.
+    /// </summary>
+    /// <returns>True if Dolphin was successfully installed; otherwise, false.</returns>
+    public static async Task<bool> InstallFlatpakDolphin(IProgress<int> progress = null)
+    {
+        // Ensure Flatpak is installed; if not, attempt installation.
+        if (!isFlatPakInstalled())
+        {
+            var flatpakInstalled = await InstallFlatpak(progress);
+            if (!flatpakInstalled)
+                return false;
+        }
+
+        // Install Dolphin using Flatpak and report progress.
+        var exitCode = await RunProcessWithProgressAsync("flatpak", "install -y org.DolphinEmu.dolphin-emu", progress);
+        if (exitCode is 127 or 126) //this is error unauthorized
+        {
+            Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                new MessageBoxWindow().SetTitleText("Error")
+                    .SetTitleText("You need to be an administrator to install Flatpak").Show();
+            });
+        }
+        return exitCode == 0;
+    }
 }
+

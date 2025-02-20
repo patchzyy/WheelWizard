@@ -82,15 +82,33 @@ public partial class WhWzSettings : UserControl
     private async void DolphinExeBrowse_OnClick(object sender, RoutedEventArgs e)
     {
         //if on linux
-        if(RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
-            var flatpakInstalled = IsFlatpakDolphinInstalled();
-            if (!flatpakInstalled)
+            if (IsFlatpakDolphinInstalled()) 
+            {
+                DolphinExeInput.Text = "flatpak run org.DolphinEmu.dolphin-emu";
+                return;
+            }
+            var wantsAutomaticInstall = await new YesNoWindow()
+                .SetMainText("Invalid configuration.")
+                .SetExtraText("The flatpak version of Dolphin Emulator does not appear to be installed. Would you like us to install it?")
+                .SetButtonText("Install", "Manual").AwaitAnswer();
+            if (!wantsAutomaticInstall) return; 
+            
+            
+            var progressWindow = new ProgressWindow()
+                .SetGoal("Installing Dolphin Emulator")
+                .SetExtraText("This may take a while depending on your internet connection.");
+            progressWindow.Show();
+            var progress = new Progress<int>(progressWindow.UpdateProgress);
+            var success = await LinuxVerifications.InstallFlatpakDolphin(progress);
+            progressWindow.Close();
+            if (!success)
             {
                 await new MessageBoxWindow()
-                    .SetMessageType(MessageBoxWindow.MessageType.Warning)
-                    .SetTitleText("Flatpak Dolphin not found.")
-                    .SetInfoText("The flatpak version of Dolphin Emulator does not appear to be installed. Please install it.")
+                    .SetMessageType(MessageBoxWindow.MessageType.Error)
+                    .SetTitleText("Failed to install Dolphin")
+                    .SetInfoText("The installation of Dolphin Emulator failed. Please try manually installing flatpak dolphin.")
                     .ShowDialog();
                 return;
             }
@@ -202,19 +220,9 @@ public partial class WhWzSettings : UserControl
     }
 
 
-    private void SaveButton_OnClick(object sender, RoutedEventArgs e)
+    private async void SaveButton_OnClick(object sender, RoutedEventArgs e)
     {
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) &&
-            DolphinExeInput.Text.Trim() == "flatpak run org.DolphinEmu.dolphin-emu" &&
-            !IsFlatpakDolphinInstalled())
-        {
-            new MessageBoxWindow()
-                .SetMessageType(MessageBoxWindow.MessageType.Warning)
-                .SetTitleText("Invalid configuration.")
-                .SetInfoText("The flatpak version of Dolphin Emulator does not appear to be installed. Please install it or choose the executable yourself.")
-                .ShowDialog();
-            return; 
-        }
+        
         
         var oldPath1 = (string)SettingsManager.DOLPHIN_LOCATION.Get();
         var oldPath2 = (string)SettingsManager.GAME_LOCATION.Get();
@@ -227,7 +235,7 @@ public partial class WhWzSettings : UserControl
         TogglePathSettings(false);
         if (!(SettingsHelper.PathsSetupCorrectly() && path1 && path2 && path3))
         {
-            new MessageBoxWindow()
+            await new MessageBoxWindow()
                 .SetMessageType(MessageBoxWindow.MessageType.Warning)
                 .SetTitleText("Invalid configuration.")
                 .SetInfoText(Phrases.PopupText_EnsurePathsExists)
@@ -235,7 +243,7 @@ public partial class WhWzSettings : UserControl
         }
         else
         {
-            new MessageBoxWindow()
+            await new MessageBoxWindow()
                 .SetMessageType(MessageBoxWindow.MessageType.Message)
                 .SetTitleText(Phrases.PopupText_SettingsSaved)
                 .SetInfoText(Phrases.PopupText_SettingsSaved)
