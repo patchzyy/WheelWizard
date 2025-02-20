@@ -35,11 +35,11 @@
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 
         <!-- Everyhitng specifically for Avalonia -->
-        <PackageReference Include="Avalonia" Version="11.0.10"/>
-        <PackageReference Include="Avalonia.Desktop" Version="11.0.10"/>
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.10"/>
-        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.10"/>
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.10"/>
+        <PackageReference Include="Avalonia" Version="11.2.4"/>
+        <PackageReference Include="Avalonia.Desktop" Version="11.2.4"/>
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.4"/>
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.4"/>
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.2.4"/>
         <PackageReference Include="Semver" Version="3.0.0" />
         <PackageReference Include="SharpCompress" Version="0.39.0" />
     </ItemGroup>

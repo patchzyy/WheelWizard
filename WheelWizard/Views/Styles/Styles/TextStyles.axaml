@@ -52,6 +52,6 @@
     
     <Style Selector="SelectableTextBlock">
         <Setter Property="SelectionBrush" Value="{StaticResource Primary500}"/>
-        <!-- <Setter Property="SelectionForeground" Value="{StaticResource Neutral50}"/> -->
+        <Setter Property="SelectionForegroundBrush" Value="{StaticResource Neutral50}"/>
     </Style>
 </Styles>
