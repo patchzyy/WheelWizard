@@ -36,4 +36,10 @@
     <Style Selector="ListBoxItem Border.BoxItemBackground:pointerover">
         <Setter Property="Background" Value="{StaticResource Neutral700}"/>
     </Style>
+    
+    <Style Selector="ToolTip, ContextMenu">
+        <Setter Property="Background" Value="{StaticResource BlackIsh}"/>
+        <Setter Property="Foreground" Value="{StaticResource Neutral300}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
 </Styles>

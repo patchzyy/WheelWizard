@@ -221,6 +221,9 @@
         <Color x:Key="Primary800">#08675A</Color>
         <Color x:Key="Primary900">#0C554A</Color>
         <Color x:Key="Primary950">#00342F</Color>
+    
+        <Color x:Key="BlackIsh">#090A0C</Color>
+    
 
         <!-- IMPORTANT -->
         <!-- Any color that is going to be re-used in different components, and should ALWAYS stay the same. they can be defined here -->
