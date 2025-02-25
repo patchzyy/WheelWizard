@@ -24,7 +24,7 @@
         <DefineConstants>LINUX</DefineConstants>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'osx-x64'">
+    <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'osx-arm64' or '$(RuntimeIdentifier)' == 'osx-x64'">
         <DefineConstants>MACOS</DefineConstants>
     </PropertyGroup>
 

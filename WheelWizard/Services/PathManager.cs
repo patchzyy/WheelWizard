@@ -58,8 +58,30 @@ public static class PathManager
         if (FileHelper.DirectoryExists(appDataPath))
             return appDataPath;
 
+        // Macos path
+        var libraryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+                                       "Library", "Application Support", "Dolphin");
+        if (FileHelper.DirectoryExists(libraryPath))
+            return libraryPath;
+
         var documentsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                                          "Dolphin Emulator");
         return FileHelper.DirectoryExists(documentsPath) ? documentsPath : null;
+    }
+
+    public static string? TryToFindApplicationPath() {
+
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+        {
+            // Try system wide install on MacOS
+            var path = "/Applications/Dolphin.app/Contents/MacOS/Dolphin";
+            if (FileHelper.FileExists(path))
+                return path;
+            // Try user install on MacOS
+            path = Path.Combine("~", "Applications", "Dolphin.app", "Contents", "MacOS", "Dolphin");
+            if (FileHelper.FileExists(path))
+                return path;
+        }
+        return null;
     }
 }
