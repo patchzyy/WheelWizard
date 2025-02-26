@@ -66,7 +66,18 @@ public partial class WhWzSettings : UserControl
 
     private async void AutoFillPaths()
     {
+        if (DolphinExeInput.Text != "")
+            return;
         
+        var folderPath = PathManager.TryFindUserFolderPath();
+        if (!string.IsNullOrEmpty(folderPath))
+            DolphinUserPathInput.Text = folderPath;
+    }
+
+    private async void DolphinExeBrowse_OnClick(object sender, RoutedEventArgs e)
+    {
+        //if on linux
+
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
             if (IsFlatpakDolphinInstalled()) 
@@ -120,16 +131,54 @@ public partial class WhWzSettings : UserControl
             Patterns = Environment.OSVersion.Platform switch
             {
                 PlatformID.Win32NT => new[] { "*.exe" },
-                PlatformID.Unix or PlatformID.MacOSX => new[] { "*", "*.sh" }, 
+                PlatformID.Unix => new[] { "*", "*.sh" }, 
+                PlatformID.MacOSX => new[] { "*", "*.app" },
                 _ => new[] { "*" } // Fallback
             }
         };
 
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+        {
+            var dolphinAppPath = PathManager.TryToFindApplicationPath();
+            if (!string.IsNullOrEmpty(dolphinAppPath))
+            {
+                var result = await new YesNoWindow()
+                    .SetMainText($"{Phrases.PopupText_DolphinFoundText}\n{dolphinAppPath}")
+                    .SetExtraText("If you dont know what all of this means, just click yes :)")
+                    .AwaitAnswer();
+
+                if (result)
+                {
+                    DolphinExeInput.Text = dolphinAppPath;
+                    return;
+                }
+            } else
+            {
+                await new MessageBoxWindow()
+                    .SetMessageType(MessageBoxWindow.MessageType.Warning)
+                    .SetTitleText("Dolphin App not found in system/user application folders.")
+                    .SetInfoText(Phrases.PopupText_DolphinNotFoundText)
+                    .ShowDialog();
+            }
+            // Fallback to manual selection
+            Console.WriteLine("Selecting folder on macOS");
+            var folders = await FilePickerHelper.SelectFolderAsync("Select Dolphin.app");
+            if (folders.Count >= 1)
+            {
+                var executablePath = Path.Combine(folders[0].Path.LocalPath, "Contents", "MacOS", "Dolphin");
+                DolphinExeInput.Text = executablePath;
+            }
+
+            return; // do not do normal selection for MacOS
+        }
+            
         var filePath = await FilePickerHelper.OpenSingleFileAsync("Select Dolphin Emulator", new[] { executableFileType });
         if (!string.IsNullOrEmpty(filePath))
         {
             DolphinExeInput.Text = filePath;
         }
+
+        
     }
     
     private bool IsFlatpakDolphinInstalled()
