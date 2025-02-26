@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using WheelWizard.Helpers;
 using WheelWizard.Services.Settings;
 
@@ -49,12 +50,12 @@ public static class PathManager
         }
     }
     public static string WiiFolderPath => Path.Combine(UserFolderPath, "Wii");
-    
-    
-    public static string? TryFindUserFolderPath()
+
+
+    public async static Task<string?> TryFindUserFolderPath()
     {
         var appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                                       "Dolphin Emulator");
+            "Dolphin Emulator");
         if (FileHelper.DirectoryExists(appDataPath))
             return appDataPath;
 
@@ -65,7 +66,7 @@ public static class PathManager
             return libraryPath;
 
         var documentsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                                         "Dolphin Emulator");
+            "Dolphin Emulator");
         return FileHelper.DirectoryExists(documentsPath) ? documentsPath : null;
     }
 

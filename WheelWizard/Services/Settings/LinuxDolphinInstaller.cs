@@ -1,6 +1,7 @@
 ﻿using Avalonia.Threading;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ using WheelWizard.Views.Popups.Generic;
 
 namespace WheelWizard.Services.Settings;
 
-public static class LinuxVerifications
+public static class LinuxDolphinInstaller
 {
     public static bool IsValidCommand(string command)
     {
@@ -59,7 +60,8 @@ public static class LinuxVerifications
     }
 
     // Helper method to run a process asynchronously with progress reporting.
-    private static async Task<int> RunProcessWithProgressAsync(string fileName, string arguments, IProgress<int> progress = null)
+    private static async Task<int> RunProcessWithProgressAsync(string fileName, string arguments,
+        IProgress<int> progress = null)
     {
         var processInfo = new ProcessStartInfo
         {
@@ -76,21 +78,21 @@ public static class LinuxVerifications
         // Listen for output data to parse progress.
         process.OutputDataReceived += (sender, e) =>
         {
-            if (string.IsNullOrWhiteSpace(e.Data)) 
+            if (string.IsNullOrWhiteSpace(e.Data))
                 return;
-            
+
             var match = Regex.Match(e.Data, @"(\d+)%");
             if (match.Success && int.TryParse(match.Groups[1].Value, out int percent))
             {
                 progress?.Report(percent);
             }
         };
-        
+
         process.ErrorDataReceived += (sender, e) =>
         {
-            if (string.IsNullOrWhiteSpace(e.Data)) 
+            if (string.IsNullOrWhiteSpace(e.Data))
                 return;
-            
+
             var match = Regex.Match(e.Data, @"(\d+)%");
             if (match.Success && int.TryParse(match.Groups[1].Value, out int percent))
             {
@@ -139,8 +141,11 @@ public static class LinuxVerifications
                     .SetTitleText("You need to be an administrator to install Flatpak").Show();
             });
         }
+
         return exitCode == 0 && isFlatPakInstalled();
     }
+
+
 
     /// <summary>
     /// Installs Dolphin via Flatpak.
@@ -166,8 +171,40 @@ public static class LinuxVerifications
                 new MessageBoxWindow().SetTitleText("Error")
                     .SetTitleText("You need to be an administrator to install Flatpak").Show();
             });
+            return false;
         }
-        return exitCode == 0;
+
+        if (exitCode != 0)
+            return false;
+        try
+        {
+            var dolphinProcess = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "flatpak",
+                    Arguments = "run org.DolphinEmu.dolphin-emu",
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                }
+            };
+
+            dolphinProcess.Start();
+            await Task.Delay(4000);
+            dolphinProcess.Kill();
+        }
+        catch (Exception ex)
+        {
+            Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                new MessageBoxWindow().SetTitleText("Error")
+                    .SetTitleText($"Failed to launch Dolphin")
+                    .SetInfoText(ex.Message).Show();
+            });
+        }
+
+        return true;
     }
 }
-

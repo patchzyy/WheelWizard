@@ -5,6 +5,7 @@ using Avalonia.Media;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -63,14 +64,8 @@ public partial class WhWzSettings : UserControl
         return "Custom: " + percentageString;
     }
 
-    private void AutoFillPaths()
+    private async void AutoFillPaths()
     {
-        //if on linux and the dolphin path is empty, suggest the flatpak command
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) && string.IsNullOrWhiteSpace(DolphinExeInput.Text))
-        {
-            DolphinExeInput.Text = "flatpak run org.DolphinEmu.dolphin-emu";
-        }
-        
         if (DolphinExeInput.Text != "")
             return;
         
@@ -82,6 +77,7 @@ public partial class WhWzSettings : UserControl
     private async void DolphinExeBrowse_OnClick(object sender, RoutedEventArgs e)
     {
         //if on linux
+
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
             if (IsFlatpakDolphinInstalled()) 
@@ -93,15 +89,16 @@ public partial class WhWzSettings : UserControl
                 .SetMainText("Invalid configuration.")
                 .SetExtraText("The flatpak version of Dolphin Emulator does not appear to be installed. Would you like us to install it?")
                 .SetButtonText("Install", "Manual").AwaitAnswer();
-            if (!wantsAutomaticInstall) return; 
-            
+            if (!wantsAutomaticInstall) 
+                goto AfterIF; 
             
             var progressWindow = new ProgressWindow()
                 .SetGoal("Installing Dolphin Emulator")
                 .SetExtraText("This may take a while depending on your internet connection.");
+            TogglePathSettings(true);
             progressWindow.Show();
             var progress = new Progress<int>(progressWindow.UpdateProgress);
-            var success = await LinuxVerifications.InstallFlatpakDolphin(progress);
+            var success = await LinuxDolphinInstaller.InstallFlatpakDolphin(progress);
             progressWindow.Close();
             if (!success)
             {
@@ -115,6 +112,19 @@ public partial class WhWzSettings : UserControl
             DolphinExeInput.Text = "flatpak run org.DolphinEmu.dolphin-emu";
             return;
         }
+        
+        AfterIF:
+        if (DolphinExeInput.Text != "")
+            return;
+        
+        var folderPath = await PathManager.TryFindUserFolderPath();
+        if (!string.IsNullOrEmpty(folderPath))
+            DolphinUserPathInput.Text = folderPath;
+    }
+
+    private async void DolphinExeBrowse_OnClick(object sender, RoutedEventArgs e)
+    {
+        //if on linux
         // Define platform-specific executable patterns
         var executableFileType = new FilePickerFileType("Executable files")
         {
@@ -226,7 +236,7 @@ public partial class WhWzSettings : UserControl
         }
 
         // Attempt to find Dolphin's default path if no valid folder is set
-        var folderPath = PathManager.TryFindUserFolderPath();
+        var folderPath = await PathManager.TryFindUserFolderPath();
         if (!string.IsNullOrEmpty(folderPath))
         {
             // Ask the user if they want to use the automatically found folder
@@ -260,8 +270,6 @@ public partial class WhWzSettings : UserControl
 
     private async void SaveButton_OnClick(object sender, RoutedEventArgs e)
     {
-        
-        
         var oldPath1 = (string)SettingsManager.DOLPHIN_LOCATION.Get();
         var oldPath2 = (string)SettingsManager.GAME_LOCATION.Get();
         var oldPath3 = (string)SettingsManager.USER_FOLDER_PATH.Get();
