@@ -20,7 +20,7 @@ public class SettingsManager
             if (string.IsNullOrWhiteSpace(pathOrCommand))
                 return false;
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                return FileHelper.FileExists(pathOrCommand) || LinuxVerifications.IsValidCommand(pathOrCommand);
+                return FileHelper.FileExists(pathOrCommand) || LinuxDolphinInstaller.IsValidCommand(pathOrCommand);
             
             return FileHelper.FileExists(pathOrCommand);
         });
